@@ -12,8 +12,8 @@
 	<classpathentry kind="lib" path="web/WEB-INF/lib/struts2-core-2.1.8.1.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/struts2-jfreechart-plugin-2.1.8.1.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/xwork-core-2.1.6.jar"/>
-	<classpathentry kind="lib" path="web/WEB-INF/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
