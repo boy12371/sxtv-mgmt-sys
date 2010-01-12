@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="web/WEB-INF/classes" path="java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/commons-logging-api-1.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/dwr-1.1.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/freemarker-2.3.15.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/json-lib-2.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/ognl-2.7.3.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/struts2-core-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/struts2-jfreechart-plugin-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/xwork-core-2.1.6.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
