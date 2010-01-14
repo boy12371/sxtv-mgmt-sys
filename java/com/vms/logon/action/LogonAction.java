@@ -12,12 +12,10 @@ public class LogonAction extends BaseAction{
 	private SessionUserInfo userInfo;
 	
 	public String toLogon() throws Exception{
-		logger.error("toLogon");
 		return SUCCESS;
 	}
 	
 	public String doLogon() throws Exception{
-		logger.error("doLogon");
 		return SUCCESS;
 	}
 
