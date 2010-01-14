@@ -9,10 +9,5 @@
 		<action name="toLogon" class="com.vms.logon.action.LogonAction" method="toLogon">
             <result name="success">logon.jsp</result>
         </action>
-        
-		<action name="doLogon" class="com.vms.logon.action.LogonAction" method="doLogon">
-            <result name="success">ok.jsp</result>
-            <result name="input">logon.jsp</result>
-        </action>
 	</package>
 </struts>
