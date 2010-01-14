@@ -1,0 +1,59 @@
+ul,li{list-style:none; padding:0; margin:0;}
+
+.topBranding {
+	width:100%;
+	background:url(../images/top_bg.gif) 0 0 repeat-x;
+	height:134px;
+	padding:19px 0 0 0;
+	}
+
+.tabviewArea{
+	margin-top:-56px;
+
+}
+
+.yui-nav {
+	border-color:#F7F7F7 !important;
+	border-width:0 0 2px !important;
+	}
+
+.yui-nav a {
+	color:#EBEBEB !important;
+}
+
+.yui-nav .selected a {
+	color:#444444 !important;
+}
+
+.bodyTop{
+	background:#E8E8D0 url(../images/body_bg.gif)  0 0 repeat-x;
+	width:100%;
+	height:13px;
+	margin-top:0px;
+	}
+	
+.subTabview {
+	border-width:0px !important;
+	background:url(../images/subtab_bg.gif) 0 0 repeat-x !important;
+	padding:0px !important;
+	}
+
+.subTabview li{
+	float:left;
+	height:29px;
+	padding:0;
+	width:auto;
+	background:url(../images/nav_div.gif) no-repeat scroll right top;
+	padding:0 2px 0 0;
+	}
+
+.subTabview li a{
+	padding-left:14px;
+	padding-right:14px;
+	color:#1F2123;
+	text-decoration:none;
+	line-height:20px;
+	font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
+	}
+	
+	
