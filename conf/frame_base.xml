@@ -2,30 +2,45 @@
 
 <ParamConfs> 
 	<MainConsole>
-		<Module Name="Data Inpput" URL="/vmgui/dashboard/toMainpage.action">
-			<ModuleItem Name="Input" URL="http://www.baidu.com"/>
-			<ModuleItem Name="dataCenterView" URL="http://www.google.com"/> 
+		<Module Name="影带录入" URL="/vmgui/dashboard/toMainpage.action">
+			<ModuleItem Name="录入影带" URL="http://www.baidu.com"/>
+			<ModuleItem Name="查看影带信息" URL="http://www.google.com"/> 
+			<ModuleItem Name="修改影带信息" URL="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="Examination" URL="http://labp3:8080/base/Demo/managerServerTree.html">
+		<Module Name="影带打分" URL="http://labp3:8080/base/Demo/managerServerTree.html">
+			<ModuleItem Name="打分" URL="http://www.baidu.com"/>
+			<ModuleItem Name="查看打分" URL="http://www.google.com"/> 
+			<ModuleItem Name="修改打分" URL="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="Inspectation" URL="/vmgui/offering/toConsoleList.action">
-			<ModuleItem ID="currentOfferings" Name="currentOfferings" UserAclName="manageOfferings_currentOfferings" URL="/vmgui/appDefinition/toList.action"/>
-			<ModuleItem ID="createDefinitions" Name="createDefinitions" UserAclName="manageOfferings_createDefinitions" URL="/vmgui/appDefinition/toCreate.action?removeAppdSession=true"/>
-			<ModuleItem ID="importDefinitions" Name="importDefinitions" UserAclName="manageOfferings_importDefinitionsFile" URL="/vmgui/appDefinition/toImportXML.action"/>
+		<Module Name="影带审看" URL="/vmgui/offering/toConsoleList.action">
+			<ModuleItem Name="审看" URL="http://www.baidu.com"/>
+			<ModuleItem Name="审看结果" URL="http://www.google.com"/> 
+			<ModuleItem Name="修改" URL="http://www.google.com"/> 
 		</Module>
 		
-		<Module ID="manageUsers" Name="manageUsers" UserAclName="main_manageUsers" URL="http://lweb.platform.com/a/tech/UX/projects/Other/Cloud/Prototypes/Offering/Users.html" LogoutURL="/framework/logout.action">
-			<ModuleItem ID="accounts" Name="accounts" UserAclName="manageUsers_accounts" URL="/vmgui/account/toAccountList.action"/>
-			<ModuleItem ID="viewUserList" Name="viewUserList" UserAclName="manageUsers_viewUserList" URL="/vmgui/user/toUserList.action?viewportName=Users&amp;viewportActionName=listAllUsers&amp;viewportActionGroupName=userList&amp;reload=1&amp;addBreadcrumb=undefined&amp;navigationListDisplayed=false&amp;breadcrumbAreaDisplayed=false&amp;globalActionDisplayed=false"/>
-			<ModuleItem ID="createNewUser" Name="createNewUser" UserAclName="manageUsers_createNewUser" URL="/vmgui/user/toCreateUser.action?viewportName=Users&amp;viewportActionName=toCreateUser&amp;viewportActionGroupName=CreateUser&amp;reload=1&amp;addBreadcrumb=true&amp;navigationListDisplayed=false&amp;breadcrumbAreaDisplayed=false&amp;globalActionDisplayed=false"/>
-			<ModuleItem ID="permission" Name="permissions" UserAclName="manageUsers_permissions" URL="/vmgui/permission/toSwitch.action"/>
+		<Module Name="影带编排" URL="/vmgui/offering/toConsoleList.action">
+			<ModuleItem Name="编排" URL="http://www.baidu.com"/>
+			<ModuleItem Name="查看编排" URL="http://www.google.com"/> 
+			<ModuleItem Name="修改编排" URL="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="User" URL="/vmgui/application/toList.action">
-			<ModuleItem Name="Create User" URL="/vmgui/application/toAppCenterList.action"/>
-			<ModuleItem Name="Permission" URL="/vmgui/overview/consumerVmListAjax.action?listLevel=APP_MACHINES"/>
+		<Module Name="市场反馈" URL="/vmgui/offering/toConsoleList.action">
+			<ModuleItem Name="录入反馈" URL="http://www.baidu.com"/>
+			<ModuleItem Name="查看反馈" URL="http://www.google.com"/> 
+			<ModuleItem Name="修改反馈" URL="http://www.google.com"/> 
+		</Module>
+		
+		<Module Name="统计查询" URL="/vmgui/offering/toConsoleList.action">
+		</Module>
+		
+		<Module Name="用户管理" URL="/vmgui/application/toList.action">
+			<ModuleItem Name="创建用户" URL="/vmgui/application/toAppCenterList.action"/>
+			<ModuleItem Name="权限管理" URL="/vmgui/overview/consumerVmListAjax.action?listLevel=APP_MACHINES"/>
+		</Module>
+		
+		<Module Name="系统设置" URL="/vmgui/application/toList.action">
 		</Module>
 	</MainConsole>
 </ParamConfs> 
