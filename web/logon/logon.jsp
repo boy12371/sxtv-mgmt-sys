@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<s:form action="/logon/doLogon.action">
+<s:form action="doLogon" namespace="/logon" method="post">
 
 <h3>logon</h3>
 <table>
