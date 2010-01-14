@@ -39,7 +39,7 @@ body {
 <div id="tab<s:property value='#st.index'/>">
 <ul>
 	<s:iterator value="subTabs">
-	<li><a href="<s:property value='URL'/>" target="contentFrame" onclick="resizeIframe(this);return false;"><s:property value="name"/></a></li>
+	<li><a href="<s:property value='URL'/>" target="contentFrame" onclick="refreshIframe(this);return false;"><s:property value="name"/></a></li>
 	</s:iterator>
 </ul>
 </div>
@@ -50,13 +50,14 @@ body {
 <div class="bodyTop">
 </div>
 
-<iframe id="contentFrameId" name="contentFrame" style="width:100%;height:500px" frameborder='0' scrolling='no' 
+<iframe id="contentFrameId" name="contentFrame" style="width:100%;height:100%" frameborder='0' scrolling='auto' 
 	src=""></iframe>
 
 <script>
 	( function() {
 		var tabView = new YAHOO.widget.TabView('tabView');
 	})();
+	resizeIframe();
 </script>
 
 
