@@ -4,10 +4,21 @@ function refreshIframe(obj){
 	return false;
 }
 
+function resizeContentDiv(){
+	var contentDiv = document.getElementById("contentDiv");
+	contentDiv.style.height = window.screen.availHeight - 300 + "px";
+	return false;
+}
+
 function resizeIframe(){
 	var iframeObj = document.getElementById("contentFrameId");
-	iframeObj.style.height = window.screen.availHeight - 300 + "px";
-	return false;
+	var height;
+	if(null == iframeObj.contentDocument || "undefine" == typeof(iframeObj.contentDocument)){
+		height = iframeObj.document.body.scrollHeight;;
+	}else{
+		height = iframeObj.contentDocument.body.offsetHeight;
+	}
+	iframeObj.style.height = height + "px";
 }
 
 function resizeTabview(){
