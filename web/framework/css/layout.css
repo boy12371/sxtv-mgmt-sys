@@ -9,12 +9,11 @@ ul,li{list-style:none; padding:0; margin:0;}
 
 .tabviewArea{
 	margin-top:-56px;
-
 }
 
 .yui-nav {
 	border-color:#F7F7F7 !important;
-	border-width:0 0 2px !important;
+	border-width:0 0 0px !important;
 	}
 
 .yui-nav a {
@@ -31,19 +30,25 @@ ul,li{list-style:none; padding:0; margin:0;}
 	height:13px;
 	margin-top:0px;
 	}
+
+.subTabUL {
+	padding-top:0px;
+
+}	
 	
 .subTabview {
 	border-width:0px !important;
 	background:url(../images/subtab_bg.gif) 0 0 repeat-x !important;
 	padding:0px !important;
+	margin-top:1px;
 	}
 
 .subTabview li{
 	float:left;
-	height:29px;
+	height:26px;
 	padding:0;
 	width:auto;
-	background:url(../images/nav_div.gif) no-repeat scroll right top;
+	background:url(../images/nav_div.gif) no-repeat scroll left top;
 	padding:0 2px 0 0;
 	}
 
@@ -54,6 +59,13 @@ ul,li{list-style:none; padding:0; margin:0;}
 	text-decoration:none;
 	line-height:20px;
 	font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
+	}
+	
+.contentIframe{
+	width:960px;
+	height:100%;
+	border:2px solid #B7DDF2;
+	background-color:#EBF4FB;
 	}
 	
 	
