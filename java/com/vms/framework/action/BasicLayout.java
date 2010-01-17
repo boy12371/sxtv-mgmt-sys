@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.vms.action.LogonAction;
 import com.vms.common.BaseAction;
 import com.vms.common.SessionUserInfo;
 import com.vms.framework.tabview.TabElementBean;
 import com.vms.framework.tabview.TabViewManager;
-import com.vms.logon.action.LogonAction;
 
 public class BasicLayout extends BaseAction{
 	private static Logger logger = Logger.getLogger(LogonAction.class);
