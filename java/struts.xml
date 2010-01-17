@@ -7,7 +7,5 @@
 
 	<include file="struts_base.xml"/>
 	
-	<include file="com/vms/logon/struts.xml"/>
-	
 	<include file="com/vms/framework/struts.xml"/>
 </struts>
