@@ -1,0 +1,37 @@
+body{
+	padding:12px;
+	margin:0;
+	font-family:Arial, Helvetica, sans-serif;
+	background-color:#EBF4FB;
+	}
+	
+h1{
+	font-size:14px;
+	font-weight:bold;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+p{
+	border-bottom:1px solid #B7DDF2;
+	color:#666666;
+	font-size:11px;
+	padding-bottom:10px;
+}
+
+label {
+	display:block;
+	float:left;
+	font-weight:bold;
+	text-align:right;
+	width:140px;
+}
+
+input, textarea{
+	border:1px solid #AACFE4;
+	float:left;
+	font-size:12px;
+	margin:5px;
+	padding:4px 2px;
+	width:200px;
+}
