@@ -8,6 +8,7 @@
 body {
 	margin:0;
 	padding:0;
+	overflow:hidden;
 	background:url(../images/body_bg.gif) 0 0 repeat-x #E8E8D0;
 }
 </style>
@@ -47,20 +48,20 @@ body {
 </div>
 </div>
 
-<div class="bodyTop">
-</div>
-
+<div style="overflow-y:auto;overflow-x:hidden" id="contentDiv">
+<div class="bodyTop"></div>
 <div align="center">
-<iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='auto' 
-	src=""></iframe>
+<iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='no' 
+	src="" onload="resizeIframe();return false;"></iframe>
 </div>
-
+<div style="margin-top:30px;"/>
+</div>
 <script language="JavaScript">
 	( function() {
 		var tabView = new YAHOO.widget.TabView('tabView');
 	})();
-	resizeIframe();
-	resizeTabview()
+	resizeContentDiv();
+	resizeTabview();
 </script>
 
 
