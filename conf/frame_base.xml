@@ -32,7 +32,7 @@
 			<ModuleItem Name="修改反馈" URL="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="统计查询" URL="/vmgui/offering/toConsoleList.action">
+		<Module Name="统计查询" URL="/collection/tapeCollect.jsp">
 		</Module>
 		
 		<Module Name="用户管理" URL="/vmgui/application/toList.action">
@@ -40,7 +40,7 @@
 			<ModuleItem Name="权限管理" URL="/vmgui/overview/consumerVmListAjax.action?listLevel=APP_MACHINES"/>
 		</Module>
 		
-		<Module Name="系统设置" URL="/vmgui/application/toList.action">
+		<Module Name="系统设置" URL="/collection/tapeCollect.jsp">
 		</Module>
 	</MainConsole>
 </ParamConfs> 
