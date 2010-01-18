@@ -5,8 +5,10 @@ function refreshIframe(obj){
 }
 
 function resizeContentDiv(){
+	var subTab = document.getElementById("subTabview");
 	var contentDiv = document.getElementById("contentDiv");
-	contentDiv.style.height = window.screen.availHeight - 300 + "px";
+	var divHeight = document.documentElement.clientHeight - 125 - subTab.offsetHeight;
+	contentDiv.style.height = divHeight + "px";
 	return false;
 }
 
@@ -14,11 +16,13 @@ function resizeIframe(){
 	var iframeObj = document.getElementById("contentFrameId");
 	var height;
 	if(null == iframeObj.contentDocument || "undefine" == typeof(iframeObj.contentDocument)){
-		height = iframeObj.document.body.scrollHeight;;
+		height = iframeObj.document.body.scrollHeight;
 	}else{
 		height = iframeObj.contentDocument.body.offsetHeight;
 	}
 	iframeObj.style.height = height + "px";
+	
+	resizeContentDiv();
 }
 
 function resizeTabview(){
