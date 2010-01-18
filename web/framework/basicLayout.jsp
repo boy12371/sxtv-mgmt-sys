@@ -1,6 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow:hidden;">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -31,7 +31,16 @@ body {
 <div id="tabView" class="yui-navset tabviewArea">
 <ul class="yui-nav">
 	<s:iterator value="tabs" status="st">
-	<li><a href="#tab<s:property value='#st.index'/>"><em><s:property value="name"/></em></a></li>
+	<li>
+		<s:if test="subTabs.size() == 0">
+		<a href="<s:property value='URL'/>" onclick="refreshIframe(this);return false;">
+		</s:if>
+		<s:else>
+		<a href="#tab<s:property value='#st.index'/>">
+		</s:else>
+			<em><s:property value="name"/></em>
+		</a>
+	</li>
 	</s:iterator>
 </ul>
 
@@ -62,6 +71,9 @@ body {
 	})();
 	resizeContentDiv();
 	resizeTabview();
+	window.onresize=function(){
+		resizeContentDiv();
+	}
 </script>
 
 
