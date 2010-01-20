@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.vms.db.bean">
+	<class
+		name="Topic"
+		table="topic"
+	>
+		<meta attribute="sync-DAO">true</meta>
+		<id
+			name="id"
+			type="integer"
+			column="topicID"
+		>
+			<generator class="sequence"/>
+		</id>
+
+		<property
+			name="topicName"
+			column="topicName"
+			type="string"
+			not-null="true"
+			length="128"
+		/>
+		<property
+			name="comments"
+			column="comments"
+			type="string"
+			not-null="true"
+			length="512"
+		/>
+	
+
+		<set name="vediotapes" inverse="true">
+			<key column="topicID"/>
+			<one-to-many class="Vediotape"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

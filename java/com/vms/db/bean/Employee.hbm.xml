@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.vms.db.bean">
+	<class
+		name="Employee"
+		table="employee"
+	>
+		<meta attribute="sync-DAO">true</meta>
+		<id
+			name="id"
+			type="integer"
+			column="employeeID"
+		>
+			<generator class="sequence"/>
+		</id>
+
+		<property
+			name="name"
+			column="name"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="birthday"
+			column="birthday"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="contractDate"
+			column="contractDate"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="gender"
+			column="gender"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="tel"
+			column="tel"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="comments"
+			column="comments"
+			type="string"
+			not-null="true"
+			length="512"
+		/>
+	
+
+		<set name="users" inverse="true">
+			<key column="employeeID"/>
+			<one-to-many class="User"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

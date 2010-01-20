@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.vms.db.bean">
+	<class
+		name="Playchangelog"
+		table="playchangelog"
+	>
+		<meta attribute="sync-DAO">true</meta>
+		<id
+			name="id"
+			type="integer"
+			column="Id"
+		>
+			<generator class="sequence"/>
+		</id>
+
+		<property
+			name="fromDate"
+			column="fromDate"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="toDate"
+			column="toDate"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="operation"
+			column="operation"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<many-to-one
+			name="auditor"
+			column="auditor"
+			class="User"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="vedioID"
+			column="vedioID"
+			class="Vediotape"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.vms.db.bean">
+	<class name="Vediotape" table="vediotape">
+		<meta attribute="sync-DAO">true</meta>
+		<id name="id" type="string" column="vedioID">
+			<generator class="assigned" />
+		</id>
+		<property name="vedioName" column="vedioName" type="string" not-null="true" length="128" />
+		<property name="dateComing" column="dateComing" type="date" not-null="true" length="10" />
+		<property name="dateInput" column="dateInput" type="timestamp" not-null="true" length="19" />
+		<property name="comments" column="comments" type="string" not-null="false" length="512" />
+		<property name="marketShare" column="marketShare" type="java.lang.Float" not-null="false" length="12" />
+		<property name="audienceRating" column="audienceRating" type="java.lang.Float" not-null="false" length="12" />
+		<many-to-one name="topic" column="topic" class="Topic" not-null="true">
+		</many-to-one>
+		<many-to-one name="inputer" column="inputer" class="User" not-null="true">
+		</many-to-one>
+		<many-to-one name="status" column="status" class="Status" not-null="true">
+		</many-to-one>
+		<many-to-one name="subject" column="subject" class="Subject" not-null="true">
+		</many-to-one>
+		<many-to-one name="companyID" column="companyID" class="Company" not-null="true">
+		</many-to-one>
+		<set name="vedioscores" inverse="true">
+			<key column="vedioID" />
+			<one-to-many class="Vedioscore" />
+		</set>
+		<set name="playorders" inverse="true">
+			<key column="vedioID" />
+			<one-to-many class="Playorder" />
+		</set>
+		<set name="playchangelogs" inverse="true">
+			<key column="vedioID" />
+			<one-to-many class="Playchangelog" />
+		</set>
+	</class>
+</hibernate-mapping>
