@@ -35,6 +35,28 @@
 .IHC {background-image: url(../image/bs_top_title_bg.png);background-repeat:repeat-x;}
 .IHR {background-image: url(../image/bs_top_right_corner.png);background-repeat:no-repeat;width:6px;height:39px;}
 
+.logon_btn {
+	background-image: url(../image/logon_button.png);
+	background-repeat:no-repeat;
+	width:100px;
+	height:30px;
+	font-weight:bold;
+	text-align:center;
+	vertical-align:middle;
+	line-height:30px;
+	margin-top:10px;
+	}
+	
+.sxtv_logo{
+	background-image: url(../image/sxtv_logo.png);
+	background-repeat:no-repeat;
+	text-align:center;
+	width:500px;
+	height:500px;
+	margin:auto;
+	margin-top:100px;
+	}
+
 input, textarea{
 	border:1px solid #AACFE4;
 	float:left;
@@ -51,4 +73,5 @@ label {
 	text-align:right;
 	color:#AACFE4;
 }
+
 
