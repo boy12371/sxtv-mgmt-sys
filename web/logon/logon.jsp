@@ -11,8 +11,9 @@
 
 <body>
 <s:form action="doLogon" namespace="/logon" method="post">
-
-	<table cellspacing="0" cellpadding="0" border="0">
+<div style="text-align:center;">
+	<div class="sxtv_logo">
+	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:100px;">
 		<tr>
 			<td class="tl"></td>
 			<td class="tc"></td>
@@ -31,15 +32,20 @@
 						<td align="center" width="278">
 							<table cellspacing="0" cellpadding="0" border="0">
 								<tr valign="middle">
-									<td align="right"><label>用户名</label></td>
-									<td style="padding-left: 15px;">
+									<td align="right"><img border="0" src="image/user.png"/></td>
+									<td style="padding-left: 10px;">
 										<input type="text" size="20" maxlength="100" name="txtuserid" />
 									</td>
 								</tr>
 								<tr valign="middle">
-									<td align="right"><label>密&nbsp;&nbsp;码</label></td>
-									<td style="padding-left: 15px;">
+									<td align="right"><img border="0" src="image/key.png"/></td>
+									<td style="padding-left: 10px;">
 										<input type="password" size="20" maxlength="50" name="txtpwd" />
+									</td>
+								</tr>
+								<tr valign="middle">
+									<td align="center" colspan="2">
+										<div class="logon_btn">登&nbsp;&nbsp;录 </div>
 									</td>
 								</tr>
 							</table>
@@ -56,7 +62,8 @@
 			<td class="br"></td>
 		</tr>
 	</table>
-
+	</div>
+</div>
 </s:form>
 </body>
 
