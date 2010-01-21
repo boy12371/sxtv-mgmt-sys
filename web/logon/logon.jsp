@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<s:form action="doLogon" namespace="/logon" method="post">
+<form action="doLogon" namespace="/logon" method="post">
 <div style="text-align:center;">
 	<div class="sxtv_logo">
 	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:100px;">
@@ -64,7 +64,7 @@
 	</table>
 	</div>
 </div>
-</s:form>
+</form>
 </body>
 
 </html>
