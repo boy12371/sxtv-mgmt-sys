@@ -18,6 +18,7 @@ public class BasicLayout extends BaseAction{
 	private List<TabElementBean> tabs;
 	
 	public String doLogon() throws Exception{
+		this.setUserInfo(userInfo);
 		TabViewManager tabManager = TabViewManager.getInstance(this.session);
 		tabs = tabManager.getTabs();
 		return SUCCESS;
