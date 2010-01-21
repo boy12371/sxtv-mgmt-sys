@@ -15,6 +15,14 @@ public class BasicLayout extends BaseAction{
 	
 	private SessionUserInfo userInfo;
 	
+	public SessionUserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(SessionUserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
 	private List<TabElementBean> tabs;
 	
 	public String doLogon() throws Exception{
