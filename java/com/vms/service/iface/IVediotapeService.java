@@ -12,7 +12,8 @@ public interface IVediotapeService {
 	 * @param CompanyID
 	 * @return
 	 */
-	List findVediotapeByFields(Map<String, Object> fieldsNameValue) throws Exception;
+	List<Vediotape> findVediotapeByProperty(Class clz,String propertyName, Object value,
+			int startIndex, int endIndex, boolean asceding) throws Exception;
 	
 	void createVediotapes(List<Vediotape> vedioes) throws Exception;
 	

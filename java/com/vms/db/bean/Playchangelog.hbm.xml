@@ -14,7 +14,7 @@
 			type="integer"
 			column="Id"
 		>
-			<generator class="sequence"/>
+			<generator class="identity"/>
 		</id>
 
 		<property

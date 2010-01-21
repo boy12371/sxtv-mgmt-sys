@@ -15,24 +15,25 @@ public class VediotapeService implements IVediotapeService {
 
 	private IVediotapeDAO vediotapeDAO;
 
-	@Override
-	public List findVediotapeByFields(Map<String, Object> fieldsNameValue) throws Exception {
-		// TODO Auto-generated method stub	
-		return vediotapeDAO.findVediosByProperties(fieldsNameValue, 0, 10,
-				Vediotape.PROP_COMPANY_ID, true);
+	private Class clz = com.vms.db.bean.Vediotape.class;
 
-	}
-
-	
 	@Override
 	public void createVediotapes(List<Vediotape> vedios) throws Exception {
 		// TODO Auto-generated method stub
 		this.vediotapeDAO.saveVedios(vedios);
 
 	}
-	
-	
-	
+
+	@Override
+	public List<Vediotape> findVediotapeByProperty(Class clz,
+			String propertyName, Object value, int startIndex, int endIndex,
+			boolean asceding) throws Exception {
+		// TODO Auto-generated method stub
+		vediotapeDAO.findObjectByField(clz, propertyName, value, startIndex,
+				endIndex, asceding);
+		return null;
+	}
+
 	public IVediotapeDAO getVediotapeDAO() {
 		return vediotapeDAO;
 	}
@@ -40,7 +41,5 @@ public class VediotapeService implements IVediotapeService {
 	public void setVediotapeDAO(IVediotapeDAO vediotapeDAO) {
 		this.vediotapeDAO = vediotapeDAO;
 	}
-
-
 
 }

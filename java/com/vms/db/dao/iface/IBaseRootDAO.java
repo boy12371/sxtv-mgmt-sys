@@ -5,9 +5,12 @@ package com.vms.db.dao.iface;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.SimpleExpression;
+
+import com.vms.db.bean.Status;
 
 /**
  * @author alexdong
@@ -31,5 +34,12 @@ public interface IBaseRootDAO {
 	void update(Object object) throws Exception;
 
 	void delete(Object object) throws Exception;
+	
+	List findObjectByField(Class clz,String propertyName, Object value,
+			int startIndex, int endIndex, boolean asceding) throws Exception;
+
+	List findObjectByFields(Class clz, Map<String, Object> propertiesValues,
+			int startIndex, int endIndex, String propertyName, boolean ascending)
+			throws Exception;
 
 }

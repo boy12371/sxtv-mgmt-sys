@@ -11,4 +11,10 @@ import org.hibernate.criterion.Order;
 public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayorderDAO {
 
 	private Class clz = com.vms.db.bean.Playorder.class;
+
+	@Override
+	public void deletePlayorder(int id) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
