@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<form action="doLogon" namespace="/logon" method="post">
+<form action="/framework/doLogon.action" method="post" name="logonForm">
 <div style="text-align:center;">
 	<div class="sxtv_logo">
 	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:100px;">
@@ -34,18 +34,18 @@
 								<tr valign="middle">
 									<td align="right"><img border="0" src="image/user.png"/></td>
 									<td style="padding-left: 10px;">
-										<input type="text" size="20" maxlength="100" name="txtuserid" />
+										<input type="text" size="20" maxlength="100" name="userInfo.username" />
 									</td>
 								</tr>
 								<tr valign="middle">
 									<td align="right"><img border="0" src="image/key.png"/></td>
 									<td style="padding-left: 10px;">
-										<input type="password" size="20" maxlength="50" name="txtpwd" />
+										<input type="password" size="20" maxlength="50" name="userInfo.password" />
 									</td>
 								</tr>
 								<tr valign="middle">
 									<td align="center" colspan="2">
-										<div class="logon_btn">登&nbsp;&nbsp;录 </div>
+										<div class="logon_btn" onclick="userlogon();return false;">登&nbsp;&nbsp;录</div>
 									</td>
 								</tr>
 							</table>
@@ -65,6 +65,12 @@
 	</div>
 </div>
 </form>
+
+<SCRIPT LANGUAGE="JavaScript">
+function userlogon(){
+	document.logonForm.submit();
+}
+</SCRIPT>
 </body>
 
 </html>
