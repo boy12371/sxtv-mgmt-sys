@@ -22,16 +22,18 @@ public class TabViewManager {
 		TabViewManager instance = (TabViewManager)session.getAttribute("TabManager");
 		if(null == instance){
 			instance = new TabViewManager();
-			instance.initializeTabs();
+			String path = session.getServletContext().getRealPath("/");
+			String filePath = path+"conf/frame_base.xml";
+			instance.initializeTabs(filePath);
 			session.setAttribute("TabManager", instance);
 		}
 		return instance;
 	}
 	
-	private void initializeTabs() throws Exception{
+	private void initializeTabs(String filePath) throws Exception{
 		tabs = new ArrayList<TabElementBean>();
 		NodeList mainConsoleConfNode = null;
-		Document doc = FileControlUtil.ParseXMLFile(System.getenv("VMS_CONFDIR") + "/frame_base.xml");
+		Document doc = FileControlUtil.ParseXMLFile(filePath);
 		mainConsoleConfNode = doc.getElementsByTagName("MainConsole");
 		
 		int numItems = mainConsoleConfNode.getLength();
