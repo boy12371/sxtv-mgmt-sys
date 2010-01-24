@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>com/vms/db/bean/Auditing.hbm.xml</value>
+				<value>com/vms/db/bean/Company.hbm.xml</value>
+				<value>com/vms/db/bean/Employee.hbm.xml</value>
+				<value>com/vms/db/bean/Playchangelog.hbm.xml</value>
+				<value>com/vms/db/bean/Playorder.hbm.xml</value>
+				<value>com/vms/db/bean/Status.hbm.xml</value>
+				<value>com/vms/db/bean/Subject.hbm.xml</value>
+				<value>com/vms/db/bean/Topic.hbm.xml</value>
+				<value>com/vms/db/bean/User.hbm.xml</value>
+				<value>com/vms/db/bean/Vedioscore.hbm.xml</value>
+				<value>com/vms/db/bean/Vediotape.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.hbm2ddl.auto=update  
+                hibernate.show_sql=true
+                hibernate.format_sql=true  
+                
+			</value>
+		</property>
+	</bean>
+	<bean name="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+      <!-- 配置事务属性 -->
+		<property name="transactionAttributes">
+			<props>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>vediotapeService</value>
+				<value>companyService</value>
+				<value>employeeService</value>
+				<value>statusService</value>
+				<value>subjectService</value>
+				<value>topicService</value>
+				<value>userService</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<!--
+		DAO**************************************************************
+	-->
+	<bean id="baseDAO" class="com.vms.db.dao.BaseRootDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="auditingDAO" class="com.vms.db.dao.AuditingDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="statusDAO" class="com.vms.db.dao.StatusDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="subjectDAO" class="com.vms.db.dao.SubjectDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="topicDAO" class="com.vms.db.dao.TopicDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="userDAO" class="com.vms.db.dao.UserDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="vediotapeDAO" class="com.vms.db.dao.VediotapeDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="vedioscoreDAO" class="com.vms.db.dao.VedioscoreDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="employeeDAO" class="com.vms.db.dao.EmployeeDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="companyDAO" class="com.vms.db.dao.CompanyDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="playchangelogDAO" class="com.vms.db.dao.PlaychangelogDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="playorderDAO" class="com.vms.db.dao.PlayorderDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<!--
+		Service **************************************************************
+	-->
+	<bean id="vediotapeService" class="com.vms.service.VediotapeService">
+		<property name="vediotapeDAO" ref="vediotapeDAO" />
+	</bean>
+	<bean id="companyService" class="com.vms.service.CompanyService">
+		<property name="companyDAO" ref="companyDAO" />
+	</bean>
+	<bean id="employeeService" class="com.vms.service.EmployeeService">
+		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>
+	<bean id="statusService" class="com.vms.service.StatusService">
+		<property name="statusDAO" ref="statusDAO" />
+	</bean>
+	<bean id="subjectService" class="com.vms.service.SubjectService">
+		<property name="subjectDAO" ref="subjectDAO" />
+	</bean>
+	<bean id="topicService" class="com.vms.service.TopicService">
+		<property name="topicDAO" ref="topicDAO" />
+	</bean>
+	<bean id="userService" class="com.vms.service.UserService">
+		<property name="userDAO" ref="userDAO" />
+	</bean>
+	<!--
+		Proxy Service ********************************************************
+	-->
+</beans>

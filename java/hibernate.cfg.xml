@@ -1,0 +1,34 @@
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- local connection properties -->
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost:32506/sxtvdb
+		</property>
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">123</property>
+		<!-- property name="hibernate.connection.pool_size"></property -->
+		<!-- dialect for MySQL -->
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.transaction.factory_class">
+			org.hibernate.transaction.JDBCTransactionFactory
+		</property>
+		<mapping resource="com/vms/db/bean/Auditing.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Company.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Employee.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Playchangelog.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Playorder.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Status.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Subject.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Topic.hbm.xml" />
+		<mapping resource="com/vms/db/bean/User.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Vedioscore.hbm.xml" />
+		<mapping resource="com/vms/db/bean/Vediotape.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
