@@ -1,8 +1,7 @@
+<%@page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -10,7 +9,8 @@
 </head>
 
 <body>
-<form action="/framework/doLogon.action" method="post" name="logonForm">
+
+<s:form action="doLogon" method="post" namespace="/framework" name="logonForm">
 <div style="text-align:center;">
 	<div class="sxtv_logo">
 	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:100px;">
@@ -64,10 +64,11 @@
 	</table>
 	</div>
 </div>
-</form>
 
+</s:form>
 <SCRIPT LANGUAGE="JavaScript">
 function userlogon(){
+
 	document.logonForm.submit();
 }
 </SCRIPT>
