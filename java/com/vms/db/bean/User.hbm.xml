@@ -2,69 +2,38 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
-
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="User"
-		table="user"
-	>
+	<class name="User" table="user">
 		<meta attribute="sync-DAO">true</meta>
-		<id
-			name="id"
-			type="integer"
-			column="userID"
-		>
-			<generator class="identity"/>
+		<id name="id" type="integer" column="userID">
+			<generator class="identity" />
 		</id>
-
-		<property
-			name="userName"
-			column="userName"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="userPass"
-			column="userPass"
-			type="string"
-			not-null="true"
-			length="128"
-		/>
-		<many-to-one
-			name="employee"
-			column="employee"
-			class="Employee"
-			not-null="true"
-		>
+		<property name="userName" column="userName" type="string"
+			not-null="true" length="50" />
+		<property name="userPass" column="userPass" type="string"
+			not-null="true" length="128" />
+		<many-to-one name="employee" column="employee" class="Employee"
+			not-null="true">
 		</many-to-one>
-	
-
 		<set name="vedioscores" inverse="true">
-			<key column="userID"/>
-			<one-to-many class="Vedioscore"/>
+			<key column="userID" />
+			<one-to-many class="Vedioscore" />
 		</set>
-
 		<set name="playorders" inverse="true">
-			<key column="userID"/>
-			<one-to-many class="Playorder"/>
+			<key column="userID" />
+			<one-to-many class="Playorder" />
 		</set>
-
 		<set name="playchangelogs" inverse="true">
-			<key column="userID"/>
-			<one-to-many class="Playchangelog"/>
+			<key column="userID" />
+			<one-to-many class="Playchangelog" />
 		</set>
-
 		<set name="vediotapes" inverse="true">
-			<key column="userID"/>
-			<one-to-many class="Vediotape"/>
+			<key column="userID" />
+			<one-to-many class="Vediotape" />
 		</set>
-
 		<set name="auditings" inverse="true">
-			<key column="userID"/>
-			<one-to-many class="Auditing"/>
+			<key column="userID" />
+			<one-to-many class="Auditing" />
 		</set>
-
-
-	</class>	
+	</class>
 </hibernate-mapping>

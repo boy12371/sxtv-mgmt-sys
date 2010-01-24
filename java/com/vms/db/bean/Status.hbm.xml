@@ -2,47 +2,23 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
-
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="Status"
-		table="status"
-	>
+	<class name="Status" table="status">
 		<meta attribute="sync-DAO">true</meta>
-		<id
-			name="id"
-			type="integer"
-			column="statusID"
-		>
-			<generator class="identity"/>
+		<id name="id" type="integer" column="statusID">
+			<generator class="identity" />
 		</id>
-
-		<property
-			name="status"
-			column="status"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="comments"
-			column="comments"
-			type="string"
-			not-null="true"
-			length="512"
-		/>
-	
-
+		<property name="status" column="status" type="string"
+			not-null="true" length="50" />
+		<property name="comments" column="comments" type="string"
+			not-null="true" length="512" />
 		<set name="vediotapes" inverse="true">
-			<key column="statusID"/>
-			<one-to-many class="Vediotape"/>
+			<key column="statusID" />
+			<one-to-many class="Vediotape" />
 		</set>
-
 		<set name="auditings" inverse="true">
-			<key column="statusID"/>
-			<one-to-many class="Auditing"/>
+			<key column="statusID" />
+			<one-to-many class="Auditing" />
 		</set>
-
-
-	</class>	
+	</class>
 </hibernate-mapping>

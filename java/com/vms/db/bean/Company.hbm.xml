@@ -2,63 +2,25 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
-
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="Company"
-		table="company"
-	>
+	<class name="Company" table="company">
 		<meta attribute="sync-DAO">true</meta>
-		<id
-			name="id"
-			type="integer"
-			column="companyID"
-		>
-			<generator class="identity"/>
+		<id name="id" type="integer" column="companyID">
+			<generator class="identity" />
 		</id>
-
-		<property
-			name="companyName"
-			column="companyName"
-			type="string"
-			not-null="true"
-			length="128"
-		/>
-		<property
-			name="registrationNo"
-			column="registrationNo"
-			type="string"
-			not-null="true"
-			length="128"
-		/>
-		<property
-			name="phone"
-			column="phone"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="contactPerson"
-			column="contactPerson"
-			type="string"
-			not-null="true"
-			length="50"
-		/>
-		<property
-			name="comments"
-			column="comments"
-			type="string"
-			not-null="true"
-			length="512"
-		/>
-	
-
+		<property name="companyName" column="companyName" type="string"
+			not-null="true" length="128" />
+		<property name="registrationNo" column="registrationNo" type="string"
+			not-null="true" length="128" />
+		<property name="phone" column="phone" type="string" not-null="true"
+			length="50" />
+		<property name="contactPerson" column="contactPerson" type="string"
+			not-null="true" length="50" />
+		<property name="comments" column="comments" type="string"
+			not-null="true" length="512" />
 		<set name="vediotapes" inverse="true">
-			<key column="companyID"/>
-			<one-to-many class="Vediotape"/>
+			<key column="companyID" />
+			<one-to-many class="Vediotape" />
 		</set>
-
-
-	</class>	
+	</class>
 </hibernate-mapping>

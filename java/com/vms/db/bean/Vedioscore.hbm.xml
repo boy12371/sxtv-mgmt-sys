@@ -2,100 +2,34 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
-
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="Vedioscore"
-		table="vedioscore"
-	>
+	<class name="Vedioscore" table="vedioscore">
 		<meta attribute="sync-DAO">true</meta>
-		<id
-			name="id"
-			type="integer"
-			column="id"
-		>
-			<generator class="identity"/>
+		<id name="id" type="integer" column="id">
+			<generator class="identity" />
 		</id>
-
-		<property
-			name="storyScore"
-			column="storyScore"
-			type="java.lang.Float"
-			not-null="true"
-			length="12"
-		/>
-		<property
-			name="techScore"
-			column="techScore"
-			type="java.lang.Float"
-			not-null="true"
-			length="12"
-		/>
-		<property
-			name="performScore"
-			column="performScore"
-			type="java.lang.Float"
-			not-null="true"
-			length="12"
-		/>
-		<property
-			name="innovateScore"
-			column="innovateScore"
-			type="java.lang.Float"
-			not-null="true"
-			length="12"
-		/>
-		<property
-			name="score"
-			column="score"
-			type="java.lang.Float"
-			not-null="true"
-			length="12"
-		/>
-		<property
-			name="audiendceVote"
-			column="audiendceVote"
-			type="integer"
-			not-null="true"
-			length="10"
-		/>
-		<property
-			name="award"
-			column="award"
-			type="string"
-			not-null="true"
-			length="128"
-		/>
-		<property
-			name="precision"
-			column="precision"
-			type="java.lang.Float"
-			not-null="true"
-			length="12"
-		/>
-		<property
-			name="purchase"
-			column="purchase"
-			type="string"
-			not-null="true"
-			length="128"
-		/>
-		<property
-			name="comments"
-			column="comments"
-			type="string"
-			not-null="false"
-			length="512"
-		/>
-		<many-to-one
-			name="vedioID"
-			column="vedioID"
-			class="Vediotape"
-			not-null="true"
-		>
+		<property name="storyScore" column="storyScore" type="java.lang.Float"
+			not-null="true" length="12" />
+		<property name="techScore" column="techScore" type="java.lang.Float"
+			not-null="true" length="12" />
+		<property name="performScore" column="performScore" type="java.lang.Float"
+			not-null="true" length="12" />
+		<property name="innovateScore" column="innovateScore" type="java.lang.Float"
+			not-null="true" length="12" />
+		<property name="score" column="score" type="java.lang.Float"
+			not-null="true" length="12" />
+		<property name="audiendceVote" column="audiendceVote" type="integer"
+			not-null="true" length="10" />
+		<property name="award" column="award" type="string" not-null="true"
+			length="128" />
+		<property name="precision" column="precision" type="java.lang.Float"
+			not-null="true" length="12" />
+		<property name="purchase" column="purchase" type="string"
+			not-null="true" length="128" />
+		<property name="comments" column="comments" type="string"
+			not-null="false" length="512" />
+		<many-to-one name="vedioID" column="vedioID" class="Vediotape"
+			not-null="true">
 		</many-to-one>
-		
-
-
-	</class>	
+	</class>
 </hibernate-mapping>
