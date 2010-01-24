@@ -49,6 +49,7 @@ body {
 <div id="tab<s:property value='#st.index'/>">
 <ul class="subTabUL">
 	<s:iterator value="subTabs">
+
 	<li><a href="<s:property value='URL'/>" target="contentFrame" onclick="refreshIframe(this);return false;"><s:property value="name"/></a></li>
 	</s:iterator>
 </ul>
