@@ -24,9 +24,6 @@ import com.vms.db.dao.iface.IBaseRootDAO;
 public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 	private SessionFactory sessionFactory;
 
-	private Criteria criteria;
-	private Query query;
-
 	@Override
 	public void deleteObject(Object object) throws Exception {
 		// TODO Auto-generated method stub
@@ -106,33 +103,12 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		return crt.list();
 	}
 
-	public Criteria getCriteria() {
-		return criteria;
+	public Query getQuery(String hqlString) {
+		return this.getSession().createQuery(hqlString);
 	}
 
 	public Criteria getCriteria(Class clz) {
-		if (criteria == null) {
-
-			Session session = this.getSessionFactory().getCurrentSession();
-			criteria = session.createCriteria(clz);
-		}
-		return criteria;
-	}
-
-	public void setCriteria(Criteria criteria) {
-		this.criteria = criteria;
-	}
-
-	public Query getQuery(String hqlString) {
-		if (query == null) {
-			Session session = this.getSessionFactory().getCurrentSession();
-			query = session.createQuery(hqlString);
-		}
-		return query;
-	}
-
-	public void setQuery(Query query) {
-		this.query = query;
+		return this.getSession().createCriteria(clz);
 	}
 
 }
