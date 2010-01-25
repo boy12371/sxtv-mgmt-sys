@@ -26,7 +26,7 @@ public class PlaychangelogDAO extends com.vms.db.dao.BaseRootDAO implements
 	@Override
 	public void deltePlaychangelog(int id) throws Exception {
 		// TODO Auto-generated method stub
-		this.delete(this.load(clz, id));
+		this.deleteObject(this.loadObject(clz, id));
 	}
 
 	

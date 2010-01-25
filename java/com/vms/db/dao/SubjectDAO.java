@@ -19,7 +19,7 @@ public class SubjectDAO extends com.vms.db.dao.BaseRootDAO  implements ISubjectD
 	@Override
 	public void deleteSubject(int subjectID) throws Exception {
 		// TODO Auto-generated method stub
-		this.delete(this.load(clz, subjectID));
+		this.deleteObject(this.loadObject(clz, subjectID));
 		
 	}
 

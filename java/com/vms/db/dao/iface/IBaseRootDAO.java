@@ -18,22 +18,22 @@ import com.vms.db.bean.Status;
  */
 public interface IBaseRootDAO {
 
-	Object get(Class clz, Serializable id) throws Exception;
+	Object getObject(Class clz, Serializable id) throws Exception;
 
-	Object load(Class clz, Serializable id) throws Exception;
+	Object loadObject(Class clz, Serializable id) throws Exception;
 
 //	List findAll(Order order, Class clz) throws Exception;
 //
 //	List findFiltered(String propName, SimpleExpression simpleExpression,
 //			Order order, Class clz) throws Exception;
 
-	Serializable save(Object object) throws Exception;
+	Serializable saveObject(Object object) throws Exception;
 
-	void saveOrUpdate(Object object) throws Exception;
+	void saveOrUpdateObject(Object object) throws Exception;
 
-	void update(Object object) throws Exception;
+	void updateObject(Object object) throws Exception;
 
-	void delete(Object object) throws Exception;
+	void deleteObject(Object object) throws Exception;
 	
 	List findObjectByField(Class clz,String propertyName, Object value,
 			int startIndex, int endIndex, boolean asceding) throws Exception;

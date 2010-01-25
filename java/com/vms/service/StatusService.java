@@ -21,7 +21,7 @@ public class StatusService implements IStatusService {
 	@Override
 	public void deleteStatus(Status status) throws Exception {
 		// TODO Auto-generated method stub
-		statusDAO.delete(status);
+		statusDAO.deleteObject(status);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class StatusService implements IStatusService {
 	@Override
 	public void createStatus(Status status) throws Exception {
 		// TODO Auto-generated method stub
-		this.statusDAO.save(status);
+		this.statusDAO.saveObject(status);
 	}
 
 	public IStatusDAO getStatusDAO() {

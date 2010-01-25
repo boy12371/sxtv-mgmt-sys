@@ -3,14 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
-           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="command" />
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -40,9 +40,7 @@
 			</value>
 		</property>
 	</bean>
-	<bean name="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory">
@@ -54,7 +52,7 @@
 		<property name="transactionManager">
 			<ref bean="transactionManager" />
 		</property>
-      <!-- 配置事务属性 -->
+		<!-- 配置事务属性 -->
 		<property name="transactionAttributes">
 			<props>
 				<prop key="delete*">PROPAGATION_REQUIRED</prop>
@@ -65,8 +63,9 @@
 			</props>
 		</property>
 	</bean>
-	<bean
-		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+
+	
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
 		<property name="beanNames">
 			<list>
 				<value>vediotapeService</value>
@@ -84,48 +83,52 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">   
+		<property name="transactionInterceptor" ref="transactionInterceptor"/>   
+	</bean>
 	<!--
-		DAO**************************************************************
-	-->
+			DAO**************************************************************
+		-->
 	<bean id="baseDAO" class="com.vms.db.dao.BaseRootDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="auditingDAO" class="com.vms.db.dao.AuditingDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="statusDAO" class="com.vms.db.dao.StatusDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="subjectDAO" class="com.vms.db.dao.SubjectDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="topicDAO" class="com.vms.db.dao.TopicDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="userDAO" class="com.vms.db.dao.UserDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="vediotapeDAO" class="com.vms.db.dao.VediotapeDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="vedioscoreDAO" class="com.vms.db.dao.VedioscoreDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="employeeDAO" class="com.vms.db.dao.EmployeeDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="companyDAO" class="com.vms.db.dao.CompanyDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="playchangelogDAO" class="com.vms.db.dao.PlaychangelogDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="playorderDAO" class="com.vms.db.dao.PlayorderDAO">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<!--
-		Service **************************************************************
-	-->
+			Service **************************************************************
+		-->
 	<bean id="vediotapeService" class="com.vms.service.VediotapeService">
 		<property name="vediotapeDAO" ref="vediotapeDAO" />
 	</bean>
@@ -148,6 +151,6 @@
 		<property name="userDAO" ref="userDAO" />
 	</bean>
 	<!--
-		Proxy Service ********************************************************
-	-->
+			Proxy Service ********************************************************
+		-->
 </beans>

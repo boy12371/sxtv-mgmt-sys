@@ -21,7 +21,7 @@
 		<property name="comments" column="comments" type="string"
 			not-null="true" length="512" />
 		<set name="users" inverse="true" lazy="true">
-			<key column="employeeID" />
+			<key column="employeeID" not-null="false" />
 			<one-to-many class="User" />
 		</set>
 	</class>

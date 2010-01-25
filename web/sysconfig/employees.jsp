@@ -89,7 +89,7 @@
 			oPayload.totalRecords = oResponse.meta.totalRecords;
 			return oPayload;
 		}
-		alert(myDataTable.records);
+		
 		return {
 			ds :myDataSource,
 			dt :myDataTable

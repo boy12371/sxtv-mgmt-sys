@@ -21,7 +21,7 @@ public class CompanyService implements ICompanyService {
 	@Override
 	public void deleteCompany(Company company) throws Exception {
 		// TODO Auto-generated method stub
-		this.companyDAO.delete(company);
+		this.companyDAO.deleteObject(company);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class CompanyService implements ICompanyService {
 	@Override
 	public void createCompany(Company company) throws Exception {
 		// TODO Auto-generated method stub
-		this.companyDAO.save(company);
+		this.companyDAO.saveObject(company);
 	}
 
 	public ICompanyDAO getCompanyDAO() {

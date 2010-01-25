@@ -19,7 +19,7 @@ public class UserDAO  extends com.vms.db.dao.BaseRootDAO  implements IUserDAO {
 	@Override
 	public void deleteUser(int id) throws Exception {
 		// TODO Auto-generated method stub
-		this.delete(this.load(clz, id));
+		this.deleteObject(this.loadObject(clz, id));
 	}
 
 	@Override

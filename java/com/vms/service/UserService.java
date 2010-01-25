@@ -13,7 +13,7 @@ public class UserService implements IUserService {
 	@Override
 	public void createUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		userDAO.save(user);
+		userDAO.saveObject(user);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class UserService implements IUserService {
 	@Override
 	public void deleteUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		userDAO.delete(user);
+		userDAO.deleteObject(user);
 	}
 
 	@Override

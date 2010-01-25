@@ -38,21 +38,16 @@ public class Test {
 
 	
 		try {
-		//	service.findVediotapeByFields(null);
-			Employee employee=new Employee();
-			employee.setBirthday(new Date());
-			employee.setContractDate(new Date());
-			employee.setComments("这是一个员工");
-			employee.setGender(1);
-			employee.setName("周强");
-			employee.setTel("13991366931");
-			service.createEmployee(employee);
+		
 			List<Employee> list = service.findAllEmployees(0, -1);
 			
 			for(Employee e : list){
 				System.out.println(e.getName()+"/"+ e.getId());
 				
 			}
+			
+			Employee ep = service.getEmployeeById(1);
+			System.out.println(ep.getName()+"=========");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

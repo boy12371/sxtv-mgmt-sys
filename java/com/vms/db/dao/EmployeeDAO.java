@@ -13,22 +13,21 @@ import org.hibernate.criterion.Order;
 /**
  * This is an automatically generated DAO class which should not be edited.
  */
-public class EmployeeDAO extends com.vms.db.dao.BaseRootDAO  implements IEmployeeDAO{
-	private Class clz = com.vms.db.bean.Employee.class;
-
+public class EmployeeDAO extends com.vms.db.dao.BaseRootDAO implements
+		IEmployeeDAO {
 	@Override
-	public void deleteEmployee(int id) throws Exception {
+	public void deleteEmployee(Class clz, int id) throws Exception {
 		// TODO Auto-generated method stub
-		this.delete(this.load(clz, id));
+		this.deleteObject(this.loadObject(clz, id));
 	}
 
 	@Override
-	public List<Employee> findAllEmployees(int startIndex, int endIndex)
-			throws Exception {
+	public List<Employee> findAllEmployees(Class clz, int startIndex,
+			int endIndex) throws Exception {
 		// TODO Auto-generated method stub
-		
-		return (List<Employee>)this.findObjectByFields(clz, null, startIndex, endIndex, null, false);
+
+		return (List<Employee>) this.findObjectByFields(clz, null, startIndex,
+				endIndex, null, false);
 	}
 
-	
 }

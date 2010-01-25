@@ -22,13 +22,13 @@ public class SubjectService implements ISubjectService {
 	@Override
 	public void deleteSubject(Subject subject) throws Exception {
 		// TODO Auto-generated method stub
-		subjectDAO.delete(subject);
+		subjectDAO.deleteObject(subject);
 	}
 
 	@Override
 	public void createSubject(Subject subject) throws Exception {
 		// TODO Auto-generated method stub
-		subjectDAO.save(subject);
+		subjectDAO.saveObject(subject);
 	}
 
 

@@ -8,8 +8,8 @@ import com.vms.db.bean.Employee;
 
 public interface IEmployeeDAO  extends IBaseRootDAO{
 	
-	void deleteEmployee(int id)throws Exception;
+	void deleteEmployee(Class clz, int id)throws Exception;
 	
-	List<Employee> findAllEmployees(int startIndex,int endIndex) throws Exception;
+	List<Employee> findAllEmployees(Class clz, int startIndex,int endIndex) throws Exception;
 	
 }

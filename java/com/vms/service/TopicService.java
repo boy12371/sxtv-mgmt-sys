@@ -14,7 +14,7 @@ public class TopicService implements ITopicService {
 	@Override
 	public void createTopic(Topic topic) throws Exception {
 		// TODO Auto-generated method stub
-		topicDAO.save(topic);
+		topicDAO.saveObject(topic);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class TopicService implements ITopicService {
 	@Override
 	public void deleteTopic(Topic topic) throws Exception {
 		// TODO Auto-generated method stub
-		topicDAO.delete(topic);
+		topicDAO.deleteObject(topic);
 	}
 
 	@Override
