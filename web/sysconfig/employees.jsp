@@ -38,22 +38,18 @@
 
 
 <script type="text/javascript">
+
+	
 	YAHOO.example.DynamicData = function() {
 		// Column definitions
 		var myColumnDefs = [ // sortable:true enables sorting
-		{
-			key :"id",
-			label :"ID",
-			sortable :true
-		}, {
-			key :"name",
-			label :"Name",
-			sortable :true
-		} ];
+							{key :"id",label :"ID", sortable :true}, 
+							{key :"name",label :"Name",sortable :true}
+						];
 
 		// DataSource instance
 		var myDataSource = new YAHOO.util.DataSource(
-				"/tv/sys/getEmployees.action");
+				"/tv/sys/getEmployees.action?");
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
 		myDataSource.responseSchema = {
@@ -67,14 +63,15 @@
 
 		// DataTable configuration
 		var myConfigs = {
-			initialRequest :"", // Initial request for first page of data
+				
+			initialRequest :"sort=id&dir=asc&startIndex=0&results=2", // Initial request for first page of data
 			dynamicData :true, // Enables dynamic server-driven data
 			sortedBy : {
 				key :"id",
 				dir :YAHOO.widget.DataTable.CLASS_ASC
 			}, // Sets UI initial sort arrow
 			paginator :new YAHOO.widget.Paginator( {
-				rowsPerPage :3
+				rowsPerPage :2
 			})
 		// Enables pagination 
 		};

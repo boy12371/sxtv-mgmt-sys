@@ -20,7 +20,7 @@ function resizeIframe(){
 	}else{
 		height = iframeObj.contentDocument.body.offsetHeight;
 	}
-	iframeObj.style.height = height + "px";
+	iframeObj.style.height = "650px";
 	
 	resizeContentDiv();
 }
