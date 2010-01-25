@@ -36,22 +36,6 @@ public class Test {
 	
 		IEmployeeService service = (IEmployeeService) ctx.getBean("employeeService");
 
-	
-		try {
-		
-			List<Employee> list = service.findAllEmployees(0, -1);
-			
-			for(Employee e : list){
-				System.out.println(e.getName()+"/"+ e.getId());
-				
-			}
-			
-			Employee ep = service.getEmployeeById(1);
-			System.out.println(ep.getName()+"=========");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		
 		

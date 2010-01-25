@@ -39,4 +39,28 @@ ServletRequestAware, ServletResponseAware {
 	protected void setUserInfo(SessionUserInfo userInfo){
 		session.setAttribute("SessionUserInfo", userInfo);
 	}
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	public HttpServletResponse getResponse() {
+		return response;
+	}
+
+	public void setResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public HttpSession getSession() {
+		return session;
+	}
+
+	public void setSession(HttpSession session) {
+		this.session = session;
+	}
 }
