@@ -24,10 +24,12 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
-	public List<Employee> findAllEmployees(int startIndex, int endIndex)
+	public List<Employee> findAllEmployees(int startIndex, int endIndex, String propertyName, boolean ascending)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return employeeDAO.findAllEmployees(clz,startIndex, endIndex);
+		
+		return employeeDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
+		//return employeeDAO.findAllEmployees(clz,startIndex, endIndex);
 	}
 
 	@Override
