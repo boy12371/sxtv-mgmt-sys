@@ -2,14 +2,15 @@ package com.vms.action.sysconfig;
 
 import java.util.List;
 
-public class JSONTableData {
+public class JSONDataTable {
 
-	private int recordsReturned=10;
-	private int totalRecords=16;
+	private int recordsReturned;
+	private int totalRecords=0;
 	private int startIndex=0;
 	private String sort;
 	private String dir = "asc";
-	private int pageSize = 5;
+	private int pageSize = 3;
+	private int rowsPerPage=10;
 
 	private List records;
 
@@ -68,5 +69,15 @@ public class JSONTableData {
 	public void setRecords(List records) {
 		this.records = records;
 	}
+
+	public int getRowsPerPage() {
+		return rowsPerPage;
+	}
+
+	public void setRowsPerPage(int rowsPerPage) {
+		this.rowsPerPage = rowsPerPage;
+	}
+
+	
 
 }

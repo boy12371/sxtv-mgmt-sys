@@ -18,17 +18,17 @@ public class EmployeeMgmtAction extends BaseAction {
 	private Employee employee;
 	private List<Employee> empList;
 
-	private JSONTableData data;
+	private JSONDataTable table;
 
 	public String toEmployees() throws Exception {
 		return this.SUCCESS;
-
 	}
 
 	public String getEmployees() throws Exception {
-		data = new JSONTableData();
-		data.setTotalRecords(15);
-		empList = employeeService.findAllEmployees(0, -1);
+		//table = new JSONTableData();
+		table = PagerUtils.initJSONDataTable(getRequest());
+		empList = employeeService.findAllEmployees(table.getStartIndex(), table.getStartIndex()+table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));		
+		
 		List<MyEmp> myEmp = new ArrayList();
 		for (int i = 0; i < empList.size(); i++) {
 			MyEmp e = new MyEmp();
@@ -36,7 +36,7 @@ public class EmployeeMgmtAction extends BaseAction {
 			e.setName(empList.get(i).getName());
 			myEmp.add(e);
 		}
-		data.setRecords(myEmp);
+		PagerUtils.setupJSONDataTable(myEmp, table, 7);
 
 		return this.SUCCESS;
 
@@ -75,12 +75,14 @@ public class EmployeeMgmtAction extends BaseAction {
 		this.empList = empList;
 	}
 
-	public JSONTableData getData() {
-		return data;
+	public JSONDataTable getTable() {
+		return table;
 	}
 
-	public void setData(JSONTableData data) {
-		this.data = data;
+	public void setTable(JSONDataTable table) {
+		this.table = table;
 	}
+
+	
 
 }
