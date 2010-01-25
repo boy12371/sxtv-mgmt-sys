@@ -44,6 +44,11 @@ public class EmployeeService implements IEmployeeService {
 		return (Employee) employeeDAO.getObject(clz, id);
 	}
 	
+	@Override
+	public int getEmployeeTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return employeeDAO.getObjectTotalCount(clz, Employee.PROP_ID);
+	}
 	
 	
 	public IEmployeeDAO getEmployeeDAO() {
@@ -53,4 +58,6 @@ public class EmployeeService implements IEmployeeService {
 	public void setEmployeeDAO(IEmployeeDAO employeeDAO) {
 		this.employeeDAO = employeeDAO;
 	}
+
+	
 }

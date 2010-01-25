@@ -22,10 +22,9 @@ public interface IBaseRootDAO {
 
 	Object loadObject(Class clz, Serializable id) throws Exception;
 
-//	List findAll(Order order, Class clz) throws Exception;
-//
-//	List findFiltered(String propName, SimpleExpression simpleExpression,
-//			Order order, Class clz) throws Exception;
+	
+	
+	int getObjectTotalCount(Class clz, String propertyName)throws Exception;
 
 	Serializable saveObject(Object object) throws Exception;
 

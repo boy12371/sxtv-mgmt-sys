@@ -1,10 +1,12 @@
-package com.vms.action.sysconfig;
+package com.vms.common;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PagerUtils {
+import com.vms.beans.JSONDataTable;
+
+public class JSONDataTableUtils {
 	
 	
 	public static JSONDataTable initJSONDataTable(HttpServletRequest request){

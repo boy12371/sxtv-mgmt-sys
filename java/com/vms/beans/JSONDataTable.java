@@ -1,4 +1,4 @@
-package com.vms.action.sysconfig;
+package com.vms.beans;
 
 import java.util.List;
 

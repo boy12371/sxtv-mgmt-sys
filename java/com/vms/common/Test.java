@@ -36,7 +36,7 @@ public class Test {
 	
 		IEmployeeService service = (IEmployeeService) ctx.getBean("employeeService");
 
-		
+		System.out.print(service.getEmployeeTotalCount()+"====");
 		
 		
 		

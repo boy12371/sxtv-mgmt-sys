@@ -19,6 +19,10 @@
 		<action name="toAddEmployee" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="toAddEmployee">
 			<result name="success">/sysconfig/addEmployee.jsp</result>
 		</action>
+		
+		<action name="toUpdateEmployee" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="toUpdateEmployee">
+			<result name="success">/sysconfig/employee.jsp</result>
+		</action>
 		<action name="doAddEmployee" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="doAddEmployee">
 			<result type="chain">
 				<param name="actionName">toEmployees</param>

@@ -12,6 +12,8 @@ import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -102,7 +104,15 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		crt.setMaxResults(endIndex);
 		return crt.list();
 	}
-
+	
+	
+	@Override
+	public int getObjectTotalCount(Class clz, String propertyName) throws Exception {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		crt.setProjection(Projections.count(propertyName));		
+		return Integer.parseInt(crt.uniqueResult().toString());
+	}
 	public Query getQuery(String hqlString) {
 		return this.getSession().createQuery(hqlString);
 	}
@@ -110,5 +120,7 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 	public Criteria getCriteria(Class clz) {
 		return this.getSession().createCriteria(clz);
 	}
+
+	
 
 }

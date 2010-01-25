@@ -1,4 +1,4 @@
-package com.vms.service.bean;
+package com.vms.beans;
 
 public class EmployeeVO {
 

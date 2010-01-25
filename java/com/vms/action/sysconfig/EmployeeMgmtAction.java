@@ -3,7 +3,11 @@ package com.vms.action.sysconfig;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vms.beans.EmployeeVO;
+import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
+import com.vms.common.JSONDataTableUtils;
+import com.vms.common.beanutils.BeanConvert;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.MyEmp;
 import com.vms.service.iface.IEmployeeService;
@@ -15,9 +19,8 @@ public class EmployeeMgmtAction extends BaseAction {
 
 	private IEmployeeService employeeService;
 
+	private EmployeeVO vEmployee;
 	private Employee employee;
-	private List<Employee> empList;
-
 	private JSONDataTable table;
 
 	public String toEmployees() throws Exception {
@@ -25,29 +28,28 @@ public class EmployeeMgmtAction extends BaseAction {
 	}
 
 	public String getEmployees() throws Exception {
-		//table = new JSONTableData();
-		table = PagerUtils.initJSONDataTable(getRequest());
-		empList = employeeService.findAllEmployees(table.getStartIndex(), table.getStartIndex()+table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));		
-		
-		List<MyEmp> myEmp = new ArrayList();
-		for (int i = 0; i < empList.size(); i++) {
-			MyEmp e = new MyEmp();
-			e.setId(empList.get(i).getId());
-			e.setName(empList.get(i).getName());
-			myEmp.add(e);
-		}
-		PagerUtils.setupJSONDataTable(myEmp, table, 7);
+		// table = new JSONTableData();
+		table = JSONDataTableUtils.initJSONDataTable(getRequest());
+		List<Employee> empList = employeeService.findAllEmployees(table.getStartIndex(), table.getStartIndex()
+				+ table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
+		List<EmployeeVO> vlist = BeanConvert.convertBeans(empList);
+		JSONDataTableUtils.setupJSONDataTable(vlist, table, employeeService.getEmployeeTotalCount());
 
 		return this.SUCCESS;
 
 	}
 
+	
+	public String toUpdateEmployee()throws Exception{
+		employee = this.employeeService.getEmployeeById(employee.getId());
+		return this.SUCCESS;
+	}
 	public String toAddEmployee() {
 		return this.SUCCESS;
 	}
 
 	public String doAddEmployee() throws Exception {
-		employeeService.createEmployee(employee);
+		//employeeService.createEmployee(employee);
 		return this.SUCCESS;
 	}
 
@@ -59,21 +61,7 @@ public class EmployeeMgmtAction extends BaseAction {
 		this.employeeService = employeeService;
 	}
 
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public List<Employee> getEmpList() {
-		return empList;
-	}
-
-	public void setEmpList(List<Employee> empList) {
-		this.empList = empList;
-	}
+	
 
 	public JSONDataTable getTable() {
 		return table;
@@ -83,6 +71,21 @@ public class EmployeeMgmtAction extends BaseAction {
 		this.table = table;
 	}
 
-	
+	public EmployeeVO getVEmployee() {
+		return vEmployee;
+	}
+
+	public void setVEmployee(EmployeeVO employee) {
+		vEmployee = employee;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 
 }
