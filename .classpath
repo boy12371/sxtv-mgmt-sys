@@ -14,7 +14,6 @@
 	<classpathentry kind="lib" path="web/WEB-INF/lib/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="web/WEB-INF/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/asm-attrs.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/asm.jar"/>
@@ -32,5 +31,13 @@
 	<classpathentry kind="lib" path="web/WEB-INF/lib/jta.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/spring.jar"/>
 	<classpathentry kind="lib" path="web/WEB-INF/lib/mysql-connector-java-5.1.10-bin.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/commons-lang-2.3.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/morph-1.1.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/struts2-json-plugin-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/struts2-spring-plugin-2.1.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
