@@ -14,7 +14,6 @@ public class StatusMgmtAction extends BaseAction {
 	}
 
 	public String doAddStatus() throws Exception {
-
 		statusService.createStatus(status);
 		return SUCCESS;
 

@@ -1,45 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<sx:head />
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>员工管理</title>
+
+<link rel="stylesheet" type="text/css" href="../../common/yui/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="../../common/yui/build/calendar/assets/skins/sam/calendar.css" />
+<link rel="stylesheet" type="text/css" href="../../common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="../../common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css" href="../../common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="../../common/css/common.css" />
+
+<script type="text/javascript" src="../../common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../../common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="../../common/yui/build/calendar/calendar-min.js"></script>
+<script type="text/javascript" src="../../common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="../../common/yui/build/datatable/datatable-min.js"></script>
+<script type="text/javascript" src="../../common/yui/build/paginator/paginator-min.js"></script>
+<script type="text/javascript" src="../../common/yui/build/button/button-min.js"></script>
+
 </head>
 <body>
 
 
 
-<h1>Sign-up form</h1>
+<h1>员工信息</h1>
 <p>This is the basic look of my form without table</p>
 
 <s:form>
+	<div align="center">
 	<table>
 		<tr>
-			<td><label>员工姓名</label></td>
+			<td><label>姓名：</label></td>
 			<td><s:textfield name="employee.name" /></td>
-			<td><label>性别</label></td>
-			<td><s:textfield name="" /></td>
+			<td><label>性别：</label></td>
+			<td><s:select name="employee.gender" list="#{'1':'男','0':'女'}" /></td>
 		</tr>
 		<tr>
-			<td><label>出生日期</label></td>
-			<td></td>
-			<td><label>入职日期</label></td>
-			<td></td>
+			<td><label>出生日期：</label></td>
+			<td><sx:datetimepicker name="employee.birthday" displayFormat="yyyy-MM-dd" /></td>
+			<td><label>电话：</label></td>
+			<td><s:textfield name="employee.tel" /></td>
 		</tr>
 		<tr>
-			<td><label>电话</label></td>
-			<td><s:textfield name="" /></td>
-			<td><label>备注</label></td>
-			<td><s:textarea name=""></s:textarea></td>
+			<td><label>入职日期：</label></td>
+			<td><sx:datetimepicker name="employee.contractDate" displayFormat="yyyy-MM-dd" /></td>
 
+			<td><label>备注：</label></td>
+			<td><s:textarea name="employee.comments" cols="20" rows="2"></s:textarea></td>
 		</tr>
+
 		<tr>
-			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
+			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span
+				class="first-child">
 			<button type="button">Go!</button>
 			</span> </span></td>
 		</tr>
 	</table>
+	</div>
+<s:if test="employee.users!=null">
+	<h1>用户信息</h1>
+	<p>员工的登录系统用户</p>
+<div align="center">
+	<table>
+<s:iterator value="employee.users"></s:iterator>
+		<tr>
+			<td><label>用户名：</label></td>
+			<td><s:property value="userName" /></td>
+			<td><label>密码：</label></td>
+			<td><s:property value="userPass" /></td>
+		</tr>
+		
+	</table>
+</div>
+</s:if>
+<s:else>
+<p>尚未为此员工创建系统用户</p>
+</s:else>
 
 </s:form>
 </body>

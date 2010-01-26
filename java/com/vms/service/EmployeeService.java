@@ -28,7 +28,7 @@ public class EmployeeService implements IEmployeeService {
 			throws Exception {
 		// TODO Auto-generated method stub
 		
-		return employeeDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
+		return (List<Employee>)employeeDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
 		//return employeeDAO.findAllEmployees(clz,startIndex, endIndex);
 	}
 

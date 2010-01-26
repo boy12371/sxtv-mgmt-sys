@@ -36,7 +36,8 @@ public class Test {
 	
 		IEmployeeService service = (IEmployeeService) ctx.getBean("employeeService");
 
-		System.out.print(service.getEmployeeTotalCount()+"====");
+		Employee emp = service.getEmployeeById(1);
+		System.out.print(emp.getUsers().size());
 		
 		
 		

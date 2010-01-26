@@ -3,7 +3,7 @@
 <ParamConfs> 
 	<MainConsole>
 		<Module Name="影带录入" URL="/vmgui/dashboard/toMainpage.action">
-			<ModuleItem Name="录入影带" URL="/collection/tapeCollect.jsp"/>
+			<ModuleItem Name="录入影带" URL="/tv/vediotape/addVediotape.jsp"/>
 			<ModuleItem Name="查看影带信息" URL="http://www.google.com"/> 
 			<ModuleItem Name="修改影带信息" URL="http://www.google.com"/> 
 		</Module>

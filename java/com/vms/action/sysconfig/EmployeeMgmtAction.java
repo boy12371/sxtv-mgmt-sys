@@ -30,13 +30,18 @@ public class EmployeeMgmtAction extends BaseAction {
 	public String getEmployees() throws Exception {
 		// table = new JSONTableData();
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
-		List<Employee> empList = employeeService.findAllEmployees(table.getStartIndex(), table.getStartIndex()
-				+ table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
-		List<EmployeeVO> vlist = BeanConvert.convertBeans(empList);
-		JSONDataTableUtils.setupJSONDataTable(vlist, table, employeeService.getEmployeeTotalCount());
-
+		int si = table.getStartIndex();
+		int ei = table.getStartIndex()+table.getRowsPerPage();
+		String sort=table.getSort();
+		boolean asc = table.getDir().equals("asc");
+		try{
+			List<Employee> empList = employeeService.findAllEmployees(si,ei,sort,asc);
+			List<EmployeeVO> vlist = BeanConvert.convertBeans(empList);
+			JSONDataTableUtils.setupJSONDataTable(vlist, table, employeeService.getEmployeeTotalCount());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return this.SUCCESS;
-
 	}
 
 	
@@ -49,7 +54,7 @@ public class EmployeeMgmtAction extends BaseAction {
 	}
 
 	public String doAddEmployee() throws Exception {
-		//employeeService.createEmployee(employee);
+		employeeService.createEmployee(employee);
 		return this.SUCCESS;
 	}
 

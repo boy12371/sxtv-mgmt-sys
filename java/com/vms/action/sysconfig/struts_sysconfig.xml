@@ -7,23 +7,23 @@
 		<action name="tosysmain" class="com.vms.action.sysconfig.SystemConfigAction">
 			<result>/sysconfig/sysMain.jsp</result>
 		</action>
-		<action name="toEmployees" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="toEmployees">
+		<action name="toEmployees" class="employeeMgmt" method="toEmployees">
 			<result name="success">/sysconfig/employees.jsp
 			</result>
 		</action>
-		<action name="getEmployees" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="getEmployees">
+		<action name="getEmployees" class="employeeMgmt" method="getEmployees">
 			<result type="json">
 			<param name="root">table</param>
 			</result>
 		</action>
-		<action name="toAddEmployee" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="toAddEmployee">
+		<action name="toAddEmployee" class="employeeMgmt" method="toAddEmployee">
 			<result name="success">/sysconfig/addEmployee.jsp</result>
 		</action>
 		
-		<action name="toUpdateEmployee" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="toUpdateEmployee">
+		<action name="toUpdateEmployee" class="employeeMgmt" method="toUpdateEmployee">
 			<result name="success">/sysconfig/employee.jsp</result>
 		</action>
-		<action name="doAddEmployee" class="com.vms.action.sysconfig.EmployeeMgmtAction" method="doAddEmployee">
+		<action name="doAddEmployee" class="employeeMgmt" method="doAddEmployee">
 			<result type="chain">
 				<param name="actionName">toEmployees</param>
 			</result>

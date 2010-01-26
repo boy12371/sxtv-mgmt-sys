@@ -6,17 +6,20 @@ function initDataTable(){
 		href+="'>"+sData+"</a>";						
         elCell.innerHTML =href;
     };
-    var formatGender = function(elCell, oRecord, oColumn, sData) {
-       
+    var formatGender = function(elCell, oRecord, oColumn, sData) {       
         var sex = "<span>女</span>";
         if(sData==1){
 	        sex= "<span>男</span>";
 	     }
         elCell.innerHTML = sex;
-    }; 
-	var formatDate=function(elCell, oRecord, oColumn, sData){			
-		var date = YAHOO.util.Date.format(sData,null,"%D");			 
-		elCell.innerHTML=date;
+    };
+	var formatDate=function(elCell, oRecord, oColumn, sData){
+		var idx = sData.indexOf("T");
+		if(idx!=-1){
+			elCell.innerHTML=sData.substring(0,idx);
+		}else{
+			elCell.innerHTML=sData;
+		}
 	}	    
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
@@ -24,7 +27,7 @@ function initDataTable(){
 						{key :"name",label :"姓名",sortable :true},
 						{key :"gender",label :"性别",sortable :true,formatter:formatGender},
 						{key :"contractDate",label :"入职日期",sortable :true,formatter:formatDate},
-						{key :"birthday",label :"生日",sortable :true,formatter:"date"},
+						{key :"birthday",label :"生日",sortable :true,formatter:formatDate},
 						{key :"tel",label :"电话"},
 						{key :"comments",label :"备注"},
 					];
@@ -36,13 +39,6 @@ function initDataTable(){
 			"/tv/sys/getEmployees.action?");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
-	//fields : [ {key :"id", parser :"number"}, 
-			   //{key :"name"},
-			   //{key :"gender"},
-			   //{key :"contractDate"},
-			   //{key :"birthday"},
-			   //{key :"tel"},
-			   //{key :"comments"}],
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : ["id","name","gender","contractDate","birthday","tel","comments"],
@@ -52,8 +48,7 @@ function initDataTable(){
 	};
 
 	// DataTable configuration
-	var myConfigs = {
-			
+	var myConfigs = {			
 		initialRequest :"sort=id&dir=asc&startIndex=0&results=2", // Initial request for first page of data
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
