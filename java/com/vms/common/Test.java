@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.vms.beans.EmployeeVO;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Vediotape;
@@ -36,8 +37,18 @@ public class Test {
 	
 		IEmployeeService service = (IEmployeeService) ctx.getBean("employeeService");
 
-		Employee emp = service.getEmployeeById(1);
-		System.out.print(emp.getUsers().size());
+		Employee emp = service.getEmployeeById(2);
+		EmployeeVO vp =new EmployeeVO();
+		vp.setId(2);
+		vp.setName("王萌");
+		vp.setComments("王萌王萌王萌王萌王萌王萌王萌王萌王萌王萌");
+		vp.setBirthday(emp.getBirthday());
+		vp.setContractDate(emp.getContractDate());
+		vp.setGender(0);
+		vp.setTel("13991366930");
+		
+		service.updateEmployee(vp);
+		
 		
 		
 		

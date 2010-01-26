@@ -2,6 +2,7 @@ package com.vms.service.iface;
 
 import java.util.List;
 
+import com.vms.beans.EmployeeVO;
 import com.vms.db.bean.Employee;
 
 public interface IEmployeeService {
@@ -19,4 +20,10 @@ public interface IEmployeeService {
 
 	int getEmployeeTotalCount() throws Exception;
 
+	/***
+	 * 更新员工信息 
+	 * @param voEmp 仅跟新员工信息，不更新其user
+	 * @throws Exception
+	 */
+	boolean updateEmployee(EmployeeVO voEmp) throws Exception;
 }

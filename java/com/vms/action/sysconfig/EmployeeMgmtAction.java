@@ -3,6 +3,9 @@ package com.vms.action.sysconfig;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
+
 import com.vms.beans.EmployeeVO;
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
@@ -17,8 +20,12 @@ import net.sf.json.JSONObject;
 
 public class EmployeeMgmtAction extends BaseAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger(EmployeeMgmtAction.class);
 	private IEmployeeService employeeService;
-
 	private EmployeeVO vEmployee;
 	private Employee employee;
 	private JSONDataTable table;
@@ -30,31 +37,50 @@ public class EmployeeMgmtAction extends BaseAction {
 	public String getEmployees() throws Exception {
 		// table = new JSONTableData();
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
-		int si = table.getStartIndex();
-		int ei = table.getStartIndex()+table.getRowsPerPage();
-		String sort=table.getSort();
-		boolean asc = table.getDir().equals("asc");
-		try{
-			List<Employee> empList = employeeService.findAllEmployees(si,ei,sort,asc);
+
+		try {
+			List<Employee> empList = employeeService.findAllEmployees(table.getStartIndex(), table.getStartIndex()
+					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
 			List<EmployeeVO> vlist = BeanConvert.convertBeans(empList);
 			JSONDataTableUtils.setupJSONDataTable(vlist, table, employeeService.getEmployeeTotalCount());
-		}catch(Exception e){
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
 		return this.SUCCESS;
 	}
 
-	
-	public String toUpdateEmployee()throws Exception{
+	public String toUpdateEmployee() throws Exception {
 		employee = this.employeeService.getEmployeeById(employee.getId());
 		return this.SUCCESS;
 	}
+
+	public String doUpdateEmployee() throws Exception {
+		vEmployee = BeanConvert.convertBean(employee);
+		boolean success = false;
+		try {
+			success = employeeService.updateEmployee(vEmployee);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			this.addActionError("更新失败");
+			return this.INPUT;
+		}
+		
+		return this.SUCCESS;
+	}
+
 	public String toAddEmployee() {
 		return this.SUCCESS;
 	}
 
 	public String doAddEmployee() throws Exception {
-		employeeService.createEmployee(employee);
+		try{
+			employeeService.createEmployee(employee);	
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			this.addActionError("添加失败");
+			return this.INPUT;
+		}
+		this.addActionMessage("添加成功");
 		return this.SUCCESS;
 	}
 
@@ -65,8 +91,6 @@ public class EmployeeMgmtAction extends BaseAction {
 	public void setEmployeeService(IEmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
-
-	
 
 	public JSONDataTable getTable() {
 		return table;
@@ -91,6 +115,5 @@ public class EmployeeMgmtAction extends BaseAction {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
 
 }

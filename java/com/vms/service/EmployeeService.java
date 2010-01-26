@@ -2,6 +2,7 @@ package com.vms.service;
 
 import java.util.List;
 
+import com.vms.beans.EmployeeVO;
 import com.vms.db.bean.Employee;
 import com.vms.db.dao.EmployeeDAO;
 import com.vms.db.dao.iface.IEmployeeDAO;
@@ -50,6 +51,16 @@ public class EmployeeService implements IEmployeeService {
 		return employeeDAO.getObjectTotalCount(clz, Employee.PROP_ID);
 	}
 	
+	/***
+	 * 更新员工信息 
+	 * @param voEmp 仅跟新员工信息，不更新其user
+	 * @throws Exception
+	 */
+	@Override
+	public boolean updateEmployee(EmployeeVO voEmp) throws Exception {
+		// TODO Auto-generated method stub
+		return employeeDAO.updateEmployee(voEmp);
+	}
 	
 	public IEmployeeDAO getEmployeeDAO() {
 		return employeeDAO;
@@ -58,6 +69,8 @@ public class EmployeeService implements IEmployeeService {
 	public void setEmployeeDAO(IEmployeeDAO employeeDAO) {
 		this.employeeDAO = employeeDAO;
 	}
+
+	
 
 	
 }

@@ -22,11 +22,16 @@
 		
 		<action name="toUpdateEmployee" class="employeeMgmt" method="toUpdateEmployee">
 			<result name="success">/sysconfig/employee.jsp</result>
+			
 		</action>
+		
+		<action name="doUpdateEmployee" class="employeeMgmt" method="doUpdateEmployee">
+			<result name="success">/sysconfig/employees.jsp</result>
+			<result name="input">/sysconfig/employee.jsp</result>
+		</action>
+		
 		<action name="doAddEmployee" class="employeeMgmt" method="doAddEmployee">
-			<result type="chain">
-				<param name="actionName">toEmployees</param>
-			</result>
+			<result name="success">/sysconfig/employees.jsp</result>
 			<result name="input">/sysconfig/addEmployee.jsp</result>
 		</action>
 	</package>
