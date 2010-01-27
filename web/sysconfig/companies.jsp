@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="application/json; charset=UTF-8">
-<title>员工信息</title>
+<title>影视公司信息</title>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
@@ -18,13 +18,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/sysconfig/js/employee.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/sysconfig/js/company.js"></script>
 </head>
-<body class="yui-skin-sam">
+<body>
 
-<h1>员工信息</h1>
-<p>查看所有员工信息</p>
+
+
+
+<h1>影视公司信息</h1>
+<p>影视公司相关信息</p>
 
 <s:actionmessage/>
 <s:actionerror/>
@@ -33,12 +35,11 @@
 
 
 <div>
-<a align="left" href="./sys/toAddEmployee.action">添加新员工</a>
+<a align="left" href="#">添加新公司</a>
 </div>
 
 <script type="text/javascript">
 	YAHOO.example.DynamicData = initDataTable()
 </script>
-
 </body>
 </html>

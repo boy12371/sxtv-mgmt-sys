@@ -9,32 +9,43 @@ import com.vms.service.iface.ICompanyService;
 public class CompanyService implements ICompanyService {
 
 	private ICompanyDAO companyDAO;
-	
+	private Class clz = Company.class;
+
+	@Override
+	public void createCompany(Company company) throws Exception {
+		// TODO Auto-generated method stub
+		companyDAO.saveObject(company);
+	}
+
 	@Override
 	public void deleteCompany(int id) throws Exception {
 		// TODO Auto-generated method stub
-		
-		this.companyDAO.deleteCompany(id);
-
+		companyDAO.deleteCompany(id);
 	}
 
 	@Override
 	public void deleteCompany(Company company) throws Exception {
 		// TODO Auto-generated method stub
-		this.companyDAO.deleteObject(company);
+		companyDAO.deleteObject(company);
 	}
 
 	@Override
-	public List<Company> findAllCompany(int startIndex, int endIndex) throws Exception {
+	public List<Company> findAllCompany(int startIndex, int endIndex, String propertyName, boolean ascending)
+			throws Exception {
 		// TODO Auto-generated method stub
-
-		return this.companyDAO.findAllCompanies(startIndex, endIndex);
+		return (List<Company>) companyDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
 	}
 
 	@Override
-	public void createCompany(Company company) throws Exception {
+	public int getCompanyTotalCount() throws Exception {
 		// TODO Auto-generated method stub
-		this.companyDAO.saveObject(company);
+		return companyDAO.getObjectTotalCount(clz, Company.PROP_ID);
+	}
+
+	@Override
+	public boolean updateCompany(Company company) throws Exception {
+		// TODO Auto-generated method stub
+		return companyDAO.updateCompany(company);
 	}
 
 	public ICompanyDAO getCompanyDAO() {

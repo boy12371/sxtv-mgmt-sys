@@ -11,4 +11,8 @@
 		<property name="employeeService" ref="employeeService" />
 	</bean>
 
+
+<bean id="companyMgmt" class="com.vms.action.sysconfig.CompanyMgmtAction" scope="prototype">
+		<property name="companyService" ref="companyService" />
+	</bean>
 </beans>

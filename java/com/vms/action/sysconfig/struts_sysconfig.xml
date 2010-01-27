@@ -34,5 +34,16 @@
 			<result name="success">/sysconfig/employees.jsp</result>
 			<result name="input">/sysconfig/addEmployee.jsp</result>
 		</action>
+		
+		
+		<action name="toCompanies" class="companyMgmt" method="toCompanies">
+			<result name="success">/sysconfig/companies.jsp
+			</result>
+		</action>
+		<action name="getCompanies" class="companyMgmt" method="getCompanies">
+			<result type="json">
+			<param name="root">table</param>
+			</result>
+		</action>
 	</package>
 </struts>

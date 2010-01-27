@@ -99,7 +99,10 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		Criteria crt = this.getCriteria(clz);
 
 		crt.add(Restrictions.eq(propertyName, value));
-		crt.addOrder(DaoUtils.getOrder(propertyName, asceding));
+		Order order = DaoUtils.getOrder(propertyName, asceding);
+		if (order != null) {
+			crt.addOrder(order);
+		}		
 		crt.setFirstResult(startIndex);
 		crt.setMaxResults(endIndex);
 		return crt.list();

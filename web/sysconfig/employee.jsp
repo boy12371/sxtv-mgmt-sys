@@ -9,12 +9,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>员工管理</title>
 
-<link rel="stylesheet" type="text/css" href="../../common/yui/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="../../common/yui/build/calendar/assets/skins/sam/calendar.css" />
-<link rel="stylesheet" type="text/css" href="../../common/yui/build/datatable/assets/skins/sam/datatable.css" />
-<link rel="stylesheet" type="text/css" href="../../common/yui/build/paginator/assets/skins/sam/paginator.css" />
-<link rel="stylesheet" type="text/css" href="../../common/yui/build/button/assets/skins/sam/button.css" />
-<link rel="stylesheet" type="text/css" href="../../common/css/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 
 </head>
 <body>

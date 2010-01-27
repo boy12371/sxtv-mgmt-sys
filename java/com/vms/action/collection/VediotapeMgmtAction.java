@@ -30,7 +30,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	private List<Topic> topicList;
 
 	public String toAddingVedio() throws Exception {
-		companyList = companyService.findAllCompany(0, -1);
+		//companyList = companyService.findAllCompany(0, -1);
 		statusList = statusService.findAllStatus(0, -1);
 		subjectList = subjectService.findAllSubjects(0, -1);
 		topicList = topicService.findAllTopics(0, -1);
