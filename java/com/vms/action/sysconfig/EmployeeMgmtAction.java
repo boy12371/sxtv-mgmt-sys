@@ -12,7 +12,7 @@ import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.common.beanutils.BeanConvert;
 import com.vms.db.bean.Employee;
-import com.vms.db.bean.MyEmp;
+
 import com.vms.service.iface.IEmployeeService;
 
 import net.sf.json.JSONArray;

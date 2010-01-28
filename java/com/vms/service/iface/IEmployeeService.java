@@ -11,6 +11,15 @@ public interface IEmployeeService {
 
 	void deleteEmployee(Employee employee) throws Exception;
 
+	/***
+	 * 查询所有员工
+	 * @param startIndex 
+	 * @param endIndex
+	 * @param propertyName 
+	 * @param ascending
+	 * @return
+	 * @throws Exception
+	 */
 	List<Employee> findAllEmployees(int startIndex, int endIndex,
 			String propertyName, boolean ascending) throws Exception;
 

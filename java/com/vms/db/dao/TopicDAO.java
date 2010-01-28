@@ -30,6 +30,14 @@ public class TopicDAO extends com.vms.db.dao.BaseRootDAO  implements ITopicDAO{
 	
 	}
 
+	@Override
+	public boolean updateTopic(Topic topic) throws Exception {
+		// TODO Auto-generated method stub
+		String hql = "update Topic topic set topic.topicName=?, set topic.comments=? where topic.id=?";
+		int result = this.getHibernateTemplate().bulkUpdate(hql, new Object[]{topic.getTopicName(),topic.getComments()});
+		return result!=0;
+	}
+
 	
 	
 	

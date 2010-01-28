@@ -22,8 +22,10 @@ import com.vms.db.dao.BaseRootDAO;
 import com.vms.db.dao.StatusDAO;
 import com.vms.db.dao.VediotapeDAO;
 import com.vms.db.dao.iface.IAuditingDAO;
+import com.vms.service.StatusService;
 import com.vms.service.VediotapeService;
 import com.vms.service.iface.IEmployeeService;
+import com.vms.service.iface.IStatusService;
 import com.vms.service.iface.IVediotapeService;
 
 public class Test {
@@ -34,23 +36,13 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 	
-//		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");		
-//	
-//		IEmployeeService service = (IEmployeeService) ctx.getBean("employeeService");
-//
-//		Employee emp = service.getEmployeeById(2);
-//		EmployeeVO vp =new EmployeeVO();
-//		vp.setId(2);
-//		vp.setName("王萌");
-//		vp.setComments("王萌王萌王萌王萌王萌王萌王萌王萌王萌王萌");
-//		vp.setBirthday(emp.getBirthday());
-//		vp.setContractDate(emp.getContractDate());
-//		vp.setGender(0);
-//		vp.setTel("13991366930");
-//		
-//		service.updateEmployee(vp);
-		String s = StringEscapeUtils.escapeHtml("<  >  ?  ' \"  #  @  &  % *");
-		System.out.println(s);
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");		
+	
+		StatusDAO dao = (StatusDAO) ctx.getBean("statusDAO");
+		
+		List list = dao.findObjectByFields(Status.class, null, 0, 100, "id", true);
+		System.out.println(list.size());
+		
 		
 		
 		

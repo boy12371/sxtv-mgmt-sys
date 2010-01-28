@@ -4,15 +4,19 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
-	
-	
-	
-	<bean id="employeeMgmt" class="com.vms.action.sysconfig.EmployeeMgmtAction" scope="prototype">
+	<bean id="employeeMgmt" class="com.vms.action.sysconfig.EmployeeMgmtAction"
+		scope="prototype">
 		<property name="employeeService" ref="employeeService" />
 	</bean>
-
-
-<bean id="companyMgmt" class="com.vms.action.sysconfig.CompanyMgmtAction" scope="prototype">
+	<bean id="companyMgmt" class="com.vms.action.sysconfig.CompanyMgmtAction"
+		scope="prototype">
 		<property name="companyService" ref="companyService" />
 	</bean>
+	
+	<bean id="sysDataMgmt" class="com.vms.action.sysconfig.SystemDataMgmt"
+		scope="prototype">
+		<property name="topicService" ref="topicService" />
+		<property name="statusService" ref="statusService" />
+	</bean>
+	
 </beans>

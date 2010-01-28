@@ -10,6 +10,7 @@ public class StatusService implements IStatusService {
 
 	
 	private IStatusDAO statusDAO;
+	private Class clz= Status.class;
 	@Override
 	public void deleteStatus(int id) throws Exception {
 		// TODO Auto-generated method stub
@@ -25,9 +26,9 @@ public class StatusService implements IStatusService {
 	}
 
 	@Override
-	public List<Status> findAllStatus(int startIndex,int endIndex) throws Exception {
+	public List<Status> findAllStatus(int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception {
 		// TODO Auto-generated method stub
-		return statusDAO.findAllStatus(startIndex, endIndex);
+		return (List<Status>)statusDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
 	}
 
 	@Override
@@ -42,6 +43,12 @@ public class StatusService implements IStatusService {
 
 	public void setStatusDAO(IStatusDAO statusDAO) {
 		this.statusDAO = statusDAO;
+	}
+
+	@Override
+	public int getStatusTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return this.statusDAO.getObjectTotalCount(clz, Status.PROP_ID);
 	}
 
 }

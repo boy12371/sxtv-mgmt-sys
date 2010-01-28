@@ -11,6 +11,7 @@ public class TopicService implements ITopicService {
 
 	
 	private ITopicDAO topicDAO;
+	private Class clz = Topic.class;
 	@Override
 	public void createTopic(Topic topic) throws Exception {
 		// TODO Auto-generated method stub
@@ -30,14 +31,20 @@ public class TopicService implements ITopicService {
 	}
 
 	@Override
-	public List<Topic> findAllTopics(int startIndex, int endIndex)
+	public List<Topic> findAllTopics(int startIndex, int endIndex, String propertyName, boolean ascending)
 			throws Exception {
 		// TODO Auto-generated method stub
 		
-		return this.topicDAO.findAllTopics(startIndex, endIndex);
+		return this.topicDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
 		
 	}
 
+	@Override
+	public boolean updateTopic(Topic topic) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	public ITopicDAO getTopicDAO() {
 		return topicDAO;
 	}
@@ -45,5 +52,14 @@ public class TopicService implements ITopicService {
 	public void setTopicDAO(ITopicDAO topicDAO) {
 		this.topicDAO = topicDAO;
 	}
+
+	@Override
+	public int getTopicTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return this.topicDAO.getObjectTotalCount(clz, Topic.PROP_ID);
+	
+	}
+
+
 
 }

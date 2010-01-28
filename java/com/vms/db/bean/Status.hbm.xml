@@ -13,11 +13,11 @@
 		<property name="comments" column="comments" type="string"
 			not-null="true" length="512" />
 		<set name="vediotapes" inverse="true">
-			<key column="statusID" />
+			<key column="status" not-null="false"/>
 			<one-to-many class="Vediotape" />
 		</set>
 		<set name="auditings" inverse="true">
-			<key column="statusID" />
+			<key column="status" not-null="false"/>
 			<one-to-many class="Auditing" />
 		</set>
 	</class>

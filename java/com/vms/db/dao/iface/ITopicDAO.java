@@ -12,6 +12,8 @@ public interface ITopicDAO  extends IBaseRootDAO{
 	
 	List<Topic> findAllTopics(int startIndex, int endIndex)throws Exception;
 	
+	boolean updateTopic(Topic topic) throws Exception;
+	
 	
 	
 }

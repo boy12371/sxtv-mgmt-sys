@@ -14,26 +14,28 @@
 		</action>
 		<action name="getEmployees" class="employeeMgmt" method="getEmployees">
 			<result type="json">
-			<param name="root">table</param>
+				<param name="root">table</param>
 			</result>
 		</action>
 		<action name="toAddEmployee" class="employeeMgmt" method="toAddEmployee">
-			<result name="success">/sysconfig/addEmployee.jsp</result>
+			<result name="success">/sysconfig/addEmployee.jsp
+			</result>
 		</action>
-		
 		<action name="toUpdateEmployee" class="employeeMgmt" method="toUpdateEmployee">
-			<result name="success">/sysconfig/employee.jsp</result>
-			
+			<result name="success">/sysconfig/employee.jsp
+			</result>
 		</action>
-		
 		<action name="doUpdateEmployee" class="employeeMgmt" method="doUpdateEmployee">
-			<result name="success">/sysconfig/employees.jsp</result>
-			<result name="input">/sysconfig/employee.jsp</result>
+			<result name="success">/sysconfig/employees.jsp
+			</result>
+			<result name="input">/sysconfig/employee.jsp
+			</result>
 		</action>
-		
 		<action name="doAddEmployee" class="employeeMgmt" method="doAddEmployee">
-			<result name="success">/sysconfig/employees.jsp</result>
-			<result name="input">/sysconfig/addEmployee.jsp</result>
+			<result name="success">/sysconfig/employees.jsp
+			</result>
+			<result name="input">/sysconfig/addEmployee.jsp
+			</result>
 		</action>
 		<!--Employee End-->
 		<!--Company-->
@@ -43,26 +45,46 @@
 		</action>
 		<action name="getCompanies" class="companyMgmt" method="getCompanies">
 			<result type="json">
-			<param name="root">table</param>
+				<param name="root">table</param>
 			</result>
 		</action>
-			
 		<action name="toUpdateCompany" class="companyMgmt" method="toUpdateCompany">
-			<result name="success">/sysconfig/company.jsp</result>
-			<result name="input">/sysconfig/companies.jsp</result>
+			<result name="success">/sysconfig/company.jsp
+			</result>
+			<result name="input">/sysconfig/companies.jsp
+			</result>
 		</action>
-		
 		<action name="doUpdateCompany" class="companyMgmt" method="doUpdateCompany">
-			<result name="success">/sysconfig/companies.jsp</result>
-			<result name="input">/sysconfig/company.jsp</result>
+			<result name="success">/sysconfig/companies.jsp
+			</result>
+			<result name="input">/sysconfig/company.jsp
+			</result>
 		</action>
-		
 		<action name="toAddCompany" class="companyMgmt" method="toAddCompany">
-			<result name="success">/sysconfig/addCompany.jsp</result>
+			<result name="success">/sysconfig/addCompany.jsp
+			</result>
 		</action>
 		<action name="doAddCompany" class="companyMgmt" method="doAddCompany">
-			<result name="success">/sysconfig/companies.jsp</result>
-			<result name="input">/sysconfig/addCompany.jsp</result>
+			<result name="success">/sysconfig/companies.jsp
+			</result>
+			<result name="input">/sysconfig/addCompany.jsp
+			</result>
+		</action>
+		<!-- Company end -->
+		<!-- System config -->
+		<action name="toSystemData" class="sysDataMgmt" method="toSystemData">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+		</action>
+		<action name="getStatuses" class="sysDataMgmt" method="getStatuses">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
+		<action name="getTopices" class="sysDataMgmt" method="getTopices">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
 		</action>
 	</package>
 </struts>
