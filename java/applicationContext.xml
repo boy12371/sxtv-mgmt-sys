@@ -10,7 +10,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="command" />
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">

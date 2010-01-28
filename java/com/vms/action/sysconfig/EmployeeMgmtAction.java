@@ -50,7 +50,12 @@ public class EmployeeMgmtAction extends BaseAction {
 	}
 
 	public String toUpdateEmployee() throws Exception {
+		try {
 		employee = this.employeeService.getEmployeeById(employee.getId());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return this.INPUT;
+		}
 		return this.SUCCESS;
 	}
 

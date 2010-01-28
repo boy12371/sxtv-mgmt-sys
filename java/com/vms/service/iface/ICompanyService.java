@@ -44,4 +44,6 @@ public interface ICompanyService {
 	 * @throws Exception
 	 */
 	boolean updateCompany(Company company) throws Exception;
+	
+	Company getCompanyById(int id)throws Exception;
 }

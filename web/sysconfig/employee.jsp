@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 
 </head>
-<body>
+<body class="yui-skin-sam">
 
 
 
@@ -35,13 +35,13 @@
 		</tr>
 		<tr>
 			<td><label>出生日期：</label></td>
-			<td><sx:datetimepicker name="employee.birthday" displayFormat="yyyy-MM-dd" /></td>
+			<td><sx:datetimepicker name="employee.birthday" displayFormat="yyyy-MM-dd"  /></td>
 			<td><label>电话：</label></td>
 			<td><s:textfield name="employee.tel" /></td>
 		</tr>
 		<tr>
 			<td><label>入职日期：</label></td>
-			<td><sx:datetimepicker name="employee.contractDate" displayFormat="yyyy-MM-dd" /></td>
+			<td><sx:datetimepicker name="employee.contractDate" displayFormat="yyyy-MM-dd"/></td>
 
 			<td><label>备注：</label></td>
 			<td><s:textarea name="employee.comments" cols="20" rows="2"></s:textarea></td>

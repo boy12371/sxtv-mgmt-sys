@@ -7,6 +7,7 @@
 		<action name="tosysmain" class="com.vms.action.sysconfig.SystemConfigAction">
 			<result>/sysconfig/sysMain.jsp</result>
 		</action>
+		<!--Employee-->
 		<action name="toEmployees" class="employeeMgmt" method="toEmployees">
 			<result name="success">/sysconfig/employees.jsp
 			</result>
@@ -34,8 +35,8 @@
 			<result name="success">/sysconfig/employees.jsp</result>
 			<result name="input">/sysconfig/addEmployee.jsp</result>
 		</action>
-		
-		
+		<!--Employee End-->
+		<!--Company-->
 		<action name="toCompanies" class="companyMgmt" method="toCompanies">
 			<result name="success">/sysconfig/companies.jsp
 			</result>
@@ -44,6 +45,24 @@
 			<result type="json">
 			<param name="root">table</param>
 			</result>
+		</action>
+			
+		<action name="toUpdateCompany" class="companyMgmt" method="toUpdateCompany">
+			<result name="success">/sysconfig/company.jsp</result>
+			<result name="input">/sysconfig/companies.jsp</result>
+		</action>
+		
+		<action name="doUpdateCompany" class="companyMgmt" method="doUpdateCompany">
+			<result name="success">/sysconfig/companies.jsp</result>
+			<result name="input">/sysconfig/company.jsp</result>
+		</action>
+		
+		<action name="toAddCompany" class="companyMgmt" method="toAddCompany">
+			<result name="success">/sysconfig/addCompany.jsp</result>
+		</action>
+		<action name="doAddCompany" class="companyMgmt" method="doAddCompany">
+			<result name="success">/sysconfig/companies.jsp</result>
+			<result name="input">/sysconfig/addCompany.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -1,6 +1,6 @@
 function initDataTable() {
 	var formatUrl = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./sys/toUpdateEmployee.action?employee.id=";
+		var href = "<a href='./sys/toUpdateCompany.action?company.id=";
 		href += sData;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;

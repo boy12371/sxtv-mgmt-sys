@@ -25,16 +25,18 @@ public class CompanyMgmtAction extends BaseAction {
 
 	private JSONDataTable table;
 
-	
-	public String toCompanies(){
+	public String toCompanies() {
 		return SUCCESS;
 	}
+
 	public String getCompanies() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			comList = companyService.findAllCompany(table.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
-			JSONDataTableUtils.setupJSONDataTable(comList,table,companyService.getCompanyTotalCount());
+			comList = companyService.findAllCompany(table.getStartIndex(),
+					table.getStartIndex() + table.getRowsPerPage(), table
+							.getSort(), table.getDir().equals("asc"));
+			JSONDataTableUtils.setupJSONDataTable(comList, table,
+					companyService.getCompanyTotalCount());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -42,12 +44,40 @@ public class CompanyMgmtAction extends BaseAction {
 	}
 
 	public String toAddCompany() {
-
 		return this.SUCCESS;
 	}
 
 	public String doAddCompany() throws Exception {
-		companyService.createCompany(company);
+		try {
+			companyService.createCompany(company);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			this.addActionError("添加失败");
+			return this.INPUT;
+		}
+		this.addActionMessage("添加成功");
+		return this.SUCCESS;
+	}
+
+	public String toUpdateCompany() throws Exception {
+		try {
+			company = companyService.getCompanyById(company.getId());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return this.INPUT;
+		}
+		return this.SUCCESS;
+	}
+
+	public String doUpdateCompany() {
+		boolean success = false;
+		try {
+			success = companyService.updateCompany(company);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			this.addActionError("添加失败");
+			return this.INPUT;
+		}
 		return this.SUCCESS;
 	}
 
@@ -66,15 +96,19 @@ public class CompanyMgmtAction extends BaseAction {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+
 	public List<Company> getComList() {
 		return comList;
 	}
+
 	public void setComList(List<Company> comList) {
 		this.comList = comList;
 	}
+
 	public JSONDataTable getTable() {
 		return table;
 	}
+
 	public void setTable(JSONDataTable table) {
 		this.table = table;
 	}

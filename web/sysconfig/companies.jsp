@@ -37,7 +37,7 @@
 
 
 <div>
-<a align="left" href="#">添加新公司</a>
+<a align="left" href="./sys/toAddCompany.action">添加新公司</a>
 </div>
 
 <script type="text/javascript">

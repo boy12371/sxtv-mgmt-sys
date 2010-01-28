@@ -56,4 +56,10 @@ public class CompanyService implements ICompanyService {
 		this.companyDAO = companyDAO;
 	}
 
+	@Override
+	public Company getCompanyById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return (Company) this.companyDAO.getObject(clz, id);
+	}
+
 }
