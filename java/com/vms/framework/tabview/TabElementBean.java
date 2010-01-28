@@ -6,7 +6,7 @@ public class TabElementBean {
 
 	private String name;
 
-	private String URL;
+	private String url;
 	
 	private List<TabElementBean> subTabs;
 
@@ -25,27 +25,20 @@ public class TabElementBean {
 		this.name = name;
 	}
 
-	/**
-	 * @return Returns the URL.
-	 */
-	public String getURL() {
-		return URL;
-	}
-
-	/**
-	 * @param name
-	 *            The URL to set.
-	 */
-	public void setURL(String URL) {
-		this.URL = URL;
-	}
-
 	public void setSubTabs(List<TabElementBean> subTabs) {
 		this.subTabs = subTabs;
 	}
 
 	public List<TabElementBean> getSubTabs() {
 		return subTabs;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUrl() {
+		return url;
 	}
 
 }

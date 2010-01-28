@@ -56,10 +56,10 @@ public class TabViewManager {
 				TabElementBean mainTab = new TabElementBean();
 				
 				NamedNodeMap attributesModule = tempModule.getAttributes();
-				String tabName = attributesModule.getNamedItem("Name").getNodeValue();
+				String tabName = attributesModule.getNamedItem("name").getNodeValue();
 				mainTab.setName(tabName);
-				String tabURL = attributesModule.getNamedItem("URL").getNodeValue();
-				mainTab.setURL(tabURL);
+				String tabURL = attributesModule.getNamedItem("url").getNodeValue();
+				mainTab.setUrl(tabURL);
 				
 				//get the its all child info
 				//if the child node isn't layout, don't used
@@ -75,10 +75,10 @@ public class TabViewManager {
 								continue;
 							}
 							NamedNodeMap attributesModuleItem = tempModuleItem.getAttributes();						
-							String subTabName = attributesModuleItem.getNamedItem("Name").getNodeValue();
+							String subTabName = attributesModuleItem.getNamedItem("name").getNodeValue();
 							subTab.setName(subTabName);
-							String subTabURL = attributesModuleItem.getNamedItem("URL").getNodeValue();
-							subTab.setURL(subTabURL);
+							String subTabURL = attributesModuleItem.getNamedItem("url").getNodeValue();
+							subTab.setUrl(subTabURL);
 							
 							subTabs.add(subTab);
 						}
