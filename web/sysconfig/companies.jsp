@@ -20,7 +20,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/sysconfig/js/company.js"></script>
 </head>
-<body>
+
+
+<body class="yui-skin-sam">
 
 
 

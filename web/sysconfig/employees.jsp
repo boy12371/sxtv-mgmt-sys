@@ -18,7 +18,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/sysconfig/js/employee.js"></script>
 </head>
 <body class="yui-skin-sam">
