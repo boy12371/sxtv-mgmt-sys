@@ -2,48 +2,48 @@
 
 <ParamConfs> 
 	<MainConsole>
-		<Module Name="影带录入" URL="/vmgui/dashboard/toMainpage.action">
-			<ModuleItem Name="录入影带" URL="/tv/vediotape/addVediotape.jsp"/>
-			<ModuleItem Name="查看影带信息" URL="http://www.google.com"/> 
-			<ModuleItem Name="修改影带信息" URL="http://www.google.com"/> 
+		<Module id="tapeMgmt" name="影带录入" url="">
+			<ModuleItem id="tapeAdd" name="录入影带" url="/tv/vedioTapeMgmt/addVediotape.jsp"/>
+			<ModuleItem id="tapeView" name="查看影带信息" url="http://www.google.com"/> 
+			<ModuleItem id="tapeModify" name="修改影带信息" url="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="影带打分" URL="http://labp3:8080/base/Demo/managerServerTree.html">
-			<ModuleItem Name="打分" URL="http://www.baidu.com"/>
-			<ModuleItem Name="查看打分" URL="http://www.google.com"/> 
-			<ModuleItem Name="修改打分" URL="http://www.google.com"/> 
+		<Module id="tapeExam" name="影带打分" url="http://labp3:8080/base/Demo/managerServerTree.html">
+			<ModuleItem id="exam" name="打分" url="http://www.baidu.com"/>
+			<ModuleItem id="examView" name="查看打分" url="http://www.google.com"/> 
+			<ModuleItem id="examModify" name="修改打分" url="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="影带审看" URL="/vmgui/offering/toConsoleList.action">
-			<ModuleItem Name="审看" URL="http://www.baidu.com"/>
-			<ModuleItem Name="审看结果" URL="http://www.google.com"/> 
-			<ModuleItem Name="修改" URL="http://www.google.com"/> 
+		<Module id="tapeAudit" name="影带审看" url="/vmgui/offering/toConsoleList.action">
+			<ModuleItem id="audit" name="审看" url="http://www.baidu.com"/>
+			<ModuleItem id="auditView" name="审看结果" url="http://www.google.com"/> 
+			<ModuleItem id="auditModify" name="修改" url="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="影带编排" URL="/vmgui/offering/toConsoleList.action">
-			<ModuleItem Name="编排" URL="http://www.baidu.com"/>
-			<ModuleItem Name="查看编排" URL="http://www.google.com"/> 
-			<ModuleItem Name="修改编排" URL="http://www.google.com"/> 
+		<Module id="tapeArrange" name="影带编排" url="/vmgui/offering/toConsoleList.action">
+			<ModuleItem id="arrange" name="编排" url="http://www.baidu.com"/>
+			<ModuleItem id="arrangeView" name="查看编排" url="http://www.google.com"/> 
+			<ModuleItem id="arrangeModify" name="修改编排" url="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="市场反馈" URL="/vmgui/offering/toConsoleList.action">
-			<ModuleItem Name="录入反馈" URL="http://www.baidu.com"/>
-			<ModuleItem Name="查看反馈" URL="http://www.google.com"/> 
-			<ModuleItem Name="修改反馈" URL="http://www.google.com"/> 
+		<Module id="feedback" name="市场反馈" url="/vmgui/offering/toConsoleList.action">
+			<ModuleItem id="feedbackAdd" name="录入反馈" url="http://www.baidu.com"/>
+			<ModuleItem id="feedbackView" name="查看反馈" url="http://www.google.com"/> 
+			<ModuleItem id="feedbackModify" name="修改反馈" url="http://www.google.com"/> 
 		</Module>
 		
-		<Module Name="统计查询" URL="/collection/tapeCollect.jsp">
+		<Module id="statistics" name="统计查询" url="http://www.google.com">
 		</Module>
 		
-		<Module Name="用户管理" URL="/vmgui/application/toList.action">
-			<ModuleItem Name="创建用户" URL="/vmgui/application/toAppCenterList.action"/>
-			<ModuleItem Name="权限管理" URL="/vmgui/overview/consumerVmListAjax.action?listLevel=APP_MACHINES"/>
+		<Module id="userMgmt" name="用户管理" url="/vmgui/application/toList.action">
+			<ModuleItem id="userAdd" name="创建用户" url="/vmgui/application/toAppCenterList.action"/>
+			<ModuleItem id="permission" name="权限管理" url="/vmgui/overview/consumerVmListAjax.action?listLevel=APP_MACHINES"/>
 		</Module>
 		
-		<Module Name="系统设置" URL="/tv/sys/tosysmain.action">
-			<ModuleItem Name="员工管理" URL="/tv/sys/toEmployees.action"/>
-			<ModuleItem Name="影视公司管理" URL="/tv/sys/toCompanies.action"/>
-			<ModuleItem Name="系统参数" URL=""/>
+		<Module id="sysConfig" name="系统设置" url="/tv/sys/tosysmain.action">
+			<ModuleItem id="employeeMgmt" name="员工管理" url="/tv/sys/toEmployees.action"/>
+			<ModuleItem name="影视公司管理" URL="/tv/sys/toCompanies.action"/>
+			<ModuleItem id="sysProperties" name="系统参数" url=""/>
 		</Module>
 	</MainConsole>
 </ParamConfs> 
