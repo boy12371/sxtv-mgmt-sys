@@ -47,7 +47,7 @@ body {
 		<s:iterator value="subTabs">
 			<li><a href="<s:property value='url'/>" target="contentFrame" 
 				id="<s:property value='id'/>"
-				onclick="refreshIframe(this);return false;">
+				onclick="highLightSubtab(this);refreshIframe(this);return false;">
 				<s:property value="name" />
 				</a>
 			</li>
