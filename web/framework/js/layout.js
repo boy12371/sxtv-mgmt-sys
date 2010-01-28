@@ -1,5 +1,4 @@
 function refreshIframe(obj){
-	highLightSubtab(obj);
 	if("" == obj.href || obj.href.indexOf("doLogon.action") != -1) return;
 	var iframeObj = document.getElementById("contentFrameId");
 	iframeObj.src = obj.href;
