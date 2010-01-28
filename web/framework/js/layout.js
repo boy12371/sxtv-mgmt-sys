@@ -1,4 +1,6 @@
 function refreshIframe(obj){
+	highLightSubtab(obj);
+	if("" == obj.href || obj.href.indexOf("doLogon.action") != -1) return;
 	var iframeObj = document.getElementById("contentFrameId");
 	iframeObj.src = obj.href;
 	return false;
@@ -23,6 +25,26 @@ function resizeIframe(){
 	iframeObj.style.height = "650px";
 	
 	resizeContentDiv();
+}
+
+function showDefaultSubtab(self){
+	var pos = self.href.indexOf("#");
+	var subId = self.href.substring(pos+1,self.href.length);
+	var subDiv = document.getElementById(subId);
+	var subLink = subDiv.getElementsByTagName("a")[0];
+	subLink.onclick();
+}
+
+function highLightSubtab(linkObj){
+	var ulObj = linkObj.parentNode.parentNode;
+	var links = ulObj.getElementsByTagName("a");
+	for(var i=0;i<links.length;i++){
+		if("bold"==links[i].style.fontWeight){
+			links[i].style.fontWeight="normal";
+		}
+	}
+	linkObj.style.fontWeight="bold";
+	return;
 }
 
 function resizeTabview(){
