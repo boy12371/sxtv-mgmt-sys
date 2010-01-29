@@ -17,7 +17,7 @@
 			<one-to-many class="Vediotape" />
 		</set>
 		<set name="auditings" inverse="true">
-			<key column="status" not-null="false"/>
+			<key column="result" not-null="false"/>
 			<one-to-many class="Auditing" />
 		</set>
 	</class>

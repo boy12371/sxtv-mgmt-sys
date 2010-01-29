@@ -47,7 +47,7 @@ public class SystemDataMgmt extends BaseAction {
 		try {
 			topList = topicService.findAllTopics(table.getStartIndex(),
 					table.getStartIndex() + table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
-			JSONDataTableUtils.setupJSONDataTable(staList, table, topicService.getTopicTotalCount());
+			JSONDataTableUtils.setupJSONDataTable(topList, table, topicService.getTopicTotalCount());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

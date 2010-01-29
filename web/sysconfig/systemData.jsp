@@ -37,6 +37,8 @@
 <br />
 <div id="vedioTopic" align="center"></div>
 
-
+<script type="text/javascript">
+	YAHOO.example.DynamicData = initTopicTable()
+</script>
 </body>
 </html>
