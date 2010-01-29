@@ -29,7 +29,7 @@
 <br />
 <div id="vedioStatus" align="center"></div>
 <script type="text/javascript">
-	YAHOO.example.DynamicData = initStatusTable()
+	YAHOO.example.DynamicData = initStatusTable();
 </script>
 
 <h1>影带题材</h1>
@@ -38,7 +38,16 @@
 <div id="vedioTopic" align="center"></div>
 
 <script type="text/javascript">
-	YAHOO.example.DynamicData = initTopicTable()
+	YAHOO.example.DynamicData = initTopicTable();
+</script>
+
+<h1>影带题材</h1>
+<p>可添加或修改题材内容</p>
+<br />
+<div id="vedioSubject" align="center"></div>
+
+<script type="text/javascript">
+	YAHOO.example.DynamicData = initSubjectTable();
 </script>
 </body>
 </html>

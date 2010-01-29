@@ -18,11 +18,7 @@ public class CompanyMgmtAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(CompanyMgmtAction.class);
 	private ICompanyService companyService;
-
 	private Company company;
-
-	private List<Company> comList;
-
 	private JSONDataTable table;
 
 	public String toCompanies() {
@@ -32,9 +28,10 @@ public class CompanyMgmtAction extends BaseAction {
 	public String getCompanies() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			comList = companyService.findAllCompany(table.getStartIndex(),
-					table.getStartIndex() + table.getRowsPerPage(), table
-							.getSort(), table.getDir().equals("asc"));
+			List<Company> comList = companyService.findAllCompany(table
+					.getStartIndex(), table.getStartIndex()
+					+ table.getRowsPerPage(), table.getSort(), table.getDir()
+					.equals("asc"));
 			JSONDataTableUtils.setupJSONDataTable(comList, table,
 					companyService.getCompanyTotalCount());
 		} catch (Exception e) {
@@ -97,13 +94,7 @@ public class CompanyMgmtAction extends BaseAction {
 		this.company = company;
 	}
 
-	public List<Company> getComList() {
-		return comList;
-	}
-
-	public void setComList(List<Company> comList) {
-		this.comList = comList;
-	}
+	
 
 	public JSONDataTable getTable() {
 		return table;

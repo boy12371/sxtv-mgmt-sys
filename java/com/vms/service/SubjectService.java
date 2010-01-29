@@ -10,6 +10,7 @@ public class SubjectService implements ISubjectService {
 
 	
 	private ISubjectDAO subjectDAO;
+	private Class clz = Subject.class;
 	@Override
 	public void deleteSubject(int id) throws Exception {
 		// TODO Auto-generated method stub
@@ -34,12 +35,17 @@ public class SubjectService implements ISubjectService {
 
 
 	@Override
-	public List<Subject> findAllSubjects(int startIndex, int endIndex) throws Exception {
+	public List<Subject> findAllSubjects(int startIndex, int endIndex,
+			String propertyName, boolean ascending) throws Exception {
 		// TODO Auto-generated method stub
-		return subjectDAO.findAllSubject(startIndex, endIndex);
+		return (List<Subject>)subjectDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
 	}
 
-
+	@Override
+	public int getSubjectTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return this.subjectDAO.getObjectTotalCount(clz, Subject.PROP_ID);
+	}
 
 	public ISubjectDAO getSubjectDAO() {
 		return subjectDAO;
@@ -50,5 +56,9 @@ public class SubjectService implements ISubjectService {
 	public void setSubjectDAO(ISubjectDAO subjectDAO) {
 		this.subjectDAO = subjectDAO;
 	}
+
+
+
+	
 
 }

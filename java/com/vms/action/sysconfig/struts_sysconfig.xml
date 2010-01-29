@@ -86,5 +86,11 @@
 				<param name="root">table</param>
 			</result>
 		</action>
+		
+		<action name="getSubjects" class="sysDataMgmt" method="getSubjects">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
 	</package>
 </struts>

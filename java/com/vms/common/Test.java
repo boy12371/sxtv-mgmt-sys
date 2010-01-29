@@ -36,12 +36,13 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 	
-		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");		
+		//ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");		
 	
-		StatusDAO dao = (StatusDAO) ctx.getBean("statusDAO");
+	//	StatusDAO dao = (StatusDAO) ctx.getBean("statusDAO");
 		
-		List list = dao.findObjectByFields(Status.class, null, 0, 100, "id", true);
-		System.out.println(list.size());
+		//List list = dao.findObjectByFields(Status.class, null, 0, 100, "id", true);
+		String vmname="sdfsdffwefsdf ".replaceAll("#", "%23").replaceAll("&", "%26");
+		System.out.println(vmname);
 		
 		
 		

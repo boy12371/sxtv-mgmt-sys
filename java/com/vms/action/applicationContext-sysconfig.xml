@@ -17,6 +17,8 @@
 		scope="prototype">
 		<property name="topicService" ref="topicService" />
 		<property name="statusService" ref="statusService" />
+		<property name="subjectService" ref="subjectService" />
+		
 	</bean>
 	
 </beans>
