@@ -9,4 +9,5 @@
 	
 	<include file="com/vms/framework/struts.xml"/>
 	<include file="com/vms/action/sysconfig/struts_sysconfig.xml"></include>
+	<include file="com/vms/action/examine/struts.xml"/>
 </struts>

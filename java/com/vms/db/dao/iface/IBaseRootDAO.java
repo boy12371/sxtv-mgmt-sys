@@ -21,7 +21,16 @@ public interface IBaseRootDAO {
 	Object getObject(Class clz, Serializable id) throws Exception;
 
 	Object loadObject(Class clz, Serializable id) throws Exception;
-
+	
+	/**
+	 * 查询指定列指定值的数量
+	 * @param clz 查询对象
+	 * @param propertyName 列名
+	 * @param value 值
+	 * @return
+	 * @throws Exception
+	 */
+	int getObjectTotalCountByFields(Class clz, String propertyName, Object value) throws Exception;
 	
 	/**
 	 * 查询指定列名的数量

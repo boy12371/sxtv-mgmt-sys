@@ -70,6 +70,7 @@
 		<property name="beanNames">
 			<list>
 				<value>vediotapeService</value>
+				<value>vedioscoreService</value>
 				<value>companyService</value>
 				<value>employeeService</value>
 				<value>statusService</value>
@@ -131,6 +132,10 @@
 			Service **************************************************************
 		-->
 	<bean id="vediotapeService" class="com.vms.service.VediotapeService">
+		<property name="vediotapeDAO" ref="vediotapeDAO" />
+	</bean>
+	<bean id="vedioscoreService" class="com.vms.service.VedioscoreService">
+		<property name="vedioscoreDAO" ref="vedioscoreDAO" />
 		<property name="vediotapeDAO" ref="vediotapeDAO" />
 	</bean>
 	<bean id="companyService" class="com.vms.service.CompanyService">

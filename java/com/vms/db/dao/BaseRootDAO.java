@@ -116,6 +116,16 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		crt.setProjection(Projections.count(propertyName));		
 		return Integer.parseInt(crt.uniqueResult().toString());
 	}
+	
+	@Override
+	public int getObjectTotalCountByFields(Class clz, String propertyName, Object value) throws Exception {
+		if(null == value) return getObjectTotalCount(clz,propertyName);
+		Criteria crt = this.getCriteria(clz);
+		crt.add(Restrictions.eq(propertyName, value));
+		crt.setProjection(Projections.rowCount());		
+		return Integer.parseInt(crt.uniqueResult().toString());
+	}
+	
 	public Query getQuery(String hqlString) {
 		return this.getSession().createQuery(hqlString);
 	}

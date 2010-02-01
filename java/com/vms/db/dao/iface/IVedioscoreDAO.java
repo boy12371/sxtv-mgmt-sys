@@ -1,8 +1,10 @@
 package com.vms.db.dao.iface;
 
-import java.io.Serializable;
+import java.util.List;
 
-public interface IVedioscoreDAO  extends IBaseRootDAO {
-	
+import com.vms.db.bean.Vedioscore;
 
+public interface IVedioscoreDAO extends IBaseRootDAO {
+	public Vedioscore getUniqueVedioscore(String propertyName, Object value) throws Exception;
+	public void saveVedioscores(List<Vedioscore> vedios) throws Exception;
 }
