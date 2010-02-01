@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.beans">
+	<class
+		name="Role"
+		table="role"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="integer"
+			column="id"
+		>
+			<generator class="sequence"/>
+		</id>
+
+		<property
+			name="Name"
+			column="name"
+			type="string"
+			not-null="true"
+			length="25"
+		/>
+		<property
+			name="Comments"
+			column="comments"
+			type="string"
+			not-null="true"
+			length="512"
+		/>
+	
+		<set
+			name="Resources"
+			table="role_resource"
+			cascade="all"
+		>
+			<key column="roleid"/>
+			<many-to-many column="resourceid" class="Resources"/>
+		</set>
+		<set
+			name="Users"
+			table="user_role"
+			cascade="all"
+		>
+			<key column="roleid"/>
+			<many-to-many column="userid" class="User"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

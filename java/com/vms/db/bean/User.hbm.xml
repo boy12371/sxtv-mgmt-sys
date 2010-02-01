@@ -34,5 +34,13 @@
 			<key column="userID" />
 			<one-to-many class="Auditing" />
 		</set>
+		<set
+			name="Roles"
+			table="user_role"
+			cascade="all"
+		>
+			<key column="userid"/>
+			<many-to-many column="roleid" class="Role"/>
+		</set>
 	</class>
 </hibernate-mapping>

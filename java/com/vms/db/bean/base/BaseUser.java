@@ -6,6 +6,7 @@ import com.vms.db.bean.Auditing;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
+import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
@@ -23,10 +24,11 @@ import com.vms.db.bean.Vediotape;
 public abstract class BaseUser  implements Serializable {
 
 	public static String REF = "User";
-	public static String PROP_ID = "id";
-	public static String PROP_USER_NAME = "userName";
-	public static String PROP_EMPLOYEE = "employee";
-	public static String PROP_USER_PASS = "userPass";
+	public static String PROP_STATUS = "Status";
+	public static String PROP_ID = "Id";
+	public static String PROP_USER_NAME = "UserName";
+	public static String PROP_EMPLOYEE = "Employee";
+	public static String PROP_USER_PASS = "UserPass";
 
 
 	// constructors
@@ -47,14 +49,16 @@ public abstract class BaseUser  implements Serializable {
 	 */
 	public BaseUser (
 		java.lang.Integer id,
-		com.vms.db.bean.Employee employee,
+		Employee employee,
 		java.lang.String userName,
-		java.lang.String userPass) {
+		java.lang.String userPass,
+		java.lang.Integer status) {
 
 		this.setId(id);
 		this.setEmployee(employee);
 		this.setUserName(userName);
 		this.setUserPass(userPass);
+		this.setStatus(status);
 		initialize();
 	}
 
@@ -70,16 +74,18 @@ public abstract class BaseUser  implements Serializable {
 	// fields
 	private java.lang.String userName;
 	private java.lang.String userPass;
+	private java.lang.Integer status;
 
 	// many to one
-	private com.vms.db.bean.Employee employee;
+	private Employee employee;
 
 	// collections
-	private java.util.Set<com.vms.db.bean.Vedioscore> vedioscores;
-	private java.util.Set<com.vms.db.bean.Playorder> playorders;
-	private java.util.Set<com.vms.db.bean.Playchangelog> playchangelogs;
-	private java.util.Set<com.vms.db.bean.Vediotape> vediotapes;
-	private java.util.Set<com.vms.db.bean.Auditing> auditings;
+	private java.util.Set<Vedioscore> vedioscores;
+	private java.util.Set<Playchangelog> playchangelogs;
+	private java.util.Set<Vediotape> vediotapes;
+	private java.util.Set<Playorder> playorders;
+	private java.util.Set<Auditing> auditings;
+	private java.util.Set<Role> roles;
 
 
 
@@ -140,9 +146,26 @@ public abstract class BaseUser  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: status
+	 */
+	public java.lang.Integer getStatus () {
+		return status;
+	}
+
+	/**
+	 * Set the value related to the column: status
+	 * @param status the status value
+	 */
+	public void setStatus (java.lang.Integer status) {
+		this.status = status;
+	}
+
+
+
+	/**
 	 * Return the value associated with the column: employee
 	 */
-	public com.vms.db.bean.Employee getEmployee () {
+	public Employee getEmployee () {
 		return employee;
 	}
 
@@ -150,118 +173,140 @@ public abstract class BaseUser  implements Serializable {
 	 * Set the value related to the column: employee
 	 * @param employee the employee value
 	 */
-	public void setEmployee (com.vms.db.bean.Employee employee) {
+	public void setEmployee (Employee employee) {
 		this.employee = employee;
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: vedioscores
+	 * Return the value associated with the column: Vedioscores
 	 */
-	public java.util.Set<com.vms.db.bean.Vedioscore> getVedioscores () {
+	public java.util.Set<Vedioscore> getVedioscores () {
 		return vedioscores;
 	}
 
 	/**
-	 * Set the value related to the column: vedioscores
-	 * @param vedioscores the vedioscores value
+	 * Set the value related to the column: Vedioscores
+	 * @param vedioscores the Vedioscores value
 	 */
-	public void setVedioscores (java.util.Set<com.vms.db.bean.Vedioscore> vedioscores) {
+	public void setVedioscores (java.util.Set<Vedioscore> vedioscores) {
 		this.vedioscores = vedioscores;
 	}
 
-	public void addTovedioscores (com.vms.db.bean.Vedioscore vedioscore) {
-		if (null == getVedioscores()) setVedioscores(new java.util.TreeSet<com.vms.db.bean.Vedioscore>());
+	public void addToVedioscores (Vedioscore vedioscore) {
+		if (null == getVedioscores()) setVedioscores(new java.util.TreeSet<Vedioscore>());
 		getVedioscores().add(vedioscore);
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: playorders
+	 * Return the value associated with the column: Playchangelogs
 	 */
-	public java.util.Set<com.vms.db.bean.Playorder> getPlayorders () {
-		return playorders;
-	}
-
-	/**
-	 * Set the value related to the column: playorders
-	 * @param playorders the playorders value
-	 */
-	public void setPlayorders (java.util.Set<com.vms.db.bean.Playorder> playorders) {
-		this.playorders = playorders;
-	}
-
-	public void addToplayorders (com.vms.db.bean.Playorder playorder) {
-		if (null == getPlayorders()) setPlayorders(new java.util.TreeSet<com.vms.db.bean.Playorder>());
-		getPlayorders().add(playorder);
-	}
-
-
-
-	/**
-	 * Return the value associated with the column: playchangelogs
-	 */
-	public java.util.Set<com.vms.db.bean.Playchangelog> getPlaychangelogs () {
+	public java.util.Set<Playchangelog> getPlaychangelogs () {
 		return playchangelogs;
 	}
 
 	/**
-	 * Set the value related to the column: playchangelogs
-	 * @param playchangelogs the playchangelogs value
+	 * Set the value related to the column: Playchangelogs
+	 * @param playchangelogs the Playchangelogs value
 	 */
-	public void setPlaychangelogs (java.util.Set<com.vms.db.bean.Playchangelog> playchangelogs) {
+	public void setPlaychangelogs (java.util.Set<Playchangelog> playchangelogs) {
 		this.playchangelogs = playchangelogs;
 	}
 
-	public void addToplaychangelogs (com.vms.db.bean.Playchangelog playchangelog) {
-		if (null == getPlaychangelogs()) setPlaychangelogs(new java.util.TreeSet<com.vms.db.bean.Playchangelog>());
+	public void addToPlaychangelogs (Playchangelog playchangelog) {
+		if (null == getPlaychangelogs()) setPlaychangelogs(new java.util.TreeSet<Playchangelog>());
 		getPlaychangelogs().add(playchangelog);
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: vediotapes
+	 * Return the value associated with the column: Vediotapes
 	 */
-	public java.util.Set<com.vms.db.bean.Vediotape> getVediotapes () {
+	public java.util.Set<Vediotape> getVediotapes () {
 		return vediotapes;
 	}
 
 	/**
-	 * Set the value related to the column: vediotapes
-	 * @param vediotapes the vediotapes value
+	 * Set the value related to the column: Vediotapes
+	 * @param vediotapes the Vediotapes value
 	 */
-	public void setVediotapes (java.util.Set<com.vms.db.bean.Vediotape> vediotapes) {
+	public void setVediotapes (java.util.Set<Vediotape> vediotapes) {
 		this.vediotapes = vediotapes;
 	}
 
-	public void addTovediotapes (com.vms.db.bean.Vediotape vediotape) {
-		if (null == getVediotapes()) setVediotapes(new java.util.TreeSet<com.vms.db.bean.Vediotape>());
+	public void addToVediotapes (Vediotape vediotape) {
+		if (null == getVediotapes()) setVediotapes(new java.util.TreeSet<Vediotape>());
 		getVediotapes().add(vediotape);
 	}
 
 
 
 	/**
-	 * Return the value associated with the column: auditings
+	 * Return the value associated with the column: Playorders
 	 */
-	public java.util.Set<com.vms.db.bean.Auditing> getAuditings () {
+	public java.util.Set<Playorder> getPlayorders () {
+		return playorders;
+	}
+
+	/**
+	 * Set the value related to the column: Playorders
+	 * @param playorders the Playorders value
+	 */
+	public void setPlayorders (java.util.Set<Playorder> playorders) {
+		this.playorders = playorders;
+	}
+
+	public void addToPlayorders (Playorder playorder) {
+		if (null == getPlayorders()) setPlayorders(new java.util.TreeSet<Playorder>());
+		getPlayorders().add(playorder);
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: Auditings
+	 */
+	public java.util.Set<Auditing> getAuditings () {
 		return auditings;
 	}
 
 	/**
-	 * Set the value related to the column: auditings
-	 * @param auditings the auditings value
+	 * Set the value related to the column: Auditings
+	 * @param auditings the Auditings value
 	 */
-	public void setAuditings (java.util.Set<com.vms.db.bean.Auditing> auditings) {
+	public void setAuditings (java.util.Set<Auditing> auditings) {
 		this.auditings = auditings;
 	}
 
-	public void addToauditings (com.vms.db.bean.Auditing auditing) {
-		if (null == getAuditings()) setAuditings(new java.util.TreeSet<com.vms.db.bean.Auditing>());
+	public void addToAuditings (Auditing auditing) {
+		if (null == getAuditings()) setAuditings(new java.util.TreeSet<Auditing>());
 		getAuditings().add(auditing);
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: Roles
+	 */
+	public java.util.Set<Role> getRoles () {
+		return roles;
+	}
+
+	/**
+	 * Set the value related to the column: Roles
+	 * @param roles the Roles value
+	 */
+	public void setRoles (java.util.Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public void addToRoles (Role role) {
+		if (null == getRoles()) setRoles(new java.util.TreeSet<Role>());
+		getRoles().add(role);
 	}
 
 
@@ -269,9 +314,9 @@ public abstract class BaseUser  implements Serializable {
 
 	public boolean equals (Object obj) {
 		if (null == obj) return false;
-		if (!(obj instanceof com.vms.db.bean.User)) return false;
+		if (!(obj instanceof User)) return false;
 		else {
-			com.vms.db.bean.User user = (com.vms.db.bean.User) obj;
+			User user = (User) obj;
 			if (null == this.getId() || null == user.getId()) return false;
 			else return (this.getId().equals(user.getId()));
 		}

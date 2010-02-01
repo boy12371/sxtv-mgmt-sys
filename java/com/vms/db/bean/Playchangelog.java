@@ -2,38 +2,29 @@ package com.vms.db.bean;
 
 import com.vms.db.bean.base.BasePlaychangelog;
 
-
-
 public class Playchangelog extends BasePlaychangelog {
 	private static final long serialVersionUID = 1L;
 
-/*[CONSTRUCTOR MARKER BEGIN]*/
-	public Playchangelog () {
+	/* [CONSTRUCTOR MARKER BEGIN] */
+	public Playchangelog() {
 		super();
 	}
 
 	/**
 	 * Constructor for primary key
 	 */
-	public Playchangelog (java.lang.Integer id) {
+	public Playchangelog(java.lang.Integer id) {
 		super(id);
 	}
 
 	/**
 	 * Constructor for required fields
 	 */
-	public Playchangelog (
-		java.lang.Integer id,
-		com.vms.db.bean.User auditor,
-		com.vms.db.bean.Vediotape vedioID) {
+	public Playchangelog(java.lang.Integer id, com.vms.db.bean.User auditor, com.vms.db.bean.Vediotape vedioID) {
 
-		super (
-			id,
-			auditor,
-			vedioID);
+		super(id, auditor, vedioID);
 	}
 
-/*[CONSTRUCTOR MARKER END]*/
-
+	/* [CONSTRUCTOR MARKER END] */
 
 }
