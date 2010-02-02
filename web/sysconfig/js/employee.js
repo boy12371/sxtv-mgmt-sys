@@ -1,4 +1,5 @@
-function initDataTable() {
+function initEmployeeDataTable() {
+	
 	var formatUrl = function(elCell, oRecord, oColumn, sData) {
 		var href = "<a href='./sys/toUpdateEmployee.action?employee.id=";
 		href += sData;
@@ -57,7 +58,7 @@ function initDataTable() {
 		key :"comments",
 		label :"备注",
 		formatter: formatComments
-	}, ];
+	} ];
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource("/tv/sys/getEmployees.action?");
@@ -93,7 +94,98 @@ function initDataTable() {
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.DataTable("employeeTable", myColumnDefs,
+			myDataSource, myConfigs);
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
+	}
+
+	return {
+		ds :myDataSource,
+		dt :myDataTable
+	};
+}
+
+
+function initUserDataTable() {
+	var formatUrl = function(elCell, oRecord, oColumn, sData) {
+		var href = "<a href='./sys/#.action?user.id=";
+		href += sData;
+		href += "'>" + sData + "</a>";
+		elCell.innerHTML = href;
+	};
+	
+	
+	var formatStatus = function(elCell, oRecord, oColumn, sData) {
+		if(sData==0){
+			elCell.innerHTML="<span>禁用</span>";
+		}else{
+			elCell.innerHTML="<span>正常</span>";
+		}
+		
+	}
+	// Column definitions
+	var myColumnDefs = [ // sortable:true enables sorting
+	{
+		key :"id",
+		label :"编号",
+		sortable :true,
+		formatter :formatUrl
+	}, {
+		key :"userName",
+		label :"用户名",
+		sortable :true
+	}, {
+		key :"userPass",
+		label :"密码"
+	}, {
+		key :"status",
+		label :"状态",
+		sortable :true,
+		formatter :formatStatus
+	}, {
+		key :"employee.name",
+		label :"员工"
+	}
+	];
+
+	// DataSource instance
+	var myDataSource = new YAHOO.util.DataSource("/tv/sys/getUsers.action?");
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+
+	myDataSource.responseSchema = {
+		resultsList :"records",
+		fields : [ "id", "userName", "userPass", "status",{key:"employee.name"} ],
+		metaFields : {
+			totalRecords :"totalRecords" // Access to value in the server
+											// response
+	}
+	};
+
+	// DataTable configuration
+	var myConfigs = {
+		initialRequest :"sort=id&dir=asc&startIndex=0&results=10", // Initial
+																	// request
+																	// for first
+																	// page of
+																	// data
+		dynamicData :true, // Enables dynamic server-driven data
+		sortedBy : {
+			key :"id",
+			dir :YAHOO.widget.DataTable.CLASS_ASC
+		}, // Sets UI initial sort arrow
+		paginator :new YAHOO.widget.Paginator( {
+			rowsPerPage :10
+		})
+	// Enables pagination
+	};
+
+	// DataTable instance
+
+	var myDataTable = new YAHOO.widget.DataTable("userTable", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,

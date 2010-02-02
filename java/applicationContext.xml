@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="command" />
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -38,6 +38,10 @@
 				<value>com/vms/db/bean/User.hbm.xml</value>
 				<value>com/vms/db/bean/Vedioscore.hbm.xml</value>
 				<value>com/vms/db/bean/Vediotape.hbm.xml</value>
+				<value>com/vms/db/bean/Resources.hbm.xml</value>
+				<value>com/vms/db/bean/Role.hbm.xml</value>
+				<value>com/vms/db/bean/RoleResource.hbm.xml</value>
+				<value>com/vms/db/bean/UserRole.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -87,6 +91,7 @@
 				<value>subjectService</value>
 				<value>topicService</value>
 				<value>userService</value>
+				<value>roleService</value>
 			</list>
 		</property>
 		<property name="interceptorNames">
@@ -138,6 +143,11 @@
 	<bean id="playorderDAO" class="com.vms.db.dao.PlayorderDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="roleDAO" class="com.vms.db.dao.RoleDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	<!--
 			Service **************************************************************
 		-->
@@ -165,6 +175,9 @@
 	</bean>
 	<bean id="userService" class="com.vms.service.UserService">
 		<property name="userDAO" ref="userDAO" />
+	</bean>
+	<bean id="roleService" class="com.vms.service.RoleService">
+		<property name="roleDAO" ref="roleDAO" />
 	</bean>
 	<!--
 			Proxy Service ********************************************************

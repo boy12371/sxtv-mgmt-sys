@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
-<hibernate-mapping package="com.beans">
+<hibernate-mapping package="com.vms.db.bean">
 	<class
 		name="Resources"
 		table="resources"
@@ -14,7 +14,7 @@
 			type="integer"
 			column="id"
 		>
-			<generator class="sequence"/>
+			<generator class="identity"/>
 		</id>
 
 		<property

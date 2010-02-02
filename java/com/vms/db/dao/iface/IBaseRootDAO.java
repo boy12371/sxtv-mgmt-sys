@@ -77,5 +77,7 @@ public interface IBaseRootDAO {
 	List findObjectByFields(Class clz, Map<String, Object> propertiesValues,
 			int startIndex, int endIndex, String propertyName, boolean ascending)
 			throws Exception;
+	
+	List findAll(Class clz)throws Exception;
 
 }

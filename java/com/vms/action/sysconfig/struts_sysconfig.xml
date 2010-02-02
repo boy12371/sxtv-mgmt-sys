@@ -9,7 +9,7 @@
 		</action>
 		<!--Employee-->
 		<action name="toEmployees" class="employeeMgmt" method="toEmployees">
-			<result name="success">/sysconfig/employees.jsp
+			<result name="success">/sysconfig/employees_users.jsp
 			</result>
 		</action>
 		<action name="getEmployees" class="employeeMgmt" method="getEmployees">
@@ -26,13 +26,13 @@
 			</result>
 		</action>
 		<action name="doUpdateEmployee" class="employeeMgmt" method="doUpdateEmployee">
-			<result name="success">/sysconfig/employees.jsp
+			<result name="success">/sysconfig/employees_users.jsp
 			</result>
 			<result name="input">/sysconfig/employee.jsp
 			</result>
 		</action>
 		<action name="doAddEmployee" class="employeeMgmt" method="doAddEmployee">
-			<result name="success">/sysconfig/employees.jsp
+			<result name="success">/sysconfig/employees_users.jsp
 			</result>
 			<result name="input">/sysconfig/addEmployee.jsp
 			</result>
@@ -92,5 +92,17 @@
 				<param name="root">table</param>
 			</result>
 		</action>
+		<!-- System end -->
+		<!--User -->
+		<action name="getUsers" class="userMgmt" method="getUsers">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
+		<action name="toAddUser" class="userMgmt" method="toAddUser">
+			<result name="success">/sysconfig/user.jsp
+			</result>			
+		</action>
+		<!--User end-->
 	</package>
 </struts>

@@ -134,6 +134,13 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		return this.getSession().createCriteria(clz);
 	}
 
+	@Override
+	public List findAll(Class clz) throws Exception {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		return crt.list();
+	}
+
 	
 
 }

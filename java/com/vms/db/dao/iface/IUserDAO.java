@@ -10,4 +10,6 @@ public interface IUserDAO  extends IBaseRootDAO{
 	void deleteUser(int id)throws Exception;
 	
 	List<User> findAllUser(int startIndex, int endIndex)throws Exception;
+	
+	boolean updateUser(String hql,Object[] args) throws Exception;
 }

@@ -12,34 +12,30 @@
 			not-null="true" length="50" />
 		<property name="userPass" column="userPass" type="string"
 			not-null="true" length="128" />
-		<many-to-one name="employee" column="employee" class="Employee"	not-null="true">
+		<many-to-one name="employee" column="employee" class="Employee"	not-null="true" lazy="false">
 		</many-to-one>
 		<set name="vedioscores" inverse="true">
-			<key column="userID" />
+			<key column="examiner" />
 			<one-to-many class="Vedioscore" />
 		</set>
 		<set name="playorders" inverse="true">
-			<key column="userID" />
+			<key column="auditor" />
 			<one-to-many class="Playorder" />
 		</set>
 		<set name="playchangelogs" inverse="true">
-			<key column="userID" />
+			<key column="auditor" />
 			<one-to-many class="Playchangelog" />
 		</set>
 		<set name="vediotapes" inverse="true">
-			<key column="userID" />
+			<key column="inputer" />
 			<one-to-many class="Vediotape" />
 		</set>
 		<set name="auditings" inverse="true">
-			<key column="userID" />
+			<key column="auditor" />
 			<one-to-many class="Auditing" />
 		</set>
-		<set
-			name="Roles"
-			table="user_role"
-			cascade="all"
-		>
-			<key column="userid"/>
+		<set name="Roles" table="user_role"	cascade="all">
+			<key column="userID"/>
 			<many-to-many column="roleid" class="Role"/>
 		</set>
 	</class>

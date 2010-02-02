@@ -12,11 +12,11 @@ public interface IEmployeeService {
 	void deleteEmployee(Employee employee) throws Exception;
 
 	/***
-	 * 查询所有员工
+	 * 查询所有员工 分页查询
 	 * @param startIndex 
 	 * @param endIndex
-	 * @param propertyName 
-	 * @param ascending
+	 * @param propertyName  排序列 
+	 * @param ascending  true=升序，false=降序
 	 * @return
 	 * @throws Exception
 	 */
@@ -35,4 +35,10 @@ public interface IEmployeeService {
 	 * @throws Exception
 	 */
 	boolean updateEmployee(EmployeeVO voEmp) throws Exception;
+	/**
+	 * 查询所有员工 不分页
+	 * @return
+	 * @throws Exception
+	 */
+	List<Employee> findAllEmployees() throws Exception;
 }

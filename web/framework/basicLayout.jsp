@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow:hidden;">
@@ -24,50 +25,44 @@ body {
 
 <body class="yui-skin-sam">
 
-<div id="topBranding" class="topBranding"></div>
+<div id="topBranding" class="topBranding">
+<div class="topSearch">
+<form name="serch" action="#" method="post"><input type="text" value="输入剧名搜索" class="txtBox"><input
+	type="submit" name="go" value="Go" class="go"><a href="#">高级</a>
+</div>
+
+</div>
 
 <div id="tabView" class="yui-navset tabviewArea">
 <ul class="yui-nav">
 	<s:iterator value="tabs" status="st">
-		<li>
-			<s:if test="subTabs.size() == 0">
-				<a href="<s:property value='url'/>" id="<s:property value='id'/>" onclick="refreshIframe(this);return false;">
-			</s:if> <s:else>
-				<a href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>" onclick="showDefaultSubtab(this);return false";>
-			</s:else> 
-			<em><s:property value="name"/></em></a>
-		</li>
+		<li><s:if test="subTabs.size() == 0">
+			<a href="<s:property value='url'/>" id="<s:property value='id'/>" onclick="refreshIframe(this);return false;">
+		</s:if> <s:else>
+			<a href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>"
+				onclick="showDefaultSubtab(this);return false";>
+		</s:else> <em><s:property value="name" /></em></a></li>
 	</s:iterator>
 </ul>
 
-<div class="yui-content subTabview" id="subTabview">
-<s:iterator	value="tabs" status="st">
+<div class="yui-content subTabview" id="subTabview"><s:iterator value="tabs" status="st">
 	<div id="tab<s:property value='#st.index'/>">
 	<ul class="subTabUL">
 		<s:iterator value="subTabs">
-			<li><a href="<s:property value='url'/>" target="contentFrame" 
-				id="<s:property value='id'/>"
-				onclick="highLightSubtab(this);refreshIframe(this);return false;">
-				<s:property value="name" />
-				</a>
-			</li>
+			<li><a href="<s:property value='url'/>" target="contentFrame" id="<s:property value='id'/>"
+				onclick="highLightSubtab(this);refreshIframe(this);return false;"> <s:property value="name" /> </a></li>
 		</s:iterator>
 	</ul>
 	</div>
-</s:iterator>
-</div>
+</s:iterator></div>
 </div>
 
 <div style="overflow-y: auto; overflow-x: hidden" id="contentDiv">
 <div class="bodyTop"></div>
-<div align="center">
-	<iframe id="contentFrameId"
-	name="contentFrame" class="contentIframe" frameborder='0'
-	scrolling='no' style="height: 650px" src=""
-	onload="resizeIframe();return false;">
-	</iframe>
+<div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0'
+	scrolling='no' style="height: 650px" src="" onload="resizeIframe();return false;"> </iframe></div>
+<div style="margin-top: 30px;" />
 </div>
-<div style="margin-top: 30px;" /></div>
 <script language="JavaScript">
 	( function() {
 		var tabView = new YAHOO.widget.TabView('tabView');

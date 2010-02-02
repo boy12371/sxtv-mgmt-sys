@@ -29,4 +29,14 @@ public class UserDAO  extends com.vms.db.dao.BaseRootDAO  implements IUserDAO {
 		
 		return (List<User>)this.findObjectByFields(clz, null, startIndex, endIndex, null, false);
 	}
+
+	
+
+	@Override
+	public boolean updateUser(String hql, Object[] args) throws Exception {
+		// TODO Auto-generated method stub
+		int result = this.getHibernateTemplate().bulkUpdate(hql, args);
+		return result!=0;
+		
+	}
 }

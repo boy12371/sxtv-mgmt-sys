@@ -58,13 +58,6 @@ CREATE TABLE IF NOT EXISTS `company` (
   UNIQUE KEY `registrationNo` (`registrationNo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='公司信息' AUTO_INCREMENT=2 ;
 
---
--- 转存表中的数据 `company`
---
-
-INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `contactPerson`, `comments`) VALUES
-(1, '中华影视', '12331123123', '34534534534', '胡戈', '第三方万恶服务');
-
 -- --------------------------------------------------------
 
 --
@@ -83,19 +76,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   PRIMARY KEY  (`employeeID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='员工信息' AUTO_INCREMENT=9 ;
 
---
--- 转存表中的数据 `employee`
---
 
-INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gender`, `tel`, `status`, `comments`) VALUES
-(1, '王文婷', '1983-02-19', '2006-01-16', 0, '13991366931', 0, '这是一个员工'),
-(2, '王萌', '2010-01-21', '1970-01-01', 0, '13991366930', 0, '王萌王萌王萌王萌王萌王萌王萌王萌王萌王萌'),
-(3, '周强', '2010-01-21', '2010-01-21', 1, '13991366931', 0, '这是一个员工'),
-(4, '周zhou', '2010-01-21', '2010-01-21', 1, '13991366931', 0, '这是一个员工'),
-(5, '里斯', '2010-01-25', '2010-01-20', 1, '123123123', 0, '的期望的钱'),
-(6, '张武', '2006-01-09', '2007-01-15', 0, '123124234', 0, '撕得粉碎大放送'),
-(7, '赵流', '2006-01-16', '2008-01-22', 0, '123123', 0, '扫的服务阿飞'),
-(8, '王其', '2010-01-17', '1982-01-12', 0, '维吾尔', 0, '斯蒂芬');
 
 -- --------------------------------------------------------
 
@@ -210,20 +191,7 @@ CREATE TABLE IF NOT EXISTS `status` (
   PRIMARY KEY  (`statusID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ucs2 COMMENT='状态' AUTO_INCREMENT=10 ;
 
---
--- 转存表中的数据 `status`
---
 
-INSERT INTO `status` (`statusID`, `status`, `comments`) VALUES
-(1, '待评', '新进剧目，带评分'),
-(2, '待审', '剧目以评分，等待审核'),
-(3, '通过', '审核已通过，等待指定播放时间'),
-(4, '修改', '审核未通过，有待修改'),
-(5, '重审', '修改已完成，需重新审核'),
-(6, '待播', '审核通过，并已指定时间，等待播放'),
-(7, '退回', '审核未通过，直接退带'),
-(8, '已播', '剧目已播出，尚未得到市场反馈'),
-(9, '结束', '剧目已播出并收到市场反馈');
 
 -- --------------------------------------------------------
 
@@ -238,13 +206,7 @@ CREATE TABLE IF NOT EXISTS `subject` (
   PRIMARY KEY  (`subjectID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='栏目' AUTO_INCREMENT=3 ;
 
---
--- 转存表中的数据 `subject`
---
 
-INSERT INTO `subject` (`subjectID`, `subjectName`, `comments`) VALUES
-(1, '都市碎戏', '都市碎戏都市碎戏都市碎戏都市碎戏都市碎戏'),
-(2, '百家碎戏', '百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏');
 
 -- --------------------------------------------------------
 
@@ -258,16 +220,6 @@ CREATE TABLE IF NOT EXISTS `topic` (
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`topicID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='题材' AUTO_INCREMENT=5 ;
-
---
--- 转存表中的数据 `topic`
---
-
-INSERT INTO `topic` (`topicID`, `topicName`, `comments`) VALUES
-(1, '爱情', '爱情爱情爱情爱情爱情爱情'),
-(2, '亲情', '亲情亲情亲情亲情亲情亲情亲情亲情'),
-(3, '生活', '生活生活生活生活生活生活'),
-(4, '社会', '社会社会社会社会社会');
 
 -- --------------------------------------------------------
 
@@ -285,12 +237,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   KEY `userEmployee` (`employee`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户' AUTO_INCREMENT=2 ;
 
---
--- 转存表中的数据 `user`
---
 
-INSERT INTO `user` (`userID`, `userName`, `userPass`, `employee`, `status`) VALUES
-(1, 'tiger', 'command', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -435,3 +382,65 @@ ALTER TABLE `vediotape`
   ADD CONSTRAINT `vedioStatus` FOREIGN KEY (`status`) REFERENCES `status` (`statusID`),
   ADD CONSTRAINT `vedioSubject` FOREIGN KEY (`subject`) REFERENCES `subject` (`subjectID`),
   ADD CONSTRAINT `vedioTopic` FOREIGN KEY (`topic`) REFERENCES `topic` (`topicID`) ON UPDATE CASCADE;
+
+
+--
+-- 转存表中的数据 `company`
+--
+
+INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `contactPerson`, `comments`) VALUES
+(1, '中华影视', '12331123123', '34534534534', '胡戈', '第三方万恶服务');
+
+--
+-- 转存表中的数据 `employee`
+--
+
+INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gender`, `tel`, `status`, `comments`) VALUES
+(1, '王文婷', '1983-02-19', '2006-01-16', 0, '13991366931', 0, '这是一个员工'),
+(2, '王萌', '2010-01-21', '1970-01-01', 0, '13991366930', 0, '王萌王萌王萌王萌王萌王萌王萌王萌王萌王萌'),
+(3, '周强', '2010-01-21', '2010-01-21', 1, '13991366931', 0, '这是一个员工'),
+(4, '周zhou', '2010-01-21', '2010-01-21', 1, '13991366931', 0, '这是一个员工'),
+(5, '里斯', '2010-01-25', '2010-01-20', 1, '123123123', 0, '的期望的钱'),
+(6, '张武', '2006-01-09', '2007-01-15', 0, '123124234', 0, '撕得粉碎大放送'),
+(7, '赵流', '2006-01-16', '2008-01-22', 0, '123123', 0, '扫的服务阿飞'),
+(8, '王其', '2010-01-17', '1982-01-12', 0, '维吾尔', 0, '斯蒂芬');
+--
+-- 转存表中的数据 `status`
+--
+
+INSERT INTO `status` (`statusID`, `status`, `comments`) VALUES
+(1, '待评', '新进剧目，带评分'),
+(2, '待审', '剧目以评分，等待审核'),
+(3, '通过', '审核已通过，等待指定播放时间'),
+(4, '修改', '审核未通过，有待修改'),
+(5, '重审', '修改已完成，需重新审核'),
+(6, '待播', '审核通过，并已指定时间，等待播放'),
+(7, '退回', '审核未通过，直接退带'),
+(8, '已播', '剧目已播出，尚未得到市场反馈'),
+(9, '结束', '剧目已播出并收到市场反馈');
+
+--
+-- 转存表中的数据 `subject`
+--
+
+INSERT INTO `subject` (`subjectID`, `subjectName`, `comments`) VALUES
+(1, '都市碎戏', '都市碎戏都市碎戏都市碎戏都市碎戏都市碎戏'),
+(2, '百家碎戏', '百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏');
+
+
+--
+-- 转存表中的数据 `topic`
+--
+
+INSERT INTO `topic` (`topicID`, `topicName`, `comments`) VALUES
+(1, '爱情', '爱情爱情爱情爱情爱情爱情'),
+(2, '亲情', '亲情亲情亲情亲情亲情亲情亲情亲情'),
+(3, '生活', '生活生活生活生活生活生活'),
+(4, '社会', '社会社会社会社会社会');
+
+--
+-- 转存表中的数据 `user`
+--
+
+INSERT INTO `user` (`userID`, `userName`, `userPass`, `employee`, `status`) VALUES
+(1, 'tiger', 'command', 1, 0);

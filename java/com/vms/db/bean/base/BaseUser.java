@@ -25,7 +25,7 @@ public abstract class BaseUser  implements Serializable {
 
 	public static String REF = "User";
 	public static String PROP_STATUS = "Status";
-	public static String PROP_ID = "Id";
+	public static String PROP_ID = "id";
 	public static String PROP_USER_NAME = "UserName";
 	public static String PROP_EMPLOYEE = "Employee";
 	public static String PROP_USER_PASS = "UserPass";

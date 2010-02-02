@@ -1,6 +1,5 @@
 package com.vms.common;
 
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.vms.beans.EmployeeVO;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.Status;
+import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.bean.base.BaseStatus;
 import com.vms.db.dao.AuditingDAO;
@@ -26,27 +26,25 @@ import com.vms.service.StatusService;
 import com.vms.service.VediotapeService;
 import com.vms.service.iface.IEmployeeService;
 import com.vms.service.iface.IStatusService;
+import com.vms.service.iface.IUserService;
 import com.vms.service.iface.IVediotapeService;
 
 public class Test {
 
 	/**
 	 * @param args
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-	
-		//ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");		
-	
-	//	StatusDAO dao = (StatusDAO) ctx.getBean("statusDAO");
-		
-		//List list = dao.findObjectByFields(Status.class, null, 0, 100, "id", true);
-		String vmname="sdfsdffwefsdf ".replaceAll("#", "%23").replaceAll("&", "%26");
-		System.out.println(vmname);
-		
-		
-		
-		
+
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"applicationContext.xml");
+
+		IUserService service = (IUserService) ctx.getBean("userService");
+		List<User> list  = service .findAllUser(0, 10, User.PROP_ID, true);
+		System.out.println(list.size());
+		System.out.println(list.get(0).getEmployee().getName());
+
 	}
 
 }

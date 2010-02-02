@@ -56,6 +56,15 @@ public class EmployeeService implements IEmployeeService {
 	 * @param voEmp 仅跟新员工信息，不更新其user
 	 * @throws Exception
 	 */
+	
+
+	@Override
+	public List<Employee> findAllEmployees() throws Exception {
+		// TODO Auto-generated method stub
+		return (List<Employee>)employeeDAO.findAll(clz);
+	}
+	
+	
 	@Override
 	public boolean updateEmployee(EmployeeVO voEmp) throws Exception {
 		// TODO Auto-generated method stub
@@ -69,6 +78,7 @@ public class EmployeeService implements IEmployeeService {
 	public void setEmployeeDAO(IEmployeeDAO employeeDAO) {
 		this.employeeDAO = employeeDAO;
 	}
+
 
 	
 

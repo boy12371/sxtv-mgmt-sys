@@ -22,4 +22,11 @@
 		<property name="service" ref="vedioscoreService" />
 	</bean>
 	
+	<bean id="userMgmt" class="com.vms.action.sysconfig.UserMgmtAction" scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="employeeService" ref="employeeService" />
+		<property name="roleService" ref="roleService" />
+		
+	</bean>
+	
 </beans>
