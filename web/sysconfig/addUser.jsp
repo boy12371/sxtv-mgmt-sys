@@ -22,9 +22,8 @@
 
 <h1>员工用户</h1>
 <p>编辑并添加用户信息</p>
-
 <s:actionerror />
-<s:form action="doAddEmployee" namespace="/sys" method="post">
+<s:form action="doAddUser" namespace="/sys" method="post">
 	<div align="center">
 	<table>
 		<tr>
@@ -46,11 +45,17 @@
 
 		<tr>
 			<td colspan="4">
-			 <s:checkboxlist name="user.roles"
-				list="roleList" listKey="id" listValue="name">
-			</s:checkboxlist></td>
+			 
+<s:iterator value="roleList" status="stat" id="role" >
+<s:checkbox name="user.roles[%{#stat.index}].id" value="false" fieldValue="%{#role.id}" /><s:property value="name"/><br />
+</s:iterator>
+</td>
 		</tr>
-
+		<tr>
+			<td colspan="4">
+				<s:submit value="提交" />
+			 </td>
+		</tr>
 	</table>
 	</div>
 </s:form>

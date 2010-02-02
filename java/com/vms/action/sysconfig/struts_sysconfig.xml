@@ -100,8 +100,12 @@
 			</result>
 		</action>
 		<action name="toAddUser" class="userMgmt" method="toAddUser">
-			<result name="success">/sysconfig/user.jsp
+			<result name="success">/sysconfig/addUser.jsp
 			</result>			
+		</action>
+		<action name="doAddUser" class="userMgmt" method="doAddUser">
+			<result name="success">/sysconfig/employees_users.jsp</result>
+			<result name="input">/sysconfig/addUser.jsp</result>			
 		</action>
 		<!--User end-->
 	</package>

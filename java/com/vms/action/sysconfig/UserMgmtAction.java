@@ -35,7 +35,14 @@ public class UserMgmtAction extends BaseAction {
 	}
 
 	public String doAddUser() throws Exception {
-		userService.createUser(user);
+		try{
+			userService.createUser(user);	
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			this.addActionError("用户创建失败");
+			return INPUT;
+		}
+		this.addActionMessage("用户创建成功");
 		return this.SUCCESS;
 	}
 

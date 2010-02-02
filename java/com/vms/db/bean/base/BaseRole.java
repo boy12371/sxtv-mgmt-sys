@@ -84,7 +84,7 @@ public abstract class BaseRole  implements Serializable {
 	 * Set the unique identifier of this class
 	 * @param id the new ID
 	 */
-	public void setId (java.lang.Integer id) {
+	public void setId (int id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
