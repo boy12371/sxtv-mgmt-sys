@@ -27,8 +27,9 @@ body {
 
 <div id="topBranding" class="topBranding">
 <div class="topSearch">
-<form name="serch" action="#" method="post"><input type="text" value="输入剧名搜索" class="txtBox"><input
-	type="submit" name="go" value="Go" class="go"><a href="#">高级</a>
+<img border="0" width="163" height="50" title="ecode" class="logo" alt="ecode" src="./images/logo.gif">
+<form name="serch" action="#" method="post"><input type="text" value="输入剧名搜索" class="txtBox"><input type="submit" name="go" value="Go"
+	class="go"><a href="#">高级</a>
 </div>
 
 </div>
@@ -39,8 +40,7 @@ body {
 		<li><s:if test="subTabs.size() == 0">
 			<a href="<s:property value='url'/>" id="<s:property value='id'/>" onclick="refreshIframe(this);return false;">
 		</s:if> <s:else>
-			<a href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>"
-				onclick="showDefaultSubtab(this);return false";>
+			<a href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>" onclick="showDefaultSubtab(this);return false";>
 		</s:else> <em><s:property value="name" /></em></a></li>
 	</s:iterator>
 </ul>
@@ -59,10 +59,9 @@ body {
 
 <div style="overflow-y: auto; overflow-x: hidden" id="contentDiv">
 <div class="bodyTop"></div>
-<div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0'
-	scrolling='no' style="height: 650px" src="" onload="resizeIframe();return false;"> </iframe></div>
-<div style="margin-top: 30px;" />
-</div>
+<div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='no' style="height: 650px"
+	src="" onload="resizeIframe();return false;"> </iframe></div>
+<div style="margin-top: 30px;" /></div>
 <script language="JavaScript">
 	( function() {
 		var tabView = new YAHOO.widget.TabView('tabView');
