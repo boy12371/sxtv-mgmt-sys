@@ -2,9 +2,6 @@ package com.vms.db.bean.base;
 
 import java.io.Serializable;
 
-import com.vms.db.bean.Employee;
-import com.vms.db.bean.User;
-
 
 /**
  * This is an object that contains data related to the employee table.
@@ -19,6 +16,7 @@ public abstract class BaseEmployee  implements Serializable {
 
 	public static String REF = "Employee";
 	public static String PROP_NAME = "name";
+	public static String PROP_STATUS = "status";
 	public static String PROP_COMMENTS = "comments";
 	public static String PROP_BIRTHDAY = "birthday";
 	public static String PROP_CONTRACT_DATE = "contractDate";
@@ -50,6 +48,7 @@ public abstract class BaseEmployee  implements Serializable {
 		java.util.Date contractDate,
 		java.lang.Integer gender,
 		java.lang.String tel,
+		java.lang.Integer status,
 		java.lang.String comments) {
 
 		this.setId(id);
@@ -58,6 +57,7 @@ public abstract class BaseEmployee  implements Serializable {
 		this.setContractDate(contractDate);
 		this.setGender(gender);
 		this.setTel(tel);
+		this.setStatus(status);
 		this.setComments(comments);
 		initialize();
 	}
@@ -77,6 +77,7 @@ public abstract class BaseEmployee  implements Serializable {
 	private java.util.Date contractDate;
 	private java.lang.Integer gender;
 	private java.lang.String tel;
+	private java.lang.Integer status;
 	private java.lang.String comments;
 
 	// collections
@@ -87,7 +88,7 @@ public abstract class BaseEmployee  implements Serializable {
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="sequence"
+     *  generator-class="identity"
      *  column="employeeID"
      */
 	public java.lang.Integer getId () {
@@ -187,6 +188,23 @@ public abstract class BaseEmployee  implements Serializable {
 	 */
 	public void setTel (java.lang.String tel) {
 		this.tel = tel;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: status
+	 */
+	public java.lang.Integer getStatus () {
+		return status;
+	}
+
+	/**
+	 * Set the value related to the column: status
+	 * @param status the status value
+	 */
+	public void setStatus (java.lang.Integer status) {
+		this.status = status;
 	}
 
 

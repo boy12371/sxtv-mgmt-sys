@@ -29,15 +29,16 @@ public class UserMgmtAction extends BaseAction {
 
 	private User user;
 	private JSONDataTable table;
+	private String operation;
 
-	public String toAddUser()throws Exception {
+	public String toAddUser() throws Exception {
 		return this.SUCCESS;
 	}
 
 	public String doAddUser() throws Exception {
-		try{
-			userService.createUser(user);	
-		}catch(Exception e){
+		try {
+			userService.createUser(user);
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 			this.addActionError("用户创建失败");
 			return INPUT;
@@ -50,45 +51,43 @@ public class UserMgmtAction extends BaseAction {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 
 		try {
-			List<User> users = userService.findAllUser(table.getStartIndex(),
-					table.getStartIndex() + table.getRowsPerPage(), table
-							.getSort(), table.getDir().equals("asc"));
-			JSONDataTableUtils.setupJSONDataTable(users, table, userService
-					.getUserTotalCount());
+			List<User> users = userService.findAllUser(table.getStartIndex(), table.getStartIndex()
+					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
+			JSONDataTableUtils.setupJSONDataTable(users, table, userService.getUserTotalCount());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return this.SUCCESS;
 	}
 
-	public String toUpdateUser()throws Exception{
+	public String toUpdateUser() throws Exception {
+		try {
+			user = userService.getUserById(user.getId());
+		} catch (Exception e) {
+			logger.error(e);
+			return INPUT;
+		}
+
 		return SUCCESS;
 	}
-	
-	public String resetUserPassword()throws Exception{
+
+	public String doUpdateUser() throws Exception {
+		try {
+			userService.updateUser(operation, user);
+		} catch (Exception e) {
+			logger.error(e);
+			return INPUT;
+		}
+
 		return SUCCESS;
 	}
-	
-	public String updateUserRole() throws Exception{
-		return SUCCESS;	
+
+	public List<Employee> getEmpList() throws Exception {
+
+		return this.employeeService.findAllUnassignedEmployees();
 	}
-	
-	public String disableUser()throws Exception{
-		return SUCCESS;
-	}
-	
-	public String enableUser()throws Exception{
-		return SUCCESS;
-	}
-	
-	
-	public List<Employee> getEmpList()throws Exception{
-		
-		return this.employeeService.findAllEmployees();
-		
-	}
-	
-	public List<Role> getRoleList()throws Exception{
+
+	public List<Role> getRoleList() throws Exception {
 		return roleService.findAllRoles();
 	}
 
@@ -107,6 +106,7 @@ public class UserMgmtAction extends BaseAction {
 	public void setRoleService(IRoleService roleService) {
 		this.roleService = roleService;
 	}
+
 	public IUserService getUserService() {
 		return userService;
 	}
@@ -129,5 +129,13 @@ public class UserMgmtAction extends BaseAction {
 
 	public void setTable(JSONDataTable table) {
 		this.table = table;
+	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 }

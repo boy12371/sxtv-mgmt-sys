@@ -41,4 +41,6 @@ public interface IEmployeeService {
 	 * @throws Exception
 	 */
 	List<Employee> findAllEmployees() throws Exception;
+	
+	List<Employee> findAllUnassignedEmployees() throws Exception;
 }

@@ -21,9 +21,9 @@ public class Employee extends BaseEmployee {
 	 * Constructor for required fields
 	 */
 	public Employee(java.lang.Integer id, java.lang.String name, java.util.Date birthday, java.util.Date contractDate,
-			java.lang.Integer gender, java.lang.String tel, java.lang.String comments) {
+			java.lang.Integer gender, java.lang.String tel, java.lang.Integer status, java.lang.String comments) {
 
-		super(id, name, birthday, contractDate, gender, tel, comments);
+		super(id, name, birthday, contractDate, gender, tel, status, comments);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */

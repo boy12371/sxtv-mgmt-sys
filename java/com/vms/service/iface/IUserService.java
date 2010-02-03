@@ -18,13 +18,7 @@ public interface IUserService {
 	User getUserById(int id) throws Exception;
 
 	int getUserTotalCount() throws Exception;
-
-//	boolean updateUserInfo(User user) throws Exception;
-
-	boolean disableUser(int id) throws Exception;
-
-	boolean enableUser(int id) throws Exception;
-
-	boolean resetPassword(int id, String password) throws Exception;
+	
+	boolean updateUser(String operation, User user)throws Exception;
 
 }

@@ -112,7 +112,7 @@ function initEmployeeDataTable() {
 
 function initUserDataTable() {
 	var formatUrl = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./sys/#.action?user.id=";
+		var href = "<a href='./sys/toUpdateUser.action?user.id=";
 		href += sData;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
@@ -198,4 +198,11 @@ function initUserDataTable() {
 		ds :myDataSource,
 		dt :myDataTable
 	};
+}
+
+function executOperations(obj){
+	var form =document.forms[0];
+	form.operation.value=obj;
+	form.submit();
+	
 }

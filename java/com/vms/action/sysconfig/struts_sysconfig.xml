@@ -86,7 +86,6 @@
 				<param name="root">table</param>
 			</result>
 		</action>
-		
 		<action name="getSubjects" class="sysDataMgmt" method="getSubjects">
 			<result type="json">
 				<param name="root">table</param>
@@ -101,12 +100,29 @@
 		</action>
 		<action name="toAddUser" class="userMgmt" method="toAddUser">
 			<result name="success">/sysconfig/addUser.jsp
-			</result>			
+			</result>
 		</action>
 		<action name="doAddUser" class="userMgmt" method="doAddUser">
-			<result name="success">/sysconfig/employees_users.jsp</result>
-			<result name="input">/sysconfig/addUser.jsp</result>			
+			<result name="success">/sysconfig/employees_users.jsp
+			</result>
+			<result name="input">/sysconfig/addUser.jsp
+			</result>
 		</action>
+		<action name="toUpdateUser" class="userMgmt" method="toUpdateUser">
+			<result name="success">/sysconfig/user.jsp
+			</result>
+			<result name="input">/sysconfig/employees_users.jsp
+			</result>
+		</action>
+		
+		<action name="doUpdateUser" class="userMgmt" method="doUpdateUser">
+			<result name="success">/sysconfig/employees_users.jsp
+			</result>
+			<result name="input">/sysconfig/user.jsp
+			</result>
+		</action>
+		
+		
 		<!--User end-->
 	</package>
 </struts>

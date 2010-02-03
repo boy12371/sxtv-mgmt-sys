@@ -51,7 +51,7 @@ public class EmployeeMgmtAction extends BaseAction {
 
 	public String toUpdateEmployee() throws Exception {
 		try {
-		employee = this.employeeService.getEmployeeById(employee.getId());
+			employee = this.employeeService.getEmployeeById(employee.getId());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return this.INPUT;
@@ -61,15 +61,15 @@ public class EmployeeMgmtAction extends BaseAction {
 
 	public String doUpdateEmployee() throws Exception {
 		vEmployee = BeanConvert.convertBean(employee);
-		boolean success = false;
+
 		try {
-			success = employeeService.updateEmployee(vEmployee);
+			employeeService.updateEmployee(vEmployee);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			this.addActionError("更新失败");
 			return this.INPUT;
 		}
-		
+
 		return this.SUCCESS;
 	}
 
@@ -78,9 +78,9 @@ public class EmployeeMgmtAction extends BaseAction {
 	}
 
 	public String doAddEmployee() throws Exception {
-		try{
-			employeeService.createEmployee(employee);	
-		}catch(Exception e){
+		try {
+			employeeService.createEmployee(employee);
+		} catch (Exception e) {
 			logger.error(e.getMessage());
 			this.addActionError("添加失败");
 			return this.INPUT;

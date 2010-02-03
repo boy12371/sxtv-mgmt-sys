@@ -50,7 +50,7 @@ public interface IBaseRootDAO {
 	void deleteObject(Object object) throws Exception;
 	
 	/***
-	 * 根据给定列名的值，查询对象列表
+	 * 根据给定列名的值，查询对象列表  startIndex 或 endIndex =-1 则不分页
 	 * @param clz 查询对象
 	 * @param propertyName 列名
 	 * @param value 值
@@ -64,11 +64,11 @@ public interface IBaseRootDAO {
 			int startIndex, int endIndex, boolean asceding) throws Exception;
 
 	/***
-	 * 查询对象列表
+	 * 查询对象列表 startIndex 或 endIndex =-1 则不分页
 	 * @param clz 查询对象
 	 * @param propertiesValues 匹配条件，键值对 键=列名 值=值， 如果为null或empthy 则将查询所有
-	 * @param startIndex 
-	 * @param endIndex 
+	 * @param startIndex
+	 * @param endIndex
 	 * @param propertyName 排序列的列名
 	 * @param ascending true=升序 false=降序
 	 * @return

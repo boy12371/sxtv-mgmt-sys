@@ -65,8 +65,7 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 	}
 
 	@Override
-	public List findObjectByFields(Class clz,
-			Map<String, Object> propertiesValues, int startIndex, int endIndex,
+	public List findObjectByFields(Class clz, Map<String, Object> propertiesValues, int startIndex, int endIndex,
 			String propertyName, boolean ascending) throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
@@ -94,38 +93,41 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 	}
 
 	@Override
-	public List findObjectByField(Class clz, String propertyName, Object value,
-			int startIndex, int endIndex, boolean asceding) throws Exception {
+	public List findObjectByField(Class clz, String propertyName, Object value, int startIndex, int endIndex,
+			boolean asceding) throws Exception {
 		Criteria crt = this.getCriteria(clz);
 
 		crt.add(Restrictions.eq(propertyName, value));
 		Order order = DaoUtils.getOrder(propertyName, asceding);
 		if (order != null) {
 			crt.addOrder(order);
-		}		
-		crt.setFirstResult(startIndex);
-		crt.setMaxResults(endIndex);
+		}
+		if (startIndex != -1 || endIndex != -1) {
+
+			crt.setFirstResult(startIndex);
+			crt.setMaxResults(endIndex);
+		}
 		return crt.list();
 	}
-	
-	
+
 	@Override
 	public int getObjectTotalCount(Class clz, String propertyName) throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
-		crt.setProjection(Projections.count(propertyName));		
+		crt.setProjection(Projections.count(propertyName));
 		return Integer.parseInt(crt.uniqueResult().toString());
 	}
-	
+
 	@Override
 	public int getObjectTotalCountByFields(Class clz, String propertyName, Object value) throws Exception {
-		if(null == value) return getObjectTotalCount(clz,propertyName);
+		if (null == value)
+			return getObjectTotalCount(clz, propertyName);
 		Criteria crt = this.getCriteria(clz);
 		crt.add(Restrictions.eq(propertyName, value));
-		crt.setProjection(Projections.rowCount());		
+		crt.setProjection(Projections.rowCount());
 		return Integer.parseInt(crt.uniqueResult().toString());
 	}
-	
+
 	public Query getQuery(String hqlString) {
 		return this.getSession().createQuery(hqlString);
 	}
@@ -140,7 +142,5 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		Criteria crt = this.getCriteria(clz);
 		return crt.list();
 	}
-
-	
 
 }

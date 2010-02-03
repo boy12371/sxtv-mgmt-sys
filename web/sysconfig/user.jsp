@@ -18,26 +18,20 @@
 <h1>员工用户</h1>
 <p>编辑并添加用户信息</p>
 <s:actionerror />
-<s:form action="doAddUser" namespace="/sys" method="post">
+<s:form action="doUpdateUser" namespace="/sys" method="post">
 	<div align="center">
 	<table>
+
 		<tr>
 			<td><label>用户名：</label></td>
-			<td><s:textfield name="user.userName" /></td>
-			<td><label>员工：</label></td>
-			<td><s:select name="user.employee.id" list="empList" listKey="id" listValue="name" /></td>
-		</tr>
-		<tr>
+			<td><label><s:property value="user.userName"/></label></td>
 			<td><label>密码：</label></td>
-			<td><s:password name="user.userPass" /></td>
-			<td><label>重复密码：</label></td>
-			<td><s:password name="pwdRepeat" /></td>
+			<td><label>********</label></td>
 		</tr>
 		<tr>
 			<td colspan="1"><label>权限：</label></td>
 			<td colspan="3"><label>&nbsp;</label></td>
 		</tr>
-
 		<tr>
 			<td colspan="4"><s:iterator value="roleList" status="stat" id="role">
 				<s:checkbox name="user.roles[%{#stat.index}].id" value="false" fieldValue="%{#role.id}" />
@@ -46,7 +40,12 @@
 			</s:iterator></td>
 		</tr>
 		<tr>
-			<td colspan="4"><s:submit value="提交" /></td>
+			<td colspan="4"><s:hidden name="operation" /><s:hidden name="user.id" /> <s:submit value="更新" id="updateUserRole"
+				onclick="executOperations(this.id)" /><s:if test="user.status==1">
+				<s:submit value="禁用" id="disableUser" onclick="executOperations(this.id)" />
+			</s:if><s:else>
+				<s:submit value="启用" id="enableUser" onclick="executOperations(this.id)" />
+			</s:else> <s:submit value="重置密码" id="resetPwd" onclick="executOperations(this.id)" /></td>
 		</tr>
 	</table>
 	</div>
