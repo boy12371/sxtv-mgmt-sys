@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.vms.db.bean">
+	<class
+		name="Audiencescore"
+		table="audiencescore"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<property
+			name="audienceID"
+			column="audienceID"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="dateExamine"
+			column="dateExamine"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="result"
+			column="result"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="comments"
+			column="comments"
+			type="string"
+			not-null="false"
+			length="512"
+		/>
+		<many-to-one
+			name="vedioID"
+			column="vedioID"
+			class="Vediotape"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="audienceID"
+			column="audienceID"
+			class="Audience"
+			not-null="true"
+		>
+		</many-to-one>
+
+	</class>	
+</hibernate-mapping>
