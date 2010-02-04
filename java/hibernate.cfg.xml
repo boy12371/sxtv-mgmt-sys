@@ -3,13 +3,13 @@
 	<session-factory>
 		<!-- local connection properties -->
 		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost:32506/sxtvdb
+			jdbc:mysql://localhost:3306/sxtvdb
 		</property>
 		<property name="hibernate.connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">123</property>
+		<property name="hibernate.connection.password">root</property>
 		<!-- property name="hibernate.connection.pool_size"></property -->
 		<!-- dialect for MySQL -->
 		<property name="dialect">
