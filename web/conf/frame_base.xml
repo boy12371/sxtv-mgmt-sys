@@ -10,7 +10,7 @@
 		
 		<Module id="tapeExam" name="影带打分" url="">
 			<ModuleItem id="exam" name="待打分" url="/tv/examine/toUnExaminedTapes.action"/>
-			<ModuleItem id="examView" name="打分记录" url="http://www.google.com"/> 
+			<ModuleItem id="examView" name="打分记录" url="/tv/examine/toExaminedTapes.action"/> 
 		</Module>
 		
 		<Module id="tapeAudit" name="影带审看" url="">
