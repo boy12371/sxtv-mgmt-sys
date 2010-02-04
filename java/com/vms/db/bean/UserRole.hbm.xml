@@ -4,32 +4,12 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="UserRole"
-		table="user_role"
-	>
+	<class name="UserRole" table="user_role">
 		<meta attribute="sync-DAO">false</meta>
 		<composite-id name="Id" class="UserRolePK">
-			<key-many-to-one
-				name="Roleid"
-				class="Role"
-				column="roleid"
-			/>
-			<key-many-to-one
-				name="Userid"
-				class="User"
-				column="userid"
-			/>
+			<key-many-to-one name="Roleid" class="Role"	column="roleid"/>
+			<key-many-to-one name="Userid" class="User"	column="userid"/>
 		</composite-id>
-
-		<property
-			name="Comments"
-			column="comments"
-			type="string"
-			not-null="true"
-			length="512"
-		/>
-
-
+		<property name="Comments" column="comments"	type="string" not-null="true" length="512"/>
 	</class>	
 </hibernate-mapping>

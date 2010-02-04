@@ -1,5 +1,5 @@
 function initEmployeeDataTable() {
-	
+
 	var formatUrl = function(elCell, oRecord, oColumn, sData) {
 		var href = "<a href='./sys/toUpdateEmployee.action?employee.id=";
 		href += sData;
@@ -22,74 +22,74 @@ function initEmployeeDataTable() {
 		}
 	}
 	var formatComments = function(elCell, oRecord, oColumn, sData) {
-		sData =sData.substring(0,13);
-		elCell.innerHTML=sData;
+		sData = sData.substring(0, 13);
+		elCell.innerHTML = sData;
 	}
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
-		key :"id",
-		label :"编号",
-		sortable :true,
-		formatter :formatUrl
-	}, {
-		key :"name",
-		label :"姓名",
-		sortable :true
-	}, {
-		key :"gender",
-		label :"性别",
-		sortable :true,
-		formatter :formatGender
-	}, {
-		key :"contractDate",
-		label :"入职日期",
-		sortable :true,
-		formatter :formatDate
-	}, {
-		key :"birthday",
-		label :"生日",
-		sortable :true,
-		formatter :formatDate
-	}, {
-		key :"tel",
-		label :"电话"
-	}, {
-		key :"comments",
-		label :"备注",
-		formatter: formatComments
-	} ];
+				key : "id",
+				label : "编号",
+				sortable : true,
+				formatter : formatUrl
+			}, {
+				key : "name",
+				label : "姓名",
+				sortable : true
+			}, {
+				key : "gender",
+				label : "性别",
+				sortable : true,
+				formatter : formatGender
+			}, {
+				key : "contractDate",
+				label : "入职日期",
+				sortable : true,
+				formatter : formatDate
+			}, {
+				key : "birthday",
+				label : "生日",
+				sortable : true,
+				formatter : formatDate
+			}, {
+				key : "tel",
+				label : "电话"
+			}, {
+				key : "comments",
+				label : "备注",
+				formatter : formatComments
+			}];
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource("/tv/sys/getEmployees.action?");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
 	myDataSource.responseSchema = {
-		resultsList :"records",
-		fields : [ "id", "name", "gender", "contractDate", "birthday", "tel",
-				"comments" ],
+		resultsList : "records",
+		fields : ["id", "name", "gender", "contractDate", "birthday", "tel",
+				"comments"],
 		metaFields : {
-			totalRecords :"totalRecords" // Access to value in the server
-											// response
-	}
+			totalRecords : "totalRecords" // Access to value in the server
+			// response
+		}
 	};
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=id&dir=asc&startIndex=0&results=10", // Initial
-																	// request
-																	// for first
-																	// page of
-																	// data
-		dynamicData :true, // Enables dynamic server-driven data
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=10", // Initial
+		// request
+		// for first
+		// page of
+		// data
+		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
-			key :"id",
-			dir :YAHOO.widget.DataTable.CLASS_ASC
+			key : "id",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator( {
-			rowsPerPage :10
-		})
-	// Enables pagination
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 10
+				})
+		// Enables pagination
 	};
 
 	// DataTable instance
@@ -104,11 +104,10 @@ function initEmployeeDataTable() {
 	}
 
 	return {
-		ds :myDataSource,
-		dt :myDataTable
+		ds : myDataSource,
+		dt : myDataTable
 	};
 }
-
 
 function initUserDataTable() {
 	var formatUrl = function(elCell, oRecord, oColumn, sData) {
@@ -117,70 +116,70 @@ function initUserDataTable() {
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	};
-	
-	
+
 	var formatStatus = function(elCell, oRecord, oColumn, sData) {
-		if(sData==0){
-			elCell.innerHTML="<span>禁用</span>";
-		}else{
-			elCell.innerHTML="<span>正常</span>";
+		if (sData == 0) {
+			elCell.innerHTML = "<span>禁用</span>";
+		} else {
+			elCell.innerHTML = "<span>正常</span>";
 		}
-		
+
 	}
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
-		key :"id",
-		label :"编号",
-		sortable :true,
-		formatter :formatUrl
-	}, {
-		key :"userName",
-		label :"用户名",
-		sortable :true
-	}, {
-		key :"userPass",
-		label :"密码"
-	}, {
-		key :"status",
-		label :"状态",
-		sortable :true,
-		formatter :formatStatus
-	}, {
-		key :"employee.name",
-		label :"员工"
-	}
-	];
+				key : "id",
+				label : "编号",
+				sortable : true,
+				formatter : formatUrl
+			}, {
+				key : "userName",
+				label : "用户名",
+				sortable : true
+			}, {
+				key : "userPass",
+				label : "密码"
+			}, {
+				key : "status",
+				label : "状态",
+				sortable : true,
+				formatter : formatStatus
+			}, {
+				key : "employee.name",
+				label : "员工"
+			}];
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource("/tv/sys/getUsers.action?");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
 	myDataSource.responseSchema = {
-		resultsList :"records",
-		fields : [ "id", "userName", "userPass", "status",{key:"employee.name"} ],
+		resultsList : "records",
+		fields : ["id", "userName", "userPass", "status", {
+					key : "employee.name"
+				}],
 		metaFields : {
-			totalRecords :"totalRecords" // Access to value in the server
-											// response
-	}
+			totalRecords : "totalRecords" // Access to value in the server
+			// response
+		}
 	};
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=id&dir=asc&startIndex=0&results=10", // Initial
-																	// request
-																	// for first
-																	// page of
-																	// data
-		dynamicData :true, // Enables dynamic server-driven data
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=10", // Initial
+		// request
+		// for first
+		// page of
+		// data
+		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
-			key :"id",
-			dir :YAHOO.widget.DataTable.CLASS_ASC
+			key : "id",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator( {
-			rowsPerPage :10
-		})
-	// Enables pagination
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 10
+				})
+		// Enables pagination
 	};
 
 	// DataTable instance
@@ -195,14 +194,23 @@ function initUserDataTable() {
 	}
 
 	return {
-		ds :myDataSource,
-		dt :myDataTable
+		ds : myDataSource,
+		dt : myDataTable
 	};
 }
 
-function executOperations(obj){
-	var form =document.forms[0];
-	form.operation.value=obj;
-	form.submit();
-	
+function executOperations(obj) {
+	var form = document.forms[0];
+	form.operation.value = obj;
+	if (obj == "disableEmp") {
+		var confirm = window.confirm("注销此员工后将同时禁用其系统用户，确定吗？");
+		if (confirm) {
+			form.submit();
+		} else {
+			return;
+		}
+	} else {
+		form.submit();
+	}
+
 }

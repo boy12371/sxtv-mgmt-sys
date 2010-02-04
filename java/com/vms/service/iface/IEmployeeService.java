@@ -43,4 +43,15 @@ public interface IEmployeeService {
 	List<Employee> findAllEmployees() throws Exception;
 	
 	List<Employee> findAllUnassignedEmployees() throws Exception;
+	
+
+	
+	/***
+	 * 注销或启用员工， 此员工关联系统用户将同时禁用或启用.
+	 * @param id 
+	 * @param isEnable true=Enable false=Disable 
+	 * @return
+	 * @throws Exception
+	 */
+	boolean employeeEnableOrDisable(int id, boolean isEnable) throws Exception;
 }

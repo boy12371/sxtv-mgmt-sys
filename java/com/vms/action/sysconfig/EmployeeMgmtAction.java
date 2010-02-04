@@ -29,6 +29,7 @@ public class EmployeeMgmtAction extends BaseAction {
 	private EmployeeVO vEmployee;
 	private Employee employee;
 	private JSONDataTable table;
+	private String operation;
 
 	public String toEmployees() throws Exception {
 		return this.SUCCESS;
@@ -63,7 +64,12 @@ public class EmployeeMgmtAction extends BaseAction {
 		vEmployee = BeanConvert.convertBean(employee);
 
 		try {
-			employeeService.updateEmployee(vEmployee);
+			if("updateEmp".equals(operation)){
+				employeeService.updateEmployee(vEmployee);	
+			}else{
+				employeeService.employeeEnableOrDisable(vEmployee.getId(), "enableEmp".equals(operation)?true:false);
+			}
+			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			this.addActionError("更新失败");

@@ -36,8 +36,9 @@
 		
 		<Module id="userMgmt" name="用户管理" url="">
 			<ModuleItem id="employeeMgmt" name="员工-用户" url="/tv/sys/toEmployees.action"/>
+			<ModuleItem id="employeeAdd" name="添加员工" url="/tv/sys/toAddEmployee.action"/>
 			<ModuleItem id="userAdd" name="创建用户" url="/tv/sys/toAddUser.action"/>
-			<ModuleItem id="permission" name="权限管理" url="/vmgui/overview/consumerVmListAjax.action?listLevel=APP_MACHINES"/>
+			<ModuleItem id="permission" name="权限管理" url="#"/>
 		</Module>
 		
 		<Module id="sysConfig" name="系统设置" url="">

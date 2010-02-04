@@ -2,11 +2,14 @@ package com.vms.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.vms.beans.EmployeeVO;
 import com.vms.db.bean.Employee;
+import com.vms.db.bean.User;
 import com.vms.db.dao.EmployeeDAO;
 import com.vms.db.dao.iface.IEmployeeDAO;
 import com.vms.service.iface.IEmployeeService;
@@ -92,6 +95,24 @@ public class EmployeeService implements IEmployeeService {
 		return unassigned;
 	}
 
+	
+	
+	@Override
+	public boolean employeeEnableOrDisable(int id, boolean isEnable)
+			throws Exception {
+		Employee emp = (Employee) employeeDAO.getObject(clz, id);
+		emp.setStatus(isEnable?1:0);
+		Set<User> empUser  =  emp.getUsers();
+		if(!empUser.isEmpty()){
+			Iterator<User> it  = empUser.iterator();
+			while (it.hasNext()) {
+				User u = it.next();
+				u.setStatus(isEnable?1:0);
+			}
+		}
+		employeeDAO.updateObject(emp);
+		return true;
+	}
 	public IEmployeeDAO getEmployeeDAO() {
 		return employeeDAO;
 	}
@@ -99,5 +120,11 @@ public class EmployeeService implements IEmployeeService {
 	public void setEmployeeDAO(IEmployeeDAO employeeDAO) {
 		this.employeeDAO = employeeDAO;
 	}
+
+
+
+	
+
+
 
 }

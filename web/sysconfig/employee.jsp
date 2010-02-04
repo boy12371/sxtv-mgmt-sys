@@ -10,10 +10,14 @@
 <title>员工管理</title>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 
 </head>
@@ -23,7 +27,7 @@
 
 <h1>员工信息</h1>
 <p>编辑并更新员工信息</p>
-<s:actionerror/>
+<s:actionerror />
 <s:form action="doUpdateEmployee" namespace="/sys" method="post">
 	<div align="center">
 	<table>
@@ -35,21 +39,33 @@
 		</tr>
 		<tr>
 			<td><label>出生日期：</label></td>
-			<td><sx:datetimepicker name="employee.birthday" displayFormat="yyyy-MM-dd"  /></td>
+			<td><sx:datetimepicker name="employee.birthday" displayFormat="yyyy-MM-dd" /></td>
 			<td><label>电话：</label></td>
 			<td><s:textfield name="employee.tel" /></td>
 		</tr>
 		<tr>
 			<td><label>入职日期：</label></td>
-			<td><sx:datetimepicker name="employee.contractDate" displayFormat="yyyy-MM-dd"/></td>
+			<td><sx:datetimepicker name="employee.contractDate" displayFormat="yyyy-MM-dd" /></td>
 
 			<td><label>备注：</label></td>
 			<td><s:textarea name="employee.comments" cols="20" rows="2"></s:textarea></td>
 		</tr>
 
 		<tr>
-			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child"> <s:submit value="更新" />
-			</span> </span></td>
+			<td colspan="4" align="center">
+				<s:hidden name="operation" /> 
+				<span id="go" class="yui-button yui-push-button">
+					<span class="first-child"> 
+					<s:submit id="updateEmp" value="更新" onclick="executOperations(this.id);" />
+					<s:if test="employee.status==1">
+						<s:submit id="disableEmp" value="注销" onclick="executOperations(this.id);" />
+					</s:if><s:else>
+						<s:submit id="enableEmp" value="启用" onclick="executOperations(this.id);" />
+					</s:else> 
+					
+					</span> 
+				</span>
+			</td>
 		</tr>
 	</table>
 	</div>
@@ -63,7 +79,7 @@
 				<td><label>用户名：</label></td>
 				<td><s:property value="userName" /></td>
 				<td><label>密码：</label></td>
-				<td><s:property value="userPass" /></td>
+				<td>*******</td>
 			</tr>
 		</table>
 		</div>

@@ -40,10 +40,14 @@ public class Test {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"applicationContext.xml");
 
-		IUserService service = (IUserService) ctx.getBean("userService");
-		List<User> list  = service .findAllUser(0, 10, User.PROP_ID, true);
+		IEmployeeService service = (IEmployeeService) ctx.getBean("employeeService");
+		List<Employee> list = service.findAllEmployees();
+		
 		System.out.println(list.size());
-		System.out.println(list.get(0).getEmployee().getName());
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getName()+"/ NO. "+list.get(i).getId());
+		}
+		
 
 	}
 

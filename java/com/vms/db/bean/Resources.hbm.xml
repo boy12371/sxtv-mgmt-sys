@@ -4,43 +4,19 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="Resources"
-		table="resources"
-	>
+	<class name="Resources" table="resources">
 		<meta attribute="sync-DAO">false</meta>
-		<id
-			name="Id"
-			type="integer"
-			column="id"
-		>
+		<id	name="Id" type="integer" column="id">
 			<generator class="identity"/>
 		</id>
 
-		<property
-			name="Url"
-			column="url"
-			type="string"
-			not-null="true"
-			length="512"
-		/>
-		<property
-			name="Comments"
-			column="comments"
-			type="string"
-			not-null="true"
-			length="512"
-		/>
+		<property name="Url" column="url" type="string"	not-null="true"	length="512"/>
+		<property name="Comments" column="comments"	type="string" not-null="true" length="512"/>
 	
-		<set
-			name="Roles"
-			table="role_resource"
-			cascade="all"
-		>
+		<set name="Roles" table="role_resource" cascade="all">
 			<key column="resourceid"/>
 			<many-to-many column="roleid" class="Role"/>
 		</set>
-
 
 	</class>	
 </hibernate-mapping>

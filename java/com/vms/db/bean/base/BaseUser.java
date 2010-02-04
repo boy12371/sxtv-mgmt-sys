@@ -74,7 +74,7 @@ public abstract class BaseUser  implements Serializable {
 	// fields
 	private java.lang.String userName;
 	private java.lang.String userPass;
-	private java.lang.Integer status;
+	private java.lang.Integer status=1;
 
 	// many to one
 	private Employee employee;

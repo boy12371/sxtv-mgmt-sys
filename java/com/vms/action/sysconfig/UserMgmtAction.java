@@ -1,6 +1,8 @@
 package com.vms.action.sysconfig;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -28,6 +30,7 @@ public class UserMgmtAction extends BaseAction {
 	private IRoleService roleService;
 
 	private User user;
+	private List<Role> roleList;
 	private JSONDataTable table;
 	private String operation;
 
@@ -63,6 +66,14 @@ public class UserMgmtAction extends BaseAction {
 	public String toUpdateUser() throws Exception {
 		try {
 			user = userService.getUserById(user.getId());
+			Set<Role> r = user.getRoles();
+			Iterator<Role> it = r.iterator();
+			while (it.hasNext()) {
+				Role role = it.next();
+				System.out.println(role.getId()+"==="+role.getName());
+				
+			}
+			
 		} catch (Exception e) {
 			logger.error(e);
 			return INPUT;
@@ -138,4 +149,10 @@ public class UserMgmtAction extends BaseAction {
 	public void setOperation(String operation) {
 		this.operation = operation;
 	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+
+
 }
