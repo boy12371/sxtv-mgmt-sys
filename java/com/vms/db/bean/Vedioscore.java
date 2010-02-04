@@ -20,13 +20,35 @@ public class Vedioscore extends BaseVedioscore {
 	/**
 	 * Constructor for required fields
 	 */
-	public Vedioscore(java.lang.Integer id, com.vms.db.bean.Vediotape vedioID, java.lang.Float storyScore,
-			java.lang.Float techScore, java.lang.Float performScore, java.lang.Float innovateScore,
-			java.lang.Float score, java.lang.Integer audiendceVote, java.lang.String award, java.lang.Float precision,
-			java.lang.String purchase) {
+	public Vedioscore (
+		java.lang.Integer id,
+		com.vms.db.bean.Vediotape vedioID,
+		com.vms.db.bean.User examiner,
+		java.lang.Float storyScore,
+		java.lang.Float techScore,
+		java.lang.Float performScore,
+		java.lang.Float innovateScore,
+		java.lang.Float score,
+		java.lang.Integer audiendceVote,
+		java.lang.String award,
+		java.lang.Float precision,
+		java.lang.String purchase,
+		java.util.Date dateExamine) {
 
-		super(id, vedioID, storyScore, techScore, performScore, innovateScore, score, audiendceVote, award, precision,
-				purchase);
+		super (
+			id,
+			vedioID,
+			examiner,
+			storyScore,
+			techScore,
+			performScore,
+			innovateScore,
+			score,
+			audiendceVote,
+			award,
+			precision,
+			purchase,
+			dateExamine);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */
