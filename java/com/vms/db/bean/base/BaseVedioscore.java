@@ -2,9 +2,6 @@ package com.vms.db.bean.base;
 
 import java.io.Serializable;
 
-import com.vms.db.bean.Vedioscore;
-import com.vms.db.bean.Vediotape;
-
 
 /**
  * This is an object that contains data related to the vedioscore table.
@@ -18,17 +15,19 @@ import com.vms.db.bean.Vediotape;
 public abstract class BaseVedioscore  implements Serializable {
 
 	public static String REF = "Vedioscore";
-	public static String PROP_VEDIO_I_D = "vedioID";
 	public static String PROP_INNOVATE_SCORE = "innovateScore";
+	public static String PROP_EXAMINER = "examiner";
 	public static String PROP_COMMENTS = "comments";
+	public static String PROP_DATE_EXAMINE = "dateExamine";
+	public static String PROP_AUDIENDCE_VOTE = "audiendceVote";
+	public static String PROP_TECH_SCORE = "techScore";
+	public static String PROP_PERFORM_SCORE = "performScore";
+	public static String PROP_VEDIO_I_D = "vedioID";
 	public static String PROP_PURCHASE = "purchase";
 	public static String PROP_PRECISION = "precision";
-	public static String PROP_AUDIENDCE_VOTE = "audiendceVote";
 	public static String PROP_ID = "id";
-	public static String PROP_SCORE = "score";
-	public static String PROP_PERFORM_SCORE = "performScore";
-	public static String PROP_TECH_SCORE = "techScore";
 	public static String PROP_STORY_SCORE = "storyScore";
+	public static String PROP_SCORE = "score";
 	public static String PROP_AWARD = "award";
 
 
@@ -51,6 +50,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	public BaseVedioscore (
 		java.lang.Integer id,
 		com.vms.db.bean.Vediotape vedioID,
+		com.vms.db.bean.User examiner,
 		java.lang.Float storyScore,
 		java.lang.Float techScore,
 		java.lang.Float performScore,
@@ -59,10 +59,12 @@ public abstract class BaseVedioscore  implements Serializable {
 		java.lang.Integer audiendceVote,
 		java.lang.String award,
 		java.lang.Float precision,
-		java.lang.String purchase) {
+		java.lang.String purchase,
+		java.util.Date dateExamine) {
 
 		this.setId(id);
 		this.setVedioID(vedioID);
+		this.setExaminer(examiner);
 		this.setStoryScore(storyScore);
 		this.setTechScore(techScore);
 		this.setPerformScore(performScore);
@@ -72,6 +74,7 @@ public abstract class BaseVedioscore  implements Serializable {
 		this.setAward(award);
 		this.setPrecision(precision);
 		this.setPurchase(purchase);
+		this.setDateExamine(dateExamine);
 		initialize();
 	}
 
@@ -94,10 +97,12 @@ public abstract class BaseVedioscore  implements Serializable {
 	private java.lang.String award;
 	private java.lang.Float precision;
 	private java.lang.String purchase;
+	private java.util.Date dateExamine;
 	private java.lang.String comments;
 
 	// many to one
 	private com.vms.db.bean.Vediotape vedioID;
+	private com.vms.db.bean.User examiner;
 
 
 
@@ -277,6 +282,23 @@ public abstract class BaseVedioscore  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: dateExamine
+	 */
+	public java.util.Date getDateExamine () {
+		return dateExamine;
+	}
+
+	/**
+	 * Set the value related to the column: dateExamine
+	 * @param dateExamine the dateExamine value
+	 */
+	public void setDateExamine (java.util.Date dateExamine) {
+		this.dateExamine = dateExamine;
+	}
+
+
+
+	/**
 	 * Return the value associated with the column: comments
 	 */
 	public java.lang.String getComments () {
@@ -306,6 +328,23 @@ public abstract class BaseVedioscore  implements Serializable {
 	 */
 	public void setVedioID (com.vms.db.bean.Vediotape vedioID) {
 		this.vedioID = vedioID;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: examiner
+	 */
+	public com.vms.db.bean.User getExaminer () {
+		return examiner;
+	}
+
+	/**
+	 * Set the value related to the column: examiner
+	 * @param examiner the examiner value
+	 */
+	public void setExaminer (com.vms.db.bean.User examiner) {
+		this.examiner = examiner;
 	}
 
 

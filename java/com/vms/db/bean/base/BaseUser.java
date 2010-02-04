@@ -24,11 +24,11 @@ import com.vms.db.bean.Vediotape;
 public abstract class BaseUser  implements Serializable {
 
 	public static String REF = "User";
-	public static String PROP_STATUS = "Status";
+	public static String PROP_STATUS = "status";
 	public static String PROP_ID = "id";
-	public static String PROP_USER_NAME = "UserName";
-	public static String PROP_EMPLOYEE = "Employee";
-	public static String PROP_USER_PASS = "UserPass";
+	public static String PROP_USER_NAME = "userName";
+	public static String PROP_EMPLOYEE = "employee";
+	public static String PROP_USER_PASS = "userPass";
 
 
 	// constructors
