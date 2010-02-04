@@ -8,9 +8,19 @@
 			<result>/examine/unExaminedList.jsp</result>
 		</action>
 		
+		<action name="toExaminedTapes" class="examineMgmt" method="toExaminedTapes">
+			<result>/examine/examinedList.jsp</result>
+		</action>
+		
 		<action name="getUnExaminedTapes" class="examineMgmt" method="getUnExaminedTapes">
 			<result type="json">
 				<param name="root">unExaminedTable</param>
+			</result>
+		</action>
+		
+		<action name="getExaminedTapes" class="examineMgmt" method="getExaminedTapes">
+			<result type="json">
+				<param name="root">examinedTable</param>
 			</result>
 		</action>
 	</package>
