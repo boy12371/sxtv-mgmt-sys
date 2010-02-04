@@ -21,6 +21,7 @@ public class BasicLayout extends BaseAction{
 
 	public void setUserInfo(SessionUserInfo userInfo) {
 		this.userInfo = userInfo;
+		super.setUserInfo(userInfo);
 	}
 
 	private List<TabElementBean> tabs;
