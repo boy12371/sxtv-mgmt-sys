@@ -17,35 +17,43 @@ function initDataTable() {
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
-		key :"name",
+		key :"vedioName",
 		label :"影带名称",
 		formatter :formatUrl
 	}, {
-		key :"subject",
-		label :"栏目"		
+		key :"storyScore",
+		label :"情节",
+		sortable :true
 	}, {
-		key :"topic",
-		label :"题材"		
+		key :"techScore",
+		label :"技术",
+		sortable :true
 	}, {
-		key :"dateComing",
-		label :"收带日期",
+		key :"performScore",
+		label :"表演",
+		sortable :true
+	}, {
+		key :"innovateScore",
+		label :"创新",
+		sortable :true
+	}, {
+		key :"score",
+		label :"综合",
+		sortable :true
+	}, {
+		key :"dateExamine",
+		label :"打分时间",
 		sortable :true,
 		formatter :formatDate
-	}, {
-		key :"status",
-		label :"状态"
-	}, {
-		key :"company",
-		label :"公司",
-	}, ];
+	}];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getUnExaminedTapes.action?");
+	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getExaminedTapes.action?");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "name", "subject", "topic", "dateComing", "status", "company" ],
+		fields : [ "vedioName", "storyScore", "techScore", "performScore", "innovateScore", "score", "dateExamine"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -53,10 +61,10 @@ function initDataTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=10", // Initial
+		initialRequest :"sort=dateExamine&dir=asc&startIndex=0&results=10", // Initial
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
-			key :"dateComing",
+			key :"dateExamine",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator( {rowsPerPage :10})
@@ -65,8 +73,7 @@ function initDataTable() {
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
-			myDataSource, myConfigs);
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs, myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
