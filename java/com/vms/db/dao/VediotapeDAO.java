@@ -29,6 +29,14 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		return tapes;
 	}
 	
+	public List<Vediotape> findVedioesByStatus(Status status ,int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception {
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put(Vediotape.PROP_STATUS, status);
+		
+		List<Vediotape> tapes = this.findObjectByFields(clz,conditions,startIndex,endIndex,propertyName,ascending);
+		return tapes;
+	}
+	
 	public int getVedioTotalCountByStatus(Status status) throws Exception {
 		return this.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS, status);
 	}

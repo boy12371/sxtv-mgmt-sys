@@ -11,15 +11,6 @@ import com.vms.db.dao.iface.IVedioscoreDAO;
  */
 public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedioscoreDAO {
 
-	private Class clz = com.vms.db.bean.Vedioscore.class;	
-
-	public Vedioscore getUniqueVedioscore(String propertyName, Object value) throws Exception {
-		
-		return null;
-	}
-
-	public void saveVedioscores(List<Vedioscore> vedios) throws Exception {
-		
-	}
+	public static Class clz = com.vms.db.bean.Vedioscore.class;	
 
 }
