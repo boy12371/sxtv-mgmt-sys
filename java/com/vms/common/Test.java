@@ -2,8 +2,10 @@ package com.vms.common;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.hibernate.Criteria;
@@ -13,8 +15,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.vms.beans.EmployeeVO;
 import com.vms.db.bean.Employee;
+import com.vms.db.bean.Role;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
+import com.vms.db.bean.UserRole;
+import com.vms.db.bean.UserRolePK;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.bean.base.BaseStatus;
 import com.vms.db.dao.AuditingDAO;
@@ -26,6 +31,7 @@ import com.vms.service.StatusService;
 import com.vms.service.VediotapeService;
 import com.vms.service.iface.IEmployeeService;
 import com.vms.service.iface.IStatusService;
+import com.vms.service.iface.IUserRoleService;
 import com.vms.service.iface.IUserService;
 import com.vms.service.iface.IVediotapeService;
 
@@ -37,16 +43,20 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
-
-		IEmployeeService service = (IEmployeeService) ctx.getBean("employeeService");
-		List<Employee> list = service.findAllEmployees();
+//		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+//				"applicationContext.xml");
+//
+//		IUserRoleService service = (IUserRoleService) ctx.getBean("userRoleService");
+//		IUserService userService = (IUserService) ctx.getBean("userService");
 		
-		System.out.println(list.size());
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getName()+"/ NO. "+list.get(i).getId());
-		}
+		UserRolePK pk =new UserRolePK(new Role(1),new User(1));		
+		UserRolePK pk2 =new UserRolePK(new Role(2),new User(1));
+		
+		UserRole ur =new UserRole(pk);
+		UserRole ur2 =new UserRole(pk2);
+		
+		System.out.println(ur.equals(ur2));
+		
 		
 
 	}

@@ -12,7 +12,7 @@
 			not-null="true" length="50" />
 		<property name="userPass" column="userPass" type="string"
 			not-null="true" length="128" />
-		<property name="Status" column="status" type="integer"
+		<property name="status" column="status" type="integer"
 			not-null="true" length="10" />
 		<many-to-one name="employee" column="employee" class="Employee"
 			not-null="true" lazy="false">

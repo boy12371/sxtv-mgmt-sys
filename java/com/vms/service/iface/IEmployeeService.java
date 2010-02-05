@@ -53,5 +53,5 @@ public interface IEmployeeService {
 	 * @return
 	 * @throws Exception
 	 */
-	boolean employeeEnableOrDisable(int id, boolean isEnable) throws Exception;
+	boolean enableOrDisableEmployee(int id, boolean isEnable) throws Exception;
 }

@@ -30,7 +30,7 @@ public class UserMgmtAction extends BaseAction {
 	private IRoleService roleService;
 
 	private User user;
-	private List<Role> roleList;
+	private List<Integer> roleIDs;
 	private JSONDataTable table;
 	private String operation;
 
@@ -39,8 +39,8 @@ public class UserMgmtAction extends BaseAction {
 	}
 
 	public String doAddUser() throws Exception {
-		try {
-			userService.createUser(user);
+		try {			
+			userService.createUser(user,roleIDs);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			this.addActionError("用户创建失败");
@@ -83,13 +83,19 @@ public class UserMgmtAction extends BaseAction {
 	}
 
 	public String doUpdateUser() throws Exception {
+		boolean succeed=false;
 		try {
-			userService.updateUser(operation, user);
+			 succeed = userService.updateUser(operation, user, roleIDs);
 		} catch (Exception e) {
 			logger.error(e);
+			this.addActionError("操作失败.");
 			return INPUT;
 		}
-
+		if(!succeed){
+			this.addActionError("操作失败.");
+			return INPUT;
+		}
+		this.addActionMessage("操作成功");
 		return SUCCESS;
 	}
 
@@ -150,9 +156,15 @@ public class UserMgmtAction extends BaseAction {
 		this.operation = operation;
 	}
 
-	public void setRoleList(List<Role> roleList) {
-		this.roleList = roleList;
+	public List getRoleIDs() {
+		return roleIDs;
 	}
+
+	public void setRoleIDs(List roleIDs) {
+		this.roleIDs = roleIDs;
+	}
+
+	
 
 
 }

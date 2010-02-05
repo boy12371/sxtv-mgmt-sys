@@ -21,7 +21,6 @@ public class UserRole extends BaseUserRole {
 	 * Constructor for required fields
 	 */
 	public UserRole(UserRolePK id, java.lang.String comments) {
-
 		super(id, comments);
 	}
 

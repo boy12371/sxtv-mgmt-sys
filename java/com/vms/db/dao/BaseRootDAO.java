@@ -24,7 +24,6 @@ import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IBaseRootDAO;
 
 public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
-	private SessionFactory sessionFactory;
 
 	@Override
 	public void deleteObject(Object object) throws Exception {

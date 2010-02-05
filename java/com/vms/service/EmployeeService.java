@@ -98,7 +98,7 @@ public class EmployeeService implements IEmployeeService {
 	
 	
 	@Override
-	public boolean employeeEnableOrDisable(int id, boolean isEnable)
+	public boolean enableOrDisableEmployee(int id, boolean isEnable)
 			throws Exception {
 		Employee emp = (Employee) employeeDAO.getObject(clz, id);
 		emp.setStatus(isEnable?1:0);

@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/sysconfig/js/employee.js"></script>
 </head>
 <body>
 
@@ -39,35 +40,34 @@
 		</tr>
 		<tr>
 			<td colspan="4">
-			<s:iterator value="roleList" var="role" status="st">
-				<s:iterator value="user.roles" var="r">
-					<s:if test="%[#role.id==r.id]">
-						==
-										
-					</s:if>
-					<s:else>
-						**
-					</s:else>
-						
-			</s:iterator>
 				
+				<s:iterator value="roleList" var="role" status="st">
+					<s:set value="false" var="cbxState" />					
+					<s:iterator value="user.roles" var="r">											
+						<s:if test="#role.id == #r.id">
+							<s:set value="true" var="cbxState" />
+						</s:if>													
+					</s:iterator>
 
-			</s:iterator></td>
+				<s:checkbox name="roleIDs" value="#cbxState" fieldValue="%{#role.id}"/><s:property value="#role.name"/><br/>										
+				</s:iterator> 
+			</td>
 
 
 		</tr>
+		
 		<tr>
-			<td colspan="4"><s:iterator value="user.roles" var="r">
-				<s:property value="#r.id" />
-			</s:iterator></td>
-		</tr>
-		<tr>
-			<td colspan="4"><s:hidden name="operation" /><s:hidden name="user.id" /> <s:submit value="更新"
-				id="updateUserRole" onclick="executOperations(this.id)" /><s:if test="user.status==1">
+			<td colspan="4">
+			<s:hidden name="operation" />
+			<s:hidden name="user.id" /> 
+			<s:submit value="更新" id="updateUserRole" onclick="executOperations(this.id)" />
+			<s:if test="user.status==1">
 				<s:submit value="禁用" id="disableUser" onclick="executOperations(this.id)" />
-			</s:if><s:else>
+			</s:if>
+			<s:else>
 				<s:submit value="启用" id="enableUser" onclick="executOperations(this.id)" />
-			</s:else> <s:submit value="重置密码" id="resetPwd" onclick="executOperations(this.id)" /></td>
+			</s:else> 
+			<s:submit value="重置密码" id="resetPwd" onclick="executOperations(this.id)" /></td>
 		</tr>
 	</table>
 	</div>

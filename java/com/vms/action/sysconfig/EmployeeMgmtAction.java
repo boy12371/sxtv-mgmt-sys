@@ -67,7 +67,7 @@ public class EmployeeMgmtAction extends BaseAction {
 			if("updateEmp".equals(operation)){
 				employeeService.updateEmployee(vEmployee);	
 			}else{
-				employeeService.employeeEnableOrDisable(vEmployee.getId(), "enableEmp".equals(operation)?true:false);
+				employeeService.enableOrDisableEmployee(vEmployee.getId(), "enableEmp".equals(operation)?true:false);
 			}
 			
 		} catch (Exception e) {
@@ -125,6 +125,14 @@ public class EmployeeMgmtAction extends BaseAction {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 
 }

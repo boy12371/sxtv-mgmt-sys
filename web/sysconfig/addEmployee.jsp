@@ -25,7 +25,9 @@
 	<table>
 		<tr>
 			<td><label>姓名：</label></td>
-			<td><s:textfield name="employee.name" /></td>
+			<td><s:textfield name="employee.name" />
+				<s:hidden name="employee.status" value="1"/>	
+			</td>
 			<td><label>性别：</label></td>
 			<td><s:select name="employee.gender" list="#{'1':'男','0':'女'}" /></td>
 		</tr>

@@ -1,7 +1,10 @@
 package com.vms.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.db.dao.iface.IUserDAO;
 import com.vms.service.iface.IUserService;
@@ -12,8 +15,17 @@ public class UserService implements IUserService {
 	private Class clz = User.class;
 
 	@Override
-	public void createUser(User user) throws Exception {
+	public void createUser(User user, List<Integer> roles) throws Exception {
 		// TODO Auto-generated method stub
+		Set<Role> userRoles = new HashSet<Role>();
+		if(roles!=null && !roles.isEmpty()){
+			for (int i = 0; i < roles.size(); i++) {
+				Role role =new Role();
+				role.setId(roles.get(i));
+				userRoles.add(role);
+			}
+		}
+		user.setRoles(userRoles);		
 		userDAO.saveObject(user);
 	}
 
@@ -74,7 +86,7 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public boolean updateUser(String operation, User user) throws Exception {
+	public boolean updateUser(String operation, User user, List roleIDs) throws Exception {
 		// TODO Auto-generated method stub
 		if (operation.equals("updateUserRole")) {
 			return updateUserRole(user.getId());

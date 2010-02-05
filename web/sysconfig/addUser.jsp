@@ -40,7 +40,7 @@
 
 		<tr>
 			<td colspan="4"><s:iterator value="roleList" status="stat" id="role">
-				<s:checkbox name="user.roles[%{#stat.index}].id" value="false" fieldValue="%{#role.id}" />
+				<s:checkbox name="roleIDs" value="false" fieldValue="%{#role.id}" />
 				<s:property value="name" />
 				<br />
 			</s:iterator></td>
