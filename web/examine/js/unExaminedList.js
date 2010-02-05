@@ -13,7 +13,7 @@ function initDataTable() {
 			elCell.innerHTML = sData;
 		}
 	};
-	
+
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -36,8 +36,8 @@ function initDataTable() {
 		label :"状态"
 	}, {
 		key :"company",
-		label :"公司",
-	}, ];
+		label :"公司"
+	} ];
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getUnExaminedTapes.action?");
