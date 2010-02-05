@@ -6,14 +6,14 @@ public class Vedioscore extends BaseVedioscore {
 	private static final long serialVersionUID = 1L;
 
 	/* [CONSTRUCTOR MARKER BEGIN] */
-	public Vedioscore() {
+	public Vedioscore () {
 		super();
 	}
 
 	/**
 	 * Constructor for primary key
 	 */
-	public Vedioscore(java.lang.Integer id) {
+	public Vedioscore (java.lang.Integer id) {
 		super(id);
 	}
 
@@ -29,10 +29,9 @@ public class Vedioscore extends BaseVedioscore {
 		java.lang.Float performScore,
 		java.lang.Float innovateScore,
 		java.lang.Float score,
-		java.lang.Integer audiendceVote,
-		java.lang.String award,
+		java.lang.Integer award,
 		java.lang.Float precision,
-		java.lang.String purchase,
+		java.lang.Integer purchase,
 		java.util.Date dateExamine) {
 
 		super (
@@ -44,7 +43,6 @@ public class Vedioscore extends BaseVedioscore {
 			performScore,
 			innovateScore,
 			score,
-			audiendceVote,
 			award,
 			precision,
 			purchase,
@@ -52,5 +50,5 @@ public class Vedioscore extends BaseVedioscore {
 	}
 
 	/* [CONSTRUCTOR MARKER END] */
-
 }
+
