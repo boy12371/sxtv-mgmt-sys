@@ -19,7 +19,6 @@ public abstract class BaseVedioscore  implements Serializable {
 	public static String PROP_EXAMINER = "examiner";
 	public static String PROP_COMMENTS = "comments";
 	public static String PROP_DATE_EXAMINE = "dateExamine";
-	public static String PROP_AUDIENDCE_VOTE = "audiendceVote";
 	public static String PROP_TECH_SCORE = "techScore";
 	public static String PROP_PERFORM_SCORE = "performScore";
 	public static String PROP_VEDIO_I_D = "vedioID";
@@ -56,10 +55,9 @@ public abstract class BaseVedioscore  implements Serializable {
 		java.lang.Float performScore,
 		java.lang.Float innovateScore,
 		java.lang.Float score,
-		java.lang.Integer audiendceVote,
-		java.lang.String award,
+		java.lang.Integer award,
 		java.lang.Float precision,
-		java.lang.String purchase,
+		java.lang.Integer purchase,
 		java.util.Date dateExamine) {
 
 		this.setId(id);
@@ -70,7 +68,6 @@ public abstract class BaseVedioscore  implements Serializable {
 		this.setPerformScore(performScore);
 		this.setInnovateScore(innovateScore);
 		this.setScore(score);
-		this.setAudiendceVote(audiendceVote);
 		this.setAward(award);
 		this.setPrecision(precision);
 		this.setPurchase(purchase);
@@ -93,10 +90,9 @@ public abstract class BaseVedioscore  implements Serializable {
 	private java.lang.Float performScore;
 	private java.lang.Float innovateScore;
 	private java.lang.Float score;
-	private java.lang.Integer audiendceVote;
-	private java.lang.String award;
+	private java.lang.Integer award;
 	private java.lang.Float precision;
-	private java.lang.String purchase;
+	private java.lang.Integer purchase;
 	private java.util.Date dateExamine;
 	private java.lang.String comments;
 
@@ -109,7 +105,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="sequence"
+     *  generator-class="identity"
      *  column="id"
      */
 	public java.lang.Integer getId () {
@@ -214,26 +210,9 @@ public abstract class BaseVedioscore  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: audiendceVote
-	 */
-	public java.lang.Integer getAudiendceVote () {
-		return audiendceVote;
-	}
-
-	/**
-	 * Set the value related to the column: audiendceVote
-	 * @param audiendceVote the audiendceVote value
-	 */
-	public void setAudiendceVote (java.lang.Integer audiendceVote) {
-		this.audiendceVote = audiendceVote;
-	}
-
-
-
-	/**
 	 * Return the value associated with the column: award
 	 */
-	public java.lang.String getAward () {
+	public java.lang.Integer getAward () {
 		return award;
 	}
 
@@ -241,7 +220,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	 * Set the value related to the column: award
 	 * @param award the award value
 	 */
-	public void setAward (java.lang.String award) {
+	public void setAward (java.lang.Integer award) {
 		this.award = award;
 	}
 
@@ -267,7 +246,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	/**
 	 * Return the value associated with the column: purchase
 	 */
-	public java.lang.String getPurchase () {
+	public java.lang.Integer getPurchase () {
 		return purchase;
 	}
 
@@ -275,7 +254,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	 * Set the value related to the column: purchase
 	 * @param purchase the purchase value
 	 */
-	public void setPurchase (java.lang.String purchase) {
+	public void setPurchase (java.lang.Integer purchase) {
 		this.purchase = purchase;
 	}
 
