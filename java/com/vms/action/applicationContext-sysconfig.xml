@@ -18,10 +18,6 @@
 		<property name="subjectService" ref="subjectService" />		
 	</bean>
 	
-	<bean id="examineMgmt" class="com.vms.action.examine.ExamineAction" scope="prototype">
-		<property name="service" ref="vedioscoreService" />
-	</bean>
-	
 	<bean id="userMgmt" class="com.vms.action.sysconfig.UserMgmtAction" scope="prototype">
 		<property name="userService" ref="userService" />
 		<property name="employeeService" ref="employeeService" />
