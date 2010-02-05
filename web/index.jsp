@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <SCRIPT LANGUAGE="JavaScript">
-	window.location="tv/logon/toLogon.action";
+	window.location="/tv/logon/toLogon.action";
 </SCRIPT>
 <body>
 </body>
