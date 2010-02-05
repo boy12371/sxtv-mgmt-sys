@@ -30,9 +30,8 @@
 <br />
 <div id="dynamicdata" align="center"></div>
 
-
-<script type="text/javascript">
-	YAHOO.example.DynamicData = initDataTable()
+<script language="JavaScript">
+	YAHOO.example.DynamicData = initDataTable();
 </script>
 
 </body>
