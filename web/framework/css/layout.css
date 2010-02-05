@@ -7,16 +7,6 @@ ul,li{list-style:none; padding:0; margin:0;}
 	padding:19px 0 0 0;
 	}
 
-
-.topBranding img.logo {
-	display:block;
-	float:left;
-	font-size:0;
-	line-height:0;
-	margin:0 82px 22px 0;
-	padding:7px 0 0;
-}
-
 .tabviewArea{
 	margin-top:-56px;
 }
@@ -73,62 +63,9 @@ ul,li{list-style:none; padding:0; margin:0;}
 	
 .contentIframe{
 	width:960px;
-	height:1050px;
+	height:100%;
 	border:2px solid #B7DDF2;
 	background-color:#EBF4FB;
 	}
-	
-
-	
-.topSearch form{
-	background:url(../images/serch_bg.gif) 0 0 no-repeat;
-	width:249px;
-	height:47px;
-	float:right;
-	padding:17px 108px 0 53px;
-}
-.topSearch form input.txtBox{
-	width:184px;
-	height:15px;
-	border-bottom:#D4D0C8 solid 1px;
-	border-right:#D4D0C8 solid 1px;
-	border-left:#404040 solid 1px;
-	border-top:#404040 solid 1px;
-	background-color:#fff;
-	color:#000;
-	float:left;
-	padding:4px 0 0 14px;
-	font-size:10px;
-	margin:0 0 5px 0;
-	line-height:15px;
-}
-.topSearch form input.go{
-	background:url(../images/btn_go.gif) 0 0 no-repeat;
-	width:36px;
-	height:21px;
-	float:right;
-	font-size:12px;
-	line-height:21px;
-	font-weight:bold;
-	color:#333333;
-	background-color:#0D6C8A;
-	border:none;
-	cursor:pointer;
-	margin:0 0 5px 0;
-}
-.topSearch form a{
-	font-size:11px;
-	line-height:14px;
-	font-weight:bold;
-	color:#D6DF43;
-	background-color:#0D6C8A;
-	float:left;
-	display:block;
-	width:25px;
-	text-decoration:none;
-}
-.topSearch form a:hover{
-	text-decoration:underline;
-}
 	
 	
