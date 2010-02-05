@@ -18,14 +18,12 @@
 			not-null="true" length="12" />
 		<property name="score" column="score" type="java.lang.Float"
 			not-null="true" length="12" />
-		<property name="audiendceVote" column="audiendceVote" type="integer"
+		<property name="award" column="award" type="integer" 
 			not-null="true" length="10" />
-		<property name="award" column="award" type="string" not-null="true"
-			length="128" />
 		<property name="precision" column="precision" type="java.lang.Float"
 			not-null="true" length="12" />
-		<property name="purchase" column="purchase" type="string"
-			not-null="true" length="128" />
+		<property name="purchase" column="purchase" type="integer"
+			not-null="true" length="10" />
 		<property name="dateExamine" column="dateExamine" type="timestamp" 
 			not-null="true" length="19" />
 		<property name="comments" column="comments" type="string"
