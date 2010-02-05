@@ -25,7 +25,7 @@ CREATE TABLE `audience` (
   `gender` int(4) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18446744073709551615 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table audience
@@ -221,16 +221,36 @@ CREATE TABLE `role_resource` (
 
 
 #
+# Source for table scoreweight
+#
+
+DROP TABLE IF EXISTS `scoreweight`;
+CREATE TABLE `scoreweight` (
+  `factor` varchar(50) NOT NULL DEFAULT '',
+  `wieght` float NOT NULL DEFAULT '0',
+  PRIMARY KEY (`factor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Dumping data for table scoreweight
+#
+
+INSERT INTO `scoreweight` VALUES ('innovateScore',0.1);
+INSERT INTO `scoreweight` VALUES ('performScore',0.3);
+INSERT INTO `scoreweight` VALUES ('storyScore',0.4);
+INSERT INTO `scoreweight` VALUES ('techScore',0.2);
+
+#
 # Source for table status
 #
 
 DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status` (
   `statusID` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `comments` varchar(512) CHARACTER SET utf8 NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `comments` varchar(512) NOT NULL,
   PRIMARY KEY (`statusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=ucs2 COMMENT='状态';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='状态';
 
 #
 # Dumping data for table status
@@ -341,22 +361,21 @@ CREATE TABLE `vedioscore` (
   `performScore` float NOT NULL,
   `innovateScore` float NOT NULL,
   `score` float NOT NULL,
-  `audiendceVote` int(11) NOT NULL,
-  `award` varchar(128) NOT NULL,
+  `award` int(11) NOT NULL DEFAULT '0',
   `precision` float NOT NULL,
-  `purchase` varchar(128) NOT NULL,
+  `purchase` int(11) NOT NULL DEFAULT '0',
   `dateExamine` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `comments` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `vedioExaminer` (`examiner`),
   KEY `vedioID` (`vedioID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='评分表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='评分表';
 
 #
 # Dumping data for table vedioscore
 #
 
-INSERT INTO `vedioscore` VALUES (2,'2',2,2.2,3.2,4.2,5.2,14.8,0,'Yes',0,'Yes','2010-01-30',NULL);
+INSERT INTO `vedioscore` VALUES (1,'2',2,24,35,46,56,36,1,0,0,'2010-01-30',NULL);
 
 #
 # Source for table vediotape
@@ -397,8 +416,8 @@ INSERT INTO `vediotape` VALUES ('2','12 Monkey',1,4,1,'2001-12-30','2001-01-31',
 #
 
 ALTER TABLE `audiencescore`
-ADD CONSTRAINT `audiencescore_ibfk_2` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`),
-ADD CONSTRAINT `audiencescore_ibfk_1` FOREIGN KEY (`audienceID`) REFERENCES `audience` (`Id`);
+ADD CONSTRAINT `audiencescore_ibfk_1` FOREIGN KEY (`audienceID`) REFERENCES `audience` (`Id`),
+ADD CONSTRAINT `audiencescore_ibfk_2` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`);
 
 #
 #  Foreign keys for table auditing
