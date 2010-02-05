@@ -26,12 +26,17 @@ body {
 <body class="yui-skin-sam">
 
 <div id="topBranding" class="topBranding">
-<div class="topSearch">
-<img border="0" style="margin-top:-10px;" src="./images/sxtv_logo.png"/>
-<img border="0" style="margin-top:-10px;float:right" src="./images/sxlogo.png"/>
-<img border="0" style="margin-top:-10px;float:right" src="./images/TVlogo.png"/>
-</div>
-
+<table style="margin-top:-10px;width:100%;">
+<tr>
+<td><img border="0" style="" src="./images/sxlogo.png"/></td>
+<td>
+	<div style="float:right">
+	<img border="0" height="40" src="./images/TVlogo.png"/>
+	<img border="0" height="40" src="./images/sxtv_logo.png"/>
+	</div>
+</td>
+</tr>
+</table>
 </div>
 
 <div id="tabView" class="yui-navset tabviewArea">
