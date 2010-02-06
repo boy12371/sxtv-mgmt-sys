@@ -4,41 +4,17 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="Audience"
-		table="audience"
-	>
-		<meta attribute="sync-DAO">false</meta>
-		<id
-			name="id"
-			type="integer"
-			column="id"
-		>
-			<generator class="sequence"/>
+	<class name="Audience" table="audience">
+		<meta attribute="sync-DAO">true</meta>
+		<id name="id" type="integer" column="id">
+			<generator class="identity"/>
 		</id>
 
-		<property
-			name="name"
-			column="name"
-			type="string"
-			not-null="true"
-			length="255"
-		/>
-		<property
-			name="gender"
-			column="gender"
-			type="integer"
-			not-null="false"
-			length="10"
-		/>
-		<property
-			name="comments"
-			column="comments"
-			type="string"
-			not-null="false"
-			length="255"
-		/>
-
+		<property name="name" column="name" type="string" not-null="true" length="255"/>
+		<property name="age" column="age" type="integer" not-null="false" length="10"/>
+		<property name="gender" column="gender" type="integer" not-null="false" length="10"/>
+		<property name="career" column="career" type="string" not-null="false" length="50"/>
+		<property name="comments" column="comments" type="string" not-null="false" length="255"/>
 
 	</class>	
 </hibernate-mapping>
