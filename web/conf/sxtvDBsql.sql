@@ -22,10 +22,12 @@ DROP TABLE IF EXISTS `audience`;
 CREATE TABLE `audience` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
+  `age` int(11) DEFAULT NULL,
   `gender` int(4) DEFAULT NULL,
+  `career` varchar(50) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18446744073709551615 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table audience
@@ -40,7 +42,7 @@ DROP TABLE IF EXISTS `audiencescore`;
 CREATE TABLE `audiencescore` (
   `vedioID` varchar(128) NOT NULL DEFAULT '0',
   `audienceID` int(11) NOT NULL DEFAULT '0',
-  `dateExamine` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dateExamine` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `result` int(11) NOT NULL DEFAULT '0',
   `comments` varchar(512) DEFAULT NULL,
   UNIQUE KEY `pk` (`vedioID`,`audienceID`),
@@ -60,9 +62,9 @@ DROP TABLE IF EXISTS `auditing`;
 CREATE TABLE `auditing` (
   `vedioID` varchar(128) NOT NULL DEFAULT '',
   `auditor` int(11) NOT NULL,
-  `auditDate` datetime NOT NULL,
+  `auditDate` datetime NOT NULL DEFAULT '1000-01-01 00:00:01',
   `result` int(11) NOT NULL,
-  `comments` varchar(512) NOT NULL,
+  `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`vedioID`),
   KEY `auditor` (`auditor`),
   KEY `result` (`result`)
@@ -82,9 +84,9 @@ CREATE TABLE `company` (
   `companyID` int(11) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(128) NOT NULL,
   `registrationNo` varchar(128) NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `contactPerson` varchar(50) NOT NULL,
-  `comments` varchar(512) NOT NULL,
+  `phone` varchar(50) DEFAULT '0',
+  `contactPerson` varchar(50) DEFAULT '',
+  `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`companyID`),
   UNIQUE KEY `registrationNo` (`registrationNo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='公司信息';
@@ -103,11 +105,11 @@ DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
   `employeeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `birthday` date DEFAULT '0000-00-00',
-  `contractDate` date NOT NULL,
-  `gender` int(11) NOT NULL,
-  `tel` varchar(50) DEFAULT '',
-  `status` int(11) NOT NULL COMMENT '0=禁用，1=正常',
+  `birthday` date DEFAULT '1000-01-01',
+  `contractDate` date NOT NULL DEFAULT '1000-01-01',
+  `gender` int(11) NOT NULL DEFAULT '0',
+  `tel` varchar(50) DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '0=禁用，1=正常',
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`employeeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='员工信息';
@@ -134,9 +136,9 @@ CREATE TABLE `playchangelog` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `vedioID` varchar(128) NOT NULL DEFAULT '',
   `auditor` int(11) NOT NULL DEFAULT '0',
-  `fromDate` datetime DEFAULT NULL,
-  `toDate` datetime DEFAULT '0000-00-00 00:00:00',
-  `operation` varchar(50) DEFAULT NULL,
+  `fromDate` datetime DEFAULT '1000-01-01 00:00:00',
+  `toDate` datetime DEFAULT '1000-01-01 00:00:00',
+  `operation` varchar(50) DEFAULT '',
   PRIMARY KEY (`Id`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`)
@@ -154,9 +156,9 @@ CREATE TABLE `playchangelog` (
 DROP TABLE IF EXISTS `playorder`;
 CREATE TABLE `playorder` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `playDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `playDate` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `vedioID` varchar(128) NOT NULL DEFAULT '',
-  `arrangeDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `arrangeDate` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `auditor` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Id`),
   KEY `vedioID` (`vedioID`),
@@ -313,10 +315,10 @@ INSERT INTO `topic` VALUES (4,'社会','社会社会社会社会社会');
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(50) CHARACTER SET ucs2 NOT NULL,
-  `userPass` varchar(128) CHARACTER SET ucs2 NOT NULL,
-  `employee` int(11) NOT NULL,
-  `status` int(11) NOT NULL COMMENT '0=禁用，1=正常',
+  `userName` varchar(50) NOT NULL DEFAULT '',
+  `userPass` varchar(50) NOT NULL DEFAULT '',
+  `employee` int(11) NOT NULL DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '0=禁用，1=正常',
   PRIMARY KEY (`userID`),
   KEY `userEmployee` (`employee`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户';
@@ -364,7 +366,7 @@ CREATE TABLE `vedioscore` (
   `award` int(11) NOT NULL DEFAULT '0',
   `precision` float NOT NULL,
   `purchase` int(11) NOT NULL DEFAULT '0',
-  `dateExamine` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dateExamine` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `comments` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `vedioExaminer` (`examiner`),
@@ -388,8 +390,8 @@ CREATE TABLE `vediotape` (
   `subject` int(11) NOT NULL,
   `topic` int(11) NOT NULL,
   `companyID` int(11) NOT NULL,
-  `dateComing` date NOT NULL,
-  `dateInput` datetime NOT NULL,
+  `dateComing` date NOT NULL DEFAULT '1000-01-01',
+  `dateInput` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `inputer` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `comments` varchar(512) DEFAULT NULL,
@@ -416,7 +418,7 @@ INSERT INTO `vediotape` VALUES ('2','12 Monkey',1,4,1,'2001-12-30','2001-01-31',
 #
 
 ALTER TABLE `audiencescore`
-ADD CONSTRAINT `audiencescore_ibfk_1` FOREIGN KEY (`audienceID`) REFERENCES `audience` (`Id`),
+ADD CONSTRAINT `audiencescore_ibfk_1` FOREIGN KEY (`audienceID`) REFERENCES `audience` (`id`),
 ADD CONSTRAINT `audiencescore_ibfk_2` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`);
 
 #
