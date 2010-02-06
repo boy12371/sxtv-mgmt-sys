@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.vms.db.bean">
+	<class
+		name="Scoreweight"
+		table="scoreweight"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="id"
+			type="string"
+			column="factor"
+		>
+			<generator class="sequence"/>
+		</id>
+
+		<property
+			name="wieght"
+			column="wieght"
+			type="java.lang.Float"
+			not-null="true"
+			length="12"
+		/>
+
+
+	</class>	
+</hibernate-mapping>
