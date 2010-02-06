@@ -17,6 +17,8 @@ public abstract class BaseAudience  implements Serializable {
 	public static String REF = "Audience";
 	public static String PROP_NAME = "name";
 	public static String PROP_COMMENTS = "comments";
+	public static String PROP_AGE = "age";
+	public static String PROP_CAREER = "career";
 	public static String PROP_GENDER = "gender";
 	public static String PROP_ID = "id";
 
@@ -57,7 +59,9 @@ public abstract class BaseAudience  implements Serializable {
 
 	// fields
 	private java.lang.String name;
+	private java.lang.Integer age;
 	private java.lang.Integer gender;
+	private java.lang.String career;
 	private java.lang.String comments;
 
 
@@ -65,7 +69,7 @@ public abstract class BaseAudience  implements Serializable {
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="sequence"
+     *  generator-class="identity"
      *  column="id"
      */
 	public java.lang.Integer getId () {
@@ -102,6 +106,23 @@ public abstract class BaseAudience  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: age
+	 */
+	public java.lang.Integer getAge () {
+		return age;
+	}
+
+	/**
+	 * Set the value related to the column: age
+	 * @param age the age value
+	 */
+	public void setAge (java.lang.Integer age) {
+		this.age = age;
+	}
+
+
+
+	/**
 	 * Return the value associated with the column: gender
 	 */
 	public java.lang.Integer getGender () {
@@ -114,6 +135,23 @@ public abstract class BaseAudience  implements Serializable {
 	 */
 	public void setGender (java.lang.Integer gender) {
 		this.gender = gender;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: career
+	 */
+	public java.lang.String getCareer () {
+		return career;
+	}
+
+	/**
+	 * Set the value related to the column: career
+	 * @param career the career value
+	 */
+	public void setCareer (java.lang.String career) {
+		this.career = career;
 	}
 
 

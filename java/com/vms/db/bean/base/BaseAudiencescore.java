@@ -31,14 +31,13 @@ public abstract class BaseAudiencescore  implements Serializable {
 	 * Constructor for required fields
 	 */
 	public BaseAudiencescore (
-		com.vms.db.bean.Vediotape vedioID,
 		com.vms.db.bean.Audience audienceID,
+		com.vms.db.bean.Vediotape vedioID,
 		java.util.Date dateExamine,
 		java.lang.Integer result) {
 
+		this.setAudienceID(audienceID);
 		this.setVedioID(vedioID);
-		this.setAudienceID(audienceID);
-		this.setAudienceID(audienceID);
 		this.setDateExamine(dateExamine);
 		this.setResult(result);
 		initialize();
@@ -54,8 +53,11 @@ public abstract class BaseAudiencescore  implements Serializable {
 	private java.lang.String comments;
 
 	// many to one
-	private com.vms.db.bean.Vediotape vedioID;
 	private com.vms.db.bean.Audience audienceID;
+	private com.vms.db.bean.Vediotape vedioID;
+
+
+
 
 
 
@@ -111,23 +113,6 @@ public abstract class BaseAudiencescore  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: vedioID
-	 */
-	public com.vms.db.bean.Vediotape getVedioID () {
-		return vedioID;
-	}
-
-	/**
-	 * Set the value related to the column: vedioID
-	 * @param vedioID the vedioID value
-	 */
-	public void setVedioID (com.vms.db.bean.Vediotape vedioID) {
-		this.vedioID = vedioID;
-	}
-
-
-
-	/**
 	 * Return the value associated with the column: audienceID
 	 */
 	public com.vms.db.bean.Audience getAudienceID () {
@@ -140,6 +125,23 @@ public abstract class BaseAudiencescore  implements Serializable {
 	 */
 	public void setAudienceID (com.vms.db.bean.Audience audienceID) {
 		this.audienceID = audienceID;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: vedioID
+	 */
+	public com.vms.db.bean.Vediotape getVedioID () {
+		return vedioID;
+	}
+
+	/**
+	 * Set the value related to the column: vedioID
+	 * @param vedioID the vedioID value
+	 */
+	public void setVedioID (com.vms.db.bean.Vediotape vedioID) {
+		this.vedioID = vedioID;
 	}
 
 
