@@ -16,19 +16,18 @@ public class Audiencescore extends BaseAudiencescore {
 	 * Constructor for required fields
 	 */
 	public Audiencescore (
-		com.vms.db.bean.Vediotape vedioID,
 		com.vms.db.bean.Audience audienceID,
+		com.vms.db.bean.Vediotape vedioID,
 		java.util.Date dateExamine,
 		java.lang.Integer result) {
 
 		super (
-			vedioID,
 			audienceID,
+			vedioID,
 			dateExamine,
 			result);
 	}
 
 /*[CONSTRUCTOR MARKER END]*/
-
 
 }
