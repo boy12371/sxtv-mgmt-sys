@@ -8,15 +8,10 @@
 		name="Audiencescore"
 		table="audiencescore"
 	>
-		<meta attribute="sync-DAO">false</meta>
 
-		<property
-			name="audienceID"
-			column="audienceID"
-			type="integer"
-			not-null="true"
-			length="10"
-		/>
+		<meta attribute="sync-DAO">true</meta>
+
+
 		<property
 			name="dateExamine"
 			column="dateExamine"
@@ -39,19 +34,20 @@
 			length="512"
 		/>
 		<many-to-one
-			name="vedioID"
-			column="vedioID"
-			class="Vediotape"
-			not-null="true"
-		>
-		</many-to-one>
-		<many-to-one
 			name="audienceID"
 			column="audienceID"
 			class="Audience"
 			not-null="true"
 		>
 		</many-to-one>
+		<many-to-one
+			name="vedioID"
+			column="vedioID"
+			class="Vediotape"
+			not-null="true"
+		>
+		</many-to-one>
+
 
 	</class>	
 </hibernate-mapping>
