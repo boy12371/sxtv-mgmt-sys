@@ -30,7 +30,6 @@ public class Vedioscore extends BaseVedioscore {
 		java.lang.Float innovateScore,
 		java.lang.Float score,
 		java.lang.Integer award,
-		java.lang.Float precision,
 		java.lang.Integer purchase,
 		java.util.Date dateExamine) {
 
@@ -44,11 +43,9 @@ public class Vedioscore extends BaseVedioscore {
 			innovateScore,
 			score,
 			award,
-			precision,
 			purchase,
 			dateExamine);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */
 }
-
