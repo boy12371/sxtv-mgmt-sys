@@ -12,8 +12,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 </head>
-<body>
+<body class="yui-skin-sam">
 
 <h1>员工用户</h1>
 <p>编辑并添加用户信息</p>
@@ -46,10 +50,18 @@
 			</s:iterator></td>
 		</tr>
 		<tr>
-			<td colspan="4"><s:submit value="提交" /></td>
+			<td colspan="4"><div id="go"></div></td>
 		</tr>
 	</table>
 	</div>
 </s:form>
+<script language="JavaScript">
+var goBtn = new YAHOO.widget.Button({  
+					type: "submit",  
+					label: "提&nbsp;&nbsp;交",  
+					id: "goBtn",  
+					container: "go" }
+					); 
+</script>
 </body>
 </html>
