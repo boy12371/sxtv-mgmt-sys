@@ -2,10 +2,12 @@ body{
 	padding:12px;
 	margin:0;
 	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
 	background-color:#EBF4FB;
-	}
+}
 	
 h1{
+	color:#003366;
 	font-size:20px;
 	font-weight:bold;
 	margin-top:5px;
@@ -15,14 +17,16 @@ h1{
 p{
 	border-bottom:1px solid #B7DDF2;
 	color:#666666;
-	font-size:15px;
+	font-size:14px;
 	padding-bottom:10px;
 }
 
 label {
+	color:#666666;
 	display:block;
-	float:left;
+	float:right;
 	font-weight:bold;
+	font-size:14px;
 	text-align:right;
 	width:140px;
 }
@@ -34,6 +38,20 @@ input, textarea{
 	margin:5px;
 	padding:4px 2px;
 	width:200px;
+}
+
+.radioSel{
+	width:25px;	
+}
+
+.inputTable{
+	width:70%;
+	height:auto;	
+}
+
+.inputTable td{
+	height:40px;
+	vertical-align:middle;	
 }
 
 .yui-skin-sam .yui-dt table{
