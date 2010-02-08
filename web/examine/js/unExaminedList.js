@@ -1,7 +1,8 @@
 function initDataTable() {
 	var formatUrl = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./sys/toUpdateCompany.action?company.id=";
-		href += sData;
+		var data = encodeURIComponent(oRecord.getData().vedioID);
+		var href = "<a href='./examine/toExamineTape.action?tapeScore.vedioID=";
+		href += data;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	};
@@ -17,6 +18,10 @@ function initDataTable() {
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
+	    key :"vedioID",
+	    label :"影带编号",
+	    formatter :formatUrl
+	}, {
 		key :"name",
 		label :"影带名称",
 		formatter :formatUrl
@@ -45,7 +50,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "name", "subject", "topic", "dateComing", "status", "company" ],
+		fields : [ "vedioID", "name", "subject", "topic", "dateComing", "status", "company" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
