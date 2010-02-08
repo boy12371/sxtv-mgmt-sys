@@ -35,7 +35,7 @@
 
 <body class="yui-skin-sam">
 
-<form id="form1" name="form1" method="post" action="">
+<s:form id="form1" name="form1" method="post" action="doAddingVedio" namespace="/vedio">
 
 <h1>Sign-up forcccccccccccccccm</h1>
 <p>This is the basic look of my form without table</p>
@@ -56,7 +56,7 @@
 		<td><label>栏目</label></td>
 		<td><s:select list="subList" listKey="id" listValue="subjectName" id="vsubject" /></td>
 		<td><label>备注</label></td>
-		<td><textarea name="textfield" id="vremarks"></textarea></td>
+		<td><textarea name="textfield" id="vcomments"></textarea></td>
 
 	</tr>
 	
@@ -70,28 +70,20 @@
 </td>
 	</tr>
 </table>
-
+<s:hidden name="jasonDataString" id="jasonDataString"/>
 <h1>Tape information</h1>
 <p>This is the basic look of my form without table</p>
 <div id="cellediting" align="center"></div>
 
 
-<span id="submit" class="yui-button yui-push-button">
+<span align="center" id="submit" class="yui-button yui-push-button">
         <span class="first-child">
             <button type="button"> 确 定 </button>
         </span>
 </span>
-</form>
+</s:form>
 
 <script type="text/javascript">
-YAHOO.example.Data = {
-		ss:[],
-		topices: ["topic1","topic2"],
-		subjects: ["subject1","subject2"]
-		   		}
-
-
-
 
 YAHOO.util.Event.addListener(window, "load", initDataTable());
 </script>

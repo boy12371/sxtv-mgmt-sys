@@ -68,7 +68,7 @@ function initDataTable() {
 		}
 	}
 	var formatCompany = function(elCell, oRecord, oColumn, oData) {
-		
+
 		elCell.innerHTML = oData["companyName"];
 	}
 	var formatTopic = function(elCell, oRecord, oColumn, oData) {
@@ -119,7 +119,7 @@ function initDataTable() {
 				label : "收带日期",
 				sortable : true
 			}, {
-				key : "vremarks",
+				key : "vcomments",
 				label : "备注",
 				formatter : formatorRemarks,
 				editor : new YAHOO.widget.TextareaCellEditor({
@@ -131,7 +131,7 @@ function initDataTable() {
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 	myDataSource.responseSchema = {
 		fields : ["vid", "vname", "vcompany", "vtopic", "vsubject", "vdate",
-				"vremarks"]
+				"vcomments"]
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("cellediting", myColumnDefs,
@@ -172,7 +172,7 @@ function initDataTable() {
 					format : "%Y-%m-%d"
 				});
 
-		var _vremarks = YAHOO.util.Dom.get("vremarks").value;
+		var _vcomments = YAHOO.util.Dom.get("vcomments").value;
 		return {
 			vid : _vid,
 			vname : _vname,
@@ -180,7 +180,7 @@ function initDataTable() {
 			vtopic : _vt,
 			vsubject : _vs,
 			vdate : _vdate,
-			vremarks : _vremarks
+			vcomments : _vcomments
 		};
 
 	};
@@ -191,15 +191,40 @@ function initDataTable() {
 
 	var btn = new YAHOO.widget.Button("go");
 	btn.on("click", handleClick);
-	
-	
-	var handleSubmit = function(){
-		var d = myDataTable.getRecordSet().getRecords();	
-		alert(d[0].getData["vid"]);
+
+	var handleSubmit = function() {
+		var records = myDataTable.getRecordSet().getRecords();
+		var len = records.length;
+		if (len != 0) {
+			var data = YAHOO.util.Dom.get("jasonDataString");
+			
+			var form = document.forms[0];			
+			var jasonString = "[";
+			for (var i = 0; i < len; i++) {
+				var oData = records[i];
+				if (i != 0 && i < len) {
+					jasonString += ",";
+				}
+				jasonString += "{id:" + oData.getData("vid") + ",vedioName:\""
+						+ oData.getData("vname") + "\",companyID:"
+						+ oData.getData("vcompany").id + ",topic:"
+						+ oData.getData("vtopic").id + ",subject:"
+						+ oData.getData("vsubject").id + ",comments:\""
+						+ oData.getData("vcomments") + "\"}";
+			}
+			jasonString += "]";
+			
+			data.value=jasonString;
+			//alert(data.value);
+			form.submit();
+		}else{
+			alert("尚未添加任何影带信息");			
+		}
+
 	}
 	var submitBtn = new YAHOO.widget.Button("submit");
 	submitBtn.on("click", handleSubmit);
-	
+
 	var onContextMenuClick = function(p_sType, p_aArgs, p_myDataTable) {
 		var task = p_aArgs[1];
 		if (task) {

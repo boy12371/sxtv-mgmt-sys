@@ -9,5 +9,8 @@
 		</action>
 		<action name="getCompanies" class="vedioMgmt" method="getCompaniesStr" />
 			
+		<action name="doAddingVedio" class="vedioMgmt" method="doAddingVedio">
+			<result>/vediotape/addVediotape.jsp</result>
+		</action>
 	</package>
 </struts>
