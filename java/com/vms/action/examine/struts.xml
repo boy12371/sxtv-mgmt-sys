@@ -23,5 +23,13 @@
 				<param name="root">examinedTable</param>
 			</result>
 		</action>
+		
+		<action name="toExamineTape" class="examineMgmt" method="toExamineTape">
+			<result>/examine/examineTape.jsp</result>
+		</action>
+		
+		<action name="doExamineTape" class="examineMgmt" method="doExamineTape">
+			<result>/examine/examineTape.jsp</result>
+		</action>
 	</package>
 </struts>

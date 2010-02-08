@@ -18,11 +18,13 @@ public class ExamineAction extends BaseAction {
 	
 	private static Logger logger = Logger.getLogger(ExamineAction.class);
 	
-	private IVedioscoreService service;
+	private IVedioscoreService vedioscoreService;
 
 	private JSONDataTable unExaminedTable;
 	
 	private JSONDataTable examinedTable;
+	
+	private VedioScoreVO tapeScore;
 	
 	public String toUnExaminedTapes() {
 		return SUCCESS;
@@ -36,9 +38,9 @@ public class ExamineAction extends BaseAction {
 		unExaminedTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 
 		try {
-			List<VedioTapeVO> tapes = service.getAllUnExaminedVedioes(unExaminedTable.getStartIndex(), unExaminedTable.getStartIndex()+ unExaminedTable.getRowsPerPage());
+			List<VedioTapeVO> tapes = vedioscoreService.getAllUnExaminedVedioes(unExaminedTable.getStartIndex(), unExaminedTable.getStartIndex()+ unExaminedTable.getRowsPerPage());
 			Status status = new Status(1);
-			JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, service.getVedioCountByStatus(status));
+			JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, vedioscoreService.getVedioCountByStatus(status));
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 			throw e;
@@ -50,13 +52,13 @@ public class ExamineAction extends BaseAction {
 		examinedTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 
 		try {
-			List<VedioScoreVO> scores = service.getUserExaminedVedioes(
+			List<VedioScoreVO> scores = vedioscoreService.getUserExaminedVedioes(
 					getUserInfo().getUsername(),
 					examinedTable.getStartIndex(), 
 					examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
 					examinedTable.getSort(), examinedTable.getDir().equals("asc")					
 			);
-			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, service.getCountOfUserExaminedVedio(getUserInfo().getUsername()));
+			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, vedioscoreService.getCountOfUserExaminedVedio(getUserInfo().getUsername()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -64,7 +66,22 @@ public class ExamineAction extends BaseAction {
 		}
 		return SUCCESS;
 	}
-
+	
+	public String toExamineTape() throws Exception{	
+		if(null == tapeScore.getVedioID() || "".equals(tapeScore.getVedioID())) return INPUT;
+		//for chinese characters, need to convert to utf-8
+		//String vname = new String(tape.getVedioName().getBytes("iso-8859-1"),"utf-8");
+		String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getName();		
+		tapeScore.setVedioName(name);
+		return SUCCESS;
+	}
+	
+	public String doExamineTape() throws Exception{	
+		tapeScore.setExaminer(this.getUserInfo().getUsername());
+		vedioscoreService.saveVedioScore(tapeScore);
+		return SUCCESS;
+	}
+	
 	public void setUnExaminedTable(JSONDataTable unExaminedTable) {
 		this.unExaminedTable = unExaminedTable;
 	}
@@ -80,13 +97,20 @@ public class ExamineAction extends BaseAction {
 	public JSONDataTable getExaminedTable() {
 		return examinedTable;
 	}
-
-	public void setService(IVedioscoreService service) {
-		this.service = service;
-	}
-
-	public IVedioscoreService getService() {
-		return service;
-	}
 	
+	public IVedioscoreService getVedioscoreService() {
+		return vedioscoreService;
+	}
+
+	public void setVedioscoreService(IVedioscoreService vedioscoreService) {
+		this.vedioscoreService = vedioscoreService;
+	}
+
+	public void setTapeScore(VedioScoreVO tapeScore) {
+		this.tapeScore = tapeScore;
+	}
+
+	public VedioScoreVO getTapeScore() {
+		return tapeScore;
+	}
 }

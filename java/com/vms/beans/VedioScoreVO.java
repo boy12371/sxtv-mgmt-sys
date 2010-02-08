@@ -2,9 +2,17 @@ package com.vms.beans;
 
 import java.util.Date;
 
+import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
+import com.vms.db.bean.Vediotape;
 
 public class VedioScoreVO {
+	private final static String AwardStr="获奖";
+	private final static String UnAwardStr="否";
+	private final static String PurchaseStr="购买";
+	private final static String UnPurchaseStr="否";
+	
+	private String vedioID;
 	private String vedioName;
 	private String examiner;
 	private float storyScore;
@@ -12,12 +20,15 @@ public class VedioScoreVO {
 	private float performScore;
 	private float innovateScore;
 	private float score;
-	private float precision;
+	private float accuracy;
 	private Date dateExamine;
+	private String award;
+	private String purchase;
 	
 	public VedioScoreVO(){}
 	
 	public VedioScoreVO(Vedioscore score){
+		this.vedioID = score.getVedioID().getId();
 		this.vedioName = score.getVedioID().getVedioName();
 		this.examiner = score.getExaminer().getUserName();
 		this.storyScore = score.getStoryScore();
@@ -25,8 +36,31 @@ public class VedioScoreVO {
 		this.performScore = score.getPerformScore();
 		this.innovateScore = score.getInnovateScore();
 		this.score = score.getScore();
-		this.precision = null==score.getPrecision()?0:score.getPrecision();
+		this.setAccuracy(null==score.getAccuracy()?0:score.getAccuracy());
 		this.dateExamine = score.getDateExamine();
+		this.award = 1==score.getAward()? AwardStr : UnAwardStr;
+		this.purchase = 1==score.getPurchase()? PurchaseStr : UnPurchaseStr;
+	}
+	
+	public Vedioscore toVedioscore(){
+		Vedioscore score = new Vedioscore();
+		score.setStoryScore(storyScore);
+		score.setTechScore(techScore);
+		score.setPerformScore(performScore);
+		score.setInnovateScore(innovateScore);
+		score.setDateExamine(new Date());
+		score.setAward(new Integer(award));
+		score.setPurchase(new Integer(purchase));
+		
+		Vediotape tape = new Vediotape();
+		tape.setVedioName(vedioName);
+		tape.setId(vedioID);
+		score.setVedioID(tape);
+		
+		User user = new User();
+		user.setUserName(examiner);
+		score.setExaminer(user);
+		return score;
 	}
 	
 	public String getVedioName() {
@@ -71,12 +105,6 @@ public class VedioScoreVO {
 	public void setScore(float score) {
 		this.score = score;
 	}
-	public float getPrecision() {
-		return precision;
-	}
-	public void setPrecision(float precision) {
-		this.precision = precision;
-	}
 
 	public void setDateExamine(Date dateExamine) {
 		this.dateExamine = dateExamine;
@@ -84,6 +112,38 @@ public class VedioScoreVO {
 
 	public Date getDateExamine() {
 		return dateExamine;
+	}
+
+	public void setAward(String award) {
+		this.award = award;
+	}
+
+	public String getAward() {
+		return award;
+	}
+
+	public void setPurchase(String purchase) {
+		this.purchase = purchase;
+	}
+
+	public String getPurchase() {
+		return purchase;
+	}
+
+	public void setVedioID(String vedioID) {
+		this.vedioID = vedioID;
+	}
+
+	public String getVedioID() {
+		return vedioID;
+	}
+
+	public void setAccuracy(float accuracy) {
+		this.accuracy = accuracy;
+	}
+
+	public float getAccuracy() {
+		return accuracy;
 	}
 	
 }

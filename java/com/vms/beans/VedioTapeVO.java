@@ -5,7 +5,7 @@ import java.util.Date;
 import com.vms.db.bean.Vediotape;
 
 public class VedioTapeVO {
-	
+	private String vedioID;
 	private String name;
 	private String subject;
 	private String topic;
@@ -18,6 +18,7 @@ public class VedioTapeVO {
 	public VedioTapeVO(){}
 	
 	public VedioTapeVO(Vediotape tape){
+		this.vedioID = tape.getId();
 		this.name = tape.getVedioName();
 		this.subject = tape.getSubject().getSubjectName();
 		this.topic = tape.getTopic().getTopicName();
@@ -75,6 +76,14 @@ public class VedioTapeVO {
 	}
 	public void setAudienceRating(float audienceRating) {
 		this.audienceRating = audienceRating;
+	}
+
+	public void setVedioID(String vedioID) {
+		this.vedioID = vedioID;
+	}
+
+	public String getVedioID() {
+		return vedioID;
 	}
 	
 }
