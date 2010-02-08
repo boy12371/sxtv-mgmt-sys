@@ -15,4 +15,8 @@ public interface IVedioscoreService {
 	public int getVedioCountByStatus(Status status) throws Exception;
 	
 	public int getCountOfUserExaminedVedio(String username) throws Exception;
+	
+	public VedioTapeVO getTapeByID(String ID) throws Exception;
+	
+	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception;
 }

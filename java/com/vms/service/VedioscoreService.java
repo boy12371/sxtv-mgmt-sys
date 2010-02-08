@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
+import com.vms.db.bean.Scoreweight;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
@@ -34,6 +35,11 @@ public class VedioscoreService implements IVedioscoreService {
 		}
 		return scoreVOs;
 	}
+	
+	public VedioTapeVO getTapeByID(String ID) throws Exception {
+		Vediotape tape = (Vediotape)vedioscoreDAO.getObject(Vediotape.class, ID);
+		return new VedioTapeVO(tape);
+	}
 
 	@Override
 	public List<VedioTapeVO> getAllUnExaminedVedioes(int startIndex, int endIndex) throws Exception {
@@ -51,8 +57,33 @@ public class VedioscoreService implements IVedioscoreService {
 	}
 	
 	public int getCountOfUserExaminedVedio(String username) throws Exception {
-		List<User> users = vedioscoreDAO.findObjectByField(com.vms.db.bean.User.class, User.PROP_USER_NAME, username, -1, -1, true);
+		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, username, -1, -1, true);
 		return vedioscoreDAO.getObjectTotalCountByFields(VedioscoreDAO.clz, Vedioscore.PROP_EXAMINER, users.get(0));
+	}
+	
+	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception{
+		Vedioscore score = scoreVO.toVedioscore();
+		//get examiner object for userID 
+		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, scoreVO.getExaminer(), -1, -1, true);
+		score.setExaminer(users.get(0));
+		
+		Map<String,Float> weights =  getWeights();
+		Float sum = score.getPerformScore()*weights.get("performScore") + 
+					score.getInnovateScore()*weights.get("innovateScore") +
+					score.getStoryScore()*weights.get("storyScore") + 
+					score.getTechScore()*weights.get("techScore");
+		score.setScore(sum);
+		
+		vedioscoreDAO.saveObject(score);
+	}
+	
+	private Map<String,Float> getWeights() throws Exception{
+		Map<String,Float> map = new HashMap<String,Float>();
+		List<Scoreweight> weights = vedioscoreDAO.findAll(Scoreweight.class);
+		for(Scoreweight w:weights){
+			map.put(w.getId(), w.getWieght());
+		}
+		return map;
 	}
 
 	public void setVedioscoreDAO(IVedioscoreDAO vedioscoreDAO) {
