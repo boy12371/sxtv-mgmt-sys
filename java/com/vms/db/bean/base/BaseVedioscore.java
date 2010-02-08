@@ -19,11 +19,11 @@ public abstract class BaseVedioscore  implements Serializable {
 	public static String PROP_EXAMINER = "examiner";
 	public static String PROP_COMMENTS = "comments";
 	public static String PROP_DATE_EXAMINE = "dateExamine";
+	public static String PROP_ACCURACY = "accuracy";
 	public static String PROP_TECH_SCORE = "techScore";
 	public static String PROP_PERFORM_SCORE = "performScore";
 	public static String PROP_VEDIO_I_D = "vedioID";
 	public static String PROP_PURCHASE = "purchase";
-	public static String PROP_PRECISION = "precision";
 	public static String PROP_ID = "id";
 	public static String PROP_STORY_SCORE = "storyScore";
 	public static String PROP_SCORE = "score";
@@ -56,7 +56,6 @@ public abstract class BaseVedioscore  implements Serializable {
 		java.lang.Float innovateScore,
 		java.lang.Float score,
 		java.lang.Integer award,
-		java.lang.Float precision,
 		java.lang.Integer purchase,
 		java.util.Date dateExamine) {
 
@@ -69,7 +68,6 @@ public abstract class BaseVedioscore  implements Serializable {
 		this.setInnovateScore(innovateScore);
 		this.setScore(score);
 		this.setAward(award);
-		this.setPrecision(precision);
 		this.setPurchase(purchase);
 		this.setDateExamine(dateExamine);
 		initialize();
@@ -91,7 +89,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	private java.lang.Float innovateScore;
 	private java.lang.Float score;
 	private java.lang.Integer award;
-	private java.lang.Float precision;
+	private java.lang.Float accuracy;
 	private java.lang.Integer purchase;
 	private java.util.Date dateExamine;
 	private java.lang.String comments;
@@ -227,18 +225,18 @@ public abstract class BaseVedioscore  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: precision
+	 * Return the value associated with the column: accuracy
 	 */
-	public java.lang.Float getPrecision () {
-		return precision;
+	public java.lang.Float getAccuracy () {
+		return accuracy;
 	}
 
 	/**
-	 * Set the value related to the column: precision
-	 * @param precision the precision value
+	 * Set the value related to the column: accuracy
+	 * @param accuracy the accuracy value
 	 */
-	public void setPrecision (java.lang.Float precision) {
-		this.precision = precision;
+	public void setAccuracy (java.lang.Float accuracy) {
+		this.accuracy = accuracy;
 	}
 
 

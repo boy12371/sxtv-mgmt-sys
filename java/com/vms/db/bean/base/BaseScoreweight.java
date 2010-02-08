@@ -61,7 +61,7 @@ public abstract class BaseScoreweight  implements Serializable {
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="sequence"
+     *  generator-class="assigned"
      *  column="factor"
      */
 	public java.lang.String getId () {
