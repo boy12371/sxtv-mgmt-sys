@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <sx:head />
 <title>添加员工</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
@@ -21,8 +21,8 @@
 
 <s:actionerror/>
 <s:form action="doAddEmployee" namespace="/sys" method="post">
-	<div align="center">
-	<table>
+	<div>
+	<table class="inputTable">
 		<tr>
 			<td><label>姓名：</label></td>
 			<td><s:textfield name="employee.name" />
