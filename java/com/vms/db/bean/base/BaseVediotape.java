@@ -12,17 +12,15 @@ import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 
-
 /**
- * This is an object that contains data related to the vediotape table.
- * Do not modify this class because it will be overwritten if the configuration file
+ * This is an object that contains data related to the vediotape table. Do not
+ * modify this class because it will be overwritten if the configuration file
  * related to this class is modified.
- *
- * @hibernate.class
- *  table="vediotape"
+ * 
+ * @hibernate.class table="vediotape"
  */
 
-public abstract class BaseVediotape  implements Serializable {
+public abstract class BaseVediotape implements Serializable {
 
 	public static String REF = "Vediotape";
 	public static String PROP_STATUS = "status";
@@ -38,16 +36,15 @@ public abstract class BaseVediotape  implements Serializable {
 	public static String PROP_ID = "id";
 	public static String PROP_DATE_INPUT = "dateInput";
 
-
 	// constructors
-	public BaseVediotape () {
+	public BaseVediotape() {
 		initialize();
 	}
 
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseVediotape (java.lang.String id) {
+	public BaseVediotape(java.lang.String id) {
 		this.setId(id);
 		initialize();
 	}
@@ -55,16 +52,9 @@ public abstract class BaseVediotape  implements Serializable {
 	/**
 	 * Constructor for required fields
 	 */
-	public BaseVediotape (
-		java.lang.String id,
-		com.vms.db.bean.Topic topic,
-		com.vms.db.bean.User inputer,
-		com.vms.db.bean.Status status,
-		com.vms.db.bean.Subject subject,
-		com.vms.db.bean.Company companyID,
-		java.lang.String vedioName,
-		java.util.Date dateComing,
-		java.util.Date dateInput) {
+	public BaseVediotape(java.lang.String id, com.vms.db.bean.Topic topic, com.vms.db.bean.User inputer,
+			com.vms.db.bean.Status status, com.vms.db.bean.Subject subject, com.vms.db.bean.Company companyID,
+			java.lang.String vedioName, java.util.Date dateComing, java.util.Date dateInput) {
 
 		this.setId(id);
 		this.setTopic(topic);
@@ -78,9 +68,8 @@ public abstract class BaseVediotape  implements Serializable {
 		initialize();
 	}
 
-	protected void initialize () {}
-
-
+	protected void initialize() {
+	}
 
 	private int hashCode = Integer.MIN_VALUE;
 
@@ -107,297 +96,300 @@ public abstract class BaseVediotape  implements Serializable {
 	private java.util.Set<com.vms.db.bean.Playorder> playorders;
 	private java.util.Set<com.vms.db.bean.Playchangelog> playchangelogs;
 
-
-
 	/**
 	 * Return the unique identifier of this class
-     * @hibernate.id
-     *  generator-class="assigned"
-     *  column="vedioID"
-     */
-	public java.lang.String getId () {
+	 * 
+	 * @hibernate.id generator-class="assigned" column="vedioID"
+	 */
+	public java.lang.String getId() {
 		return id;
 	}
 
 	/**
 	 * Set the unique identifier of this class
-	 * @param id the new ID
+	 * 
+	 * @param id
+	 *            the new ID
 	 */
-	public void setId (java.lang.String id) {
+	public void setId(java.lang.String id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
 
-
-
-
 	/**
 	 * Return the value associated with the column: vedioName
 	 */
-	public java.lang.String getVedioName () {
+	public java.lang.String getVedioName() {
 		return vedioName;
 	}
 
 	/**
 	 * Set the value related to the column: vedioName
-	 * @param vedioName the vedioName value
+	 * 
+	 * @param vedioName
+	 *            the vedioName value
 	 */
-	public void setVedioName (java.lang.String vedioName) {
+	public void setVedioName(java.lang.String vedioName) {
 		this.vedioName = vedioName;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: dateComing
 	 */
-	public java.util.Date getDateComing () {
+	public java.util.Date getDateComing() {
 		return dateComing;
 	}
 
 	/**
 	 * Set the value related to the column: dateComing
-	 * @param dateComing the dateComing value
+	 * 
+	 * @param dateComing
+	 *            the dateComing value
 	 */
-	public void setDateComing (java.util.Date dateComing) {
+	public void setDateComing(java.util.Date dateComing) {
 		this.dateComing = dateComing;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: dateInput
 	 */
-	public java.util.Date getDateInput () {
+	public java.util.Date getDateInput() {
 		return dateInput;
 	}
 
 	/**
 	 * Set the value related to the column: dateInput
-	 * @param dateInput the dateInput value
+	 * 
+	 * @param dateInput
+	 *            the dateInput value
 	 */
-	public void setDateInput (java.util.Date dateInput) {
+	public void setDateInput(java.util.Date dateInput) {
 		this.dateInput = dateInput;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: comments
 	 */
-	public java.lang.String getComments () {
+	public java.lang.String getComments() {
 		return comments;
 	}
 
 	/**
 	 * Set the value related to the column: comments
-	 * @param comments the comments value
+	 * 
+	 * @param comments
+	 *            the comments value
 	 */
-	public void setComments (java.lang.String comments) {
+	public void setComments(java.lang.String comments) {
 		this.comments = comments;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: marketShare
 	 */
-	public java.lang.Float getMarketShare () {
+	public java.lang.Float getMarketShare() {
 		return marketShare;
 	}
 
 	/**
 	 * Set the value related to the column: marketShare
-	 * @param marketShare the marketShare value
+	 * 
+	 * @param marketShare
+	 *            the marketShare value
 	 */
-	public void setMarketShare (java.lang.Float marketShare) {
+	public void setMarketShare(java.lang.Float marketShare) {
 		this.marketShare = marketShare;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: audienceRating
 	 */
-	public java.lang.Float getAudienceRating () {
+	public java.lang.Float getAudienceRating() {
 		return audienceRating;
 	}
 
 	/**
 	 * Set the value related to the column: audienceRating
-	 * @param audienceRating the audienceRating value
+	 * 
+	 * @param audienceRating
+	 *            the audienceRating value
 	 */
-	public void setAudienceRating (java.lang.Float audienceRating) {
+	public void setAudienceRating(java.lang.Float audienceRating) {
 		this.audienceRating = audienceRating;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: topic
 	 */
-	public com.vms.db.bean.Topic getTopic () {
+	public com.vms.db.bean.Topic getTopic() {
 		return topic;
 	}
 
 	/**
 	 * Set the value related to the column: topic
-	 * @param topic the topic value
+	 * 
+	 * @param topic
+	 *            the topic value
 	 */
-	public void setTopic (com.vms.db.bean.Topic topic) {
+	public void setTopic(com.vms.db.bean.Topic topic) {
 		this.topic = topic;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: inputer
 	 */
-	public com.vms.db.bean.User getInputer () {
+	public com.vms.db.bean.User getInputer() {
 		return inputer;
 	}
 
 	/**
 	 * Set the value related to the column: inputer
-	 * @param inputer the inputer value
+	 * 
+	 * @param inputer
+	 *            the inputer value
 	 */
-	public void setInputer (com.vms.db.bean.User inputer) {
+	public void setInputer(com.vms.db.bean.User inputer) {
 		this.inputer = inputer;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: status
 	 */
-	public com.vms.db.bean.Status getStatus () {
+	public com.vms.db.bean.Status getStatus() {
 		return status;
 	}
 
 	/**
 	 * Set the value related to the column: status
-	 * @param status the status value
+	 * 
+	 * @param status
+	 *            the status value
 	 */
-	public void setStatus (com.vms.db.bean.Status status) {
+	public void setStatus(com.vms.db.bean.Status status) {
 		this.status = status;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: subject
 	 */
-	public com.vms.db.bean.Subject getSubject () {
+	public com.vms.db.bean.Subject getSubject() {
 		return subject;
 	}
 
 	/**
 	 * Set the value related to the column: subject
-	 * @param subject the subject value
+	 * 
+	 * @param subject
+	 *            the subject value
 	 */
-	public void setSubject (com.vms.db.bean.Subject subject) {
+	public void setSubject(com.vms.db.bean.Subject subject) {
 		this.subject = subject;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: companyID
 	 */
-	public com.vms.db.bean.Company getCompanyID () {
+	public com.vms.db.bean.Company getCompanyID() {
 		return companyID;
 	}
 
 	/**
 	 * Set the value related to the column: companyID
-	 * @param companyID the companyID value
+	 * 
+	 * @param companyID
+	 *            the companyID value
 	 */
-	public void setCompanyID (com.vms.db.bean.Company companyID) {
+	public void setCompanyID(com.vms.db.bean.Company companyID) {
 		this.companyID = companyID;
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: vedioscores
 	 */
-	public java.util.Set<com.vms.db.bean.Vedioscore> getVedioscores () {
+	public java.util.Set<com.vms.db.bean.Vedioscore> getVedioscores() {
 		return vedioscores;
 	}
 
 	/**
 	 * Set the value related to the column: vedioscores
-	 * @param vedioscores the vedioscores value
+	 * 
+	 * @param vedioscores
+	 *            the vedioscores value
 	 */
-	public void setVedioscores (java.util.Set<com.vms.db.bean.Vedioscore> vedioscores) {
+	public void setVedioscores(java.util.Set<com.vms.db.bean.Vedioscore> vedioscores) {
 		this.vedioscores = vedioscores;
 	}
 
-	public void addTovedioscores (com.vms.db.bean.Vedioscore vedioscore) {
-		if (null == getVedioscores()) setVedioscores(new java.util.TreeSet<com.vms.db.bean.Vedioscore>());
+	public void addTovedioscores(com.vms.db.bean.Vedioscore vedioscore) {
+		if (null == getVedioscores())
+			setVedioscores(new java.util.TreeSet<com.vms.db.bean.Vedioscore>());
 		getVedioscores().add(vedioscore);
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: playorders
 	 */
-	public java.util.Set<com.vms.db.bean.Playorder> getPlayorders () {
+	public java.util.Set<com.vms.db.bean.Playorder> getPlayorders() {
 		return playorders;
 	}
 
 	/**
 	 * Set the value related to the column: playorders
-	 * @param playorders the playorders value
+	 * 
+	 * @param playorders
+	 *            the playorders value
 	 */
-	public void setPlayorders (java.util.Set<com.vms.db.bean.Playorder> playorders) {
+	public void setPlayorders(java.util.Set<com.vms.db.bean.Playorder> playorders) {
 		this.playorders = playorders;
 	}
 
-	public void addToplayorders (com.vms.db.bean.Playorder playorder) {
-		if (null == getPlayorders()) setPlayorders(new java.util.TreeSet<com.vms.db.bean.Playorder>());
+	public void addToplayorders(com.vms.db.bean.Playorder playorder) {
+		if (null == getPlayorders())
+			setPlayorders(new java.util.TreeSet<com.vms.db.bean.Playorder>());
 		getPlayorders().add(playorder);
 	}
-
-
 
 	/**
 	 * Return the value associated with the column: playchangelogs
 	 */
-	public java.util.Set<com.vms.db.bean.Playchangelog> getPlaychangelogs () {
+	public java.util.Set<com.vms.db.bean.Playchangelog> getPlaychangelogs() {
 		return playchangelogs;
 	}
 
 	/**
 	 * Set the value related to the column: playchangelogs
-	 * @param playchangelogs the playchangelogs value
+	 * 
+	 * @param playchangelogs
+	 *            the playchangelogs value
 	 */
-	public void setPlaychangelogs (java.util.Set<com.vms.db.bean.Playchangelog> playchangelogs) {
+	public void setPlaychangelogs(java.util.Set<com.vms.db.bean.Playchangelog> playchangelogs) {
 		this.playchangelogs = playchangelogs;
 	}
 
-	public void addToplaychangelogs (com.vms.db.bean.Playchangelog playchangelog) {
-		if (null == getPlaychangelogs()) setPlaychangelogs(new java.util.TreeSet<com.vms.db.bean.Playchangelog>());
+	public void addToplaychangelogs(com.vms.db.bean.Playchangelog playchangelog) {
+		if (null == getPlaychangelogs())
+			setPlaychangelogs(new java.util.TreeSet<com.vms.db.bean.Playchangelog>());
 		getPlaychangelogs().add(playchangelog);
 	}
 
-
-
-
-	public boolean equals (Object obj) {
-		if (null == obj) return false;
-		if (!(obj instanceof com.vms.db.bean.Vediotape)) return false;
+	public boolean equals(Object obj) {
+		if (null == obj)
+			return false;
+		if (!(obj instanceof com.vms.db.bean.Vediotape))
+			return false;
 		else {
 			com.vms.db.bean.Vediotape vediotape = (com.vms.db.bean.Vediotape) obj;
-			if (null == this.getId() || null == vediotape.getId()) return false;
-			else return (this.getId().equals(vediotape.getId()));
+			if (null == this.getId() || null == vediotape.getId())
+				return false;
+			else
+				return (this.getId().equals(vediotape.getId()));
 		}
 	}
 
-	public int hashCode () {
+	public int hashCode() {
 		if (Integer.MIN_VALUE == this.hashCode) {
-			if (null == this.getId()) return super.hashCode();
+			if (null == this.getId())
+				return super.hashCode();
 			else {
 				String hashStr = this.getClass().getName() + ":" + this.getId().hashCode();
 				this.hashCode = hashStr.hashCode();
@@ -406,10 +398,8 @@ public abstract class BaseVediotape  implements Serializable {
 		return this.hashCode;
 	}
 
-
-	public String toString () {
+	public String toString() {
 		return super.toString();
 	}
-
 
 }

@@ -3,7 +3,7 @@
 <ParamConfs> 
 	<MainConsole>
 		<Module id="tapeMgmt" name="影带录入" url="">
-			<ModuleItem id="tapeAdd" name="录入影带" url="/tv/vediotape/addVediotape.jsp"/>
+			<ModuleItem id="tapeAdd" name="录入影带" url="/tv/vedio/toAddingVedio.action"/>
 			<ModuleItem id="tapeView" name="查看影带信息" url="http://www.google.com"/> 
 			<ModuleItem id="tapeModify" name="修改影带信息" url="http://www.google.com"/> 
 		</Module>

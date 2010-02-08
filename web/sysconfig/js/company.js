@@ -5,10 +5,10 @@ function initDataTable() {
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	};
-	
+
 	var formatComments = function(elCell, oRecord, oColumn, sData) {
-		sData =sData.substring(0,20);
-		elCell.innerHTML=sData;
+		sData = sData.substring(0, 20);
+		elCell.innerHTML = sData;
 	}
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
@@ -19,10 +19,10 @@ function initDataTable() {
 		formatter :formatUrl
 	}, {
 		key :"companyName",
-		label :"公司名称"		
+		label :"公司名称"
 	}, {
 		key :"registrationNo",
-		label :"注册号"		
+		label :"注册号"
 	}, {
 		key :"phone",
 		label :"电话"
@@ -41,20 +41,21 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "companyName", "registrationNo", "phone", "contactPerson", "comments" ],
+		fields : [ "id", "companyName", "registrationNo", "phone",
+				"contactPerson", "comments" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
-											// response
-	}
+	// response
+		}
 	};
 
 	// DataTable configuration
 	var myConfigs = {
 		initialRequest :"sort=id&dir=asc&startIndex=0&results=10", // Initial
-																	// request
-																	// for first
-																	// page of
-																	// data
+		// request
+		// for first
+		// page of
+		// data
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
 			key :"id",

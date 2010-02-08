@@ -83,7 +83,7 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		if (order != null) {
 			crt.addOrder(order);
 		}
-		if (endIndex != -1) {
+		if (startIndex != -1 || endIndex != -1) {
 			crt.setFirstResult(startIndex);
 			crt.setMaxResults(endIndex);
 		}
@@ -101,8 +101,7 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		if (order != null) {
 			crt.addOrder(order);
 		}
-		if (startIndex != -1 || endIndex != -1) {
-
+		if (startIndex != -1 && endIndex != -1) {
 			crt.setFirstResult(startIndex);
 			crt.setMaxResults(endIndex);
 		}
