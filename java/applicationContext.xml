@@ -27,6 +27,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mappingResources">
 			<list>
+				<value>com/vms/db/bean/Audience.hbm.xml</value>
+	 			<value>com/vms/db/bean/Audiencescore.hbm.xml</value>
 				<value>com/vms/db/bean/Auditing.hbm.xml</value>
 				<value>com/vms/db/bean/Company.hbm.xml</value>
 				<value>com/vms/db/bean/Employee.hbm.xml</value>
@@ -34,6 +36,7 @@
 				<value>com/vms/db/bean/Playorder.hbm.xml</value>
 				<value>com/vms/db/bean/Status.hbm.xml</value>
 				<value>com/vms/db/bean/Subject.hbm.xml</value>
+				<value>com/vms/db/bean/Scoreweight.hbm.xml</value>
 				<value>com/vms/db/bean/Topic.hbm.xml</value>
 				<value>com/vms/db/bean/User.hbm.xml</value>
 				<value>com/vms/db/bean/Vedioscore.hbm.xml</value>

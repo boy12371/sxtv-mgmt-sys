@@ -6,7 +6,7 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 	
 	<bean id="examineMgmt" class="com.vms.action.examine.ExamineAction" scope="prototype">
-		<property name="service" ref="vedioscoreService" />
+		<property name="vedioscoreService" ref="vedioscoreService" />
 	</bean>
 	
 </beans>
