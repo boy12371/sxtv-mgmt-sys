@@ -364,7 +364,7 @@ CREATE TABLE `vedioscore` (
   `innovateScore` float NOT NULL,
   `score` float NOT NULL,
   `award` int(11) NOT NULL DEFAULT '0',
-  `precision` float NOT NULL,
+  `accuracy` float DEFAULT NULL,
   `purchase` int(11) NOT NULL DEFAULT '0',
   `dateExamine` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `comments` varchar(512) DEFAULT NULL,
