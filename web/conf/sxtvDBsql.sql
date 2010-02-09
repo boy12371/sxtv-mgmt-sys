@@ -27,12 +27,16 @@ CREATE TABLE `audience` (
   `career` varchar(50) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table audience
 #
 
+INSERT INTO `audience` VALUES (1,'张三',NULL,NULL,NULL,NULL);
+INSERT INTO `audience` VALUES (2,'李四',NULL,NULL,NULL,NULL);
+INSERT INTO `audience` VALUES (3,'王麻子',NULL,NULL,NULL,NULL);
+INSERT INTO `audience` VALUES (4,'赵六',NULL,NULL,NULL,NULL);
 
 #
 # Source for table audiencescore
@@ -53,6 +57,7 @@ CREATE TABLE `audiencescore` (
 # Dumping data for table audiencescore
 #
 
+INSERT INTO `audiencescore` VALUES ('0',2,'2009-03-01',1,NULL);
 
 #
 # Source for table auditing
