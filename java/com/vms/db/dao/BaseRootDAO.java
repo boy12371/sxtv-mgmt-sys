@@ -153,6 +153,7 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		return this.getSession().createQuery(hqlString);
 	}
 
+	
 	public Criteria getCriteria(Class clz) {
 		return this.getSession().createCriteria(clz);
 	}
