@@ -7,10 +7,13 @@
 		<action name="toAddingVedio" class="vedioMgmt" method="toAddingVedio">
 			<result>/vediotape/addVediotape.jsp</result>
 		</action>
-		<action name="getCompanies" class="vedioMgmt" method="getCompaniesStr" />
+		<action name="isVediotapeExsits" class="vedioMgmt" method="isVediotapeExsits" />
 			
 		<action name="doAddingVedio" class="vedioMgmt" method="doAddingVedio">
 			<result>/vediotape/addVediotape.jsp</result>
+			<result name="input">
+				/vediotape/addVediotape.jsp
+			</result>
 		</action>
 	</package>
 </struts>

@@ -1,26 +1,16 @@
 
 
-function initSelectionsData() {
+function isVedioNameValid(inputEl) {
 	var callbacks = {
 		success : function(o) {
 			YAHOO.log("RAW JSON DATA: " + o.responseText);
 			// Process the JSON data returned from the server
-			try {
-				var obj = YAHOO.lang.JSON.parse(o.responseText);
-			} catch (x) {
-				alert("JSON Parse failed!");
-				return;
-			}
-			// YAHOO.log("PARSED DATA: " + YAHOO.lang.dump(companies));
-			var com_section = YAHOO.util.Dom.get('vcompany');
-			// The returned data was parsed into an array of objects.
-			// Add a P element for each received message
-			for (var i = 0; i < obj.length; i++) {
-				var c = obj[i];
-				var _text = c.companyName;
-				var _value = c.id;
-				com_section.options.add(new Option(_text, _value));
-
+			var obj = o.responseText;
+			
+			if (obj.indexOf("SUCCESS")== -1) {
+				var msg = "<font color='red'>" + obj + "</font>";
+				alert(obj);
+				// YAHOO.util.Dom.insertAfter(msg,inputEl);
 			}
 
 		},
@@ -33,8 +23,10 @@ function initSelectionsData() {
 
 		timeout : 3000
 	}
-	YAHOO.util.Connect.asyncRequest('GET', "/tv/vedio/getCompanies.action",
-			callbacks);
+	
+	var vedioName = inputEl.value;
+	var url = "/tv/vedio/isVediotapeExsits.action?vedioName=" + vedioName;
+	YAHOO.util.Connect.asyncRequest('GET', url, callbacks);
 }
 
 var isBuild = false;
@@ -197,8 +189,8 @@ function initDataTable() {
 		var len = records.length;
 		if (len != 0) {
 			var data = YAHOO.util.Dom.get("jasonDataString");
-			
-			var form = document.forms[0];			
+
+			var form = document.forms[0];
 			var jasonString = "[";
 			for (var i = 0; i < len; i++) {
 				var oData = records[i];
@@ -213,18 +205,44 @@ function initDataTable() {
 						+ oData.getData("vcomments") + "\"}";
 			}
 			jasonString += "]";
-			
-			data.value=jasonString;
-			//alert(data.value);
+
+			data.value = jasonString;
+			// alert(data.value);
 			form.submit();
-		}else{
-			alert("尚未添加任何影带信息");			
+		} else {
+			alert("尚未添加任何影带信息");
 		}
 
 	}
 	var submitBtn = new YAHOO.widget.Button("submit");
 	submitBtn.on("click", handleSubmit);
 
+	var checkVedioName = function() {
+		
+		var vName = YAHOO.util.Dom.get("vname");
+		var records = myDataTable.getRecordSet().getRecords();
+		var len = records.length;
+		var exists = false;
+		if (len != 0) {
+			for (var i = 0; i < len; i++) {
+				var oData = records[i];
+				var _vname = oData.getData("vname");
+				if (vName.value == _vname) {
+					alert("影带已存在，请检查影带名称");
+					exists = true;
+					break;
+				}
+			}		
+			if(exists ==false){
+				isVedioNameValid(vName);
+			}
+		}
+	}
+	
+	var vedioName = YAHOO.util.Dom.get("vname");
+	YAHOO.util.Event.addListener(vedioName,"blur",checkVedioName);
+	//vedioName.on("blur", checkVedioName);
+	
 	var onContextMenuClick = function(p_sType, p_aArgs, p_myDataTable) {
 		var task = p_aArgs[1];
 		if (task) {

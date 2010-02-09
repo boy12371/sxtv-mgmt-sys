@@ -18,4 +18,7 @@ public interface IVediotapeService {
 	void createVediotapes(List<Vediotape> vedioes) throws Exception;
 	
 	
+	Vediotape getVediotapeByName(String vedioName)throws Exception;
+	
+	
 }

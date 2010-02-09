@@ -1,6 +1,8 @@
 package com.vms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IVediotapeDAO;
@@ -15,7 +17,7 @@ public class VediotapeService implements IVediotapeService {
 	@Override
 	public void createVediotapes(List<Vediotape> vedios) throws Exception {
 		// TODO Auto-generated method stub
-
+		vediotapeDAO.saveObjects(vedios);
 	}
 
 	@Override
@@ -34,6 +36,15 @@ public class VediotapeService implements IVediotapeService {
 
 	public void setVediotapeDAO(IVediotapeDAO vediotapeDAO) {
 		this.vediotapeDAO = vediotapeDAO;
+	}
+
+	@Override
+	public Vediotape getVediotapeByName(String vedioName) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> propertiesValues =new HashMap<String, Object>();
+		propertiesValues.put(Vediotape.PROP_VEDIO_NAME, vedioName);
+		return (Vediotape) this.vediotapeDAO.getUniqueResultByProperty(clz, propertiesValues);
+		
 	}
 
 }

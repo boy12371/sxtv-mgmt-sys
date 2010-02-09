@@ -1,11 +1,14 @@
 package com.vms.db.dao;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -45,8 +48,19 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		return tapes;
 	}
 	
+	@Override
+	public void saveObjects(List<Vediotape> objects) {
+		// TODO Auto-generated method stub		
+		for ( int i=0; i < objects.size() ; i++ ) {		    
+			this.getHibernateTemplate().save(objects.get(i));
+		}		  
+		 		
+	}
+	
 	public int getVedioTotalCountByStatus(Status status) throws Exception {
 		return this.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS, status);
 	}
+
+	
 
 }

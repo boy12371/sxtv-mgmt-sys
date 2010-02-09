@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class SessionUserInfo {
 	
+	private int userId;	
+	
 	private String username;
 	
 	private String password;
@@ -28,5 +30,12 @@ public class SessionUserInfo {
 	}
 	public Map<String, Integer> getPermissions() {
 		return permissions;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }

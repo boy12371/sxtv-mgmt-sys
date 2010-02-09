@@ -25,6 +25,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
@@ -36,9 +37,10 @@
 <body class="yui-skin-sam">
 
 <s:form id="form1" name="form1" method="post" action="doAddingVedio" namespace="/vedio">
-
-<h1>Sign-up forcccccccccccccccm</h1>
-<p>This is the basic look of my form without table</p>
+<s:actionerror/>
+<s:actionmessage/>
+<h1>影带信息</h1>
+<p>调描条形码并填写或选择其他相关信息</p>
 <table>
 	<tr>
 		<td><label>影带编号</label></td>
@@ -71,8 +73,8 @@
 	</tr>
 </table>
 <s:hidden name="jasonDataString" id="jasonDataString"/>
-<h1>Tape information</h1>
-<p>This is the basic look of my form without table</p>
+<h1>影带信息</h1>
+<p>单击表格可进行编辑，单击右键可删除</p>
 <div id="cellediting" align="center"></div>
 
 

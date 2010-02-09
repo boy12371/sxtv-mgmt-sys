@@ -2,7 +2,10 @@ package com.vms.action.vediotape;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -23,6 +26,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger(VediotapeMgmtAction.class);
 	private IVediotapeService vedioService;
 	private ICompanyService companyService;
 	private ISubjectService subjectService;
@@ -30,25 +34,32 @@ public class VediotapeMgmtAction extends BaseAction {
 
 	private Vediotape vedio;
 	private String jasonDataString;
-	public String toAddingVedio() throws Exception {
-		
-		
+	
+	
+	public String toAddingVedio() throws Exception {		
 		return SUCCESS;
 	}
 
 	public String doAddingVedio() throws Exception {
 		List<Vediotape> vedios = this.convertJASSONStringToVedio();
-		vedioService.createVediotapes(vedios);
+		try{
+			vedioService.createVediotapes(vedios);	
+		}catch(Exception e){
+			logger.error(e);
+			this.addActionError("添加失败");
+			return INPUT;
+		}
+		this.addActionMessage("添加成功");
 		return this.SUCCESS;
 	}
 
-	
 	
 	private List<Vediotape> convertJASSONStringToVedio(){
 		JSONArray jasonArray = JSONArray.fromObject(this.jasonDataString);
 		if(jasonArray.isArray() && !jasonArray.isEmpty()){
 			List<Vediotape> vedios = new ArrayList<Vediotape>();
 			SessionUserInfo userInfo = (SessionUserInfo)session.getAttribute("SessionUserInfo");
+			Date date =new Date();
 			int size = jasonArray.size();
 			for (int i = 0; i < size; i++) {
 				JSONObject obj =jasonArray.getJSONObject(i);
@@ -59,7 +70,11 @@ public class VediotapeMgmtAction extends BaseAction {
 				v.setTopic(new Topic(obj.getInt(Vediotape.PROP_TOPIC)));
 				v.setSubject(new Subject(obj.getInt(Vediotape.PROP_SUBJECT)));
 				v.setStatus(new Status(1));
-				//v.setInputer(new User(userInfo.getId()));
+				v.setComments(obj.getString(Vediotape.PROP_COMMENTS));
+				//v.setInputer(new User(userInfo.getUserId()));
+				v.setInputer(new User(1));
+				v.setDateComing(date);
+				v.setDateInput(date);
 				vedios.add(v);
 			}
 			return vedios;
@@ -81,22 +96,18 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	
 	
-	public String getCompaniesStr() throws Exception {
-		StringBuffer sb =new StringBuffer("[");
-		List<Company>  coms = companyService.findAllCompany(-1, -1, Company.PROP_ID, true);
-		int size =coms.size();
-		for (int i=0;i<size;i++) {
-			Company c = coms.get(i);
-			if(i!=0 && i<size ){
-				sb.append(",");
-			}
-			sb.append("{\"id\":\""+c.getId()+"\",\"companyName\":\""+c.getCompanyName()+"\"}");
-			
-		}
-		sb.append("]");
-		response.setCharacterEncoding("UTF-8");
+	public String isVediotapeExsits() throws Exception {
+		String vedioName = this.getRequest().getParameter("vedioName");
+		this.getResponse().setCharacterEncoding("UTF-8");
+		PrintWriter out = this.getResponse().getWriter();
+		Vediotape vedio = this.vedioService.getVediotapeByName(vedioName);
 		
-		PrintWriter out = response.getWriter();
+		StringBuffer sb =new StringBuffer();
+		if(vedio!=null){
+			sb.append("影带已存在，请检查影带名称");
+		}else{
+			sb.append("SUCCESS");
+		}		
 		out.println(sb.toString());
 		out.close();
 		return NONE;

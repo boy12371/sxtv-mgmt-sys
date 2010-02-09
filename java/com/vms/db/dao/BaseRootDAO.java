@@ -126,6 +126,29 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		return Integer.parseInt(crt.uniqueResult().toString());
 	}
 
+	@Override
+	public List findAll(Class clz) throws Exception {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		return crt.list();
+	}
+	
+	@Override
+	public Object getUniqueResultByProperty(Class clz, Map<String, Object> propertiesValues) throws Exception {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		if (propertiesValues != null) {
+			Set<String> keys = propertiesValues.keySet();
+			Iterator<String> it = keys.iterator();
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				crt.add(Restrictions.eq(key, propertiesValues.get(key)));
+			}
+		}
+		return crt.uniqueResult();
+
+	}
+
 	public Query getQuery(String hqlString) {
 		return this.getSession().createQuery(hqlString);
 	}
@@ -134,11 +157,6 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		return this.getSession().createCriteria(clz);
 	}
 
-	@Override
-	public List findAll(Class clz) throws Exception {
-		// TODO Auto-generated method stub
-		Criteria crt = this.getCriteria(clz);
-		return crt.list();
-	}
+	
 
 }
