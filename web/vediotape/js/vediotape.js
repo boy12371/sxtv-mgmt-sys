@@ -36,13 +36,12 @@ var subjects = []
 function buildArray(array, selectId) {
 	var obj = YAHOO.util.Dom.get(selectId);
 	var ops = obj.options;
-	for (var i = 0; i < ops.length; i++) {
-		array.push({
-					label : ops[i].innerHTML,
-					value : ops[i].value
-				});
-	}
-
+		for (var i = 0; i < ops.length; i++) {
+			array.push({
+						label : ops[i].innerHTML,
+						value : ops[i].value
+					});
+		}	
 }
 
 function initDataTable() {
@@ -63,12 +62,25 @@ function initDataTable() {
 
 		elCell.innerHTML = oData["companyName"];
 	}
-	var formatTopic = function(elCell, oRecord, oColumn, oData) {
-		elCell.innerHTML = oData["topic"];
+	var formatTopic = function(elCell, oRecord, oColumn, xData) {
+		
+		if(typeof(xData) != "object"){
+			var _id = parseInt(xData);
+			
+			for(var i=0 ;i<topices.length;i++){
+				if(_id == topices[i].value){					
+					xData = {id:topices[i].value, topic:topices[i].label}
+				}				
+			}
+		}
+
+		elCell.innerHTML = xData["topic"];
+	//	elCell.innerHTML = oData;
 	}
 	var formatSubject = function(elCell, oRecord, oColumn, oData) {
 		elCell.innerHTML = oData["subject"];
 	}
+	//var subjectSel = ;
 	var myColumnDefs = [{
 				key : "vid",
 				label : "编号",
@@ -103,9 +115,9 @@ function initDataTable() {
 				sortable : true,
 				formatter : formatSubject,
 				editor : new YAHOO.widget.DropdownCellEditor({
-							dropdownOptions : subjects,
-							disableBtns : true
-						})
+					dropdownOptions : subjects,
+					disableBtns : true
+				})
 			}, {
 				key : "vdate",
 				label : "收带日期",
@@ -118,7 +130,11 @@ function initDataTable() {
 							disableBtns : false
 						})
 			}];
-
+	//subjectSel.on("change",function(){alert(11);});
+	//YAHOO.util.Event.addListener(subjectSel, "click", function(){alert(11);});
+	//subjectSel.dropdown.onchange = function(){
+	//	alert(11);
+	//}
 	var myDataSource = new YAHOO.util.DataSource([]);
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 	myDataSource.responseSchema = {
@@ -197,18 +213,26 @@ function initDataTable() {
 				if (i != 0 && i < len) {
 					jasonString += ",";
 				}
+				var vc ="";
+				if(typeof oData.getData("vcompany") != "object"){
+					vc = oData.getData("vcompany"); 
+				}else{
+					vc = oData.getData("vcompany").id;
+				}
+				
 				jasonString += "{id:" + oData.getData("vid") + ",vedioName:\""
 						+ oData.getData("vname") + "\",companyID:"
 						+ oData.getData("vcompany").id + ",topic:"
-						+ oData.getData("vtopic").id + ",subject:"
+						+ oData.getData("vtopic") + ",subject:"
 						+ oData.getData("vsubject").id + ",comments:\""
 						+ oData.getData("vcomments") + "\"}";
 			}
 			jasonString += "]";
 
+			alert(jasonString);
 			data.value = jasonString;
 			// alert(data.value);
-			form.submit();
+			//form.submit();
 		} else {
 			alert("尚未添加任何影带信息");
 		}
