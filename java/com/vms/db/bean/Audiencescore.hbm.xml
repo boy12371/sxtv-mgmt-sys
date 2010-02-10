@@ -6,12 +6,46 @@
 <hibernate-mapping package="com.vms.db.bean">
 	<class name="Audiencescore" table="audiencescore">
 		<meta attribute="sync-DAO">true</meta>
-		<composite-id name="Id" class="AudienceScorePK">
-			<key-many-to-one name="audienceID"	class="Audience" column="audienceID"/>
-			<key-many-to-one name="vedioID" class="Vediotape" column="vedioID"/>
-		</composite-id>
-		<property name="dateExamine" column="dateExamine" type="timestamp" not-null="true" length="19"/>
-		<property name="result" column="result" type="integer" not-null="true" length="10"/>
-		<property name="comments" column="comments" type="string" not-null="false" length="512"/>
+		<id name="id" type="integer" column="id">
+			<generator class="identity"/>
+		</id>
+
+		<property
+			name="dateExamine"
+			column="dateExamine"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="result"
+			column="result"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="comments"
+			column="comments"
+			type="string"
+			not-null="false"
+			length="512"
+		/>
+		<many-to-one
+			name="audienceID"
+			column="audienceID"
+			class="Audience"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="vedioID"
+			column="vedioID"
+			class="Vediotape"
+			not-null="true"
+		>
+		</many-to-one>
+
+
 	</class>	
 </hibernate-mapping>
