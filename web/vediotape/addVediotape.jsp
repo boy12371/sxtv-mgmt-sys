@@ -46,7 +46,7 @@
 		<td><label>影带编号</label></td>
 		<td><input type="text" name="textfield" id="vid" /></td>
 		<td><label>剧目名称</label></td>
-		<td><input type="text" name="textfield" id="vname" /></td>
+		<td><input type="text" name="textfield" id="vname"/></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>

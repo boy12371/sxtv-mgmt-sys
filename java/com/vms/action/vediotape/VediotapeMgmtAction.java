@@ -56,6 +56,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	private List<Vediotape> convertJASSONStringToVedio(){
 		JSONArray jasonArray = JSONArray.fromObject(this.jasonDataString);
+		System.out.println(jasonArray);
 		if(jasonArray.isArray() && !jasonArray.isEmpty()){
 			List<Vediotape> vedios = new ArrayList<Vediotape>();
 			SessionUserInfo userInfo = (SessionUserInfo)session.getAttribute("SessionUserInfo");
@@ -91,7 +92,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	}
 	
 	public List<Subject> getSubList() throws Exception{
-		return subjectService.findAllSubjects(-1, 01, Subject.PROP_ID, true);
+		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
 	}
 	
 	

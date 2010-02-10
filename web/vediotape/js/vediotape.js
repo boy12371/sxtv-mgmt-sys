@@ -1,47 +1,16 @@
-
-
-function isVedioNameValid(inputEl) {
-	var callbacks = {
-		success : function(o) {
-			YAHOO.log("RAW JSON DATA: " + o.responseText);
-			// Process the JSON data returned from the server
-			var obj = o.responseText;
-
-			if (obj.indexOf("SUCCESS") == -1) {
-				var msg = "<font color='red'>" + obj + "</font>";
-				alert(obj);
-				// YAHOO.util.Dom.insertAfter(msg,inputEl);
-			}
-
-		},
-
-		failure : function(o) {
-			if (!YAHOO.util.Connect.isCallInProgress(o)) {
-				alert("Async call failed!");
-			}
-		},
-
-		timeout : 3000
-	}
-
-	var vedioName = inputEl.value;
-	var url = "/tv/vedio/isVediotapeExsits.action?vedioName=" + vedioName;
-	YAHOO.util.Connect.asyncRequest('GET', url, callbacks);
-}
-
 var isBuild = false;
 var companies = [];
 var topices = [];
-var subjects = []
+var subjects = [];
 function buildArray(array, selectId) {
 	var obj = YAHOO.util.Dom.get(selectId);
 	var ops = obj.options;
-		for (var i = 0; i < ops.length; i++) {
-			array.push({
-						label : ops[i].innerHTML,
-						value : ops[i].value
-					});
-		}	
+	for (var i = 0; i < ops.length; i++) {
+		array.push({
+					label : ops[i].innerHTML,
+					value : ops[i].value
+				});
+	}
 }
 
 function initDataTable() {
@@ -59,28 +28,51 @@ function initDataTable() {
 		}
 	}
 	var formatCompany = function(elCell, oRecord, oColumn, oData) {
-
+		if (typeof(oData) != "object") {
+			var _id = parseInt(oData);
+			for (var i = 0; i < companies.length; i++) {
+				if (_id == companies[i].value) {
+					oData = {
+						id : companies[i].value,
+						companyName : companies[i].label
+					}
+				}
+			}
+		}
 		elCell.innerHTML = oData["companyName"];
 	}
-	var formatTopic = function(elCell, oRecord, oColumn, xData) {
-		
-		if(typeof(xData) != "object"){
-			var _id = parseInt(xData);
-			
-			for(var i=0 ;i<topices.length;i++){
-				if(_id == topices[i].value){					
-					xData = {id:topices[i].value, topic:topices[i].label}
-				}				
+	var formatTopic = function(elCell, oRecord, oColumn, oData) {
+
+		if (typeof(oData) != "object") {
+			var _id = parseInt(oData);
+			for (var i = 0; i < topices.length; i++) {
+				if (_id == topices[i].value) {
+					oData = {
+						id : topices[i].value,
+						topic : topices[i].label
+					}
+				}
 			}
 		}
 
-		elCell.innerHTML = xData["topic"];
-	//	elCell.innerHTML = oData;
+		elCell.innerHTML = oData["topic"];
+		// elCell.innerHTML = oData;
 	}
 	var formatSubject = function(elCell, oRecord, oColumn, oData) {
+		if (typeof(oData) != "object") {
+			var _id = parseInt(oData);
+			for (var i = 0; i < subjects.length; i++) {
+				if (_id == subjects[i].value) {
+					oData = {
+						id : subjects[i].value,
+						subject : subjects[i].label
+					}
+				}
+			}
+		}
 		elCell.innerHTML = oData["subject"];
 	}
-	//var subjectSel = ;
+	// var subjectSel = ;
 	var myColumnDefs = [{
 				key : "vid",
 				label : "编号",
@@ -115,9 +107,9 @@ function initDataTable() {
 				sortable : true,
 				formatter : formatSubject,
 				editor : new YAHOO.widget.DropdownCellEditor({
-					dropdownOptions : subjects,
-					disableBtns : true
-				})
+							dropdownOptions : subjects,
+							disableBtns : true
+						})
 			}, {
 				key : "vdate",
 				label : "收带日期",
@@ -130,11 +122,7 @@ function initDataTable() {
 							disableBtns : false
 						})
 			}];
-	//subjectSel.on("change",function(){alert(11);});
-	//YAHOO.util.Event.addListener(subjectSel, "click", function(){alert(11);});
-	//subjectSel.dropdown.onchange = function(){
-	//	alert(11);
-	//}
+
 	var myDataSource = new YAHOO.util.DataSource([]);
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 	myDataSource.responseSchema = {
@@ -193,14 +181,62 @@ function initDataTable() {
 
 	};
 
+	isVedioNameValid = function() {
+		var callbacks = {
+			success : function(o) {
+				YAHOO.log("RAW JSON DATA: " + o.responseText);
+				// Process the JSON data returned from the server
+				var obj = o.responseText;
+				if (obj.indexOf("SUCCESS") != -1) {
+					myDataTable.addRow(getData(), 0);
+				} else {
+					alert(obj);
+					return;
+				}
+			},
+			failure : function(o) {
+				if (!YAHOO.util.Connect.isCallInProgress(o)) {
+					alert("Async call failed!");
+				}
+			},
+			timeout : 3000
+		}
+
+		var videoName = YAHOO.util.Dom.get("vname").value;
+		var url = "/tv/vedio/isVediotapeExsits.action?vedioName=" + videoName;
+		YAHOO.util.Connect.asyncRequest('GET', url, callbacks);
+	}
 	var handleClick = function() {
-		myDataTable.addRow(getData(), 0);
+		var dataSet = myDataTable.getRecordSet().getRecords();
+		if (dataSet.length == 0) {
+			isVedioNameValid();
+		} else {
+			var videoName = YAHOO.util.Dom.get("vname").value;
+			for (var i = 0; i < dataSet.length; i++) {
+				var record = dataSet[i];
+				if (record.getData("vname") == videoName) {
+					alert("列表中已有此剧目，请检查剧目名称。");
+					return;
+				}
+			}
+			isVedioNameValid();
+		}
 	}
 
 	var btn = new YAHOO.widget.Button("go");
 	btn.on("click", handleClick);
 
+	getRealData = function(dataObj, fieldName) {
+		var realValue = "";
+		if (typeof dataObj != "object") {
+			realValue = dataObj;
+		} else {
+			realValue = dataObj.id;
+		}
+		return realValue;
+	}
 	var handleSubmit = function() {
+		
 		var records = myDataTable.getRecordSet().getRecords();
 		var len = records.length;
 		if (len != 0) {
@@ -213,59 +249,28 @@ function initDataTable() {
 				if (i != 0 && i < len) {
 					jasonString += ",";
 				}
-				var vc ="";
-				if(typeof oData.getData("vcompany") != "object"){
-					vc = oData.getData("vcompany"); 
-				}else{
-					vc = oData.getData("vcompany").id;
-				}
-				
-				jasonString += "{id:" + oData.getData("vid") + ",vedioName:\""
-						+ oData.getData("vname") + "\",companyID:"
-						+ oData.getData("vcompany").id + ",topic:"
-						+ oData.getData("vtopic") + ",subject:"
-						+ oData.getData("vsubject").id + ",comments:\""
+				var vc = getRealData(oData.getData("vcompany"), "company");
+				var vt = getRealData(oData.getData("vtopic"), "topic");
+				var vs = getRealData(oData.getData("vsubject"), "subject");
+
+				jasonString += "{id:\"" + oData.getData("vid") + "\",vedioName:\""
+						+ oData.getData("vname") + "\",companyID:" + vc
+						+ ",topic:" + vt + ",subject:" + vs + ",comments:\""
 						+ oData.getData("vcomments") + "\"}";
 			}
 			jasonString += "]";
 
 			alert(jasonString);
 			data.value = jasonString;
-			// alert(data.value);
-			//form.submit();
+			form.submit();
 		} else {
 			alert("尚未添加任何影带信息");
+			return;
 		}
 
 	}
 	var submitBtn = new YAHOO.widget.Button("submit");
 	submitBtn.on("click", handleSubmit);
-
-	var checkVedioName = function() {
-
-		var vName = YAHOO.util.Dom.get("vname");
-		var records = myDataTable.getRecordSet().getRecords();
-		var len = records.length;
-		var exists = false;
-		if (len != 0) {
-			for (var i = 0; i < len; i++) {
-				var oData = records[i];
-				var _vname = oData.getData("vname");
-				if (vName.value == _vname) {
-					alert("影带已存在，请检查影带名称");
-					exists = true;
-					break;
-				}
-			}
-			if (exists == false) {
-				isVedioNameValid(vName);
-			}
-		}
-	}
-
-	var vedioName = YAHOO.util.Dom.get("vname");
-	YAHOO.util.Event.addListener(vedioName, "blur", checkVedioName);
-	// vedioName.on("blur", checkVedioName);
 
 	var onContextMenuClick = function(p_sType, p_aArgs, p_myDataTable) {
 		var task = p_aArgs[1];
