@@ -44,20 +44,23 @@ INSERT INTO `audience` VALUES (4,'赵六',NULL,NULL,NULL,NULL);
 
 DROP TABLE IF EXISTS `audiencescore`;
 CREATE TABLE `audiencescore` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `vedioID` varchar(128) NOT NULL DEFAULT '0',
   `audienceID` int(11) NOT NULL DEFAULT '0',
   `dateExamine` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `result` int(11) NOT NULL DEFAULT '0',
   `comments` varchar(512) DEFAULT NULL,
-  UNIQUE KEY `pk` (`vedioID`,`audienceID`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_key` (`vedioID`,`audienceID`),
+  KEY `vedioID` (`vedioID`),
   KEY `audienceID` (`audienceID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table audiencescore
 #
 
-INSERT INTO `audiencescore` VALUES ('0',2,'2009-03-01',1,NULL);
+INSERT INTO `audiencescore` VALUES (1,'0',2,'2009-03-01',1,NULL);
 
 #
 # Source for table auditing
@@ -374,6 +377,7 @@ CREATE TABLE `vedioscore` (
   `dateExamine` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `comments` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_key` (`vedioID`,`examiner`),
   KEY `vedioExaminer` (`examiner`),
   KEY `vedioID` (`vedioID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='评分表';
@@ -423,8 +427,8 @@ INSERT INTO `vediotape` VALUES ('2','12 Monkey',1,4,1,'2001-12-30','2001-01-31',
 #
 
 ALTER TABLE `audiencescore`
-ADD CONSTRAINT `audiencescore_ibfk_1` FOREIGN KEY (`audienceID`) REFERENCES `audience` (`id`),
-ADD CONSTRAINT `audiencescore_ibfk_2` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`);
+ADD CONSTRAINT `audiencescore_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`),
+ADD CONSTRAINT `audiencescore_ibfk_2` FOREIGN KEY (`audienceID`) REFERENCES `audience` (`id`);
 
 #
 #  Foreign keys for table auditing
