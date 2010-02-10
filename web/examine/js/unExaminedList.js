@@ -14,7 +14,26 @@ function initDataTable() {
 			elCell.innerHTML = sData;
 		}
 	};
-
+	var formatSelect = function(elCell, oRecord, oColumn, sData) {
+		var data = encodeURIComponent(oRecord.getData().vedioID);
+		var sel = document.createElement("select");
+		sel.id = "scoreSel";
+		sel.options.add(new Option("选择评价类型","0")); 
+		sel.options.add(new Option("专业人员打分","1")); 
+		sel.options.add(new Option("普通观众评价","2"));
+		sel.onchange = eval("(1,function(){selFunc(\"" + data + "\");})");
+		elCell.appendChild(sel);
+	};
+	function selFunc(vedioID){
+		var sel = document.getElementById("scoreSel");
+		var index=sel.selectedIndex;
+		var val = sel.options[index].value;
+		if(1 == val){
+			window.location="/tv/examine/toExamineTape.action?tape.vedioID=" + vedioID;
+		}else{
+			window.location="/tv/examine/toAudienceExamine.action?tape.vedioID=" + vedioID;
+		}
+	}
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -42,7 +61,11 @@ function initDataTable() {
 	}, {
 		key :"company",
 		label :"公司"
-	} ];
+	}, {
+		key :"",
+		lable :"影带评价",
+		formatter :formatSelect
+	}];
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getUnExaminedTapes.action?");
