@@ -15,7 +15,7 @@ public class Audiencescore extends BaseAudiencescore {
 	/**
 	 * Constructor for primary key
 	 */
-	public Audiencescore (com.vms.db.bean.AudienceScorePK id) {
+	public Audiencescore (java.lang.Integer id) {
 		super(id);
 	}
 
@@ -23,12 +23,16 @@ public class Audiencescore extends BaseAudiencescore {
 	 * Constructor for required fields
 	 */
 	public Audiencescore (
-		com.vms.db.bean.AudienceScorePK id,
+		java.lang.Integer id,
+		com.vms.db.bean.Audience audienceID,
+		com.vms.db.bean.Vediotape vedioID,
 		java.util.Date dateExamine,
 		java.lang.Integer result) {
 
 		super (
 			id,
+			audienceID,
+			vedioID,
 			dateExamine,
 			result);
 	}
