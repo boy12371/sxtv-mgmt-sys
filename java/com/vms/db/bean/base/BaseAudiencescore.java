@@ -15,10 +15,12 @@ import java.io.Serializable;
 public abstract class BaseAudiencescore  implements Serializable {
 
 	public static String REF = "Audiencescore";
+	public static String PROP_VEDIO_I_D = "vedioID";
 	public static String PROP_RESULT = "result";
 	public static String PROP_COMMENTS = "comments";
 	public static String PROP_DATE_EXAMINE = "dateExamine";
-	public static String PROP_ID = "Id";
+	public static String PROP_ID = "id";
+	public static String PROP_AUDIENCE_I_D = "audienceID";
 
 
 	// constructors
@@ -29,7 +31,7 @@ public abstract class BaseAudiencescore  implements Serializable {
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseAudiencescore (com.vms.db.bean.AudienceScorePK id) {
+	public BaseAudiencescore (java.lang.Integer id) {
 		this.setId(id);
 		initialize();
 	}
@@ -38,11 +40,15 @@ public abstract class BaseAudiencescore  implements Serializable {
 	 * Constructor for required fields
 	 */
 	public BaseAudiencescore (
-		com.vms.db.bean.AudienceScorePK id,
+		java.lang.Integer id,
+		com.vms.db.bean.Audience audienceID,
+		com.vms.db.bean.Vediotape vedioID,
 		java.util.Date dateExamine,
 		java.lang.Integer result) {
 
 		this.setId(id);
+		this.setAudienceID(audienceID);
+		this.setVedioID(vedioID);
 		this.setDateExamine(dateExamine);
 		this.setResult(result);
 		initialize();
@@ -55,20 +61,26 @@ public abstract class BaseAudiencescore  implements Serializable {
 	private int hashCode = Integer.MIN_VALUE;
 
 	// primary key
-	private com.vms.db.bean.AudienceScorePK id;
+	private java.lang.Integer id;
 
 	// fields
 	private java.util.Date dateExamine;
 	private java.lang.Integer result;
 	private java.lang.String comments;
 
+	// many to one
+	private com.vms.db.bean.Audience audienceID;
+	private com.vms.db.bean.Vediotape vedioID;
+
 
 
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
+     *  generator-class="sequence"
+     *  column="id"
      */
-	public com.vms.db.bean.AudienceScorePK getId () {
+	public java.lang.Integer getId () {
 		return id;
 	}
 
@@ -76,7 +88,7 @@ public abstract class BaseAudiencescore  implements Serializable {
 	 * Set the unique identifier of this class
 	 * @param id the new ID
 	 */
-	public void setId (com.vms.db.bean.AudienceScorePK id) {
+	public void setId (java.lang.Integer id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
@@ -131,6 +143,40 @@ public abstract class BaseAudiencescore  implements Serializable {
 	 */
 	public void setComments (java.lang.String comments) {
 		this.comments = comments;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: audienceID
+	 */
+	public com.vms.db.bean.Audience getAudienceID () {
+		return audienceID;
+	}
+
+	/**
+	 * Set the value related to the column: audienceID
+	 * @param audienceID the audienceID value
+	 */
+	public void setAudienceID (com.vms.db.bean.Audience audienceID) {
+		this.audienceID = audienceID;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: vedioID
+	 */
+	public com.vms.db.bean.Vediotape getVedioID () {
+		return vedioID;
+	}
+
+	/**
+	 * Set the value related to the column: vedioID
+	 * @param vedioID the vedioID value
+	 */
+	public void setVedioID (com.vms.db.bean.Vediotape vedioID) {
+		this.vedioID = vedioID;
 	}
 
 
