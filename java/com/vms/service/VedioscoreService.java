@@ -29,7 +29,7 @@ public class VedioscoreService implements IVedioscoreService {
 		List<User> users = vedioscoreDAO.findObjectByField(com.vms.db.bean.User.class, User.PROP_USER_NAME, username, -1, -1, true);
 		conditions.put(Vedioscore.PROP_EXAMINER, users.get(0));
 		List<VedioScoreVO> scoreVOs = new ArrayList<VedioScoreVO>();
-		List<Vedioscore> scores = vedioscoreDAO.findObjectByFields(VedioscoreDAO.clz,conditions,startIndex,endIndex,Vedioscore.PROP_DATE_EXAMINE,false);
+		List<Vedioscore> scores = vedioscoreDAO.findObjectByFields(VedioscoreDAO.clz,conditions,startIndex,endIndex,propertyName,false);
 		for(Vedioscore score:scores){
 			scoreVOs.add(new VedioScoreVO(score));
 		}
