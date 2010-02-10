@@ -31,5 +31,19 @@
 		<action name="doExamineTape" class="examineMgmt" method="doExamineTape">
 			<result>/examine/examineTape.jsp</result>
 		</action>
+		
+		<action name="toAudienceExamine" class="audienceExamineMgmt" method="toAudienceExamine">
+			<result>/examine/audienceExamine.jsp</result>
+		</action>
+		
+		<action name="getAudienceExamine" class="audienceExamineMgmt" method="getAudienceExamine">
+			<result type="json">
+				<param name="root">audienceExamineTable</param>
+			</result>
+		</action>
+		
+		<action name="doAudienceExamine" class="audienceExamineMgmt" method="doAudienceExamine">
+			<result>/examine/audienceExamine.jsp</result>
+		</action>
 	</package>
 </struts>
