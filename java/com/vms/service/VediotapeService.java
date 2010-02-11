@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IVediotapeDAO;
 import com.vms.service.iface.IVediotapeService;
@@ -75,6 +76,10 @@ public class VediotapeService implements IVediotapeService {
 	public void setVediotapeDAO(IVediotapeDAO vediotapeDAO) {
 		this.vediotapeDAO = vediotapeDAO;
 	}
-
 	
+	public VedioTapeVO getTapeByID(String ID) throws Exception {
+		Vediotape tape = (Vediotape)vediotapeDAO.getObject(Vediotape.class, ID);
+		return new VedioTapeVO(tape);
+	}
+
 }

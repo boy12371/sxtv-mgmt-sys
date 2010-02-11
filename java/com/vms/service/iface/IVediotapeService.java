@@ -3,6 +3,7 @@ package com.vms.service.iface;
 import java.util.List;
 import java.util.Map;
 
+import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Vediotape;
 
 public interface IVediotapeService {	
@@ -38,5 +39,5 @@ public interface IVediotapeService {
 	
 	Vediotape getVediotapeByName(String vedioName)throws Exception;
 	
-	
+	VedioTapeVO getTapeByID(String ID) throws Exception;
 }
