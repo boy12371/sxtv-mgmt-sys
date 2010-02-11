@@ -10,7 +10,8 @@
 	</bean>
 	
 	<bean id="audienceExamineMgmt" class="com.vms.action.examine.AudienceExamineAction" scope="prototype">
-		<property name="audienceExamineService" ref="audienceExamineService" />
+		<property name="audienceExamineService" ref="audienceScoreService" />
+		<property name="tapeService" ref="vediotapeService" />
 	</bean>
 	
 </beans>

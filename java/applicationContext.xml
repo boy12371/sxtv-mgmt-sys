@@ -98,7 +98,7 @@
 				<value>topicService</value>
 				<value>userService</value>
 				<value>roleService</value>
-				<value>audienceExamineService</value>
+				<value>audienceScoreService</value>
 			</list>
 		</property>
 		<property name="interceptorNames">
@@ -159,7 +159,7 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<bean id="audienceExamineDAO" class="com.vms.db.dao.AudienceExamineDAO">
+	<bean id="audienceScoreDAO" class="com.vms.db.dao.AudienceScoreDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<!--
@@ -196,8 +196,8 @@
 	<bean id="userRoleService" class="com.vms.service.UserRoleService">
 		<property name="userRoleDAO" ref="userRoleDAO" />
 	</bean>
-	<bean id="audienceExamineService" class="com.vms.service.AudienceExamineService">
-		<property name="audienceExamineDAO" ref="audienceExamineDAO" />
+	<bean id="audienceScoreService" class="com.vms.service.AudienceScoreService">
+		<property name="audienceScoreDAO" ref="audienceScoreDAO" />
 	</bean>
 	<!--
 			Proxy Service ********************************************************

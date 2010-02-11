@@ -10,7 +10,8 @@ import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.db.bean.Audience;
-import com.vms.service.iface.IAudienceExamineService;
+import com.vms.service.iface.IAudienceScoreService;
+import com.vms.service.iface.IVediotapeService;
 
 public class AudienceExamineAction extends BaseAction {
 
@@ -18,8 +19,10 @@ public class AudienceExamineAction extends BaseAction {
 
 	private static Logger logger = Logger.getLogger(AudienceExamineAction.class);
 	
-	private IAudienceExamineService audienceExamineService;
+	private IAudienceScoreService audienceExamineService;
 	
+	private IVediotapeService tapeService;
+
 	private JSONDataTable audienceExamineTable;
 	
 	private List<Audience> audience;
@@ -28,6 +31,7 @@ public class AudienceExamineAction extends BaseAction {
 
 	public String toAudienceExamine() throws Exception {
 		try{
+			tape = tapeService.getTapeByID(tape.getVedioID());
 			setAudience(audienceExamineService.getAllAudience("name", true));
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
@@ -63,11 +67,11 @@ public class AudienceExamineAction extends BaseAction {
 		return audienceExamineTable;
 	}
 
-	public void setAudienceExamineService(IAudienceExamineService audienceExamineService) {
+	public void setAudienceExamineService(IAudienceScoreService audienceExamineService) {
 		this.audienceExamineService = audienceExamineService;
 	}
 
-	public IAudienceExamineService getAudienceExamineService() {
+	public IAudienceScoreService getAudienceExamineService() {
 		return audienceExamineService;
 	}
 
@@ -87,4 +91,11 @@ public class AudienceExamineAction extends BaseAction {
 		return tape;
 	}
 	
+	public IVediotapeService getTapeService() {
+		return tapeService;
+	}
+
+	public void setTapeService(IVediotapeService tapeService) {
+		this.tapeService = tapeService;
+	}
 }
