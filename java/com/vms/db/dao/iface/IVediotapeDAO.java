@@ -55,4 +55,5 @@ public interface IVediotapeDAO extends IBaseRootDAO {
 	List<Vediotape> findAllVideosInScope(String scopeName,Object[] values, String propertyName, int startIndex, int endIndex, boolean asceding)
 			throws Exception;
 
+	int getVedioTotalCountByStatus(Status status) throws Exception;
 }

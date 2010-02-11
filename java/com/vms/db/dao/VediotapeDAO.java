@@ -123,6 +123,8 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		
 	}
 
-	
+	public int getVedioTotalCountByStatus(Status status) throws Exception {
+		return this.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS, status);
+	}
 
 }
