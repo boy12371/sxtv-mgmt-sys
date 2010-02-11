@@ -8,18 +8,24 @@ import java.util.Map;
 import com.vms.beans.AudienceExamineVO;
 import com.vms.db.bean.Audience;
 import com.vms.db.bean.Audiencescore;
-import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
-import com.vms.db.dao.VedioscoreDAO;
-import com.vms.db.dao.iface.IAudienceExamineDAO;
-import com.vms.service.iface.IAudienceExamineService;
+import com.vms.db.dao.iface.IAudienceScoreDAO;
+import com.vms.service.iface.IAudienceScoreService;
 
-public class AudienceExamineService implements IAudienceExamineService{
+public class AudienceScoreService implements IAudienceScoreService{
 	
-	private IAudienceExamineDAO audienceExamineDAO;
+	private IAudienceScoreDAO audienceScoreDAO;
 	
+	public IAudienceScoreDAO getAudienceScoreDAO() {
+		return audienceScoreDAO;
+	}
+
+	public void setAudienceScoreDAO(IAudienceScoreDAO audienceScoreDAO) {
+		this.audienceScoreDAO = audienceScoreDAO;
+	}
+
 	public List<Audience> getAllAudience(String propertyName, boolean ascending) throws Exception{
-		return audienceExamineDAO.findObjectByFields(Audience.class, null, -1, -1, propertyName, ascending);
+		return audienceScoreDAO.findObjectByFields(Audience.class, null, -1, -1, propertyName, ascending);
 	}
 	
 	public List<AudienceExamineVO> getAudienceScoreOfTape(String vedioID, int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception{
@@ -30,7 +36,7 @@ public class AudienceExamineService implements IAudienceExamineService{
 		tape.setId(vedioID);		
 		conditions.put(Audiencescore.PROP_VEDIO_I_D, tape);
 		
-		List<Audiencescore> AEs= audienceExamineDAO.findObjectByFields(Audiencescore.class,conditions,startIndex,endIndex,propertyName,false);
+		List<Audiencescore> AEs= audienceScoreDAO.findObjectByFields(Audiencescore.class,conditions,startIndex,endIndex,propertyName,false);
 		for(Audiencescore AE:AEs){
 			AEVOs.add(new AudienceExamineVO(AE));
 		}
@@ -40,14 +46,7 @@ public class AudienceExamineService implements IAudienceExamineService{
 	public int getCountAudienceOfTape(String vedioID) throws Exception{
 		Vediotape tape = new Vediotape();
 		tape.setId(vedioID);
-		return audienceExamineDAO.getObjectTotalCountByFields(Audiencescore.class, Audiencescore.PROP_VEDIO_I_D, tape);
+		return audienceScoreDAO.getObjectTotalCountByFields(Audiencescore.class, Audiencescore.PROP_VEDIO_I_D, tape);
 	}
 
-	public void setAudienceExamineDAO(IAudienceExamineDAO audienceExamineDAO) {
-		this.audienceExamineDAO = audienceExamineDAO;
-	}
-
-	public IAudienceExamineDAO getAudienceExamineDAO() {
-		return audienceExamineDAO;
-	}
 }
