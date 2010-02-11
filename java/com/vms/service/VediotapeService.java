@@ -51,7 +51,7 @@ public class VediotapeService implements IVediotapeService {
 			int endIndex, boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(Vediotape.PROP_STATUS, status);
+		map.put(Vediotape.PROP_STATUS+".id", status);
 		return (List<Vediotape>) vediotapeDAO
 				.findObjectByFields(clz, map, startIndex, endIndex, propertyName, asceding);
 

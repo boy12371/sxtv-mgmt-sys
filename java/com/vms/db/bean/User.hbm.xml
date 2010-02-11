@@ -17,26 +17,28 @@
 		<many-to-one name="employee" column="employee" class="Employee"
 			not-null="true" lazy="false">
 		</many-to-one>
-		<set name="vedioscores" inverse="true">
+		<!--
+		<set name="vedioscores" inverse="true" lazy="false">
 			<key column="examiner" not-null="false" />
 			<one-to-many class="Vedioscore" />
 		</set>
-		<set name="playorders" inverse="true">
+		<set name="playorders" inverse="true" lazy="false">
 			<key column="auditor" not-null="false"/>
 			<one-to-many class="Playorder" />
 		</set>
-		<set name="playchangelogs" inverse="true">
+		<set name="playchangelogs" inverse="true" lazy="false">
 			<key column="auditor" not-null="false"/>
 			<one-to-many class="Playchangelog" />
 		</set>
-		<set name="vediotapes" inverse="true">
+		<set name="vediotapes" inverse="true" lazy="false" >
 			<key column="inputer" not-null="false"/>
 			<one-to-many class="Vediotape" />
 		</set>
-		<set name="auditings" inverse="true">
+		<set name="auditings" inverse="true" lazy="false">
 			<key column="auditor" not-null="false"/>
 			<one-to-many class="Auditing" />
 		</set>
+		-->
 		<set name="Roles" table="user_role" cascade="all">
 			<key column="userID" not-null="false"/>
 			<many-to-many column="roleid" class="Role" />

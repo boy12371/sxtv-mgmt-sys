@@ -18,9 +18,11 @@
 			not-null="true" length="50" />
 		<property name="comments" column="comments" type="string"
 			not-null="true" length="512" />
+			<!--
 		<set name="vediotapes" inverse="true">
 			<key column="companyID" not-null="false"/>
 			<one-to-many class="Vediotape" />
 		</set>
+		-->
 	</class>
 </hibernate-mapping>
