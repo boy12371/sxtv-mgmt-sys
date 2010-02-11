@@ -6,7 +6,7 @@
 	<class name="Playorder" table="playorder">
 		<meta attribute="sync-DAO">true</meta>
 		<id name="id" type="integer" column="Id">
-			<generator class="identity" />
+			<generator class="native" />
 		</id>
 		<property name="playDate" column="playDate" type="timestamp"
 			not-null="true" length="19" />

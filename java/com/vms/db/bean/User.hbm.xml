@@ -6,7 +6,7 @@
 	<class name="User" table="user">
 		<meta attribute="sync-DAO">true</meta>
 		<id name="id" type="integer" column="userID">
-			<generator class="identity" />
+			<generator class="native" />
 		</id>
 		<property name="userName" column="userName" type="string"
 			not-null="true" length="50" />
@@ -18,27 +18,27 @@
 			not-null="true" lazy="false">
 		</many-to-one>
 		<set name="vedioscores" inverse="true">
-			<key column="examiner" />
+			<key column="examiner" not-null="false" />
 			<one-to-many class="Vedioscore" />
 		</set>
 		<set name="playorders" inverse="true">
-			<key column="auditor" />
+			<key column="auditor" not-null="false"/>
 			<one-to-many class="Playorder" />
 		</set>
 		<set name="playchangelogs" inverse="true">
-			<key column="auditor" />
+			<key column="auditor" not-null="false"/>
 			<one-to-many class="Playchangelog" />
 		</set>
 		<set name="vediotapes" inverse="true">
-			<key column="inputer" />
+			<key column="inputer" not-null="false"/>
 			<one-to-many class="Vediotape" />
 		</set>
 		<set name="auditings" inverse="true">
-			<key column="auditor" />
+			<key column="auditor" not-null="false"/>
 			<one-to-many class="Auditing" />
 		</set>
 		<set name="Roles" table="user_role" cascade="all">
-			<key column="userID" />
+			<key column="userID" not-null="false"/>
 			<many-to-many column="roleid" class="Role" />
 		</set>
 	</class>

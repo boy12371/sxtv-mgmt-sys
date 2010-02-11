@@ -6,7 +6,7 @@
 	<class name="Subject" table="subject">
 		<meta attribute="sync-DAO">true</meta>
 		<id name="id" type="integer" column="subjectID">
-			<generator class="identity" />
+			<generator class="native" />
 		</id>
 		<property name="subjectName" column="subjectName" type="string"
 			not-null="true" length="128" />

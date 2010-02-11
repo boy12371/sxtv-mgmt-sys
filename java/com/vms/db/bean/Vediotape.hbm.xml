@@ -25,15 +25,15 @@
 		<many-to-one name="companyID" column="companyID" class="Company" not-null="true">
 		</many-to-one>
 		<set name="vedioscores" inverse="true">
-			<key column="vedioID" />
+			<key column="vedioID" not-null="false" />
 			<one-to-many class="Vedioscore" />
 		</set>
 		<set name="playorders" inverse="true">
-			<key column="vedioID" />
+			<key column="vedioID" not-null="false"/>
 			<one-to-many class="Playorder" />
 		</set>
 		<set name="playchangelogs" inverse="true">
-			<key column="vedioID" />
+			<key column="vedioID" not-null="false"/>
 			<one-to-many class="Playchangelog" />
 		</set>
 	</class>

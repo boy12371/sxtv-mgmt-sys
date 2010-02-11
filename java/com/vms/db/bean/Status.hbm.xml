@@ -6,13 +6,13 @@
 	<class name="Status" table="status">
 		<meta attribute="sync-DAO">true</meta>
 		<id name="id" type="integer" column="statusID">
-			<generator class="identity" />
+			<generator class="native" />
 		</id>
 		<property name="status" column="status" type="string"
 			not-null="true" length="50" />
 		<property name="comments" column="comments" type="string"
 			not-null="true" length="512" />
-		<set name="vediotapes" inverse="true">
+		<set name="vediotapes" inverse="false">
 			<key column="status" not-null="false"/>
 			<one-to-many class="Vediotape" />
 		</set>

@@ -6,7 +6,7 @@
 	<class name="Playchangelog" table="playchangelog">
 		<meta attribute="sync-DAO">true</meta>
 		<id name="id" type="integer" column="Id">
-			<generator class="identity" />
+			<generator class="native" />
 		</id>
 		<property name="fromDate" column="fromDate" type="timestamp"
 			not-null="false" length="19" />

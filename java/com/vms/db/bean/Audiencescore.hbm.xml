@@ -7,7 +7,7 @@
 	<class name="Audiencescore" table="audiencescore">
 		<meta attribute="sync-DAO">true</meta>
 		<id name="id" type="integer" column="id">
-			<generator class="identity"/>
+			<generator class="native"/>
 		</id>
 
 		<property

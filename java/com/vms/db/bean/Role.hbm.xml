@@ -7,7 +7,7 @@
 	<class name="Role" table="role">
 		<meta attribute="sync-DAO">false</meta>
 		<id name="Id" type="integer" column="id">
-			<generator class="identity"/>
+			<generator class="native"/>
 		</id>
 		<property name="Name" column="name"	type="string" not-null="true" length="25"/>
 		<property name="Comments" column="comments"	type="string" not-null="true" length="512"/>

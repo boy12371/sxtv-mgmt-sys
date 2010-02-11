@@ -3,6 +3,7 @@ package com.vms.action.sysconfig;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.json.annotations.JSON;
 
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
@@ -25,6 +26,7 @@ public class CompanyMgmtAction extends BaseAction {
 		return SUCCESS;
 	}
 
+	@JSON(serialize=false)
 	public String getCompanies() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {

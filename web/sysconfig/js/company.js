@@ -51,7 +51,7 @@ function initDataTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=id&dir=asc&startIndex=0&results=10", // Initial
+		initialRequest :"sort=id&dir=asc&startIndex=0&results=25", // Initial
 		// request
 		// for first
 		// page of
@@ -62,7 +62,7 @@ function initDataTable() {
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator( {
-			rowsPerPage :10
+			rowsPerPage :25
 		})
 	// Enables pagination
 	};

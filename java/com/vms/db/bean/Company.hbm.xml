@@ -6,7 +6,7 @@
 	<class name="Company" table="company">
 		<meta attribute="sync-DAO">true</meta>
 		<id name="id" type="integer" column="companyID">
-			<generator class="identity" />
+			<generator class="native" />
 		</id>
 		<property name="companyName" column="companyName" type="string"
 			not-null="true" length="128" />
@@ -19,7 +19,7 @@
 		<property name="comments" column="comments" type="string"
 			not-null="true" length="512" />
 		<set name="vediotapes" inverse="true">
-			<key column="companyID" />
+			<key column="companyID" not-null="false"/>
 			<one-to-many class="Vediotape" />
 		</set>
 	</class>

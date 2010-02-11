@@ -10,10 +10,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.objectweb.asm.xwork.Type;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.sun.org.apache.xpath.internal.Expression;
@@ -32,7 +35,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 	
 	public List<Vediotape> findVedioesByStatus(Status status ,int startIndex, int endIndex) throws Exception {
 		Map<String, Object> conditions = new HashMap<String, Object>();
-		conditions.put(Vediotape.PROP_STATUS, status);
+		conditions.put(Vediotape.PROP_STATUS+".id", status.getId());
 		
 		List<Vediotape> tapes = this.findObjectByFields(clz,conditions,startIndex,endIndex,Vediotape.PROP_DATE_COMING,true);
 		return tapes;
@@ -62,10 +65,6 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		}		  
 		 		
 	}
-	
-	public int getVedioTotalCountByStatus(Status status) throws Exception {
-		return this.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS, status);
-	}
 
 	@Override
 	public List<Vediotape> findVedioesInPeriod(Date dateStart, Date dateEnd, Map<String, Object> propertiesValues,
@@ -92,6 +91,35 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 			crt.setMaxResults(endIndex);
 		}
 		return crt.list();
+		
+	}
+
+	@Override
+	public List<Vediotape> findAllVideosInScope(String scopeName,Object[] values, String propertyName, int startIndex, int endIndex, boolean asceding)
+			throws Exception {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		crt.add(Restrictions.in(scopeName, values));
+		Order order = DaoUtils.getOrder(propertyName, asceding);
+		if (order != null) {
+			crt.addOrder(order);
+		}
+		if (startIndex != -1 && endIndex != -1) {
+			crt.setFirstResult(startIndex);
+			crt.setMaxResults(endIndex);
+		}
+		List<Vediotape> list = (List<Vediotape>) crt.list();
+		return list;
+		
+	}
+
+	@Override
+	public int getTotalCountForAllVideotapesForAudit() throws Exception {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		crt.add(Restrictions.in(Vediotape.PROP_STATUS+".id", new Object[]{2,3,4,5}));
+		crt.setProjection(Projections.rowCount());
+		return Integer.parseInt(crt.uniqueResult().toString());
 		
 	}
 

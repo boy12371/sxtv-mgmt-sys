@@ -14,7 +14,7 @@
 		</Module>
 		
 		<Module id="tapeAudit" name="影带审看" url="">
-			<ModuleItem id="audit" name="审看" url="http://www.baidu.com"/>
+			<ModuleItem id="audit" name="审看" url="/tv/audit/toAuditVideos.action"/>
 			<ModuleItem id="auditView" name="审看结果" url="http://www.google.com"/> 
 			<ModuleItem id="auditModify" name="修改" url="http://www.google.com"/> 
 		</Module>
