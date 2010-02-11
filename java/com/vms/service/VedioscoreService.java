@@ -26,7 +26,7 @@ public class VedioscoreService implements IVedioscoreService {
 	public List<VedioScoreVO> getUserExaminedVedioes(String username,int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception {
 		Map<String, Object> conditions = new HashMap<String, Object>();
 		
-		List<User> users = vedioscoreDAO.findObjectByField(com.vms.db.bean.User.class, User.PROP_USER_NAME, username, -1, -1, true);
+		List<User> users = vedioscoreDAO.findObjectByField(com.vms.db.bean.User.class, User.PROP_USER_NAME, username, -1, -1, User.PROP_ID, true);
 		conditions.put(Vedioscore.PROP_EXAMINER, users.get(0));
 		List<VedioScoreVO> scoreVOs = new ArrayList<VedioScoreVO>();
 		List<Vedioscore> scores = vedioscoreDAO.findObjectByFields(VedioscoreDAO.clz,conditions,startIndex,endIndex,propertyName,false);
@@ -57,14 +57,14 @@ public class VedioscoreService implements IVedioscoreService {
 	}
 	
 	public int getCountOfUserExaminedVedio(String username) throws Exception {
-		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, username, -1, -1, true);
+		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, username, -1, -1, "", true);
 		return vedioscoreDAO.getObjectTotalCountByFields(VedioscoreDAO.clz, Vedioscore.PROP_EXAMINER+".id", users.get(0).getId());
 	}
 	
 	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception{
 		Vedioscore score = scoreVO.toVedioscore();
 		//get examiner object for userID 
-		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, scoreVO.getExaminer(), -1, -1, true);
+		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, scoreVO.getExaminer(), -1, -1, "", true);
 		score.setExaminer(users.get(0));
 		
 		Map<String,Float> weights =  getWeights();
@@ -86,6 +86,23 @@ public class VedioscoreService implements IVedioscoreService {
 		return map;
 	}
 
+	@Override
+	public List<VedioScoreVO> findUserExamineScoreByVideoId(String videoID, int startIndex, int endIndex,
+			String propertyName, boolean ascending) throws Exception {
+		// TODO Auto-generated method stub
+		List<VedioScoreVO> voList =new ArrayList<VedioScoreVO>();
+		Map<String, Object> proMap =new HashMap<String, Object>();
+		proMap.put(Vedioscore.PROP_VEDIO_ID, videoID);
+		List<Vedioscore> list = vedioscoreDAO.findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO_ID, videoID, startIndex, endIndex, propertyName, ascending);
+		//List<Vedioscore> list = vedioscoreDAO.findObjectByFields(Vedioscore.class, proMap, startIndex, endIndex, propertyName, ascending);
+		if(list!=null && !list.isEmpty()){
+			for (Vedioscore vedioscore : list) {
+				voList.add(new VedioScoreVO(vedioscore));
+			}
+			
+		}
+		return voList;
+	}
 	public void setVedioscoreDAO(IVedioscoreDAO vedioscoreDAO) {
 		this.vedioscoreDAO = vedioscoreDAO;
 	}
@@ -101,6 +118,15 @@ public class VedioscoreService implements IVedioscoreService {
 	public IVediotapeDAO getVediotapeDAO() {
 		return vediotapeDAO;
 	}
+
+	@Override
+	public int getTotalCountUserExamineScoreByVideoId(String videoID) throws Exception {
+		// TODO Auto-generated method stub
+		return vediotapeDAO.getObjectTotalCountByFields(Vedioscore.class, Vedioscore.PROP_VEDIO_ID+".id", videoID);
+		
+	}
+
+	
 
 	
 }

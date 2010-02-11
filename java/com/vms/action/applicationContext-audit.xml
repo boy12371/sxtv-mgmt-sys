@@ -7,6 +7,8 @@
 	
 	<bean id="auditMgmt" class="com.vms.action.audit.AuditVideoMgmtAction" scope="prototype">
 		<property name="videoService" ref="vediotapeService" />
+		<property name="vedioscoreService" ref="vedioscoreService" />
+			<property name="audienceScoreService" ref="audienceScoreService" />
 	</bean>
 	
 </beans>

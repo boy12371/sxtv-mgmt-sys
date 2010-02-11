@@ -92,12 +92,11 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 	}
 
 	@Override
-	public List findObjectByField(Class clz, String propertyName, Object value, int startIndex, int endIndex,
-			boolean asceding) throws Exception {
+	public List findObjectByField(Class clz, String propertyName, Object value, int startIndex, int endIndex, String orderPropertyName, boolean asceding) throws Exception {
 		Criteria crt = this.getCriteria(clz);
 
 		crt.add(Restrictions.eq(propertyName, value));
-		Order order = DaoUtils.getOrder(propertyName, asceding);
+		Order order = DaoUtils.getOrder(orderPropertyName, asceding);
 		if (order != null) {
 			crt.addOrder(order);
 		}

@@ -22,7 +22,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	public static String PROP_ACCURACY = "accuracy";
 	public static String PROP_TECH_SCORE = "techScore";
 	public static String PROP_PERFORM_SCORE = "performScore";
-	public static String PROP_VEDIO_I_D = "vedioID";
+	public static String PROP_VEDIO_ID = "vedioID";
 	public static String PROP_PURCHASE = "purchase";
 	public static String PROP_ID = "id";
 	public static String PROP_STORY_SCORE = "storyScore";

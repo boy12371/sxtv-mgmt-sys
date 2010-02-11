@@ -26,6 +26,7 @@ import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
 import com.vms.db.bean.UserRole;
 import com.vms.db.bean.UserRolePK;
+import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.bean.base.BaseStatus;
 import com.vms.db.dao.AuditingDAO;
@@ -61,8 +62,8 @@ public class Test {
 //			System.out.println(vediotape.getId()+" / "+vediotape.getVedioName());
 //		}
 		
-		int totoal=service.getCountOfUserExaminedVedio("cat");
-		System.out.println(totoal);
+		List list = service.findUserExamineScoreByVideoId("2",0, 10, Vedioscore.PROP_SCORE, true);
+		System.out.println(list.size());
 		
 		// cal.get
 		// dao.findVedioesInPeriod(dateStart, dateEnd, propertiesValues,

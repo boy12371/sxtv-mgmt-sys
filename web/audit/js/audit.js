@@ -1,12 +1,17 @@
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./?.id=";
-		href += sData;
-		href += "'>" + sData + "</a>";
-		elCell.innerHTML = href;
+		if (oRecord.getData("status").id != 4) {
+			var href = "<a href='./audit/toAuditingVideo?videoID=";
+			href += sData;
+			href += "'>" + sData + "</a>";
+			elCell.innerHTML = href;
+		}else{
+			elCell.innerHTML = sData;
+		}
+
 	}
-	
+
 	var formatCompany = function(elCell, oRecord, oColumn, sData) {
 		elCell.innerHTML = sData.companyName;
 	}
@@ -32,11 +37,10 @@ function initDataTable() {
 				key : "id",
 				label : "编号",
 				sortable : true,
-				formatter: formatLink
+				formatter : formatLink
 			}, {
 				key : "vedioName",
-				label : "剧目名称",
-				formatter:formatLink
+				label : "剧目名称"
 			}, {
 				key : "topic",
 				label : "题材",
@@ -103,7 +107,9 @@ function initDataTable() {
 		sort = (oState.sortedBy)
 				? oState.sortedBy.key
 				: oSelf.getColumnSet().keys[0].getKey();
-		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC) ? "desc": "asc";
+		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC)
+				? "desc"
+				: "asc";
 		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
 				+ sort + "&dir=" + dir + "&filter=" + filterValue;
 	}
@@ -171,6 +177,120 @@ function initDataTable() {
 	// DataTable instance
 	var filter = YAHOO.util.Dom.get("filter");
 	YAHOO.util.Event.addListener(filter, "change", fireEvent);
+	return {
+		ds : myDataSource,
+		dt : myDataTable
+	};
+
+}
+
+function initScoreDataTable() {
+
+	var formatLink = function(elCell, oRecord, oColumn, sData) {
+		var href = "<a href='./?.id=";
+		href += sData;
+		href += "'>" + sData + "</a>";
+		elCell.innerHTML = href;
+	}
+
+	var formatCompany = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.companyName;
+	}
+	var formatTopic = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.topicName;
+	}
+	var formatSubject = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.subjectName;
+	}
+	var formatDate = function(elCell, oRecord, oColumn, sData) {
+		var idx = sData.indexOf("T");
+		if (idx != -1) {
+			elCell.innerHTML = sData.substring(0, idx);
+		} else {
+			elCell.innerHTML = sData;
+		}
+	}
+	var formatStatus = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.status;
+	}
+	// Column definitions
+	var myColumnDefs = [{
+				key : "vedioName",
+				label : "剧目名称",
+				formatter : formatLink
+			}, {
+				key : "storyScore",
+				label : "故事",
+				sortable : true,
+				formatter : formatTopic
+			}, {
+				key : "techScore",
+				label : "技术",
+				sortable : true,
+				formatter : formatSubject
+			}, {
+				key : "performScore",
+				label : "表演",
+				sortable : true,
+				formatter : formatCompany
+			}, {
+				key : "innovateScore",
+				label : "创新",
+				sortable : true
+			}, {
+				key : "score",
+				label : "综合得分",
+				sortable : true,
+				formatter : formatStatus
+			}, {
+				key : "dateExamine",
+				label : "评分日期"
+			}, {
+				key : "award",
+				label : "获奖"
+			}, {
+				key : "purchase",
+				label : "购买意见"
+			}];
+
+	// DataSource instance
+	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/getVideoScores.action?");
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+	myDataSource.responseSchema = {
+		resultsList : "records",
+		fields : ["vedioName", "storyScore", "techScore", "performScore",
+				"innovateScore", "score", "dateExamine", "award", "purchase"],
+		metaFields : {
+			totalRecords : "totalRecords" // Access to value in the server
+			// response
+		}
+	};
+
+	// DataTable configuration
+	var myConfigs = {
+		initialRequest : "sort=score&dir=asc&startIndex=0&results=25",
+		dynamicData : true, // Enables dynamic server-driven data
+		sortedBy : {
+			key : "score",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
+		}, // Sets UI initial sort arrow
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 25
+				})
+
+	};
+
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+			myDataSource, myConfigs);
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
+	}
+
+	// DataTable instance
+
 	return {
 		ds : myDataSource,
 		dt : myDataTable

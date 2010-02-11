@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
@@ -29,30 +28,60 @@
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/audit/js/audit.js"></script>
-<title>待审剧目</title>
+<title>审核剧目</title>
 </head>
 <body class="yui-skin-sam">
 
 
-<h1>待审剧目</h1>
+<h1>剧目详细信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
- 
-<select id="filter">
-<option value="0">All</option>
-<option value="2">待审剧目</option>
-<option value="3">通过剧目</option>
-<option value="4">修改剧目</option>
-<option value="5">重审剧目</option>
-</select>
+<table>
+
+	<tr>
+		<td><label>编号</label></td>
+		<td><s:property value="vv.vedioID" /></td>
+		<td><label>剧目名称</label></td>
+		<td><s:property value="vv.name" /></td>
+
+	</tr>
+	<tr>
+		<td><label>栏目</label></td>
+		<td><s:property value="vv.subject" /></td>
+		<td><label>题材</label></td>
+		<td><s:property value="vv.topic" /></td>
+
+	</tr>
+	<tr>
+		<td><label>影视公司</label></td>
+		<td><s:property value="vv.company" /></td>
+		<td><label>收录日期</label></td>
+		<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
+
+	</tr>
+	<tr>
+		<td><label>状态</label></td>
+		<td><s:property value="vv.status" /></td>
+		<td><label>观众评价</label></td>
+		<td><s:iterator value="vv.watching">
+
+		</s:iterator></td>
+
+	</tr>
+
+
+
+</table>
+
+
+<h1>评分信息</h1>
+<p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
+
 
 <div id="dynamicdata" align="center"></div>
+
+
 <script type="text/javascript">
-
-YAHOO.util.Event.addListener(window, "load", initDataTable);
-
-
+	YAHOO.util.Event.addListener(window, "load", initScoreDataTable);
 </script>
-
-
 </body>
 </html>

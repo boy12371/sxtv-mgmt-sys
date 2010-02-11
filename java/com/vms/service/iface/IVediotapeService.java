@@ -13,6 +13,8 @@ public interface IVediotapeService {
 	
 	List<Vediotape> findVideotapeByStatus(int status,String propertyName,
 			int startIndex, int endIndex, boolean asceding)throws Exception;
+	public List<Vediotape> findVediotapeByProperty(String propertyName, Object value, int startIndex, int endIndex,String orderPropertyName,
+			boolean asceding) throws Exception;
 	int getTotalCountForVideosByStatus(int status)throws Exception;
 	
 	

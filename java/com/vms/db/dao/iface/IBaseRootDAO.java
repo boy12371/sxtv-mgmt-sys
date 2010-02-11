@@ -72,7 +72,7 @@ public interface IBaseRootDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	List findObjectByField(Class clz, String propertyName, Object value, int startIndex, int endIndex, boolean asceding)
+	List findObjectByField(Class clz, String propertyName, Object value, int startIndex, int endIndex, String orderPropertyName, boolean asceding)
 			throws Exception;
 
 	/***
