@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IVediotapeDAO;
@@ -69,6 +70,27 @@ public class VediotapeService implements IVediotapeService {
 		return vediotapeDAO.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS+".id", status);
 	}
 
+	@Override
+	public VedioTapeVO getVideotapeById(String videoID, List<AudienceExamineVO> audienceVote) throws Exception {
+		// TODO Auto-generated method stub
+		Vediotape vt = (Vediotape) vediotapeDAO.getObject(clz, videoID);
+		VedioTapeVO vv =new VedioTapeVO(vt);
+		int size = audienceVote.size();
+		int watch=0;
+		for (int i = 0; i < size; i++) {
+			AudienceExamineVO aev = audienceVote.get(i);
+			if(aev.getResult().equals(AudienceExamineVO.yes)){
+				watch ++;
+			}
+			
+		}
+		Map<String,Integer> watching =new HashMap<String, Integer>();
+		watching.put(AudienceExamineVO.yes, new Integer(watch));
+		watching.put(AudienceExamineVO.no, new Integer(size-watch));
+		vv.setWatching(watching);
+		return vv;
+	}
+	
 	public IVediotapeDAO getVediotapeDAO() {
 		return vediotapeDAO;
 	}

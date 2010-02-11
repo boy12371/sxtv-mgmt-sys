@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.db.bean.Vediotape;
+import com.vms.service.iface.IAudienceScoreService;
 import com.vms.service.iface.IVediotapeService;
 
 public class AuditVideoMgmtAction extends BaseAction {
@@ -19,8 +21,10 @@ public class AuditVideoMgmtAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(AuditVideoMgmtAction.class);
 	private IVediotapeService videoService;
+	private IAudienceScoreService audienceScoreService;
 	private int filter = 0;
 	private JSONDataTable table;
+	private String videoID;
 
 	public String toAuditVideos() throws Exception {
 		return SUCCESS;
@@ -52,7 +56,15 @@ public class AuditVideoMgmtAction extends BaseAction {
 
 	}
 
+	
+	public String toAuditingVideo() throws Exception{
+		
+		List<AudienceExamineVO> ae =audienceScoreService.getAudienceScoreOfTape(videoID, -1, -1, "", true);
+		
+		return SUCCESS;
+	}
 	public IVediotapeService getVideoService() {
+		
 		return videoService;
 	}
 

@@ -1,6 +1,7 @@
 package com.vms.beans;
 
 import java.util.Date;
+import java.util.Map;
 
 import com.vms.db.bean.Vediotape;
 
@@ -14,6 +15,8 @@ public class VedioTapeVO {
 	private String status;
 	private float marketShare;
 	private float audienceRating;
+	
+	private Map<String,Integer> watching;
 	
 	public VedioTapeVO(){}
 	
@@ -84,6 +87,14 @@ public class VedioTapeVO {
 
 	public String getVedioID() {
 		return vedioID;
+	}
+
+	public Map<String, Integer> getWatching() {
+		return watching;
+	}
+
+	public void setWatching(Map<String, Integer> watching) {
+		this.watching = watching;
 	}
 	
 }
