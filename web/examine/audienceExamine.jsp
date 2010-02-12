@@ -9,7 +9,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
+<link rel="stylesheet" type="text/css" href="./css/examine.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
@@ -18,6 +21,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/examine/js/audienceExamine.js"></script>
 </head>
 <body class="yui-skin-sam">
@@ -34,7 +40,28 @@
 			<td><label>影带编号：</label></td>
 			<td id="vedioID"><s:property value="tape.vedioID"/></td>
 			<td><label>影带名称：</label></td>
-			<td><s:property value="tape.name"/></td>
+			<td id="vedioName"><s:property value="tape.name"/></td>
+		</tr>
+		<tr>
+			<td><label>输入观众名：</label></td>
+			<td>
+	    		<input id="audienceName" class="autoComplete" type="text"> 
+	    		<div id="container"></div>  
+			</td>
+		</tr>
+		<tr>
+			<td><label>选择评价：</label></td>
+			<td>
+				<table><tr>
+					<td><input type="radio" class="radioSel" id="look" name="result" value="1"/>看</td>
+					<td><input type="radio" class="radioSel" id="unlook" name="result" value="0"/>不看</td>
+				</tr></table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center">
+				<div style="margin-top:30px;" id="addBtnDiv"></div>
+			</td>
 		</tr>
 	</table>
 </div>		
@@ -42,8 +69,48 @@
 <p>影带已有评价</p>
 <br/>
 <div id="dynamicdata" align="center"></div>
+<div align="center">
+	<div style="margin-top:30px;" id="submitBtnDiv"></div>
+</div>
+<s:form action="doAudienceExamine" namespace="/examine" >
+	<s:hidden name="newResult" id="newResult"/>
+</s:form>
 <script type="text/javascript">
-	YAHOO.example.DynamicData = initDataTable()
+	//get all audience name to javascript array for autocomplete.
+	var audience = new Array();
+	<s:iterator value="audience" status="st">
+		var name = "<s:property value='name' escape='false'/>";
+		audience[audience.length] = name;
+	</s:iterator>
+
+	YAHOO.example.BasicLocal = function() { 
+		// Use a LocalDataSource 
+		var oDS = new YAHOO.util.LocalDataSource(audience); 
+		// Instantiate the AutoComplete 
+		var oAC = new YAHOO.widget.AutoComplete("audienceName", "container", oDS); 
+		oAC.prehighlightClassName = "yui-ac-prehighlight"; 
+		oAC.useShadow = true;   
+		return { 
+			oDS: oDS, 
+			oAC: oAC 
+		}; 
+	}(); 
+	//button to add audience result to data table.
+	var addBtn = new YAHOO.widget.Button({  
+		label: "确&nbsp;&nbsp;定",  
+		id: "addBtn",  
+		container: "addBtnDiv" }
+		); 
+	addBtn.on("click",addAction);
+	//button to submit new data
+	var submitBtn = new YAHOO.widget.Button({  
+		label: "提&nbsp;&nbsp;交",  
+		id: "submitBtn",  
+		container: "submitBtnDiv" }
+		); 
+	submitBtn.on("click",submitAction);
+	//audience result datatable.
+	YAHOO.example.DynamicData = initDataTable();
 </script>
 
 </body>
