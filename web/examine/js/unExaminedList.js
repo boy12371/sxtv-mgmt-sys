@@ -17,7 +17,7 @@ function initDataTable() {
 	var formatSelect = function(elCell, oRecord, oColumn, sData) {
 		var data = encodeURIComponent(oRecord.getData().vedioID);
 		var sel = document.createElement("select");
-		sel.id = "scoreSel";
+		sel.id = "scoreSel_" + data;
 		sel.options.add(new Option("选择评价类型","0")); 
 		sel.options.add(new Option("专业人员打分","1")); 
 		sel.options.add(new Option("普通观众评价","2"));
@@ -25,11 +25,11 @@ function initDataTable() {
 		elCell.appendChild(sel);
 	};
 	function selFunc(vedioID){
-		var sel = document.getElementById("scoreSel");
+		var sel = document.getElementById("scoreSel_" + vedioID);
 		var index=sel.selectedIndex;
 		var val = sel.options[index].value;
-		if(1 == val){
-			window.location="/tv/examine/toExamineTape.action?tape.vedioID=" + vedioID;
+		if("1" == val){
+			window.location="/tv/examine/toExamineTape.action?tapeScore.vedioID=" + vedioID;
 		}else{
 			window.location="/tv/examine/toAudienceExamine.action?tape.vedioID=" + vedioID;
 		}

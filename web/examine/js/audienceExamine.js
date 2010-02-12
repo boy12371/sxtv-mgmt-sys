@@ -1,3 +1,4 @@
+var myDataTable;
 function initDataTable() {
 	var formatDate = function(elCell, oRecord, oColumn, sData) {
 		var idx = sData.indexOf("T");
@@ -7,7 +8,13 @@ function initDataTable() {
 			elCell.innerHTML = sData;
 		}
 	};
-	
+	var myRowFormatter = function(elTr, oRecord){
+		var xData = oRecord.getData();
+		if(typeof(xData.marked)!="undefined" && 1==xData.marked){
+			elTr.className = elTr.className + " markedRow";
+		}
+		return true;
+	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -15,7 +22,7 @@ function initDataTable() {
 	    label :"观众名称",
 	    sortable :true,
 	}, {
-		key :"tape",
+		key :"tapeName",
 		label :"影带名称",
 	}, {
 		key :"result",
@@ -34,7 +41,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "audience", "tape", "result", "dateExamine"],
+		fields : [ "audience", "tapeName", "result", "dateExamine"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -48,13 +55,14 @@ function initDataTable() {
 			key :"dateExamine",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator( {rowsPerPage :10})
+		paginator :new YAHOO.widget.Paginator( {rowsPerPage :10}),
 		// Enables pagination
+		formatRow: myRowFormatter
 	};
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
@@ -66,4 +74,42 @@ function initDataTable() {
 		ds :myDataSource,
 		dt :myDataTable
 	};
+}
+
+function addAction(){
+	var tapeID = document.getElementById("vedioID").innerHTML;
+	var tapeName = document.getElementById("vedioName").innerHTML;
+	var audience = document.getElementById("audienceName").value;
+	var result = document.getElementById("look").checked?"看":"不看";
+	var xData = {
+		tapeID:tapeID,
+		tapeName:tapeName,
+		audience:audience,
+		result:result,
+		dateExamine:"",
+		//mark this row is new need to be submit.
+		marked:1
+	};
+	var pos = getRecordFormTable(xData);
+	if(null != pos){
+		myDataTable.deleteRow(pos);  
+	}
+	myDataTable.addRow(xData,0);
+	markRow(0);
+}
+
+function submitAction(){
+	var newResult = document.getElementById("newResult");
+	newResult.value = "xxxxxxxxxxxxx";
+	document.forms[0].submit();
+}
+
+function getRecordFormTable(xData){
+	for(var i=0,record=myDataTable.getRecord(i); null != record; i++,record=myDataTable.getRecord(i)){
+		var tData = record.getData();
+		if(xData.audience == tData.audience && xData.tapeName == tData.tapeName){
+			return i;
+		}
+	}
+	return null;
 }
