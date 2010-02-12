@@ -32,9 +32,10 @@
 </head>
 <body class="yui-skin-sam">
 
-
+<s:actionerror/>
 <h1>剧目详细信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
+<s:form action="videoOperation" method="post" namespace="/audit">
 <table>
 
 	<tr>
@@ -72,7 +73,7 @@
 
 	</tr>
 	<tr>
-		<td colspan="4"><s:radio list="#{3:'通 过',4:'修 改',7:'退 回'}" name="operate"></s:radio></td>
+		<td colspan="4"><s:radio list="#{3:'通 过',4:'修 改',7:'退 回'}" name="operation"></s:radio></td>
 
 	</tr>
 
@@ -82,7 +83,7 @@
 	</tr>
 
 </table>
-
+</s:form>
 <div></div>
 <h1>评分信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>

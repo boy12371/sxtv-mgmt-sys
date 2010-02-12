@@ -23,5 +23,10 @@
 				<param name="root">table</param>
 			</result>
 		</action>
+		
+		<action name="videoOperation" class="auditMgmt" method="videoOperation">
+			<result>/audit/videosAuditing.jsp</result>
+			<result name="input">/audit/videoAuditing.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -2,16 +2,18 @@ package com.vms.db.bean.base;
 
 import java.io.Serializable;
 
+
 /**
- * This is an object that contains data related to the auditing table. Do not
- * modify this class because it will be overwritten if the configuration file
+ * This is an object that contains data related to the auditing table.
+ * Do not modify this class because it will be overwritten if the configuration file
  * related to this class is modified.
- * 
- * @hibernate.class table="auditing"
+ *
+ * @hibernate.class
+ *  table="auditing"
  */
 
-public abstract class BaseAuditing implements
-		Serializable {
+public abstract class BaseAuditing  implements Serializable {
+
 	public static String REF = "Auditing";
 	public static String PROP_VEDIO_I_D = "vedioID";
 	public static String PROP_RESULT = "result";
@@ -39,14 +41,14 @@ public abstract class BaseAuditing implements
 	 */
 	public BaseAuditing (
 		java.lang.Integer id,
-		com.vms.db.bean.User auditor,
 		com.vms.db.bean.Status result,
+		com.vms.db.bean.User auditor,
 		com.vms.db.bean.Vediotape vedioID,
 		java.util.Date auditDate) {
 
 		this.setId(id);
-		this.setAuditor(auditor);
 		this.setResult(result);
+		this.setAuditor(auditor);
 		this.setVedioID(vedioID);
 		this.setAuditDate(auditDate);
 		initialize();
@@ -66,8 +68,8 @@ public abstract class BaseAuditing implements
 	private java.lang.String comments;
 
 	// many to one
-	private com.vms.db.bean.User auditor;
 	private com.vms.db.bean.Status result;
+	private com.vms.db.bean.User auditor;
 	private com.vms.db.bean.Vediotape vedioID;
 
 
@@ -75,7 +77,7 @@ public abstract class BaseAuditing implements
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="sequence"
+     *  generator-class="native"
      *  column="id"
      */
 	public java.lang.Integer getId () {
@@ -129,23 +131,6 @@ public abstract class BaseAuditing implements
 
 
 	/**
-	 * Return the value associated with the column: auditor
-	 */
-	public com.vms.db.bean.User getAuditor () {
-		return auditor;
-	}
-
-	/**
-	 * Set the value related to the column: auditor
-	 * @param auditor the auditor value
-	 */
-	public void setAuditor (com.vms.db.bean.User auditor) {
-		this.auditor = auditor;
-	}
-
-
-
-	/**
 	 * Return the value associated with the column: result
 	 */
 	public com.vms.db.bean.Status getResult () {
@@ -158,6 +143,23 @@ public abstract class BaseAuditing implements
 	 */
 	public void setResult (com.vms.db.bean.Status result) {
 		this.result = result;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: auditor
+	 */
+	public com.vms.db.bean.User getAuditor () {
+		return auditor;
+	}
+
+	/**
+	 * Set the value related to the column: auditor
+	 * @param auditor the auditor value
+	 */
+	public void setAuditor (com.vms.db.bean.User auditor) {
+		this.auditor = auditor;
 	}
 
 
@@ -205,5 +207,6 @@ public abstract class BaseAuditing implements
 	public String toString () {
 		return super.toString();
 	}
+
 
 }

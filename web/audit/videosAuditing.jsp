@@ -33,7 +33,8 @@
 </head>
 <body class="yui-skin-sam">
 
-
+<s:actionerror/>
+<s:actionmessage/>
 <h1>待审剧目</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
  
