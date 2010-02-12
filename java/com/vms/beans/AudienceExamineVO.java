@@ -5,8 +5,8 @@ import java.util.Date;
 import com.vms.db.bean.Audiencescore;
 
 public class AudienceExamineVO {
-	private final static String yes="看";
-	private final static String no="不看";
+	public final static String yes="看";
+	public final static String no="不看";
 	
 	private String audience;
 	
