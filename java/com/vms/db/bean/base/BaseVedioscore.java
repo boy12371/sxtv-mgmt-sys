@@ -22,7 +22,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	public static String PROP_ACCURACY = "accuracy";
 	public static String PROP_TECH_SCORE = "techScore";
 	public static String PROP_PERFORM_SCORE = "performScore";
-	public static String PROP_VEDIO_ID = "vedioID";
+	public static String PROP_VEDIO = "vedio";
 	public static String PROP_PURCHASE = "purchase";
 	public static String PROP_ID = "id";
 	public static String PROP_STORY_SCORE = "storyScore";
@@ -48,7 +48,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	 */
 	public BaseVedioscore (
 		java.lang.Integer id,
-		com.vms.db.bean.Vediotape vedioID,
+		com.vms.db.bean.Vediotape vedio,
 		com.vms.db.bean.User examiner,
 		java.lang.Float storyScore,
 		java.lang.Float techScore,
@@ -60,7 +60,7 @@ public abstract class BaseVedioscore  implements Serializable {
 		java.util.Date dateExamine) {
 
 		this.setId(id);
-		this.setVedioID(vedioID);
+		this.setVedio(vedio);
 		this.setExaminer(examiner);
 		this.setStoryScore(storyScore);
 		this.setTechScore(techScore);
@@ -95,7 +95,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	private java.lang.String comments;
 
 	// many to one
-	private com.vms.db.bean.Vediotape vedioID;
+	private com.vms.db.bean.Vediotape vedio;
 	private com.vms.db.bean.User examiner;
 
 
@@ -293,18 +293,18 @@ public abstract class BaseVedioscore  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: vedioID
+	 * Return the value associated with the column: vedio
 	 */
-	public com.vms.db.bean.Vediotape getVedioID () {
-		return vedioID;
+	public com.vms.db.bean.Vediotape getVedio () {
+		return vedio;
 	}
 
 	/**
-	 * Set the value related to the column: vedioID
-	 * @param vedioID the vedioID value
+	 * Set the value related to the column: vedio
+	 * @param vedio the vedio value
 	 */
-	public void setVedioID (com.vms.db.bean.Vediotape vedioID) {
-		this.vedioID = vedioID;
+	public void setVedio (com.vms.db.bean.Vediotape vedio) {
+		this.vedio = vedio;
 	}
 
 

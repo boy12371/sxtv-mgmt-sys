@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.VedioTapeVO;
+import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Vediotape;
 
 
@@ -45,4 +46,6 @@ public interface IVediotapeService {
 	
 	VedioTapeVO getTapeByID(String ID) throws Exception;
 	VedioTapeVO getVideotapeById(String videoID, List<AudienceExamineVO> audienceVote) throws Exception;
+	
+	boolean auditingVideo(String vedioId, SessionUserInfo user, int operation)throws Exception;
 }

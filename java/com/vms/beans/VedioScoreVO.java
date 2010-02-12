@@ -14,6 +14,7 @@ public class VedioScoreVO {
 	
 	private String vedioID;
 	private String vedioName;
+	private int status;
 	private String examiner;
 	private float storyScore;
 	private float techScore;
@@ -28,14 +29,15 @@ public class VedioScoreVO {
 	public VedioScoreVO(){}
 	
 	public VedioScoreVO(Vedioscore score){
-		this.vedioID = score.getVedioID().getId();
-		this.vedioName = score.getVedioID().getVedioName();
+		this.vedioID = score.getVedio().getId();
+		this.vedioName = score.getVedio().getVedioName();
 		this.examiner = score.getExaminer().getUserName();
 		this.storyScore = score.getStoryScore();
 		this.techScore = score.getTechScore();
 		this.performScore = score.getPerformScore();
 		this.innovateScore = score.getInnovateScore();
 		this.score = score.getScore();
+		this.status = score.getVedio().getStatus().getId();
 		this.setAccuracy(null==score.getAccuracy()?0:score.getAccuracy());
 		this.dateExamine = score.getDateExamine();
 		this.award = 1==score.getAward()? AwardStr : UnAwardStr;
@@ -55,7 +57,7 @@ public class VedioScoreVO {
 		Vediotape tape = new Vediotape();
 		tape.setVedioName(vedioName);
 		tape.setId(vedioID);
-		score.setVedioID(tape);
+		score.setVedio(tape);
 		
 		User user = new User();
 		user.setUserName(examiner);
@@ -144,6 +146,14 @@ public class VedioScoreVO {
 
 	public float getAccuracy() {
 		return accuracy;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

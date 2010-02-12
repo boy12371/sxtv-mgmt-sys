@@ -5,6 +5,7 @@ function initDataTable() {
 			var href = "<a href='./audit/toAuditingVideo?videoID=";
 			href += sData;
 			href += "'>" + sData + "</a>";
+			
 			elCell.innerHTML = href;
 		}else{
 			elCell.innerHTML = sData;
@@ -184,24 +185,7 @@ function initDataTable() {
 
 }
 
-function initScoreDataTable() {
-
-	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./?.id=";
-		href += sData;
-		href += "'>" + sData + "</a>";
-		elCell.innerHTML = href;
-	}
-
-	var formatCompany = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.companyName;
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.topicName;
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.subjectName;
-	}
+function initScoreDataTable(videoID) {	
 	var formatDate = function(elCell, oRecord, oColumn, sData) {
 		var idx = sData.indexOf("T");
 		if (idx != -1) {
@@ -216,41 +200,42 @@ function initScoreDataTable() {
 	// Column definitions
 	var myColumnDefs = [{
 				key : "vedioName",
-				label : "剧目名称",
-				formatter : formatLink
+				label : "剧目名称"
 			}, {
+				key : "score",
+				label : "综合得分",
+				sortable : true
+			},{
 				key : "storyScore",
 				label : "故事",
-				sortable : true,
-				formatter : formatTopic
+				sortable : true
 			}, {
 				key : "techScore",
 				label : "技术",
-				sortable : true,
-				formatter : formatSubject
+				sortable : true
 			}, {
 				key : "performScore",
 				label : "表演",
-				sortable : true,
-				formatter : formatCompany
+				sortable : true
 			}, {
 				key : "innovateScore",
 				label : "创新",
 				sortable : true
 			}, {
-				key : "score",
-				label : "综合得分",
-				sortable : true,
-				formatter : formatStatus
-			}, {
 				key : "dateExamine",
-				label : "评分日期"
+				label : "评分日期",
+				sortable : true
 			}, {
 				key : "award",
-				label : "获奖"
+				label : "获奖",
+				sortable : true
 			}, {
 				key : "purchase",
-				label : "购买意见"
+				label : "购买意见",
+				sortable : true
+			},{
+				key:"examiner",
+				label:"评分人"
 			}];
 
 	// DataSource instance
@@ -258,8 +243,8 @@ function initScoreDataTable() {
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.responseSchema = {
 		resultsList : "records",
-		fields : ["vedioName", "storyScore", "techScore", "performScore",
-				"innovateScore", "score", "dateExamine", "award", "purchase"],
+		fields : ["vedioName", "score", "storyScore", "techScore", "performScore",
+				"innovateScore", "dateExamine", "award", "purchase","examiner"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -268,7 +253,7 @@ function initScoreDataTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=score&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=score&dir=asc&startIndex=0&results=25&videoID="+YAHOO.util.Dom.get("videoID").value,
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "score",
@@ -279,7 +264,7 @@ function initScoreDataTable() {
 				})
 
 	};
-
+	
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server

@@ -56,4 +56,6 @@ public interface IVediotapeDAO extends IBaseRootDAO {
 			throws Exception;
 
 	int getVedioTotalCountByStatus(Status status) throws Exception;
+	
+	boolean updateVideotape(String hql,Object[] args)throws Exception;
 }

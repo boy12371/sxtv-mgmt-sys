@@ -28,11 +28,13 @@
 			not-null="true" length="19" />
 		<property name="comments" column="comments" type="string"
 			not-null="false" length="512" />
-		<many-to-one name="vedioID" column="vedioID" class="Vediotape"
+		
+		<many-to-one name="vedio" column="vedioID" class="Vediotape"
 			not-null="true">
 		</many-to-one>
 		<many-to-one name="examiner" column="examiner" class="User"
 			not-null="true">
 		</many-to-one>
+		
 	</class>
 </hibernate-mapping>

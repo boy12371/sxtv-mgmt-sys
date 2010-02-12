@@ -55,15 +55,16 @@ public class Test {
 		//
 		// IUserRoleService service = (IUserRoleService)
 		// ctx.getBean("userRoleService");
-		IVedioscoreService service = (IVedioscoreService) ctx.getBean("vedioscoreService");
+		IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
 
 //		List<Vediotape> list = service.findAllVideotapesForAudit(Vediotape.PROP_ID, 0, 10, true);
 //		for (Vediotape vediotape : list) {
 //			System.out.println(vediotape.getId()+" / "+vediotape.getVedioName());
 //		}
 		
-		List list = service.findUserExamineScoreByVideoId("2",0, 10, Vedioscore.PROP_SCORE, true);
-		System.out.println(list.size());
+		boolean flag = service.auditingVideo("2", new SessionUserInfo(2), 7);
+		//List list = service.getUserExaminedVedioes("cat", 0, 10, "score", true);
+		System.out.println(flag);
 		
 		// cal.get
 		// dao.findVedioesInPeriod(dateStart, dateEnd, propertiesValues,

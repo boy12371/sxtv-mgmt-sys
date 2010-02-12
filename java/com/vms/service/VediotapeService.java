@@ -1,18 +1,26 @@
 package com.vms.service;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.VedioTapeVO;
+import com.vms.common.SessionUserInfo;
+import com.vms.db.bean.Auditing;
+import com.vms.db.bean.Status;
+import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
+import com.vms.db.dao.iface.IAuditingDAO;
 import com.vms.db.dao.iface.IVediotapeDAO;
 import com.vms.service.iface.IVediotapeService;
 
 public class VediotapeService implements IVediotapeService {
 
 	private IVediotapeDAO vediotapeDAO;
+	private IAuditingDAO auditingDAO;
 
 	private Class clz = com.vms.db.bean.Vediotape.class;
 
@@ -56,7 +64,7 @@ public class VediotapeService implements IVediotapeService {
 			boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
 
-		return (List<Vediotape>) vediotapeDAO.findObjectByField(clz, Vediotape.PROP_STATUS, status, startIndex, endIndex,
+		return (List<Vediotape>) vediotapeDAO.findObjectByField(clz, Vediotape.PROP_STATUS, new Status(status), startIndex, endIndex,
 				propertyName, asceding);
 
 	}
@@ -105,6 +113,25 @@ public class VediotapeService implements IVediotapeService {
 	public VedioTapeVO getTapeByID(String ID) throws Exception {
 		Vediotape tape = (Vediotape) vediotapeDAO.getObject(Vediotape.class, ID);
 		return new VedioTapeVO(tape);
+	}
+
+	@Override
+	public boolean auditingVideo(String vedioId, SessionUserInfo user, int operation) throws Exception {
+		// TODO Auto-generated method stub
+		String hql ="update Vediotape tape set tape.status=? where tape.id=?";
+		boolean success = vediotapeDAO.updateVideotape(hql, new Object[]{operation, vedioId});
+		Serializable id=null;
+		if(success){
+			Auditing audit =new Auditing(vedioId);
+			audit.setAuditor(new User(user.getUserId()));
+			audit.setResult(new Status(operation));
+			audit.setAuditDate(new Date());
+			id = auditingDAO.saveObject(audit);
+		}else{
+			return false;
+		}
+		
+		return id!=null;
 	}
 
 }

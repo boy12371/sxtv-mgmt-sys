@@ -39,7 +39,7 @@
 
 	<tr>
 		<td><label>编号</label></td>
-		<td><s:property value="vv.vedioID" /></td>
+		<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" id="videoID" /></td>
 		<td><label>剧目名称</label></td>
 		<td><s:property value="vv.name" /></td>
 
@@ -62,17 +62,28 @@
 		<td><label>状态</label></td>
 		<td><s:property value="vv.status" /></td>
 		<td><label>观众评价</label></td>
-		<td><s:iterator value="vv.watching">
-
+		<td><s:iterator value="vv.watching" var="w">
+			<s:property value="#w.key" /> : <s:property value="#w.value" />
 		</s:iterator></td>
 
 	</tr>
+	<tr height="20px">
+		<td colspan="4"></td>
 
+	</tr>
+	<tr>
+		<td colspan="4"><s:radio list="#{3:'通 过',4:'修 改',7:'退 回'}" name="operate"></s:radio></td>
 
+	</tr>
+
+	<tr>
+		<td colspan="4"><s:submit value="确定" /></td>
+
+	</tr>
 
 </table>
 
-
+<div></div>
 <h1>评分信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 
@@ -81,7 +92,7 @@
 
 
 <script type="text/javascript">
-	YAHOO.util.Event.addListener(window, "load", initScoreDataTable);
+	YAHOO.util.Event.addListener(window, "load", initScoreDataTable());
 </script>
 </body>
 </html>

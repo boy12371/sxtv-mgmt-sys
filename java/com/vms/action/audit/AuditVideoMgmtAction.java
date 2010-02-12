@@ -11,6 +11,7 @@ import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
+import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.IAudienceScoreService;
 import com.vms.service.iface.IVedioscoreService;
@@ -30,6 +31,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 	private JSONDataTable table;
 	private String videoID;
 	private VedioTapeVO vv;
+	private int operation;
 
 	public String toAuditVideos() throws Exception {
 		return SUCCESS;
@@ -83,6 +85,14 @@ public class AuditVideoMgmtAction extends BaseAction {
 		return SUCCESS;
 	}
 
+	
+	public String videoOperation() throws Exception{
+		SessionUserInfo user = this.getUserInfo();
+		
+		return SUCCESS;
+		
+	}
+	
 	public IVediotapeService getVideoService() {
 
 		return videoService;
@@ -115,6 +125,8 @@ public class AuditVideoMgmtAction extends BaseAction {
 	public void setAudienceScoreService(IAudienceScoreService audienceScoreService) {
 		this.audienceScoreService = audienceScoreService;
 	}
+
+	
 
 	public String getVideoID() {
 		return videoID;

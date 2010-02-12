@@ -127,4 +127,11 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		return this.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS, status);
 	}
 
+	@Override
+	public boolean updateVideotape(String hql, Object[] args) throws Exception {
+		// TODO Auto-generated method stub		
+		int result = this.getHibernateTemplate().bulkUpdate(hql, args);
+		return result != 0;
+	}
+
 }
