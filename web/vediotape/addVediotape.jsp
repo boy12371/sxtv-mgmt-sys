@@ -32,10 +32,46 @@
 
 
 
+ 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" /> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
+
 </head>
 
 <body class="yui-skin-sam">
 
+<input id="searchinput" type="text" name="p">
+<div id="searchcontainer"></div>
+	
+<script type="text/javascript"> 
+YAHOO.example.Centered = function() {
+    var myDataSource = new YAHOO.util.XHRDataSource("/tv/search/autoCompleteForVideoName.action?");
+    myDataSource.responseSchema = {
+        resultsList: "records",
+        fields: ["vname"]
+    };
+ 	alert("aaaaa");
+    // Instantiate AutoComplete
+    var myAutoComp = new YAHOO.widget.AutoComplete("searchinput","searchcontainer", myDataSource);
+    myAutoComp.queryMatchContains = true;
+    myAutoComp.queryQuestionMark = false;
+    myAutoComp.useShadow = true;
+    
+    // Keeps container centered
+    /*myAutoComp.doBeforeExpandContainer = function(oTextbox, oContainer, sQuery, aResults) {
+        var pos = YAHOO.util.Dom.getXY(oTextbox);
+        pos[1] += YAHOO.util.Dom.get(oTextbox).offsetHeight + 2;
+        YAHOO.util.Dom.setXY(oContainer,pos);
+        return true;
+    };*/
+    
+    return {
+        oDS: myDataSource,
+        oAC: myAutoComp
+    };
+}();
+</script> 
 <s:form id="form1" name="form1" method="post" action="doAddingVedio" namespace="/vedio">
 <s:actionerror/>
 <s:actionmessage/>

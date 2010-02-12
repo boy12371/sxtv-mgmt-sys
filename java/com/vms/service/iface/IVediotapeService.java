@@ -48,4 +48,6 @@ public interface IVediotapeService {
 	VedioTapeVO getVideotapeById(String videoID, List<AudienceExamineVO> audienceVote) throws Exception;
 	
 	boolean auditingVideo(String vedioId, SessionUserInfo user, int operation)throws Exception;
+	
+	List<String> findVideoNamesForAutoComplete(String videoName) throws Exception;
 }

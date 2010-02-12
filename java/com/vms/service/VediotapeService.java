@@ -1,10 +1,18 @@
 package com.vms.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.hibernate.Hibernate;
+import org.hibernate.type.StringType;
+import org.hibernate.type.Type;
+
+
+
 
 import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.VedioTapeVO;
@@ -134,7 +142,24 @@ public class VediotapeService implements IVediotapeService {
 		
 		return id!=null;
 	}
-
+	@Override
+	public List<String> findVideoNamesForAutoComplete(String videoName) throws Exception {
+		// TODO Auto-generated method stub
+		String hql ="from Vediotape v where v.vedioName like ?";
+		Map<String,Object[]> valuesTypes = new HashMap<String,Object[]>();
+		valuesTypes.put("values", new Object[]{"%"+videoName+"%"});
+		valuesTypes.put("types", new Type[]{Hibernate.STRING});
+		List<Vediotape> list = vediotapeDAO.findVideos(hql, valuesTypes, -1, -1);
+		List<String> names =new ArrayList<String>();
+		if(list!=null && !list.isEmpty()){
+			for (Vediotape vediotape : list) {
+				names.add(vediotape.getVedioName());
+			}
+			
+		}
+		return names;
+		
+	}
 	public IAuditingDAO getAuditingDAO() {
 		return auditingDAO;
 	}
@@ -142,5 +167,7 @@ public class VediotapeService implements IVediotapeService {
 	public void setAuditingDAO(IAuditingDAO auditingDAO) {
 		this.auditingDAO = auditingDAO;
 	}
+
+	
 
 }

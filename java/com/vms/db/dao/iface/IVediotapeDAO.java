@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.type.Type;
+
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Vediotape;
 
@@ -58,4 +60,8 @@ public interface IVediotapeDAO extends IBaseRootDAO {
 	int getVedioTotalCountByStatus(Status status) throws Exception;
 	
 	boolean updateVideotape(String hql,Object[] args)throws Exception;
+	
+
+	
+	List<Vediotape> findVideos(String hql,Map<String,Object[]> valuesTypes,int startIndex,int endIndex)throws Exception;
 }

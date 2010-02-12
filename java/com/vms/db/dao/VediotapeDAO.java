@@ -1,5 +1,6 @@
 package com.vms.db.dao;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -10,13 +11,16 @@ import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.objectweb.asm.xwork.Type;
+import org.hibernate.type.Type;
+
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.sun.org.apache.xpath.internal.Expression;
@@ -32,53 +36,55 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 
 	private Class clz = com.vms.db.bean.Vediotape.class;
 
-	
-	public List<Vediotape> findVedioesByStatus(Status status ,int startIndex, int endIndex) throws Exception {
+	public List<Vediotape> findVedioesByStatus(Status status, int startIndex, int endIndex) throws Exception {
 		Map<String, Object> conditions = new HashMap<String, Object>();
-		conditions.put(Vediotape.PROP_STATUS+".id", status.getId());
-		
-		List<Vediotape> tapes = this.findObjectByFields(clz,conditions,startIndex,endIndex,Vediotape.PROP_DATE_COMING,true);
+		conditions.put(Vediotape.PROP_STATUS + ".id", status.getId());
+
+		List<Vediotape> tapes = this.findObjectByFields(clz, conditions, startIndex, endIndex,
+				Vediotape.PROP_DATE_COMING, true);
 		return tapes;
 	}
-	
-	public List<Vediotape> findVedioesByStatus(Status status ,int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception {
-		Map<String, Object> conditions = new HashMap<String, Object>();
-		conditions.put(Vediotape.PROP_STATUS, status);
-		
-		List<Vediotape> tapes = this.findObjectByFields(clz,conditions,startIndex,endIndex,propertyName,ascending);
-		return tapes;
-	}
-	
-	public List<Vediotape> findVedioesByColumn(Status status ,int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception {
+
+	public List<Vediotape> findVedioesByStatus(Status status, int startIndex, int endIndex, String propertyName,
+			boolean ascending) throws Exception {
 		Map<String, Object> conditions = new HashMap<String, Object>();
 		conditions.put(Vediotape.PROP_STATUS, status);
-		
-		List<Vediotape> tapes = this.findObjectByFields(clz,conditions,startIndex,endIndex,propertyName,ascending);
+
+		List<Vediotape> tapes = this.findObjectByFields(clz, conditions, startIndex, endIndex, propertyName, ascending);
 		return tapes;
 	}
-	
+
+	public List<Vediotape> findVedioesByColumn(Status status, int startIndex, int endIndex, String propertyName,
+			boolean ascending) throws Exception {
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put(Vediotape.PROP_STATUS, status);
+
+		List<Vediotape> tapes = this.findObjectByFields(clz, conditions, startIndex, endIndex, propertyName, ascending);
+		return tapes;
+	}
+
 	@Override
 	public void saveObjects(List<Vediotape> objects) {
-		// TODO Auto-generated method stub		
-		for ( int i=0; i < objects.size() ; i++ ) {		    
+		// TODO Auto-generated method stub
+		for (int i = 0; i < objects.size(); i++) {
 			this.getHibernateTemplate().save(objects.get(i));
-		}		  
-		 		
+		}
+
 	}
 
 	@Override
 	public List<Vediotape> findVedioesInPeriod(Date dateStart, Date dateEnd, Map<String, Object> propertiesValues,
 			int startIndex, int endIndex, String propertyName, boolean ascending) {
 		// TODO Auto-generated method stub
-		Criteria crt = this.getCriteria(clz);	
-	
+		Criteria crt = this.getCriteria(clz);
+
 		if (propertiesValues != null) {
 			Set<String> keys = propertiesValues.keySet();
 			Iterator<String> it = keys.iterator();
 
 			while (it.hasNext()) {
-				String key = (String) it.next();			
-				crt.add(Restrictions.between(Vediotape.PROP_DATE_INPUT,dateStart,dateEnd));
+				String key = (String) it.next();
+				crt.add(Restrictions.between(Vediotape.PROP_DATE_INPUT, dateStart, dateEnd));
 			}
 		}
 
@@ -91,12 +97,12 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 			crt.setMaxResults(endIndex);
 		}
 		return crt.list();
-		
+
 	}
 
 	@Override
-	public List<Vediotape> findAllVideosInScope(String scopeName,Object[] values, String propertyName, int startIndex, int endIndex, boolean asceding)
-			throws Exception {
+	public List<Vediotape> findAllVideosInScope(String scopeName, Object[] values, String propertyName, int startIndex,
+			int endIndex, boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
 		crt.add(Restrictions.in(scopeName, values));
@@ -110,28 +116,58 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		}
 		List<Vediotape> list = (List<Vediotape>) crt.list();
 		return list;
-		
+
 	}
 
 	@Override
 	public int getTotalCountForAllVideotapesForAudit() throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
-		crt.add(Restrictions.in(Vediotape.PROP_STATUS+".id", new Object[]{2,3,4,5}));
+		crt.add(Restrictions.in(Vediotape.PROP_STATUS + ".id", new Object[] { 2, 3, 4, 5 }));
 		crt.setProjection(Projections.rowCount());
 		return Integer.parseInt(crt.uniqueResult().toString());
-		
+
 	}
 
+	@Override
 	public int getVedioTotalCountByStatus(Status status) throws Exception {
 		return this.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS, status);
 	}
 
 	@Override
 	public boolean updateVideotape(String hql, Object[] args) throws Exception {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		int result = this.getHibernateTemplate().bulkUpdate(hql, args);
 		return result != 0;
 	}
 
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Vediotape> findVideos(final String hql, final Map<String,Object[]> valuesTypes, final int startIndex, final int endIndex) throws Exception {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().executeFind(new HibernateCallback() {
+
+			@Override
+			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+				// TODO Auto-generated method stub
+				Query query = session.createQuery(hql);
+				if(valuesTypes!=null && !valuesTypes.isEmpty()){
+					Object[] values = valuesTypes.get("values");
+					Type[] types = (Type[]) valuesTypes.get("types");
+					query.setParameters(values, types);
+				}
+				if(startIndex!=-1&& endIndex!=-1){
+					query.setFirstResult(startIndex);
+					query.setMaxResults(endIndex);
+				}				
+				return query.list();
+			}
+
+		});
+		
+	}
+
+	
 }

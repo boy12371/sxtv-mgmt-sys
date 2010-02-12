@@ -20,6 +20,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.vms.beans.EmployeeVO;
+import com.vms.beans.JSONDataTable;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.Role;
 import com.vms.db.bean.Status;
@@ -57,14 +58,34 @@ public class Test {
 		// ctx.getBean("userRoleService");
 		IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
 
-//		List<Vediotape> list = service.findAllVideotapesForAudit(Vediotape.PROP_ID, 0, 10, true);
+		List<String> list = service.findVideoNamesForAutoComplete("2");
+		System.out.println(list.size());
+		
+		
 //		for (Vediotape vediotape : list) {
 //			System.out.println(vediotape.getId()+" / "+vediotape.getVedioName());
 //		}
 		
-		boolean flag = service.auditingVideo("2", new SessionUserInfo(2), 7);
+		//List<String> names = service.findVideoNamesForAutoComplete();
+		StringBuffer sb =new StringBuffer("{\"records\":[");
+		for (int i = 0; i < list.size(); i++) {
+			String v = list.get(i);
+			if(i!=0 && i!= list.size()){
+				sb.append(",");
+			}
+			sb.append("{\"vname\":\""+v+"\"}");
+			
+		}
+		sb.append("]}");
+		JSONObject object= JSONObject.fromObject(sb.toString());
+		System.out.println(object);
+//		for (int i = 0; i < names.size(); i++) {
+//			System.out.println(names.get(i));
+//		}
+//		JSONArray array = JSONArray.fromObject(names);
+//		System.out.println(array);
 		//List list = service.getUserExaminedVedioes("cat", 0, 10, "score", true);
-		System.out.println(flag);
+		//System.out.println(flag);
 		
 		// cal.get
 		// dao.findVedioesInPeriod(dateStart, dateEnd, propertiesValues,
