@@ -33,7 +33,7 @@ public class CompanyMgmtAction extends BaseAction {
 			List<Company> comList = companyService.findAllCompany(table
 					.getStartIndex(), table.getStartIndex()
 					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals("asc"));
+					.equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(comList, table,
 					companyService.getCompanyTotalCount());
 		} catch (Exception e) {

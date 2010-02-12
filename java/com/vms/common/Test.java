@@ -68,7 +68,7 @@ public class Test {
 		
 		// cal.get
 		// dao.findVedioesInPeriod(dateStart, dateEnd, propertiesValues,
-		// startIndex, endIndex, propertyName, ascending)
+		// startIndex, endIndex, propertyName, JSONDataTableUtils.SORT_DIRECTIONending)
 		// UserRolePK pk =new UserRolePK(new Role(1),new User(1));
 		// UserRolePK pk2 =new UserRolePK(new Role(2),new User(1));
 		//		

@@ -41,7 +41,7 @@ public class EmployeeMgmtAction extends BaseAction {
 
 		try {
 			List<Employee> empList = employeeService.findAllEmployees(table.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
+					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			List<EmployeeVO> vlist = BeanConvert.convertBeans(empList);
 			JSONDataTableUtils.setupJSONDataTable(vlist, table, employeeService.getEmployeeTotalCount());
 		} catch (Exception e) {

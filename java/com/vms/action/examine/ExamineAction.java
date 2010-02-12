@@ -56,7 +56,7 @@ public class ExamineAction extends BaseAction {
 					getUserInfo().getUsername(),
 					examinedTable.getStartIndex(), 
 					examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
-					examinedTable.getSort(), examinedTable.getDir().equals("asc")					
+					examinedTable.getSort(), examinedTable.getDir().equals("JSONDataTableUtils.SORT_DIRECTION")					
 			);
 			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, vedioscoreService.getCountOfUserExaminedVedio(getUserInfo().getUsername()));
 		} catch (Exception e) {

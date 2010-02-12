@@ -37,7 +37,7 @@ public class SystemDataMgmt extends BaseAction {
 			List<Status> staList = statusService.findAllStatus(table
 					.getStartIndex(), table.getStartIndex()
 					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals("asc"));
+					.equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(staList, table, statusService
 					.getStatusTotalCount());
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class SystemDataMgmt extends BaseAction {
 			List<Topic> topList = topicService.findAllTopics(table
 					.getStartIndex(), table.getStartIndex()
 					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals("asc"));
+					.equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(topList, table, topicService
 					.getTopicTotalCount());
 		} catch (Exception e) {
@@ -67,7 +67,7 @@ public class SystemDataMgmt extends BaseAction {
 			List<Subject> subList = subjectService.findAllSubjects(table
 					.getStartIndex(), table.getStartIndex()
 					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals("asc"));
+					.equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(subList, table,
 					subjectService.getSubjectTotalCount());
 		} catch (Exception e) {

@@ -31,7 +31,7 @@ public class VedioScoreVO {
 	public VedioScoreVO(Vedioscore score){
 		this.vedioID = score.getVedio().getId();
 		this.vedioName = score.getVedio().getVedioName();
-		this.examiner = score.getExaminer().getUserName();
+		this.examiner = score.getExaminer().getEmployee().getName();
 		this.storyScore = score.getStoryScore();
 		this.techScore = score.getTechScore();
 		this.performScore = score.getPerformScore();

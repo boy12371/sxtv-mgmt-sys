@@ -2,13 +2,15 @@ package com.vms.beans;
 
 import java.util.List;
 
+import com.vms.common.JSONDataTableUtils;
+
 public class JSONDataTable {
 
 	private int recordsReturned;
 	private int totalRecords=0;
 	private int startIndex=0;
 	private String sort;
-	private String dir = "asc";
+	private String dir = JSONDataTableUtils.SORT_DIRECTION;
 	private int pageSize = 3;
 	private int rowsPerPage=10;
 

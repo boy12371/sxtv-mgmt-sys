@@ -44,13 +44,13 @@ public class AuditVideoMgmtAction extends BaseAction {
 			if (filter != 0) {
 				videosList = videoService.findVideotapeByStatus(filter, table.getSort(), table.getStartIndex(), table
 						.getStartIndex()
-						+ table.getRowsPerPage(), table.getDir().equals("asc"));
+						+ table.getRowsPerPage(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 				JSONDataTableUtils.setupJSONDataTable(videosList, table, videoService
 						.getTotalCountForVideosByStatus(filter));
 			} else {
 				videosList = videoService.findAllVideotapesForAudit(table.getSort(), table.getStartIndex(), table
 						.getStartIndex()
-						+ table.getRowsPerPage(), table.getDir().equals("asc"));
+						+ table.getRowsPerPage(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 				JSONDataTableUtils.setupJSONDataTable(videosList, table, videoService
 						.getTotalCountForAllVideotapesForAudit());
 			}
@@ -79,7 +79,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 	public String getVideoScores() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		List<VedioScoreVO> data = vedioscoreService.findUserExamineScoreByVideoId(videoID, table.getStartIndex(),
-				table.getStartIndex() + table.getRowsPerPage(), table.getSort(), table.getDir().equals("asc"));
+				table.getStartIndex() + table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 		JSONDataTableUtils.setupJSONDataTable(data, table, vedioscoreService
 				.getTotalCountUserExamineScoreByVideoId(videoID));
 		return SUCCESS;
@@ -87,8 +87,20 @@ public class AuditVideoMgmtAction extends BaseAction {
 
 	
 	public String videoOperation() throws Exception{
-		SessionUserInfo user = this.getUserInfo();
+		SessionUserInfo user = new SessionUserInfo(1); //this.getUserInfo();
+		boolean flag=false;
+		try {
+			flag = videoService.auditingVideo(vv.getVedioID(), user, operation);	
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);			
+		}
 		
+		if(!flag){
+			this.addActionError("审核失败.");
+			return INPUT;
+		}
+		this.addActionError("审核成功.");
 		return SUCCESS;
 		
 	}
@@ -150,6 +162,14 @@ public class AuditVideoMgmtAction extends BaseAction {
 
 	public void setVedioscoreService(IVedioscoreService vedioscoreService) {
 		this.vedioscoreService = vedioscoreService;
+	}
+
+	public int getOperation() {
+		return operation;
+	}
+
+	public void setOperation(int operation) {
+		this.operation = operation;
 	}
 
 }

@@ -8,6 +8,7 @@ import com.vms.beans.JSONDataTable;
 
 public class JSONDataTableUtils {
 	
+	public final static String SORT_DIRECTION="asc";
 	
 	public static JSONDataTable initJSONDataTable(HttpServletRequest request){
 		

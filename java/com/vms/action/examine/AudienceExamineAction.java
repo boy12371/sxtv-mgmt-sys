@@ -48,7 +48,7 @@ public class AudienceExamineAction extends BaseAction {
 			List<AudienceExamineVO> AEs = audienceExamineService.getAudienceScoreOfTape(
 					tape.getVedioID(), -1, -1, 
 					audienceExamineTable.getSort(),
-					audienceExamineTable.getDir().equals("asc"));
+					audienceExamineTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(AEs, audienceExamineTable, audienceExamineService.getCountAudienceOfTape(tape.getVedioID()));
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
