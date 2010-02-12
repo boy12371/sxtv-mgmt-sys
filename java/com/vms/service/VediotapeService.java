@@ -118,11 +118,12 @@ public class VediotapeService implements IVediotapeService {
 	@Override
 	public boolean auditingVideo(String vedioId, SessionUserInfo user, int operation) throws Exception {
 		// TODO Auto-generated method stub
-		String hql ="update Vediotape tape set tape.status=? where tape.id=?";
+		String hql ="update Vediotape tape set tape.status.id=? where tape.id=?";
 		boolean success = vediotapeDAO.updateVideotape(hql, new Object[]{operation, vedioId});
 		Serializable id=null;
 		if(success){
-			Auditing audit =new Auditing(vedioId);
+			Auditing audit =new Auditing();
+			audit.setVedioID(new Vediotape(vedioId));
 			audit.setAuditor(new User(user.getUserId()));
 			audit.setResult(new Status(operation));
 			audit.setAuditDate(new Date());
@@ -132,6 +133,14 @@ public class VediotapeService implements IVediotapeService {
 		}
 		
 		return id!=null;
+	}
+
+	public IAuditingDAO getAuditingDAO() {
+		return auditingDAO;
+	}
+
+	public void setAuditingDAO(IAuditingDAO auditingDAO) {
+		this.auditingDAO = auditingDAO;
 	}
 
 }

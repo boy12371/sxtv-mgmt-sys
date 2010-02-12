@@ -134,6 +134,7 @@
 	</bean>
 	<bean id="vediotapeDAO" class="com.vms.db.dao.VediotapeDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
+		
 	</bean>
 	<bean id="vedioscoreDAO" class="com.vms.db.dao.VedioscoreDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -167,6 +168,8 @@
 		-->
 	<bean id="vediotapeService" class="com.vms.service.VediotapeService">
 		<property name="vediotapeDAO" ref="vediotapeDAO" />
+		<property name="auditingDAO" ref="auditingDAO" />
+		
 	</bean>
 	<bean id="vedioscoreService" class="com.vms.service.VedioscoreService">
 		<property name="vedioscoreDAO" ref="vedioscoreDAO" />
