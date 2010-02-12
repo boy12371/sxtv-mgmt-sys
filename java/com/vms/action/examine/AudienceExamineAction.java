@@ -28,6 +28,8 @@ public class AudienceExamineAction extends BaseAction {
 	private List<Audience> audience;
 	
 	private VedioTapeVO tape;
+	
+	private String newResult;
 
 	public String toAudienceExamine() throws Exception {
 		try{
@@ -97,5 +99,13 @@ public class AudienceExamineAction extends BaseAction {
 
 	public void setTapeService(IVediotapeService tapeService) {
 		this.tapeService = tapeService;
+	}
+
+	public void setNewResult(String newResult) {
+		this.newResult = newResult;
+	}
+
+	public String getNewResult() {
+		return newResult;
 	}
 }
