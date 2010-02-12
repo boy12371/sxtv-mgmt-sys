@@ -58,3 +58,12 @@ input, textarea{
 	width:800px;
 
 }
+
+.autoComplete{
+	width:200px !important;
+	position:inherit !important;
+}
+
+.yui-ac-container{
+	width:202px !important;
+}
