@@ -5,12 +5,14 @@ import java.util.Date;
 import com.vms.db.bean.Audiencescore;
 
 public class AudienceExamineVO {
-	public final static String yes="看";
-	public final static String no="不看";
+	private final static String yes="看";
+	private final static String no="不看";
 	
 	private String audience;
 	
-	private String tape;
+	private String tapeName;
+	
+	private String tapeID;
 	
 	private String result;
 	
@@ -18,7 +20,8 @@ public class AudienceExamineVO {
 	
 	public AudienceExamineVO(Audiencescore as){
 		this.audience = as.getAudienceID().getName();
-		this.tape = as.getVedioID().getVedioName();
+		this.tapeID = as.getVedioID().getId();
+		this.tapeName = as.getVedioID().getVedioName();
 		this.result = as.getResult()==0?no:yes;
 		this.dateExamine = as.getDateExamine();
 	}
@@ -35,16 +38,27 @@ public class AudienceExamineVO {
 	public String getAudience() {
 		return audience;
 	}
-	public void setTape(String tape) {
-		this.tape = tape;
-	}
-	public String getTape() {
-		return tape;
-	}
+
 	public void setDateExamine(Date dateExamine) {
 		this.dateExamine = dateExamine;
 	}
 	public Date getDateExamine() {
 		return dateExamine;
+	}
+
+	public void setTapeID(String tapeID) {
+		this.tapeID = tapeID;
+	}
+
+	public String getTapeID() {
+		return tapeID;
+	}
+
+	public void setTapeName(String tapeName) {
+		this.tapeName = tapeName;
+	}
+
+	public String getTapeName() {
+		return tapeName;
 	}
 }
