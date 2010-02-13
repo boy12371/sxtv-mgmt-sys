@@ -30,9 +30,11 @@ body {
 <tr>
 <td><img border="0" style="" src="./images/sxlogo.png"/></td>
 <td>
-	<div style="float:right">
-	<img border="0" height="40" src="./images/TVlogo.png"/>
-	<img border="0" height="40" src="./images/sxtv_logo.png"/>
+	<div class="divSearch">
+		<table><tr style="height: 40px;">
+			<td><input type="text" class="inputSearch"/></td>
+			<td><img border="0" width="33" height="33" style="margin-top:5px;" onclick="alert('Search!');" src="./images/telescope.png"/></td>
+		</tr></table>
 	</div>
 </td>
 </tr>

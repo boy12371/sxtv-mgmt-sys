@@ -68,4 +68,23 @@ ul,li{list-style:none; padding:0; margin:0;}
 	background-color:#EBF4FB;
 	}
 	
+.divSearch{
+	width:263px;
+	height:57px;
+	background:url("../images/search_bg.png") no-repeat scroll 0 0 transparent;
+	float:right;
+	margin-top:15px;
+	margin-right:50px;
+	}
+	
+.inputSearch{
+	width:180px;
+	margin-left:25px;
+	margin-top:10px;
+	background-color:#FFFFFF;
+	border-color:#404040 #D4D0C8 #D4D0C8 #404040;
+	border-style:solid;
+	border-width:1px;
+	color:#000000;
+	}
 	
