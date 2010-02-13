@@ -34,6 +34,7 @@
 		
 		<action name="toAudienceExamine" class="audienceExamineMgmt" method="toAudienceExamine">
 			<result>/examine/audienceExamine.jsp</result>
+			<result name="input">/examine/audienceExamine.jsp</result>
 		</action>
 		
 		<action name="getAudienceExamine" class="audienceExamineMgmt" method="getAudienceExamine">
@@ -44,6 +45,7 @@
 		
 		<action name="doAudienceExamine" class="audienceExamineMgmt" method="doAudienceExamine">
 			<result>/examine/audienceExamine.jsp</result>
+			<result name="input">/examine/audienceExamine.jsp</result>
 		</action>
 	</package>
 </struts>
