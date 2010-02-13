@@ -1,6 +1,9 @@
 package com.vms.action.examine;
 
+import java.util.ArrayList;
 import java.util.List;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 
@@ -10,6 +13,12 @@ import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.db.bean.Audience;
+import com.vms.db.bean.Company;
+import com.vms.db.bean.Status;
+import com.vms.db.bean.Subject;
+import com.vms.db.bean.Topic;
+import com.vms.db.bean.User;
+import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.IAudienceScoreService;
 import com.vms.service.iface.IVediotapeService;
 
@@ -57,7 +66,33 @@ public class AudienceExamineAction extends BaseAction {
 		return SUCCESS;
 	}
 	
-	public String doAudienceExamine() {
+	public String doAudienceExamine() throws Exception {
+		JSONArray jsonArray = JSONArray.fromObject(newResult);
+		List<AudienceExamineVO> aes = new ArrayList<AudienceExamineVO>();
+		if(jsonArray.isArray() && !jsonArray.isEmpty()){
+			int size = jsonArray.size();
+			for (int i = 0; i < size; i++) {
+				JSONObject obj =jsonArray.getJSONObject(i);
+				AudienceExamineVO aev = new AudienceExamineVO();
+				aev.setAudience(obj.getString("audience"));
+				String tapeID = obj.getString("tapeID");
+				aev.setTapeID(tapeID);
+				if(null == tape){
+					tape = new VedioTapeVO();
+					tape.setVedioID(tapeID);
+				}
+				
+				aev.setResult(obj.getString("result"));
+				int mark = obj.getInt("marked");
+				if(2 == mark){
+					aev.setId(new Integer(obj.getInt("id")));
+				}
+				aes.add(aev);
+			}
+		}
+		audienceExamineService.updateAudienceScore(aes);
+		//back to original page
+		toAudienceExamine();
 		return SUCCESS;
 	}
 
