@@ -2,11 +2,15 @@ package com.vms.beans;
 
 import java.util.Date;
 
+import com.vms.db.bean.Audience;
 import com.vms.db.bean.Audiencescore;
+import com.vms.db.bean.Vediotape;
 
 public class AudienceExamineVO {
 	public final static String yes="看";
 	public final static String no="不看";
+	
+	private Integer id;
 	
 	private String audience;
 	
@@ -18,12 +22,37 @@ public class AudienceExamineVO {
 	
 	private Date dateExamine;
 	
+	public AudienceExamineVO(){}
+	
 	public AudienceExamineVO(Audiencescore as){
+		this.id = as.getId();
 		this.audience = as.getAudienceID().getName();
 		this.tapeID = as.getVedioID().getId();
 		this.tapeName = as.getVedioID().getVedioName();
 		this.result = as.getResult()==0?no:yes;
 		this.dateExamine = as.getDateExamine();
+	}
+	
+	public Audiencescore toAudiencescore(){
+		Audiencescore as = new Audiencescore();
+		as.setVedioID(new Vediotape(tapeID));
+		if(result.equals(yes)){
+			as.setResult(1);
+		}else{
+			as.setResult(0);
+		}
+		if(null == dateExamine){
+			as.setDateExamine(new Date());
+		}else{
+			as.setDateExamine(dateExamine);
+		}
+		if(null != id){
+			as.setId(id);
+		}
+		Audience au = new Audience();
+		au.setName(audience);
+		as.setAudienceID(au);
+		return as;
 	}
 		
 	public String getResult() {
@@ -60,5 +89,13 @@ public class AudienceExamineVO {
 
 	public String getTapeName() {
 		return tapeName;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 }
