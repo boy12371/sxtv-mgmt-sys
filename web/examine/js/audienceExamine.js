@@ -10,7 +10,7 @@ function initDataTable() {
 	};
 	var myRowFormatter = function(elTr, oRecord){
 		var xData = oRecord.getData();
-		if(typeof(xData.marked)!="undefined" && 1==xData.marked){
+		if(typeof(xData.marked)!="undefined" && 1<=xData.marked){
 			elTr.className = elTr.className + " markedRow";
 		}
 		return true;
@@ -41,7 +41,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "audience", "tapeName", "result", "dateExamine"],
+		fields : ["id", "audience", "tapeName", "result", "dateExamine"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -80,27 +80,52 @@ function addAction(){
 	var tapeID = document.getElementById("vedioID").innerHTML;
 	var tapeName = document.getElementById("vedioName").innerHTML;
 	var audience = document.getElementById("audienceName").value;
+	if(null==audience || ""==audience){
+		alert("请输入观众姓名。");
+		return;
+	}
+	if(!document.getElementById("look").checked && !document.getElementById("unlook").checked){
+		alert("请选择观众评价。");
+		return;
+	}
 	var result = document.getElementById("look").checked?"看":"不看";
 	var xData = {
+		id:-1,
 		tapeID:tapeID,
 		tapeName:tapeName,
 		audience:audience,
 		result:result,
 		dateExamine:"",
-		//mark this row is new need to be submit.
+		//mark this row is new need to be submit. 1:insert 2:update
 		marked:1
 	};
 	var pos = getRecordFormTable(xData);
 	if(null != pos){
-		myDataTable.deleteRow(pos);  
+		var x = confirm("该观众已经评价过此影带，如果确定，原来的评价将被更新，否则请取消。");
+		if(x){
+			var id = myDataTable.getRecord(pos).getData("id");
+			xData.marked = 2;
+			xData.id = id;
+			myDataTable.deleteRow(pos);  
+		}else{
+			return;
+		}
 	}
 	myDataTable.addRow(xData,0);
 	markRow(0);
 }
 
 function submitAction(){
+	var submitArray = new Array();
+	var records = myDataTable.getRecordSet().getRecords();
+	for(var i=0;i<records.length;i++){
+		var xData = records[i].getData();
+		if(typeof(xData.marked)!="undefined" && 1<=xData.marked){
+			submitArray[submitArray.length] = xData;
+		}
+	}
 	var newResult = document.getElementById("newResult");
-	newResult.value = "xxxxxxxxxxxxx";
+	newResult.value = YAHOO.lang.JSON.stringify(submitArray);
 	document.forms[0].submit();
 }
 
