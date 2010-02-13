@@ -28,7 +28,7 @@ body {
 <div id="topBranding" class="topBranding">
 <table style="margin-top:-10px;width:100%;">
 <tr>
-<td><img border="0" style="" src="./images/sxlogo.png"/></td>
+<td><img border="0" style="margin-left:20px;" src="./images/TVlogo.png" onclick="changeLogo(this);"/></td>
 <td>
 	<div class="divSearch">
 		<table><tr style="height: 40px;">
@@ -77,6 +77,14 @@ body {
 	resizeTabview();
 	window.onresize = function() {
 		resizeContentDiv();
+	}
+
+	function changeLogo(self){
+		if(self.src.indexOf("TVlogo") != -1){
+			self.src = "./images/sxlogo.png";
+		}else{
+			self.src = "./images/TVlogo.png";
+		}
 	}
 </script>
 </body>
