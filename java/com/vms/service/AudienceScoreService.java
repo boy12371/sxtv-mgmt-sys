@@ -48,5 +48,22 @@ public class AudienceScoreService implements IAudienceScoreService{
 		tape.setId(vedioID);
 		return audienceScoreDAO.getObjectTotalCountByFields(Audiencescore.class, Audiencescore.PROP_VEDIO_I_D, tape);
 	}
-
+	
+	public void updateAudienceScore(List<AudienceExamineVO> aes) throws Exception{
+		Map<String, Audience> ausMap = getAllAudience();
+		for(AudienceExamineVO ae:aes){
+			Audiencescore as = ae.toAudiencescore();
+			as.setAudienceID(ausMap.get(as.getAudienceID().getName()));
+			audienceScoreDAO.saveOrUpdateObject(as);
+		}
+	}
+	
+	private Map<String, Audience> getAllAudience() throws Exception{
+		Map<String, Audience> ausMap = new HashMap<String, Audience>();
+		List<Audience> ausList = audienceScoreDAO.findAll(Audience.class);
+		for(Audience a:ausList){
+			ausMap.put(a.getName(), a);
+		}
+		return ausMap;
+	}
 }
