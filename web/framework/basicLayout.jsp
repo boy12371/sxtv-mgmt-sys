@@ -21,26 +21,89 @@ body {
 <script type="text/javascript" src="../common/yui/build/tabview/tabview-min.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
 
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
+
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" /> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
+
+
 </head>
 
 <body class="yui-skin-sam">
 
 <div id="topBranding" class="topBranding">
+<form id="form1" name="form1" method="post" action="/tv/search/searchVideoByName.action" target="contentFrameId">
 <table style="margin-top:-10px;width:100%;">
 <tr>
 <td><img border="0" style="margin-left:20px;" src="./images/TVlogo.png" onclick="changeLogo(this);"/></td>
 <td>
 	<div class="divSearch">
 		<table><tr style="height: 40px;">
-			<td><input type="text" class="inputSearch"/></td>
-			<td><img border="0" width="33" height="33" style="margin-top:5px;" onclick="alert('Search!');" src="./images/telescope.png"/></td>
+			<td><input type="text" class="inputSearch" id="searchinput" name="query"/><div id="searchcontainer"></div>
+			</td>
+			<td>
+			<input type="submit" value="GO" />
+			<!-- img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/--></td>
 		</tr></table>
 	</div>
 </td>
 </tr>
 </table>
+</form>
 </div>
+	
+<script type="text/javascript"> 
+function goSearch(){
+	var query = YAHOO.util.Dom.get("searchinput").value;
+	
+	var href ="/tv/search/doAddingVedio.action?query="+query;
+	alert(href);
+	window.location.href=href;
+}
+YAHOO.example.Centered = function() {
+    var myDataSource = new YAHOO.util.XHRDataSource("/tv/search/autoCompleteForVideoName.action?");
+    myDataSource.responseSchema = {
+        resultsList: "records",
+        fields: ["vname"]
+    };
 
+    // Instantiate AutoComplete
+    var myAutoComp = new YAHOO.widget.AutoComplete("searchinput","searchcontainer", myDataSource);
+    myAutoComp.queryMatchContains = true;
+    myAutoComp.queryQuestionMark = false;
+    myAutoComp.useShadow = true;
+    
+    // Keeps container centered
+    /*myAutoComp.doBeforeExpandContainer = function(oTextbox, oContainer, sQuery, aResults) {
+        var pos = YAHOO.util.Dom.getXY(oTextbox);
+        pos[1] += YAHOO.util.Dom.get(oTextbox).offsetHeight + 2;
+        YAHOO.util.Dom.setXY(oContainer,pos);
+        return true;
+    };*/
+    
+    return {
+        oDS: myDataSource,
+        oAC: myAutoComp
+    };
+}();
+</script>
 <div id="tabView" class="yui-navset tabviewArea">
 <ul class="yui-nav">
 	<s:iterator value="tabs" status="st">

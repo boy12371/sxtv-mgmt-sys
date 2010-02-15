@@ -10,7 +10,11 @@
 			</result>
 		</action>
 		
-			
+		
+		<action name="searchVideoByName" class="searchMgmt" method="searchVideoByName">
+			<result name="success">/search/videoDetails.jsp</result>
+			<result name="input">/search/videoDetails.jsp</result>
+		</action>
 		
 	</package>
 </struts>

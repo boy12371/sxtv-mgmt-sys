@@ -17,6 +17,7 @@ public class VedioSearchMgmt extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private IVediotapeService vedioService;
 	private JSONDataTable table;
+	private Vediotape video;
 	private String query;
 
 	public String autoCompleteForVideoName() throws Exception {
@@ -28,21 +29,18 @@ public class VedioSearchMgmt extends BaseAction {
 			for (int i = 0; i < size; i++) {
 				nameList.add(new VideoNameJSON(names.get(i)));
 			}
-		}
-		
+		}		
 		table.setRecords(nameList);
 		return SUCCESS;
 	}
 
 	public String searchVideoByName() throws Exception {
-
+		try {
+			video = vedioService.getVediotapeByName(query);
+		} catch (Exception e) {
+			// TODO: handle exception		
+		}		
 		return SUCCESS;
-	}
-
-	private class VedioNames implements Serializable {
-
-		// private String
-
 	}
 
 	public IVediotapeService getVedioService() {
