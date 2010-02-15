@@ -253,17 +253,19 @@
 	function saveDragDropNodes()
 	{
 		var saveString = "";
-		var uls = dragDropTopContainer.getElementsByTagName('UL');
+		var mainContainer = document.getElementById('dhtmlgoodies_mainContainer');
+		var form =document.forms[0];
+		var uls = mainContainer.getElementsByTagName('UL');
 		for(var no=0;no<uls.length;no++){	// LOoping through all <ul>
 			var lis = uls[no].getElementsByTagName('LI');
 			for(var no2=0;no2<lis.length;no2++){
 				if(saveString.length>0)saveString = saveString + ";";
-				saveString = saveString + uls[no].id + '|' + lis[no2].id;
+				saveString = saveString + uls[no].id + '=' + lis[no2].id;
 			}	
 		}		
-		
+		document.getElementById("orderString").value=saveString;
 		document.getElementById('saveContent').innerHTML = '<h1>Ready to save these nodes:</h1> ' + saveString.replace(/;/g,';<br>') + '<p>Format: ID of ul |(pipe) ID of li;(semicolon)</p><p>You can put these values into a hidden form fields, post it to the server and explode the submitted value there</p>';
-		
+		form.submit();
 	}
 	
 	function initDragDropScript()
@@ -319,28 +321,26 @@
 
 function initMontSelections(select){
 	
-	var value = select.value;
-	
+	var month = select.value;
+
 	var today =new Date();
 	var year = today.getFullYear();	
-	var orderDate= new Date(year, value-1, 0);
-	var dateNo = orderDate.getDate();
+	var orderDate= new Date(year, month, 0);
+	var dateNo = orderDate.getDate();	
 	
-	alert(dateNo);
+	var smonth = month.length==2?mounth:"0"+month;
+	var playerDateID = year+""+smonth;
+
 	var mainContainer = document.getElementById('dhtmlgoodies_mainContainer');
 	var htmlString ="";
+	
 	for(var i=0; i< dateNo; i++){
-		var innerHtml = "<div><p>"+value+"月"+(i+1)+"日</p>" +
-				"<ul id='box"+i+"'></ul>" +
-						"</div>";
+		var d = (i+1)>10?(i+1):"0"+(i+1);		
+		var innerHtml = "<div><p>"+year+"年"+month+"月"+(i+1)+"日</p><ul id='"+ playerDateID+d +"'></ul></div>";		
 		htmlString += innerHtml;
 		boxSizeArray[i] = 1;
-	}
-	
-	
+	}	
 	mainContainer.innerHTML = htmlString;
 	initDragDropScript();
-	
-	
 	
 }

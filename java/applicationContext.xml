@@ -100,6 +100,8 @@
 				<value>userService</value>
 				<value>roleService</value>
 				<value>audienceScoreService</value>
+				<value>playorderService</value>
+				
 			</list>
 		</property>
 		<property name="interceptorNames">
@@ -202,6 +204,10 @@
 	</bean>
 	<bean id="audienceScoreService" class="com.vms.service.AudienceScoreService">
 		<property name="audienceScoreDAO" ref="audienceScoreDAO" />
+	</bean>
+	
+	<bean id="playorderService" class="com.vms.service.PlayorderService">
+		<property name="playorderDAO" ref="playorderDAO" />
 	</bean>
 	<!--
 			Proxy Service ********************************************************

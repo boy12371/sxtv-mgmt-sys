@@ -35,6 +35,7 @@ import com.vms.db.dao.BaseRootDAO;
 import com.vms.db.dao.StatusDAO;
 import com.vms.db.dao.VediotapeDAO;
 import com.vms.db.dao.iface.IAuditingDAO;
+import com.vms.db.dao.iface.IPlayorderDAO;
 import com.vms.service.StatusService;
 import com.vms.service.VediotapeService;
 import com.vms.service.iface.IEmployeeService;
@@ -56,29 +57,27 @@ public class Test {
 		//
 		// IUserRoleService service = (IUserRoleService)
 		// ctx.getBean("userRoleService");
-		IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
+		//IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
 
-		List<String> list = service.findVideoNamesForAutoComplete("2");
-		System.out.println(list.size());
+		//List<String> list = service.findVideoNamesForAutoComplete("2");
+		//System.out.println(list.size());
 		
+		
+		IPlayorderDAO service = (IPlayorderDAO) ctx.getBean("playorderDAO");
+		Calendar cal = Calendar.getInstance();
+		//cal.set(Calendar.YEAR, 2010);
+		cal.set(2010, 02, 01);
+		
+		System.out.println(cal.getTime());
+		List list = service.findPlayorderByMonth(cal.getTime());
+		System.out.println(list.size());
 		
 //		for (Vediotape vediotape : list) {
 //			System.out.println(vediotape.getId()+" / "+vediotape.getVedioName());
 //		}
 		
 		//List<String> names = service.findVideoNamesForAutoComplete();
-		StringBuffer sb =new StringBuffer("{\"records\":[");
-		for (int i = 0; i < list.size(); i++) {
-			String v = list.get(i);
-			if(i!=0 && i!= list.size()){
-				sb.append(",");
-			}
-			sb.append("{\"vname\":\""+v+"\"}");
-			
-		}
-		sb.append("]}");
-		JSONObject object= JSONObject.fromObject(sb.toString());
-		System.out.println(object);
+//		
 //		for (int i = 0; i < names.size(); i++) {
 //			System.out.println(names.get(i));
 //		}
