@@ -1,19 +1,30 @@
 /* VARIABLES YOU COULD MODIFY */
-	var boxSizeArray = [];	// Array indicating how many items there is rooom for in the right column ULs
+	var boxSizeArray = [];	// Array indicating how many items there is rooom
+							// for in the right column ULs
 	var arrow_offsetX = -5;	// Offset X - position of small arrow
 	var arrow_offsetY = 0;	// Offset Y - position of small arrow
 	
 	var arrow_offsetX_firefox = -6;	// Firefox - offset X small arrow
 	var arrow_offsetY_firefox = -13; // Firefox - offset Y small arrow
 	
-	var verticalSpaceBetweenListItems = 3;	// Pixels space between one <li> and next	
-											// Same value or higher as margin bottom in CSS for #dhtmlgoodies_dragDropContainer ul li,#dragContent li
+	var verticalSpaceBetweenListItems = 3;	// Pixels space between one <li> and
+											// next
+											// Same value or higher as margin
+											// bottom in CSS for
+											// #dhtmlgoodies_dragDropContainer
+											// ul li,#dragContent li
 	
 											
-	var indicateDestionationByUseOfArrow = true;	// Display arrow to indicate where object will be dropped(false = use rectangle)
+	var indicateDestionationByUseOfArrow = true;	// Display arrow to indicate
+													// where object will be
+													// dropped(false = use
+													// rectangle)
 
-	var cloneSourceItems = false;	// Items picked from main container will be cloned(i.e. "copy" instead of "cut").	
-	var cloneAllowDuplicates = false;	// Allow multiple instances of an item inside a small box(example: drag Student 1 to team A twice
+	var cloneSourceItems = false;	// Items picked from main container will be
+									// cloned(i.e. "copy" instead of "cut").
+	var cloneAllowDuplicates = false;	// Allow multiple instances of an item
+										// inside a small box(example: drag
+										// Student 1 to team A twice
 	
 	/* END VARIABLES YOU COULD MODIFY */
 	
@@ -21,10 +32,14 @@
 	var dragTimer = -1;
 	var dragContentObj = false;
 	var contentToBeDragged = false;	// Reference to dragged <li>
-	var contentToBeDragged_src = false;	// Reference to parent of <li> before drag started
-	var contentToBeDragged_next = false; 	// Reference to next sibling of <li> to be dragged
-	var destinationObj = false;	// Reference to <UL> or <LI> where element is dropped.
-	var dragDropIndicator = false;	// Reference to small arrow indicating where items will be dropped
+	var contentToBeDragged_src = false;	// Reference to parent of <li> before
+										// drag started
+	var contentToBeDragged_next = false; 	// Reference to next sibling of <li>
+											// to be dragged
+	var destinationObj = false;	// Reference to <UL> or <LI> where element is
+								// dropped.
+	var dragDropIndicator = false;	// Reference to small arrow indicating where
+									// items will be dropped
 	var ulPositionArray = new Array();
 	var mouseoverObj = false;	// Reference to highlighted DIV
 	
@@ -196,9 +211,9 @@
 		}
 	}
 	
-	/* End dragging 
-	Put <LI> into a destination or back to where it came from.
-	*/	
+	/*
+	 * End dragging Put <LI> into a destination or back to where it came from.
+	 */	
 	function dragDropEnd(e)
 	{
 		if(dragTimer==-1)return;
@@ -247,9 +262,9 @@
 		
 	}
 	
-	/* 
-	Preparing data to be saved 
-	*/
+	/*
+	 * Preparing data to be saved
+	 */
 	function saveDragDropNodes()
 	{
 		var saveString = "";
@@ -274,7 +289,11 @@
 		dragDropIndicator = document.getElementById('dragDropIndicator');
 		dragDropTopContainer = document.getElementById('dhtmlgoodies_dragDropContainer');
 		document.documentElement.onselectstart = cancelEvent;;
-		var listItems = dragDropTopContainer.getElementsByTagName('LI');	// Get array containing all <LI>
+		var listItems = dragDropTopContainer.getElementsByTagName('LI');	// Get
+																			// array
+																			// containing
+																			// all
+																			// <LI>
 		var itemHeight = false;
 		for(var no=0;no<listItems.length;no++){
 			listItems[no].onmousedown = initDrag;
@@ -295,8 +314,13 @@
 		var leftContainer = document.getElementById('dhtmlgoodies_listOfItems');
 		var itemBox = leftContainer.getElementsByTagName('UL')[0];
 		
-		document.documentElement.onmousemove = moveDragContent;	// Mouse move event - moving draggable div
-		document.documentElement.onmouseup = dragDropEnd;	// Mouse move event - moving draggable div
+		document.documentElement.onmousemove = moveDragContent;	// Mouse move
+																// event -
+																// moving
+																// draggable div
+		document.documentElement.onmouseup = dragDropEnd;	// Mouse move event
+															// - moving
+															// draggable div
 		
 		var ulArray = dragDropTopContainer.getElementsByTagName('UL');
 		for(var no=0;no<ulArray.length;no++){
@@ -343,4 +367,194 @@ function initMontSelections(select){
 	mainContainer.innerHTML = htmlString;
 	initDragDropScript();
 	
+}
+
+
+
+
+function initDataTable(month) {
+
+	var formatLink = function(elCell, oRecord, oColumn, sData) {
+			elCell.innerHTML = sData;	
+	}
+
+	var formatCompany = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.companyName;
+	}
+	var formatTopic = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.topicName;
+	}
+	var formatSubject = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.subjectName;
+	}
+	var formatDate = function(elCell, oRecord, oColumn, sData) {
+		var idx = sData.indexOf("T");
+		if (idx != -1) {
+			elCell.innerHTML = sData.substring(0, idx);
+		} else {
+			elCell.innerHTML = sData;
+		}
+	}
+	var formatStatus = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.status;
+	}
+	// Column definitions
+	var myColumnDefs = [{
+				key : "vedioID.id",
+				label : "编号",
+				sortable : true,
+				formatter : formatLink
+			}, {
+				key : "vedioID.vedioName",
+				label : "剧目名称"
+			}, {
+				key : "vedioID.topic.topicName",
+				label : "题材",
+				sortable : true,
+				formatter : formatTopic
+			}, {
+				key : "vedioID.subject.subjectName",
+				label : "栏目",
+				sortable : true,
+				formatter : formatSubject
+			}, {
+				key : "vedioID.companyID.companyName",
+				label : "影视公司",
+				sortable : true,
+				formatter : formatCompany
+			}, {
+				key : "vedioID.dateInput",
+				label : "收带日期",
+				sortable : true
+			}, {
+				key : "vedioID.status.status",
+				label : "状态",
+				sortable : true,
+				formatter : formatStatus
+			}, {
+				key : "playDate",
+				label : "待播時間"
+			},{
+				key : "arrangeDate",
+				label : "編排時間"
+			},	{
+				key : "auditor.employee.name",
+				label : "編排人"
+			},{
+				key : "comments",
+				label : "备注"
+			}];
+
+	// DataSource instance
+	var myDataSource = new YAHOO.util.XHRDataSource("/tv/order/getOrderListForMonth.action?");
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+	myDataSource.responseSchema = {
+		resultsList : "records",
+		fields : [{key:"vedioID.id"}, {key:"vedioID.vedioName"}, {key:"vedioID.topic.topicName"}, {key:"vedioID.subject.subjectName"}, {key:"vedioID.companyID.companyName"},{key:"vedioID.dateInput"},{key:"vedioID.status.status"},
+				"playDate", "arrangeDate", {key:"auditor.employee.name"},"comments"],
+		metaFields : {
+			totalRecords : "totalRecords" // Access to value in the server
+			// response
+		}
+	};
+	requestBuilder = function(oState, oSelf) {
+		/*
+		 * We aren't initializing sort and dir variables. If you are using
+		 * column sorting built into the DataTable, use this set of variable
+		 * initializers. var sort, dir, startIndex, results;
+		 */
+		var startIndex, results, sort, dir;
+
+		oState = oState || {
+			pagination : null,
+			sortedBy : null
+		};
+		var monthValue = YAHOO.util.Dom.get("monthFilter").value;
+		/*
+		 * If using column sorting built into DataTable, these next two lines
+		 * will properly set the current _sortedBy_ column and the
+		 * _sortDirection_ sort = (oState.sortedBy) ? oState.sortedBy.key :
+		 * oSelf.getColumnSet().keys[0].getKey(); dir = (oState.sortedBy &&
+		 * oState.sortedBy.dir === DataTable.CLASS_DESC) ? "desc" : "asc";
+		 */
+		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
+		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
+		sort = (oState.sortedBy)
+				? oState.sortedBy.key
+				: oSelf.getColumnSet().keys[0].getKey();
+		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC)
+				? "desc"
+				: "asc";
+		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
+				+ sort + "&dir=" + dir + "&month=" + monthValue;
+	}
+	// DataTable configuration
+	var myConfigs = {
+		initialRequest : "sort=dateInput&dir=asc&startIndex=0&results=50&month="+month,
+		dynamicData : true, // Enables dynamic server-driven data
+		sortedBy : {
+			key : "dateInput",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
+		}, // Sets UI initial sort arrow
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 50
+				}), // Enables pagination
+		generateRequest : requestBuilder
+	};
+
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+			myDataSource, myConfigs);
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
+	}
+
+	var fireEvent = function(resetRecordOffset) {
+		var oState = myDataTable.getState(), request, oCallback;
+
+		/*
+		 * We don't always want to reset the recordOffset. If we want the
+		 * Paginator to be set to the first page, pass in a value of true to
+		 * this method. Otherwise, pass in false or anything falsy and the
+		 * paginator will remain at the page it was set at before.
+		 */
+		if (resetRecordOffset) {
+			oState.pagination.recordOffset = 0;
+		}
+
+		/*
+		 * If the column sort direction needs to be updated, that may be done
+		 * here. It is beyond the scope of this example, but the
+		 * DataTable::sortColumn() method has code that can be used with some
+		 * modification.
+		 */
+
+		/*
+		 * This example uses onDataReturnSetRows because that method will clear
+		 * out the old data in the DataTable, making way for the new data.
+		 */
+		oCallback = {
+			success : myDataTable.onDataReturnSetRows,
+			failure : myDataTable.onDataReturnSetRows,
+			argument : oState,
+			scope : myDataTable
+		};
+
+		// Generate a query string
+		request = myDataTable.get("generateRequest")(oState, myDataTable);
+
+		// Fire off a request for new data.
+		myDataSource.sendRequest(request, oCallback);
+	}
+
+	// DataTable instance
+	var filter = YAHOO.util.Dom.get("monthFilter");
+	YAHOO.util.Event.addListener(filter, "change", fireEvent);
+	return {
+		ds : myDataSource,
+		dt : myDataTable
+	};
+
 }

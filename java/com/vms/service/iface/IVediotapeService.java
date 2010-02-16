@@ -50,4 +50,6 @@ public interface IVediotapeService {
 	boolean auditingVideo(String vedioId, SessionUserInfo user, int operation)throws Exception;
 	
 	List<String> findVideoNamesForAutoComplete(String videoName) throws Exception;
+	
+	boolean updateVideoRatingMarket(String videoID,float market, float rate)throws Exception;
 }

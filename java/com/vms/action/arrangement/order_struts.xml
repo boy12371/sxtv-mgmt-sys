@@ -8,9 +8,15 @@
 			<result>/order/videoOrder.jsp</result>
 		</action>
 		<action name="createPlayorder" class="orderMgmt" method="createPlayorder">
-			<result>/order/playOrder.jsp</result>
+			<result>/order/playOrders.jsp</result>
+			<result name="input">/order/videoOrder.jsp</result>			
 		</action>
 		
+		<action name="getOrderListForMonth" class="orderMgmt" method="getOrderListForMonth">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
 
 	</package>
 </struts>

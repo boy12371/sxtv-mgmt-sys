@@ -7,7 +7,7 @@ import com.vms.common.SessionUserInfo;
 
 public interface IPlayorderService {
 	
-	void savePlayorder(String orderString)throws Exception;
+	void savePlayorder(String orderString,SessionUserInfo user)throws Exception;
 
 	List findPlayorderByMonth(Date month)throws Exception;
 	

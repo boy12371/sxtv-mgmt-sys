@@ -168,6 +168,18 @@ public class VediotapeService implements IVediotapeService {
 		this.auditingDAO = auditingDAO;
 	}
 
+	@Override
+	public boolean updateVideoRatingMarket(String videoID, float market,
+			float rate) throws Exception {
+		// TODO Auto-generated method stub
+		String hql = "update Vediotape v set v.marketShare=?, set v.audienceRating=? where v.id=?";
+		boolean result = vediotapeDAO.updateVideotape(hql, new Object[]{market, rate, videoID});
+		if(result){
+			
+		}
+		return false;
+	}
+
 	
 
 }

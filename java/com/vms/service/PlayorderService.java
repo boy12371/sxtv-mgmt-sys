@@ -15,7 +15,7 @@ public class PlayorderService implements IPlayorderService {
 	private IPlayorderDAO  playorderDAO;
 	
 	@Override
-	public void savePlayorder(String orderString) throws Exception {
+	public void savePlayorder(String orderString,SessionUserInfo user) throws Exception {
 		// TODO Auto-generated method stub
 		if (orderString != null && orderString.length() > 0) {
 			String[] orderList = orderString.split(";");

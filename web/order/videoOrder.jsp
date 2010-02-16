@@ -25,8 +25,9 @@
 
 </head>
 <body>
+<s:form action="createPlayorder" method="post" namespace="/order">
 请选择编排月份：
-<select id="month" onchange="initMontSelections(this);">
+<select id="month" name="month" onchange="initMontSelections(this);">
 	<option value="1">1月</option>
 	<option value="2">2月</option>   
 	<option value="3">3月</option>
@@ -61,11 +62,12 @@
 </div>
 <div id="footer">
 
-	<s:form action="createPlayorder" method="post" namespace="/order">
+	
 	<input type="hidden" name="orderString" id="orderString" />
 	<input type="button" onclick="saveDragDropNodes()" value="Save">
-	</s:form>
+	
 </div>
+</s:form>
 <ul id="dragContent"></ul>
 <div id="dragDropIndicator"><img src="images/insert.gif"></div>
 <div id="saveContent"><!-- THIS ID IS ONLY NEEDED FOR THE DEMO --></div>

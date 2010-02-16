@@ -1,5 +1,6 @@
 package com.vms.common;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -53,7 +54,7 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		//
 		// IUserRoleService service = (IUserRoleService)
 		// ctx.getBean("userRoleService");
@@ -63,14 +64,14 @@ public class Test {
 		//System.out.println(list.size());
 		
 		
-		IPlayorderDAO service = (IPlayorderDAO) ctx.getBean("playorderDAO");
-		Calendar cal = Calendar.getInstance();
+		//IPlayorderDAO service = (IPlayorderDAO) ctx.getBean("playorderDAO");
+		//Calendar cal = Calendar.getInstance();
 		//cal.set(Calendar.YEAR, 2010);
-		cal.set(2010, 02, 01);
+		//cal.set(2010, 02, 01);
 		
-		System.out.println(cal.getTime());
-		List list = service.findPlayorderByMonth(cal.getTime());
-		System.out.println(list.size());
+		//System.out.println(cal.getTime());
+		//List list = service.findPlayorderByMonth(cal.getTime());
+		//System.out.println(list.size());
 		
 //		for (Vediotape vediotape : list) {
 //			System.out.println(vediotape.getId()+" / "+vediotape.getVedioName());
@@ -118,6 +119,16 @@ public class Test {
 
 		// JSONObject o = jsArray.getJSONObject(0);
 		// System.out.println(o.get("comments"));
+		
+		String date="20100606";
+		System.out.println(date.substring(0,4));
+		System.out.println(date.substring(4,6));
+		System.out.println(date.substring(6,8));
+		Calendar cal = Calendar.getInstance();
+		cal.set(Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(4,6))-1 , Integer.parseInt(date.substring(6,8)));
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(sdf.format(cal.getTime()));
+		
 
 	}
 
