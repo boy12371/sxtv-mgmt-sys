@@ -68,6 +68,10 @@ public class VediotapeService implements IVediotapeService {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	/*
+	 * status: tape status
+	 * propertyName: the column data return form database sorting by 
+	 */
 	public List<Vediotape> findVideotapeByStatus(int status, String propertyName, int startIndex, int endIndex,
 			boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
