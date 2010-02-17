@@ -18,6 +18,10 @@ public class VedioTapeVO {
 	
 	private Map<String,Integer> watching;
 	
+	private Date playDate;
+	
+	private int marked;
+	
 	public VedioTapeVO(){}
 	
 	public VedioTapeVO(Vediotape tape){
@@ -95,6 +99,22 @@ public class VedioTapeVO {
 
 	public void setWatching(Map<String, Integer> watching) {
 		this.watching = watching;
+	}
+
+	public void setPlayDate(Date playDate) {
+		this.playDate = playDate;
+	}
+
+	public Date getPlayDate() {
+		return playDate;
+	}
+
+	public void setMarked(int marked) {
+		this.marked = marked;
+	}
+
+	public int getMarked() {
+		return marked;
 	}
 	
 }
