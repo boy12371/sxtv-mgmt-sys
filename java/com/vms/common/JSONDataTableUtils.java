@@ -14,8 +14,20 @@ public class JSONDataTableUtils {
 		
 		String sort = request.getParameter("sort");
 		String dir = request.getParameter("dir");
-		int startIndex =Integer.parseInt(request.getParameter("startIndex"));
-		int results= Integer.parseInt(request.getParameter("results"));
+		int startIndex,results;
+		
+		String temp = request.getParameter("startIndex");
+		if(null != temp && !"".equals(temp)){
+			startIndex = Integer.parseInt(temp);
+		}else{
+			startIndex = 0;
+		}
+		temp = request.getParameter("results");
+		if(null != temp && !"".equals(temp)){
+			results = Integer.parseInt(temp);
+		}else{
+			results = 0;
+		}
 		
 		JSONDataTable  dataTable = new JSONDataTable();
 		dataTable.setDir(dir);
