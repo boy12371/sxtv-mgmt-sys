@@ -20,7 +20,7 @@
 		</Module>
 		
 		<Module id="tapeArrange" name="影带编排" url="">
-			<ModuleItem id="arrange" name="编排" url="/tv/order/toArrangePlayOrder.action?status=3"/>
+			<ModuleItem id="arrange" name="编排" url="/tv/arrange/toArrange.action"/>
 			<ModuleItem id="arrangeView" name="查看编排" url="http://www.google.com"/> 
 			<ModuleItem id="arrangeModify" name="修改编排" url="http://www.google.com"/> 
 		</Module>
