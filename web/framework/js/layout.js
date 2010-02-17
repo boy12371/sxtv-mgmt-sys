@@ -21,8 +21,9 @@ function resizeIframe(){
 	}else{
 		height = iframeObj.contentDocument.body.offsetHeight;
 	}
-	iframeObj.style.height = "1650px";
-	
+	height += 50;
+	if(height < 460) height = 460;
+	iframeObj.style.height = height + "px";
 	resizeContentDiv();
 }
 
