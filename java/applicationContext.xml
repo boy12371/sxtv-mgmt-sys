@@ -101,7 +101,7 @@
 				<value>roleService</value>
 				<value>audienceScoreService</value>
 				<value>playorderService</value>
-				
+				<value>arrangeService</value>
 			</list>
 		</property>
 		<property name="interceptorNames">
@@ -205,8 +205,10 @@
 	<bean id="audienceScoreService" class="com.vms.service.AudienceScoreService">
 		<property name="audienceScoreDAO" ref="audienceScoreDAO" />
 	</bean>
-	
 	<bean id="playorderService" class="com.vms.service.PlayorderService">
+		<property name="playorderDAO" ref="playorderDAO" />
+	</bean>
+	<bean id="arrangeService" class="com.vms.service.ArrangeService">
 		<property name="playorderDAO" ref="playorderDAO" />
 	</bean>
 	<!--
