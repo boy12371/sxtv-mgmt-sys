@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="arrange" namespace="/arrange" extends="json-default">
+		<action name="toArrange" class="arrangeMgmt" method="toArrange">
+			<result>/arrange/arrange.jsp</result>
+		</action>
+		
+		<action name="getUnarrangedTapes" class="arrangeMgmt" method="getUnarrangedTapes">
+			<result type="json">
+				<param name="root">unArrangedTable</param>
+			</result>
+		</action>
+		
+		<action name="getArrangedTapes" class="arrangeMgmt" method="getArrangedTapes">
+			<result type="json">
+				<param name="root">arrangeTable</param>
+			</result>
+		</action>
+		
+		<action name="doArrange" class="arrangeMgmt" method="doArrange">
+			<result>/arrange/arrange.jsp</result>
+		</action>
+	</package>
+</struts>
