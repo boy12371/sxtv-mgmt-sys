@@ -28,8 +28,6 @@ body {
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
-
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
