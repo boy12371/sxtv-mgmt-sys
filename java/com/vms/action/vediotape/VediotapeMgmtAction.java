@@ -109,9 +109,10 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	public String isVediotapeExsits() throws Exception {
 		String vedioName = this.getRequest().getParameter("vedioName");
+		String x = java.net.URLDecoder.decode(vedioName, "UTF-8");
 		this.getResponse().setCharacterEncoding("UTF-8");
 		PrintWriter out = this.getResponse().getWriter();
-		vedio = this.vedioService.getVediotapeByName(vedioName);
+		vedio = this.vedioService.getVediotapeByName(x);
 		
 		StringBuffer sb =new StringBuffer();
 		if(vedio!=null){

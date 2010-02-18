@@ -203,8 +203,8 @@ function initDataTable() {
 		}
 
 		var videoName = YAHOO.util.Dom.get("vname").value;
-		var url = "/tv/vedio/isVediotapeExsits.action?vedioName=" + videoName;
-		YAHOO.util.Connect.asyncRequest('GET', url, callbacks);
+		var url = encodeURI("/tv/vedio/isVediotapeExsits.action?vedioName=" + videoName);
+		YAHOO.util.Connect.asyncRequest('GET', encodeURI(url), callbacks);
 	}
 	var handleClick = function() {
 		var dataSet = myDataTable.getRecordSet().getRecords();

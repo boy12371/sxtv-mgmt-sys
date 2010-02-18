@@ -17,8 +17,10 @@ import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Auditing;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
+import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IAuditingDAO;
+import com.vms.db.dao.iface.IVedioscoreDAO;
 import com.vms.db.dao.iface.IVediotapeDAO;
 import com.vms.service.iface.IVediotapeService;
 
@@ -26,7 +28,7 @@ public class VediotapeService implements IVediotapeService {
 
 	private IVediotapeDAO vediotapeDAO;
 	private IAuditingDAO auditingDAO;
-
+	private IVedioscoreDAO vedioscoreDAO;
 	private Class clz = com.vms.db.bean.Vediotape.class;
 
 	@Override
@@ -165,15 +167,31 @@ public class VediotapeService implements IVediotapeService {
 
 	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean updateVideoRatingMarket(String videoID, float market, float rate) throws Exception {
 		// TODO Auto-generated method stub
 		String hql = "update Vediotape v set v.marketShare=?, set v.audienceRating=? where v.id=?";
 		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] { market, rate, videoID });
-		if (result) {
-
+		float vScore=0;
+		if(rate < 70 ){
+			vScore = 60;
+		}else if(rate >=70 && rate < 80 ){
+			vScore = 70;
+		}else if(rate >=80 && rate < 90){
+			vScore = 80;
+		}else{
+			vScore = 90;
 		}
-		return false;
+		if (result) {
+			List<Vedioscore> scoreList =  vedioscoreDAO.findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(videoID), -1, -1, "", false);
+			for (Vedioscore vs : scoreList) {
+				float acc  = Math.abs(vs.getScore() - vScore) / vScore * 100;
+				vs.setAccuracy(acc);
+				vedioscoreDAO.saveOrUpdateObject(vs);
+			}
+		}
+		return true;
 	}
 
 

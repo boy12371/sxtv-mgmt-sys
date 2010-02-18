@@ -22,7 +22,7 @@
 		
 		<action name="searchVideoByName" class="searchMgmt" method="searchVideoByName">
 			<result name="success">/vediotape/videotape.jsp</result>
-			<result name="input">/vediotape/videotape.jsp</result>
+			<result name="input">/marketRate/marketRate.jsp</result>
 		</action>
 		
 		<action name="updateMarketRate" class="vedioMgmt" method="updateMarketRate">
