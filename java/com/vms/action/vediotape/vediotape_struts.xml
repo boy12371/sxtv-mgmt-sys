@@ -15,5 +15,19 @@
 				/vediotape/addVediotape.jsp
 			</result>
 		</action>
+		
+		<action name="toMarketRate" class="vedioMgmt" method="toMarketRate">
+			<result>/marketRate/marketRate.jsp</result>
+		</action>
+		
+		<action name="searchVideoByName" class="searchMgmt" method="searchVideoByName">
+			<result name="success">/vediotape/videotape.jsp</result>
+			<result name="input">/vediotape/videotape.jsp</result>
+		</action>
+		
+		<action name="updateMarketRate" class="vedioMgmt" method="updateMarketRate">
+			<result>/marketRate/marketRate.jsp</result>
+			<result name="input">/vediotape/videotape.jsp</result>
+		</action>
 	</package>
 </struts>

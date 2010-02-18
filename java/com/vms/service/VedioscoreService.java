@@ -57,13 +57,13 @@ public class VedioscoreService implements IVedioscoreService {
 	}
 
 	public int getVedioCountByStatus(Status status) throws Exception {
-		return vediotapeDAO.getObjectTotalCountByFields(Vediotape.class, Vediotape.PROP_STATUS + ".id", status.getId());
+		return vediotapeDAO.getTotalCount_findObjectByField(Vediotape.class, Vediotape.PROP_STATUS, status);
 	}
 
 	public int getCountOfUserExaminedVedio(String username) throws Exception {
 		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, username, -1, -1, "", true);
-		return vedioscoreDAO.getObjectTotalCountByFields(VedioscoreDAO.clz, Vedioscore.PROP_EXAMINER + ".id", users
-				.get(0).getId());
+		return vedioscoreDAO.getTotalCount_findObjectByField(VedioscoreDAO.clz, Vedioscore.PROP_EXAMINER + ".id", users
+				.get(0));
 	}
 
 	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception {
@@ -125,8 +125,7 @@ public class VedioscoreService implements IVedioscoreService {
 	@Override
 	public int getTotalCountUserExamineScoreByVideoId(String videoID) throws Exception {
 		// TODO Auto-generated method stub
-		return vediotapeDAO.getObjectTotalCountByFields(Vedioscore.class, Vedioscore.PROP_VEDIO + ".id", videoID);
-
+		return vediotapeDAO.getTotalCount_findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(videoID));
 	}
 
 }

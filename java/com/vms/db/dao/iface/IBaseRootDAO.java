@@ -34,7 +34,7 @@ public interface IBaseRootDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	int getObjectTotalCountByFields(Class clz, String propertyName, Object value) throws Exception;
+	//int getObjectTotalCountByFields(Class clz, String propertyName, Object value) throws Exception;
 
 	/**
 	 * 查询指定列名的数量
@@ -75,6 +75,7 @@ public interface IBaseRootDAO {
 	List findObjectByField(Class clz, String propertyName, Object value, int startIndex, int endIndex, String orderPropertyName, boolean asceding)
 			throws Exception;
 
+	int getTotalCount_findObjectByField(Class clz, String propertyName, Object value);
 	/***
 	 * 查询对象列表 startIndex 或 endIndex =-1 则不分页
 	 * 
@@ -93,7 +94,7 @@ public interface IBaseRootDAO {
 	 */
 	List findObjectByFields(Class clz, Map<String, Object> propertiesValues, int startIndex, int endIndex,
 			String propertyName, boolean ascending) throws Exception;
-
+	int getTotalCount_findObjectByFields(Class clz, Map<String, Object> propertiesValues);
 	List findAll(Class clz) throws Exception;
 
 	Object getUniqueResultByProperty(Class clz, Map<String, Object> propertiesValues) throws Exception;

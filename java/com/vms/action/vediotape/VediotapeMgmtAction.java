@@ -82,6 +82,16 @@ public class VediotapeMgmtAction extends BaseAction {
 		}		
 		return null;
 	}
+	
+	public String toMarketRate()throws Exception{
+		return SUCCESS;
+	}
+	
+	public String updateMarketRate()throws Exception{
+		vedioService.updateVideoRatingMarket(vedio.getId(), vedio.getMarketShare(), vedio.getAudienceRating());
+		
+		return SUCCESS;
+	}
 	public List<Company> getComList() throws Exception{
 		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);		
 	}
@@ -101,7 +111,7 @@ public class VediotapeMgmtAction extends BaseAction {
 		String vedioName = this.getRequest().getParameter("vedioName");
 		this.getResponse().setCharacterEncoding("UTF-8");
 		PrintWriter out = this.getResponse().getWriter();
-		Vediotape vedio = this.vedioService.getVediotapeByName(vedioName);
+		vedio = this.vedioService.getVediotapeByName(vedioName);
 		
 		StringBuffer sb =new StringBuffer();
 		if(vedio!=null){

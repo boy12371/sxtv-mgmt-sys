@@ -39,8 +39,14 @@ public class VedioSearchMgmt extends BaseAction {
 			video = vedioService.getVediotapeByName(query);
 		} catch (Exception e) {
 			// TODO: handle exception		
-		}		
-		return SUCCESS;
+		}
+		if(video!=null){
+			return SUCCESS;	
+		}else{
+			this.addActionError("影带未找到");
+			return INPUT;
+		}
+		
 	}
 
 	public IVediotapeService getVedioService() {
@@ -83,5 +89,13 @@ public class VedioSearchMgmt extends BaseAction {
 
 	public void setTable(JSONDataTable table) {
 		this.table = table;
+	}
+
+	public Vediotape getVideo() {
+		return video;
+	}
+
+	public void setVideo(Vediotape video) {
+		this.video = video;
 	}
 }

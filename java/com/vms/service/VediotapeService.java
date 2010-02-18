@@ -11,9 +11,6 @@ import org.hibernate.Hibernate;
 import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
 
-
-
-
 import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.common.SessionUserInfo;
@@ -76,8 +73,8 @@ public class VediotapeService implements IVediotapeService {
 			boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
 
-		return (List<Vediotape>) vediotapeDAO.findObjectByField(clz, Vediotape.PROP_STATUS, new Status(status), startIndex, endIndex,
-				propertyName, asceding);
+		return (List<Vediotape>) vediotapeDAO.findObjectByField(clz, Vediotape.PROP_STATUS, new Status(status),
+				startIndex, endIndex, propertyName, asceding);
 
 	}
 
@@ -90,7 +87,7 @@ public class VediotapeService implements IVediotapeService {
 	@Override
 	public int getTotalCountForVideosByStatus(int status) throws Exception {
 		// TODO Auto-generated method stub
-		return vediotapeDAO.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS + ".id", status);
+		return vediotapeDAO.getTotalCount_findObjectByField(clz, Vediotape.PROP_STATUS, new Status(status));
 	}
 
 	@Override
@@ -130,40 +127,56 @@ public class VediotapeService implements IVediotapeService {
 	@Override
 	public boolean auditingVideo(String vedioId, SessionUserInfo user, int operation) throws Exception {
 		// TODO Auto-generated method stub
-		String hql ="update Vediotape tape set tape.status.id=? where tape.id=?";
-		boolean success = vediotapeDAO.updateVideotape(hql, new Object[]{operation, vedioId});
-		Serializable id=null;
-		if(success){
-			Auditing audit =new Auditing();
+		String hql = "update Vediotape tape set tape.status.id=? where tape.id=?";
+		boolean success = vediotapeDAO.updateVideotape(hql, new Object[] { operation, vedioId });
+		Serializable id = null;
+		if (success) {
+			Auditing audit = new Auditing();
 			audit.setVedioID(new Vediotape(vedioId));
 			audit.setAuditor(new User(user.getUserId()));
 			audit.setResult(new Status(operation));
 			audit.setAuditDate(new Date());
 			id = auditingDAO.saveObject(audit);
-		}else{
+		} else {
 			return false;
 		}
-		
-		return id!=null;
+
+		return id != null;
 	}
+
 	@Override
 	public List<String> findVideoNamesForAutoComplete(String videoName) throws Exception {
 		// TODO Auto-generated method stub
-		String hql ="from Vediotape v where v.vedioName like ?";
-		Map<String,Object[]> valuesTypes = new HashMap<String,Object[]>();
-		valuesTypes.put("values", new Object[]{"%"+videoName+"%"});
-		valuesTypes.put("types", new Type[]{Hibernate.STRING});
-		List<Vediotape> list = vediotapeDAO.findVideos(hql, valuesTypes, -1, -1);
-		List<String> names =new ArrayList<String>();
-		if(list!=null && !list.isEmpty()){
+		String hql = "from Vediotape v where v.vedioName like ?";
+		Map<String, Object[]> valuesTypes = new HashMap<String, Object[]>();
+		valuesTypes.put("values", new Object[] { "%" + videoName + "%" });
+		valuesTypes.put("types", new Type[] { Hibernate.STRING });
+		List<Vediotape> list = (List<Vediotape>) vediotapeDAO.findVideos(hql, valuesTypes, -1, -1);
+		List<String> names = new ArrayList<String>();
+		if (list != null && !list.isEmpty()) {
 			for (Vediotape vediotape : list) {
 				names.add(vediotape.getVedioName());
 			}
-			
+
 		}
 		return names;
-		
+
 	}
+
+	
+
+	@Override
+	public boolean updateVideoRatingMarket(String videoID, float market, float rate) throws Exception {
+		// TODO Auto-generated method stub
+		String hql = "update Vediotape v set v.marketShare=?, set v.audienceRating=? where v.id=?";
+		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] { market, rate, videoID });
+		if (result) {
+
+		}
+		return false;
+	}
+
+
 	public IAuditingDAO getAuditingDAO() {
 		return auditingDAO;
 	}
@@ -171,19 +184,4 @@ public class VediotapeService implements IVediotapeService {
 	public void setAuditingDAO(IAuditingDAO auditingDAO) {
 		this.auditingDAO = auditingDAO;
 	}
-
-	@Override
-	public boolean updateVideoRatingMarket(String videoID, float market,
-			float rate) throws Exception {
-		// TODO Auto-generated method stub
-		String hql = "update Vediotape v set v.marketShare=?, set v.audienceRating=? where v.id=?";
-		boolean result = vediotapeDAO.updateVideotape(hql, new Object[]{market, rate, videoID});
-		if(result){
-			
-		}
-		return false;
-	}
-
-	
-
 }

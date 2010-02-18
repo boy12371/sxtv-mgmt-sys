@@ -63,5 +63,5 @@ public interface IVediotapeDAO extends IBaseRootDAO {
 	
 
 	
-	List<Vediotape> findVideos(String hql,Map<String,Object[]> valuesTypes,int startIndex,int endIndex)throws Exception;
+	Object findVideos(String hql,Map<String,Object[]> valuesTypes,int startIndex,int endIndex)throws Exception;
 }

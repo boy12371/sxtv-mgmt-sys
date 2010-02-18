@@ -84,7 +84,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 
 			while (it.hasNext()) {
 				String key = (String) it.next();
-				crt.add(Restrictions.between(Vediotape.PROP_DATE_INPUT, dateStart, dateEnd));
+				crt.add(Restrictions.between(key, dateStart, dateEnd));
 			}
 		}
 
@@ -96,7 +96,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 			crt.setFirstResult(startIndex);
 			crt.setMaxResults(endIndex);
 		}
-		return crt.list();
+		return (List<Vediotape>)crt.list();
 
 	}
 
@@ -131,7 +131,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 
 	@Override
 	public int getVedioTotalCountByStatus(Status status) throws Exception {
-		return this.getObjectTotalCountByFields(clz, Vediotape.PROP_STATUS, status);
+		return this.getTotalCount_findObjectByField(clz, Vediotape.PROP_STATUS, status);
 	}
 
 	@Override
@@ -141,11 +141,9 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		return result != 0;
 	}
 
-	
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Vediotape> findVideos(final String hql, final Map<String,Object[]> valuesTypes, final int startIndex, final int endIndex) throws Exception {
+	public Object findVideos(final String hql, final Map<String,Object[]> valuesTypes, final int startIndex, final int endIndex) throws Exception {
 		// TODO Auto-generated method stub
 		return this.getHibernateTemplate().executeFind(new HibernateCallback() {
 

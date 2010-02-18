@@ -115,15 +115,15 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		return Integer.parseInt(crt.uniqueResult().toString());
 	}
 
-	@Override
-	public int getObjectTotalCountByFields(Class clz, String propertyName, Object value) throws Exception {
-		if (null == value)
-			return getObjectTotalCount(clz, propertyName);
-		Criteria crt = this.getCriteria(clz);
-		crt.add(Restrictions.eq(propertyName, value));
-		crt.setProjection(Projections.rowCount());
-		return Integer.parseInt(crt.uniqueResult().toString());
-	}
+//	@Override
+//	public int getObjectTotalCountByFields(Class clz, String propertyName, Object value) throws Exception {
+//		if (null == value)
+//			return getObjectTotalCount(clz, propertyName);
+//		Criteria crt = this.getCriteria(clz);
+//		crt.add(Restrictions.eq(propertyName, value));
+//		crt.setProjection(Projections.rowCount());
+//		return Integer.parseInt(crt.uniqueResult().toString());
+//	}
 
 	@Override
 	public List findAll(Class clz) throws Exception {
@@ -155,6 +155,33 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 	
 	public Criteria getCriteria(Class clz) {
 		return this.getSession().createCriteria(clz);
+	}
+
+	@Override
+	public int getTotalCount_findObjectByField(Class clz, String propertyName, Object value) {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		crt.add(Restrictions.eq(propertyName, value));
+		crt.setProjection(Projections.rowCount());
+		return Integer.parseInt(crt.uniqueResult().toString());
+		
+	}
+
+	@Override
+	public int getTotalCount_findObjectByFields(Class clz, Map<String, Object> propertiesValues) {
+		// TODO Auto-generated method stub
+		Criteria crt = this.getCriteria(clz);
+		if (propertiesValues != null) {
+			Set<String> keys = propertiesValues.keySet();
+			Iterator<String> it = keys.iterator();
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				crt.add(Restrictions.eq(key, propertiesValues.get(key)));
+			}
+		}
+		crt.setProjection(Projections.rowCount());
+		return Integer.parseInt(crt.uniqueResult().toString());
+		
 	}
 
 	

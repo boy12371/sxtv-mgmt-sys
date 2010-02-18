@@ -46,7 +46,7 @@ public class AudienceScoreService implements IAudienceScoreService{
 	public int getCountAudienceOfTape(String vedioID) throws Exception{
 		Vediotape tape = new Vediotape();
 		tape.setId(vedioID);
-		return audienceScoreDAO.getObjectTotalCountByFields(Audiencescore.class, Audiencescore.PROP_VEDIO_I_D, tape);
+		return audienceScoreDAO.getTotalCount_findObjectByField(Audiencescore.class, Audiencescore.PROP_VEDIO_I_D, tape);
 	}
 	
 	public void updateAudienceScore(List<AudienceExamineVO> aes) throws Exception{

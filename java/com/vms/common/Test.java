@@ -54,14 +54,14 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		//ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		//
 		// IUserRoleService service = (IUserRoleService)
 		// ctx.getBean("userRoleService");
-		//IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
+		IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
 
-		//List<String> list = service.findVideoNamesForAutoComplete("2");
-		//System.out.println(list.size());
+		int count = service.getTotalCountForVideosByStatus(2);
+		System.out.println(count);
 		
 		
 		//IPlayorderDAO service = (IPlayorderDAO) ctx.getBean("playorderDAO");
@@ -120,14 +120,7 @@ public class Test {
 		// JSONObject o = jsArray.getJSONObject(0);
 		// System.out.println(o.get("comments"));
 		
-		String date="20100606";
-		System.out.println(date.substring(0,4));
-		System.out.println(date.substring(4,6));
-		System.out.println(date.substring(6,8));
-		Calendar cal = Calendar.getInstance();
-		cal.set(Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(4,6))-1 , Integer.parseInt(date.substring(6,8)));
-		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(sdf.format(cal.getTime()));
+		
 		
 
 	}

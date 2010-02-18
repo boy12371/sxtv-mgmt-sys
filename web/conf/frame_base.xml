@@ -26,7 +26,7 @@
 		</Module>
 		
 		<Module id="feedback" name="市场反馈" url="">
-			<ModuleItem id="feedbackAdd" name="录入反馈" url="http://www.baidu.com"/>
+			<ModuleItem id="feedbackAdd" name="录入反馈" url="/tv/vedio/toMarketRate.action"/>
 			<ModuleItem id="feedbackView" name="查看反馈" url="http://www.google.com"/> 
 			<ModuleItem id="feedbackModify" name="修改反馈" url="http://www.google.com"/> 
 		</Module>
