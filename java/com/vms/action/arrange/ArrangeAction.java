@@ -1,5 +1,7 @@
 package com.vms.action.arrange;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 
@@ -15,6 +18,8 @@ import com.vms.beans.Pair;
 import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
+import com.vms.db.bean.Playorder;
+import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.IArrangeService;
 import com.vms.service.iface.IVediotapeService;
@@ -96,7 +101,6 @@ public class ArrangeAction extends BaseAction {
 		try {
 			List<VedioTapeVO> tapes = arrangeService.findArrangedTapes(selDate);
 			//make records the date of which has no tape to play.
-			Date pDate = tapes.get(0).getPlayDate();
 			for(int i=1;i<=numDayOfMonth;i++){
 				boolean insert = true;
 				for(VedioTapeVO tape:tapes){
@@ -107,7 +111,7 @@ public class ArrangeAction extends BaseAction {
 				}
 				if(insert){
 					VedioTapeVO voidTape = new VedioTapeVO();
-					Date playDate = new Date(pDate.getYear(),pDate.getMonth(),i);
+					Date playDate = new Date(selDate.getYear(),selDate.getMonth(),i);
 					voidTape.setPlayDate(playDate);
 					tapes.add(i-1,voidTape);
 				}
@@ -123,12 +127,45 @@ public class ArrangeAction extends BaseAction {
 	
 	public String doArrange() throws Exception {
 		JSONArray jsonArray = JSONArray.fromObject(newResult);
+		List<Playorder> allOrders = new ArrayList<Playorder>();
+		List<Playorder> newOrders = new ArrayList<Playorder>();
 		if(jsonArray.isArray() && !jsonArray.isEmpty()){
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
+				JSONObject obj =jsonArray.getJSONObject(i);
+				Playorder po = new Playorder();
+				po.setVedioID(new Vediotape(obj.getString("vedioID")));
+				DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");         
+				po.setPlayDate(dFormat.parse(obj.getString("playDate")));
+				po.setArrangeDate(new Date());
+				po.setAuditor(new User(getUserInfo().getUserId()));
 				
+				int marked = obj.getInt("marked");
+				if(1<=marked){
+					newOrders.add(po);
+				}
+				allOrders.add(po);
 			}
 		}
+		arrangeService.savePlayorder(newOrders);
+		//get old play order of select month to filter for records need to be deleted.
+		Date selDate = new Date();
+		String[] xx = month.split("-");
+		selDate.setYear(Integer.parseInt(xx[0]));
+		selDate.setMonth(Integer.parseInt(xx[1])-1);
+		List<Playorder> oldOrders = arrangeService.findPlayorders(selDate);
+		List<Playorder> delOrders = new ArrayList<Playorder>();
+		for(Playorder oldOrder: oldOrders){
+			boolean delFlag = true;
+			for(Playorder order:allOrders){
+				if(oldOrder.getVedioID().getId().equals(order.getVedioID().getId())){
+					delFlag = false;
+					break;
+				}
+			}
+			if(delFlag) delOrders.add(oldOrder);
+		}
+		arrangeService.deletePlayOrder(delOrders);
 		return SUCCESS;
 	}
 	
