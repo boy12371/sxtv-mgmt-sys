@@ -6,12 +6,16 @@ import org.apache.log4j.Logger;
 
 import com.vms.action.LogonAction;
 import com.vms.common.BaseAction;
+import com.vms.common.BaseException;
 import com.vms.common.SessionUserInfo;
 import com.vms.framework.tabview.TabElementBean;
 import com.vms.framework.tabview.TabViewManager;
+import com.vms.service.iface.IUserService;
 
 public class BasicLayout extends BaseAction{
 	private static Logger logger = Logger.getLogger(LogonAction.class);
+	
+	private IUserService userService;
 	
 	private SessionUserInfo userInfo;
 	
@@ -27,6 +31,8 @@ public class BasicLayout extends BaseAction{
 	private List<TabElementBean> tabs;
 	
 	public String doLogon() throws Exception{
+		userInfo = userService.authenticate(userInfo.getUsername(), userInfo.getPassword());
+		if(null == userInfo) throw new BaseException("", "验证失败，用户名或密码错误。");
 		this.setUserInfo(userInfo);
 		TabViewManager tabManager = TabViewManager.getInstance(this.session);
 		tabs = tabManager.getTabs();
@@ -39,5 +45,13 @@ public class BasicLayout extends BaseAction{
 
 	public List<TabElementBean> getTabs() {
 		return tabs;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
+	public IUserService getUserService() {
+		return userService;
 	}
 }
