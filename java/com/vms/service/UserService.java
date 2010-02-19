@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.db.dao.iface.IUserDAO;
@@ -112,6 +113,21 @@ public class UserService implements IUserService {
 
 	public void setUserDAO(IUserDAO userDAO) {
 		this.userDAO = userDAO;
+	}
+	
+	public SessionUserInfo authenticate(String username, String password) throws Exception{
+		SessionUserInfo userInfo = null;
+		List<User> users = userDAO.findObjectByField(User.class, "userName", username, -1, -1, User.PROP_ID, true);
+		if(null == users || 0 == users.size()) return null;
+		User user = users.get(0);
+		if(0 == user.getStatus()) return null;
+		if(user.getUserPass().equals(password)){
+			userInfo = new SessionUserInfo();
+			userInfo.setUsername(username);
+			userInfo.setPassword(password);
+			userInfo.setUserId(user.getId());
+		}
+		return userInfo;
 	}
 
 }

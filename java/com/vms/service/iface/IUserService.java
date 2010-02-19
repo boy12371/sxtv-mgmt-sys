@@ -3,6 +3,7 @@ package com.vms.service.iface;
 import java.util.List;
 import java.util.Set;
 
+import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.User;
 
 public interface IUserService {
@@ -22,4 +23,5 @@ public interface IUserService {
 	
 	boolean updateUser(String operation, User user, List roleIDs)throws Exception;
 
+	SessionUserInfo authenticate(String username, String password) throws Exception;
 }
