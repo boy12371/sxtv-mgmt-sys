@@ -5,6 +5,7 @@ var selMonth = "";
 function selectMonthFunc(self){
 	var index=self.selectedIndex;
 	selMonth = self.options[index].value;
+	document.getElementById("month").value = selMonth;
 }
 
 var formatDate = function(elCell, oRecord, oColumn, sData) {
@@ -28,14 +29,15 @@ function initUnArrangeTable() {
 		img.onclick = eval("(1,function(){addTapeToArrange(\"" + oRecord.getId() + "\");})");
 		elCell.appendChild(img);
 		elCell.style.padding="2px";
+		elCell.style.width="20px";
 	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
 		key :"",
 		label :"",
-	    formatter :formatAddTape,
-	    width: 30
+		width : 30,
+	    formatter :formatAddTape
 	}, {
 	    key :"vedioID",
 	    label :"影带编号",
@@ -100,9 +102,10 @@ function initArrangeTable() {
 		var img = document.createElement("img");
 		img.border = 0;
 		img.src="./images/delete.png"
-		img.onclick = eval("(1,function(){addTapeToArrange(\"" + oRecord.getId() + "\");})");
+		img.onclick = eval("(1,function(){removeTapeFromArrange(\"" + oRecord.getId() + "\");})");
 		elCell.appendChild(img);
 		elCell.style.padding="2px";
+		elCell.style.width="20px";
 	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
@@ -316,22 +319,40 @@ function addTapeToArrange(rID){
 }
 
 function removeTapeFromArrange(rID){
-	var xData = arrangeTable.getRecord(rID).getData();
+	var xRecord = arrangeTable.getRecord(rID);
+	var xData = xRecord.getData();
+	var nData = {};
+	nData.vedioID = xData.vedioID;
+	nData.name = xData.name;
+	nData.subject = xData.subject;
+	nData.topic = xData.topic;
+	nData.company = xData.company;
+	nData.dateComing = xData.dataComing;
 	if(null==xData.vedioID || ""==xData.vedioID) return;
-	arrangeTable.deleteRow(rID);
+	arrangeTable.updateCell(xRecord, "vedioID", "");
+	arrangeTable.updateCell(xRecord, "name", "");
+	arrangeTable.updateCell(xRecord, "subject", "");
+	arrangeTable.updateCell(xRecord, "topic", "");
+	arrangeTable.updateCell(xRecord, "company" , "");
+	arrangeTable.updateCell(xRecord, "dateComing", "");
 	xData.marked = 0;
-	unArrangeTable.addRow(xData,0);
+	unArrangeTable.addRow(nData,0);
 }
 
 function submitAction(){
+	var selObj = document.getElementById("selectMonth");
+	var index=selObj.selectedIndex;
+	var selMonth = selObj.options[index].value;
+	document.getElementById("month").value = selMonth;
+	
 	var submitArray = new Array();
 	var records = arrangeTable.getRecordSet().getRecords();
 	for(var i=0;i<records.length;i++){
 		var xData = records[i].getData();
-		if(typeof(xData.marked)!="undefined" 
-			&& 1<=xData.marked
-			&& null != xData.vedioID
-			&& "" != xData.vedioID){
+		if(typeof(xData.marked)=="undefined"){
+			xData.marked = 0;
+		}
+		if( null != xData.vedioID && "" != xData.vedioID){
 			submitArray[submitArray.length] = xData;
 		}
 	}

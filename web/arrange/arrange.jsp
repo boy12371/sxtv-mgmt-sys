@@ -48,6 +48,7 @@
 </div>
 <s:form action="doArrange" namespace="/arrange" >
 	<s:hidden name="newResult" id="newResult"/>
+	<s:hidden name="month" id="month"/>
 </s:form>
 <script type="text/javascript">
 	initUnArrangeTable();
