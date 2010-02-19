@@ -6,8 +6,9 @@
 
 <struts>
 	<package name="framework" namespace="/framework" extends="struts-default">
-		<action name="doLogon" class="com.vms.framework.action.BasicLayout" method="doLogon">
+		<action name="doLogon" class="frameMgmt" method="doLogon">
             <result name="success">basicLayout.jsp</result>
+            <result name="input">../logon/logon.jsp</result>
         </action>
 	</package>
 </struts>
