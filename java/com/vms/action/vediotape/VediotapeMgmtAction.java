@@ -31,6 +31,9 @@ public class VediotapeMgmtAction extends BaseAction {
 	private ICompanyService companyService;
 	private ISubjectService subjectService;
 	private ITopicService topicService;
+	private String vname;
+	private String vid;
+	private String optionName;
 
 	private Vediotape vedio;
 	private String jasonDataString;
@@ -87,11 +90,59 @@ public class VediotapeMgmtAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String toUpdateVideoInfo() throws Exception{
+		return this.SUCCESS;
+	}
+	
 	public String updateMarketRate()throws Exception{
 		vedioService.updateVideoRatingMarket(vedio.getId(), vedio.getMarketShare(), vedio.getAudienceRating());
-		
 		return SUCCESS;
 	}
+	
+	
+	public String searchVideoByNameOrID()throws Exception{
+		
+		List<Vediotape> list = null;
+		try {
+			if(!"".equals(vid)){
+				list = vedioService.findVediotapeByProperty(Vediotape.PROP_ID, vid, -1, -1, "", false);
+			}else{
+				list  = vedioService.findVediotapeByProperty(Vediotape.PROP_VEDIO_NAME, vname, -1, -1, "", false);
+			}	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}		
+		if(list!=null && !list.isEmpty()){
+			this.vedio = list.get(0);
+			int status = vedio.getStatus().getId();
+			if(null != optionName && !"".equals(optionName)){
+				if(optionName.equals("auditing")){
+					
+					
+					
+				}
+				
+			}
+			return this.SUCCESS;
+		}
+		this.addActionError("影带未找到");
+		return this.INPUT;
+	}
+	
+	public String updateVideoInfo() throws Exception {
+		try {
+			this.vedioService.updateVideoInfo(vedio);
+			this.addActionMessage("更新成功");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		this.addActionError("更新失败");
+		return this.INPUT;
+	}
+	
+	
 	public List<Company> getComList() throws Exception{
 		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);		
 	}
@@ -171,6 +222,22 @@ public class VediotapeMgmtAction extends BaseAction {
 
 	public void setJasonDataString(String jasonDataString) {
 		this.jasonDataString = jasonDataString;
+	}
+
+	public String getVname() {
+		return vname;
+	}
+
+	public void setVname(String vname) {
+		this.vname = vname;
+	}
+
+	public String getVid() {
+		return vid;
+	}
+
+	public void setVid(String vid) {
+		this.vid = vid;
 	}
 
 	

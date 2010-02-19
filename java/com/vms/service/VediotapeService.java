@@ -15,7 +15,10 @@ import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Auditing;
+import com.vms.db.bean.Company;
 import com.vms.db.bean.Status;
+import com.vms.db.bean.Subject;
+import com.vms.db.bean.Topic;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
@@ -68,8 +71,8 @@ public class VediotapeService implements IVediotapeService {
 	@SuppressWarnings("unchecked")
 	@Override
 	/*
-	 * status: tape status
-	 * propertyName: the column data return form database sorting by 
+	 * status: tape status propertyName: the column data return form database
+	 * sorting by
 	 */
 	public List<Vediotape> findVideotapeByStatus(int status, String propertyName, int startIndex, int endIndex,
 			boolean asceding) throws Exception {
@@ -165,28 +168,27 @@ public class VediotapeService implements IVediotapeService {
 
 	}
 
-	
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean updateVideoRatingMarket(String videoID, float market, float rate) throws Exception {
 		// TODO Auto-generated method stub
 		String hql = "update Vediotape v set v.marketShare=?, set v.audienceRating=? where v.id=?";
 		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] { market, rate, videoID });
-		float vScore=0;
-		if(rate < 70 ){
+		float vScore = 0;
+		if (rate < 70) {
 			vScore = 60;
-		}else if(rate >=70 && rate < 80 ){
+		} else if (rate >= 70 && rate < 80) {
 			vScore = 70;
-		}else if(rate >=80 && rate < 90){
+		} else if (rate >= 80 && rate < 90) {
 			vScore = 80;
-		}else{
+		} else {
 			vScore = 90;
 		}
 		if (result) {
-			List<Vedioscore> scoreList =  vedioscoreDAO.findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(videoID), -1, -1, "", false);
+			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO,
+					new Vediotape(videoID), -1, -1, "", false);
 			for (Vedioscore vs : scoreList) {
-				float acc  = Math.abs(vs.getScore() - vScore) / vScore * 100;
+				float acc = Math.abs(vs.getScore() - vScore) / vScore * 100;
 				vs.setAccuracy(acc);
 				vedioscoreDAO.saveOrUpdateObject(vs);
 			}
@@ -194,6 +196,15 @@ public class VediotapeService implements IVediotapeService {
 		return true;
 	}
 
+	@Override
+	public boolean updateVideoInfo(Vediotape video) throws Exception {
+		// TODO Auto-generated method stub
+		String hql = "update Vediotape v set v.vedioName=?, v.companyID=?, v.subject=?, v.topic=?, v.marketShare=?, v.audienceRating=?, v.comments=?  where v.id=?";
+		Object[] args = { video.getVedioName(), new Company(video.getCompanyID().getId()),
+				new Subject(video.getSubject().getId()), new Topic(video.getTopic().getId()), video.getMarketShare(),
+				video.getAudienceRating(),video.getComments(), video.getId() };
+		return vediotapeDAO.updateVideotape(hql, args);
+	}
 
 	public IAuditingDAO getAuditingDAO() {
 		return auditingDAO;

@@ -29,5 +29,21 @@
 			<result>/marketRate/marketRate.jsp</result>
 			<result name="input">/vediotape/videotape.jsp</result>
 		</action>
+		
+		
+		<action name="searchVideoByNameOrID" class="vedioMgmt" method="searchVideoByNameOrID">
+			<result name="success">/vediotape/videoTape.jsp</result>
+			<result name="input">/vediotape/videoTape.jsp</result>
+		</action>
+		
+		<action name="updateVideoInfo" class="vedioMgmt" method="updateVideoInfo">
+			<result name="success">/vediotape/videoTape.jsp</result>
+			<result name="input">/vediotape/videoTape.jsp</result>
+		</action>
+		
+		<action name="toUpdateVideoInfo" class="vedioMgmt" method="toUpdateVideoInfo">
+			<result name="success">/vediotape/videoTape.jsp</result>		
+		</action>
+		
 	</package>
 </struts>

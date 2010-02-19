@@ -14,23 +14,7 @@
 </head>
 <body>
 
-<h1>收视率/市场份额</h1>
-<p>录入剧目收视率及市场份额</p>
-<s:form action="" namespace="" method="post">
-<table>
-	<tr>
-		<td><label>收视率</label></td>
-		<td><s:textfield name="video.audienceRating" /> <s:hidden name="video.id" /></td>
-		<td><label>市场份额</label></td>
-		<td><s:textfield name="video.marketShare" /></td>
-	</tr>
-	<tr>
-		<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
-		<button type="button">确 定</button>
-		</span> </span></td>
-	</tr>
-</table>
-</s:form>
+
 <h1>影带信息</h1>
 <p>影带相关信息</p>
 <table>
@@ -61,6 +45,22 @@
 	</tr>
 
 </table>
-
+<h1>收视率/市场份额</h1>
+<p>录入剧目收视率及市场份额</p>
+<s:form action="" namespace="" method="post">
+	<table>
+		<tr>
+			<td><label>收视率</label></td>
+			<td><s:textfield name="video.audienceRating" /> <s:hidden name="video.id" /></td>
+			<td><label>市场份额</label></td>
+			<td><s:textfield name="video.marketShare" /></td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
+			<button type="button">确 定</button>
+			</span> </span></td>
+		</tr>
+	</table>
+</s:form>
 </body>
 </html>
