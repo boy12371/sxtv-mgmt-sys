@@ -9,7 +9,8 @@
 </head>
 
 <body>
-
+<s:actionmessage/>
+<s:actionerror/>
 <s:form action="doLogon" method="post" namespace="/framework" name="logonForm">
 <div style="text-align:center;">
 	<div class="sxtv_logo">
