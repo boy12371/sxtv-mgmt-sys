@@ -15,15 +15,20 @@ public class ArrangeService implements IArrangeService{
 	
 	private IPlayorderDAO playorderDAO;
 	
-	public List<VedioTapeVO> findArrangedTapes(Date month) throws Exception{
-		List<VedioTapeVO> tapes = new  ArrayList<VedioTapeVO>();
-		
+	public List<Playorder> findPlayorders(Date month) throws Exception{
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(month);
 		
 		Date startDate = new Date(month.getYear(),month.getMonth(),1);
 		Date endDate = new Date(month.getYear(),month.getMonth(),calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		List<Playorder> orders = playorderDAO.findMonthPlayOrder(startDate,endDate,-1,-1,true);
+		return orders;
+	}
+	
+	public List<VedioTapeVO> findArrangedTapes(Date month) throws Exception{
+		List<VedioTapeVO> tapes = new  ArrayList<VedioTapeVO>();
+		
+		List<Playorder> orders = findPlayorders(month);
 		
 		for(Playorder p:orders){
 			VedioTapeVO tape = new VedioTapeVO(p.getVedioID());
@@ -32,7 +37,15 @@ public class ArrangeService implements IArrangeService{
 		}
 		return tapes;
 	}
-
+	
+	public void deletePlayOrder(List<Playorder> pos) throws Exception{
+		playorderDAO.deletePlayorder(pos);
+	}
+	
+	public void savePlayorder(List<Playorder> pos) throws Exception{
+		playorderDAO.savePlayorder(pos);
+	}
+	
 	public void setPlayorderDAO(IPlayorderDAO playorderDAO) {
 		this.playorderDAO = playorderDAO;
 	}
