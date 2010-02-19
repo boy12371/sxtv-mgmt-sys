@@ -2,7 +2,9 @@ package com.vms.db.dao;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
@@ -10,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.vms.common.DaoUtils;
 import com.vms.db.bean.Playorder;
+import com.vms.db.bean.Status;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IPlayorderDAO;
 
@@ -21,9 +24,14 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 	private Class clz = com.vms.db.bean.Playorder.class;
 
 	@Override
-	public void deletePlayorder(int id) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void deletePlayorder(List<Playorder> pos) throws Exception {
+		for(Playorder po: pos){
+			deleteObject(po);
+			
+			Vediotape tape = (Vediotape)this.getObject(Vediotape.class, po.getVedioID().getId());
+			tape.setStatus(new Status(3));
+			this.updateObject(tape);
+		}
 	}
 	
 	public List<Playorder> findMonthPlayOrder(Date startTime, Date endTime, int startIndex, int endIndex, boolean ascending) throws Exception{
@@ -72,12 +80,22 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 	}
 
 	@Override
-	public void savePlayorder(List<Playorder> orders) throws Exception {
-		// TODO Auto-generated method stub
-		for (Playorder playorder : orders) {
-			this.getHibernateTemplate().save(playorder);
+	public void savePlayorder(List<Playorder> pos) throws Exception {
+		for(Playorder p: pos){
+			Map<String, Object> conditions = new HashMap<String, Object>();
+			conditions.put(Playorder.PROP_VEDIO_I_D, p.getVedioID());
+//			conditions.put(Playorder.PROP_AUDITOR, p.getAuditor());
+			List<Playorder> temp = findObjectByFields(Playorder.class, conditions, -1, -1, Playorder.PROP_ID, true);
+			if(null != temp && 0 != temp.size()){
+				p.setId(temp.get(0).getId());
+//				this.getSession().refresh(p);
+			}
+			this.getHibernateTemplate().merge(p);
+			
+			Vediotape tape = (Vediotape)this.getObject(Vediotape.class, p.getVedioID().getId());
+			tape.setStatus(new Status(6));
+			this.updateObject(tape);
 		}
-		
 	}
 
 	@Override
