@@ -3,9 +3,14 @@ var arrangeTable;
 var selMonth = "";
 
 function selectMonthFunc(self){
-	var index=self.selectedIndex;
-	selMonth = self.options[index].value;
-	document.getElementById("month").value = selMonth;
+//	var index=self.selectedIndex;
+//	selMonth = YAHOO.util.Dom.get("selectMonth").value; //self.options[index].value;
+//	//document.getElementById("month").value = selMonth;
+//	
+//	arrangeTable.getDataSource().sendRequest(
+//			"/tv/arrange/getArrangedTapes.action?month="+selMonth+"&sort=playDate&dir=asc",  
+//			{success:arrangeTable.onDataReturnInitializeTable, scope:arrangeTable, argument:{}} 
+//			);
 }
 
 var formatDate = function(elCell, oRecord, oColumn, sData) {
@@ -142,7 +147,7 @@ function initArrangeTable() {
 	}];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.DataSource("/tv/arrange/getArrangedTapes.action?month="+selMonth+"&");
+	var myDataSource = new YAHOO.util.DataSource("/tv/arrange/getArrangedTapes.action?");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
 	myDataSource.responseSchema = {
@@ -152,14 +157,37 @@ function initArrangeTable() {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
 	};
+	
+	requestBuilder = function(oState, oSelf) {
+		
+		var startIndex, results, sort, dir;
+
+		oState = oState || {
+			pagination : null,
+			sortedBy : null
+		};
+		selMonth = YAHOO.util.Dom.get("selectMonth").value; //self.options[index].value;
+		
+		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
+		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
+		sort = (oState.sortedBy)
+				? oState.sortedBy.key
+				: oSelf.getColumnSet().keys[0].getKey();
+		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC)
+				? "desc"
+				: "asc";
+		
+		return "&sort="+sort+"&dir=" + dir + "&month=" + selMonth;
+	}
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=playDate&dir=asc", // Initial
+		initialRequest :"sort=playDate&dir=asc&month="+selMonth, // Initial
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
 			key :"playDate",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
-		} // Sets UI initial sort arrow
+		},// Sets UI initial sort arrow
+		generateRequest : requestBuilder
 	};
 	// DataTable instance
 	arrangeTable = new YAHOO.widget.DataTable("arrangeTableDiv", myColumnDefs,
@@ -170,6 +198,22 @@ function initArrangeTable() {
 		return oPayload;
 	};
 	
+	var fireEvent = function(resetRecordOffset) {
+		var oState = arrangeTable.getState(), request, oCallback;
+		//if (resetRecordOffset) {
+		//	oState.pagination.recordOffset = 0;
+		//}
+		oCallback = {
+			success : arrangeTable.onDataReturnSetRows,
+			failure : arrangeTable.onDataReturnSetRows,
+			argument : oState,
+			scope : arrangeTable
+		};
+		request = arrangeTable.get("generateRequest")(oState, arrangeTable);
+		myDataSource.sendRequest(request, oCallback);
+	}
+	var smonth = YAHOO.util.Dom.get("selectMonth");
+	YAHOO.util.Event.addListener(smonth, "change", fireEvent);
 	return {
 		ds :myDataSource,
 		dt :arrangeTable
