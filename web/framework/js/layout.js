@@ -17,12 +17,19 @@ function resizeIframe(){
 	var iframeObj = document.getElementById("contentFrameId");
 	var height;
 	if(null == iframeObj.contentDocument || "undefine" == typeof(iframeObj.contentDocument)){
-		height = iframeObj.document.body.scrollHeight;
+		height = iframeObj.Document.body.scrollHeight;
 	}else{
 		height = iframeObj.contentDocument.body.offsetHeight;
 	}
 	height += 50;
-	if(height < 460) height = 460;
+	// the height can not be lower than the client area height.
+	var subTab = document.getElementById("subTabview");
+	var minHeight = document.documentElement.clientHeight - 125 - subTab.offsetHeight;
+	minHeight -= 40;
+	if(height < minHeight) {
+		height = minHeight;
+	}
+	
 	iframeObj.style.height = height + "px";
 	resizeContentDiv();
 }
@@ -63,4 +70,17 @@ function resizeTabview(){
 			j++
 		}
 	}
+}
+
+function getBroswer(){
+	var browser;
+	var ua = navigator.userAgent.toLowerCase();
+	if(window.ActiveXObject){
+		var pos = ua.indexOf("msie");
+		var ver = ua.substring(pos+5,pos+6);
+		browser = "IE" + ver;
+	}else{
+		browser = "FF";
+	}
+	return browser;
 }
