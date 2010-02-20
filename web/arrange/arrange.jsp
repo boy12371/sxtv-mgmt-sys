@@ -39,7 +39,7 @@
 	<s:select list="monthList" listKey="key" listValue="value" 
 		id="selectMonth" 
 		onchange="selectMonthFunc(this)"
-		cssStyle="float:right;width:100px;"
+		cssStyle="float:right;width:100px;margin:0px;"
 	/>
 </div>
 <div id="arrangeTableDiv" align="center"></div>

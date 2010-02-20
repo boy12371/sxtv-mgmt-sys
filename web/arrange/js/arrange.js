@@ -47,10 +47,12 @@ function initUnArrangeTable() {
 		label :"影带名称"
 	}, {
 		key :"subject",
-		label :"栏目"		
+		label :"栏目",
+		sortable :true
 	}, {
 		key :"topic",
-		label :"题材"
+		label :"题材",
+		sortable :true
 	}, {
 		key :"dateComing",
 		label :"收带日期",
@@ -58,7 +60,8 @@ function initUnArrangeTable() {
 		formatter :formatDate
 	}, {
 		key :"company",
-		label :"公司"
+		label :"公司",
+		sortable :true
 	}];
 
 	// DataSource instance
@@ -74,13 +77,12 @@ function initUnArrangeTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=10", // Initial
-		dynamicData :true, // Enables dynamic server-driven data
+		initialRequest :"sort=dateComing&dir=asc&startIndex=0", // Initial
 		sortedBy : {
 			key :"dateComing",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator( {rowsPerPage :10})
+		paginator :new YAHOO.widget.Paginator( {rowsPerPage:10})
 	};
 	// DataTable instance
 	unArrangeTable = new YAHOO.widget.DataTable("unArrangeTableDiv", myColumnDefs,
@@ -209,12 +211,6 @@ function initArrangeReorderEvent(){
 		endDrag: function(x,y) { 
 			var position;
 			if (null != this.destEl && this.destEl.nodeName.toLowerCase() === "tr") { 
-//				arrangeTable.deleteRow(this.destIndex);
-//				arrangeTable.addRow(this.destData, this.srcIndex);
-//				arrangeTable.deleteRow(this.srcIndex);
-//				arrangeTable.addRow(this.srcData, this.destIndex);
-//				arrangeTable.updateRow(this.srcIndex, this.destData);
-//				arrangeTable.updateRow(this.destIndex, this.srcData);
 				//exchange data of 2 records
 				var srcRecord = arrangeTable.getRecord(this.srcIndex);
 				var destRecord = arrangeTable.getRecord(this.destIndex);
@@ -327,7 +323,7 @@ function removeTapeFromArrange(rID){
 	nData.subject = xData.subject;
 	nData.topic = xData.topic;
 	nData.company = xData.company;
-	nData.dateComing = xData.dataComing;
+	nData.dateComing = xData.dateComing;
 	if(null==xData.vedioID || ""==xData.vedioID) return;
 	arrangeTable.updateCell(xRecord, "vedioID", "");
 	arrangeTable.updateCell(xRecord, "name", "");
@@ -337,6 +333,11 @@ function removeTapeFromArrange(rID){
 	arrangeTable.updateCell(xRecord, "dateComing", "");
 	xData.marked = 0;
 	unArrangeTable.addRow(nData,0);
+	
+	//resort unArrange table
+	var sortColumn = unArrangeTable.getState().sortedBy.column;
+	var dir = unArrangeTable.getState().sortedBy.dir;
+	unArrangeTable.sortColumn(sortColumn, dir);
 }
 
 function submitAction(){
