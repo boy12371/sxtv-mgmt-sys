@@ -8,7 +8,9 @@
 		<property name="companyService" ref="companyService" />
 		<property name="topicService" ref="topicService" />
 		<property name="subjectService" ref="subjectService" />
-		<property name="vedioService" ref="vediotapeService" />		
+		<property name="vedioService" ref="vediotapeService" />
+		<property name="audienceScoreService" ref="audienceScoreService" />	
+			
 	</bean>
 	
 	

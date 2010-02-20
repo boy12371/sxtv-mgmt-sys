@@ -167,5 +167,43 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 		
 	}
 
+	@Override
+	public List<Vediotape> findVideosByFieldsNamePartiallyDateInScope(
+			Map<String, Object> fieldsValues, int startIndex, int endIndex,
+			String orderProperty, boolean ascending) throws Exception {
+		
+		Criteria crt = this.getCriteria(clz);
+		
+		if (fieldsValues != null) {
+			Set<String> keys = fieldsValues.keySet();
+			Iterator<String> it = keys.iterator();
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				if(key.equals(Vediotape.PROP_VEDIO_NAME)){
+					crt.add(Restrictions.ilike(key, fieldsValues.get(key)));
+					break;
+				}
+				if(key.equals("startDate")){					
+					if(fieldsValues.get(key) != null){
+						crt.add(Restrictions.ge(Vediotape.PROP_DATE_INPUT, fieldsValues.get(key)));
+						break;
+					}
+					
+				}
+				if(key.equals("endDate")){					
+					if(fieldsValues.get(key) != null){
+						crt.add(Restrictions.le(Vediotape.PROP_DATE_INPUT, fieldsValues.get(key)));
+						break;
+					}
+					
+				}
+				
+				
+				crt.add(Restrictions.eq(key, fieldsValues.get(key)));
+			}
+		}
+		return null;
+	}
+
 	
 }

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.data.general.DefaultPieDataset;
 
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;

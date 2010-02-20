@@ -10,7 +10,9 @@ import org.apache.log4j.Logger;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
+import com.vms.common.CommonVariable;
 import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Company;
 import com.vms.db.bean.Status;
@@ -31,11 +33,13 @@ public class VediotapeMgmtAction extends BaseAction {
 	private ICompanyService companyService;
 	private ISubjectService subjectService;
 	private ITopicService topicService;
+	private IAudienceScoreService audienceScoreService;
 	private String vname;
 	private String vid;
 	private String optionName;
 
 	private Vediotape vedio;
+	private VedioTapeVO vv;
 	private String jasonDataString;
 	
 	
@@ -111,17 +115,46 @@ public class VediotapeMgmtAction extends BaseAction {
 			}	
 		} catch (Exception e) {
 			// TODO: handle exception
+			logger.error(e);
 		}		
 		if(list!=null && !list.isEmpty()){
 			this.vedio = list.get(0);
 			int status = vedio.getStatus().getId();
+			String videoid = vedio.getId();
 			if(null != optionName && !"".equals(optionName)){
 				if(optionName.equals("auditing")){
-					
+					if(status == CommonVariable.VIDEO_STATUS_AUDITING || status ==CommonVariable.VIDEO_STATUS_REAUDITING ){
+						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
+						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+						return SUCCESS;
+					}else if(status == CommonVariable.VIDEO_STATUS_MODIFICATION) {
+						this.addActionError("影带状态正在修改中，不能审核");
+						return INPUT;
+					}else{
+						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能审核");
+						return INPUT;
+					}					
+				}else if(optionName.equals("modification")){					
+					if(status == CommonVariable.VIDEO_STATUS_MODIFICATION){
+						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
+						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+						return SUCCESS;
+					}else{
+						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
+						return INPUT;
+					}					
+				}else if(optionName.equals("marketRate")){
+					if(status == CommonVariable.VIDEO_STATUS_PLAYED){
+						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
+						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+						return SUCCESS;
+					}else{
+						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
+						return INPUT;
+					}
 					
 					
 				}
-				
 			}
 			return this.SUCCESS;
 		}
@@ -143,17 +176,24 @@ public class VediotapeMgmtAction extends BaseAction {
 	}
 	
 	
-	public List<Company> getComList() throws Exception{
-		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);		
-	}
-
-
-	public List<Topic> getTopList() throws Exception{
-		return topicService.findAllTopics(-1,-1, Topic.PROP_ID, true);
+	public String modificationFinish()throws Exception{
+		try {
+			SessionUserInfo user = new SessionUserInfo(1);
+			this.vedioService.auditingVideo(vv.getVedioID(), user, 5);
+			this.addActionMessage("影带已进入重审状态,等待审核");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		this.addActionError("修改影带状态失败");
+		return INPUT;
+		
 	}
 	
-	public List<Subject> getSubList() throws Exception{
-		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
+	public String toVideoModifications()throws Exception{
+		return SUCCESS;
+		
 	}
 	
 	
@@ -176,6 +216,21 @@ public class VediotapeMgmtAction extends BaseAction {
 		return NONE;
 	}
 
+	
+	
+	public List<Company> getComList() throws Exception{
+		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);		
+	}
+
+
+	public List<Topic> getTopList() throws Exception{
+		return topicService.findAllTopics(-1,-1, Topic.PROP_ID, true);
+	}
+	
+	public List<Subject> getSubList() throws Exception{
+		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
+	}
+	
 	public ICompanyService getCompanyService() {
 		return companyService;
 	}
@@ -238,6 +293,30 @@ public class VediotapeMgmtAction extends BaseAction {
 
 	public void setVid(String vid) {
 		this.vid = vid;
+	}
+
+	public IAudienceScoreService getAudienceScoreService() {
+		return audienceScoreService;
+	}
+
+	public void setAudienceScoreService(IAudienceScoreService audienceScoreService) {
+		this.audienceScoreService = audienceScoreService;
+	}
+
+	public String getOptionName() {
+		return optionName;
+	}
+
+	public void setOptionName(String optionName) {
+		this.optionName = optionName;
+	}
+
+	public VedioTapeVO getVv() {
+		return vv;
+	}
+
+	public void setVv(VedioTapeVO vv) {
+		this.vv = vv;
 	}
 
 	

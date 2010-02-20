@@ -31,18 +31,24 @@
 <s:actionerror/>
 <h1>剧目收视率、市场份额</h1>
 <p>搜索或点击剧目名称或编号，输入收视率和市场份额</p>
-
-<s:form action="searchVideoByName" method="post" namespace="/vedio">
+<s:form id="searchForm" action="searchVideoByNameOrIDForMarketRate" namespace="/vedio">
 <table>
 	<tr>
-		<td><label>剧目搜索：</label> </td>
-		<td> 
-		<input type="text" id="searchinput" name="query" style="width:200px" />
+		<td><label>影带编号</label></td>
+		<td><input type="text" name="vid" id="vid" /><s:hidden name="optionName" value="marketRate"/></td>
+		<td><label>剧目名称</label></td>
+		<td><input type="text" id="searchinput" name="vname" style="width: 200px" />
 		<div id="searchcontainer">
 		</td>
-		<td><input type="submit" value="搜索"/></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="center">
+		<span id="go" class="yui-button yui-push-button"> <span class="first-child">
+		<input type="submit" value="搜索" />
+		</span> </span></td>
 	</tr>
 </table>
+
 </s:form>
 <br><br><br><br>
 <div id="dynamicdata" align="center"></div>

@@ -5,11 +5,11 @@ var subjects = [];
 function buildArray(array, selectId) {
 	var obj = YAHOO.util.Dom.get(selectId);
 	var ops = obj.options;
-	for (var i = 0; i < ops.length; i++) {
-		array.push({
-					label : ops[i].innerHTML,
-					value : ops[i].value
-				});
+	for ( var i = 0; i < ops.length; i++) {
+		array.push( {
+			label :ops[i].innerHTML,
+			value :ops[i].value
+		});
 	}
 }
 
@@ -28,13 +28,13 @@ function initDataTable() {
 		}
 	}
 	var formatCompany = function(elCell, oRecord, oColumn, oData) {
-		if (typeof(oData) != "object") {
+		if (typeof (oData) != "object") {
 			var _id = parseInt(oData);
-			for (var i = 0; i < companies.length; i++) {
+			for ( var i = 0; i < companies.length; i++) {
 				if (_id == companies[i].value) {
 					oData = {
-						id : companies[i].value,
-						companyName : companies[i].label
+						id :companies[i].value,
+						companyName :companies[i].label
 					}
 				}
 			}
@@ -43,13 +43,13 @@ function initDataTable() {
 	}
 	var formatTopic = function(elCell, oRecord, oColumn, oData) {
 
-		if (typeof(oData) != "object") {
+		if (typeof (oData) != "object") {
 			var _id = parseInt(oData);
-			for (var i = 0; i < topices.length; i++) {
+			for ( var i = 0; i < topices.length; i++) {
 				if (_id == topices[i].value) {
 					oData = {
-						id : topices[i].value,
-						topic : topices[i].label
+						id :topices[i].value,
+						topic :topices[i].label
 					}
 				}
 			}
@@ -59,13 +59,13 @@ function initDataTable() {
 		// elCell.innerHTML = oData;
 	}
 	var formatSubject = function(elCell, oRecord, oColumn, oData) {
-		if (typeof(oData) != "object") {
+		if (typeof (oData) != "object") {
 			var _id = parseInt(oData);
-			for (var i = 0; i < subjects.length; i++) {
+			for ( var i = 0; i < subjects.length; i++) {
 				if (_id == subjects[i].value) {
 					oData = {
-						id : subjects[i].value,
-						subject : subjects[i].label
+						id :subjects[i].value,
+						subject :subjects[i].label
 					}
 				}
 			}
@@ -73,61 +73,61 @@ function initDataTable() {
 		elCell.innerHTML = oData["subject"];
 	}
 	// var subjectSel = ;
-	var myColumnDefs = [{
-				key : "vid",
-				label : "编号",
-				sortable : true
-			}, {
-				key : "vname",
-				label : "剧目名称",
-				editor : new YAHOO.widget.TextboxCellEditor({
-							disableBtns : true
-						})
-			}, {
-				key : "vcompany",
-				label : "影视公司",
-				sortable : true,
-				formatter : formatCompany,
-				editor : new YAHOO.widget.DropdownCellEditor({
-							dropdownOptions : companies,
-							disableBtns : true
-						})
-			}, {
-				key : "vtopic",
-				label : "题材",
-				sortable : true,
-				formatter : formatTopic,
-				editor : new YAHOO.widget.DropdownCellEditor({
-							dropdownOptions : topices,
-							disableBtns : true
-						})
-			}, {
-				key : "vsubject",
-				label : "栏目",
-				sortable : true,
-				formatter : formatSubject,
-				editor : new YAHOO.widget.DropdownCellEditor({
-							dropdownOptions : subjects,
-							disableBtns : true
-						})
-			}, {
-				key : "vdate",
-				label : "收带日期",
-				sortable : true
-			}, {
-				key : "vcomments",
-				label : "备注",
-				formatter : formatorRemarks,
-				editor : new YAHOO.widget.TextareaCellEditor({
-							disableBtns : false
-						})
-			}];
+	var myColumnDefs = [ {
+		key :"vid",
+		label :"编号",
+		sortable :true
+	}, {
+		key :"vname",
+		label :"剧目名称",
+		editor :new YAHOO.widget.TextboxCellEditor( {
+			disableBtns :true
+		})
+	}, {
+		key :"vcompany",
+		label :"影视公司",
+		sortable :true,
+		formatter :formatCompany,
+		editor :new YAHOO.widget.DropdownCellEditor( {
+			dropdownOptions :companies,
+			disableBtns :true
+		})
+	}, {
+		key :"vtopic",
+		label :"题材",
+		sortable :true,
+		formatter :formatTopic,
+		editor :new YAHOO.widget.DropdownCellEditor( {
+			dropdownOptions :topices,
+			disableBtns :true
+		})
+	}, {
+		key :"vsubject",
+		label :"栏目",
+		sortable :true,
+		formatter :formatSubject,
+		editor :new YAHOO.widget.DropdownCellEditor( {
+			dropdownOptions :subjects,
+			disableBtns :true
+		})
+	}, {
+		key :"vdate",
+		label :"收带日期",
+		sortable :true
+	}, {
+		key :"vcomments",
+		label :"备注",
+		formatter :formatorRemarks,
+		editor :new YAHOO.widget.TextareaCellEditor( {
+			disableBtns :false
+		})
+	} ];
 
-	var myDataSource = new YAHOO.util.DataSource([]);
+	var myDataSource = new YAHOO.util.DataSource( []);
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 	myDataSource.responseSchema = {
-		fields : ["vid", "vname", "vcompany", "vtopic", "vsubject", "vdate",
-				"vcomments"]
+		fields : [ "vid", "vname", "vcompany", "vtopic", "vsubject", "vdate",
+				"vcomments" ]
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("cellediting", myColumnDefs,
@@ -150,33 +150,33 @@ function initDataTable() {
 		var _vname = YAHOO.util.Dom.get("vname").value;
 		var _vcompany = YAHOO.util.Dom.get("vcompany");
 		var _vc = {
-			id : _vcompany.options[_vcompany.selectedIndex].value,
-			companyName : _vcompany.options[_vcompany.selectedIndex].text
+			id :_vcompany.options[_vcompany.selectedIndex].value,
+			companyName :_vcompany.options[_vcompany.selectedIndex].text
 		};
 		var _vtopic = YAHOO.util.Dom.get("vtopic");
 		var _vt = {
-			id : _vtopic.options[_vtopic.selectedIndex].value,
-			topic : _vtopic.options[_vtopic.selectedIndex].text
+			id :_vtopic.options[_vtopic.selectedIndex].value,
+			topic :_vtopic.options[_vtopic.selectedIndex].text
 		};
 		var _vsubject = YAHOO.util.Dom.get("vsubject");
 		var _vs = {
-			id : _vsubject.options[_vsubject.selectedIndex].value,
-			subject : _vsubject.options[_vsubject.selectedIndex].text
+			id :_vsubject.options[_vsubject.selectedIndex].value,
+			subject :_vsubject.options[_vsubject.selectedIndex].text
 		};
 
 		var _vdate = YAHOO.util.Date.format(new Date(), {
-					format : "%Y-%m-%d"
-				});
+			format :"%Y-%m-%d"
+		});
 
 		var _vcomments = YAHOO.util.Dom.get("vcomments").value;
 		return {
-			vid : _vid,
-			vname : _vname,
-			vcompany : _vc,
-			vtopic : _vt,
-			vsubject : _vs,
-			vdate : _vdate,
-			vcomments : _vcomments
+			vid :_vid,
+			vname :_vname,
+			vcompany :_vc,
+			vtopic :_vt,
+			vsubject :_vs,
+			vdate :_vdate,
+			vcomments :_vcomments
 		};
 
 	};
@@ -186,24 +186,25 @@ function initDataTable() {
 			success : function(o) {
 				YAHOO.log("RAW JSON DATA: " + o.responseText);
 				// Process the JSON data returned from the server
-				var obj = o.responseText;
-				if (obj.indexOf("SUCCESS") != -1) {
-					myDataTable.addRow(getData(), 0);
-				} else {
-					alert(obj);
-					return;
-				}
-			},
-			failure : function(o) {
-				if (!YAHOO.util.Connect.isCallInProgress(o)) {
-					alert("Async call failed!");
-				}
-			},
-			timeout : 3000
+			var obj = o.responseText;
+			if (obj.indexOf("SUCCESS") != -1) {
+				myDataTable.addRow(getData(), 0);
+			} else {
+				alert(obj);
+				return;
+			}
+		},
+		failure : function(o) {
+			if (!YAHOO.util.Connect.isCallInProgress(o)) {
+				alert("Async call failed!");
+			}
+		},
+		timeout :3000
 		}
 
 		var videoName = YAHOO.util.Dom.get("vname").value;
-		var url = encodeURI("/tv/vedio/isVediotapeExsits.action?vedioName=" + videoName);
+		var url = encodeURI("/tv/vedio/isVediotapeExsits.action?vedioName="
+				+ videoName);
 		YAHOO.util.Connect.asyncRequest('GET', encodeURI(url), callbacks);
 	}
 	var handleClick = function() {
@@ -212,7 +213,7 @@ function initDataTable() {
 			isVedioNameValid();
 		} else {
 			var videoName = YAHOO.util.Dom.get("vname").value;
-			for (var i = 0; i < dataSet.length; i++) {
+			for ( var i = 0; i < dataSet.length; i++) {
 				var record = dataSet[i];
 				if (record.getData("vname") == videoName) {
 					alert("列表中已有此剧目，请检查剧目名称。");
@@ -236,7 +237,7 @@ function initDataTable() {
 		return realValue;
 	}
 	var handleSubmit = function() {
-		
+
 		var records = myDataTable.getRecordSet().getRecords();
 		var len = records.length;
 		if (len != 0) {
@@ -244,7 +245,7 @@ function initDataTable() {
 
 			var form = document.forms[0];
 			var jasonString = "[";
-			for (var i = 0; i < len; i++) {
+			for ( var i = 0; i < len; i++) {
 				var oData = records[i];
 				if (i != 0 && i < len) {
 					jasonString += ",";
@@ -253,10 +254,11 @@ function initDataTable() {
 				var vt = getRealData(oData.getData("vtopic"), "topic");
 				var vs = getRealData(oData.getData("vsubject"), "subject");
 
-				jasonString += "{id:\"" + oData.getData("vid") + "\",vedioName:\""
-						+ oData.getData("vname") + "\",companyID:" + vc
-						+ ",topic:" + vt + ",subject:" + vs + ",comments:\""
-						+ oData.getData("vcomments") + "\"}";
+				jasonString += "{id:\"" + oData.getData("vid")
+						+ "\",vedioName:\"" + oData.getData("vname")
+						+ "\",companyID:" + vc + ",topic:" + vt + ",subject:"
+						+ vs + ",comments:\"" + oData.getData("vcomments")
+						+ "\"}";
 			}
 			jasonString += "]";
 
@@ -281,163 +283,144 @@ function initDataTable() {
 
 			if (elRow) {
 				switch (task.index) {
-					case 0 : // Delete row upon confirmation
-						var oRecord = p_myDataTable.getRecord(elRow);
-						if (confirm("您却定要删除影带 " + oRecord.getData("vid") + " ("
-								+ oRecord.getData("vname") + ")?")) {
-							p_myDataTable.deleteRow(elRow);
-						}
+				case 0: // Delete row upon confirmation
+					var oRecord = p_myDataTable.getRecord(elRow);
+					if (confirm("您却定要删除影带 " + oRecord.getData("vid") + " ("
+							+ oRecord.getData("vname") + ")?")) {
+						p_myDataTable.deleteRow(elRow);
+					}
 				}
 			}
 		}
 	};
 
 	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu", {
-				trigger : myDataTable.getTbodyEl()
-			});
+		trigger :myDataTable.getTbodyEl()
+	});
 	myContextMenu.addItem("Delete Item");
 	// Render the ContextMenu instance to the parent container of the DataTable
 	myContextMenu.render("cellediting");
 	myContextMenu.clickEvent.subscribe(onContextMenuClick, myDataTable);
 	return {
-		oDS : myDataSource,
-		oDT : myDataTable
+		oDS :myDataSource,
+		oDT :myDataTable
 	};
 }
 
-function initPage() {
+function initModificationPage() {
+	var formatLink = function(elCell, oRecord, oColumn, sData) {
+		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForModification?optionName=modification&vid=";
+		href += sData;
+		href += "'>" + sData + "</a>";
+		elCell.innerHTML = href;
+	}
 
-	var formatorRemarks = function(elCell, oRecord, oColumn, oData) {
-		if (oData.length > 35) {
-			elCell.innerHTML = oData.substring(0, 35) + ".....";
+	var formatCompany = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.companyName;
+	}
+	var formatTopic = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.topicName;
+	}
+	var formatSubject = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.subjectName;
+	}
+	var formatDate = function(elCell, oRecord, oColumn, sData) {
+		var idx = sData.indexOf("T");
+		if (idx != -1) {
+			elCell.innerHTML = sData.substring(0, idx);
 		} else {
-			elCell.innerHTML = oData;
+			elCell.innerHTML = sData;
 		}
 	}
-	var formatCompany = function(elCell, oRecord, oColumn, oData) {
+	var formatStatus = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.status;
+	}
 
-		elCell.innerHTML = oData["companyName"];
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, oData) {
-		elCell.innerHTML = oData["topic"];
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, oData) {
-		elCell.innerHTML = oData["subject"];
-	}
-	var myColumnDefs = [{
-				key : "vid",
-				label : "编号",
-				sortable : true
-			}, {
-				key : "vname",
-				label : "剧目名称",
-				editor : new YAHOO.widget.TextboxCellEditor({
-							disableBtns : true
-						})
-			}, {
-				key : "vcompany",
-				label : "影视公司",
-				sortable : true,
-				formatter : formatCompany,
-				editor : new YAHOO.widget.DropdownCellEditor({
-							dropdownOptions : companies,
-							disableBtns : true
-						})
-			}, {
-				key : "vtopic",
-				label : "题材",
-				sortable : true,
-				formatter : formatTopic,
-				editor : new YAHOO.widget.DropdownCellEditor({
-							dropdownOptions : topices,
-							disableBtns : true
-						})
-			}, {
-				key : "vsubject",
-				label : "栏目",
-				sortable : true,
-				formatter : formatSubject,
-				editor : new YAHOO.widget.DropdownCellEditor({
-							dropdownOptions : subjects,
-							disableBtns : true
-						})
-			}, {
-				key : "vdate",
-				label : "收带日期",
-				sortable : true
-			}, {
-				key : "vcomments",
-				label : "备注",
-				formatter : formatorRemarks,
-				editor : new YAHOO.widget.TextareaCellEditor({
-							disableBtns : false
-						})
-			}];
+	// Column definitions
+	var myColumnDefs = [ {
+		key :"id",
+		label :"编号",
+		sortable :true,
+		formatter :formatLink
+	}, {
+		key :"vedioName",
+		label :"剧目名称"
+	}, {
+		key :"topic",
+		label :"题材",
+		sortable :true,
+		formatter :formatTopic
+	}, {
+		key :"subject",
+		label :"栏目",
+		sortable :true,
+		formatter :formatSubject
+	}, {
+		key :"companyID",
+		label :"影视公司",
+		sortable :true,
+		formatter :formatCompany
+	}, {
+		key :"dateInput",
+		label :"收带日期",
+		sortable :true,
+		formatter :formatDate
+	}, {
+		key :"status",
+		label :"状态",
+		sortable :true,
+		formatter :formatStatus
+	}, {
+		key :"comments",
+		label :"备注"
+	} ];
 
-	var myDataSource = new YAHOO.util.DataSource([]);
+	// DataSource instance
+	var myDataSource = new YAHOO.util.XHRDataSource(
+			"/tv/audit/filterVideos.action?filter=4&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.connXhrMode = "queueRequests";
-
 	myDataSource.responseSchema = {
-		resultsList : "records",
-		fields : ["vid", "vname", "vcompany", "vtopic", "vsubject", "vdate",
-				"vcomments"],
+		resultsList :"records",
+		fields : [ "id", "vedioName", "topic", "subject", "companyID",
+				"dateInput", "status", "comments" ],
 		metaFields : {
-			totalRecords : "totalRecords" // Access to value in the server
-			// response
+			totalRecords :"totalRecords" // Access to value in the server
+	// response
 		}
 	};
+
+	
+	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
-		dynamicData : true,
+		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25",
+		dynamicData :true,
 		sortedBy : {
-			key : "id",
-			dir : YAHOO.widget.DataTable.CLASS_ASC
-		}, // Sets UI initial sort arrow
-		paginator : new YAHOO.widget.Paginator({
-					rowsPerPage : 10
-				})
-		// Enables pagination
+			key :"dateInput",
+			dir :YAHOO.widget.DataTable.CLASS_ASC
+		},
+		paginator :new YAHOO.widget.Paginator( {
+			rowsPerPage :25,
+			template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+			rowsPerPageOptions : [ 25, 50, 100 ]
+		})
+
 	};
-	var myDataTable = new YAHOO.widget.DataTable("dataContainer", myColumnDefs,
+
+	// DataTable instance
+
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
-
-	var getDataRecords = function() {
-		var dateStart = YAHOO.util.Dom.get("dateStart").value;
-		var dateEnd = YAHOO.util.Dom.get("dateEnd").value;
-		myDataSource = new YAHOO.util.DataSource("/tv/vedio/getVediosForUser.action?");
-		myConfigs.initialRequest = "sort=id&dir=asc&startIndex=0&results=10&dateStart="
-				+ dateStart + "&dateEnd=" + dateEnd;
-
-		var mySuccessHandler = function() {
-			this.set("sortedBy", null);
-			this.onDataReturnAppendRows.apply(this, arguments);
-		};
-		var myFailureHandler = function() {
-			this.showTableMessage(YAHOO.widget.DataTable.MSG_ERROR,
-					YAHOO.widget.DataTable.CLASS_ERROR);
-			this.onDataReturnAppendRows.apply(this, arguments);
-		};
-		var callbackObj = {
-			success : mySuccessHandler,
-			failure : myFailureHandler,
-			scope : myDataTable
-		};
-
-		myDataSource.sendRequest(
-				"query=mexican&zip=94089&results=10&output=json", callbackObj);
-
-		myDataSource.sendRequest(
-				"query=chinese&zip=94089&results=10&output=json", callbackObj);
-
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
 	}
 
-	var goBtn = new YAHOO.widget.Button("go");
-	goBtn.on("click", getDataRecords);
-
 	return {
-		oDS : myDataSource,
-		oDT : myDataTable
+		ds :myDataSource,
+		dt :myDataTable
 	};
 
 }

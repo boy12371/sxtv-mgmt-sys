@@ -4,7 +4,8 @@
 	<MainConsole>
 		<Module id="tapeMgmt" name="影带管理" url="">
 			<ModuleItem id="tapeAdd" name="录入影带" url="/tv/vedio/toAddingVedio.action"/>
-			<ModuleItem id="tapeModify" name="查看修改影带信息" url="/tv/vedio/toUpdateVideoInfo.action"/> 
+			<ModuleItem id="tapeModify" name="查看编辑影带信息" url="/tv/vedio/toUpdateVideoInfo.action"/>
+			<ModuleItem id="tapeModify" name="修改影带" url="/tv/vedio/toVideoModification.action"/> 
 		</Module>
 		
 		<Module id="tapeExam" name="影带打分" url="">

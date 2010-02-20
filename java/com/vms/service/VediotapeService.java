@@ -206,6 +206,15 @@ public class VediotapeService implements IVediotapeService {
 		return vediotapeDAO.updateVideotape(hql, args);
 	}
 
+	
+	public List<Vediotape> findVidesByConditions()throws Exception{
+		
+		return null;
+	}
+	
+	public int getTotalCountByConditions()throws Exception{
+		return 0;
+	}
 	public IAuditingDAO getAuditingDAO() {
 		return auditingDAO;
 	}

@@ -31,7 +31,6 @@
 <title>审核剧目</title>
 </head>
 <body class="yui-skin-sam">
-
 <s:actionerror />
 <h1>剧目详细信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
@@ -73,13 +72,14 @@
 
 		</tr>
 		<tr>
-			<td colspan="4"><s:radio list="#{3:'通 过',4:'修 改',7:'退 回'}" name="operation"></s:radio></td>
+			<td colspan="4">			
+			<s:radio list="#{3:'通 过',4:'修 改',7:'退 回'}" name="operation"></s:radio>
+			</td>
 
 		</tr>
 
 		<tr>
 			<td colspan="4"><s:submit value="确定"/></td>
-
 		</tr>
 
 	</table>

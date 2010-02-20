@@ -13,10 +13,10 @@
 			</result>
 		</action>		
 		
-		<action name="toAuditingVideo" class="auditMgmt" method="toAuditingVideo">
-			<result>/audit/videoAuditing.jsp</result>
+		<!--action name="toAuditingVideo" class="auditMgmt" method="toAuditingVideo">
+			<result>/audit/auditVideo.jsp</result>
 			<result name="input">/audit/videosAuditing.jsp</result>
-		</action>
+		</action-->
 		
 		<action name="getVideoScores" class="auditMgmt" method="getVideoScores">
 			<result type="json">
@@ -24,9 +24,15 @@
 			</result>
 		</action>
 		
-		<action name="videoOperation" class="auditMgmt" method="videoOperation">
+		<action name="videoOperation" class="auditMgmt" method="videoAuditOperation">
 			<result>/audit/videosAuditing.jsp</result>
-			<result name="input">/audit/videoAuditing.jsp</result>
+			<result name="input">/audit/auditVideo.jsp</result>
 		</action>
+		
+		<action name="findVideoByNameOrID" class="vedioMgmt" method="searchVideoByNameOrID">
+			<result name="success">/audit/auditVideo.jsp</result>
+			<result name="input">/audit/videosAuditing.jsp</result>
+		</action>
+		
 	</package>
 </struts>

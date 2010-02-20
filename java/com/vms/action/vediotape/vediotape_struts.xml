@@ -35,6 +35,15 @@
 			<result name="success">/vediotape/videoTape.jsp</result>
 			<result name="input">/vediotape/videoTape.jsp</result>
 		</action>
+		<action name="searchVideoByNameOrIDForModification" class="vedioMgmt" method="searchVideoByNameOrID">
+			<result name="success">/vediotape/modify.jsp</result>
+			<result name="input">/vediotape/modifications.jsp</result>
+		</action>
+		
+		<action name="searchVideoByNameOrIDForMarketRate" class="vedioMgmt" method="searchVideoByNameOrID">
+			<result name="success">/marketRate/marketRateInput.jsp</result>
+			<result name="input">/marketRate/marketRate.jsp</result>
+		</action>
 		
 		<action name="updateVideoInfo" class="vedioMgmt" method="updateVideoInfo">
 			<result name="success">/vediotape/videoTape.jsp</result>
@@ -44,6 +53,15 @@
 		<action name="toUpdateVideoInfo" class="vedioMgmt" method="toUpdateVideoInfo">
 			<result name="success">/vediotape/videoTape.jsp</result>		
 		</action>
+				
+		<action name="toVideoModification" class="vedioMgmt" method="toVideoModifications">
+			<result name="success">/vediotape/modifications.jsp</result>		
+		</action>
 		
+		
+		<action name="modificationFinish" class="vedioMgmt" method="modificationFinish">
+			<result name="success">/vediotape/modifications.jsp</result>
+			<result name="input">/vediotape/modify.jsp</result>		
+		</action>
 	</package>
 </struts>

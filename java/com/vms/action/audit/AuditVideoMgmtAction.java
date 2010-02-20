@@ -66,18 +66,18 @@ public class AuditVideoMgmtAction extends BaseAction {
 
 	}
 
-	public String toAuditingVideo() throws Exception {
-		try {
-			List<AudienceExamineVO> ae = audienceScoreService.getAudienceScoreOfTape(videoID, -1, -1, "", true);
-			vv = videoService.getVideotapeById(videoID, ae);
-			// vedioscoreService.getUserExaminedVedioesByVideoId(videoID,
-			// startIndex, endIndex, propertyName, ascending);
-			return SUCCESS;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return INPUT;
-		}
-	}
+//	public String toAuditingVideo() throws Exception {
+//		try {
+//			List<AudienceExamineVO> ae = audienceScoreService.getAudienceScoreOfTape(videoID, -1, -1, "", true);
+//			vv = videoService.getVideotapeById(videoID, ae);
+//			// vedioscoreService.getUserExaminedVedioesByVideoId(videoID,
+//			// startIndex, endIndex, propertyName, ascending);
+//			return SUCCESS;
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			return INPUT;
+//		}
+//	}
 
 	public String getVideoScores() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
@@ -89,7 +89,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 	}
 
 	
-	public String videoOperation() throws Exception{
+	public String videoAuditOperation() throws Exception{
 		SessionUserInfo user = new SessionUserInfo(1); //this.getUserInfo();
 		boolean flag=false;
 		try {

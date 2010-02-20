@@ -33,38 +33,6 @@
 <title>查询影带信息</title>
 </head>
 <body>
-<s:actionerror />
-<s:actionmessage />
-<h1>影带查询</h1>
-<p>选择查询时间段</p>
-<table>
-	<tr>
-		<td><label>从</label></td>
-		<td><sx:datetimepicker name="dateStart" displayFormat="yyyy-MM-dd" dayWidth="wide" /></td>
-		<td><label>至</label></td>
-		<td><sx:datetimepicker name="dateEnd" displayFormat="yyyy-MM-dd" dayWidth="wide" /></td>
-	</tr>
-
-
-	<tr>
-		<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
-		<button type="button">确 定</button>
-		</span> </span></td>
-	</tr>
-</table>
-
-<h1>影带列表</h1>
-<p>单击表格可进行编辑，单击右键可删除</p>
-<div id="dataContainer" align="center"></div>
-
-
-
-<script type="text/javascript">
-	YAHOO.util.Event.addListener(window, "load", initPage());
-</script>
-
-
-
 
 </body>
 </html>

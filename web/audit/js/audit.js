@@ -1,8 +1,8 @@
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		if (oRecord.getData("status").id != 4) {
-			var href = "<a href='./audit/toAuditingVideo?videoID=";
+		if (oRecord.getData("status").id != 4 && oRecord.getData("status").id != 3) {
+			var href = "<a href='./audit/findVideoByNameOrID?optionName=auditing&vid=";
 			href += sData;
 			href += "'>" + sData + "</a>";
 			
@@ -262,7 +262,9 @@ function initScoreDataTable(videoID) {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-					rowsPerPage : 25
+					rowsPerPage : 25,
+					template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+					rowsPerPageOptions : [ 25, 50, 100 ]
 				})
 
 	};

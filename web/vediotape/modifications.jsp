@@ -27,13 +27,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/audit/js/audit.js"></script>
-<title>待审剧目</title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
+
+<title>影带信息</title>
 </head>
 <body class="yui-skin-sam">
 
@@ -43,11 +45,11 @@
 
 <h1>查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
-<s:form id="searchForm" action="findVideoByNameOrID" namespace="/audit">
+<s:form id="searchForm" action="searchVideoByNameOrIDForModification" namespace="/vedio">
 <table>
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><input type="text" name="vid" id="vid" /><s:hidden name="optionName" value="auditing"/></td>
+		<td><input type="text" name="vid" id="vid" /><s:hidden name="optionName" value="modification"/></td>
 		<td><label>剧目名称</label></td>
 		<td><input type="text" id="searchinput" name="vname" style="width: 200px" />
 		<div id="searchcontainer">
@@ -67,25 +69,18 @@
 </s:form>
 
 
-<h1>待审剧目</h1>
-<p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
+
+<h1>修改剧目</h1>
+<p>点击链接并修改剧目</p>
  
-<select id="filter">
-<option value="0">All</option>
-<option value="2">待审剧目</option>
-<option value="3">通过剧目</option>
-<option value="4">修改剧目</option>
-<option value="5">重审剧目</option>
-</select>
 
 <div id="dynamicdata" align="center"></div>
 <script type="text/javascript">
 
-YAHOO.util.Event.addListener(window, "load", initDataTable);
+YAHOO.util.Event.addListener(window, "load", initModificationPage);
 
 
 </script>
-
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='/tv/vedio/?videoID=";
+		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForMarketRate?optionName=marketRate&vid=";
 		href += sData;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
@@ -69,7 +69,7 @@ function initDataTable() {
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.XHRDataSource(
-			"/tv/audit/filterVideos.action?");
+			"/tv/audit/filterVideos.action?filter=8&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.connXhrMode = "queueRequests";
 	myDataSource.responseSchema = {
@@ -79,12 +79,12 @@ function initDataTable() {
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 	// response
-	}
+		}
 	};
-
+	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25&filter=8",
+		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25",
 		dynamicData :true,
 		sortedBy : {
 			key :"dateInput",
@@ -108,7 +108,7 @@ function initDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-
+	
 	return {
 		ds :myDataSource,
 		dt :myDataTable

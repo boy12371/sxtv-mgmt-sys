@@ -64,4 +64,6 @@ public interface IVediotapeDAO extends IBaseRootDAO {
 
 	
 	Object findVideos(String hql,Map<String,Object[]> valuesTypes,int startIndex,int endIndex)throws Exception;
+	
+	List<Vediotape> findVideosByFieldsNamePartiallyDateInScope(Map<String,Object> fieldsValues ,int startIndex, int endIndex, String orderProperty, boolean ascending)throws Exception;
 }
