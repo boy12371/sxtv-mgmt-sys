@@ -68,15 +68,15 @@ public class ArrangeAction extends BaseAction {
 			List<Vediotape> tapes = tapeService.findVideotapeByStatus(
 					status, 
 					unArrangedTable.getSort(),
-					unArrangedTable.getStartIndex(), 
-					unArrangedTable.getStartIndex()+unArrangedTable.getRowsPerPage(), 
+					-1, 
+					-1, 
 					unArrangedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			
 			List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
 			for(Vediotape tape:tapes){
 				tapeVOs.add(new VedioTapeVO(tape));
 			}
-			JSONDataTableUtils.setupJSONDataTable(tapeVOs, unArrangedTable, tapeService.getTotalCountForVideosByStatus(status));
+			JSONDataTableUtils.setupJSONDataTable(tapeVOs, unArrangedTable, tapeVOs.size());
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 			throw e;
