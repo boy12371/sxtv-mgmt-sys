@@ -96,7 +96,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 			crt.setFirstResult(startIndex);
 			crt.setMaxResults(endIndex);
 		}
-		return (List<Vediotape>)crt.list();
+		return (List<Vediotape>) crt.list();
 
 	}
 
@@ -143,7 +143,8 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Object findVideos(final String hql, final Map<String,Object[]> valuesTypes, final int startIndex, final int endIndex) throws Exception {
+	public Object findVideos(final String hql, final Map<String, Object[]> valuesTypes, final int startIndex,
+			final int endIndex) throws Exception {
 		// TODO Auto-generated method stub
 		return this.getHibernateTemplate().executeFind(new HibernateCallback() {
 
@@ -151,59 +152,64 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				// TODO Auto-generated method stub
 				Query query = session.createQuery(hql);
-				if(valuesTypes!=null && !valuesTypes.isEmpty()){
+				if (valuesTypes != null && !valuesTypes.isEmpty()) {
 					Object[] values = valuesTypes.get("values");
 					Type[] types = (Type[]) valuesTypes.get("types");
 					query.setParameters(values, types);
 				}
-				if(startIndex!=-1&& endIndex!=-1){
+				if (startIndex != -1 && endIndex != -1) {
 					query.setFirstResult(startIndex);
 					query.setMaxResults(endIndex);
-				}				
+				}
 				return query.list();
 			}
 
 		});
-		
+
 	}
 
 	@Override
-	public List<Vediotape> findVideosByFieldsNamePartiallyDateInScope(
-			Map<String, Object> fieldsValues, int startIndex, int endIndex,
-			String orderProperty, boolean ascending) throws Exception {
-		
+	public List<Vediotape> findVideosByFieldsNamePartiallyDateInScope(Map<String, Object> fieldsValues, int startIndex,
+			int endIndex, String orderProperty, boolean ascending) throws Exception {
+
 		Criteria crt = this.getCriteria(clz);
-		
-		if (fieldsValues != null) {
+
+		if (fieldsValues != null && !fieldsValues.isEmpty()) {
 			Set<String> keys = fieldsValues.keySet();
 			Iterator<String> it = keys.iterator();
 			while (it.hasNext()) {
 				String key = (String) it.next();
-				if(key.equals(Vediotape.PROP_VEDIO_NAME)){
+				if (key.equals(Vediotape.PROP_VEDIO_NAME)) {
 					crt.add(Restrictions.ilike(key, fieldsValues.get(key)));
 					break;
 				}
-				if(key.equals("startDate")){					
-					if(fieldsValues.get(key) != null){
+				if (key.equals("startDate")) {
+					if (fieldsValues.get(key) != null) {
 						crt.add(Restrictions.ge(Vediotape.PROP_DATE_INPUT, fieldsValues.get(key)));
 						break;
 					}
-					
+
 				}
-				if(key.equals("endDate")){					
-					if(fieldsValues.get(key) != null){
+				if (key.equals("endDate")) {
+					if (fieldsValues.get(key) != null) {
 						crt.add(Restrictions.le(Vediotape.PROP_DATE_INPUT, fieldsValues.get(key)));
 						break;
 					}
-					
+
 				}
-				
-				
 				crt.add(Restrictions.eq(key, fieldsValues.get(key)));
 			}
 		}
-		return null;
+		Order order = DaoUtils.getOrder(orderProperty, ascending);
+		if (order != null) {
+			crt.addOrder(order);
+		}
+		if (startIndex != -1 && endIndex != -1) {
+			crt.setFirstResult(startIndex);
+			crt.setMaxResults(endIndex);
+		}
+		
+		return (List<Vediotape>) crt.list();
 	}
 
-	
 }

@@ -32,7 +32,49 @@
 
 <title>查询影带信息</title>
 </head>
-<body>
+<body class="yui-skin-sam">
+<table>
+	<tr>
+		<td><label>影带编号</label></td>
+		<td><input type="text" name="video.id" id="vid" /></td>
+		<td><label>剧目名称</label></td>
+		<td><input type="text" name="video.vedioName" id="vname" /></td>
+	</tr>
+	<tr>
+		<td><label>影视公司</label></td>
+		<td><s:select list="comList" listKey="id" listValue="companyName" id="vcompany" name="video.companyID.id" /></td>
+		<td><label>题材</label></td>
+		<td><s:select list="topList" listKey="id" listValue="topicName" id="vtopic" name="video.topic.id" /></td>
+	</tr>
+	<tr>
+		<td><label>栏目</label></td>
+		<td><s:select list="subList" listKey="id" listValue="subjectName" id="vsubject" name="video.subject.id" /></td>
+		<td><label>状态</label></td>
+		<td><s:select list="statusList" listKey="id" listValue="status" id="vstatus" name="video.status.id"/></td>
 
+	</tr>
+	<tr>
+		<td><label>从</label></td>
+		<td><sx:datetimepicker name="startDate" displayFormat="yyyy-MM-dd" id="startDate"/></td>
+		<td><label>至</label></td>
+		<td><sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" id="endDate" /></td>
+
+	</tr>
+
+	<tr>
+		<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
+		<button type="button">查 询</button>
+		</span> </span></td>
+	</tr>
+</table>
+
+<h1>影带列表</h1>
+<p>单击表头，可进行排序</p>
+<div id="dynamicdata" align="center"></div>
+
+
+<script type="text/javascript">
+	YAHOO.util.Event.addListener(window, "load", initDataTable());
+</script>
 </body>
 </html>

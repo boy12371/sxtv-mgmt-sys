@@ -2,12 +2,21 @@ package com.vms.action.search;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
+import com.vms.db.bean.Company;
+import com.vms.db.bean.Status;
+import com.vms.db.bean.Subject;
+import com.vms.db.bean.Topic;
 import com.vms.db.bean.Vediotape;
+import com.vms.service.iface.ICompanyService;
+import com.vms.service.iface.IStatusService;
+import com.vms.service.iface.ISubjectService;
+import com.vms.service.iface.ITopicService;
 import com.vms.service.iface.IVediotapeService;
 
 public class VedioSearchMgmt extends BaseAction {
@@ -17,8 +26,15 @@ public class VedioSearchMgmt extends BaseAction {
 	 */
 	private static final long serialVersionUID = 1L;
 	private IVediotapeService vedioService;
+
+	private ICompanyService companyService;
+	private ISubjectService subjectService;
+	private ITopicService topicService;
+	private IStatusService statusService;
 	private JSONDataTable table;
 	private Vediotape video;
+	private Date startDate;
+	private Date endDate;
 	private String query;
 
 	public String autoCompleteForVideoName() throws Exception {
@@ -50,12 +66,32 @@ public class VedioSearchMgmt extends BaseAction {
 		
 	}
 
-	
-	public String getChartFor(){
+
+	public String searchVideos()throws Exception{
 		
-	
+		
 		return this.SUCCESS;
 	}
+
+	
+	public List<Company> getComList() throws Exception{
+		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);		
+	}
+
+
+	public List<Topic> getTopList() throws Exception{
+		return topicService.findAllTopics(-1,-1, Topic.PROP_ID, true);
+	}
+	
+	public List<Subject> getSubList() throws Exception{
+		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
+	}
+	
+	public List<Status> getStatusList() throws Exception{
+		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
+	}
+	
+	
 	public IVediotapeService getVedioService() {
 		return vedioService;
 	}
@@ -63,9 +99,6 @@ public class VedioSearchMgmt extends BaseAction {
 	public void setVedioService(IVediotapeService vedioService) {
 		this.vedioService = vedioService;
 	}
-
-	
-	
 	public String getQuery() {
 		return query;
 	}
