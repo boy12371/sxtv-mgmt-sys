@@ -28,15 +28,15 @@
 			</tr>
 			<tr>
 				<td><label>故事：</label></td>
-				<td><s:textfield name="tapeScore.storyScore" value=""/></td>
+				<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" value=""/></td>
 				<td><label>技术：</label></td>
-				<td><s:textfield name="tapeScore.techScore" value=""/></td>
+				<td><s:textfield cssClass="inputField" name="tapeScore.techScore" value=""/></td>
 			</tr>
 			<tr>
 				<td><label>表演：</label></td>
-				<td><s:textfield name="tapeScore.performScore" value=""/></td>
+				<td><s:textfield cssClass="inputField" name="tapeScore.performScore" value=""/></td>
 				<td><label>创新：</label></td>
-				<td><s:textfield name="tapeScore.innovateScore" value=""/></td>
+				<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" value=""/></td>
 			</tr>
 			<tr>
 				<td><label>获奖情况：</label></td>
