@@ -52,29 +52,29 @@
 <s:actionmessage/>
 <h1>影带信息</h1>
 <p>调描条形码并填写或选择其他相关信息</p>
-<table>
+<table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><input type="text" name="textfield" id="vid" /></td>
+		<td><input class="inputField" type="text" name="textfield" id="vid" /></td>
 		<td><label>剧目名称</label></td>
-		<td><input type="text" name="textfield" id="vname"/></td>
+		<td><input class="inputField" type="text" name="textfield" id="vname"/></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
-		<td><s:select list="comList" listKey="id" listValue="companyName" id="vcompany" /></td>
+		<td><s:select cssClass="selectField" list="comList" listKey="id" listValue="companyName" id="vcompany" /></td>
 		<td><label>题材</label></td>
-		<td><s:select list="topList" listKey="id" listValue="topicName" id="vtopic" /></td>
+		<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" /></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
-		<td><s:select list="subList" listKey="id" listValue="subjectName" id="vsubject" /></td>
+		<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" /></td>
 		<td><label>收带日期</label></td>
-		<td><sx:datetimepicker displayFormat="yyyy-MM-dd" id="vdateComing" toggleType="explode" value="today"/></td>
+		<td><sx:datetimepicker cssClass="inputField" displayFormat="yyyy-MM-dd" id="vdateComing" toggleType="explode" value="today"/></td>
 
 	</tr>
 	<tr>
 		<td><label>备注</label></td>
-		<td><textarea name="textfield" id="vcomments"></textarea></td>
+		<td><textarea class="inputField" name="textfield" id="vcomments"></textarea></td>
 		<td></td>
 		<td></td>
 

@@ -44,13 +44,13 @@
 <h1>查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
 <s:form id="searchForm" action="searchVideoByNameOrID" namespace="/vedio">
-<table>
+<table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><input type="text" name="vid" id="vid" /></td>
+		<td><input class="inputField" type="text" name="vid" id="vid" /></td>
 		<td><label>剧目名称</label></td>
-		<td><input type="text" id="searchinput" name="vname" style="width: 200px" />
-		<div id="searchcontainer">
+		<td><input class="inputField" type="text" id="searchinput" name="vname"/>
+		<div id="searchcontainer"></div>
 		</td>
 	</tr>
 	<tr>
@@ -70,38 +70,38 @@
 <h1>影带信息</h1>
 <p>查看或编辑剧目信息并保存</p>
 <s:form id="updateForm" action="updateVideoInfo" namespace="/vedio" method="post">
-	<table>
+	<table class="inputTable">
 		<tr>
 			<td><label>影带编号</label></td>
 			<td><s:property value="vedio.id" /> <s:hidden name="vedio.id" /></td>
 			<td><label>剧目名称</label></td>
-			<td><s:textfield name="vedio.vedioName" /></td>
+			<td><s:textfield cssClass="inputField" name="vedio.vedioName" /></td>
 		</tr>
 		<tr>
 			<td><label>影视公司</label></td>
-			<td><s:select list="comList" listKey="id" listValue="companyName" name="vedio.companyID.id" /></td>
+			<td><s:select cssClass="selectField" list="comList" listKey="id" listValue="companyName" name="vedio.companyID.id" /></td>
 			<td><label>收带时间</label></td>
 			<td><s:date name="vedio.dateComing" format="yyyy-MM-dd" /></td>
 		</tr>
 		<tr>
 			<td><label>栏目</label></td>
-			<td><s:select list="subList" listKey="id" listValue="subjectName" id="vsubject" name="vedio.subject.id" /></td>
+			<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" name="vedio.subject.id" /></td>
 			<td><label>题材</label></td>
-			<td><s:select list="topList" listKey="id" listValue="topicName" id="vtopic" name="vedio.topic.id" /></td>
+			<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" name="vedio.topic.id" /></td>
 		</tr>
 		<s:if test="vedio.audienceRating != null && vedio.audienceRating !=0">
 			<tr>
 				<td><label>收视率</label></td>
-				<td><s:textfield name="vedio.audienceRating" /></td>
+				<td><s:textfield cssClass="inputField" name="vedio.audienceRating" /></td>
 				<td><label>市场份额</label></td>
-				<td><s:textfield name="vedio.marketShare" /></td>
+				<td><s:textfield cssClass="inputField" name="vedio.marketShare" /></td>
 			</tr>
 		</s:if>
 		<tr>
 			<td><label>状态</label></td>
 			<td><s:property value="vedio.status.status" /></td>
 			<td><label>备注</label></td>
-			<td><s:textarea name="vedio.comments"></s:textarea></td>
+			<td><s:textarea cssClass="inputField" name="vedio.comments"></s:textarea></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">

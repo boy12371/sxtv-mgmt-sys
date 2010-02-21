@@ -15,8 +15,7 @@
 <h1>影带信息</h1>
 <p>确定并点击按钮，影带将被重新审核</p>
 <s:form action="modificationFinish" method="post" namespace="/vedio">
-	<table>
-
+	<table class="inputTable">
 		<tr>
 			<td><label>编号</label></td>
 			<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" /></td>
