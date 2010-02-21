@@ -38,11 +38,17 @@ public class ArrangeAction extends BaseAction {
 	
 	private JSONDataTable arrangeTable;
 	
+	private JSONDataTable arrangedHistoryTable;
+	
 	private List<Pair> monthList = new ArrayList<Pair>();
 	
 	private String month;
 	
 	private String newResult;
+	
+	private String firstArrangedDate;
+	
+	private String nowDate;
 	
 	public String toArrange() throws Exception {
 		Calendar calendar = new GregorianCalendar();
@@ -169,7 +175,18 @@ public class ArrangeAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String toArrangedHistory() throws Exception{
+		Date fDate = arrangeService.getFirstArrangedDate();
+		SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd");
+		firstArrangedDate = dateFm.format(fDate);
+		nowDate = dateFm.format(new Date());
+		return SUCCESS;
+	}
 	
+	public String getArrangedHistory() throws Exception {
+		
+		return SUCCESS;
+	}
 
 	public void setTapeService(IVediotapeService tapeService) {
 		this.tapeService = tapeService;
@@ -226,4 +243,29 @@ public class ArrangeAction extends BaseAction {
 	public String getMonth() {
 		return month;
 	}
+
+	public void setArrangedHistoryTable(JSONDataTable arrangedHistoryTable) {
+		this.arrangedHistoryTable = arrangedHistoryTable;
+	}
+
+	public JSONDataTable getArrangedHistoryTable() {
+		return arrangedHistoryTable;
+	}
+
+	public void setFirstArrangedDate(String firstArrangedDate) {
+		this.firstArrangedDate = firstArrangedDate;
+	}
+
+	public String getFirstArrangedDate() {
+		return firstArrangedDate;
+	}
+
+	public void setNowDate(String nowDate) {
+		this.nowDate = nowDate;
+	}
+
+	public String getNowDate() {
+		return nowDate;
+	}
+
 }

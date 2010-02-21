@@ -23,5 +23,15 @@
 		<action name="doArrange" class="arrangeMgmt" method="doArrange">
 			<result>/arrange/arrange.jsp</result>
 		</action>
+		
+		<action name="toArrangedHistory" class="arrangeMgmt" method="toArrangedHistory">
+			<result>/arrange/arrangedHistory.jsp</result>
+		</action>
+		
+		<action name="getArrangedHistory" class="arrangeMgmt" method="getArrangedHistory">
+			<result type="json">
+				<param name="root">arrangedHistoryTable</param>
+			</result>
+		</action>
 	</package>
 </struts>

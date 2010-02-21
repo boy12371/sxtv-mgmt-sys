@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.vms.common.DaoUtils;
@@ -22,6 +23,12 @@ import com.vms.db.dao.iface.IPlayorderDAO;
 public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayorderDAO {
 
 	private Class clz = com.vms.db.bean.Playorder.class;
+	
+	public Date getFirstArrangedDate() throws Exception {
+		Criteria crt = this.getCriteria(clz);
+		Date min = (Date)crt.setProjection( Projections.projectionList().add(Projections.min(Playorder.PROP_PLAY_DATE))).uniqueResult();
+		return min;
+	}
 
 	@Override
 	public void deletePlayorder(List<Playorder> pos) throws Exception {

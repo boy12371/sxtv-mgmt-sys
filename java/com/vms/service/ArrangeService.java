@@ -15,6 +15,10 @@ public class ArrangeService implements IArrangeService{
 	
 	private IPlayorderDAO playorderDAO;
 	
+	public Date getFirstArrangedDate() throws Exception {
+		return playorderDAO.getFirstArrangedDate();
+	}
+	
 	public List<Playorder> findPlayorders(Date month) throws Exception{
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(month);

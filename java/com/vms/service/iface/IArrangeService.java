@@ -7,6 +7,8 @@ import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Playorder;
 
 public interface IArrangeService {
+	public Date getFirstArrangedDate() throws Exception;
+	
 	public List<VedioTapeVO> findArrangedTapes(Date month) throws Exception;
 	
 	public void savePlayorder(List<Playorder> pos) throws Exception;
