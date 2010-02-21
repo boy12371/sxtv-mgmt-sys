@@ -1,5 +1,6 @@
 package com.vms.common;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,14 +55,14 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		//
 		// IUserRoleService service = (IUserRoleService)
 		// ctx.getBean("userRoleService");
-		IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
+		//IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
 
-		int count = service.getTotalCountForVideosByStatus(2);
-		System.out.println(count);
+		//int count = service.getTotalCountForVideosByStatus(2);
+		//System.out.println(count);
 		
 		
 		//IPlayorderDAO service = (IPlayorderDAO) ctx.getBean("playorderDAO");
@@ -120,6 +121,8 @@ public class Test {
 		// JSONObject o = jsArray.getJSONObject(0);
 		// System.out.println(o.get("comments"));
 		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(format.parse("2010-02-19"));
 		
 		
 

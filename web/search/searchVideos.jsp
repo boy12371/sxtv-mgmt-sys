@@ -27,7 +27,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/search/js/search.js"></script>
+
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
 
 
 <title>查询影带信息</title>
@@ -71,7 +77,6 @@
 <h1>影带列表</h1>
 <p>单击表头，可进行排序</p>
 <div id="dynamicdata" align="center"></div>
-
 
 <script type="text/javascript">
 	YAHOO.util.Event.addListener(window, "load", initDataTable());

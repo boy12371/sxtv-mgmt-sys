@@ -6,7 +6,11 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 	
 	<bean id="searchMgmt" class="com.vms.action.search.VedioSearchMgmt" scope="prototype">
-		<property name="vedioService" ref="vediotapeService" />
+		<property name="vedioService" ref="vediotapeService" />		
+		<property name="companyService" ref="companyService" />
+		<property name="subjectService" ref="subjectService" />
+		<property name="topicService" ref="topicService" />
+		<property name="statusService" ref="statusService" />
 		
 	</bean>
 	

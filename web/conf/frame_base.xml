@@ -30,7 +30,7 @@
 			<ModuleItem id="feedbackModify" name="修改反馈" url="http://www.google.com"/> 
 		</Module>
 		
-		<Module id="statistics" name="统计查询" url="http://www.google.com">
+		<Module id="statistics" name="统计查询" url="/tv/search/toGenericSeaching.action">
 		</Module>
 		
 		<Module id="userMgmt" name="用户管理" url="">

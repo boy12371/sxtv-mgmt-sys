@@ -14,5 +14,15 @@
 			<result name="input">/search/videoDetails.jsp</result>
 		</action>
 		
+		<action name="searchVideos" class="searchMgmt" method="searchVideos">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
+		
+		<action name="toGenericSeaching" class="searchMgmt" method="toGenericSeaching">
+			<result name="success">/search/searchVideos.jsp</result>
+			
+		</action>
 	</package>
 </struts>

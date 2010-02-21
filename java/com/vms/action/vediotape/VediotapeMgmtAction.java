@@ -1,7 +1,11 @@
 package com.vms.action.vediotape;
 
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -61,9 +65,10 @@ public class VediotapeMgmtAction extends BaseAction {
 	}
 
 	
-	private List<Vediotape> convertJASSONStringToVedio(){
+	private List<Vediotape> convertJASSONStringToVedio() throws ParseException{
 		JSONArray jasonArray = JSONArray.fromObject(this.jasonDataString);
-		System.out.println(jasonArray);
+		DateFormat format = new SimpleDateFormat();
+		
 		if(jasonArray.isArray() && !jasonArray.isEmpty()){
 			List<Vediotape> vedios = new ArrayList<Vediotape>();
 			SessionUserInfo userInfo = (SessionUserInfo)session.getAttribute("SessionUserInfo");
@@ -78,10 +83,10 @@ public class VediotapeMgmtAction extends BaseAction {
 				v.setTopic(new Topic(obj.getInt(Vediotape.PROP_TOPIC)));
 				v.setSubject(new Subject(obj.getInt(Vediotape.PROP_SUBJECT)));
 				v.setStatus(new Status(1));
+				v.setDateComing(format.parse(obj.getString(Vediotape.PROP_DATE_COMING)));
 				v.setComments(obj.getString(Vediotape.PROP_COMMENTS));
 				//v.setInputer(new User(userInfo.getUserId()));
-				v.setInputer(new User(1));
-				v.setDateComing(date);
+				v.setInputer(new User(1));				
 				v.setDateInput(date);
 				vedios.add(v);
 			}

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<sx:head />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
@@ -37,6 +39,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
 
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
 </head>
 
 <body class="yui-skin-sam">
@@ -62,11 +68,17 @@
 	<tr>
 		<td><label>栏目</label></td>
 		<td><s:select list="subList" listKey="id" listValue="subjectName" id="vsubject" /></td>
-		<td><label>备注</label></td>
-		<td><textarea name="textfield" id="vcomments"></textarea></td>
+		<td><label>收带日期</label></td>
+		<td><sx:datetimepicker displayFormat="yyyy-MM-dd" id="vdateComing" toggleType="explode" value="today"/></td>
 
 	</tr>
-	
+	<tr>
+		<td><label>备注</label></td>
+		<td><textarea name="textfield" id="vcomments"></textarea></td>
+		<td></td>
+		<td></td>
+
+	</tr>
 	<tr>
 		<td colspan="4" align="center">
 		<span id="go" class="yui-button yui-push-button">

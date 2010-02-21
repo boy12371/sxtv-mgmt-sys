@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
+import com.vms.common.JSONDataTableUtils;
+import com.vms.common.SearchCondition;
 import com.vms.db.bean.Company;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Subject;
@@ -25,28 +28,32 @@ public class VedioSearchMgmt extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger(VedioSearchMgmt.class);
 	private IVediotapeService vedioService;
-
 	private ICompanyService companyService;
 	private ISubjectService subjectService;
 	private ITopicService topicService;
 	private IStatusService statusService;
 	private JSONDataTable table;
 	private Vediotape video;
-	private Date startDate;
-	private Date endDate;
+	private SearchCondition sc;
 	private String query;
 
+	
+	
+	public String toGenericSeaching()throws Exception{
+		return this.SUCCESS;
+	}
 	public String autoCompleteForVideoName() throws Exception {
 		List<String> names = vedioService.findVideoNamesForAutoComplete(query);
-		List<VideoNameJSON> nameList =new ArrayList<VideoNameJSON>();
-		table=new JSONDataTable();
+		List<VideoNameJSON> nameList = new ArrayList<VideoNameJSON>();
+		table = new JSONDataTable();
 		if (names != null && !names.isEmpty()) {
 			int size = names.size();
 			for (int i = 0; i < size; i++) {
 				nameList.add(new VideoNameJSON(names.get(i)));
 			}
-		}		
+		}
 		table.setRecords(nameList);
 		return SUCCESS;
 	}
@@ -55,43 +62,52 @@ public class VedioSearchMgmt extends BaseAction {
 		try {
 			video = vedioService.getVediotapeByName(query);
 		} catch (Exception e) {
-			// TODO: handle exception		
+			// TODO: handle exception
+			logger.error(e);
 		}
-		if(video!=null){
-			return SUCCESS;	
-		}else{
+		if (video != null) {
+			return SUCCESS;
+		} else {
 			this.addActionError("影带未找到");
 			return INPUT;
 		}
-		
+
 	}
 
+	public String searchVideos() throws Exception {
+		table = JSONDataTableUtils.initJSONDataTable(getRequest());
+		try {
+			List<Vediotape> dataList = this.vedioService.findVidesByConditions(
+					sc, table.getSort(), table.getStartIndex(), table
+							.getStartIndex()
+							+ table.getRowsPerPage(), table.getDir().equals(
+							JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(dataList, table, vedioService
+					.getTotalCountForVidesByConditions(sc));
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
 
-	public String searchVideos()throws Exception{
-		
-		
+		}
 		return this.SUCCESS;
 	}
 
-	
-	public List<Company> getComList() throws Exception{
-		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);		
+	public List<Company> getComList() throws Exception {
+		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);
 	}
 
-
-	public List<Topic> getTopList() throws Exception{
-		return topicService.findAllTopics(-1,-1, Topic.PROP_ID, true);
+	public List<Topic> getTopList() throws Exception {
+		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true);
 	}
-	
-	public List<Subject> getSubList() throws Exception{
+
+	public List<Subject> getSubList() throws Exception {
 		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
 	}
-	
-	public List<Status> getStatusList() throws Exception{
+
+	public List<Status> getStatusList() throws Exception {
 		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
 	}
-	
-	
+
 	public IVediotapeService getVedioService() {
 		return vedioService;
 	}
@@ -99,6 +115,7 @@ public class VedioSearchMgmt extends BaseAction {
 	public void setVedioService(IVediotapeService vedioService) {
 		this.vedioService = vedioService;
 	}
+
 	public String getQuery() {
 		return query;
 	}
@@ -107,12 +124,13 @@ public class VedioSearchMgmt extends BaseAction {
 		this.query = query;
 	}
 
-	public class VideoNameJSON{
+	public class VideoNameJSON {
 		public String vname;
-		
-		public VideoNameJSON(String vname){
-			this.vname=vname;
+
+		public VideoNameJSON(String vname) {
+			this.vname = vname;
 		}
+
 		public String getVname() {
 			return vname;
 		}
@@ -120,7 +138,7 @@ public class VedioSearchMgmt extends BaseAction {
 		public void setVname(String vname) {
 			this.vname = vname;
 		}
-		
+
 	}
 
 	public JSONDataTable getTable() {
@@ -137,5 +155,45 @@ public class VedioSearchMgmt extends BaseAction {
 
 	public void setVideo(Vediotape video) {
 		this.video = video;
+	}
+
+	public ICompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(ICompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public ISubjectService getSubjectService() {
+		return subjectService;
+	}
+
+	public void setSubjectService(ISubjectService subjectService) {
+		this.subjectService = subjectService;
+	}
+
+	public ITopicService getTopicService() {
+		return topicService;
+	}
+
+	public void setTopicService(ITopicService topicService) {
+		this.topicService = topicService;
+	}
+
+	public IStatusService getStatusService() {
+		return statusService;
+	}
+
+	public void setStatusService(IStatusService statusService) {
+		this.statusService = statusService;
+	}
+
+	public SearchCondition getSc() {
+		return sc;
+	}
+
+	public void setSc(SearchCondition sc) {
+		this.sc = sc;
 	}
 }
