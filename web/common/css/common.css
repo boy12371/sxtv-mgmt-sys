@@ -31,7 +31,7 @@ label {
 	width:140px;
 }
 
-input, textarea{
+.inputField{
 	border:1px solid #AACFE4;
 	float:left;
 	font-size:14px;
@@ -40,7 +40,7 @@ input, textarea{
 	width:200px;
 }
 
-select{
+.selectField{
 	border:1px solid #AACFE4;
 	font-size:14px;
 	margin:5px;
