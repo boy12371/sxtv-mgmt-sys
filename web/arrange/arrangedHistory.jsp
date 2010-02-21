@@ -33,8 +33,11 @@
 <br />
 
 <div id="selectDateDiv" style="width: 800px; height: 30px; margin-left: 68px;">
-	<select id="selectYear" onchange="selectYearFunc(this)" style="width:100px;margin:0px;"></select>
-	<select id="selectMonth" onchange="selectMonthFunc(this)" style="width:100px;margin:0px;"></select>
+	<table><tr>
+	<td><label>选择查询年月：</label></td>
+	<td><select id="selectYear" class="selectField" onchange="selectYearFunc(this)" style="width:100px;margin:0px;"></select></td>
+	<td><select id="selectMonth" class="selectField" onchange="selectMonthFunc(this)" style="width:100px;margin:0px;"></select></td>
+	</tr></table>
 </div>
 <div id="historyDiv" align="center"></div>
 <s:form action="" namespace="/arrange" >
@@ -44,7 +47,6 @@
 	var firstArrangedDate = "<s:property value='firstArrangedDate'/>";
 	var nowDate = "<s:property value='nowDate'/>";
 	initSelectElements();
-	initHistoryTable();
 </script>
 
 </body>
