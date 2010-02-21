@@ -42,6 +42,11 @@ body {
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
 
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
+
 </head>
 
 <body class="yui-skin-sam">
@@ -60,6 +65,11 @@ body {
 			<input type="submit" value="GO" />
 			<!-- img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/--></td>
 		</tr></table>
+
+<table><tr style="height: 40px;">
+			<td>&nbsp;</td>
+			<td><a id="changePassword" href="#">修改密码</a> ｜ <a>退出</a></td>
+		</tr></table>
 	</div>
 </td>
 </tr>
@@ -67,14 +77,17 @@ body {
 </form>
 </div>
 	
+ <div id="passwordForm" style="display:none">
+<h1 id="popup_title">提示</h1>
+            <p><label>原 密 码:</label><input type="password" name="demo1" /></p>
+            <p><label>新 密 码:</label><input type="password" name="demo1" /></p>
+			<p><label>确认密码:</label><input type="password" name="demo1" /></p>
+			<p><input type="button" name="demo1" id="yes" value="确认" />
+			<input type="button" name="cancel" id="cancel" value="取消" /></p>
+ </div>
+
 <script type="text/javascript"> 
-function goSearch(){
-	var query = YAHOO.util.Dom.get("searchinput").value;
-	
-	var href ="/tv/search/doAddingVedio.action?query="+query;
-	alert(href);
-	window.location.href=href;
-}
+
 YAHOO.example.Centered = function() {
     var myDataSource = new YAHOO.util.XHRDataSource("/tv/search/autoCompleteForVideoName.action?");
     myDataSource.responseSchema = {
@@ -101,6 +114,33 @@ YAHOO.example.Centered = function() {
         oAC: myAutoComp
     };
 }();
+
+$(document).ready(function() { 
+	 
+    $('#changePassword').click(function() { 
+        $.blockUI({ message: $('#passwordForm'), css: { width: '475px' } }); 
+    }); 
+
+    $('#yes').click(function() { 
+        // update the block message 
+        $.blockUI({ message: "<h1>Remote call in progress...</h1>" }); 
+
+        $.ajax({ 
+            url: 'wait.php', 
+            cache: false, 
+            complete: function() { 
+                // unblock when remote call returns 
+                $.unblockUI(); 
+            } 
+        }); 
+    }); 
+
+    $('#cancel').click(function() { 
+        $.unblockUI(); 
+        return false; 
+    }); 
+
+}); 
 </script>
 <div id="tabView" class="yui-navset tabviewArea">
 <ul class="yui-nav">

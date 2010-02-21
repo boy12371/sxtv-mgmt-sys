@@ -62,7 +62,8 @@
 					<span class="first-child"> 
 					<s:submit id="updateEmp" value="更新" onclick="executOperations(this.id);" />
 					<s:if test="employee.status==1">
-						<s:submit id="disableEmp" value="注销" onclick="executOperations(this.id);" />
+						<input type="button" id="disableEmp" value="注销" onclick="executOperations(this.id);"/>
+						
 					</s:if><s:else>
 						<s:submit id="enableEmp" value="启用" onclick="executOperations(this.id);" />
 					</s:else> 
