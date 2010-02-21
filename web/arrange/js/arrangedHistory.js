@@ -1,4 +1,4 @@
-var historyTable;
+var historyTable = null;
 var selMonth="";
 
 function initSelectElements(){
@@ -39,11 +39,20 @@ function selectYearFunc(self){
 		selMonth.options.add(new Option(i+"月",i));
 	}
 	selMonth.options[0].selected = true;
+	selectMonthFunc(selMonth);
 }
 
 function selectMonthFunc(self){
-	selMonth = YAHOO.util.Dom.get("selectMonth").value; 
-	document.getElementById("month").value = selMonth;	
+	var year = YAHOO.util.Dom.get("selectYear").value;
+	var month = YAHOO.util.Dom.get("selectMonth").value;
+	selMonth = year + "-" + month; 	
+	refreshTable();
+}
+
+function refreshTable(){
+	if(null == historyTable){
+		initHistoryTable();
+	}
 	var callback = {
 			success:historyTable.onDataReturnInitializeTable,
 			failure:historyTable.onDataReturnInitializeTable,
@@ -124,6 +133,10 @@ function initHistoryTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	};
+	
+	historyTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	
 	return {
 		ds :myDataSource,
