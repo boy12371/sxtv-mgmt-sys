@@ -38,8 +38,6 @@ public class ArrangeAction extends BaseAction {
 	
 	private JSONDataTable arrangeTable;
 	
-	private JSONDataTable arrangedHistoryTable;
-	
 	private List<Pair> monthList = new ArrayList<Pair>();
 	
 	private String month;
@@ -99,35 +97,7 @@ public class ArrangeAction extends BaseAction {
 			selDate.setMonth(Integer.parseInt(xx[1])-1);
 		}
 		
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(selDate);
-		int numDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-		
-		arrangeTable = JSONDataTableUtils.initJSONDataTable(getRequest());
-		try {
-			List<VedioTapeVO> tapes = arrangeService.findArrangedTapes(selDate);
-			//make records the date of which has no tape to play.
-			for(int i=1;i<=numDayOfMonth;i++){
-				boolean insert = true;
-				for(VedioTapeVO tape:tapes){
-					if(tape.getPlayDate().getDate() == i){
-						insert = false;
-						break;
-					}
-				}
-				if(insert){
-					VedioTapeVO voidTape = new VedioTapeVO();
-					Date playDate = new Date(selDate.getYear(),selDate.getMonth(),i);
-					voidTape.setPlayDate(playDate);
-					tapes.add(i-1,voidTape);
-				}
-			}
-			
-			JSONDataTableUtils.setupJSONDataTable(tapes, arrangeTable, numDayOfMonth);
-		} catch (Exception e) {
-			logger.error(e.getStackTrace());
-			throw e;
-		}
+		getArrangedTapesByDate(selDate);
 		return SUCCESS;
 	}
 	
@@ -184,8 +154,44 @@ public class ArrangeAction extends BaseAction {
 	}
 	
 	public String getArrangedHistory() throws Exception {
+		Date selDate;
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+		selDate = dFormat.parse(month + "-01");  
 		
+		getArrangedTapesByDate(selDate);
 		return SUCCESS;
+	}
+	
+	private void getArrangedTapesByDate(Date selDate) throws Exception {
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(selDate);
+		int numDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		
+		arrangeTable = JSONDataTableUtils.initJSONDataTable(getRequest());
+		try {
+			List<VedioTapeVO> tapes = arrangeService.findArrangedTapes(selDate);
+			//make records the date of which has no tape to play.
+			for(int i=1;i<=numDayOfMonth;i++){
+				boolean insert = true;
+				for(VedioTapeVO tape:tapes){
+					if(tape.getPlayDate().getDate() == i){
+						insert = false;
+						break;
+					}
+				}
+				if(insert){
+					VedioTapeVO voidTape = new VedioTapeVO();
+					Date playDate = new Date(selDate.getYear(),selDate.getMonth(),i);
+					voidTape.setPlayDate(playDate);
+					tapes.add(i-1,voidTape);
+				}
+			}
+			
+			JSONDataTableUtils.setupJSONDataTable(tapes, arrangeTable, numDayOfMonth);
+		} catch (Exception e) {
+			logger.error(e.getStackTrace());
+			throw e;
+		}
 	}
 
 	public void setTapeService(IVediotapeService tapeService) {
@@ -242,14 +248,6 @@ public class ArrangeAction extends BaseAction {
 
 	public String getMonth() {
 		return month;
-	}
-
-	public void setArrangedHistoryTable(JSONDataTable arrangedHistoryTable) {
-		this.arrangedHistoryTable = arrangedHistoryTable;
-	}
-
-	public JSONDataTable getArrangedHistoryTable() {
-		return arrangedHistoryTable;
 	}
 
 	public void setFirstArrangedDate(String firstArrangedDate) {

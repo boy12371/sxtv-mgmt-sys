@@ -30,7 +30,7 @@
 		
 		<action name="getArrangedHistory" class="arrangeMgmt" method="getArrangedHistory">
 			<result type="json">
-				<param name="root">arrangedHistoryTable</param>
+				<param name="root">arrangeTable</param>
 			</result>
 		</action>
 	</package>
