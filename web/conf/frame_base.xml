@@ -21,8 +21,7 @@
 		
 		<Module id="tapeArrange" name="影带编排" url="">
 			<ModuleItem id="arrange" name="编排" url="/tv/arrange/toArrange.action"/>
-			<ModuleItem id="arrangeView" name="查看编排" url="/tv/order/videoOrder.jsp"/> 
-			<ModuleItem id="arrangeModify" name="修改编排" url="http://www.google.com"/> 
+			<ModuleItem id="arrangeView" name="历史编排" url="/tv/arrange/toArrangedHistory.action"/> 
 		</Module>
 		
 		<Module id="feedback" name="市场反馈" url="">
@@ -42,7 +41,6 @@
 		</Module>
 		
 		<Module id="sysConfig" name="系统设置" url="">
-			
 			<ModuleItem name="影视公司管理" url="/tv/sys/toCompanies.action"/>
 			<ModuleItem id="sysProperties" name="系统参数" url="/tv/sys/toSystemData.action"/>
 		</Module>
