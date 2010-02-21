@@ -17,7 +17,7 @@
 
 <h1>影带信息</h1>
 <p>影带相关信息</p>
-<table>
+<table class="inputTable">
 
 	<tr>
 		<td><label>影带编号</label></td>
@@ -51,12 +51,12 @@
 	<table>
 		<tr>
 			<td><label>收视率</label></td>
-			<td><s:textfield name="video.audienceRating" /> <s:hidden name="video.id" /></td>
+			<td><s:textfield cssClass="inputField" name="video.audienceRating" /> <s:hidden name="video.id" /></td>
 			<td><label>市场份额</label></td>
-			<td><s:textfield name="video.marketShare" /></td>
+			<td><s:textfield cssClass="inputField" name="video.marketShare" /></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
+			<td colspan="4" align="center"><span id="go"> <span>
 			<button type="button">确 定</button>
 			</span> </span></td>
 		</tr>

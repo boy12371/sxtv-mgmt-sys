@@ -32,18 +32,18 @@
 <h1>剧目收视率、市场份额</h1>
 <p>搜索或点击剧目名称或编号，输入收视率和市场份额</p>
 <s:form id="searchForm" action="searchVideoByNameOrIDForMarketRate" namespace="/vedio">
-<table>
+<table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><input type="text" name="vid" id="vid" /><s:hidden name="optionName" value="marketRate"/></td>
+		<td><input class="inputField" type="text" name="vid" id="vid" /><s:hidden name="optionName" value="marketRate"/></td>
 		<td><label>剧目名称</label></td>
-		<td><input type="text" id="searchinput" name="vname" style="width: 200px" />
-		<div id="searchcontainer">
+		<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname" style="width: 200px" />
+		<div id="searchcontainer"></div>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="4" align="center">
-		<span id="go" class="yui-button yui-push-button"> <span class="first-child">
+		<span id="go"> <span>
 		<input type="submit" value="搜索" />
 		</span> </span></td>
 	</tr>
