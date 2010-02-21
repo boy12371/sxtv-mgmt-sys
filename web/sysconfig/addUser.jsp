@@ -24,18 +24,18 @@
 <s:actionerror />
 <s:form action="doAddUser" namespace="/sys" method="post">
 	<div align="center">
-	<table>
+	<table class="inputTable">
 		<tr>
 			<td><label>用户名：</label></td>
-			<td><s:textfield name="user.userName" /></td>
+			<td><s:textfield cssClass="inputField" name="user.userName" /></td>
 			<td><label>员工：</label></td>
-			<td><s:select name="user.employee.id" list="empList" listKey="id" listValue="name" /></td>
+			<td><s:select cssClass="selectField" name="user.employee.id" list="empList" listKey="id" listValue="name" /></td>
 		</tr>
 		<tr>
 			<td><label>密码：</label></td>
-			<td><s:password name="user.userPass" /></td>
+			<td><s:password cssClass="inputField" name="user.userPass" /></td>
 			<td><label>重复密码：</label></td>
-			<td><s:password name="pwdRepeat" /></td>
+			<td><s:password cssClass="inputField" name="pwdRepeat" /></td>
 		</tr>
 		<tr>
 			<td colspan="1"><label>权限：</label></td>

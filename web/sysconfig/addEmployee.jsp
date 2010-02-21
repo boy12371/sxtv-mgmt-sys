@@ -27,25 +27,25 @@
 	<table class="inputTable">
 		<tr>
 			<td><label>姓名：</label></td>
-			<td><s:textfield name="employee.name" />
+			<td><s:textfield cssClass="inputField" name="employee.name" />
 				<s:hidden name="employee.status" value="1"/>	
 			</td>
 			<td><label>性别：</label></td>
-			<td><s:select name="employee.gender" list="#{'1':'男','0':'女'}" /></td>
+			<td><s:select cssClass="selectField" name="employee.gender" list="#{'1':'男','0':'女'}" /></td>
 		</tr>
 		<tr>
 			<td><label>出生日期：</label></td>
-			<td><sx:datetimepicker name="employee.birthday" displayFormat="yyyy-MM-dd" /></td>
+			<td><sx:datetimepicker cssClass="inputField" name="employee.birthday" displayFormat="yyyy-MM-dd" /></td>
 			<td><label>电话：</label></td>
-			<td><s:textfield name="employee.tel" /></td>
+			<td><s:textfield cssClass="inputField" name="employee.tel" /></td>
 		</tr>
 		
 		<tr>
 			<td><label>入职日期：</label></td>
-			<td><sx:datetimepicker name="employee.contractDate" displayFormat="yyyy-MM-dd" /></td>
+			<td><sx:datetimepicker cssClass="inputField" name="employee.contractDate" displayFormat="yyyy-MM-dd" /></td>
 
 			<td><label>备注：</label></td>
-			<td><s:textarea name="employee.comments" cols="20" rows="2"></s:textarea></td>
+			<td><s:textarea cssClass="inputField" name="employee.comments" cols="20" rows="2"></s:textarea></td>
 		</tr>
 
 		<tr>

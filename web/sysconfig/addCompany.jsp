@@ -27,30 +27,29 @@
 
 <s:form action="doAddCompany" namespace="/sys" method="post">
 	<div align="center">
-	<table>
+	<table class="inputTable">
 		<tr>
 			<td><label>公司名称：</label></td>
-			<td><s:textfield name="company.companyName" /><s:hidden name="company.id" /></td>
+			<td><s:textfield cssClass="inputField" name="company.companyName" /><s:hidden name="company.id" /></td>
 			<td><label>注册号：</label></td>
-			<td><s:textfield name="company.registrationNo" /></td>
+			<td><s:textfield cssClass="inputField" name="company.registrationNo" /></td>
 		</tr>
 		<tr>
 			<td><label>联系人：</label></td>
-			<td><s:textfield name="company.contactPerson" /></td>
+			<td><s:textfield cssClass="inputField" name="company.contactPerson" /></td>
 			<td><label>电话：</label></td>
-			<td><s:textfield name="company.phone" /></td>
+			<td><s:textfield cssClass="inputField" name="company.phone" /></td>
 		</tr>
 		<tr>
 			<td><label>备注：</label></td>
-			<td><s:textarea name="company.comments" cols="20" rows="2"></s:textarea></td>
+			<td><s:textarea cssClass="inputField" name="company.comments" cols="20" rows="2"></s:textarea></td>
 
 			<td><label></label></td>
 			<td></td>
 		</tr>
 
 		<tr>
-			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span
-				class="first-child"> <s:submit value="添加" /> </span> </span></td>
+			<td colspan="4" align="center"><span id="go" > <span> <s:submit value="添加" /> </span> </span></td>
 		</tr>
 	</table>
 	</div>

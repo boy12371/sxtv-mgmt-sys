@@ -26,7 +26,7 @@
 <s:actionerror />
 <s:form action="doUpdateUser" namespace="/sys" method="post">
 	<div align="center">
-	<table>
+	<table class="inputTable">
 
 		<tr>
 			<td><label>用户名：</label></td>
