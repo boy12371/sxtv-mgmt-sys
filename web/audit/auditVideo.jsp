@@ -35,8 +35,7 @@
 <h1>剧目详细信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 <s:form action="videoOperation" method="post" namespace="/audit">
-	<table>
-
+	<table class="inputTable">
 		<tr>
 			<td><label>编号</label></td>
 			<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" id="videoID" /></td>

@@ -137,8 +137,12 @@ function initDataTable() {
 			oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
-	}
-
+	};
+	
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
+	
 	var fireEvent = function(resetRecordOffset) {
 		var oState = myDataTable.getState(), request, oCallback;
 
@@ -277,9 +281,10 @@ function initScoreDataTable(videoID) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-
 	// DataTable instance
-
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	return {
 		ds : myDataSource,
 		dt : myDataTable
