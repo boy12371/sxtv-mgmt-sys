@@ -55,18 +55,20 @@ body {
 <form id="form1" name="form1" method="post" action="/tv/search/searchVideoByName.action" target="contentFrameId">
 <table style="margin-top:-10px;width:100%;">
 <tr>
-<td><img border="0" style="margin-left:20px;" src="./images/TVlogo.png" onclick="changeLogo(this);"/></td>
+<td><img border="0" style="margin-left:20px;" src="./images/TVlogo.png"/></td>
 <td>
 	<div class="divSearch">
 		<table><tr style="height: 40px;">
-			<td><input type="text" class="inputSearch" id="searchinput" name="query"/><div id="searchcontainer"></div>
+			<td>
+				<img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/>
 			</td>
 			<td>
-			<input type="submit" value="GO" />
-			<!-- img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/--></td>
+				<input type="text" class="inputSearch" id="searchinput" name="query"/>
+			</td>
+			<td><div id="goBtnDiv"></div></td>
 		</tr></table>
 
-<table><tr style="height: 40px;">
+		<table><tr style="height: 40px;">
 			<td>&nbsp;</td>
 			<td><a id="changePassword" href="#">修改密码</a> ｜ <a>退出</a></td>
 		</tr></table>
@@ -148,18 +150,18 @@ $(document).ready(function() {
 	( function() {
 		var tabView = new YAHOO.widget.TabView('tabView');
 	})();
+
+	var goBtn = new YAHOO.widget.Button({  
+		type: "submit",  
+		label: "GO",  
+		id: "goBtn",  
+		container: "goBtnDiv" }
+		); 
+	
 	resizeContentDiv();
 	resizeTabview();
 	window.onresize = function() {
 		resizeContentDiv();
-	}
-
-	function changeLogo(self){
-		if(self.src.indexOf("TVlogo") != -1){
-			self.src = "./images/sxlogo.png";
-		}else{
-			self.src = "./images/TVlogo.png";
-		}
 	}
 </script>
 </body>
