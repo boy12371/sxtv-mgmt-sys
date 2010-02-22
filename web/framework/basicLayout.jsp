@@ -67,7 +67,7 @@ body {
 			<td>
 				<input type="text" class="inputSearch" id="searchinput" name="query"/>
 			</td>
-			<td><div id="goBtnDiv"></div></td>
+			<td><div id="goBtnDiv" class="goBtn"></div></td>
 		</tr></table>
 
 		<table><tr style="height: 40px;">
