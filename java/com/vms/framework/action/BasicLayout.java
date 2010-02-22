@@ -32,7 +32,11 @@ public class BasicLayout extends BaseAction{
 	
 	public String doLogon() throws Exception{
 		userInfo = userService.authenticate(userInfo.getUsername(), userInfo.getPassword());
-		if(null == userInfo) throw new BaseException("", "验证失败，用户名或密码错误。");
+		if(null == userInfo){ 
+			this.addActionError("用户名或密码错误");
+			return INPUT;
+			//throw new BaseException("", "验证失败，用户名或密码错误。")
+		}
 		this.setUserInfo(userInfo);
 		TabViewManager tabManager = TabViewManager.getInstance(this.session);
 		tabs = tabManager.getTabs();

@@ -5,14 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<link rel="stylesheet" type="text/css" href="css/logon.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/logon/css/logon.css" />
 </head>
 
 <body>
-<s:actionmessage/>
-<s:actionerror/>
+
+
 <s:form action="doLogon" method="post" namespace="/framework" name="logonForm">
 <div style="text-align:center;">
+<s:actionmessage/>
+<s:actionerror/>
 	<div class="sxtv_logo">
 	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:100px;">
 		<tr>
@@ -27,19 +29,19 @@
 				<table cellspacing="0" cellpadding="0" border="0">
 					<tr>
 						<td align="left">
-							<img border="0" src="image/dssx_laugh2.png" />
+							<img border="0" src="${pageContext.request.contextPath}/logon/image/dssx_laugh2.png" />
 						</td>
 						<td class="bsep" />
 						<td align="center" width="278">
 							<table cellspacing="0" cellpadding="0" border="0">
 								<tr valign="middle">
-									<td align="right"><img border="0" src="image/user.png"/></td>
+									<td align="right"><img border="0" src="${pageContext.request.contextPath}/logon/image/user.png"/></td>
 									<td style="padding-left: 10px;">
 										<input type="text" size="20" maxlength="100" name="userInfo.username" />
 									</td>
 								</tr>
 								<tr valign="middle">
-									<td align="right"><img border="0" src="image/key.png"/></td>
+									<td align="right"><img border="0" src="${pageContext.request.contextPath}/logon/image/key.png"/></td>
 									<td style="padding-left: 10px;">
 										<input type="password" size="20" maxlength="50" name="userInfo.password" />
 									</td>

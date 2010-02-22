@@ -40,7 +40,7 @@ body {
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" /> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
@@ -79,42 +79,17 @@ body {
 	
  <div id="passwordForm" style="display:none">
 <h1 id="popup_title">提示</h1>
-            <p><label>原 密 码:</label><input type="password" name="demo1" /></p>
-            <p><label>新 密 码:</label><input type="password" name="demo1" /></p>
-			<p><label>确认密码:</label><input type="password" name="demo1" /></p>
+            <p><label>原 密 码:</label><input type="password" name="oldPwd" /></p>
+            <p><label>新 密 码:</label><input type="password" name="newPwd" /></p>
+			<p><label>确认密码:</label><input type="password" name="confirmPwd" /></p>
 			<p><input type="button" name="demo1" id="yes" value="确认" />
 			<input type="button" name="cancel" id="cancel" value="取消" /></p>
  </div>
 
 <script type="text/javascript"> 
 
-YAHOO.example.Centered = function() {
-    var myDataSource = new YAHOO.util.XHRDataSource("/tv/search/autoCompleteForVideoName.action?");
-    myDataSource.responseSchema = {
-        resultsList: "records",
-        fields: ["vname"]
-    };
-
-    // Instantiate AutoComplete
-    var myAutoComp = new YAHOO.widget.AutoComplete("searchinput","searchcontainer", myDataSource);
-    myAutoComp.queryMatchContains = true;
-    myAutoComp.queryQuestionMark = false;
-    myAutoComp.useShadow = true;
-    
-    // Keeps container centered
-    /*myAutoComp.doBeforeExpandContainer = function(oTextbox, oContainer, sQuery, aResults) {
-        var pos = YAHOO.util.Dom.getXY(oTextbox);
-        pos[1] += YAHOO.util.Dom.get(oTextbox).offsetHeight + 2;
-        YAHOO.util.Dom.setXY(oContainer,pos);
-        return true;
-    };*/
-    
-    return {
-        oDS: myDataSource,
-        oAC: myAutoComp
-    };
-}();
-
+YAHOO.example.Centered = autoCompleteVideoName(); 
+	
 $(document).ready(function() { 
 	 
     $('#changePassword').click(function() { 
@@ -123,8 +98,7 @@ $(document).ready(function() {
 
     $('#yes').click(function() { 
         // update the block message 
-        $.blockUI({ message: "<h1>Remote call in progress...</h1>" }); 
-
+        $.blockUI({ message: "<h1>请稍等......</h1>" });
         $.ajax({ 
             url: 'wait.php', 
             cache: false, 
