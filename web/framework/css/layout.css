@@ -78,8 +78,7 @@ ul,li{list-style:none; padding:0; margin:0;}
 	}
 	
 .inputSearch{
-	width:180px !important;
-	margin-left:25px;
+	width:150px !important;
 	margin-top:10px;
 	background-color:#FFFFFF;
 	border-color:#404040 #D4D0C8 #D4D0C8 #404040;
