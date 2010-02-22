@@ -11,6 +11,9 @@
 	href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 
 <script type="text/javascript"
@@ -21,6 +24,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/sysconfig/js/employee.js"></script>
 </head>
 <body class="yui-skin-sam">
@@ -32,11 +37,8 @@
 <p>查看所有员工信息</p>
 <!-- Employee Table-->
 <div id="employeeTable" align="center"></div>
-<div><a align="left" href="./sys/toAddEmployee.action">添加新员工</a></div>
+<div id="addEmp" align="center"></div>
 
-<script type="text/javascript">
-	YAHOO.example.DynamicData = initEmployeeDataTable();
-</script>
 <!-- Employee Table End-->
 
 
@@ -45,10 +47,24 @@
 <h1>用户信息</h1>
 <p>编辑并更新用户信息</p>
 <div id="userTable" align="center"></div>
-
-<div><a align="left" href="./sys/toAddUser.action">添加新用户</a></div>
+<div id="addUser" align="center"></div>
 
 <script type="text/javascript">
+	var addEmpBtn = new YAHOO.widget.Button( {
+		type :"link",
+		id :"linkbutton6",
+		label :"添加新员工",
+		href :"./sys/toAddEmployee.action",
+		container :"addEmp"
+	});
+	var addUserBtn = new YAHOO.widget.Button( {
+		type :"link",
+		id :"linkbutton7",
+		label :"添加新用户",
+		href :"./systoAddUser.action",
+		container :"addUser"
+	});
+	YAHOO.example.DynamicData = initEmployeeDataTable();
 	YAHOO.example.DynamicData = initUserDataTable();
 </script>
 
