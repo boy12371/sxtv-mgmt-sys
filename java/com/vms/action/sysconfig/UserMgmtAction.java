@@ -1,5 +1,6 @@
 package com.vms.action.sysconfig;
 
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
+import com.vms.common.SessionUserInfo;
 import com.vms.common.beanutils.BeanConvert;
 
 import com.vms.db.bean.Employee;
@@ -33,14 +35,17 @@ public class UserMgmtAction extends BaseAction {
 	private List<Integer> roleIDs;
 	private JSONDataTable table;
 	private String operation;
+	private String password;
+	private String newPass;
+	private String confirmPass;
 
 	public String toAddUser() throws Exception {
 		return this.SUCCESS;
 	}
 
 	public String doAddUser() throws Exception {
-		try {			
-			userService.createUser(user,roleIDs);
+		try {
+			userService.createUser(user, roleIDs);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			this.addActionError("用户创建失败");
@@ -54,9 +59,12 @@ public class UserMgmtAction extends BaseAction {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 
 		try {
-			List<User> users = userService.findAllUser(table.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(users, table, userService.getUserTotalCount());
+			List<User> users = userService.findAllUser(table.getStartIndex(),
+					table.getStartIndex() + table.getRowsPerPage(), table
+							.getSort(), table.getDir().equals(
+							JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(users, table, userService
+					.getUserTotalCount());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -70,10 +78,10 @@ public class UserMgmtAction extends BaseAction {
 			Iterator<Role> it = r.iterator();
 			while (it.hasNext()) {
 				Role role = it.next();
-				System.out.println(role.getId()+"==="+role.getName());
-				
+				System.out.println(role.getId() + "===" + role.getName());
+
 			}
-			
+
 		} catch (Exception e) {
 			logger.error(e);
 			return INPUT;
@@ -83,20 +91,37 @@ public class UserMgmtAction extends BaseAction {
 	}
 
 	public String doUpdateUser() throws Exception {
-		boolean succeed=false;
+		boolean succeed = false;
 		try {
-			 succeed = userService.updateUser(operation, user, roleIDs);
+			succeed = userService.updateUser(operation, user, roleIDs);
 		} catch (Exception e) {
 			logger.error(e);
 			this.addActionError("操作失败.");
 			return INPUT;
 		}
-		if(!succeed){
+		if (!succeed) {
 			this.addActionError("操作失败.");
 			return INPUT;
 		}
 		this.addActionMessage("操作成功");
 		return SUCCESS;
+	}
+
+	public String doChangePassword() throws Exception {
+		this.getResponse().setCharacterEncoding("UTF-8");
+		PrintWriter out = this.getResponse().getWriter();
+		SessionUserInfo user = this.getUserInfo();
+		if (user.getPassword().equals(this.getPassword())) {
+			if(userService.updateUserPassword(user.getUserId(), this.getNewPass())){
+				out.print("SUCCESS");
+			}else{
+				out.print("操作失败");
+			}			
+		} else {
+			out.print("密码输入错误");
+		}
+		out.close();
+		return NONE;
 	}
 
 	public List<Employee> getEmpList() throws Exception {
@@ -164,7 +189,28 @@ public class UserMgmtAction extends BaseAction {
 		this.roleIDs = roleIDs;
 	}
 
-	
+	public String getPassword() {
+		return password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNewPass() {
+		return newPass;
+	}
+
+	public void setNewPass(String newPass) {
+		this.newPass = newPass;
+	}
+
+	public String getConfirmPass() {
+		return confirmPass;
+	}
+
+	public void setConfirmPass(String confirmPass) {
+		this.confirmPass = confirmPass;
+	}
 
 }

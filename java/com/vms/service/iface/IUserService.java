@@ -22,6 +22,6 @@ public interface IUserService {
 	int getUserTotalCount() throws Exception;
 	
 	boolean updateUser(String operation, User user, List roleIDs)throws Exception;
-
+	boolean updateUserPassword(int id, String newPassword)throws Exception;
 	SessionUserInfo authenticate(String username, String password) throws Exception;
 }

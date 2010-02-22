@@ -40,17 +40,19 @@ body {
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" /> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
 
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
 
 <body class="yui-skin-sam">
-
 <div id="topBranding" class="topBranding">
 <form id="form1" name="form1" method="post" action="/tv/search/searchVideoByName.action" target="contentFrameId">
 <table style="margin-top:-10px;width:100%;">
@@ -80,43 +82,18 @@ body {
 </div>
 	
  <div id="passwordForm" style="display:none">
-<h1 id="popup_title">提示</h1>
-            <p><label>原 密 码:</label><input type="password" name="oldPwd" /></p>
-            <p><label>新 密 码:</label><input type="password" name="newPwd" /></p>
-			<p><label>确认密码:</label><input type="password" name="confirmPwd" /></p>
-			<p><input type="button" name="demo1" id="yes" value="确认" />
-			<input type="button" name="cancel" id="cancel" value="取消" /></p>
+	<h1 id="apopup_title">修改密码</h1>
+    <p><label>原 密 码:&nbsp;</label><input type="password" name="oldPwd" id="oldPwd"/></p>
+    <p><label>新 密 码:&nbsp;</label><input type="password" name="newPwd" id="newPwd"/></p>
+	<p><label>确认密码:&nbsp;</label><input type="password" name="confirmPwd" id="confirmPwd"/></p>
+	<p><input type="button" name="demo1" id="yes" value="确认" />
+	<input type="button" name="cancel" id="cancel" value="取消" /></p>
  </div>
 
 <script type="text/javascript"> 
 
 YAHOO.example.Centered = autoCompleteVideoName(); 
-	
-$(document).ready(function() { 
-	 
-    $('#changePassword').click(function() { 
-        $.blockUI({ message: $('#passwordForm'), css: { width: '475px' } }); 
-    }); 
 
-    $('#yes').click(function() { 
-        // update the block message 
-        $.blockUI({ message: "<h1>请稍等......</h1>" });
-        $.ajax({ 
-            url: 'wait.php', 
-            cache: false, 
-            complete: function() { 
-                // unblock when remote call returns 
-                $.unblockUI(); 
-            } 
-        }); 
-    }); 
-
-    $('#cancel').click(function() { 
-        $.unblockUI(); 
-        return false; 
-    }); 
-
-}); 
 </script>
 <div id="tabView" class="yui-navset tabviewArea">
 <ul class="yui-nav">

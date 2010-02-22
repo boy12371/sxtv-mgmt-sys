@@ -121,6 +121,10 @@
 		</action>
 		
 		
+		<action name="doChangePassword" class="userMgmt" method="doChangePassword" />
+			
+	
+		
 		<!--User end-->
 	</package>
 </struts>

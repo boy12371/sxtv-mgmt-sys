@@ -130,4 +130,11 @@ public class UserService implements IUserService {
 		return userInfo;
 	}
 
+	@Override
+	public boolean updateUserPassword(int id, String newPassword)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return this.resetPassword(id, newPassword);
+	}
+
 }
