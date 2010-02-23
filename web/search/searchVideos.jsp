@@ -40,24 +40,27 @@
 <title>查询影带信息</title>
 </head>
 <body class="yui-skin-sam">
-<table>
+<h1>影带查询</h1>
+<p>填写或选择相关信息，点击查询，搜索影带信息</p>
+
+<table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><input type="text" name="video.id" id="vid" /></td>
+		<td><input class="inputField" type="text" name="video.id" id="vid" /></td>
 		<td><label>剧目名称</label></td>
-		<td><input type="text" name="video.vedioName" id="vname" /></td>
+		<td><input class="inputField" type="text" name="video.vedioName" id="vname" /></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
-		<td><s:select list="comList" listKey="id" listValue="companyName" id="vcompany" name="video.companyID.id" /></td>
+		<td><s:select cssClass="selectField" list="comList" listKey="id" listValue="companyName" id="vcompany" name="video.companyID.id" /></td>
 		<td><label>题材</label></td>
-		<td><s:select list="topList" listKey="id" listValue="topicName" id="vtopic" name="video.topic.id" /></td>
+		<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" name="video.topic.id" /></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
-		<td><s:select list="subList" listKey="id" listValue="subjectName" id="vsubject" name="video.subject.id" /></td>
+		<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" name="video.subject.id" /></td>
 		<td><label>状态</label></td>
-		<td><s:select list="statusList" listKey="id" listValue="status" id="vstatus" name="video.status.id"/></td>
+		<td><s:select cssClass="selectField" list="statusList" listKey="id" listValue="status" id="vstatus" name="video.status.id"/></td>
 
 	</tr>
 	<tr>

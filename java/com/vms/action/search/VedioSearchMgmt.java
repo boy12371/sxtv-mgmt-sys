@@ -45,7 +45,7 @@ public class VedioSearchMgmt extends BaseAction {
 		return this.SUCCESS;
 	}
 	public String autoCompleteForVideoName() throws Exception {
-		List<String> names = vedioService.findVideoNamesForAutoComplete(query);
+		List<String> names = vedioService.findVideoNamesForAutoComplete(java.net.URLDecoder.decode(query, "UTF-8"));
 		List<VideoNameJSON> nameList = new ArrayList<VideoNameJSON>();
 		table = new JSONDataTable();
 		if (names != null && !names.isEmpty()) {

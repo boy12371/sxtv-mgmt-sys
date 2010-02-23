@@ -76,10 +76,7 @@
 
 <div id="dynamicdata" align="center"></div>
 <script type="text/javascript">
-
 YAHOO.util.Event.addListener(window, "load", initModificationPage);
-
-
 </script>
 
 </body>
