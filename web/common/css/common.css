@@ -75,3 +75,17 @@ label {
 .yui-ac-container{
 	width:202px !important;
 }
+
+.searchTable{
+	width:70%;
+	height:auto;	
+}
+
+.searchTable td{
+	height:40px;
+	vertical-align:middle;	
+}
+
+.searchTable lable{
+	float:left;
+}
