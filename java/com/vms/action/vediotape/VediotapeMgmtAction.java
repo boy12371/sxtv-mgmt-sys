@@ -71,7 +71,7 @@ public class VediotapeMgmtAction extends BaseAction {
 		
 		if(jasonArray.isArray() && !jasonArray.isEmpty()){
 			List<Vediotape> vedios = new ArrayList<Vediotape>();
-			SessionUserInfo userInfo = (SessionUserInfo)session.getAttribute("SessionUserInfo");
+			SessionUserInfo userInfo = this.getUserInfo();
 			Date date =new Date();
 			int size = jasonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -86,7 +86,7 @@ public class VediotapeMgmtAction extends BaseAction {
 				v.setDateComing(format.parse(obj.getString(Vediotape.PROP_DATE_COMING)));
 				v.setComments(obj.getString(Vediotape.PROP_COMMENTS));
 				//v.setInputer(new User(userInfo.getUserId()));
-				v.setInputer(new User(1));				
+				v.setInputer(new User(userInfo.getUserId()));				
 				v.setDateInput(date);
 				vedios.add(v);
 			}
@@ -183,7 +183,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	public String modificationFinish()throws Exception{
 		try {
-			SessionUserInfo user = new SessionUserInfo(1);
+			SessionUserInfo user = this.getUserInfo();
 			this.vedioService.auditingVideo(vv.getVedioID(), user, 5);
 			this.addActionMessage("影带已进入重审状态,等待审核");
 			return SUCCESS;
