@@ -60,10 +60,8 @@ public class VedioscoreService implements IVedioscoreService {
 		return vediotapeDAO.getTotalCount_findObjectByField(Vediotape.class, Vediotape.PROP_STATUS, status);
 	}
 
-	public int getCountOfUserExaminedVedio(String username) throws Exception {
-		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, username, -1, -1, "", true);
-		return vedioscoreDAO.getTotalCount_findObjectByField(VedioscoreDAO.clz, Vedioscore.PROP_EXAMINER + ".id", users
-				.get(0));
+	public int getCountOfUserExaminedVedio(User user) throws Exception {
+		return vedioscoreDAO.getTotalCount_findObjectByField(VedioscoreDAO.clz, Vedioscore.PROP_EXAMINER, user);
 	}
 
 	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception {

@@ -1,5 +1,6 @@
 package com.vms.action.examine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,9 +9,13 @@ import com.vms.beans.JSONDataTable;
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
+import com.vms.common.CommonVariable;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.db.bean.Status;
+import com.vms.db.bean.User;
+import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.IVedioscoreService;
+import com.vms.service.iface.IVediotapeService;
 
 public class ExamineAction extends BaseAction {
 	
@@ -19,12 +24,18 @@ public class ExamineAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(ExamineAction.class);
 	
 	private IVedioscoreService vedioscoreService;
+	
+	private IVediotapeService vediotapeService;
 
 	private JSONDataTable unExaminedTable;
 	
 	private JSONDataTable examinedTable;
 	
 	private VedioScoreVO tapeScore;
+	
+	private String vid;
+	
+	private String vname;
 	
 	public String toUnExaminedTapes() {
 		return SUCCESS;
@@ -36,11 +47,36 @@ public class ExamineAction extends BaseAction {
 	
 	public String getUnExaminedTapes() throws Exception {
 		unExaminedTable = JSONDataTableUtils.initJSONDataTable(getRequest());
-
+		List<VedioTapeVO> tapes;
 		try {
-			List<VedioTapeVO> tapes = vedioscoreService.getAllUnExaminedVedioes(unExaminedTable.getStartIndex(), unExaminedTable.getStartIndex()+ unExaminedTable.getRowsPerPage());
-			Status status = new Status(1);
-			JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, vedioscoreService.getVedioCountByStatus(status));
+			if((null==vid || "".equals(vid)) && (null==vname || "".equals(vname))){
+				tapes = vedioscoreService.getAllUnExaminedVedioes(unExaminedTable.getStartIndex(), unExaminedTable.getStartIndex()+ unExaminedTable.getRowsPerPage());
+				Status status = new Status(1);
+				JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, vedioscoreService.getVedioCountByStatus(status));
+			}else{
+				List<Vediotape> list;
+				if(null!=vid && !"".equals(vid)){
+					list = vediotapeService.findVediotapeByProperty(Vediotape.PROP_ID, vid, -1, -1, "", false);
+				}else{
+					list  = vediotapeService.findVediotapeByProperty(Vediotape.PROP_VEDIO_NAME, vname, -1, -1, "", false);
+				}
+				if(list.size() == 0){
+					this.addActionError("影带未找到");
+					return INPUT;
+				}else{
+					if(list.get(0).getStatus().getId() != CommonVariable.VIDEO_STATUS_EXAMINE){
+						this.addActionError("影带状态为" + list.get(0).getStatus().getStatus() + ",不能打分。");
+						return INPUT;
+					}
+				}
+				tapes= new ArrayList<VedioTapeVO>();
+				for (Vediotape tape : list) {
+					tapes.add(new VedioTapeVO(tape));
+				}
+				JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, 1);
+			}
+			
+			
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 			throw e;
@@ -58,7 +94,7 @@ public class ExamineAction extends BaseAction {
 					examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
 					examinedTable.getSort(), examinedTable.getDir().equals("JSONDataTableUtils.SORT_DIRECTION")					
 			);
-			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, vedioscoreService.getCountOfUserExaminedVedio(getUserInfo().getUsername()));
+			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, vedioscoreService.getCountOfUserExaminedVedio(new User(getUserInfo().getUserId())));
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -112,5 +148,29 @@ public class ExamineAction extends BaseAction {
 
 	public VedioScoreVO getTapeScore() {
 		return tapeScore;
+	}
+
+	public void setVid(String vid) {
+		this.vid = vid;
+	}
+
+	public String getVid() {
+		return vid;
+	}
+
+	public void setVname(String vname) {
+		this.vname = vname;
+	}
+
+	public String getVname() {
+		return vname;
+	}
+
+	public void setVediotapeService(IVediotapeService vediotapeService) {
+		this.vediotapeService = vediotapeService;
+	}
+
+	public IVediotapeService getVediotapeService() {
+		return vediotapeService;
 	}
 }

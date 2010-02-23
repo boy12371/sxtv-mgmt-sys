@@ -5,6 +5,7 @@ import java.util.List;
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Status;
+import com.vms.db.bean.User;
 
 public interface IVedioscoreService {
 	
@@ -32,7 +33,7 @@ public interface IVedioscoreService {
 	public int getTotalCountUserExamineScoreByVideoId(String videoID) throws Exception;
 	public int getVedioCountByStatus(Status status) throws Exception;
 	
-	public int getCountOfUserExaminedVedio(String username) throws Exception;
+	public int getCountOfUserExaminedVedio(User user) throws Exception;
 	
 	public VedioTapeVO getTapeByID(String ID) throws Exception;
 	

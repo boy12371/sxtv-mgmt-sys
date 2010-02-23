@@ -6,6 +6,7 @@
 	<package name="examine" namespace="/examine" extends="json-default">
 		<action name="toUnExaminedTapes" class="examineMgmt" method="toUnExaminedTapes">
 			<result>/examine/unExaminedList.jsp</result>
+			<result name="input">/examine/unExaminedList.jsp</result>
 		</action>
 		
 		<action name="toExaminedTapes" class="examineMgmt" method="toExaminedTapes">
