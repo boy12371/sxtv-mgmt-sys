@@ -90,14 +90,7 @@
 			<td><label>题材</label></td>
 			<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" name="vedio.topic.id" /></td>
 		</tr>
-		<s:if test="vedio.audienceRating != null && vedio.audienceRating !=0">
-			<tr>
-				<td><label>收视率</label></td>
-				<td><s:textfield cssClass="inputField" name="vedio.audienceRating" /></td>
-				<td><label>市场份额</label></td>
-				<td><s:textfield cssClass="inputField" name="vedio.marketShare" /></td>
-			</tr>
-		</s:if>
+		
 		<tr>
 			<td><label>状态</label></td>
 			<td><s:property value="vedio.status.status" /></td>

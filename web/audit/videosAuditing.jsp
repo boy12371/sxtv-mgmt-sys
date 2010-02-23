@@ -74,8 +74,8 @@
 <option value="0">All</option>
 <option value="2">待审剧目</option>
 <option value="3">通过剧目</option>
-<option value="4">修改剧目</option>
-<option value="5">重审剧目</option>
+<option value="7">退回剧目</option>
+<!-- option value="5">重审剧目</option-->
 </select>
 
 <div id="dynamicdata" align="center"></div>

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
@@ -26,71 +27,99 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/audit/js/audit.js"></script>
-<title>审核剧目</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
+
+<title>查看或修改影带信息</title>
 </head>
 <body class="yui-skin-sam">
-<s:actionerror />
-<h1>剧目详细信息</h1>
-<p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
-<s:form action="videoOperation" method="post" namespace="/audit">
-	<table class="inputTable">
+
+<s:actionerror/>
+<s:actionmessage/>
+<h1>影带信息</h1>
+<p>输入剧目编号或名称搜索剧目</p>
+<div align="center">
+<s:form id="searchForm" action="searchVideoByNameOrIDForMarketRateModify" namespace="/vedio">
+<table class="inputTable">
+	<tr>
+		<td><label>影带编号</label></td>
+		<td><input class="inputField" type="text" name="vid" id="vid" /></td>
+		<td><label>剧目名称</label></td>
+		<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname"/>
+		<div id="searchcontainer"></div>
+			<s:hidden name="optionName" value="modifyMarketRate"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" align="center">
+
+		<span id="searchBtn" class="yui-button yui-push-button"> <span class="first-child">
+		<button type="submit">搜索</button>
+		</span> </span></td>
+	</tr>
+</table>
+
+
+</s:form>
+</div>
+<s:if test="vv!=null">
+
+<h1>影带信息</h1>
+<p>影带相关信息</p>
+<table class="inputTable">
+
+	<tr>
+		<td><label>影带编号</label></td>
+		<td><s:property value="vv.id" /></td>
+		<td><label>剧目名称</label></td>
+		<td><s:property value="vv.vedioName" /></td>
+	</tr>
+	<tr>
+		<td><label>影视公司</label></td>
+		<td><s:property value="vv.company" /></td>
+		<td><label>收带时间</label></td>
+		<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
+	</tr>
+	<tr>
+		<td><label>栏目</label></td>
+		<td><s:property value="vv.topic" /></td>
+		<td><label>题材</label></td>
+		<td><s:property value="vv.subject" /></td>
+	</tr>
+	<tr>
+		<td><label>状态</label></td>
+		<td><s:property value="vv.status" /></td>
+		<td><label>备注</label></td>
+		<td><s:property value="vv.comments" /></td>
+	</tr>
+
+</table>
+<h1>收视率/市场份额</h1>
+<p>录入剧目收视率及市场份额</p>
+<s:form action="" namespace="" method="post">
+	<table>
 		<tr>
-			<td><label>编号</label></td>
-			<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" id="videoID" /></td>
-			<td><label>剧目名称</label></td>
-			<td><s:property value="vv.name" /></td>
-
+			<td><label>收视率</label></td>
+			<td><s:textfield cssClass="inputField" name="video.audienceRating" /> <s:hidden name="video.id" /></td>
+			<td><label>市场份额</label></td>
+			<td><s:textfield cssClass="inputField" name="video.marketShare" /></td>
 		</tr>
 		<tr>
-			<td><label>栏目</label></td>
-			<td><s:property value="vv.subject" /></td>
-			<td><label>题材</label></td>
-			<td><s:property value="vv.topic" /></td>
-
+			<td colspan="4" align="center">
+			<span id="submit"> <span>
+			<button type="button">确 定</button>
+			</span> </span></td>
 		</tr>
-		<tr>
-			<td><label>影视公司</label></td>
-			<td><s:property value="vv.company" /></td>
-			<td><label>收录日期</label></td>
-			<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
-
-		</tr>
-		<tr>
-			<td><label>状态</label></td>
-			<td><s:property value="vv.status" /></td>
-			<td><label>观众评价</label></td>
-			<td><s:iterator value="vv.watching" var="w">
-				<s:property value="#w.key" /> : <s:property value="#w.value" />
-			</s:iterator></td>
-
-		</tr>
-		<tr height="20px">
-			<td colspan="4"></td>
-
-		</tr>
-		<tr>
-			<td colspan="4">			
-			<s:radio list="#{3:'通 过',7:'退 回'}" name="operation"></s:radio>
-			</td>
-
-		</tr>
-
-		<tr>
-			<td colspan="4"><s:submit value="确定"/></td>
-		</tr>
-
 	</table>
 </s:form>
-<div></div>
-<h1>评分信息</h1>
-<p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
-
-<div id="dynamicdata" align="center"></div>
+</s:if>
 
 <script type="text/javascript">
-	YAHOO.util.Event.addListener(window, "load", initScoreDataTable());
+	YAHOO.example.Centered = autoCompleteVideoName();	
+	var submitBtn = new YAHOO.widget.Button("submit");
 </script>
 </body>
 </html>

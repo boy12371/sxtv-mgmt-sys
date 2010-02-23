@@ -21,27 +21,27 @@
 
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><s:property value="video.id" /></td>
+		<td><s:property value="vv.id" /></td>
 		<td><label>剧目名称</label></td>
-		<td><s:property value="video.vedioName" /></td>
+		<td><s:property value="vv.vedioName" /></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
-		<td><s:property value="video.companyID.companyName" /></td>
+		<td><s:property value="vv.company" /></td>
 		<td><label>收带时间</label></td>
-		<td><s:date name="video.dateComing" format="yyyy-MM-dd" /></td>
+		<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
-		<td><s:property value="video.topic.topicName" /></td>
+		<td><s:property value="vv.topic" /></td>
 		<td><label>题材</label></td>
-		<td><s:property value="video.subject.subjectName" /></td>
+		<td><s:property value="vv.subject" /></td>
 	</tr>
 	<tr>
 		<td><label>状态</label></td>
-		<td><s:property value="video.status.status" /></td>
+		<td><s:property value="vv.status" /></td>
 		<td><label>备注</label></td>
-		<td><s:property value="video.comments" /></td>
+		<td><s:property value="vv.comments" /></td>
 	</tr>
 
 </table>
@@ -51,7 +51,7 @@
 	<table>
 		<tr>
 			<td><label>收视率</label></td>
-			<td><s:textfield cssClass="inputField" name="video.audienceRating" /> <s:hidden name="video.id" /></td>
+			<td><s:textfield cssClass="inputField" name="video.audienceRating" /> <s:hidden name="vv.id" /></td>
 			<td><label>市场份额</label></td>
 			<td><s:textfield cssClass="inputField" name="video.marketShare" /></td>
 		</tr>

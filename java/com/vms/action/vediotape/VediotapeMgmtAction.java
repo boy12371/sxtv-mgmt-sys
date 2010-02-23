@@ -99,6 +99,9 @@ public class VediotapeMgmtAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String toMarketRateModify()throws Exception{
+		return SUCCESS;
+	}
 	public String toUpdateVideoInfo() throws Exception{
 		return this.SUCCESS;
 	}
@@ -148,7 +151,7 @@ public class VediotapeMgmtAction extends BaseAction {
 						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
 						return INPUT;
 					}					
-				}else if(optionName.equals("marketRate")){
+				}else if(optionName.equals("marketRate") || optionName.equals("modifyMarketRate")){
 					if(status == CommonVariable.VIDEO_STATUS_PLAYED){
 						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
 						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
@@ -157,8 +160,6 @@ public class VediotapeMgmtAction extends BaseAction {
 						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
 						return INPUT;
 					}
-					
-					
 				}
 			}
 			return this.SUCCESS;

@@ -19,7 +19,9 @@
 		<action name="toMarketRate" class="vedioMgmt" method="toMarketRate">
 			<result>/marketRate/marketRate.jsp</result>
 		</action>
-		
+		<action name="toMarketRateModify" class="vedioMgmt" method="toMarketRateModify">
+			<result>/marketRate/marketRateModify.jsp</result>
+		</action>
 		<action name="searchVideoByName" class="searchMgmt" method="searchVideoByName">
 			<result name="success">/vediotape/videotape.jsp</result>
 			<result name="input">/marketRate/marketRate.jsp</result>
@@ -43,6 +45,11 @@
 		<action name="searchVideoByNameOrIDForMarketRate" class="vedioMgmt" method="searchVideoByNameOrID">
 			<result name="success">/marketRate/marketRateInput.jsp</result>
 			<result name="input">/marketRate/marketRate.jsp</result>
+		</action>
+		
+		<action name="searchVideoByNameOrIDForMarketRateModify" class="vedioMgmt" method="searchVideoByNameOrID">
+			<result name="success">/marketRate/marketRateModify.jsp</result>
+			<result name="input">/marketRate/marketRateModify.jsp</result>
 		</action>
 		
 		<action name="updateVideoInfo" class="vedioMgmt" method="updateVideoInfo">
