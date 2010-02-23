@@ -201,6 +201,12 @@ function initDataTable() {
 		}
 
 		var videoName = YAHOO.util.Dom.get("vname").value;
+		var videoId = YAHOO.util.Dom.get("vid").value;
+		if(videoId.length==0 || videoName.length==0){
+			jAlert("信息不完整", '错误');
+			return false;
+		}
+		
 		var url = encodeURI("/tv/vedio/isVediotapeExsits.action?vedioName="
 				+ videoName);
 		YAHOO.util.Connect.asyncRequest('GET', encodeURI(url), callbacks);

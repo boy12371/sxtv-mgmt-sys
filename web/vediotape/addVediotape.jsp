@@ -53,6 +53,8 @@
 <s:actionmessage/>
 <h1>影带信息</h1>
 <p>调描条形码并填写或选择其他相关信息</p>
+
+<div align="center">
 <table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
@@ -90,17 +92,19 @@
 </td>
 	</tr>
 </table>
+</div>
 <s:hidden name="jasonDataString" id="jasonDataString"/>
 <h1>影带信息</h1>
 <p>单击表格可进行编辑，单击右键可删除</p>
 <div id="cellediting" align="center"></div>
-
-
+<br />
+<div align="center">
 <span align="center" id="submit" class="yui-button yui-push-button">
         <span class="first-child">
             <button type="button"> 确 定 </button>
         </span>
 </span>
+</div>
 </s:form>
 
 <script type="text/javascript">

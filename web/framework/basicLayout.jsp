@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow:hidden;">
 <head>
+<sx:head />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style type="text/css">
@@ -70,7 +72,7 @@ body {
 				<img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/>
 			</td>
 			<td>
-				<input type="text" class="inputSearch" id="searchinput" name="query"/>
+				<input type="text" class="inputSearch" id="searchinput" name="query"/><div id="searchcontainer">
 			</td>
 			<td><div id="goBtnDiv" class="goBtn"></div></td>
 		</tr></table>

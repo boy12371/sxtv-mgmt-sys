@@ -37,38 +37,39 @@
 
 <title>查看或修改影带信息</title>
 </head>
-<body>
+<body class="yui-skin-sam">
 
 <s:actionerror/>
 <s:actionmessage/>
 <h1>查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
+<div align="center">
 <s:form id="searchForm" action="searchVideoByNameOrID" namespace="/vedio">
 <table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
 		<td><input class="inputField" type="text" name="vid" id="vid" /></td>
 		<td><label>剧目名称</label></td>
-		<td><input class="inputField" type="text" id="searchinput" name="vname"/>
+		<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname"/>
 		<div id="searchcontainer"></div>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="4" align="center">
-		<span id="go" class="yui-button yui-push-button"> <span class="first-child">
-		<input type="submit" value="搜索" />
+
+		<span id="searchBtn" class="yui-button yui-push-button"> <span class="first-child">
+		<button type="submit">搜索</button>
 		</span> </span></td>
 	</tr>
 </table>
 
-<script type="text/javascript">
-	YAHOO.example.Centered = autoCompleteVideoName();
-</script>
-</s:form>
 
+</s:form>
+</div>
 <s:if test="vedio!=null">
 <h1>影带信息</h1>
 <p>查看或编辑剧目信息并保存</p>
+<div align="center">
 <s:form id="updateForm" action="updateVideoInfo" namespace="/vedio" method="post">
 	<table class="inputTable">
 		<tr>
@@ -104,12 +105,20 @@
 			<td><s:textarea cssClass="inputField" name="vedio.comments"></s:textarea></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
-			<input type="submit" value="确定">
+			<td colspan="4" align="center">
+			<span id="submitBtn" class="yui-button yui-push-button"> <span class="first-child">
+			<button type="submit">确定</button>
 			</span> </span></td>
 		</tr>
 	</table>
 </s:form>
+</div>
 </s:if>
+
+<script type="text/javascript">
+	YAHOO.example.Centered = autoCompleteVideoName();
+	var searchBtn = new YAHOO.widget.Button("searchBtn");
+	var submitBtn = new YAHOO.widget.Button("submitBtn");
+</script>
 </body>
 </html>
