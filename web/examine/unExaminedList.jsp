@@ -39,7 +39,7 @@
 <table class="searchTable">
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><input class="inputField" type="text" name="vid" id="vid" /><s:hidden name="optionName" value="marketRate"/></td>
+		<td><input class="inputField" type="text" name="vid" id="vid" /></td>
 		<td><label>剧目名称</label></td>
 		<td>
 			<input class="inputField autoComplete" type="text" id="searchinput" name="vname" style="width: 200px" />
@@ -56,11 +56,12 @@
 	YAHOO.example.DynamicData = initDataTable();
 
 	var searchBtn = new YAHOO.widget.Button({  
-		type: "submit",
 		label: "搜&nbsp;&nbsp;索",  
 		id: "searchBtn",  
 		container: "searchBtnDiv" }
 		); 
+
+	searchBtn.on("click",filterFunc);
 </script>
 
 </body>

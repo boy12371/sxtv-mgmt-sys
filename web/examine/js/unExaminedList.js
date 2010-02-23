@@ -1,11 +1,6 @@
+var myDataTable;
+
 function initDataTable() {
-	var formatUrl = function(elCell, oRecord, oColumn, sData) {
-		var data = encodeURIComponent(oRecord.getData().vedioID);
-		var href = "<a href='./examine/toExamineTape.action?tapeScore.vedioID=";
-		href += data;
-		href += "'>" + sData + "</a>";
-		elCell.innerHTML = href;
-	};
 	var formatDate = function(elCell, oRecord, oColumn, sData) {
 		var idx = sData.indexOf("T");
 		if (idx != -1) {
@@ -38,12 +33,10 @@ function initDataTable() {
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
 	    key :"vedioID",
-	    label :"影带编号",
-	    formatter :formatUrl
+	    label :"影带编号"
 	}, {
 		key :"name",
-		label :"影带名称",
-		formatter :formatUrl
+		label :"影带名称"
 	}, {
 		key :"subject",
 		label :"栏目"		
@@ -93,7 +86,7 @@ function initDataTable() {
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
@@ -105,4 +98,20 @@ function initDataTable() {
 		ds :myDataSource,
 		dt :myDataTable
 	};
+}
+
+function filterFunc(){
+	var vid = YAHOO.util.Dom.get("vid").value; 
+	var vname= YAHOO.util.Dom.get("searchinput").value;
+	if((null==vid || ""==vid) && (null==vname || ""==vname)) return;
+	var callback = {
+			success:myDataTable.onDataReturnInitializeTable,
+			failure:myDataTable.onDataReturnInitializeTable,
+			argument:myDataTable.getState(),
+			scope:myDataTable
+			};
+	myDataTable.getDataSource().sendRequest(
+			"sort=dateComing&dir=asc&startIndex=0&results=10&vid="+vid+"&vname="+vname,
+			callback
+			);
 }
