@@ -10,6 +10,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
@@ -18,7 +21,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/examine/js/unExaminedList.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
 <body class="yui-skin-sam">
 
@@ -28,10 +35,32 @@
 <s:actionmessage/>
 <s:actionerror/>
 <br />
+
+<table class="searchTable">
+	<tr>
+		<td><label>影带编号</label></td>
+		<td><input class="inputField" type="text" name="vid" id="vid" /><s:hidden name="optionName" value="marketRate"/></td>
+		<td><label>剧目名称</label></td>
+		<td>
+			<input class="inputField autoComplete" type="text" id="searchinput" name="vname" style="width: 200px" />
+			<div id="searchcontainer"></div>
+		</td>
+		<td><div id="searchBtnDiv"></div></td>
+	</tr>
+</table>
+
 <div id="dynamicdata" align="center"></div>
 
 <script language="JavaScript">
+	YAHOO.example.Centered = autoCompleteVideoName();
 	YAHOO.example.DynamicData = initDataTable();
+
+	var searchBtn = new YAHOO.widget.Button({  
+		type: "submit",
+		label: "搜&nbsp;&nbsp;索",  
+		id: "searchBtn",  
+		container: "searchBtnDiv" }
+		); 
 </script>
 
 </body>
