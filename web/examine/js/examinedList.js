@@ -1,4 +1,11 @@
 function initDataTable() {
+	var formatUrl = function(elCell, oRecord, oColumn, sData) {
+		var data = encodeURIComponent(oRecord.getData().vedioID);
+		var href = "<a href='./examine/toExamineTape.action?tapeScore.vedioID=";
+		href += data;
+		href += "'>" + sData + "</a>";
+		elCell.innerHTML = href;
+	};
 	var formatDate = function(elCell, oRecord, oColumn, sData) {
 		var idx = sData.indexOf("T");
 		if (idx != -1) {
@@ -12,10 +19,12 @@ function initDataTable() {
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
 	    key :"vedioID",
-	    label :"影带编号"
+	    label :"影带编号",
+	    formatter :formatUrl
 	}, {
 		key :"vedioName",
-		label :"影带名称"
+		label :"影带名称",
+		formatter :formatUrl
 	}, {
 		key :"storyScore",
 		label :"情节",
