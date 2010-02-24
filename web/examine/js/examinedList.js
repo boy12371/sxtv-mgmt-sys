@@ -8,6 +8,7 @@ function initDataTable() {
 		var href = "<a href='./examine/toExamineTape.action?tapeScore.vedioID=";
 		href += vid;
 		href += "&uid=" + uid;
+		href += "&perform=modify"
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	};
