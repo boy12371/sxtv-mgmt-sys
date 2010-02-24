@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Scoreweight;
@@ -22,23 +21,6 @@ public class VedioscoreService implements IVedioscoreService {
 
 	private IVedioscoreDAO vedioscoreDAO;
 	private IVediotapeDAO vediotapeDAO;
-
-	@Override
-	public List<VedioScoreVO> getUserExaminedVedioes(String username, int startIndex, int endIndex,
-			String propertyName, boolean ascending) throws Exception {
-		Map<String, Object> conditions = new HashMap<String, Object>();
-
-		List<User> users = vedioscoreDAO.findObjectByField(com.vms.db.bean.User.class, User.PROP_USER_NAME, username,
-				-1, -1, User.PROP_ID, true);
-		conditions.put(Vedioscore.PROP_EXAMINER, users.get(0));
-		List<VedioScoreVO> scoreVOs = new ArrayList<VedioScoreVO>();
-		List<Vedioscore> scores = vedioscoreDAO.findObjectByFields(VedioscoreDAO.clz, conditions, startIndex, endIndex,
-				propertyName, false);
-		for (Vedioscore score : scores) {
-			scoreVOs.add(new VedioScoreVO(score));
-		}
-		return scoreVOs;
-	}
 
 	public VedioTapeVO getTapeByID(String ID) throws Exception {
 		Vediotape tape = (Vediotape) vedioscoreDAO.getObject(Vediotape.class, ID);
@@ -77,7 +59,7 @@ public class VedioscoreService implements IVedioscoreService {
 				+ score.getTechScore() * weights.get("techScore");
 		score.setScore(sum);
 
-		vedioscoreDAO.saveObject(score);
+		vedioscoreDAO.saveOrUpdateObject(score);
 	}
 
 	private Map<String, Float> getWeights() throws Exception {
@@ -102,6 +84,20 @@ public class VedioscoreService implements IVedioscoreService {
 			}
 		}
 		return voList;
+	}
+	
+	public VedioScoreVO getTapeScoreByIdAndUser(String videoID, int userID) throws Exception {
+		// TODO Auto-generated method stub
+		List<VedioScoreVO> voList = new ArrayList<VedioScoreVO>();
+		Map<String, Object> propertiesValues = new HashMap<String, Object>();
+		propertiesValues.put(Vedioscore.PROP_VEDIO, new Vediotape(videoID));
+		propertiesValues.put(Vedioscore.PROP_EXAMINER, new User(userID));
+		List<Vedioscore> list = vedioscoreDAO.findObjectByFields(Vedioscore.class, propertiesValues, -1, -1, Vedioscore.PROP_ID, true);
+		if (list == null || 0 == list.size()) {
+			return null;
+		}
+		VedioScoreVO vs = new VedioScoreVO(list.get(0));
+		return vs;
 	}
 
 	public void setVedioscoreDAO(IVedioscoreDAO vedioscoreDAO) {

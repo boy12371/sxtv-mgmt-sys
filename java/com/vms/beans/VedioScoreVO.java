@@ -16,6 +16,7 @@ public class VedioScoreVO {
 	private String vedioName;
 	private int status;
 	private String examiner;
+	private int userID;
 	private float storyScore;
 	private float techScore;
 	private float performScore;
@@ -32,6 +33,7 @@ public class VedioScoreVO {
 		this.vedioID = score.getVedio().getId();
 		this.vedioName = score.getVedio().getVedioName();
 		this.examiner = score.getExaminer().getEmployee().getName();
+		this.userID = score.getExaminer().getId();
 		this.storyScore = score.getStoryScore();
 		this.techScore = score.getTechScore();
 		this.performScore = score.getPerformScore();
@@ -154,6 +156,14 @@ public class VedioScoreVO {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public int getUserID() {
+		return userID;
 	}
 	
 }

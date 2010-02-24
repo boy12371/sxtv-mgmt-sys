@@ -11,8 +11,6 @@ public interface IVedioscoreService {
 	
 	public List<VedioTapeVO> getAllUnExaminedVedioes(int startIndex, int endIndex) throws Exception;
 	
-	public List<VedioScoreVO> getUserExaminedVedioes(String username,int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception;
-	
 	/***
 	 * 获取所有对此剧目的评分
 	 * @param videoID
@@ -38,4 +36,6 @@ public interface IVedioscoreService {
 	public VedioTapeVO getTapeByID(String ID) throws Exception;
 	
 	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception;
+	
+	public VedioScoreVO getTapeScoreByIdAndUser(String videoID, int userID) throws Exception;
 }

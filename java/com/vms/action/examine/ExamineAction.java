@@ -37,6 +37,8 @@ public class ExamineAction extends BaseAction {
 	
 	private String vname;
 	
+	private String uid;
+
 	public String toUnExaminedTapes() {
 		return SUCCESS;
 	}
@@ -88,13 +90,33 @@ public class ExamineAction extends BaseAction {
 		examinedTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 
 		try {
-			List<VedioScoreVO> scores = vedioscoreService.getUserExaminedVedioes(
-					getUserInfo().getUsername(),
-					examinedTable.getStartIndex(), 
-					examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
-					examinedTable.getSort(), examinedTable.getDir().equals("JSONDataTableUtils.SORT_DIRECTION")					
-			);
-			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, vedioscoreService.getCountOfUserExaminedVedio(new User(getUserInfo().getUserId())));
+			List<VedioScoreVO> scores;
+			if(null!=vid && !"".equals(vid)){
+				scores = vedioscoreService.findUserExamineScoreByVideoId(
+						vid, 
+						examinedTable.getStartIndex(), 
+						examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
+						examinedTable.getSort(), examinedTable.getDir().equals("JSONDataTableUtils.SORT_DIRECTION")
+						);
+			}else{
+				Vediotape tape = vediotapeService.getVediotapeByName(vname);
+				if(null != tape){
+					vid = tape.getId();
+					scores = vedioscoreService.findUserExamineScoreByVideoId(
+						tape.getId(), 
+						examinedTable.getStartIndex(), 
+						examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
+						examinedTable.getSort(), examinedTable.getDir().equals("JSONDataTableUtils.SORT_DIRECTION")
+						);
+				}else{
+					scores = new ArrayList<VedioScoreVO>();
+				}
+			}
+			if(scores.size() == 0){
+				this.addActionError("该影带没有评分或找不到该影带。");
+				return INPUT;
+			}
+			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, vedioscoreService.getTotalCountUserExamineScoreByVideoId(vid));
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -107,8 +129,13 @@ public class ExamineAction extends BaseAction {
 		if(null == tapeScore.getVedioID() || "".equals(tapeScore.getVedioID())) return INPUT;
 		//for chinese characters, need to convert to utf-8
 		//String vname = new String(tape.getVedioName().getBytes("iso-8859-1"),"utf-8");
-		String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getName();		
-		tapeScore.setVedioName(name);
+		if(null != uid && !"".equals(uid)){
+			tapeScore = vedioscoreService.getTapeScoreByIdAndUser(tapeScore.getVedioID(), Integer.parseInt(uid));
+		}else{
+			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getName();		
+			tapeScore.setVedioName(name);
+		}
+		
 		return SUCCESS;
 	}
 	
@@ -172,5 +199,13 @@ public class ExamineAction extends BaseAction {
 
 	public IVediotapeService getVediotapeService() {
 		return vediotapeService;
+	}
+	
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 }
