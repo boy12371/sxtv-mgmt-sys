@@ -12,6 +12,7 @@ public class VedioScoreVO {
 	private final static String PurchaseStr="购买";
 	private final static String UnPurchaseStr="否";
 	
+	private Integer id;
 	private String vedioID;
 	private String vedioName;
 	private int status;
@@ -30,6 +31,7 @@ public class VedioScoreVO {
 	public VedioScoreVO(){}
 	
 	public VedioScoreVO(Vedioscore score){
+		this.id = score.getId();
 		this.vedioID = score.getVedio().getId();
 		this.vedioName = score.getVedio().getVedioName();
 		this.examiner = score.getExaminer().getEmployee().getName();
@@ -48,14 +50,22 @@ public class VedioScoreVO {
 	
 	public Vedioscore toVedioscore(){
 		Vedioscore score = new Vedioscore();
+		score.setId(id);
 		score.setStoryScore(storyScore);
 		score.setTechScore(techScore);
 		score.setPerformScore(performScore);
 		score.setInnovateScore(innovateScore);
 		score.setDateExamine(new Date());
-		score.setAward(new Integer(award));
-		score.setPurchase(new Integer(purchase));
-		
+		if(null == award){
+			score.setAward(new Integer(0));
+		}else{
+			score.setAward(new Integer(award));
+		}
+		if(null == purchase){
+			score.setPurchase(new Integer(0));
+		}else{
+			score.setPurchase(new Integer(purchase));
+		}
 		Vediotape tape = new Vediotape();
 		tape.setVedioName(vedioName);
 		tape.setId(vedioID);
@@ -63,6 +73,7 @@ public class VedioScoreVO {
 		
 		User user = new User();
 		user.setUserName(examiner);
+		user.setId(userID);
 		score.setExaminer(user);
 		return score;
 	}
@@ -164,6 +175,14 @@ public class VedioScoreVO {
 
 	public int getUserID() {
 		return userID;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 	
 }

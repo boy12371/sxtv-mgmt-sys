@@ -48,10 +48,6 @@ public class VedioscoreService implements IVedioscoreService {
 
 	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception {
 		Vedioscore score = scoreVO.toVedioscore();
-		// get examiner object for userID
-		List<User> users = vedioscoreDAO.findObjectByField(User.class, User.PROP_USER_NAME, scoreVO.getExaminer(), -1,
-				-1, "", true);
-		score.setExaminer(users.get(0));
 
 		Map<String, Float> weights = getWeights();
 		Float sum = score.getPerformScore() * weights.get("performScore") + score.getInnovateScore()
@@ -95,6 +91,9 @@ public class VedioscoreService implements IVedioscoreService {
 		List<Vedioscore> list = vedioscoreDAO.findObjectByFields(Vedioscore.class, propertiesValues, -1, -1, Vedioscore.PROP_ID, true);
 		if (list == null || 0 == list.size()) {
 			return null;
+		}
+		if(null == list.get(0).getExaminer().getEmployee()){
+			vedioscoreDAO.refreshObject(list.get(0));
 		}
 		VedioScoreVO vs = new VedioScoreVO(list.get(0));
 		return vs;

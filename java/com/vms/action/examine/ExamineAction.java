@@ -38,6 +38,8 @@ public class ExamineAction extends BaseAction {
 	private String vname;
 	
 	private String uid;
+	
+	private String perform;
 
 	public String toUnExaminedTapes() {
 		return SUCCESS;
@@ -129,7 +131,7 @@ public class ExamineAction extends BaseAction {
 		if(null == tapeScore.getVedioID() || "".equals(tapeScore.getVedioID())) return INPUT;
 		//for chinese characters, need to convert to utf-8
 		//String vname = new String(tape.getVedioName().getBytes("iso-8859-1"),"utf-8");
-		if(null != uid && !"".equals(uid)){
+		if("modify".equals(perform)){
 			tapeScore = vedioscoreService.getTapeScoreByIdAndUser(tapeScore.getVedioID(), Integer.parseInt(uid));
 		}else{
 			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getName();		
@@ -140,8 +142,15 @@ public class ExamineAction extends BaseAction {
 	}
 	
 	public String doExamineTape() throws Exception{	
-		tapeScore.setExaminer(this.getUserInfo().getUsername());
+		int userID;
+		if("modify".equals(perform)){
+			userID = Integer.parseInt(uid);
+		}else{
+			userID = this.getUserInfo().getUserId();
+		}
+		tapeScore.setUserID(userID);
 		vedioscoreService.saveVedioScore(tapeScore);
+		toExamineTape();
 		return SUCCESS;
 	}
 	
@@ -207,5 +216,13 @@ public class ExamineAction extends BaseAction {
 
 	public void setUid(String uid) {
 		this.uid = uid;
+	}
+
+	public void setPerform(String perform) {
+		this.perform = perform;
+	}
+
+	public String getPerform() {
+		return perform;
 	}
 }

@@ -98,5 +98,7 @@ public interface IBaseRootDAO {
 	List findAll(Class clz) throws Exception;
 
 	Object getUniqueResultByProperty(Class clz, Map<String, Object> propertiesValues) throws Exception;
+	
+	void refreshObject(Object object);
 
 }

@@ -184,6 +184,8 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 		
 	}
 
-	
+	public void refreshObject(Object object){
+		this.getHibernateTemplate().refresh(object);
+	}
 
 }
