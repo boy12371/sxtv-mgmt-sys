@@ -18,8 +18,17 @@
 <p>输入影带分值</p>
 <s:form action="doExamineTape" namespace="/examine" >
 	<s:hidden name="tapeScore.vedioID"/>
+	<s:hidden name="tapeScore.id"/>
+	<s:hidden name="uid"/>
+	<s:hidden name="perform"/>
 	<div>
 		<table class="inputTable">
+			<s:if test="'modify'==perform">
+			<tr>
+				<td><label>打分人员：</label></td>
+				<td><s:property value="tapeScore.examiner"/></td>
+			</tr>
+			</s:if>
 			<tr>
 				<td><label>影带编号：</label></td>
 				<td><s:property value="tapeScore.vedioID"/></td>
@@ -28,24 +37,42 @@
 			</tr>
 			<tr>
 				<td><label>故事：</label></td>
-				<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" value=""/></td>
+				<s:if test="'modify'==perform">
+					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore"/></td>
+				</s:if>
+				<s:else>
+					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" value=""/></td>
+				</s:else>
 				<td><label>技术：</label></td>
-				<td><s:textfield cssClass="inputField" name="tapeScore.techScore" value=""/></td>
+				<s:if test="'modify'==perform">
+					<td><s:textfield cssClass="inputField" name="tapeScore.techScore"/></td>
+				</s:if>
+				<s:else>
+					<td><s:textfield cssClass="inputField" name="tapeScore.techScore" value=""/></td>
+				</s:else>
 			</tr>
 			<tr>
 				<td><label>表演：</label></td>
-				<td><s:textfield cssClass="inputField" name="tapeScore.performScore" value=""/></td>
+				<s:if test="'modify'==perform">
+					<td><s:textfield cssClass="inputField" name="tapeScore.performScore"/></td>
+				</s:if>
+				<s:else>
+					<td><s:textfield cssClass="inputField" name="tapeScore.performScore" value=""/></td>
+				</s:else>
 				<td><label>创新：</label></td>
-				<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" value=""/></td>
+				<s:if test="'modify'==perform">
+					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore"/></td>
+				</s:if><s:else>
+					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" value=""/></td>
+				</s:else>
 			</tr>
 			<tr>
-				<td><label>获奖情况：</label></td>
-				<td>
-					<table><tr>
-					<td><input type="radio" class="radioSel" name="tapeScore.award" value="1"/>获奖</td>
-					<td><input type="radio" class="radioSel" name="tapeScore.award" value="0"/>不获奖</td>
-					</tr></table>
-				</td>
+				<td><label>获奖备选：</label></td>
+				<s:if test="'modify'==perform && '获奖'==tapeScore.award">
+					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1" checked="checked"/>获奖</td>
+				</s:if><s:else>
+					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1"/>获奖</td>
+				</s:else>
 				<td></td>
 				<td></td>
 			</tr>
@@ -53,8 +80,13 @@
 				<td><label>购买意向：</label></td>
 				<td>
 					<table><tr>
-					<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="1"/>购买</td>
-					<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="0"/>不购买</td>
+					<s:if test="'modify'==perform && '购买'==tapeScore.purchase">
+						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="1" checked="checked"/>购买</td>
+						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="0"/>不购买</td>
+					</s:if><s:else>
+						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="1"/>购买</td>
+						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="0" checked="checked"/>不购买</td>
+					</s:else>
 					</tr></table>
 				</td>
 				<td></td>

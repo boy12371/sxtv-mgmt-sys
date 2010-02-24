@@ -35,7 +35,7 @@
 <s:actionerror/>
 <br />
 
-<div id="searchTape" align="center">
+<div id="searchTape">
 <table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
