@@ -1,8 +1,13 @@
+var vid;
+var vname;
+
 function initDataTable() {
 	var formatUrl = function(elCell, oRecord, oColumn, sData) {
-		var data = encodeURIComponent(oRecord.getData().vedioID);
+		var vid = encodeURIComponent(oRecord.getData().vedioID);
+		var uid = encodeURIComponent(oRecord.getData().userID);
 		var href = "<a href='./examine/toExamineTape.action?tapeScore.vedioID=";
-		href += data;
+		href += vid;
+		href += "&uid=" + uid;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	};
@@ -19,11 +24,14 @@ function initDataTable() {
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
 	    key :"vedioID",
-	    label :"影带编号",
-	    formatter :formatUrl
+	    label :"影带编号"
 	}, {
 		key :"vedioName",
-		label :"影带名称",
+		label :"影带名称"
+	}, {
+		key :"examiner",
+		label :"打分人员",
+		sortable :true,
 		formatter :formatUrl
 	}, {
 		key :"storyScore",
@@ -61,12 +69,12 @@ function initDataTable() {
 	}];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getExaminedTapes.action?");
+	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getExaminedTapes.action?vid="+vid+"&vname="+vname+"&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "vedioID", "vedioName", "storyScore", "techScore", "performScore", "innovateScore", "score", "award", "purchase", "dateExamine"],
+		fields : [ "vedioID", "vedioName", "examiner", "storyScore", "techScore", "performScore", "innovateScore", "score", "award", "purchase", "dateExamine", "userID"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -97,4 +105,11 @@ function initDataTable() {
 		ds :myDataSource,
 		dt :myDataTable
 	};
+}
+
+function filterFunc(){
+	vid = YAHOO.util.Dom.get("vid").value; 
+	vname= YAHOO.util.Dom.get("searchinput").value;
+	if((null==vid || ""==vid) && (null==vname || ""==vname)) return;
+	YAHOO.example.DynamicData = initDataTable();
 }
