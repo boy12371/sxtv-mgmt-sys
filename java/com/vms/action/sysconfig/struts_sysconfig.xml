@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="sysconfig" namespace="/sys" extends="json-default">
+	<package name="sysconfig" namespace="/sys" extends="basePackapge">
 		
 		<!--Employee-->
 		<action name="toEmployees" class="employeeMgmt" method="toEmployees">

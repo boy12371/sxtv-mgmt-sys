@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="examine" namespace="/examine" extends="json-default">
+	<package name="examine" namespace="/examine" extends="basePackapge">
 		<action name="toUnExaminedTapes" class="examineMgmt" method="toUnExaminedTapes">
 			<result>/examine/unExaminedList.jsp</result>
 			<result name="input">/examine/unExaminedList.jsp</result>

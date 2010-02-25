@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="vedioMgmt" namespace="/vedio" extends="json-default">
+	<package name="vedioMgmt" namespace="/vedio" extends="basePackapge">
 		<action name="toAddingVedio" class="vedioMgmt" method="toAddingVedio">
 			<result>/vediotape/addVediotape.jsp</result>
 		</action>

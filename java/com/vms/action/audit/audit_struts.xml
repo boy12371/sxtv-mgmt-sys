@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="audit" namespace="/audit" extends="json-default">		
+	<package name="audit" namespace="/audit" extends="basePackapge">		
 		<action name="toAuditVideos" class="auditMgmt" method="toAuditVideos">
 			<result>/audit/videosAuditing.jsp</result>				
 		</action>

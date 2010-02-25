@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="searchMgmt" namespace="/search" extends="json-default">
+	<package name="searchMgmt" namespace="/search" extends="basePackapge">
 		<action name="autoCompleteForVideoName" class="searchMgmt" method="autoCompleteForVideoName">
 			<result type="json">
 				<param name="root">table</param>

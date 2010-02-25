@@ -1,6 +1,7 @@
 package com.vms.common;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SessionUserInfo {
@@ -11,8 +12,10 @@ public class SessionUserInfo {
 
 	private String password;
 
-	private Map<String, Integer> permissions = new HashMap<String, Integer>();
+//	private Map<String, Integer> permissions = new HashMap<String, Integer>();
 
+	private List<String> authoritedResource;
+	
 	public SessionUserInfo() {
 
 	}
@@ -38,13 +41,13 @@ public class SessionUserInfo {
 		return username;
 	}
 
-	public void setPermissions(Map<String, Integer> permissions) {
-		this.permissions = permissions;
-	}
-
-	public Map<String, Integer> getPermissions() {
-		return permissions;
-	}
+//	public void setPermissions(Map<String, Integer> permissions) {
+//		this.permissions = permissions;
+//	}
+//
+//	public Map<String, Integer> getPermissions() {
+//		return permissions;
+//	}
 
 	public int getUserId() {
 		return userId;
@@ -52,5 +55,13 @@ public class SessionUserInfo {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public List<String> getAuthoritedResource() {
+		return authoritedResource;
+	}
+
+	public void setAuthoritedResource(List<String> authoritedResource) {
+		this.authoritedResource = authoritedResource;
 	}
 }

@@ -39,7 +39,7 @@
 			<one-to-many class="Auditing" />
 		</set>
 		-->
-		<set name="Roles" table="user_role" cascade="all">
+		<set name="Roles" table="user_role" cascade="all" lazy="false">
 			<key column="userID" not-null="false"/>
 			<many-to-many column="roleid" class="Role" />
 		</set>

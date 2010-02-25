@@ -14,6 +14,6 @@
 	<include file="com/vms/action/vediotape/vediotape_struts.xml"/>
 	<include file="com/vms/action/audit/audit_struts.xml"/>
 	<include file="com/vms/action/search/search_struts.xml"/>
-	<include file="com/vms/action/arrangement/order_struts.xml"/>
+
 	
 </struts>

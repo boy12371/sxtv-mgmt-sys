@@ -20,8 +20,10 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="command" />
 	</bean>
+	
+	
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -102,6 +104,7 @@
 				<value>audienceScoreService</value>
 				<value>playorderService</value>
 				<value>arrangeService</value>
+				<value>resourceService</value>
 			</list>
 		</property>
 		<property name="interceptorNames">
@@ -166,6 +169,10 @@
 	<bean id="audienceScoreDAO" class="com.vms.db.dao.AudienceScoreDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="resourceDAO" class="com.vms.db.dao.ResourceDAO">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
 	<!--
 			Service **************************************************************
 		-->
@@ -211,6 +218,11 @@
 	<bean id="arrangeService" class="com.vms.service.ArrangeService">
 		<property name="playorderDAO" ref="playorderDAO" />
 	</bean>
+	<bean id="resourceService" class="com.vms.service.ResourceService">
+		<property name="resourceDAO" ref="resourceDAO"/>
+		
+	</bean>
+	
 	<!--
 			Proxy Service ********************************************************
 		-->
@@ -218,4 +230,6 @@
 	<bean id="frameMgmt" class="com.vms.framework.action.BasicLayout" scope="prototype">
 		<property name="userService" ref="userService" />
 	</bean>	
+	
+
 </beans>

@@ -1,5 +1,10 @@
 package com.vms.db.bean;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+
 import com.vms.db.bean.base.BaseUser;
 
 public class User extends BaseUser {
@@ -25,6 +30,29 @@ public class User extends BaseUser {
 
 		super(id, employee, userName, userPass, status);
 	}
+
+	
+	public List<String> getGrantedResource() {
+		// TODO Auto-generated method stub
+		Iterator<Role> it = this.getRoles().iterator();
+		List<String> grantedResource = new ArrayList<String>();  
+		while (it.hasNext()) {
+			Role role = it.next();
+			Iterator<Resources> rIt  = role.getResources().iterator();
+			while (rIt.hasNext()) {
+				Resources r = rIt.next();
+				if(!grantedResource.contains(r.getUrl())){
+					grantedResource.add(r.getUrl());
+				}
+				
+			}
+		}
+        return grantedResource;
+	}
+
+	
+
+
 
 	/* [CONSTRUCTOR MARKER END] */
 

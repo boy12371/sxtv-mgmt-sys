@@ -11,7 +11,13 @@ public class LogonAction extends BaseAction{
 	
 	private SessionUserInfo userInfo;
 	
+	private boolean error=false;
+	
+	
 	public String toLogon() throws Exception{
+		if(error){
+			this.addActionError("用户名密码错误");
+		}
 		return SUCCESS;
 	}
 	
@@ -25,5 +31,13 @@ public class LogonAction extends BaseAction{
 
 	public SessionUserInfo getUserInfo() {
 		return userInfo;
+	}
+
+	public boolean isError() {
+		return error;
+	}
+
+	public void setError(boolean error) {
+		this.error = error;
 	}
 }

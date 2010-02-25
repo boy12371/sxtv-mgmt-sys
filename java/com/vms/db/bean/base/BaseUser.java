@@ -1,7 +1,6 @@
 package com.vms.db.bean.base;
 
 import java.io.Serializable;
-
 import com.vms.db.bean.Auditing;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.Playchangelog;

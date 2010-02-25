@@ -21,6 +21,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+
 import com.vms.beans.EmployeeVO;
 import com.vms.beans.JSONDataTable;
 import com.vms.db.bean.Employee;
@@ -57,7 +58,12 @@ public class Test {
 
 		//ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		//
-		// IUserRoleService service = (IUserRoleService)
+//		IUserService service = (IUserService) ctx.getBean("userService");
+//		User user  =  service.getUserById(1);
+//		
+//		GrantedAuthority[] gas = user.getAuthorities();
+//		System.out.println(gas.length);
+		 
 		// ctx.getBean("userRoleService");
 		//IVediotapeService service = (IVediotapeService) ctx.getBean("vediotapeService");
 
@@ -121,11 +127,14 @@ public class Test {
 		// JSONObject o = jsArray.getJSONObject(0);
 		// System.out.println(o.get("comments"));
 		
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(format.parse("2010-02-19"));
+		
+		//System.out.println(Integer.toHexString(98).toUpperCase());
+		//PasswordEncoder md=new MessageDigestPasswordEncoder("MD5");
+		
+		//System.out.println(md.encodePassword("2", null));
 		
 		
 
 	}
-
+	
 }
