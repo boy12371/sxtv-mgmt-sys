@@ -131,26 +131,26 @@ public class VediotapeMgmtAction extends BaseAction {
 			String videoid = vedio.getId();
 			if(null != optionName && !"".equals(optionName)){
 				if(optionName.equals("auditing")){
-					if(status == CommonVariable.VIDEO_STATUS_AUDITING || status ==CommonVariable.VIDEO_STATUS_REAUDITING ){
-						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
-						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
-						return SUCCESS;
-					}else if(status == CommonVariable.VIDEO_STATUS_MODIFICATION) {
-						this.addActionError("影带状态正在修改中，不能审核");
-						return INPUT;
-					}else{
-						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能审核");
-						return INPUT;
-					}					
-				}else if(optionName.equals("modification")){					
-					if(status == CommonVariable.VIDEO_STATUS_MODIFICATION){
-						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
-						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
-						return SUCCESS;
-					}else{
-						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
-						return INPUT;
-					}					
+//					if(status == CommonVariable.VIDEO_STATUS_AUDITING || status ==CommonVariable.VIDEO_STATUS_REAUDITING ){
+//						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
+//						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+//						return SUCCESS;
+//					}else if(status == CommonVariable.VIDEO_STATUS_MODIFICATION) {
+//						this.addActionError("影带状态正在修改中，不能审核");
+//						return INPUT;
+//					}else{
+//						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能审核");
+//						return INPUT;
+//					}					
+//				}else if(optionName.equals("modification")){					
+//					if(status == CommonVariable.VIDEO_STATUS_MODIFICATION){
+//						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
+//						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+//						return SUCCESS;
+//					}else{
+//						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
+//						return INPUT;
+//					}					
 				}else if(optionName.equals("marketRate") || optionName.equals("modifyMarketRate")){
 					if(status == CommonVariable.VIDEO_STATUS_PLAYED){
 						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
