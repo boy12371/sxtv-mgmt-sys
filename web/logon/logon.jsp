@@ -4,8 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/logon/css/logon.css" />
+++<%=request.getContextPath() %>
+<br/>
+==${pageContext.request.contextPath}
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/logon/css/logon.css" />
 </head>
 
 <body>
@@ -29,19 +31,19 @@
 				<table cellspacing="0" cellpadding="0" border="0">
 					<tr>
 						<td align="left">
-							<img border="0" src="${pageContext.request.contextPath}/logon/image/dssx_laugh2.png" />
+							<img border="0" src="<%=request.getContextPath() %>/logon/image/dssx_laugh2.png" />
 						</td>
 						<td class="bsep" />
 						<td align="center" width="278">
 							<table cellspacing="0" cellpadding="0" border="0">
 								<tr valign="middle">
-									<td align="right"><img border="0" src="${pageContext.request.contextPath}/logon/image/user.png"/></td>
+									<td align="right"><img border="0" src="<%=request.getContextPath() %>/logon/image/user.png"/></td>
 									<td style="padding-left: 10px;">
 										<input type="text" size="20" maxlength="100" name="userInfo.username" />
 									</td>
 								</tr>
 								<tr valign="middle">
-									<td align="right"><img border="0" src="${pageContext.request.contextPath}/logon/image/key.png"/></td>
+									<td align="right"><img border="0" src="<%=request.getContextPath() %>/logon/image/key.png"/></td>
 									<td style="padding-left: 10px;">
 										<input type="password" size="20" maxlength="50" name="userInfo.password" />
 									</td>
