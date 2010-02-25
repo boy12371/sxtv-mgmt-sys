@@ -29,3 +29,21 @@ function autoCompleteVideoName() {
 		oAC : myAutoComp
 	}
 }
+
+function displayErrorMsg(msg){
+	var ul = document.getElementById("errorMsgUL");
+	if(null == ul) return;
+	var span = document.getElementById("errorMsgSpan");
+	if(null == span) return;
+	span.innerHTML = msg;
+	ul.style.display="block";
+}
+
+function clearErrorMsg(){
+	var ul = document.getElementById("errorMsgUL");
+	if(null == ul) return;
+	var span = document.getElementById("errorMsgSpan");
+	if(null == span) return;
+	span.innerHTML = "";
+	ul.style.display="none";
+}

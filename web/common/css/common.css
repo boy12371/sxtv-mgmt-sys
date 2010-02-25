@@ -5,6 +5,16 @@ body{
 	font-size:14px;
 	background-color:#EBF4FB;
 }
+
+.errorMessage{
+	color:#FF0000;	
+	font-weight:bold;	
+}
+
+.actionMessage{
+	color:#47AB47;
+	font-weight:bold;	
+}
 	
 h1{
 	color:#003366;
