@@ -40,6 +40,8 @@ public class ExamineAction extends BaseAction {
 	private String uid;
 	
 	private String perform;
+	
+	private String errorMsg;
 
 	public String toUnExaminedTapes() {
 		return SUCCESS;
@@ -65,11 +67,13 @@ public class ExamineAction extends BaseAction {
 					list  = vediotapeService.findVediotapeByProperty(Vediotape.PROP_VEDIO_NAME, vname, -1, -1, "", false);
 				}
 				if(list.size() == 0){
-					this.addActionError("影带未找到");
+					errorMsg = "影带未找到。";
+					this.addActionError(errorMsg);
 					return INPUT;
 				}else{
 					if(list.get(0).getStatus().getId() != CommonVariable.VIDEO_STATUS_EXAMINE){
-						this.addActionError("影带状态为" + list.get(0).getStatus().getStatus() + ",不能打分。");
+						errorMsg = "影带状态为" + list.get(0).getStatus().getStatus() + ",不能打分。";
+						this.addActionError(errorMsg);
 						return INPUT;
 					}
 				}
@@ -115,7 +119,8 @@ public class ExamineAction extends BaseAction {
 				}
 			}
 			if(scores.size() == 0){
-				this.addActionError("该影带没有评分或找不到该影带。");
+				errorMsg = "该影带没有评分或找不到该影带。";
+				this.addActionError(errorMsg);
 				return INPUT;
 			}
 			JSONDataTableUtils.setupJSONDataTable(scores, examinedTable, vedioscoreService.getTotalCountUserExamineScoreByVideoId(vid));
@@ -224,5 +229,13 @@ public class ExamineAction extends BaseAction {
 
 	public String getPerform() {
 		return perform;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
 	}
 }
