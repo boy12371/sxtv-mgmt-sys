@@ -17,11 +17,17 @@
 			<result type="json">
 				<param name="root">unExaminedTable</param>
 			</result>
+			<result type="json" name="input">
+				<param name="root">errorMsg</param>
+			</result>
 		</action>
 		
 		<action name="getExaminedTapes" class="examineMgmt" method="getExaminedTapes">
 			<result type="json">
 				<param name="root">examinedTable</param>
+			</result>
+			<result type="json" name="input">
+				<param name="root">errorMsg</param>
 			</result>
 		</action>
 		
