@@ -4,17 +4,12 @@
 /*!40101 SET SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES */;
 /*!40103 SET SQL_NOTES='ON' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS */;
-/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
 
 # Host: localhost    Database: sxtvdb
 # ------------------------------------------------------
 # Server version 5.1.42-community
 
-DROP DATABASE IF EXISTS `sxtvdb`;
 CREATE DATABASE `sxtvdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `sxtvdb`;
 
@@ -22,7 +17,6 @@ USE `sxtvdb`;
 # Source for table audience
 #
 
-DROP TABLE IF EXISTS `audience`;
 CREATE TABLE `audience` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -36,19 +30,16 @@ CREATE TABLE `audience` (
 #
 # Dumping data for table audience
 #
-/*!40000 ALTER TABLE `audience` DISABLE KEYS */;
 
 INSERT INTO `audience` VALUES (1,'张三',NULL,NULL,NULL,NULL);
 INSERT INTO `audience` VALUES (2,'李四',NULL,NULL,NULL,NULL);
 INSERT INTO `audience` VALUES (3,'王麻子',NULL,NULL,NULL,NULL);
 INSERT INTO `audience` VALUES (4,'赵六',NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `audience` ENABLE KEYS */;
 
 #
 # Source for table audiencescore
 #
 
-DROP TABLE IF EXISTS `audiencescore`;
 CREATE TABLE `audiencescore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vedioID` varchar(128) NOT NULL DEFAULT '0',
@@ -65,7 +56,6 @@ CREATE TABLE `audiencescore` (
 #
 # Dumping data for table audiencescore
 #
-/*!40000 ALTER TABLE `audiencescore` DISABLE KEYS */;
 
 INSERT INTO `audiencescore` VALUES (1,'0',2,'2010-02-12 20:15:03',1,NULL);
 INSERT INTO `audiencescore` VALUES (2,'0',3,'2010-02-13 09:41:43',1,NULL);
@@ -73,39 +63,35 @@ INSERT INTO `audiencescore` VALUES (3,'0',1,'2010-02-13 09:41:43',1,NULL);
 INSERT INTO `audiencescore` VALUES (4,'1',3,'2010-02-12 18:36:48',1,NULL);
 INSERT INTO `audiencescore` VALUES (7,'0',4,'2010-02-12 20:47:48',1,NULL);
 INSERT INTO `audiencescore` VALUES (8,'1',4,'2010-02-12 20:55:29',0,NULL);
-/*!40000 ALTER TABLE `audiencescore` ENABLE KEYS */;
 
 #
 # Source for table auditing
 #
 
-DROP TABLE IF EXISTS `auditing`;
 CREATE TABLE `auditing` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `vedioID` varchar(128) NOT NULL DEFAULT '',
   `auditor` int(11) NOT NULL,
   `auditDate` datetime NOT NULL DEFAULT '1000-01-01 00:00:01',
   `result` int(11) NOT NULL,
   `comments` varchar(512) DEFAULT '',
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `unique_key` (`vedioID`,`auditor`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='审核';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='审核';
 
 #
 # Dumping data for table auditing
-INSERT INTO `auditing` (`id`, `vedioID`, `auditor`, `auditDate`, `result`, `comments`) VALUES
-(1, '2', 2, '2010-02-12 12:25:44', 7, NULL);
+#
 
--- --------------------------------------------------------
+INSERT INTO `auditing` VALUES (1,'2',2,'2010-02-12 12:25:44',7,NULL);
 
 #
 # Source for table company
 #
 
-DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `companyID` int(11) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(128) NOT NULL,
@@ -115,23 +101,21 @@ CREATE TABLE `company` (
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`companyID`),
   UNIQUE KEY `registrationNo` (`registrationNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='公司信息';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='公司信息';
 
 #
 # Dumping data for table company
 #
-/*!40000 ALTER TABLE `company` DISABLE KEYS */;
 
-INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `contactPerson`, `comments`) VALUES
-(1, '中华影视', '12331123123', '34534534534', '胡戈', '第三方万恶服务'),
-(2, '美国影视', '123123', '123123', '万恶范围阿飞', '发送到非 '),
-(3, '法国影视', '34234', 'werwef', 'fwefwef', '发送到非万恶 ');
+INSERT INTO `company` VALUES (1,'中华影视','12331123123','34534534534','胡戈','第三方万恶服务');
+INSERT INTO `company` VALUES (2,'美国影视','123123','123123','万恶范围阿飞','发送到非 ');
+INSERT INTO `company` VALUES (3,'法国影视','34234','werwef','fwefwef','发送到非万恶 ');
+INSERT INTO `company` VALUES (4,'1234','','','','');
 
 #
 # Source for table employee
 #
 
-DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
   `employeeID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -147,7 +131,6 @@ CREATE TABLE `employee` (
 #
 # Dumping data for table employee
 #
-/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
 
 INSERT INTO `employee` VALUES (1,'王文婷','1983-02-19','2006-01-16',0,'13991366931',0,'这是一个员工');
 INSERT INTO `employee` VALUES (2,'王萌','2010-01-21','1970-01-01',0,'13991366930',0,'王萌王萌王萌王萌王萌王萌王萌王萌王萌王萌');
@@ -157,13 +140,11 @@ INSERT INTO `employee` VALUES (5,'里斯','2010-01-25','2010-01-20',1,'123123123
 INSERT INTO `employee` VALUES (6,'张武','2006-01-09','2007-01-15',0,'123124234',0,'撕得粉碎大放送');
 INSERT INTO `employee` VALUES (7,'赵流','2006-01-16','2008-01-22',0,'123123',0,'扫的服务阿飞');
 INSERT INTO `employee` VALUES (8,'王其','2010-01-17','1982-01-12',0,'维吾尔',0,'斯蒂芬');
-/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 
 #
 # Source for table playchangelog
 #
 
-DROP TABLE IF EXISTS `playchangelog`;
 CREATE TABLE `playchangelog` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `vedioID` varchar(128) NOT NULL DEFAULT '',
@@ -179,15 +160,12 @@ CREATE TABLE `playchangelog` (
 #
 # Dumping data for table playchangelog
 #
-/*!40000 ALTER TABLE `playchangelog` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `playchangelog` ENABLE KEYS */;
 
 #
 # Source for table playorder
 #
 
-DROP TABLE IF EXISTS `playorder`;
 CREATE TABLE `playorder` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `playDate` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
@@ -197,23 +175,19 @@ CREATE TABLE `playorder` (
   PRIMARY KEY (`Id`),
   KEY `vedioID` (`vedioID`),
   KEY `auditor` (`auditor`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='节目编排';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='节目编排';
 
 #
 # Dumping data for table playorder
 #
-/*!40000 ALTER TABLE `playorder` DISABLE KEYS */;
 
-INSERT INTO `playorder` VALUES (1,'2010-02-13','0','2010-02-01',1);
-INSERT INTO `playorder` VALUES (2,'2010-02-14','1','2000-01-01',1);
-INSERT INTO `playorder` VALUES (3,'2010-02-15','2','2000-01-01',1);
-/*!40000 ALTER TABLE `playorder` ENABLE KEYS */;
+INSERT INTO `playorder` VALUES (22,'2010-02-02','12dq','2010-02-20 00:09:05',2);
+INSERT INTO `playorder` VALUES (23,'2010-02-05','4','2010-02-20 00:09:05',2);
 
 #
 # Source for table resources
 #
 
-DROP TABLE IF EXISTS `resources`;
 CREATE TABLE `resources` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(512) NOT NULL,
@@ -224,15 +198,12 @@ CREATE TABLE `resources` (
 #
 # Dumping data for table resources
 #
-/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 
 #
 # Source for table role
 #
 
-DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
@@ -243,15 +214,12 @@ CREATE TABLE `role` (
 #
 # Dumping data for table role
 #
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
 
 #
 # Source for table role_resource
 #
 
-DROP TABLE IF EXISTS `role_resource`;
 CREATE TABLE `role_resource` (
   `roleid` int(11) NOT NULL,
   `resourceid` int(11) NOT NULL,
@@ -263,15 +231,12 @@ CREATE TABLE `role_resource` (
 #
 # Dumping data for table role_resource
 #
-/*!40000 ALTER TABLE `role_resource` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `role_resource` ENABLE KEYS */;
 
 #
 # Source for table scoreweight
 #
 
-DROP TABLE IF EXISTS `scoreweight`;
 CREATE TABLE `scoreweight` (
   `factor` varchar(50) NOT NULL DEFAULT '',
   `wieght` float NOT NULL DEFAULT '0',
@@ -281,19 +246,16 @@ CREATE TABLE `scoreweight` (
 #
 # Dumping data for table scoreweight
 #
-/*!40000 ALTER TABLE `scoreweight` DISABLE KEYS */;
 
 INSERT INTO `scoreweight` VALUES ('innovateScore',0.1);
 INSERT INTO `scoreweight` VALUES ('performScore',0.3);
 INSERT INTO `scoreweight` VALUES ('storyScore',0.4);
 INSERT INTO `scoreweight` VALUES ('techScore',0.2);
-/*!40000 ALTER TABLE `scoreweight` ENABLE KEYS */;
 
 #
 # Source for table status
 #
 
-DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status` (
   `statusID` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(50) NOT NULL,
@@ -304,24 +266,20 @@ CREATE TABLE `status` (
 #
 # Dumping data for table status
 #
-/*!40000 ALTER TABLE `status` DISABLE KEYS */;
 
 INSERT INTO `status` VALUES (1,'待评','新进剧目，带评分');
 INSERT INTO `status` VALUES (2,'待审','剧目以评分，等待审核');
 INSERT INTO `status` VALUES (3,'通过','审核已通过，等待指定播放时间');
-INSERT INTO `status` VALUES (4,'修改','审核未通过，有待修改');
-INSERT INTO `status` VALUES (5,'重审','修改已完成，需重新审核');
+INSERT INTO `status` VALUES (5,'待排','剧目已经通过并等待编排。');
 INSERT INTO `status` VALUES (6,'待播','审核通过，并已指定时间，等待播放');
 INSERT INTO `status` VALUES (7,'退回','审核未通过，直接退带');
 INSERT INTO `status` VALUES (8,'已播','剧目已播出，尚未得到市场反馈');
 INSERT INTO `status` VALUES (9,'结束','剧目已播出并收到市场反馈');
-/*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
 #
 # Source for table subject
 #
 
-DROP TABLE IF EXISTS `subject`;
 CREATE TABLE `subject` (
   `subjectID` int(11) NOT NULL AUTO_INCREMENT,
   `subjectName` varchar(128) NOT NULL,
@@ -332,17 +290,14 @@ CREATE TABLE `subject` (
 #
 # Dumping data for table subject
 #
-/*!40000 ALTER TABLE `subject` DISABLE KEYS */;
 
 INSERT INTO `subject` VALUES (1,'都市碎戏','都市碎戏都市碎戏都市碎戏都市碎戏都市碎戏');
 INSERT INTO `subject` VALUES (2,'百家碎戏','百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏');
-/*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 
 #
 # Source for table topic
 #
 
-DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic` (
   `topicID` int(11) NOT NULL AUTO_INCREMENT,
   `topicName` varchar(128) NOT NULL,
@@ -353,19 +308,16 @@ CREATE TABLE `topic` (
 #
 # Dumping data for table topic
 #
-/*!40000 ALTER TABLE `topic` DISABLE KEYS */;
 
 INSERT INTO `topic` VALUES (1,'爱情','爱情爱情爱情爱情爱情爱情');
 INSERT INTO `topic` VALUES (2,'亲情','亲情亲情亲情亲情亲情亲情亲情亲情');
 INSERT INTO `topic` VALUES (3,'生活','生活生活生活生活生活生活');
 INSERT INTO `topic` VALUES (4,'社会','社会社会社会社会社会');
-/*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 
 #
 # Source for table user
 #
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(50) NOT NULL DEFAULT '',
@@ -379,18 +331,15 @@ CREATE TABLE `user` (
 #
 # Dumping data for table user
 #
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
 
 INSERT INTO `user` VALUES (1,'tiger','command',1,1);
 INSERT INTO `user` VALUES (2,'cat','123',2,1);
 INSERT INTO `user` VALUES (3,'pencil','123',3,1);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 #
 # Source for table user_role
 #
 
-DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `userid` int(11) NOT NULL,
   `roleid` int(11) NOT NULL,
@@ -402,15 +351,12 @@ CREATE TABLE `user_role` (
 #
 # Dumping data for table user_role
 #
-/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
 
-/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 
 #
 # Source for table vedioscore
 #
 
-DROP TABLE IF EXISTS `vedioscore`;
 CREATE TABLE `vedioscore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vedioID` varchar(128) NOT NULL DEFAULT '',
@@ -434,16 +380,13 @@ CREATE TABLE `vedioscore` (
 #
 # Dumping data for table vedioscore
 #
-/*!40000 ALTER TABLE `vedioscore` DISABLE KEYS */;
 
-INSERT INTO `vedioscore` VALUES (1,'2',2,24,35,46,56,36,1,0,0,'2010-01-30',NULL);
-/*!40000 ALTER TABLE `vedioscore` ENABLE KEYS */;
+INSERT INTO `vedioscore` VALUES (1,'2',2,22,88,66,99,56.1,1,NULL,1,'2010-02-24 23:54:54',NULL);
 
 #
 # Source for table vediotape
 #
 
-DROP TABLE IF EXISTS `vediotape`;
 CREATE TABLE `vediotape` (
   `vedioID` varchar(128) NOT NULL DEFAULT '0',
   `vedioName` varchar(128) NOT NULL,
@@ -468,31 +411,26 @@ CREATE TABLE `vediotape` (
 #
 # Dumping data for table vediotape
 #
-/*!40000 ALTER TABLE `vediotape` DISABLE KEYS */;
 
 INSERT INTO `vediotape` VALUES ('0','阿凡达',1,3,1,'2001-01-30','2001-01-31',3,1,NULL,NULL,NULL);
 INSERT INTO `vediotape` VALUES ('1','Fight Club',2,4,1,'2000-01-30','2001-01-31',3,1,NULL,NULL,NULL);
+INSERT INTO `vediotape` VALUES ('12','12qdfw',2,3,1,'2010-02-11','2010-02-11 08:44:47',1,1,'ddvsdfsdsdvsdv',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('12asd','dqw',1,1,1,'2010-02-10','2010-02-10 14:17:59',1,2,'asdacasc',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('12dq','dqwd',2,1,1,'2010-02-10','2010-02-10 14:10:59',1,6,'zxcasc',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('1ewfv','zxvcsdv',1,3,1,'2010-02-10','2010-02-10 14:21:42',1,2,'sdv',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('1ssd','zxcasc',1,3,1,'2010-02-10','2010-02-10 14:10:59',1,2,'zxcasczx zx zx zx zx ',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('2','12 Monkey',1,4,1,'2001-12-30','2001-01-31',3,2,NULL,NULL,NULL);
+INSERT INTO `vediotape` VALUES ('23eg','fwefwef',1,2,1,'2010-02-10','2010-02-10 14:21:42',1,2,'sdvvsdv',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('23g','dfbdfbf',2,4,1,'2010-02-10','2010-02-10 14:21:42',1,1,'sdvvsdv',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('3','蝴蝶效应',2,3,1,'2009-01-01','2009-01-02',3,3,NULL,NULL,NULL);
-INSERT INTO `vediotape` VALUES ('4','超黑特警',2,4,1,'2009-02-01','2009-02-02',3,3,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `vediotape` ENABLE KEYS */;
-
-INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`, `dateComing`, `dateInput`, `inputer`, `status`, `comments`, `marketShare`, `audienceRating`) VALUES
-('12', '12qdfw', 2, 3, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 1, 'ddvsdfsdsdvsdv', NULL, NULL),
-('12asd', 'dqw', 1, 1, 1, '2010-02-10', '2010-02-10 14:17:59', 1, 5, 'asdacasc', NULL, NULL),
-('12dq', 'dqwd', 2, 1, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 3, 'zxcasc', NULL, NULL),
-('1ewfv', 'zxvcsdv', 1, 3, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdv', NULL, NULL),
-('1ssd', 'zxcasc', 1, 3, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 2, 'zxcasczx zx zx zx zx ', NULL, NULL),
-('23', 'sfsdf', 2, 3, 1, '2010-02-10', '2010-02-10 13:39:18', 1, 4, 'fwefwe', NULL, NULL),
-('23eg', 'fwefwef', 1, 2, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdvvsdv', NULL, NULL),
-('23g', 'dfbdfbf', 2, 4, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 1, 'sdvvsdv', NULL, NULL),
-('324aa', 'sfwe43', 2, 1, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdvvsdv', NULL, NULL),
-('32f', 'fwef', 2, 3, 2, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'sd', NULL, NULL),
-('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'sdfwe', NULL, NULL),
-('sf1', 'sdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 1, 'ddv', NULL, NULL),
-('sf1vsd', 'weqdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 1, 'ddvsdfsd', NULL, NULL),
-('sfw', '1v2asdsv', 1, 1, 1, '2010-02-10', '2010-02-10 14:20:35', 1, 1, 'sdvsdv', NULL, NULL),
-('sw12', 'dqwe', 2, 3, 1, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'ssdv', NULL, NULL);
+INSERT INTO `vediotape` VALUES ('324aa','sfwe43',2,1,1,'2010-02-10','2010-02-10 14:21:42',1,2,'sdvvsdv',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('32f','fwef',2,3,2,'2010-02-12','2010-02-12 10:33:18',1,1,'sd',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('32ff2','ffewef',1,2,3,'2010-02-12','2010-02-12 10:33:18',1,1,'sdfwe',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('4','超黑特警',2,4,1,'2009-02-01','2009-02-02',3,6,NULL,NULL,NULL);
+INSERT INTO `vediotape` VALUES ('sf1','sdfw',1,1,1,'2010-02-11','2010-02-11 08:44:47',1,1,'ddv',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('sf1vsd','weqdfw',1,1,1,'2010-02-11','2010-02-11 08:44:47',1,1,'ddvsdfsd',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('sfw','1v2asdsv',1,1,1,'2010-02-10','2010-02-10 14:20:35',1,1,'sdvsdv',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('sw12','dqwe',2,3,1,'2010-02-12','2010-02-12 10:33:18',1,1,'ssdv',NULL,NULL);
 
 #
 #  Foreign keys for table audiencescore
@@ -570,7 +508,5 @@ ADD CONSTRAINT `vedioSubject` FOREIGN KEY (`subject`) REFERENCES `subject` (`sub
 ADD CONSTRAINT `vedioTopic` FOREIGN KEY (`topic`) REFERENCES `topic` (`topicID`) ON UPDATE CASCADE;
 
 
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
