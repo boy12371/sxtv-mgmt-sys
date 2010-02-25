@@ -100,8 +100,20 @@ function initDataTable() {
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
-	}
-
+	};
+	
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
+	
+	myDataSource.subscribe("dataErrorEvent", function(request,callback){
+		displayErrorMsg(eval(request.response.responseText));
+	});
+	
+	myDataSource.subscribe("requestEvent", function(request,callback){
+		clearErrorMsg();
+	});
+	
 	return {
 		ds :myDataSource,
 		dt :myDataTable
@@ -112,5 +124,6 @@ function filterFunc(){
 	vid = YAHOO.util.Dom.get("vid").value; 
 	vname= YAHOO.util.Dom.get("searchinput").value;
 	if((null==vid || ""==vid) && (null==vname || ""==vname)) return;
+	clearErrorMsg();
 	YAHOO.example.DynamicData = initDataTable();
 }

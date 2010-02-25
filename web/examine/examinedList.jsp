@@ -27,7 +27,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
 <body class="yui-skin-sam">
-
+<%@ include file="/common/errorMsg.jsp" %>
 <h1>打分信息</h1>
 <p>查看已打分影带</p>
 

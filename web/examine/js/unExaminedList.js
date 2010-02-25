@@ -92,7 +92,15 @@ function initDataTable() {
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
-	}
+	};
+	
+	myDataSource.subscribe("dataErrorEvent", function(request,callback){
+		displayErrorMsg(eval(request.response.responseText));
+	});
+	
+	myDataSource.subscribe("requestEvent", function(request,callback){
+		clearErrorMsg();
+	});
 
 	return {
 		ds :myDataSource,
