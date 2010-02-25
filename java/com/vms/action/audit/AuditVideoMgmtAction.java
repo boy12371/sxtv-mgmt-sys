@@ -103,7 +103,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 			this.addActionError("审核失败.");
 			return INPUT;
 		}
-		this.addActionError("审核成功.");
+		this.addActionMessage("审核成功.");
 		return SUCCESS;
 		
 	}
