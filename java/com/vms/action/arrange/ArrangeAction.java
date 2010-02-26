@@ -67,7 +67,7 @@ public class ArrangeAction extends BaseAction {
 	
 	public String getUnarrangedTapes() throws Exception {
 		unArrangedTable = JSONDataTableUtils.initJSONDataTable(getRequest());
-		int status = 2;
+		int status = 5;
 		try {
 			List<Vediotape> tapes = tapeService.findVideotapeByStatus(
 					status, 
@@ -123,7 +123,7 @@ public class ArrangeAction extends BaseAction {
 				allOrders.add(po);
 			}
 		}
-		arrangeService.savePlayorder(newOrders);
+		arrangeService.savePlayorder(newOrders, this.getUserInfo().getUserId());
 		//get old play order of select month to filter for records need to be deleted.
 		Date selDate = new Date();
 		String[] xx = month.split("-");
@@ -141,7 +141,7 @@ public class ArrangeAction extends BaseAction {
 			}
 			if(delFlag) delOrders.add(oldOrder);
 		}
-		arrangeService.deletePlayOrder(delOrders);
+		arrangeService.deletePlayOrder(delOrders, this.getUserInfo().getUserId());
 		return SUCCESS;
 	}
 	
