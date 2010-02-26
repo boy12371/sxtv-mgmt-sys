@@ -303,7 +303,7 @@ function getFirstVoidRecord(dataTable){
 	if(null == rSet) return -1;
 	for(var i=0;i<rSet.length;i++){
 		var x = rSet[i].getData("vedioID");
-		if(null == x) return i;
+		if(null == x || "" == x) return i;
 	}
 	return -1;
 }
