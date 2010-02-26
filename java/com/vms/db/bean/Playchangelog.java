@@ -20,9 +20,17 @@ public class Playchangelog extends BasePlaychangelog {
 	/**
 	 * Constructor for required fields
 	 */
-	public Playchangelog(java.lang.Integer id, com.vms.db.bean.User auditor, com.vms.db.bean.Vediotape vedioID) {
+	public Playchangelog (
+		java.lang.Integer id,
+		com.vms.db.bean.User auditor,
+		com.vms.db.bean.Vediotape vedioID,
+		java.util.Date date) {
 
-		super(id, auditor, vedioID);
+		super (
+			id,
+			auditor,
+			vedioID,
+			date);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */
