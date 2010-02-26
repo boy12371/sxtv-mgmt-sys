@@ -2,10 +2,6 @@ package com.vms.db.bean.base;
 
 import java.io.Serializable;
 
-import com.vms.db.bean.Playchangelog;
-import com.vms.db.bean.User;
-import com.vms.db.bean.Vediotape;
-
 
 /**
  * This is an object that contains data related to the playchangelog table.
@@ -23,6 +19,7 @@ public abstract class BasePlaychangelog  implements Serializable {
 	public static String PROP_AUDITOR = "auditor";
 	public static String PROP_OPERATION = "operation";
 	public static String PROP_TO_DATE = "toDate";
+	public static String PROP_DATE = "date";
 	public static String PROP_FROM_DATE = "fromDate";
 	public static String PROP_ID = "id";
 
@@ -46,11 +43,13 @@ public abstract class BasePlaychangelog  implements Serializable {
 	public BasePlaychangelog (
 		java.lang.Integer id,
 		com.vms.db.bean.User auditor,
-		com.vms.db.bean.Vediotape vedioID) {
+		com.vms.db.bean.Vediotape vedioID,
+		java.util.Date date) {
 
 		this.setId(id);
 		this.setAuditor(auditor);
 		this.setVedioID(vedioID);
+		this.setDate(date);
 		initialize();
 	}
 
@@ -67,6 +66,7 @@ public abstract class BasePlaychangelog  implements Serializable {
 	private java.util.Date fromDate;
 	private java.util.Date toDate;
 	private java.lang.String operation;
+	private java.util.Date date;
 
 	// many to one
 	private com.vms.db.bean.User auditor;
@@ -77,7 +77,7 @@ public abstract class BasePlaychangelog  implements Serializable {
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="sequence"
+     *  generator-class="native"
      *  column="Id"
      */
 	public java.lang.Integer getId () {
@@ -143,6 +143,23 @@ public abstract class BasePlaychangelog  implements Serializable {
 	 */
 	public void setOperation (java.lang.String operation) {
 		this.operation = operation;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: date
+	 */
+	public java.util.Date getDate () {
+		return date;
+	}
+
+	/**
+	 * Set the value related to the column: date
+	 * @param date the date value
+	 */
+	public void setDate (java.util.Date date) {
+		this.date = date;
 	}
 
 

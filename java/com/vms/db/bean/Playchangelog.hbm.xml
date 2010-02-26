@@ -14,6 +14,8 @@
 			not-null="false" length="19" />
 		<property name="operation" column="operation" type="string"
 			not-null="false" length="50" />
+		<property name="date" column="date" type="timestamp" 
+			not-null="true" length="19" />
 		<many-to-one name="auditor" column="auditor" class="User"
 			not-null="true">
 		</many-to-one>

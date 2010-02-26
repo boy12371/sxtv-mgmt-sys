@@ -13,11 +13,10 @@ public interface IPlayorderDAO  extends IBaseRootDAO{
 	
 	List<Playorder> findMonthPlayOrder(Date startTime, Date endTime, int startIndex, int endIndex, boolean ascending) throws Exception;
 
-	void deletePlayorder(List<Playorder> pos)throws Exception;
+	void deletePlayorder(List<Playorder> pos,  int userID)throws Exception;
 	
-	void savePlayorder(List<Playorder> orders) throws Exception;
+	void savePlayorder(List<Playorder> orders, int userID) throws Exception;
 	
 	List findPlayorderByMonth(Date date)throws Exception;
-	
-	boolean updatePlayOrder(int orderID, Date fromDate, Date toDate,int userID)throws Exception;
+
 }
