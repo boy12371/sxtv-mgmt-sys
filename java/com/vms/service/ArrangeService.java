@@ -42,12 +42,12 @@ public class ArrangeService implements IArrangeService{
 		return tapes;
 	}
 	
-	public void deletePlayOrder(List<Playorder> pos) throws Exception{
-		playorderDAO.deletePlayorder(pos);
+	public void deletePlayOrder(List<Playorder> pos, int userID) throws Exception{
+		playorderDAO.deletePlayorder(pos, userID);
 	}
 	
-	public void savePlayorder(List<Playorder> pos) throws Exception{
-		playorderDAO.savePlayorder(pos);
+	public void savePlayorder(List<Playorder> pos,  int userID) throws Exception{
+		playorderDAO.savePlayorder(pos, userID);
 	}
 	
 	public void setPlayorderDAO(IPlayorderDAO playorderDAO) {
