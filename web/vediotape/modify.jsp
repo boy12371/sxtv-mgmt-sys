@@ -14,7 +14,7 @@
 <s:actionerror />
 <h1>影带信息</h1>
 <p>确定并点击按钮，影带将被重新审核</p>
-<s:form action="modificationFinish" method="post" namespace="/vedio">
+<s:form action="doModification" method="post" namespace="/vedio">
 	<table class="inputTable">
 		<tr>
 			<td><label>编号</label></td>
@@ -53,15 +53,13 @@
 		<tr>
 			<td colspan="4">
 				<s:if test="vv.status==3">
-					<s:hidden name="vv.vedioID" />
+					<s:hidden name="vv.status" value="5" />
 					<s:submit value="修改完成"/>
 				</s:if>				
 				<s:else>
-					<s:hidden name="vv.vedioID" />
+					<s:hidden name="vv.status" value="3" />
 					<s:submit value="撤销编排"/>
 				</s:else>
-				
-
 			</td>
 		</tr>
 

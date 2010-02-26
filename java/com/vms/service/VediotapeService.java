@@ -67,8 +67,8 @@ public class VediotapeService implements IVediotapeService {
 	public List<Vediotape> findAllVideotapesForAudit(String propertyName,
 			int startIndex, int endIndex, boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
-		Object[] values = { new Integer(2), new Integer(3),	new Integer(7) };
-		return vediotapeDAO.findAllVideosInScope(Vediotape.PROP_STATUS + ".id",
+		Status[] values = { new Status(2), new Status(3), new Status(5), new Status(7) };
+		return vediotapeDAO.findAllVideosInScope(Vediotape.PROP_STATUS,
 				values, propertyName, startIndex, endIndex, asceding);
 
 	}

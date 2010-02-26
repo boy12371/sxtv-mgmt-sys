@@ -70,5 +70,10 @@
 			<result name="success">/vediotape/modifications.jsp</result>
 			<result name="input">/vediotape/modify.jsp</result>		
 		</action>
+		
+		<action name="doModificationBatch" class="vedioMgmt" method="doModificationBatch">
+			<result name="success">/vediotape/modifications.jsp</result>
+			<result name="input">/vediotape/modifications.jsp</result>		
+		</action>
 	</package>
 </struts>

@@ -40,12 +40,18 @@
 <div id="dynamicdata" align="center"></div>
 
 
-<div>
-<a align="left" href="./sys/toAddCompany.action">添加新公司</a>
+<div id="addComp" align="center">
 </div>
 
 <script type="text/javascript">
 	YAHOO.example.DynamicData = initDataTable();
+	var addEmpBtn = new YAHOO.widget.Button( {
+		type :"link",
+		id :"linkbutton6",
+		label :"添加新公司",
+		href :"./sys/toAddCompany.action",
+		container :"addComp"
+	});
 </script>
 </body>
 </html>

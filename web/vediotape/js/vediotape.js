@@ -313,10 +313,10 @@ function initDataTable() {
 	};
 }
 
-function initModificationPage() {
+function initToArrangeTable() {
 
 	var OnHeaderCheckboxClicked = function() {
-		var myHeaderCheckbox = YAHOO.util.Dom.get("header_checkbox");
+		var myHeaderCheckbox = YAHOO.util.Dom.get("Aheader_checkbox");
 		var headerChecked = myHeaderCheckbox.checked;
 		var myDataRecords = myDataTable.getRecordSet();
 		var checkBoxIds2Check = new Array();
@@ -342,7 +342,7 @@ function initModificationPage() {
 			checkbox.setAttribute('id', checkboxId);
 			checkbox.setAttribute('class',
 					YAHOO.widget.DataTable.CLASS_CHECKBOX);
-			checkbox.setAttribute('name','approved');
+			checkbox.setAttribute('name','toApproved');
 			elCell.innerHTML = "";
 			elCell.appendChild(checkbox);
 		}
@@ -378,7 +378,7 @@ function initModificationPage() {
 	// Column definitions
 	var myColumnDefs = [{
 		key : "checkbox",
-		label : "<input id='header_checkbox' class='yui-dt-checkbox' type='checkbox'>",
+		label : "<input id='Aheader_checkbox' class='yui-dt-checkbox' type='checkbox'>",
 		sortable : false,
 		resizeable : false,
 		formatter : FormatCheckboxCell
@@ -452,7 +452,7 @@ function initModificationPage() {
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.DataTable("makeToArrange", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
@@ -460,7 +460,165 @@ function initModificationPage() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	var headerCheckbox = YAHOO.util.Dom.get("header_checkbox");
+	var headerCheckbox = YAHOO.util.Dom.get("Aheader_checkbox");
+	YAHOO.util.Event.addListener(headerCheckbox, "click",
+			OnHeaderCheckboxClicked);
+	return {
+		ds : myDataSource,
+		dt : myDataTable
+	};
+
+}
+
+
+function initToPassTable() {
+
+	var OnHeaderCheckboxClicked = function() {
+		var myHeaderCheckbox = YAHOO.util.Dom.get("Pheader_checkbox");
+		var headerChecked = myHeaderCheckbox.checked;
+		var myDataRecords = myDataTable.getRecordSet();
+		var checkBoxIds2Check = new Array();
+		for (var i = 0; i < myDataRecords.getLength(); i++) {
+			checkBoxIds2Check.push(myDataRecords.getRecord(i).getData("id"));
+		}
+
+		var id2Check;
+		for (id in checkBoxIds2Check) {
+			id2Check = document.getElementById("row_" + checkBoxIds2Check[id]);
+			id2Check.checked = headerChecked;
+		}
+
+	}
+	// Helps in drawing the checkbox for all rows !
+	var FormatCheckboxCell = function(elCell, oRecord, oColumn, oData) {
+		// Create checkbox
+		var checkboxId = 'row_' + oRecord.getData()["id"];
+		var checkbox = YAHOO.util.Dom.get(checkboxId);
+		if (checkbox == null) {
+			checkbox = document.createElement('input');
+			checkbox.setAttribute('type', 'checkbox');
+			checkbox.setAttribute('id', checkboxId);
+			checkbox.setAttribute('class',
+					YAHOO.widget.DataTable.CLASS_CHECKBOX);
+			checkbox.setAttribute('name','toPassed');
+			elCell.innerHTML = "";
+			elCell.appendChild(checkbox);
+		}
+	}
+	var formatLink = function(elCell, oRecord, oColumn, sData) {
+		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForModification?optionName=modification&vid=";
+		href += sData;
+		href += "'>" + sData + "</a>";
+		elCell.innerHTML = href;
+	}
+
+	var formatCompany = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.companyName;
+	}
+	var formatTopic = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.topicName;
+	}
+	var formatSubject = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.subjectName;
+	}
+	var formatDate = function(elCell, oRecord, oColumn, sData) {
+		var idx = sData.indexOf("T");
+		if (idx != -1) {
+			elCell.innerHTML = sData.substring(0, idx);
+		} else {
+			elCell.innerHTML = sData;
+		}
+	}
+	var formatStatus = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = sData.status;
+	}
+
+	// Column definitions
+	var myColumnDefs = [{
+		key : "checkbox",
+		label : "<input id='Pheader_checkbox' class='yui-dt-checkbox' type='checkbox'>",
+		sortable : false,
+		resizeable : false,
+		formatter : FormatCheckboxCell
+	}, {
+		key : "id",
+		label : "编号",
+		sortable : true,
+		formatter : formatLink
+	}, {
+		key : "vedioName",
+		label : "剧目名称"
+	}, {
+		key : "topic",
+		label : "题材",
+		sortable : true,
+		formatter : formatTopic
+	}, {
+		key : "subject",
+		label : "栏目",
+		sortable : true,
+		formatter : formatSubject
+	}, {
+		key : "companyID",
+		label : "影视公司",
+		sortable : true,
+		formatter : formatCompany
+	}, {
+		key : "dateInput",
+		label : "收带日期",
+		sortable : true,
+		formatter : formatDate
+	}, {
+		key : "status",
+		label : "状态",
+		sortable : true,
+		formatter : formatStatus
+	}, {
+		key : "comments",
+		label : "备注"
+	}];
+
+	// DataSource instance
+	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/filterVideos.action?filter=5&");
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+	myDataSource.connXhrMode = "queueRequests";
+	myDataSource.responseSchema = {
+		resultsList : "records",
+		fields : ["id", "vedioName", "topic", "subject", "companyID",
+				"dateInput", "status", "comments"],
+		metaFields : {
+			totalRecords : "totalRecords" // Access to value in the server
+			// response
+		}
+	};
+
+	// DataTable configuration
+	var myConfigs = {
+		initialRequest : "sort=dateInput&dir=asc&startIndex=0&results=25",
+		dynamicData : true,
+		sortedBy : {
+			key : "dateInput",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
+		},
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 25,
+					template : YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+					rowsPerPageOptions : [25, 50, 100]
+				})
+
+	};
+
+	// DataTable instance
+
+	var myDataTable = new YAHOO.widget.DataTable("makeToPass", myColumnDefs,
+			myDataSource, myConfigs);
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
+	}
+	var headerCheckbox = YAHOO.util.Dom.get("Pheader_checkbox");
 	YAHOO.util.Event.addListener(headerCheckbox, "click",
 			OnHeaderCheckboxClicked);
 	return {

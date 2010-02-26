@@ -46,6 +46,9 @@ public class VediotapeMgmtAction extends BaseAction {
 	private VedioTapeVO vv;
 	private String jasonDataString;
 	
+	private List<String> toApproved;
+	private List<String> toPassed;
+	
 	
 	public String toAddingVedio() throws Exception {		
 		return SUCCESS;
@@ -195,7 +198,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	public String doModification()throws Exception{
 		try {
 			SessionUserInfo user = this.getUserInfo();
-			this.vedioService.auditingVideo(vv.getVedioID(), user, 5);
+			this.vedioService.auditingVideo(vv.getVedioID(), user, Integer.parseInt(vv.getStatus()));
 			this.addActionMessage("影带已进入重审状态,等待审核");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -207,6 +210,31 @@ public class VediotapeMgmtAction extends BaseAction {
 		
 	}
 	
+	public String doModificationBatch() throws Exception{
+		try {
+			SessionUserInfo user = this.getUserInfo();
+			if(toApproved!=null && !toApproved.isEmpty()){
+				for (String vidString : toApproved) {
+					this.vedioService.auditingVideo(vidString, user, 5);
+				}
+				
+			}
+			
+			if(toPassed!=null && !toPassed.isEmpty()){
+				for (String vidString : toPassed) {
+					this.vedioService.auditingVideo(vidString, user, 3);
+				}
+				
+			}			
+			this.addActionMessage("操作成功");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		this.addActionError("修改影带状态失败");
+		return INPUT;
+	}
 
 	
 	
@@ -330,6 +358,22 @@ public class VediotapeMgmtAction extends BaseAction {
 
 	public void setVv(VedioTapeVO vv) {
 		this.vv = vv;
+	}
+
+	public List<String> getToApproved() {
+		return toApproved;
+	}
+
+	public void setToApproved(List<String> toApproved) {
+		this.toApproved = toApproved;
+	}
+
+	public List<String> getToPassed() {
+		return toPassed;
+	}
+
+	public void setToPassed(List<String> toPassed) {
+		this.toPassed = toPassed;
 	}
 
 	

@@ -57,9 +57,8 @@
 	</tr>
 	<tr>
 		<td colspan="4" align="center">
-		<span id="go"> <span>
-		<input type="submit" value="搜索" />
-		</span> </span></td>
+			<div id="goSearch"></div>
+		</td>
 	</tr>
 </table>
 
@@ -68,15 +67,47 @@
 </script>
 </s:form>
 
+<s:form namespace="/vedio" action="doModificationBatch" method="post">
+<h1>已通过影带列表</h1>
+<p>选择并点击按钮，使影带进入待编排状态</p>
+<div id="makeToArrange" align="center"></div>
+<div align="center">
+	<div id="submitToPreArrange">
+	</div>
+</div>
 
 
-<h1>修改剧目</h1>
-<p>点击链接并修改剧目</p>
- 
-
-<div id="dynamicdata" align="center"></div>
+<h1>待排影带列表</h1>
+<p>选择并点击按钮，使影带进入通过状态</p>
+<div id="makeToPass" align="center"></div>
+<div align="center">
+	<div id="submitToPass">
+	</div>
+</div>
+</s:form>
 <script type="text/javascript">
-YAHOO.util.Event.addListener(window, "load", initModificationPage);
+YAHOO.util.Event.addListener(window, "load", initToArrangeTable);
+YAHOO.util.Event.addListener(window, "load", initToPassTable);
+var submitToPreArrange = new YAHOO.widget.Button({  
+	type: "button",  
+	label: "进入编排",  
+	id: "toArrageBtn",  
+	container: "submitToPreArrange" }
+	); 
+
+
+var submitToPass = new YAHOO.widget.Button({  
+	type: "button",  
+	label: "进入通过",  
+	id: "toPassBtn",  
+	container: "submitToPass" }
+	);
+var submitToPass = new YAHOO.widget.Button({  
+	type: "submit",  
+	label: "搜索",  
+	id: "search",  
+	container: "goSearch" }
+	);  
 </script>
 
 </body>
