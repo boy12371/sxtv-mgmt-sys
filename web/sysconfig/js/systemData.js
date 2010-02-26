@@ -40,6 +40,9 @@ function initStatusTable() {
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("vedioStatus", myColumnDefs,
 			myDataSource, myConfigs);
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -102,6 +105,9 @@ function initTopicTable() {
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("vedioTopic", myColumnDefs,
 			myDataSource, myConfigs);
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -164,6 +170,9 @@ function initSubjectTable() {
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("vedioSubject", myColumnDefs,
 			myDataSource, myConfigs);
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {

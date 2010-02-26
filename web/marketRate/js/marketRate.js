@@ -108,6 +108,9 @@ function initDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	
 	return {
 		ds :myDataSource,

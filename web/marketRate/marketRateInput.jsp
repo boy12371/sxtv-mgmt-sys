@@ -8,11 +8,21 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="yui-skin-sam">
 
 
 <h1>影带信息</h1>
@@ -21,9 +31,9 @@
 
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><s:property value="vv.id" /></td>
+		<td><s:property value="vv.vedioID" /></td>
 		<td><label>剧目名称</label></td>
-		<td><s:property value="vv.vedioName" /></td>
+		<td><s:property value="vv.name" /></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
@@ -47,20 +57,28 @@
 </table>
 <h1>收视率/市场份额</h1>
 <p>录入剧目收视率及市场份额</p>
-<s:form action="" namespace="" method="post">
+<s:form action="updateMarketRate" namespace="/vedio" method="post">
 	<table>
 		<tr>
 			<td><label>收视率</label></td>
-			<td><s:textfield cssClass="inputField" name="video.audienceRating" /> <s:hidden name="vv.id" /></td>
+			<td><s:textfield cssClass="inputField" name="vedio.audienceRating" /> <s:hidden name="vv.vedioID" /></td>
 			<td><label>市场份额</label></td>
-			<td><s:textfield cssClass="inputField" name="video.marketShare" /></td>
+			<td><s:textfield cssClass="inputField" name="vedio.marketShare" /></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><span id="go"> <span>
-			<button type="button">确 定</button>
-			</span> </span></td>
+			<td colspan="4" align="right">
+			<div id="submitBtn" align="center"></div>
+			</td>
 		</tr>
 	</table>
 </s:form>
+<script type="text/javascript">
+	var submitBtn = new YAHOO.widget.Button( {
+		type :"submit",
+		label :"确定",
+		id :"submitBtn",
+		container :"submitBtn"
+	});
+</script>
 </body>
 </html>

@@ -187,18 +187,18 @@ public class VediotapeService implements IVediotapeService {
 	public boolean updateVideoRatingMarket(String videoID, float market,
 			float rate) throws Exception {
 		// TODO Auto-generated method stub
-		String hql = "update Vediotape v set v.marketShare=?, set v.audienceRating=? where v.id=?";
+		String hql = "update Vediotape v set v.marketShare=?, v.audienceRating=? where v.id=?";
 		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] {
 				market, rate, videoID });
 		float vScore = 0;
-		if (rate < 70) {
-			vScore = 60;
-		} else if (rate >= 70 && rate < 80) {
-			vScore = 70;
-		} else if (rate >= 80 && rate < 90) {
-			vScore = 80;
+		if (rate < 0.7) {
+			vScore = 0.6f;
+		} else if (rate >= 0.7 && rate < 0.8) {
+			vScore = 0.7f;
+		} else if (rate >= 0.8 && rate < 0.9) {
+			vScore = 0.8f;
 		} else {
-			vScore = 90;
+			vScore = 0.9f;
 		}
 		if (result) {
 			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(
@@ -286,6 +286,14 @@ public class VediotapeService implements IVediotapeService {
 
 	public void setAuditingDAO(IAuditingDAO auditingDAO) {
 		this.auditingDAO = auditingDAO;
+	}
+
+	public IVedioscoreDAO getVedioscoreDAO() {
+		return vedioscoreDAO;
+	}
+
+	public void setVedioscoreDAO(IVedioscoreDAO vedioscoreDAO) {
+		this.vedioscoreDAO = vedioscoreDAO;
 	}
 
 }

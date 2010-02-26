@@ -342,7 +342,7 @@ function initToArrangeTable() {
 			checkbox.setAttribute('id', checkboxId);
 			checkbox.setAttribute('class',
 					YAHOO.widget.DataTable.CLASS_CHECKBOX);
-			checkbox.setAttribute('name','toApproved');
+			checkbox.setAttribute('name', 'toApproved');
 			elCell.innerHTML = "";
 			elCell.appendChild(checkbox);
 		}
@@ -454,6 +454,9 @@ function initToArrangeTable() {
 
 	var myDataTable = new YAHOO.widget.DataTable("makeToArrange", myColumnDefs,
 			myDataSource, myConfigs);
+	myDataTable.subscribe("initEvent", function() {
+				parent.resizeIframe();
+			});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -469,7 +472,6 @@ function initToArrangeTable() {
 	};
 
 }
-
 
 function initToPassTable() {
 
@@ -500,7 +502,7 @@ function initToPassTable() {
 			checkbox.setAttribute('id', checkboxId);
 			checkbox.setAttribute('class',
 					YAHOO.widget.DataTable.CLASS_CHECKBOX);
-			checkbox.setAttribute('name','toPassed');
+			checkbox.setAttribute('name', 'toPassed');
 			elCell.innerHTML = "";
 			elCell.appendChild(checkbox);
 		}
@@ -612,6 +614,10 @@ function initToPassTable() {
 
 	var myDataTable = new YAHOO.widget.DataTable("makeToPass", myColumnDefs,
 			myDataSource, myConfigs);
+
+	myDataTable.subscribe("initEvent", function() {
+				parent.resizeIframe();
+			});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {

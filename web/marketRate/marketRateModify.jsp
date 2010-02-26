@@ -73,9 +73,9 @@
 
 	<tr>
 		<td><label>影带编号</label></td>
-		<td><s:property value="vv.id" /></td>
+		<td><s:property value="vv.vedioID" /></td>
 		<td><label>剧目名称</label></td>
-		<td><s:property value="vv.vedioName" /></td>
+		<td><s:property value="vv.name" /></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
@@ -99,19 +99,18 @@
 </table>
 <h1>收视率/市场份额</h1>
 <p>录入剧目收视率及市场份额</p>
-<s:form action="" namespace="" method="post">
+<s:form action="updateMarketRate" namespace="/vedio" method="post">
 	<table>
 		<tr>
 			<td><label>收视率</label></td>
-			<td><s:textfield cssClass="inputField" name="video.audienceRating" /> <s:hidden name="video.id" /></td>
+			<td><s:textfield cssClass="inputField" name="vedio.audienceRating" /> <s:hidden name="vv.vedioID" /></td>
 			<td><label>市场份额</label></td>
-			<td><s:textfield cssClass="inputField" name="video.marketShare" /></td>
+			<td><s:textfield cssClass="inputField" name="vedio.marketShare" /></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
-			<span id="submit"> <span>
-			<button type="button">确 定</button>
-			</span> </span></td>
+			<div id="submitBtn" align="center"></div>
+			</td>
 		</tr>
 	</table>
 </s:form>
@@ -119,7 +118,12 @@
 
 <script type="text/javascript">
 	YAHOO.example.Centered = autoCompleteVideoName();	
-	var submitBtn = new YAHOO.widget.Button("submit");
+	var submitBtn = new YAHOO.widget.Button({
+		type :"submit",
+		label :"确定",
+		id :"submitBtn",
+		container :"submitBtn"
+	});
 </script>
 </body>
 </html>

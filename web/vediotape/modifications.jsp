@@ -90,7 +90,7 @@ YAHOO.util.Event.addListener(window, "load", initToArrangeTable);
 YAHOO.util.Event.addListener(window, "load", initToPassTable);
 var submitToPreArrange = new YAHOO.widget.Button({  
 	type: "button",  
-	label: "进入编排",  
+	label: "批为编排",  
 	id: "toArrageBtn",  
 	container: "submitToPreArrange" }
 	); 
@@ -98,7 +98,7 @@ var submitToPreArrange = new YAHOO.widget.Button({
 
 var submitToPass = new YAHOO.widget.Button({  
 	type: "button",  
-	label: "进入通过",  
+	label: "批为通过",  
 	id: "toPassBtn",  
 	container: "submitToPass" }
 	);

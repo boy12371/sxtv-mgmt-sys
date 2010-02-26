@@ -148,6 +148,9 @@ function initDataTable() {
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {

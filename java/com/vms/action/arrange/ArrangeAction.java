@@ -67,7 +67,7 @@ public class ArrangeAction extends BaseAction {
 	
 	public String getUnarrangedTapes() throws Exception {
 		unArrangedTable = JSONDataTableUtils.initJSONDataTable(getRequest());
-		int status = 3;
+		int status = 2;
 		try {
 			List<Vediotape> tapes = tapeService.findVideotapeByStatus(
 					status, 

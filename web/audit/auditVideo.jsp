@@ -72,10 +72,10 @@
 		</tr>
 		<tr>
 			<td colspan="4">
-			<s:if test="vv.status == 3">
+			<s:if test="vedio.status.id == 3">
 				<s:radio list="#{7:'退 回'}" name="operation"></s:radio>
 			</s:if>
-			<s:elseif test="vv.status == 2">			
+			<s:elseif test="vedio.status.id == 2">			
 				<s:radio list="#{3:'通 过',7:'退 回'}" name="operation"></s:radio>
 			</s:elseif>
 			<s:else>
