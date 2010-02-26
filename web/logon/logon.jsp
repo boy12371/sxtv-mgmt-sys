@@ -4,9 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-++<%=request.getContextPath() %>
-<br/>
-==${pageContext.request.contextPath}
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/logon/css/logon.css" />
 </head>
 
@@ -26,7 +24,6 @@
 		</tr>
 		<tr>
 			<td class="ml"></td>
-			
 			<td style="width: 400px; height: 100px;" class="mc">
 				<table cellspacing="0" cellpadding="0" border="0">
 					<tr>

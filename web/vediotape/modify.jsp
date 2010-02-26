@@ -51,7 +51,18 @@
 		</tr>
 
 		<tr>
-			<td colspan="4"><s:submit value="修改完成"/></td>
+			<td colspan="4">
+				<s:if test="vv.status==3">
+					<s:hidden name="vv.vedioID" />
+					<s:submit value="修改完成"/>
+				</s:if>				
+				<s:else>
+					<s:hidden name="vv.vedioID" />
+					<s:submit value="撤销编排"/>
+				</s:else>
+				
+
+			</td>
 		</tr>
 
 	</table>

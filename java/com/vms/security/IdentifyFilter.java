@@ -44,7 +44,7 @@ public class IdentifyFilter implements Filter {
 		if (mustAuth) {
 			Object sessionUser = request.getSession().getAttribute("SessionUserInfo");
 			if (sessionUser == null) {
-				response.sendRedirect("/tv/index.jsp");
+				response.sendRedirect("/tv/logon/toLogon.action");
 			}
 		}
 

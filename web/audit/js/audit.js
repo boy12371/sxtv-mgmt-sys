@@ -1,7 +1,7 @@
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		if (oRecord.getData("status").id != 4 && oRecord.getData("status").id != 3) {
+		if (oRecord.getData("status").id != 5 ) {
 			var href = "<a href='./audit/findVideoByNameOrID?optionName=auditing&vid=";
 			href += sData;
 			href += "'>" + sData + "</a>";

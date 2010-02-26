@@ -202,11 +202,11 @@ function initDataTable() {
 
 		var videoName = YAHOO.util.Dom.get("vname").value;
 		var videoId = YAHOO.util.Dom.get("vid").value;
-		if(videoId.length==0 || videoName.length==0){
+		if (videoId.length == 0 || videoName.length == 0) {
 			jAlert("信息不完整", '错误');
 			return false;
 		}
-		
+
 		var url = encodeURI("/tv/vedio/isVediotapeExsits.action?vedioName="
 				+ videoName);
 		YAHOO.util.Connect.asyncRequest('GET', encodeURI(url), callbacks);
@@ -314,6 +314,39 @@ function initDataTable() {
 }
 
 function initModificationPage() {
+
+	var OnHeaderCheckboxClicked = function() {
+		var myHeaderCheckbox = YAHOO.util.Dom.get("header_checkbox");
+		var headerChecked = myHeaderCheckbox.checked;
+		var myDataRecords = myDataTable.getRecordSet();
+		var checkBoxIds2Check = new Array();
+		for (var i = 0; i < myDataRecords.getLength(); i++) {
+			checkBoxIds2Check.push(myDataRecords.getRecord(i).getData("id"));
+		}
+
+		var id2Check;
+		for (id in checkBoxIds2Check) {
+			id2Check = document.getElementById("row_" + checkBoxIds2Check[id]);
+			id2Check.checked = headerChecked;
+		}
+
+	}
+	// Helps in drawing the checkbox for all rows !
+	var FormatCheckboxCell = function(elCell, oRecord, oColumn, oData) {
+		// Create checkbox
+		var checkboxId = 'row_' + oRecord.getData()["id"];
+		var checkbox = YAHOO.util.Dom.get(checkboxId);
+		if (checkbox == null) {
+			checkbox = document.createElement('input');
+			checkbox.setAttribute('type', 'checkbox');
+			checkbox.setAttribute('id', checkboxId);
+			checkbox.setAttribute('class',
+					YAHOO.widget.DataTable.CLASS_CHECKBOX);
+			checkbox.setAttribute('name','approved');
+			elCell.innerHTML = "";
+			elCell.appendChild(checkbox);
+		}
+	}
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
 		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForModification?optionName=modification&vid=";
 		href += sData;
@@ -344,45 +377,51 @@ function initModificationPage() {
 
 	// Column definitions
 	var myColumnDefs = [{
-				key : "id",
-				label : "编号",
-				sortable : true,
-				formatter : formatLink
-			}, {
-				key : "vedioName",
-				label : "剧目名称"
-			}, {
-				key : "topic",
-				label : "题材",
-				sortable : true,
-				formatter : formatTopic
-			}, {
-				key : "subject",
-				label : "栏目",
-				sortable : true,
-				formatter : formatSubject
-			}, {
-				key : "companyID",
-				label : "影视公司",
-				sortable : true,
-				formatter : formatCompany
-			}, {
-				key : "dateInput",
-				label : "收带日期",
-				sortable : true,
-				formatter : formatDate
-			}, {
-				key : "status",
-				label : "状态",
-				sortable : true,
-				formatter : formatStatus
-			}, {
-				key : "comments",
-				label : "备注"
-			}];
+		key : "checkbox",
+		label : "<input id='header_checkbox' class='yui-dt-checkbox' type='checkbox'>",
+		sortable : false,
+		resizeable : false,
+		formatter : FormatCheckboxCell
+	}, {
+		key : "id",
+		label : "编号",
+		sortable : true,
+		formatter : formatLink
+	}, {
+		key : "vedioName",
+		label : "剧目名称"
+	}, {
+		key : "topic",
+		label : "题材",
+		sortable : true,
+		formatter : formatTopic
+	}, {
+		key : "subject",
+		label : "栏目",
+		sortable : true,
+		formatter : formatSubject
+	}, {
+		key : "companyID",
+		label : "影视公司",
+		sortable : true,
+		formatter : formatCompany
+	}, {
+		key : "dateInput",
+		label : "收带日期",
+		sortable : true,
+		formatter : formatDate
+	}, {
+		key : "status",
+		label : "状态",
+		sortable : true,
+		formatter : formatStatus
+	}, {
+		key : "comments",
+		label : "备注"
+	}];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/filterVideos.action?filter=4&");
+	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/filterVideos.action?filter=3&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.connXhrMode = "queueRequests";
 	myDataSource.responseSchema = {
@@ -421,7 +460,9 @@ function initModificationPage() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-
+	var headerCheckbox = YAHOO.util.Dom.get("header_checkbox");
+	YAHOO.util.Event.addListener(headerCheckbox, "click",
+			OnHeaderCheckboxClicked);
 	return {
 		ds : myDataSource,
 		dt : myDataTable

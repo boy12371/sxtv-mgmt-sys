@@ -102,9 +102,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	public String toMarketRateModify()throws Exception{
 		return SUCCESS;
 	}
-	public String toUpdateVideoInfo() throws Exception{
-		return this.SUCCESS;
-	}
+	
 	
 	public String updateMarketRate()throws Exception{
 		vedioService.updateVideoRatingMarket(vedio.getId(), vedio.getMarketShare(), vedio.getAudienceRating());
@@ -131,26 +129,26 @@ public class VediotapeMgmtAction extends BaseAction {
 			String videoid = vedio.getId();
 			if(null != optionName && !"".equals(optionName)){
 				if(optionName.equals("auditing")){
-//					if(status == CommonVariable.VIDEO_STATUS_AUDITING || status ==CommonVariable.VIDEO_STATUS_REAUDITING ){
-//						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
-//						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
-//						return SUCCESS;
-//					}else if(status == CommonVariable.VIDEO_STATUS_MODIFICATION) {
-//						this.addActionError("影带状态正在修改中，不能审核");
-//						return INPUT;
-//					}else{
-//						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能审核");
-//						return INPUT;
-//					}					
-//				}else if(optionName.equals("modification")){					
-//					if(status == CommonVariable.VIDEO_STATUS_MODIFICATION){
-//						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
-//						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
-//						return SUCCESS;
-//					}else{
-//						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
-//						return INPUT;
-//					}					
+					if(status == CommonVariable.VIDEO_STATUS_AUDITING || status ==CommonVariable.VIDEO_STATUS_REJECTION || status == CommonVariable.VIDEO_STATUS_PASS ){
+						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
+						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+						return SUCCESS;
+					}else if(status == CommonVariable.VIDEO_STATUS_PRE_ARRANGE) {
+						this.addActionError("影带已进入编排，不能审核");						
+						return INPUT;
+					}else{
+						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能审核");
+						return INPUT;
+					}					
+				}else if(optionName.equals("modification")){					
+					if(status == CommonVariable.VIDEO_STATUS_PASS || status == CommonVariable.VIDEO_STATUS_PRE_ARRANGE){
+						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
+						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+						return SUCCESS;
+					}else{
+						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
+						return INPUT;
+					}					
 				}else if(optionName.equals("marketRate") || optionName.equals("modifyMarketRate")){
 					if(status == CommonVariable.VIDEO_STATUS_PLAYED){
 						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
@@ -168,6 +166,11 @@ public class VediotapeMgmtAction extends BaseAction {
 		return this.INPUT;
 	}
 	
+	
+	public String toUpdateVideoInfo() throws Exception{
+		return this.SUCCESS;
+	}
+	
 	public String updateVideoInfo() throws Exception {
 		try {
 			this.vedioService.updateVideoInfo(vedio);
@@ -182,7 +185,14 @@ public class VediotapeMgmtAction extends BaseAction {
 	}
 	
 	
-	public String modificationFinish()throws Exception{
+	
+	public String toVideoModifications()throws Exception{
+		return SUCCESS;
+		
+	}
+	
+	
+	public String doModification()throws Exception{
 		try {
 			SessionUserInfo user = this.getUserInfo();
 			this.vedioService.auditingVideo(vv.getVedioID(), user, 5);
@@ -197,10 +207,7 @@ public class VediotapeMgmtAction extends BaseAction {
 		
 	}
 	
-	public String toVideoModifications()throws Exception{
-		return SUCCESS;
-		
-	}
+
 	
 	
 	
