@@ -38,4 +38,8 @@ public interface IVedioscoreService {
 	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception;
 	
 	public VedioScoreVO getTapeScoreByIdAndUser(String videoID, int userID) throws Exception;
+	
+	public List<User> findAllExaminer() throws Exception;
+	
+	public List<User> findExaminedUsersOfTape(String videoID) throws Exception;
 }

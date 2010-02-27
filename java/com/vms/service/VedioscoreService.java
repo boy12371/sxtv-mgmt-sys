@@ -29,11 +29,30 @@ public class VedioscoreService implements IVedioscoreService {
 
 	@Override
 	public List<VedioTapeVO> getAllUnExaminedVedioes(int startIndex, int endIndex) throws Exception {
+		//get all examiners
+		List<User> users = findAllExaminer();
+		List<String> names = new ArrayList<String>();
+		for(User user:users){
+			names.add(user.getEmployee().getName());
+		}
+		
 		Status status = new Status(1);
 		List<Vediotape> tapes = vediotapeDAO.findVedioesByStatus(status, startIndex, endIndex);
 		List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
 		for (Vediotape tape : tapes) {
-			tapeVOs.add(new VedioTapeVO(tape));
+			List<User> examinedUsers = findExaminedUsersOfTape(tape.getId());
+			List<String> examinedNames = new ArrayList<String>();
+			for(User user:examinedUsers){
+				examinedNames.add(user.getEmployee().getName());
+			}
+			List<String> temp = new ArrayList<String>(names);
+			temp.removeAll(examinedNames);
+			
+			VedioTapeVO tapeVO = new VedioTapeVO(tape);
+			tapeVO.setExaminedEmployees(examinedNames);
+			tapeVO.setUnexaminedEmployees(temp);
+			
+			tapeVOs.add(tapeVO);
 		}
 		return tapeVOs;
 	}
@@ -97,6 +116,26 @@ public class VedioscoreService implements IVedioscoreService {
 		}
 		VedioScoreVO vs = new VedioScoreVO(list.get(0));
 		return vs;
+	}
+	
+	public List<User> findExaminedUsersOfTape(String videoID) throws Exception{
+		List<User> users = new ArrayList<User>();
+		List<Vedioscore> list = vedioscoreDAO.findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(videoID), -1, -1, Vedioscore.PROP_DATE_EXAMINE, true);
+		if(null != list || 0 != list.size()){
+			for(Vedioscore score:list){
+				users.add(score.getExaminer());
+			}
+		}
+		return users;
+	}
+	
+	public List<User> findAllExaminer() throws Exception{
+		List<User> users;
+		users = vedioscoreDAO.findAll(User.class);
+		if(null == users || 0 == users.size()){
+			users = new ArrayList<User>();
+		}
+		return users;
 	}
 
 	public void setVedioscoreDAO(IVedioscoreDAO vedioscoreDAO) {

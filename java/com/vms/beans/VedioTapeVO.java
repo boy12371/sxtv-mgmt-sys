@@ -1,6 +1,7 @@
 package com.vms.beans;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.vms.db.bean.Vediotape;
@@ -23,6 +24,10 @@ public class VedioTapeVO {
 	private int marked;
 	
 	private String comments;
+	
+	private List<String> examinedEmployees;
+	
+	private List<String> unexaminedEmployees;
 	
 	public VedioTapeVO(){}
 	
@@ -125,6 +130,22 @@ public class VedioTapeVO {
 
 	public String getComments() {
 		return comments;
+	}
+
+	public void setExaminedEmployees(List<String> examinedEmployees) {
+		this.examinedEmployees = examinedEmployees;
+	}
+
+	public List<String> getExaminedEmployees() {
+		return examinedEmployees;
+	}
+
+	public void setUnexaminedEmployees(List<String> unexaminedEmployees) {
+		this.unexaminedEmployees = unexaminedEmployees;
+	}
+
+	public List<String> getUnexaminedEmployees() {
+		return unexaminedEmployees;
 	}
 	
 }
