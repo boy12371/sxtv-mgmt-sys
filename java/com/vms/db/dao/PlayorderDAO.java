@@ -41,6 +41,7 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 			plog.setVedioID(po.getVedioID());
 			plog.setOperation("移除");
 			plog.setAuditor(new User(userID));
+			plog.setFromDate(po.getPlayDate());
 			plog.setDate(new Date());
 			this.saveObject(plog);
 			

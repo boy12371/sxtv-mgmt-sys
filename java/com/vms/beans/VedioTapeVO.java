@@ -20,6 +20,10 @@ public class VedioTapeVO {
 	
 	private Date playDate;
 	
+	private int marked;
+	
+	private String comments;
+	
 	public VedioTapeVO(){}
 	
 	public VedioTapeVO(Vediotape tape){
@@ -105,6 +109,22 @@ public class VedioTapeVO {
 
 	public Date getPlayDate() {
 		return playDate;
+	}
+
+	public void setMarked(int marked) {
+		this.marked = marked;
+	}
+
+	public int getMarked() {
+		return marked;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getComments() {
+		return comments;
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.vms.beans.VedioTapeVO;
+import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
 
 public interface IArrangeService {
@@ -16,4 +17,6 @@ public interface IArrangeService {
 	public List<Playorder> findPlayorders(Date month) throws Exception;
 	
 	public void deletePlayOrder(List<Playorder> pos, int userID) throws Exception;
+	
+	public Playchangelog getDelInfoFormArrangeLog(String videoID) throws Exception;
 }

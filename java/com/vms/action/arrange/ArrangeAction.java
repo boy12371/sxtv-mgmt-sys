@@ -18,6 +18,7 @@ import com.vms.beans.Pair;
 import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
+import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
@@ -77,8 +78,24 @@ public class ArrangeAction extends BaseAction {
 					unArrangedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			
 			List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
+			int pos = 0;
 			for(Vediotape tape:tapes){
-				tapeVOs.add(new VedioTapeVO(tape));
+				//is this tape deleted from arranged list
+				Playchangelog plog = arrangeService.getDelInfoFormArrangeLog(tape.getId());
+				VedioTapeVO tapev = new VedioTapeVO(tape);
+				if(null != plog){
+					Date date = plog.getFromDate();
+					DateFormat dFormat = new SimpleDateFormat("yyyy年MM月dd日");
+					String time = dFormat.format(date);
+					String comments = "该影带从已编排列表的" + time + "移除。";
+					tapev.setMarked(9);
+					tapev.setComments(comments);
+					tapeVOs.add(pos, tapev);
+					pos++;
+				}else{
+					tapev.setMarked(0);
+					tapeVOs.add(tapev);
+				}
 			}
 			JSONDataTableUtils.setupJSONDataTable(tapeVOs, unArrangedTable, tapeVOs.size());
 		} catch (Exception e) {

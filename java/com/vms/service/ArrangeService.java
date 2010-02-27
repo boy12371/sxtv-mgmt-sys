@@ -7,7 +7,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.vms.beans.VedioTapeVO;
+import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
+import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IPlayorderDAO;
 import com.vms.service.iface.IArrangeService;
 
@@ -56,6 +58,13 @@ public class ArrangeService implements IArrangeService{
 
 	public IPlayorderDAO getPlayorderDAO() {
 		return playorderDAO;
+	}
+	
+	public Playchangelog getDelInfoFormArrangeLog(String videoID) throws Exception{
+		List<Playchangelog> list = playorderDAO.findObjectByField(Playchangelog.class, Playchangelog.PROP_VEDIO_I_D, new Vediotape(videoID), -1, -1, Playchangelog.PROP_DATE, false);
+		if(null==list || 0==list.size()) return null;
+		if(list.get(0).getOperation().equals("移除")) return list.get(0);
+		return null;
 	}
 
 }
