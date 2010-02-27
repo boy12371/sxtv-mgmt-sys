@@ -29,6 +29,15 @@ function initDataTable() {
 			window.location="/tv/examine/toAudienceExamine.action?tape.vedioID=" + vedioID;
 		}
 	}
+	
+	var formatProgress = function(elCell, oRecord, oColumn, sData) {
+		var idx = sData.indexOf("T");
+		if (idx != -1) {
+			elCell.innerHTML = sData.substring(0, idx);
+		} else {
+			elCell.innerHTML = sData;
+		}
+	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -50,7 +59,7 @@ function initDataTable() {
 		formatter :formatDate
 	}, {
 		key :"status",
-		label :"状态"
+		label :"打分进度"
 	}, {
 		key :"company",
 		label :"公司"
