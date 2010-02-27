@@ -7,8 +7,8 @@
 		</Module>
 		
 		<Module id="tapeExam" name="影带打分" url="">
-			<ModuleItem id="exam" name="待打分" url="/tv/examine/toUnExaminedTapes.action"/>
-			<ModuleItem id="examView" name="打分记录" url="/tv/examine/toExaminedTapes.action"/>
+			<ModuleItem id="exam" name="打分" url="/tv/examine/toUnExaminedTapes.action"/>
+			<ModuleItem id="examView" name="修改打分" url="/tv/examine/toExaminedTapes.action"/>
 			<ModuleItem id="tapeModify" name="查看编辑影带信息" url="/tv/vedio/toUpdateVideoInfo.action"/>
 			 
 		</Module>
