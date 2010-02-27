@@ -127,7 +127,7 @@ $(document).ready(function() {
         		if(message.indexOf("SUCCESS") == -1){
         			jAlert(message, '错误');
             	}else{
-            		jAlert(message, '提示');
+            		jAlert("密码修改成功", '提示');
             		 $.unblockUI();
                 }
         	},

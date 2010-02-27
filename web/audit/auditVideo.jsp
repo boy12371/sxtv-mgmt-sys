@@ -35,6 +35,8 @@
 <h1>剧目详细信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 <s:form action="videoOperation" method="post" namespace="/audit">
+<div align="center">
+
 	<table class="inputTable">
 		<tr>
 			<td><label>编号</label></td>
@@ -86,10 +88,13 @@
 		</tr>
 
 		<tr>
-			<td colspan="4"><s:submit value="确定"/></td>
+			<td colspan="4">
+				<div id="submit"></div>
+			</td>
 		</tr>
 
 	</table>
+</div>
 </s:form>
 <div></div>
 <h1>评分信息</h1>
@@ -99,6 +104,12 @@
 
 <script type="text/javascript">
 	YAHOO.util.Event.addListener(window, "load", initScoreDataTable());
+	var submitToPreArrange = new YAHOO.widget.Button({  
+		type: "submit",  
+		label: "确定",  
+		id: "submitBtn",  
+		container: "submit" }
+		); 
 </script>
 </body>
 </html>
