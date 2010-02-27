@@ -22,9 +22,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/arrange/js/arrangedHistory.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
 <body class="yui-skin-sam">
-
+<%@ include file="/common/errorMsg.jsp" %>
 <h1>编排信息</h1>
 <s:actionmessage/>
 <s:actionerror/>

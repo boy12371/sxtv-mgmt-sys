@@ -29,11 +29,11 @@
 <s:actionmessage/>
 <s:actionerror/>
 
-<p>未编排影带</p>
+<p>未编排影带列表，点击第一列图标将影带移入编排列表</p>
 <br />
 <div id="unArrangeTableDiv" align="center"></div>
 
-<p>已编排影带</p>
+<p>已编排影带列表，点击第一列图标可将影带移除编排列表，拖动记录可以调节播放时间。</p>
 <br />
 <div id="selectMonthDiv" style="width: 800px; height: 30px; margin-left: 68px;">
 	<s:select list="monthList" listKey="key" listValue="value" 

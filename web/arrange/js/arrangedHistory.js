@@ -35,6 +35,10 @@ function selectYearFunc(self){
 	if(firstYear == year) startMonth = firstMonth;
 	if(endYear == year) stopMonth = endMonth;
 	selMonth.options.length=0;
+	if(firstYear == endYear && startMonth > stopMonth){
+		displayErrorMsg("暂无历史编排记录。");
+		return;
+	}
 	for(var i=startMonth;i<=stopMonth;i++){
 		selMonth.options.add(new Option(i+"月",i));
 	}
