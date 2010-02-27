@@ -40,6 +40,28 @@ function initUnArrangeTable() {
 		elCell.style.padding="2px";
 		elCell.style.width="20px";
 	};
+	
+	var myRowFormatter = function(elTr, oRecord){
+		var xData = oRecord.getData();
+		if(typeof(xData.marked)!="undefined" && 9==xData.marked){
+//			elTr.className = elTr.className + YAHOO.widget.DataTable.CLASS_HIGHLIGHTED;
+			elTr.className = elTr.className + " markedRow";
+			elTr.title = xData.comments;
+		}
+		return true;
+	};
+	
+	var sortCustom = function(a, b, desc, field) { 
+		if(!YAHOO.lang.isValue(a)) { 
+			return (!YAHOO.lang.isValue(b)) ? 0 : 1; 
+		} else if(!YAHOO.lang.isValue(b)) { 
+			return -1; 
+		} 
+		//unArrangeTable.sortColumn();
+		var comp = YAHOO.util.Sort.compare; 
+		var result = comp(a.getData("marked"), b.getData("marked"), true); 
+		return (result !== 0) ? result : comp(a.getData(field), b.getData(field), desc); 
+	}; 
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -50,27 +72,32 @@ function initUnArrangeTable() {
 	}, {
 	    key :"vedioID",
 	    label :"影带编号",
-	    sortable :true
+	    sortable :true,
+	    sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"name",
 		label :"影带名称"
 	}, {
 		key :"subject",
 		label :"栏目",
-		sortable :true
+		sortable :true,
+		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"topic",
 		label :"题材",
-		sortable :true
+		sortable :true,
+		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"dateComing",
 		label :"收带日期",
 		sortable :true,
-		formatter :formatDate
+		formatter :formatDate,
+		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"company",
 		label :"公司",
-		sortable :true
+		sortable :true,
+		sortOptions:{sortFunction:sortCustom}
 	}];
 
 	// DataSource instance
@@ -79,7 +106,7 @@ function initUnArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "vedioID", "name", "subject", "topic", "dateComing", "company" ],
+		fields : [ "vedioID", "name", "subject", "topic", "dateComing", "company", "marked", "comments"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -91,7 +118,8 @@ function initUnArrangeTable() {
 			key :"dateComing",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator( {rowsPerPage:10})
+		paginator :new YAHOO.widget.Paginator( {rowsPerPage:10}),
+		formatRow: myRowFormatter
 	};
 	// DataTable instance
 	unArrangeTable = new YAHOO.widget.DataTable("unArrangeTableDiv", myColumnDefs,
@@ -101,6 +129,7 @@ function initUnArrangeTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
+	
 	return {
 		ds :myDataSource,
 		dt :unArrangeTable

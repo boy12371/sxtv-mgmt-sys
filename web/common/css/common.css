@@ -77,6 +77,16 @@ label {
 
 }
 
+.yui-skin-sam tr.yui-dt-highlighted, .yui-skin-sam tr.yui-dt-highlighted td.yui-dt-asc, .yui-skin-sam tr.yui-dt-highlighted td.yui-dt-desc, .yui-skin-sam tr.yui-dt-even td.yui-dt-highlighted, .yui-skin-sam tr.yui-dt-odd td.yui-dt-highlighted {
+	background-color:#B2D2FF;
+	cursor:auto;
+}
+
+.markedRow{
+	color:#AA0000;
+	font-weight:bold;
+}
+
 .autoComplete{
 	width:200px !important;
 	position:inherit !important;
