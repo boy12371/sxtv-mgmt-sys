@@ -71,7 +71,7 @@
 			<td colspan="4">
 			<s:if test="vedio.status.id==3">
 				<s:hidden name="vv.status" value="5" />
-				<div id="submitDiv"></div>
+				<div id="submitDiv" align="center"></div>
 				<script type="text/javascript">
 				var submitToPass = new YAHOO.widget.Button({  
 					type: "submit",  
@@ -80,9 +80,10 @@
 					container: "submitDiv" }
 					);
 				</script>
-			</s:if> <s:else>
+			</s:if> 
+			<s:else>
 				<s:hidden name="vv.status" value="3" />
-				<div id="submitDiv"></div>
+				<div id="submitDiv" align="center"></div>
 
 				<script type="text/javascript">
 				var submitToPass = new YAHOO.widget.Button({  
