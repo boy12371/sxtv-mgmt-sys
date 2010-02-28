@@ -31,12 +31,44 @@ function initDataTable() {
 	}
 	
 	var formatProgress = function(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
-		} else {
-			elCell.innerHTML = sData;
+		var infoDiv = document.createElement("div");
+		infoDiv.align="center";
+		
+		var examinedNames = oRecord.getData("examinedEmployees");
+		var unexaminedNames = oRecord.getData("unexaminedEmployees");
+		var numBar = document.createElement("div");
+		numBar.innerHTML = examinedNames.length + " / " + (examinedNames.length+unexaminedNames.length);
+		infoDiv.appendChild(numBar);
+		
+		var progressBar = document.createElement("div");
+		infoDiv.appendChild(progressBar);
+		progressBar.className = "progressBar";
+		progressBar.align="left";
+		
+		var okBar = document.createElement("div");
+		progressBar.appendChild(okBar);
+		okBar.className = "okBar";
+		
+		var percent = examinedNames.length/(examinedNames.length+unexaminedNames.length)*100;
+		okBar.style.width = percent + "%";
+		
+		var title = "已打分人员：";
+		for(var i=0;i<examinedNames.length;i++){
+			title += examinedNames[i] + ", "
 		}
+		if("," == title.charAt(title.length-2)){
+			title = title.substring(0,title.length-2);
+		}
+		title += "    \n未打分人员：";
+		for(var i=0;i<unexaminedNames.length;i++){
+			title += unexaminedNames[i] + ", "
+		}
+		if("," == title.charAt(title.length-2)){
+			title = title.substring(0,title.length-2);
+		}
+
+		elCell.title = title;
+		elCell.appendChild(infoDiv);
 	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
@@ -59,7 +91,8 @@ function initDataTable() {
 		formatter :formatDate
 	}, {
 		key :"status",
-		label :"打分进度"
+		label :"打分进度",
+		formatter : formatProgress
 	}, {
 		key :"company",
 		label :"公司"
@@ -75,7 +108,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "vedioID", "name", "subject", "topic", "dateComing", "status", "company" ],
+		fields : [ "vedioID", "name", "subject", "topic", "dateComing", "status", "company", "examinedEmployees", "unexaminedEmployees" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}

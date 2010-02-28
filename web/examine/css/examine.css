@@ -1,1 +1,11 @@
+.progressBar{
+	width:100px;
+	height:5px;
+	background-color:#CCCCCC;	
+	border:1px solid #000000;	
+}
 
+.okBar{
+	height:5px;
+	background-color:#73C167;		
+}
