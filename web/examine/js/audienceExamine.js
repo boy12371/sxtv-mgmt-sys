@@ -1,4 +1,5 @@
 var myDataTable;
+var cXData;
 function initDataTable() {
 	var formatDate = function(elCell, oRecord, oColumn, sData) {
 		var idx = sData.indexOf("T");
@@ -84,11 +85,11 @@ function addAction(){
 	var tapeName = document.getElementById("vedioName").innerHTML;
 	var audience = document.getElementById("audienceName").value;
 	if(null==audience || ""==audience){
-		alert("请输入观众姓名。");
+		jAlert("请输入观众姓名。");
 		return;
 	}
 	if(!document.getElementById("look").checked && !document.getElementById("unlook").checked){
-		alert("请选择观众评价。");
+		jAlert("请选择观众评价。");
 		return;
 	}
 	var result = document.getElementById("look").checked?"看":"不看";
@@ -102,20 +103,27 @@ function addAction(){
 		//mark this row is new need to be submit. 1:insert 2:update
 		marked:1
 	};
+	cXData = xData;
 	var pos = getRecordFormTable(xData);
 	if(null != pos){
-		var x = confirm("该观众已经评价过此影带，如果确定，原来的评价将被更新，否则请取消。");
-		if(x){
-			var id = myDataTable.getRecord(pos).getData("id");
-			xData.marked = 2;
-			xData.id = id;
-			myDataTable.deleteRow(pos);  
-		}else{
-			return;
-		}
+		jConfirm(
+			"该观众已经评价过此影带，如果确定，原来的评价将被更新，否则请取消。",
+			"确认",
+			function(r){
+			if(r){
+				var id = myDataTable.getRecord(pos).getData("id");
+				cXData.marked = 2;
+				cXData.id = id;
+				myDataTable.deleteRow(pos);  
+				myDataTable.addRow(xData,0);
+			}else{
+				return;
+			}	
+		});
+	}else{
+		myDataTable.addRow(xData,0);
+//		markRow(0);
 	}
-	myDataTable.addRow(xData,0);
-	markRow(0);
 }
 
 function submitAction(){

@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
 <link rel="stylesheet" type="text/css" href="./css/examine.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
@@ -25,6 +26,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/examine/js/audienceExamine.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 </head>
 <body class="yui-skin-sam">
 
