@@ -70,7 +70,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	private List<Vediotape> convertJASSONStringToVedio() throws ParseException{
 		JSONArray jasonArray = JSONArray.fromObject(this.jasonDataString);
-		DateFormat format = new SimpleDateFormat();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		if(jasonArray.isArray() && !jasonArray.isEmpty()){
 			List<Vediotape> vedios = new ArrayList<Vediotape>();
