@@ -79,7 +79,7 @@ body {
 
 		<table><tr style="height: 40px;">
 			<td>&nbsp;</td>
-			<td><a id="changePassword" href="#">修改密码</a> ｜ <a>退出</a></td>
+			<td><a id="changePassword" href="#">修改密码</a> ｜ <a id="logout" href="#">退出</a></td>
 		</tr></table>
 	</div>
 </td>
@@ -130,6 +130,21 @@ YAHOO.example.Centered = autoCompleteVideoName();
 <div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='no' style="height: 650px"
 	src="" onload="resizeIframe();return false;"> </iframe></div>
 <div style="margin-top: 30px;" /></div>
+
+<div class="footer" align="center">
+	<ul>
+	<li><a href="#">首页</a>|</li>
+	<li><a href="#">About Us</a>|</li>
+	<li><a href="#">Services</a>|</li>
+	<li><a href="#">Solutions</a>|</li>
+	<li><a href="#">Testimonials</a>|</li>
+	<li><a href="#">Projects</a>|</li>
+	<li><a href="#">Online Jobs</a>|</li>
+	<li><a href="#">Login</a>|</li>
+	<li><a href="#">Submission</a>|</li>
+	<li><a href="#">Contact Us</a></li>
+	</ul>
+</div>
 <script language="JavaScript">
 	( function() {
 		var tabView = new YAHOO.widget.TabView('tabView');

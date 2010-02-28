@@ -68,6 +68,32 @@ ul,li{list-style:none; padding:0; margin:0;}
 	background-color:#EBF4FB;
 	}
 	
+.footer{
+	background-image:url(../images/footer_bg.gif);
+	background-repeat:repeat-x;
+	height:70px;
+	width:100%;
+	}
+	
+.footer ul{
+	line-height:0;
+	list-style-type:none;
+	padding-top:20px;
+	margin:auto;
+	width:780px;
+	}
+	
+.footer ul li{
+	color:#FFFFFF;
+	float:left;
+	}
+
+.footer ul li a{
+	color:#FFFFFF;
+	padding-left:10px;
+	padding-right:10px;
+	}
+	
 .divSearch{
 	width:263px;
 	height:57px;
