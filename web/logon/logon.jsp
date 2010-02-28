@@ -16,7 +16,7 @@
 <s:actionmessage/>
 <s:actionerror/>
 	<div class="sxtv_logo">
-	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:100px;">
+	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:130px;">
 		<tr>
 			<td class="tl"></td>
 			<td class="tc"></td>
