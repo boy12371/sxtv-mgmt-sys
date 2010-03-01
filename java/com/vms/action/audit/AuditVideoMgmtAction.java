@@ -90,7 +90,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 
 	
 	public String videoAuditOperation() throws Exception{
-		SessionUserInfo user = new SessionUserInfo(1); //this.getUserInfo();
+		SessionUserInfo user = this.getUserInfo();
 		boolean flag=false;
 		try {
 			flag = videoService.auditingVideo(vv.getVedioID(), user, operation);	

@@ -181,9 +181,12 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	public String updateVideoInfo() throws Exception {
 		try {
-			this.vedioService.updateVideoInfo(vedio);
-			this.addActionMessage("更新成功");
-			return SUCCESS;
+			boolean flag = this.vedioService.updateVideoInfo(vedio);
+			if(flag){
+				vedio = vedioService.findVediotapeByProperty(Vediotape.PROP_ID, vedio.getId(), -1, -1, "", false).get(0);
+				this.addActionMessage("更新成功");
+				return SUCCESS;
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
