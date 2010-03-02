@@ -41,6 +41,8 @@
 		<tr>
 			<td><label>编号</label></td>
 			<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" id="videoID" /></td>
+</tr>
+<tr>
 			<td><label>剧目名称</label></td>
 			<td><s:property value="vv.name" /></td>
 
@@ -48,6 +50,8 @@
 		<tr>
 			<td><label>栏目</label></td>
 			<td><s:property value="vv.subject" /></td>
+</tr>
+<tr>
 			<td><label>题材</label></td>
 			<td><s:property value="vv.topic" /></td>
 
@@ -55,6 +59,8 @@
 		<tr>
 			<td><label>影视公司</label></td>
 			<td><s:property value="vv.company" /></td>
+</tr>
+<tr>
 			<td><label>收录日期</label></td>
 			<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
 
@@ -62,6 +68,8 @@
 		<tr>
 			<td><label>状态</label></td>
 			<td><s:property value="vv.status" /></td>
+</tr>
+<tr>
 			<td><label>观众评价</label></td>
 			<td><s:iterator value="vv.watching" var="w">
 				<s:property value="#w.key" /> : <s:property value="#w.value" />
@@ -69,11 +77,11 @@
 
 		</tr>
 		<tr height="20px">
-			<td colspan="4"></td>
+			<td colspan="2"></td>
 
 		</tr>
 		<tr>
-			<td colspan="4">
+			<td colspan="2">
 			<s:if test="vedio.status.id == 3">
 				<s:radio list="#{7:'退 回'}" name="operation"></s:radio>
 			</s:if>
