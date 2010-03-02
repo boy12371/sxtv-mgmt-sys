@@ -39,73 +39,71 @@
 </head>
 <body class="yui-skin-sam">
 
-<s:actionerror/>
-<s:actionmessage/>
+<s:actionerror />
+<s:actionmessage />
 
 
 <h1>查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
 <s:form id="searchForm" action="searchVideoByNameOrIDForModification" namespace="/vedio">
-<table class="inputTable">
-	<tr>
-		<td><label>影带编号</label></td>
-		<td><input class="inputField" type="text" name="vid" id="vid" /><s:hidden name="optionName" value="modification"/></td>
-		<td><label>剧目名称</label></td>
-		<td><input class="inputField autoComplete"  type="text" id="searchinput" name="vname"/>
-		<div id="searchcontainer"></div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="4" align="center">
+<div align="center">
+	<table>
+		<tr>
+			<td><label>影带编号</label></td>
+			<td><input class="inputField" type="text" name="vid" id="vid" /><s:hidden name="optionName" value="modification" /></td>
+			<td><label>剧目名称</label></td>
+			<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname" />
+			<div id="searchcontainer"></div>
+			</td>
+			<td colspan="4" align="center">
 			<div id="goSearch"></div>
-		</td>
-	</tr>
-</table>
+			</td>
+		</tr>
 
-<script type="text/javascript">
+	</table>
+</div>
+	<script type="text/javascript">
 	YAHOO.example.Centered = autoCompleteVideoName();
 </script>
 </s:form>
 
 <s:form namespace="/vedio" action="doModificationBatch" method="post">
-<h1>已通过影带列表</h1>
-<p>选择并点击按钮，使影带进入待编排状态</p>
-<div id="makeToArrange" align="center"></div>
-<div align="center">
-	<div id="submitToPreArrange">
+	<h1>已通过影带列表</h1>
+	<p>选择并点击按钮，使影带进入待编排状态</p>
+	<div id="makeToArrange" align="center"></div>
+	<div align="center">
+	<div id="submitToPreArrange"></div>
 	</div>
-</div>
 
 
-<h1>待排影带列表</h1>
-<p>选择并点击按钮，使影带进入通过状态</p>
-<div id="makeToPass" align="center"></div>
-<div align="center">
-	<div id="submitToPass">
+	<h1>待排影带列表</h1>
+	<p>选择并点击按钮，使影带进入通过状态</p>
+	<div id="makeToPass" align="center"></div>
+	<div align="center">
+	<div id="submitToPass"></div>
 	</div>
-</div>
 </s:form>
 <script type="text/javascript">
-YAHOO.util.Event.addListener(window, "load", initToArrangeTable);
-YAHOO.util.Event.addListener(window, "load", initToPassTable);
-var submitToPreArrange = new YAHOO.widget.Button({  
-	type: "submit",  
-	label: "批为编排",  
-	id: "toArrageBtn",  
-	container: "submitToPreArrange" }
-	); 
-var submitToPass = new YAHOO.widget.Button({  
-	type: "submit",  
-	label: "批为通过",  
-	id: "toPassBtn",  
-	container: "submitToPass" }
-	);
-var submitToPass = new YAHOO.widget.Button({  
-	type: "submit",  
-	label: "搜索",  
-	id: "search",  
-	container: "goSearch" }
-	);  
+	YAHOO.util.Event.addListener(window, "load", initToArrangeTable);
+	YAHOO.util.Event.addListener(window, "load", initToPassTable);
+	var submitToPreArrange = new YAHOO.widget.Button( {
+		type :"submit",
+		label :"批为编排",
+		id :"toArrageBtn",
+		container :"submitToPreArrange"
+	});
+	var submitToPass = new YAHOO.widget.Button( {
+		type :"submit",
+		label :"批为通过",
+		id :"toPassBtn",
+		container :"submitToPass"
+	});
+	var submitToPass = new YAHOO.widget.Button( {
+		type :"submit",
+		label :"搜索",
+		id :"search",
+		container :"goSearch"
+	});
 </script>
 
 </body>

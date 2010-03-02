@@ -35,14 +35,14 @@
 <h1>剧目详细信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 <s:form action="videoOperation" method="post" namespace="/audit">
-<div align="center">
+	<div align="center">
 
 	<table class="inputTable">
 		<tr>
 			<td><label>编号</label></td>
 			<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" id="videoID" /></td>
-</tr>
-<tr>
+		</tr>
+		<tr>
 			<td><label>剧目名称</label></td>
 			<td><s:property value="vv.name" /></td>
 
@@ -50,8 +50,8 @@
 		<tr>
 			<td><label>栏目</label></td>
 			<td><s:property value="vv.subject" /></td>
-</tr>
-<tr>
+		</tr>
+		<tr>
 			<td><label>题材</label></td>
 			<td><s:property value="vv.topic" /></td>
 
@@ -59,8 +59,8 @@
 		<tr>
 			<td><label>影视公司</label></td>
 			<td><s:property value="vv.company" /></td>
-</tr>
-<tr>
+		</tr>
+		<tr>
 			<td><label>收录日期</label></td>
 			<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
 
@@ -68,41 +68,35 @@
 		<tr>
 			<td><label>状态</label></td>
 			<td><s:property value="vv.status" /></td>
-</tr>
-<tr>
+		</tr>
+		<tr>
 			<td><label>观众评价</label></td>
 			<td><s:iterator value="vv.watching" var="w">
 				<s:property value="#w.key" /> : <s:property value="#w.value" />
 			</s:iterator></td>
 
 		</tr>
-		<tr height="20px">
-			<td colspan="2"></td>
-
+		<tr>
+			<td rowspan="2">审核</td>
+			<td><s:if test="vedio.status.id == 3">
+				<s:radio list="#{7:'退 回'}" name="operation"></s:radio>
+			</s:if> <s:elseif test="vedio.status.id == 2">
+				<s:radio list="#{3:'通 过',7:'退 回'}" name="operation"></s:radio>
+			</s:elseif> <s:else>
+				<s:radio list="#{3:'通过'}" name="operation"></s:radio>
+			</s:else></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-			<s:if test="vedio.status.id == 3">
-				<s:radio list="#{7:'退 回'}" name="operation"></s:radio>
-			</s:if>
-			<s:elseif test="vedio.status.id == 2">			
-				<s:radio list="#{3:'通 过',7:'退 回'}" name="operation"></s:radio>
-			</s:elseif>
-			<s:else>
-				<s:radio list="#{3:'通过'}" name="operation"></s:radio>
-			</s:else>
-			</td>
-
-		</tr>
-
-		<tr>
-			<td colspan="4">
-				<div id="submit"></div>
+			<div id="submit"></div>
 			</td>
 		</tr>
 
 	</table>
-</div>
+	</div>
 </s:form>
 <div></div>
 <h1>评分信息</h1>
@@ -112,12 +106,12 @@
 
 <script type="text/javascript">
 	YAHOO.util.Event.addListener(window, "load", initScoreDataTable());
-	var submitToPreArrange = new YAHOO.widget.Button({  
-		type: "submit",  
-		label: "确定",  
-		id: "submitBtn",  
-		container: "submit" }
-		); 
+	var submitToPreArrange = new YAHOO.widget.Button( {
+		type :"submit",
+		label :"确定",
+		id :"submitBtn",
+		container :"submit"
+	});
 </script>
 </body>
 </html>

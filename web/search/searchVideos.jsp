@@ -42,8 +42,8 @@
 <body class="yui-skin-sam">
 <h1>影带查询</h1>
 <p>填写或选择相关信息，点击查询，搜索影带信息</p>
-
-<table class="inputTable">
+<div align="center">
+<table>
 	<tr>
 		<td><label>影带编号</label></td>
 		<td><input class="inputField" type="text" name="video.id" id="vid" /></td>
@@ -77,7 +77,7 @@
 		</span> </span></td>
 	</tr>
 </table>
-
+</div>
 <h1>影带列表</h1>
 <p>单击表头，可进行排序</p>
 <div id="dynamicdata" align="center"></div>

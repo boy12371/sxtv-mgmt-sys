@@ -27,37 +27,42 @@
 
 <h1>影带信息</h1>
 <p>影带相关信息</p>
+
+<div align="center">
 <table class="inputTable">
 
 	<tr>
 		<td><label>影带编号</label></td>
 		<td><s:property value="vv.vedioID" /></td>
+</tr><tr>
 		<td><label>剧目名称</label></td>
 		<td><s:property value="vv.name" /></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
 		<td><s:property value="vv.company" /></td>
-		<td><label>收带时间</label></td>
+		</tr><tr><td><label>收带时间</label></td>
 		<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
 		<td><s:property value="vv.topic" /></td>
-		<td><label>题材</label></td>
+		</tr><tr><td><label>题材</label></td>
 		<td><s:property value="vv.subject" /></td>
 	</tr>
 	<tr>
 		<td><label>状态</label></td>
 		<td><s:property value="vv.status" /></td>
-		<td><label>备注</label></td>
+		</tr><tr><td><label>备注</label></td>
 		<td><s:property value="vv.comments" /></td>
 	</tr>
 
 </table>
+</div>
 <h1>收视率/市场份额</h1>
 <p>录入剧目收视率及市场份额</p>
 <s:form action="updateMarketRate" namespace="/vedio" method="post">
+<div align="center">
 	<table>
 		<tr>
 			<td><label>收视率</label></td>
@@ -72,6 +77,7 @@
 		</tr>
 	</table>
 </s:form>
+</div>
 <script type="text/javascript">
 	var submitBtn = new YAHOO.widget.Button( {
 		type :"submit",

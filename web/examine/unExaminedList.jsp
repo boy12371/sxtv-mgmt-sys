@@ -35,7 +35,7 @@
 <s:actionmessage/>
 <s:actionerror/>
 <br />
-
+<div align="center">
 <table class="searchTable">
 	<tr>
 		<td><label>影带编号</label></td>
@@ -48,7 +48,7 @@
 		<td><div id="searchBtnDiv"></div></td>
 	</tr>
 </table>
-
+</div>
 <div id="dynamicdata" align="center"></div>
 
 <script language="JavaScript">

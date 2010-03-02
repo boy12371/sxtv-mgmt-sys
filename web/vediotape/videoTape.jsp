@@ -39,73 +39,74 @@
 </head>
 <body class="yui-skin-sam">
 
-<s:actionerror/>
-<s:actionmessage/>
+<s:actionerror />
+<s:actionmessage />
 <h1>查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
-<div align="center">
-<s:form id="searchForm" action="searchVideoByNameOrID" namespace="/vedio">
-<table class="inputTable">
-	<tr>
-		<td><label>影带编号</label></td>
-		<td><input class="inputField" type="text" name="vid" id="vid" /></td>
-		<td><label>剧目名称</label></td>
-		<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname"/>
-		<div id="searchcontainer"></div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="4" align="center">
-
-		<span id="searchBtn" class="yui-button yui-push-button"> <span class="first-child">
-		<button type="submit">搜索</button>
-		</span> </span></td>
-	</tr>
-</table>
-
-
-</s:form>
-</div>
-<s:if test="vedio!=null">
-<h1>影带信息</h1>
-<p>查看或编辑剧目信息并保存</p>
-<div align="center">
-<s:form id="updateForm" action="updateVideoInfo" namespace="/vedio" method="post">
-	<table class="inputTable">
+<div align="center"><s:form id="searchForm" action="searchVideoByNameOrID" namespace="/vedio">
+	<table>
 		<tr>
 			<td><label>影带编号</label></td>
-			<td><s:property value="vedio.id" /> <s:hidden name="vedio.id" /></td>
-			<td><label>剧目名称</label></td>
-			<td><s:textfield cssClass="inputField" name="vedio.vedioName" /></td>
-		</tr>
-		<tr>
-			<td><label>影视公司</label></td>
-			<td><s:select cssClass="selectField" list="comList" listKey="id" listValue="companyName" name="vedio.companyID.id" /></td>
-			<td><label>收带时间</label></td>
-			<td><s:date name="vedio.dateComing" format="yyyy-MM-dd" /></td>
-		</tr>
-		<tr>
-			<td><label>栏目</label></td>
-			<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" name="vedio.subject.id" /></td>
-			<td><label>题材</label></td>
-			<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" name="vedio.topic.id" /></td>
-		</tr>
+			<td><input class="inputField" type="text" name="vid" id="vid" /></td>
 		
-		<tr>
-			<td><label>状态</label></td>
-			<td><s:property value="vedio.status.status" /></td>
-			<td><label>备注</label></td>
-			<td><s:textarea cssClass="inputField" name="vedio.comments"></s:textarea></td>
-		</tr>
-		<tr>
-			<td colspan="4" align="center">
-			<span id="submitBtn" class="yui-button yui-push-button"> <span class="first-child">
-			<button type="submit">确定</button>
+			<td><label>剧目名称</label></td>
+			<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname" />
+			<div id="searchcontainer"></div>
+			</td>
+<td align="center"><span id="searchBtn" class="yui-button yui-push-button"> <span class="first-child">
+			<button type="submit">搜索</button>
 			</span> </span></td>
 		</tr>
+		
 	</table>
-</s:form>
-</div>
+
+
+</s:form></div>
+<s:if test="vedio!=null">
+	<h1>影带信息</h1>
+	<p>查看或编辑剧目信息并保存</p>
+	<div align="center"><s:form id="updateForm" action="updateVideoInfo" namespace="/vedio" method="post">
+		<table class="inputTable">
+			<tr>
+				<td><label>影带编号</label></td>
+				<td><s:property value="vedio.id" /> <s:hidden name="vedio.id" /></td>
+			</tr>
+			<tr>
+				<td><label>剧目名称</label></td>
+				<td><s:textfield cssClass="inputField" name="vedio.vedioName" /></td>
+			</tr>
+			<tr>
+				<td><label>影视公司</label></td>
+				<td><s:select cssClass="selectField" list="comList" listKey="id" listValue="companyName" name="vedio.companyID.id" /></td>
+			</tr>
+			<tr>
+				<td><label>收带时间</label></td>
+				<td><s:date name="vedio.dateComing" format="yyyy-MM-dd" /></td>
+			</tr>
+			<tr>
+				<td><label>栏目</label></td>
+				<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" name="vedio.subject.id" /></td>
+			</tr>
+			<tr>
+				<td><label>题材</label></td>
+				<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" name="vedio.topic.id" /></td>
+			</tr>
+
+			<tr>
+				<td><label>状态</label></td>
+				<td><s:property value="vedio.status.status" /></td>
+			</tr>
+			<tr>
+				<td><label>备注</label></td>
+				<td><s:textarea cssClass="inputField" name="vedio.comments"></s:textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><span id="submitBtn" class="yui-button yui-push-button"> <span class="first-child">
+				<button type="submit">确定</button>
+				</span> </span></td>
+			</tr>
+		</table>
+	</s:form></div>
 </s:if>
 
 <script type="text/javascript">

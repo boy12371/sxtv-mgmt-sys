@@ -59,31 +59,36 @@
 	<tr>
 		<td><label>影带编号</label></td>
 		<td><input class="inputField" type="text" name="textfield" id="vid" /></td>
+</tr>
+			<tr>
 		<td><label>剧目名称</label></td>
 		<td><input class="inputField" type="text" name="textfield" id="vname"/></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
 		<td><s:select cssClass="selectField" list="comList" listKey="id" listValue="companyName" id="vcompany" /></td>
-		<td><label>题材</label></td>
+		</tr>
+			<tr><td><label>题材</label></td>
 		<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" /></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
 		<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" /></td>
-		<td><label>收带日期</label></td>
+		</tr>
+			<tr><td><label>收带日期</label></td>
 		<td><sx:datetimepicker cssClass="inputField" displayFormat="yyyy-MM-dd" id="vdateComing" toggleType="explode" value="today"/></td>
 
 	</tr>
 	<tr>
 		<td><label>备注</label></td>
 		<td><textarea class="inputField" name="textfield" id="vcomments"></textarea></td>
-		<td></td>
+		</tr>
+			<tr><td></td>
 		<td></td>
 
 	</tr>
 	<tr>
-		<td colspan="4" align="center">
+		<td colspan="2" align="center">
 		<span id="go" class="yui-button yui-push-button">
         <span class="first-child">
             <button type="button"> 确 定 </button>

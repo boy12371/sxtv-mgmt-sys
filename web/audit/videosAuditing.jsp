@@ -44,7 +44,9 @@
 <h1>查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
 <s:form id="searchForm" action="findVideoByNameOrID" namespace="/audit">
-<table class="inputTable">
+<div align="center">
+
+<table>
 	<tr>
 		<td><label>影带编号</label></td>
 		<td><input class="inputField" type="text" name="vid" id="vid" /><s:hidden name="optionName" value="auditing"/></td>
@@ -52,17 +54,20 @@
 		<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname" style="width: 200px" />
 		<div id="searchcontainer"></div>
 		</td>
+<td colspan="4" align="center">
+<div id="searchBtnDiv"></div></td>
 	</tr>
-	<tr>
-		<td colspan="4" align="center">
-		<span id="go"> <span>
-		<input type="submit" value="搜索" />
-		</span> </span></td>
-	</tr>
+	
 </table>
-
+</div>
 <script type="text/javascript">
 	YAHOO.example.Centered = autoCompleteVideoName();
+	var searchBtn = new YAHOO.widget.Button({  
+		label: "搜索",  
+		id: "searchBtn",
+		type:"submit",  
+		container: "searchBtnDiv" }
+		);
 </script>
 </s:form>
 

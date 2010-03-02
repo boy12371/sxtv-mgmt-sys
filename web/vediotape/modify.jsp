@@ -36,6 +36,7 @@
 		<tr>
 			<td><label>编号</label></td>
 			<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" /></td>
+</tr><tr>
 			<td><label>剧目名称</label></td>
 			<td><s:property value="vv.name" /></td>
 
@@ -43,32 +44,30 @@
 		<tr>
 			<td><label>栏目</label></td>
 			<td><s:property value="vv.subject" /></td>
-			<td><label>题材</label></td>
+			</tr><tr><td><label>题材</label></td>
 			<td><s:property value="vv.topic" /></td>
 
 		</tr>
 		<tr>
 			<td><label>影视公司</label></td>
 			<td><s:property value="vv.company" /></td>
-			<td><label>收录日期</label></td>
+			</tr><tr><td><label>收录日期</label></td>
 			<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
 
 		</tr>
 		<tr>
 			<td><label>状态</label></td>
 			<td><s:property value="vv.status" /></td>
-			<td><label>观众评价</label></td>
+			</tr><tr><td><label>观众评价</label></td>
 			<td><s:iterator value="vv.watching" var="w">
 				<s:property value="#w.key" /> : <s:property value="#w.value" />
 			</s:iterator></td>
 
 		</tr>
-		<tr height="20px">
-			<td colspan="4"></td>
-		</tr>
+		
 
 		<tr>
-			<td colspan="4">
+			<td colspan="2" height="20px">
 			<s:if test="vedio.status.id==3">
 				<s:hidden name="vv.status" value="5" />
 				<div id="submitDiv" align="center"></div>
@@ -93,9 +92,6 @@
 					container: "submitDiv" }
 					);
 				</script>
-
-
-
 			</s:else></td>
 		</tr>
 
