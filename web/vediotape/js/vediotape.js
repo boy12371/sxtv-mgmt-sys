@@ -343,7 +343,7 @@ function initToArrangeTable() {
 			checkbox.setAttribute('class',
 					YAHOO.widget.DataTable.CLASS_CHECKBOX);
 			checkbox.setAttribute('name', 'toApproved');
-			checkbox.setAttribute('value',oRecord.getData()["id"]);
+			checkbox.setAttribute('value', oRecord.getData()["id"]);
 			elCell.innerHTML = "";
 			elCell.appendChild(checkbox);
 		}
@@ -504,7 +504,7 @@ function initToPassTable() {
 			checkbox.setAttribute('class',
 					YAHOO.widget.DataTable.CLASS_CHECKBOX);
 			checkbox.setAttribute('name', 'toPassed');
-			checkbox.setAttribute('value',oRecord.getData()["id"]);
+			checkbox.setAttribute('value', oRecord.getData()["id"]);
 			elCell.innerHTML = "";
 			elCell.appendChild(checkbox);
 		}

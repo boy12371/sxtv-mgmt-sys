@@ -211,8 +211,8 @@ function executOperations(obj) {
 		jConfirm('注销此员工后将同时禁用其系统用户，确定吗？', '警告', function(r) {
 			// alert(r);
 				if (r) {
-					alert(r);
-					// form.submit();
+					//alert(r);
+					form.submit();
 			}
 		});
 	} else {

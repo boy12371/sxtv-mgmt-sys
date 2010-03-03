@@ -35,6 +35,11 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
+
 <title>查看或修改影带信息</title>
 </head>
 <body class="yui-skin-sam">
@@ -48,16 +53,16 @@
 		<tr>
 			<td><label>影带编号</label></td>
 			<td><input class="inputField" type="text" name="vid" id="vid" /></td>
-		
+
 			<td><label>剧目名称</label></td>
 			<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname" />
 			<div id="searchcontainer"></div>
 			</td>
-<td align="center"><span id="searchBtn" class="yui-button yui-push-button"> <span class="first-child">
+			<td align="center"><span id="searchBtn" class="yui-button yui-push-button"> <span class="first-child">
 			<button type="submit">搜索</button>
 			</span> </span></td>
 		</tr>
-		
+
 	</table>
 
 
@@ -73,7 +78,7 @@
 			</tr>
 			<tr>
 				<td><label>剧目名称</label></td>
-				<td><s:textfield cssClass="inputField" name="vedio.vedioName" /></td>
+				<td><s:textfield cssClass="inputField" name="vedio.vedioName" id="vname" /></td>
 			</tr>
 			<tr>
 				<td><label>影视公司</label></td>
@@ -101,9 +106,9 @@
 				<td><s:textarea cssClass="inputField" name="vedio.comments"></s:textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><span id="submitBtn" class="yui-button yui-push-button"> <span class="first-child">
-				<button type="submit">确定</button>
-				</span> </span></td>
+				<td colspan="2" align="center">
+				<div id="submitBtnDiv"></div>
+				</td>
 			</tr>
 		</table>
 	</s:form></div>
@@ -112,7 +117,48 @@
 <script type="text/javascript">
 	YAHOO.example.Centered = autoCompleteVideoName();
 	var searchBtn = new YAHOO.widget.Button("searchBtn");
-	var submitBtn = new YAHOO.widget.Button("submitBtn");
+	//	var submitBtn = new YAHOO.widget.Button("submitBtnSpan");
+	
+function validateVideoName() {
+	var callbacks = {
+		success : function(o) {
+			YAHOO.log("RAW JSON DATA: " + o.responseText);
+			// Process the JSON data returned from the server
+			var obj = o.responseText;
+			if (obj.indexOf("SUCCESS") != -1) {
+				YAHOO.util.Dom.get("updateForm").submit();
+			} else {
+				jAlert(obj, '提示');
+				return;
+			}
+		},
+		failure : function(o) {
+			if (!YAHOO.util.Connect.isCallInProgress(o)) {
+				jAlert('Async call failed!', '提示');
+				return;
+			}
+		},
+		timeout : 3000
+	}
+
+	var videoName = YAHOO.util.Dom.get("vname").value;
+	if (videoName.length == 0) {
+		jAlert("信息不完整", '错误');
+		return;
+	}
+
+	var url = encodeURI("/tv/vedio/isVediotapeExsits.action?vedioName="
+			+ videoName);
+	YAHOO.util.Connect.asyncRequest('GET', encodeURI(url), callbacks);
+}
+	var submitBtn = new YAHOO.widget.Button( {
+		type :"button",
+		label :"确定",
+		id :"submitBtn",
+		container :"submitBtnDiv"
+	});
+
+	submitBtn.on("click", validateVideoName);
 </script>
 </body>
 </html>

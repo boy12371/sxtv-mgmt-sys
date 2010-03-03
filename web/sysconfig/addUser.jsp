@@ -28,13 +28,15 @@
 		<tr>
 			<td><label>用户名：</label></td>
 			<td><s:textfield cssClass="inputField" name="user.userName" /></td>
-			<td><label>员工：</label></td>
+			</tr>
+		<tr><td><label>员工：</label></td>
 			<td><s:select cssClass="selectField" name="user.employee.id" list="empList" listKey="id" listValue="name" /></td>
 		</tr>
 		<tr>
 			<td><label>密码：</label></td>
 			<td><s:password cssClass="inputField" name="user.userPass" /></td>
-			<td><label>重复密码：</label></td>
+			</tr>
+		<tr><td><label>重复密码：</label></td>
 			<td><s:password cssClass="inputField" name="pwdRepeat" /></td>
 		</tr>
 		<tr>
@@ -43,14 +45,14 @@
 		</tr>
 
 		<tr>
-			<td colspan="4"><s:iterator value="roleList" status="stat" id="role">
+			<td colspan="2"><s:iterator value="roleList" status="stat" id="role">
 				<s:checkbox name="roleIDs" value="false" fieldValue="%{#role.id}" />
 				<s:property value="name" />
 				<br />
 			</s:iterator></td>
 		</tr>
 		<tr>
-			<td colspan="4"><div id="go"></div></td>
+			<td colspan="2"><div id="go"></div></td>
 		</tr>
 	</table>
 	</div>
