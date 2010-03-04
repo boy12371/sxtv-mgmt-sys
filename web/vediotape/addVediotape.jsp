@@ -82,10 +82,6 @@
 	<tr>
 		<td><label>备注</label></td>
 		<td><textarea class="inputField" name="textfield" id="vcomments"></textarea></td>
-		</tr>
-			<tr><td></td>
-		<td></td>
-
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
