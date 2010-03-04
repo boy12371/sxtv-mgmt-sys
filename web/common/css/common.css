@@ -39,6 +39,7 @@ label {
 	font-size:14px;
 	text-align:right;
 	width:auto;
+	WHITE-SPACE:nowrap !important;
 }
 
 .inputField{
@@ -63,13 +64,13 @@ label {
 }
 
 .inputTable{
-	width:60%;
+	width:auto;
 	height:auto;	
 }
 
 .inputTable td{
 	height:30px;
-	vertical-align:middle;
+	vertical-align:bottom;
 	border-bottom:1px solid #B7DDF2;
 	padding-left:1em;
 	padding-right:2em;
