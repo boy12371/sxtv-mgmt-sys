@@ -21,7 +21,7 @@
 	<s:hidden name="tapeScore.id"/>
 	<s:hidden name="uid"/>
 	<s:hidden name="perform"/>
-	<div>
+	<div align="center">
 		<table class="inputTable">
 			<s:if test="'modify'==perform">
 			<tr>
@@ -32,6 +32,8 @@
 			<tr>
 				<td><label>影带编号：</label></td>
 				<td><s:property value="tapeScore.vedioID"/></td>
+			</tr>
+			<tr>
 				<td><label>影带名称：</label></td>
 				<td><s:property value="tapeScore.vedioName"/></td>
 			</tr>
@@ -43,6 +45,8 @@
 				<s:else>
 					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" value=""/></td>
 				</s:else>
+			</tr>
+			<tr>
 				<td><label>技术：</label></td>
 				<s:if test="'modify'==perform">
 					<td><s:textfield cssClass="inputField" name="tapeScore.techScore"/></td>
@@ -59,6 +63,8 @@
 				<s:else>
 					<td><s:textfield cssClass="inputField" name="tapeScore.performScore" value=""/></td>
 				</s:else>
+			</tr>
+			<tr>
 				<td><label>创新：</label></td>
 				<s:if test="'modify'==perform">
 					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore"/></td>
@@ -92,17 +98,11 @@
 				<td></td>
 				<td></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td align="center">
-					<div style="margin-top:30px;" id="okBtnDiv"></div>
-				</td>
-				<td align="center">
-					<div style="margin-top:30px;" id="cancelBtnDiv"></div>
-				</td>
-				<td></td>
-			</tr>
 		</table>
+		<div style="margin-top:20px;">
+			<div id="okBtnDiv" style="display:inline;margin-right:50px;"></div>
+			<div id="cancelBtnDiv" style="display:inline;"></div>
+		</div>
 	</div>
 </s:form>
 
