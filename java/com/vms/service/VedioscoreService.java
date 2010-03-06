@@ -130,12 +130,7 @@ public class VedioscoreService implements IVedioscoreService {
 	}
 	
 	public List<User> findAllExaminer() throws Exception{
-		List<User> users;
-		users = vedioscoreDAO.findAll(User.class);
-		if(null == users || 0 == users.size()){
-			users = new ArrayList<User>();
-		}
-		return users;
+		return vedioscoreDAO.findAllExaminer();
 	}
 
 	public void setVedioscoreDAO(IVedioscoreDAO vedioscoreDAO) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="accuracy" namespace="/accuracy" extends="basePackapge">
+		<action name="toAccuracy" class="accuracyMgmt" method="toAccuracy">
+			<result>/accuracy/accuracyList.jsp</result>
+			<result name="input">/accuracy/accuracyList.jsp</result>
+		</action>
+		
+		<action name="getAccuracy" class="accuracyMgmt" method="getAccuracy">
+			<result type="json">
+				<param name="root">accuracyTable</param>
+			</result>
+			<result type="json" name="input">
+				<param name="root">errorMsg</param>
+			</result>
+		</action>
+	</package>
+</struts>
