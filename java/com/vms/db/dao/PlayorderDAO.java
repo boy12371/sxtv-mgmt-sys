@@ -95,6 +95,14 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 		crt.add(Restrictions.le(Playorder.PROP_PLAY_DATE, endDate));
 		return (List<Playorder>)crt.list();
 	}
+	
+	@Override
+	public List<Playorder> findPlayorderBetweenDateWithFeedback(Date startDate, Date endDate) throws Exception {
+		Criteria crt = this.getCriteria(Playorder.class);
+		crt.add(Restrictions.between(Playorder.PROP_PLAY_DATE, startDate, endDate))
+		.createCriteria(Playorder.PROP_VEDIO_I_D).add(Restrictions.eq(Vediotape.PROP_STATUS, new Status(9)));
+		return (List<Playorder>)crt.list();
+	}
 
 	@Override
 	public void savePlayorder(List<Playorder> pos, int userID) throws Exception {
