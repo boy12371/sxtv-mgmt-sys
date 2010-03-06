@@ -33,6 +33,9 @@
 		<Module id="statistics" name="统计查询" url="/tv/search/toGenericSeaching.action">
 		</Module>
 		
+		<Module id="accuracy" name="员工准确度" url="/tv/accuracy/toAccuracy.action">
+		</Module>
+		
 		<Module id="userMgmt" name="用户管理" url="">
 			<ModuleItem id="employeeMgmt" name="员工-用户" url="/tv/sys/toEmployees.action"/>
 			<ModuleItem id="employeeAdd" name="添加员工" url="/tv/sys/toAddEmployee.action"/>
