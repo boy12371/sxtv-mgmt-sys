@@ -227,6 +227,12 @@ CREATE TABLE `role` (
 # Dumping data for table role
 #
 
+INSERT INTO `role` VALUES (1,'ADMIN','管理员');
+INSERT INTO `role` VALUES (2,'INPUTER','录入');
+INSERT INTO `role` VALUES (3,'EXAMINER','打分');
+INSERT INTO `role` VALUES (4,'AUDITOR','审核');
+INSERT INTO `role` VALUES (5,'ARRANGER','编排');
+INSERT INTO `role` VALUES (6,'NORMAL','普通');
 
 #
 # Source for table role_resource
@@ -349,6 +355,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` VALUES (1,'tiger','command',1,1);
 INSERT INTO `user` VALUES (2,'cat','123',2,1);
 INSERT INTO `user` VALUES (3,'pencil','123',3,1);
+INSERT INTO `user` VALUES (4,'dog','123',4,1);
+INSERT INTO `user` VALUES (5,'chick','123',5,1);
 
 #
 # Source for table user_role
@@ -368,6 +376,9 @@ CREATE TABLE `user_role` (
 # Dumping data for table user_role
 #
 
+INSERT INTO `user_role` VALUES (1,1,1,'');
+INSERT INTO `user_role` VALUES (2,2,3,'');
+INSERT INTO `user_role` VALUES (3,3,2,'');
 
 #
 # Source for table vedioscore
