@@ -51,7 +51,7 @@ CREATE TABLE `audiencescore` (
   UNIQUE KEY `unique_key` (`vedioID`,`audienceID`),
   KEY `vedioID` (`vedioID`),
   KEY `audienceID` (`audienceID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table audiencescore
@@ -63,7 +63,8 @@ INSERT INTO `audiencescore` VALUES (3,'0',1,'2010-02-13 09:41:43',1,NULL);
 INSERT INTO `audiencescore` VALUES (4,'1',3,'2010-02-12 18:36:48',1,NULL);
 INSERT INTO `audiencescore` VALUES (7,'0',4,'2010-02-12 20:47:48',1,NULL);
 INSERT INTO `audiencescore` VALUES (8,'1',4,'2010-02-12 20:55:29',0,NULL);
-INSERT INTO `audiencescore` VALUES (9,'23g',1,'2010-02-27 21:55:17',0,NULL);
+INSERT INTO `audiencescore` VALUES (9,'23g',1,'2010-02-28 18:33:39',1,NULL);
+INSERT INTO `audiencescore` VALUES (10,'23g',2,'2010-02-28 18:33:39',1,NULL);
 
 #
 # Source for table auditing
@@ -77,6 +78,7 @@ CREATE TABLE `auditing` (
   `result` int(11) NOT NULL,
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_key` (`vedioID`,`auditor`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
@@ -231,10 +233,12 @@ CREATE TABLE `role` (
 #
 
 CREATE TABLE `role_resource` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `roleid` int(11) NOT NULL,
   `resourceid` int(11) NOT NULL,
   `comments` varchar(512) NOT NULL,
-  PRIMARY KEY (`roleid`,`resourceid`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `union_key` (`roleid`,`resourceid`),
   KEY `resourceid` (`resourceid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -351,10 +355,12 @@ INSERT INTO `user` VALUES (3,'pencil','123',3,1);
 #
 
 CREATE TABLE `user_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL,
   `roleid` int(11) NOT NULL,
   `comments` varchar(512) NOT NULL,
-  PRIMARY KEY (`userid`,`roleid`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `union index` (`userid`,`roleid`),
   KEY `roleid` (`roleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
