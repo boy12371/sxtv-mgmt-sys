@@ -89,7 +89,7 @@ body {
 </div>
 	
  <div id="passwordForm" style="display:none">
-	<h1 id="apopup_title">修改密码</h1>
+	<h1 class="passwordTitle">修改密码</h1>
     <p><label>原 密 码:&nbsp;</label><input type="password" name="oldPwd" id="oldPwd"/></p>
     <p><label>新 密 码:&nbsp;</label><input type="password" name="newPwd" id="newPwd"/></p>
 	<p><label>确认密码:&nbsp;</label><input type="password" name="confirmPwd" id="confirmPwd"/></p>

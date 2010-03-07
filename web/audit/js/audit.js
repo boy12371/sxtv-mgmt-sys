@@ -60,7 +60,8 @@ function initDataTable() {
 			}, {
 				key : "dateInput",
 				label : "收带日期",
-				sortable : true
+				sortable : true,
+				formatter : formatDate
 			}, {
 				key : "status",
 				label : "状态",

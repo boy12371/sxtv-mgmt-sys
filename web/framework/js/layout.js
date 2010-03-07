@@ -90,7 +90,7 @@ function getBroswer(){
 $(document).ready(function() { 
 	 
     $('#changePassword').click(function() { 
-        $.blockUI({ message: $('#passwordForm'), css: { width: '475px' } }); 
+        $.blockUI({ message: $('#passwordForm'), css: { width: '475px',top:'25%',left:'30%' } }); 
     }); 
 
     $('#yes').click(function() { 
