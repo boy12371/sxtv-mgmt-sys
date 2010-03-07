@@ -4,13 +4,42 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.vms.db.bean">
-	<class name="RoleResource" table="role_resource">
+	<class
+		name="RoleResource"
+		table="role_resource"
+	>
 		<meta attribute="sync-DAO">false</meta>
-		<composite-id name="Id" class="RoleResourcePK">
-			<key-many-to-one name="Roleid"	class="Role" column="roleid"/>
-			<key-many-to-one name="Resourceid" class="Resources" column="resourceid"/>
-		</composite-id>
-		<property name="Comments" column="comments"	type="string" not-null="true" length="512"/>
-		
+
+		<id
+			name="id"
+			type="integer"
+			column="id"
+		>
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="comments"
+			column="comments"
+			type="string"
+			not-null="true"
+			length="512"
+		/>
+		<many-to-one
+			name="roleid"
+			column="roleid"
+			class="Role"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="resourceid"
+			column="resourceid"
+			class="Resources"
+			not-null="true"
+		>
+		</many-to-one>
+
+
 	</class>	
 </hibernate-mapping>

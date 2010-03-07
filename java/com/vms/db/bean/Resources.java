@@ -1,11 +1,5 @@
 package com.vms.db.bean;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-
 import com.vms.db.bean.base.BaseResources;
 
 public class Resources extends BaseResources {

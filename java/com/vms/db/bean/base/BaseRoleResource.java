@@ -2,9 +2,6 @@ package com.vms.db.bean.base;
 
 import java.io.Serializable;
 
-import com.vms.db.bean.RoleResource;
-import com.vms.db.bean.RoleResourcePK;
-
 
 /**
  * This is an object that contains data related to the role_resource table.
@@ -18,8 +15,10 @@ import com.vms.db.bean.RoleResourcePK;
 public abstract class BaseRoleResource  implements Serializable {
 
 	public static String REF = "RoleResource";
-	public static String PROP_COMMENTS = "Comments";
-	public static String PROP_ID = "Id";
+	public static String PROP_ROLEID = "roleid";
+	public static String PROP_COMMENTS = "comments";
+	public static String PROP_ID = "id";
+	public static String PROP_RESOURCEID = "resourceid";
 
 
 	// constructors
@@ -30,7 +29,7 @@ public abstract class BaseRoleResource  implements Serializable {
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseRoleResource (RoleResourcePK id) {
+	public BaseRoleResource (java.lang.Integer id) {
 		this.setId(id);
 		initialize();
 	}
@@ -39,10 +38,14 @@ public abstract class BaseRoleResource  implements Serializable {
 	 * Constructor for required fields
 	 */
 	public BaseRoleResource (
-		RoleResourcePK id,
+		java.lang.Integer id,
+		com.vms.db.bean.Role roleid,
+		com.vms.db.bean.Resources resourceid,
 		java.lang.String comments) {
 
 		this.setId(id);
+		this.setRoleid(roleid);
+		this.setResourceid(resourceid);
 		this.setComments(comments);
 		initialize();
 	}
@@ -54,18 +57,24 @@ public abstract class BaseRoleResource  implements Serializable {
 	private int hashCode = Integer.MIN_VALUE;
 
 	// primary key
-	private RoleResourcePK id;
+	private java.lang.Integer id;
 
 	// fields
 	private java.lang.String comments;
+
+	// many to one
+	private com.vms.db.bean.Resources resourceid;
+	private com.vms.db.bean.Role roleid;
 
 
 
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
+     *  generator-class="native"
+     *  column="id"
      */
-	public RoleResourcePK getId () {
+	public java.lang.Integer getId () {
 		return id;
 	}
 
@@ -73,7 +82,7 @@ public abstract class BaseRoleResource  implements Serializable {
 	 * Set the unique identifier of this class
 	 * @param id the new ID
 	 */
-	public void setId (RoleResourcePK id) {
+	public void setId (java.lang.Integer id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
@@ -98,12 +107,46 @@ public abstract class BaseRoleResource  implements Serializable {
 
 
 
+	/**
+	 * Return the value associated with the column: resourceid
+	 */
+	public com.vms.db.bean.Resources getResourceid () {
+		return resourceid;
+	}
+
+	/**
+	 * Set the value related to the column: resourceid
+	 * @param resourceid the resourceid value
+	 */
+	public void setResourceid (com.vms.db.bean.Resources resourceid) {
+		this.resourceid = resourceid;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: roleid
+	 */
+	public com.vms.db.bean.Role getRoleid () {
+		return roleid;
+	}
+
+	/**
+	 * Set the value related to the column: roleid
+	 * @param roleid the roleid value
+	 */
+	public void setRoleid (com.vms.db.bean.Role roleid) {
+		this.roleid = roleid;
+	}
+
+
+
 
 	public boolean equals (Object obj) {
 		if (null == obj) return false;
-		if (!(obj instanceof RoleResource)) return false;
+		if (!(obj instanceof com.vms.db.bean.RoleResource)) return false;
 		else {
-			RoleResource roleResource = (RoleResource) obj;
+			com.vms.db.bean.RoleResource roleResource = (com.vms.db.bean.RoleResource) obj;
 			if (null == this.getId() || null == roleResource.getId()) return false;
 			else return (this.getId().equals(roleResource.getId()));
 		}
