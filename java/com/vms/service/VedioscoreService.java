@@ -75,6 +75,13 @@ public class VedioscoreService implements IVedioscoreService {
 		score.setScore(sum);
 
 		vedioscoreDAO.saveOrUpdateObject(score);
+		int examinerNum = vedioscoreDAO.findAllExaminer().size();
+		List<User> examinedUser = findExaminedUsersOfTape(scoreVO.getVedioID());
+		if(examinerNum <= examinedUser.size()){
+			Vediotape tape = (Vediotape)vediotapeDAO.loadObject(Vediotape.class, scoreVO.getVedioID());
+			tape.setStatus(new Status(2));
+			vediotapeDAO.saveOrUpdateObject(tape);
+		}
 	}
 
 	private Map<String, Float> getWeights() throws Exception {
