@@ -72,30 +72,29 @@
 		<tr>
 			<td><label>观众评价</label></td>
 			<td><s:iterator value="vv.watching" var="w">
-				<s:property value="#w.key" /> : <s:property value="#w.value" />
+				<s:property value="#w.key" /> : <s:property value="#w.value" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</s:iterator></td>
 
 		</tr>
 		<tr>
-			<td rowspan="2">审核</td>
-			<td><s:if test="vedio.status.id == 3">
-				<s:radio list="#{7:'退 回'}" name="operation"></s:radio>
-			</s:if> <s:elseif test="vedio.status.id == 2">
-				<s:radio list="#{3:'通 过',7:'退 回'}" name="operation"></s:radio>
-			</s:elseif> <s:else>
-				<s:radio list="#{3:'通过'}" name="operation"></s:radio>
-			</s:else></td>
+			<td><label>审核</label></td>
+			<td>
+				<table><tr>
+					<s:if test="vedio.status.id == 3">
+						<td><input type="radio" class="radioSel" name="operation" value="7" checked="checked"/>退回</td>
+					</s:if> <s:elseif test="vedio.status.id == 2">
+						<td><input type="radio" class="radioSel" name="operation" value="3"/>通过</td>
+						<td><input type="radio" class="radioSel" name="operation" value="7"/>退回</td>
+					</s:elseif> <s:else>
+						<td><input type="radio" class="radioSel" name="operation" value="3" checked="checked"/>通过</td>
+					</s:else>			
+				</tr></table>
+			</td>	
 		</tr>
-		<tr>
-			<td colspan="2">&nbsp;</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-			<div id="submit"></div>
-			</td>
-		</tr>
-
 	</table>
+	<div style="margin-top:20px;">
+		<div id="submit"></div>
+	</div>
 	</div>
 </s:form>
 <div></div>
