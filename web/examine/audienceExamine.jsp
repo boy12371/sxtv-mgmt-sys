@@ -39,12 +39,13 @@
 <s:actionmessage/>
 <s:actionerror/>
 <p>输入影带新评价</p>
-<br/>
-<div>
+<div align="center">
 	<table class="inputTable">
 		<tr>
 			<td><label>影带编号：</label></td>
 			<td id="vedioID"><s:property value="tape.vedioID"/></td>
+		</tr>
+		<tr>
 			<td><label>影带名称：</label></td>
 			<td id="vedioName"><s:property value="tape.name"/></td>
 		</tr>
@@ -63,13 +64,9 @@
 					<td><input type="radio" class="radioSel" id="unlook" name="result" value="0"/>不看</td>
 				</tr></table>
 			</td>
-		</tr>
-		<tr>
-			<td colspan="4" align="center">
-				<div style="margin-top:30px;" id="addBtnDiv"></div>
-			</td>
-		</tr>
+		</tr>		
 	</table>
+	<div style="margin-top:30px;" id="addBtnDiv"></div>
 </div>		
 
 <p>影带已有评价</p>
