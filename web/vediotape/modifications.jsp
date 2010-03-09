@@ -46,7 +46,7 @@
 <h1>查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
 <s:form id="searchForm" action="searchVideoByNameOrIDForModification" namespace="/vedio">
-<div align="center">
+	<div align="center">
 	<table>
 		<tr>
 			<td><label>影带编号</label></td>
@@ -61,13 +61,13 @@
 		</tr>
 
 	</table>
-</div>
+	</div>
 	<script type="text/javascript">
 	YAHOO.example.Centered = autoCompleteVideoName();
-</script>
+	</script>
 </s:form>
 
-<s:form namespace="/vedio" action="doModificationBatch" method="post">
+<s:form id="tableForm" namespace="/vedio" action="doModificationBatch" method="post">
 	<h1>已通过影带列表</h1>
 	<p>选择并点击按钮，使影带进入待编排状态</p>
 	<div id="makeToArrange" align="center"></div>
@@ -82,60 +82,14 @@
 	<div align="center">
 	<div id="submitToPass"></div>
 	</div>
+	<script type="text/javascript">
+	YAHOO.util.Event.addListener(window, "load", initButtons);
+	</script>
 </s:form>
 <script type="text/javascript">
-	
 	YAHOO.util.Event.addListener(window, "load", initToArrangeTable);
 	YAHOO.util.Event.addListener(window, "load", initToPassTable);
-	var submitToPreArrange = new YAHOO.widget.Button( {
-		type :"submit",
-		label :"批为编排",
-		id :"toArrageBtn",
-		container :"submitToPreArrange"
-	});
-
-	submitToPreArrange.on("click", function() {
-		var toPassed = document.getElementByName("toPassed");
-		if (toPassed != null && toPassed.length > 0) {
-			for ( var i = 0; i < toPassed.length; i++) {
-				if (toPassed[i].type == "checkbox") {
-					if (toPassed[i].checked == true
-							|| toPassed[i].checked == "checked") {
-						toPassed[i].checked = false;
-					}
-				}
-			}
-		}
-
-	});
-
-	var submitToPass = new YAHOO.widget.Button( {
-		type :"submit",
-		label :"批为通过",
-		id :"toPassBtn",
-		container :"submitToPass"
-	});
-	submitToPass.on("click", function() {
-		var toApproved = document.getElementByName("toApproved");
-		if (toApproved != null && toApproved.length > 0) {
-			for ( var i = 0; i < toApproved.length; i++) {
-				if (toApproved[i].type == "checkbox") {
-					if (toApproved[i].checked == true
-							|| toApproved[i].checked == "checked") {
-						toApproved[i].checked = false;
-					}
-				}
-			}
-		}
-
-	});
-
-	var submitToPass = new YAHOO.widget.Button( {
-		type :"submit",
-		label :"搜索",
-		id :"search",
-		container :"goSearch"
-	});
+	
 </script>
 
 </body>

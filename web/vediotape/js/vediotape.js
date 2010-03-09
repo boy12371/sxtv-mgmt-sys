@@ -635,3 +635,58 @@ function initToPassTable() {
 	};
 
 }
+function initButtons() {
+	var submitToPreArrange = new YAHOO.widget.Button({
+				type : "button",
+				label : "批为编排",
+				id : "toArrageBtn",
+				container : "submitToPreArrange"
+			});
+
+	submitToPreArrange.on("click", function() {
+				var toPassed = document.getElementsByName("toPassed");
+				if (toPassed != null && toPassed.length > 0) {
+					for (var i = 0; i < toPassed.length; i++) {
+						if (toPassed[i].type == "checkbox") {
+							if (toPassed[i].checked == true
+									|| toPassed[i].checked == "checked") {
+								toPassed[i].checked = false;
+							}
+						}
+					}
+				}
+				var form = document.getElementById("tableForm");
+				form.submit();
+
+			});
+
+	var submitToPass = new YAHOO.widget.Button({
+				type : "button",
+				label : "批为通过",
+				id : "toPassBtn",
+				container : "submitToPass"
+			});
+	submitToPass.on("click", function() {
+				var toApproved = document.getElementsByName("toApproved");
+				if (toApproved != null && toApproved.length > 0) {
+					for (var i = 0; i < toApproved.length; i++) {
+						if (toApproved[i].type == "checkbox") {
+							if (toApproved[i].checked == true
+									|| toApproved[i].checked == "checked") {
+								toApproved[i].checked = false;
+							}
+						}
+					}
+				}
+				var form = document.getElementById("tableForm");
+				form.submit();
+
+			});
+
+	var searchBtn = new YAHOO.widget.Button({
+				type : "submit",
+				label : "搜索",
+				id : "search",
+				container : "goSearch"
+			});
+}
