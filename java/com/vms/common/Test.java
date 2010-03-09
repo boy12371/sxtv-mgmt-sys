@@ -1,5 +1,8 @@
 package com.vms.common;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class Test {
 
@@ -9,7 +12,7 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		//ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		//
 //		IUserService service = (IUserService) ctx.getBean("userService");
 //		User user  =  service.getUserById(1);
