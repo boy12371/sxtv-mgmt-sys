@@ -240,7 +240,7 @@ public class VediotapeMgmtAction extends BaseAction {
 			// TODO: handle exception
 			logger.error(e);
 		}
-		this.addActionError("修改影带状态失败");
+		this.addActionError("批改影带状态失败");
 		return INPUT;
 	}
 
