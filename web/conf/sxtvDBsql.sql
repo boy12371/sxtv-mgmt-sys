@@ -51,7 +51,7 @@ CREATE TABLE `audiencescore` (
   UNIQUE KEY `unique_key` (`vedioID`,`audienceID`),
   KEY `vedioID` (`vedioID`),
   KEY `audienceID` (`audienceID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table audiencescore
@@ -65,6 +65,7 @@ INSERT INTO `audiencescore` VALUES (7,'0',4,'2010-02-12 20:47:48',1,NULL);
 INSERT INTO `audiencescore` VALUES (8,'1',4,'2010-02-12 20:55:29',0,NULL);
 INSERT INTO `audiencescore` VALUES (9,'23g',1,'2010-02-28 18:33:39',1,NULL);
 INSERT INTO `audiencescore` VALUES (10,'23g',2,'2010-02-28 18:33:39',1,NULL);
+INSERT INTO `audiencescore` VALUES (11,'1457',1,'2010-03-08 23:06:46',1,NULL);
 
 #
 # Source for table auditing
@@ -82,7 +83,7 @@ CREATE TABLE `auditing` (
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='审核';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='审核';
 
 #
 # Dumping data for table auditing
@@ -90,6 +91,7 @@ CREATE TABLE `auditing` (
 
 INSERT INTO `auditing` VALUES (1,'2',2,'2010-02-12 12:25:44',7,NULL);
 INSERT INTO `auditing` VALUES (2,'2',1,'2010-02-25 23:00:04',7,NULL);
+INSERT INTO `auditing` VALUES (3,'1457',5,'2010-03-08 23:45:09',3,NULL);
 
 #
 # Source for table company
@@ -159,7 +161,7 @@ CREATE TABLE `playchangelog` (
   PRIMARY KEY (`Id`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table playchangelog
@@ -172,6 +174,7 @@ INSERT INTO `playchangelog` VALUES (22,'4',2,NULL,'2010-02-04','加入','2010-02
 INSERT INTO `playchangelog` VALUES (23,'sfw',2,NULL,'2010-02-05','加入','2010-02-27 17:16:22');
 INSERT INTO `playchangelog` VALUES (24,'4',2,'2010-02-04',NULL,'移除','2010-02-27 17:16:58');
 INSERT INTO `playchangelog` VALUES (25,'sfw',2,'2010-02-05',NULL,'移除','2010-02-27 17:16:58');
+INSERT INTO `playchangelog` VALUES (26,'1457',5,NULL,'2010-03-28','加入','2010-03-08 23:50:14');
 
 #
 # Source for table playorder
@@ -186,7 +189,7 @@ CREATE TABLE `playorder` (
   PRIMARY KEY (`Id`),
   KEY `vedioID` (`vedioID`),
   KEY `auditor` (`auditor`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='节目编排';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='节目编排';
 
 #
 # Dumping data for table playorder
@@ -195,6 +198,7 @@ CREATE TABLE `playorder` (
 INSERT INTO `playorder` VALUES (28,'2010-02-02','3','2010-02-26 23:40:50',2);
 INSERT INTO `playorder` VALUES (30,'2010-02-03','1','2010-02-26 23:40:50',2);
 INSERT INTO `playorder` VALUES (32,'2010-02-01','sw12','2010-02-27 16:59:47',2);
+INSERT INTO `playorder` VALUES (33,'2010-03-28','1457','2010-03-08 23:50:14',5);
 
 #
 # Source for table resources
@@ -221,7 +225,7 @@ CREATE TABLE `role` (
   `name` varchar(25) NOT NULL,
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 #
 # Dumping data for table role
@@ -346,7 +350,7 @@ CREATE TABLE `user` (
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '0=禁用，1=正常',
   PRIMARY KEY (`userID`),
   KEY `userEmployee` (`employee`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户';
 
 #
 # Dumping data for table user
@@ -370,7 +374,7 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `union index` (`userid`,`roleid`),
   KEY `roleid` (`roleid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 #
 # Dumping data for table user_role
@@ -379,6 +383,8 @@ CREATE TABLE `user_role` (
 INSERT INTO `user_role` VALUES (1,1,1,'');
 INSERT INTO `user_role` VALUES (2,2,3,'');
 INSERT INTO `user_role` VALUES (3,3,2,'');
+INSERT INTO `user_role` VALUES (4,4,3,'');
+INSERT INTO `user_role` VALUES (5,5,3,'');
 
 #
 # Source for table vedioscore
@@ -402,7 +408,7 @@ CREATE TABLE `vedioscore` (
   UNIQUE KEY `unique_key` (`vedioID`,`examiner`),
   KEY `vedioExaminer` (`examiner`),
   KEY `vedioID` (`vedioID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='评分表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='评分表';
 
 #
 # Dumping data for table vedioscore
@@ -410,6 +416,10 @@ CREATE TABLE `vedioscore` (
 
 INSERT INTO `vedioscore` VALUES (1,'2',2,22,88,66,99,56.1,1,NULL,1,'2010-02-24 23:54:54',NULL);
 INSERT INTO `vedioscore` VALUES (2,'23g',2,12,11,67,45,31.6,0,NULL,0,'2010-02-27 22:09:25',NULL);
+INSERT INTO `vedioscore` VALUES (3,'12',2,22,22,22,22,22,1,NULL,1,'2010-03-08 22:53:29',NULL);
+INSERT INTO `vedioscore` VALUES (4,'1457',2,77,77,77,77,77,1,8455.56,1,'2010-03-08 23:06:19',NULL);
+INSERT INTO `vedioscore` VALUES (5,'1457',4,99,99,99,99,99,0,10900,0,'2010-03-08 23:08:01',NULL);
+INSERT INTO `vedioscore` VALUES (9,'1457',5,67,67,67,67,67,0,7344.44,0,'2010-03-08 23:25:09',NULL);
 
 #
 # Source for table vediotape
@@ -445,6 +455,7 @@ INSERT INTO `vediotape` VALUES ('1','Fight Club',2,4,1,'2000-01-30','2001-01-31'
 INSERT INTO `vediotape` VALUES ('12','12qdfw',2,3,1,'2010-02-11','2010-02-11 08:44:47',1,1,'ddvsdfsdsdvsdv',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('12asd','dqw',1,1,1,'2010-02-10','2010-02-10 14:17:59',1,2,'asdacasc',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('12dq','dqwd',2,1,1,'2010-02-10','2010-02-10 14:10:59',1,6,'zxcasc',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('1457','X战警',2,4,2,'2010-03-08','2010-03-08 22:55:39',2,8,'xxxxxx',70,50);
 INSERT INTO `vediotape` VALUES ('1ewfv','zxvcsdv',1,3,1,'2010-02-10','2010-02-10 14:21:42',1,2,'sdv',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('1ssd','zxcasc',1,3,1,'2010-02-10','2010-02-10 14:10:59',1,2,'zxcasczx zx zx zx zx ',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('2','12 Monkey',2,4,2,'2001-12-30','2001-01-31',3,7,'',NULL,NULL);
