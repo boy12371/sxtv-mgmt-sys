@@ -64,7 +64,8 @@ body {
 <form id="form1" name="form1" method="post" action="/tv/search/searchVideoByName.action" target="contentFrameId">
 <table style="margin-top:-10px;width:100%;">
 <tr>
-<td><img border="0" style="margin-left:20px;" src="./images/TVlogo.png"/></td>
+<td style="width:80px;"><img border="0" style="margin-left:20px;" src="./images/TVlogo.png"/></td>
+<td><img border="0" src="./images/titleText.png"/></td>
 <td>
 	<div class="divSearch">
 		<table><tr style="height: 40px;">
@@ -72,7 +73,7 @@ body {
 				<img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/>
 			</td>
 			<td>
-				<input type="text" class="inputSearch" id="searchinput" name="query"/><div id="searchcontainer">
+				<input type="text" class="inputSearch" id="searchinput" name="query"/><div id="searchcontainer"></div>
 			</td>
 			<td><div id="goBtnDiv" class="goBtn"></div></td>
 		</tr></table>
