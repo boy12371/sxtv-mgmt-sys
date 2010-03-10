@@ -133,4 +133,33 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 		}
 	}
 
+	@Override
+	public List<Playorder> findPlayorderByDate(Date date) throws Exception {
+		// TODO Auto-generated method stub
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.DATE, -1);
+		
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		
+		Date startTime = cal.getTime();
+		
+		cal.set(Calendar.HOUR_OF_DAY, 23);
+		cal.set(Calendar.MINUTE, 59);
+		cal.set(Calendar.SECOND, 59);
+		Date endTime = cal.getTime();
+		
+		System.out.println(startTime);
+		System.out.println(endTime);
+		
+		Criteria crt = this.getCriteria(Playorder.class);
+		
+		crt.add(Restrictions.ge(Playorder.PROP_PLAY_DATE, startTime));
+		crt.add(Restrictions.le(Playorder.PROP_PLAY_DATE, endTime));
+		return (List<Playorder>)crt.list();
+		
+	}
+
 }

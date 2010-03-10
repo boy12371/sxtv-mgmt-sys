@@ -1,11 +1,13 @@
 package com.vms.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.vms.common.SessionUserInfo;
+import com.vms.db.bean.Playorder;
 import com.vms.db.dao.PlayorderDAO;
 import com.vms.db.dao.iface.IPlayorderDAO;
 import com.vms.service.iface.IPlayorderService;
@@ -46,7 +48,13 @@ public class PlayorderService implements IPlayorderService {
 		
 	}
 
-
+	@Override
+	public List<Playorder> findPlayedVideosByDate(Date date) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return playorderDAO.findPlayorderByDate(date);
+		
+	}
 
 	public IPlayorderDAO getPlayorderDAO() {
 		return playorderDAO;
@@ -57,5 +65,9 @@ public class PlayorderService implements IPlayorderService {
 	public void setPlayorderDAO(IPlayorderDAO playorderDAO) {
 		this.playorderDAO = playorderDAO;
 	}
+
+
+
+	
 
 }

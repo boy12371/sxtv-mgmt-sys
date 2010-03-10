@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="command" />
 	</bean>
 	
 	
@@ -233,7 +233,11 @@
 	</bean>	
 	
 	
-	<bean id="updateJob" class="com.vms.common.AutoUpdatePlayedVideoStatus"></bean>
+	<bean id="updateJob" class="com.vms.common.AutoJobToUpdatePlayedVideoStatus">
+		<property name="playorderService" ref="playorderService"/>
+		<property name="vediotapeDAO" ref="vediotapeDAO"/>
+	</bean>
+	
 	<bean id="z" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
 		<property name="triggers">  
 			<list>      

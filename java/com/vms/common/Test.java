@@ -1,7 +1,14 @@
 package com.vms.common;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.vms.service.iface.IPlayorderService;
 
 
 public class Test {
@@ -13,9 +20,18 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		//
-//		IUserService service = (IUserService) ctx.getBean("userService");
-//		User user  =  service.getUserById(1);
+//		//
+		IPlayorderService service = (IPlayorderService) ctx.getBean("playorderService");
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DATE, 26);
+		cal.set(Calendar.MONTH, Calendar.FEBRUARY);
+		System.out.println(cal.getTime()+"=====");
+		List list  = service.findPlayedVideosByDate(cal.getTime());
+		System.out.println(list.size());
+		
+		
+		
+		
 //		
 //		GrantedAuthority[] gas = user.getAuthorities();
 //		System.out.println(gas.length);

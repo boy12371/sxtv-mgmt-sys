@@ -74,7 +74,7 @@
 		<table class="inputTable">
 			<tr>
 				<td><label>影带编号</label></td>
-				<td><s:property value="vedio.id" /> <s:hidden name="vedio.id" /></td>
+				<td><s:property value="vedio.id" /> <s:hidden name="vedio.id" /><s:hidden name="vedio.marketShare" /><s:hidden name="vedio.audienceRating" /></td>
 			</tr>
 			<tr>
 				<td><label>剧目名称</label></td>

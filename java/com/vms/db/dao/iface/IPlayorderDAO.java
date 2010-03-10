@@ -20,5 +20,7 @@ public interface IPlayorderDAO  extends IBaseRootDAO{
 	List<Playorder> findPlayorderByMonth(Date date)throws Exception;
 	
 	List<Playorder> findPlayorderBetweenDateWithFeedback(Date startDate, Date endDate) throws Exception;
+	
+	List<Playorder> findPlayorderByDate(Date date) throws Exception;
 
 }
