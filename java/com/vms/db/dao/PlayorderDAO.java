@@ -75,28 +75,6 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 	}
 	
 	@Override
-	public List<Playorder> findPlayorderByMonth(Date date) throws Exception {
-		// TODO Auto-generated method stub
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.HOUR, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
-		
-		cal.add(Calendar.MONTH, -1);
-		Date startDate = cal.getTime();
-		
-		cal.add(Calendar.MONTH, 1);
-		Date endDate = cal.getTime();
-		
-		Criteria crt = this.getCriteria(Vediotape.class);
-		crt.add(Restrictions.ge(Playorder.PROP_PLAY_DATE, startDate));
-		crt.add(Restrictions.le(Playorder.PROP_PLAY_DATE, endDate));
-		return (List<Playorder>)crt.list();
-	}
-	
-	@Override
 	public List<Playorder> findPlayorderBetweenDateWithFeedback(Date startDate, Date endDate) throws Exception {
 		Criteria crt = this.getCriteria(Playorder.class);
 		crt.add(Restrictions.between(Playorder.PROP_PLAY_DATE, startDate, endDate))
