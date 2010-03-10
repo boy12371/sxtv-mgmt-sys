@@ -123,7 +123,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 	public int getTotalCountForAllVideotapesForAudit() throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
-		crt.add(Restrictions.in(Vediotape.PROP_STATUS + ".id", new Object[] { 2, 3, 4, 5 }));
+		crt.add(Restrictions.in(Vediotape.PROP_STATUS, new Object[] { new Integer(2), new Integer(3), new Integer(7), new Integer(5) }));
 		crt.setProjection(Projections.rowCount());
 		return Integer.parseInt(crt.uniqueResult().toString());
 
@@ -181,23 +181,22 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 				String key = (String) it.next();
 				if (key.equals(Vediotape.PROP_VEDIO_NAME)) {
 					crt.add(Restrictions.ilike(key, "%"+fieldsValues.get(key)+"%"));
-					break;
-				}
-				if (key.equals("startDate")) {
+					
+				}else if (key.equals("startDate")) {
 					if (fieldsValues.get(key) != null) {
 						crt.add(Restrictions.ge(Vediotape.PROP_DATE_COMING, fieldsValues.get(key)));
-						break;
+						
 					}
 
-				}
-				if (key.equals("endDate")) {
+				}else if (key.equals("endDate")) {
 					if (fieldsValues.get(key) != null) {
 						crt.add(Restrictions.le(Vediotape.PROP_DATE_COMING, fieldsValues.get(key)));
-						break;
+						
 					}
-
+				}else{
+					crt.add(Restrictions.eq(key, fieldsValues.get(key)));	
 				}
-				crt.add(Restrictions.eq(key, fieldsValues.get(key)));
+				
 			}
 		}
 		Order order = DaoUtils.getOrder(orderProperty, ascending);

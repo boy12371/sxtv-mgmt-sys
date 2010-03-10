@@ -3,6 +3,7 @@ package com.vms.common;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.vms.db.bean.Company;
@@ -85,7 +86,13 @@ public class SearchCondition {
 	public Date getEndingDate() throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		if (this.getEndDate() != null && !"".equals(this.getEndDate())) {
-			return format.parse(this.getEndDate());
+			Date date = format.parse(this.getEndDate());
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.set(Calendar.HOUR_OF_DAY, 23);
+			cal.set(Calendar.MINUTE, 59);
+			cal.set(Calendar.SECOND, 59);
+			return cal.getTime();
 		}
 		return null;
 
@@ -94,7 +101,13 @@ public class SearchCondition {
 	public Date getStartingDate() throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		if (this.getStartDate() != null && !"".equals(this.getStartDate())) {
-			return format.parse(this.getStartDate());
+			Date date = format.parse(this.getStartDate());
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.set(Calendar.HOUR_OF_DAY, 0);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			return cal.getTime();
 		}
 		return null;
 	}

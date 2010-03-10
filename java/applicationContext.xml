@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="command" />
+		<property name="password" value="root" />
 	</bean>
 	
 	
@@ -262,7 +262,7 @@
 			<ref bean="scheduledUpdateJobDetail"/>  
 		</property>  
 		<property name="cronExpression">
-			<value>0/10 * * * * ?</value>    
+			<value>0/50 * * * * ?</value>    
 		</property>  
 	</bean>
 </beans>

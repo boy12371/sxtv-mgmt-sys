@@ -170,6 +170,7 @@ function initDataTable() {
 			scope : myDataTable
 		};
 		request = myDataTable.get("generateRequest")(oState, myDataTable);
+		
 		var vid = YAHOO.util.Dom.get("vid").value;
 		var vname = YAHOO.util.Dom.get("vname").value;
 		var vcompany = YAHOO.util.Dom.get("vcompany").value;
