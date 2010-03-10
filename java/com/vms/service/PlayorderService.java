@@ -42,13 +42,6 @@ public class PlayorderService implements IPlayorderService {
 	}
 
 	@Override
-	public List findPlayorderByMonth(Date month) throws Exception {
-		// TODO Auto-generated method stub
-		return playorderDAO.findPlayorderByMonth(month);
-		
-	}
-
-	@Override
 	public List<Playorder> findPlayedVideosByDate(Date date) throws Exception {
 		// TODO Auto-generated method stub
 		
