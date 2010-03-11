@@ -65,7 +65,7 @@ body {
 <table style="margin-top:-10px;width:100%;">
 <tr>
 <td style="width:80px;"><img border="0" style="margin-left:20px;" src="./images/TVlogo.png"/></td>
-<td><img border="0" src="./images/titleText.png"/></td>
+<td><img border="0" width="500" src="./images/titleText.png"/></td>
 <td>
 	<div class="divSearch">
 		<table><tr style="height: 40px;">
@@ -80,7 +80,7 @@ body {
 
 		<table><tr style="height: 40px;">
 			<td>&nbsp;</td>
-			<td><a id="changePassword" href="#"><img style="border:0; margin-top:10px; width:25px;height: 25px" src="./images/lock.png"/></a> ｜ <a id="logout" href="#"><img style="border:0; margin-top:8px" src="./images/exit.png"/></a></td>
+			<td><a id="changePassword" href="#"><img style="border:0; margin-top:10px; width:25px;height: 25px" src="./images/lock.png"/></a> �?<a id="logout" href="#"><img style="border:0; margin-top:8px" src="./images/exit.png"/></a></td>
 		</tr></table>
 	</div>
 </td>
@@ -91,8 +91,8 @@ body {
 	
  <div id="passwordForm" style="display:none">
 	<h1 class="passwordTitle">修改密码</h1>
-    <p><label>原 密 码:&nbsp;</label><input type="password" name="oldPwd" id="oldPwd"/></p>
-    <p><label>新 密 码:&nbsp;</label><input type="password" name="newPwd" id="newPwd"/></p>
+    <p><label>�?�?�?&nbsp;</label><input type="password" name="oldPwd" id="oldPwd"/></p>
+    <p><label>�?�?�?&nbsp;</label><input type="password" name="newPwd" id="newPwd"/></p>
 	<p><label>确认密码:&nbsp;</label><input type="password" name="confirmPwd" id="confirmPwd"/></p>
 	<p><input type="button" name="demo1" id="yes" value="确认" />
 	<input type="button" name="cancel" id="cancel" value="取消" /></p>
