@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="command" />
+		<property name="password" value="root" />
 	</bean>
 	
 	
@@ -176,6 +176,10 @@
 	<!--
 			Service **************************************************************
 		-->
+	<bean id="accuracyService" class="com.vms.service.AccuracyService">
+		<property name="vedioscoreDAO" ref="vedioscoreDAO" />
+		<property name="playorderDAO" ref="playorderDAO" />
+	</bean>
 	<bean id="vediotapeService" class="com.vms.service.VediotapeService">
 		<property name="vediotapeDAO" ref="vediotapeDAO" />
 		<property name="auditingDAO" ref="auditingDAO" />
