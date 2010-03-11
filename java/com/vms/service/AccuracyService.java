@@ -11,11 +11,12 @@ import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IPlayorderDAO;
 import com.vms.db.dao.iface.IVedioscoreDAO;
+import com.vms.service.iface.IAccuracyService;
 
-public class AccuracyService {
+public class AccuracyService implements IAccuracyService{
 	private IPlayorderDAO playorderDAO;
 	private IVedioscoreDAO vedioscoreDAO;
-	
+
 	public List<AccuracyVO> findAllAccuracy(Date startDate, Date endDate) throws Exception{
 		List<AccuracyVO> accs = new ArrayList<AccuracyVO>();
 		List<Playorder> playorder = playorderDAO.findPlayorderBetweenDateWithFeedback(startDate, endDate);
@@ -57,4 +58,13 @@ public class AccuracyService {
 	public IPlayorderDAO getPlayorderDAO() {
 		return playorderDAO;
 	}
+	
+	public IVedioscoreDAO getVedioscoreDAO() {
+		return vedioscoreDAO;
+	}
+
+	public void setVedioscoreDAO(IVedioscoreDAO vedioscoreDAO) {
+		this.vedioscoreDAO = vedioscoreDAO;
+	}
+
 }
