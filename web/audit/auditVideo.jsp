@@ -32,7 +32,7 @@
 </head>
 <body class="yui-skin-sam">
 <s:actionerror />
-<h1>剧目详细信息</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0">剧目详细信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 <s:form action="videoOperation" method="post" namespace="/audit">
 	<div align="center">
@@ -98,7 +98,7 @@
 	</div>
 </s:form>
 <div></div>
-<h1>评分信息</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/score.png" border="0">评分信息</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 
 <div id="dynamicdata" align="center"></div>

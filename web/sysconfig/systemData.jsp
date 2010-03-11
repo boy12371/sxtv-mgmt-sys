@@ -24,7 +24,7 @@
 
 <s:actionmessage/>
 <s:actionerror/>
-<h1>影带状态</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/21.png" border="0">影带状态</h1>
 <p>影带状态不可更改</p>
 <br />
 <div id="vedioStatus" align="center"></div>
@@ -32,7 +32,7 @@
 	YAHOO.example.DynamicData = initStatusTable();
 </script>
 
-<h1>影带题材</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/21.png" border="0">影带题材</h1>
 <p>可添加或修改题材内容</p>
 <br />
 <div id="vedioTopic" align="center"></div>
@@ -41,7 +41,7 @@
 	YAHOO.example.DynamicData = initTopicTable();
 </script>
 
-<h1>影带题材</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/21.png" border="0">影带题材</h1>
 <p>可添加或修改题材内容</p>
 <br />
 <div id="vedioSubject" align="center"></div>

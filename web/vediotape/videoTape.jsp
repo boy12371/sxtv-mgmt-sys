@@ -46,7 +46,7 @@
 
 <s:actionerror />
 <s:actionmessage />
-<h1>查看或修改影带信息</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/Search.png" border="0">查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
 <div align="center"><s:form id="searchForm" action="searchVideoByNameOrID" namespace="/vedio">
 	<table>
@@ -68,7 +68,7 @@
 
 </s:form></div>
 <s:if test="vedio!=null">
-	<h1>影带信息</h1>
+	<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0">影带信息</h1>
 	<p>查看或编辑剧目信息并保存</p>
 	<div align="center"><s:form id="updateForm" action="updateVideoInfo" namespace="/vedio" method="post">
 		<table class="inputTable">

@@ -123,7 +123,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 	public int getTotalCountForAllVideotapesForAudit() throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
-		crt.add(Restrictions.in(Vediotape.PROP_STATUS, new Object[] { new Integer(2), new Integer(3), new Integer(7), new Integer(5) }));
+		crt.add(Restrictions.in(Vediotape.PROP_STATUS, new Object[] { new Status(2), new Status(3), new Status(7), new Status(5) }));
 		crt.setProjection(Projections.rowCount());
 		return Integer.parseInt(crt.uniqueResult().toString());
 

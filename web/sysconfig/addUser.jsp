@@ -19,7 +19,7 @@
 </head>
 <body class="yui-skin-sam">
 
-<h1>员工用户</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/user.png" border="0">员工用户</h1>
 <p>编辑并添加用户信息</p>
 <s:actionerror />
 <s:form action="doAddUser" namespace="/sys" method="post">

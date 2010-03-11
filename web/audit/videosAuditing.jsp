@@ -41,7 +41,7 @@
 <s:actionmessage/>
 
 
-<h1>查看或修改影带信息</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/Search.png" border="0">查看或修改影带信息</h1>
 <p>输入剧目编号或名称搜索剧目</p>
 <s:form id="searchForm" action="findVideoByNameOrID" namespace="/audit">
 <div align="center">
@@ -72,7 +72,7 @@
 </s:form>
 
 
-<h1>待审剧目</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0">待审剧目</h1>
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
  
 <select class="selectField" style="margin-left:67px" id="filter">

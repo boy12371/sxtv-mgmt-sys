@@ -23,7 +23,7 @@
 <body class="yui-skin-sam">
 
 
-<h1>公司信息</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/company.png" border="0">公司信息</h1>
 <p>编辑并更新公司信息</p>
 <s:actionerror />
 

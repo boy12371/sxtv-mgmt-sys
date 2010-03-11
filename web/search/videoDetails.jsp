@@ -3,20 +3,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+
+
+
+
 <title>影带信息</title>
 </head>
-<body>
+<body class="yui-skin-sam">
 
 
-<h1>影带信息</h1>
+<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0" />影带信息</h1>
 <p>影带详细信息</p>
 
 <s:actionerror/>
-<table>
+<div align="center">
+<table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
 		<td> <s:property value="video.id"/>
+</tr><tr>
 		</td>
 		<td><label>剧目名称</label></td>
 		<td><s:property value="video.vedioName"/></td>
@@ -24,27 +40,27 @@
 	<tr>
 		<td><label>影视公司</label></td>
 		<td><s:property value="video.companyID.id"/></td>
-		<td><label>送带日期</label></td>
+		</tr><tr><td><label>送带日期</label></td>
 		<td><s:date name="video.dateComing"/></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
 		<td><s:property value="video.subject.subjectName"/></td>
-		<td><label>题材</label></td>
+		</tr><tr><td><label>题材</label></td>
 		<td><s:property value="video.topic.topicName"/></td>
 
 	</tr>
 	<tr>
 		<td><label>市场份额</label></td>
 		<td><s:property value="video.marketShare"/></td>
-		<td><label>收视率</label></td>
+		</tr><tr><td><label>收视率</label></td>
 		<td><s:property value="video.audienceRating"/></td>
 
 	</tr>
 	<tr>
 		<td><label>状态  </label></td>
 		<td><s:property value="video.status.status"/></td>
-		<td><label>备注</label></td>
+		</tr><tr><td><label>备注</label></td>
 		<td><s:property value="video.comments"/></td>
 
 	</tr>
@@ -76,7 +92,7 @@
 </td>
 	</tr>
 </table>
-
+</div>
 
 </body>
 </html>
