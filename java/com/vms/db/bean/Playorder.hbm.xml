@@ -16,7 +16,7 @@
 			not-null="true">
 		</many-to-one>
 		<many-to-one name="vedioID" column="vedioID" class="Vediotape"
-			not-null="true">
+			not-null="true" lazy="false">
 		</many-to-one>
 	</class>
 </hibernate-mapping>

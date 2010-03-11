@@ -80,7 +80,7 @@ body {
 
 		<table><tr style="height: 40px;">
 			<td>&nbsp;</td>
-			<td><a id="changePassword" href="#">修改密码</a> ｜ <a id="logout" href="#">退出</a></td>
+			<td><a id="changePassword" href="#"><img style="border:0; margin-top:10px; width:25px;height: 25px" src="./images/lock.png"/></a> ｜ <a id="logout" href="#"><img style="border:0; margin-top:8px" src="./images/exit.png"/></a></td>
 		</tr></table>
 	</div>
 </td>
@@ -112,6 +112,7 @@ YAHOO.example.Centered = autoCompleteVideoName();
 			<a href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>" onclick="showDefaultSubtab(this);return false";>
 		</s:else> <em><s:property value="name" /></em></a></li>
 	</s:iterator>
+
 </ul>
 
 <div class="yui-content subTabview" id="subTabview"><s:iterator value="tabs" status="st">

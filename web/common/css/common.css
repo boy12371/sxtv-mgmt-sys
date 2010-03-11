@@ -87,8 +87,8 @@ label {
 }
 
 .markedRow{
-	color:#AA0000;
-	font-weight:bold;
+	background-color: #a33;
+    color: #fff;
 }
 
 .autoComplete{

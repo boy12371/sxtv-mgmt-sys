@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.vms.db.bean.Playorder;
@@ -11,9 +12,12 @@ import com.vms.db.bean.Status;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IVediotapeDAO;
 import com.vms.service.iface.IPlayorderService;
+import com.vms.service.iface.IVediotapeService;
 
 public class AutoJobToUpdatePlayedVideoStatus{
-	private IVediotapeDAO vediotapeDAO;
+	
+	private static Logger logger = Logger.getLogger(AutoJobToUpdatePlayedVideoStatus.class);
+	private IVediotapeService vediotapeService;
 	private IPlayorderService playorderService;
 	
 	
@@ -24,21 +28,13 @@ public class AutoJobToUpdatePlayedVideoStatus{
 			for (Playorder playorder : list) {
 				Vediotape v = playorder.getVedioID();
 				v.setStatus(new Status(8));
-				vediotapeDAO.saveOrUpdateObject(v);
+				if(vediotapeService.updateVideo(v)){
+					logger.info(cal.getTime().toLocaleString()+" system update status to 8(played) of video: "+ v.getVedioName()+"/id:"+v.getId());
+					
+				}		
 			}	
 		}
 	}
-
-
-	public IVediotapeDAO getVediotapeDAO() {
-		return vediotapeDAO;
-	}
-
-
-	public void setVediotapeDAO(IVediotapeDAO vediotapeDAO) {
-		this.vediotapeDAO = vediotapeDAO;
-	}
-
 
 	public IPlayorderService getPlayorderService() {
 		return playorderService;
@@ -47,6 +43,14 @@ public class AutoJobToUpdatePlayedVideoStatus{
 
 	public void setPlayorderService(IPlayorderService playorderService) {
 		this.playorderService = playorderService;
+	}
+
+	public IVediotapeService getVediotapeService() {
+		return vediotapeService;
+	}
+
+	public void setVediotapeService(IVediotapeService vediotapeService) {
+		this.vediotapeService = vediotapeService;
 	}
 
 }

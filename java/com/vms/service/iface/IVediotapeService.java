@@ -60,7 +60,7 @@ public interface IVediotapeService {
 			throws Exception;
 
 	boolean updateVideoInfo(Vediotape video) throws Exception;
-
+	boolean updateVideo(Vediotape video) throws Exception;
 	public List<Vediotape> findVidesByConditions(SearchCondition condition,
 			String propertyName, int startIndex, int endIndex, boolean asceding)
 			throws Exception;

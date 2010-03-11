@@ -296,4 +296,11 @@ public class VediotapeService implements IVediotapeService {
 		this.vedioscoreDAO = vedioscoreDAO;
 	}
 
+	@Override
+	public boolean updateVideo(Vediotape video) throws Exception {
+		// TODO Auto-generated method stub
+		this.vediotapeDAO.saveOrUpdateObject(video);
+		return true;
+	}
+
 }
