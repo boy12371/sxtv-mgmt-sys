@@ -34,18 +34,25 @@ function initUnArrangeTable() {
 	var formatAddTape = function(elCell, oRecord, oColumn, sData) {
 		var img = document.createElement("img");
 		img.border = 0;
-		img.src="./images/arrange.png"
+		img.src="./images/arrange.gif"
 		img.onclick = eval("(1,function(){addTapeToArrange(\"" + oRecord.getId() + "\");})");
+		img.onmouseover=function(){
+			this.src="./images/plus.png";
+		}
+		img.onmouseout=function(){
+			 this.src="./images/arrange.gif";
+		}
 		elCell.appendChild(img);
 		elCell.style.padding="2px";
-		elCell.style.width="20px";
+		elCell.style.width="auto";
+		elCell.style.textAlign="center";
 	};
 	
 	var myRowFormatter = function(elTr, oRecord){
 		var xData = oRecord.getData();
 		if(typeof(xData.marked)!="undefined" && 9==xData.marked){
 //			elTr.className = elTr.className + YAHOO.widget.DataTable.CLASS_HIGHLIGHTED;
-			elTr.className = elTr.className + " markedRow";
+			elTr.className = elTr.className + " mark";
 			elTr.title = xData.comments;
 		}
 		return true;
@@ -141,11 +148,18 @@ function initArrangeTable() {
 	var formatRemoveTape = function(elCell, oRecord, oColumn, sData) {
 		var img = document.createElement("img");
 		img.border = 0;
-		img.src="./images/delete.png"
+		img.src="./images/remove.png"
 		img.onclick = eval("(1,function(){removeTapeFromArrange(\"" + oRecord.getId() + "\");})");
+		img.onmouseover=function(){
+			this.src="./images/minus.png";
+		}
+		img.onmouseout=function(){
+			 this.src="./images/remove.png";
+		}
 		elCell.appendChild(img);
 		elCell.style.padding="2px";
-		elCell.style.width="20px";
+		elCell.style.width="auto";
+		elCell.style.textAlign="center";
 	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting

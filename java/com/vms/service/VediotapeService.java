@@ -187,9 +187,9 @@ public class VediotapeService implements IVediotapeService {
 	public boolean updateVideoRatingMarket(String videoID, float market,
 			float rate) throws Exception {
 		// TODO Auto-generated method stub
-		String hql = "update Vediotape v set v.marketShare=?, v.audienceRating=? where v.id=?";
+		String hql = "update Vediotape v set v.marketShare=?, v.audienceRating=?, v.status=? where v.id=?";
 		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] {
-				market, rate, videoID });
+				market, rate, 8, videoID });
 		float vScore = 0;
 		if (rate < 0.7) {
 			vScore = 0.6f;

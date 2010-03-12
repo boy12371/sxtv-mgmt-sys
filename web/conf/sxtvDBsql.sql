@@ -79,7 +79,6 @@ CREATE TABLE `auditing` (
   `result` int(11) NOT NULL,
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_key` (`vedioID`,`auditor`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
