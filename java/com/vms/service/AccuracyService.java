@@ -43,9 +43,20 @@ public class AccuracyService implements IAccuracyService{
 		for(Vedioscore s:scores){
 			float uScore = s.getScore();
 			//FIXME the way to compute mScore should be fix.
-			float mScore = (s.getVedio().getAudienceRating() + s.getVedio().getMarketShare()) /2;
-			accSum += Math.abs(uScore - mScore);
-			mSum += mScore;
+			float vScore = 0;
+			float rate = s.getVedio().getAudienceRating();
+			if (rate < 0.7) {
+				vScore = 0.6f;
+			} else if (rate >= 0.7 && rate < 0.8) {
+				vScore = 0.7f;
+			} else if (rate >= 0.8 && rate < 0.9) {
+				vScore = 0.8f;
+			} else {
+				vScore = 0.9f;
+			}
+			vScore *= 100;
+			accSum += s.getAccuracy();
+			mSum += vScore;
 		}
 		float acc = (1 - accSum / mSum) * 100 ;
 		return acc;

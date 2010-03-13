@@ -1,6 +1,10 @@
 package com.vms.action.accuracy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -28,13 +32,29 @@ public class AccuracyAction extends BaseAction {
 	private String examiner;
 	
 	public String toAccuracy(){
+		Date startDate = new Date();
+		startDate.setDate(1);
+		startDate.setMonth(startDate.getMonth()-1);
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(startDate);
+		
+		int numDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		Date endDate = new Date();
+		endDate.setMonth(endDate.getMonth()-1);
+		endDate.setDate(numDayOfMonth);
+		
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+		startDateStr = dFormat.format(startDate);
+		endDateStr = dFormat.format(endDate);
+		
 		return SUCCESS;
 	}
 	
 	public String getAccuracy() throws Exception {
 		accuracyTable = JSONDataTableUtils.initJSONDataTable(getRequest());
-		Date startDate = new Date();
-		Date endDate = new Date();
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = dFormat.parse(startDateStr);
+		Date endDate = dFormat.parse(endDateStr);
 		List<AccuracyVO> accs = accuracyService.findAllAccuracy(startDate, endDate);
 		if(null != examiner && "".equals(examiner)){
 			AccuracyVO temp=null;

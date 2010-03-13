@@ -3,8 +3,10 @@ package com.vms.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 
+import com.vms.action.accuracy.AccuracyAction;
 import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.db.bean.UserRole;
@@ -20,6 +22,8 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 
 	public static Class clz = com.vms.db.bean.Vedioscore.class;	
 	
+	private static Logger logger = Logger.getLogger(VedioscoreDAO.class);
+	
 	public List<User> findAllExaminer() throws Exception{
 		List<User> users = new ArrayList<User>();
 		List<UserRole> urs = this.findObjectByField(UserRole.class, "roleid", new Role(3), -1, -1, "roleid", true);
@@ -29,10 +33,22 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 		return users;
 	}
 	
-	public List<Vedioscore> findScoresOfUserAndTapes(User user, List<Vediotape> tapes){
-		String hql = "from Vedioscore s where s.vedioID in (:tapes)";
-		Query query = this.getQuery(hql);
-		query.setParameterList("tapes", tapes);
-		return query.list();
+	public List<Vedioscore> findScoresOfUserAndTapes(User user, List<Vediotape> tapes) throws Exception{
+		String hql = "from Vedioscore s where s.vedio in (:tapes)";
+		List<Vedioscore> list;
+		if(null == tapes && 0 == tapes.size()){
+			return new ArrayList<Vedioscore>();
+		}
+		try{
+//			list = this.getHibernateTemplate().find(hql, tapes);
+			Query query = this.getQuery(hql);
+			query.setParameterList("tapes", tapes);
+			list = query.list();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			list = new ArrayList<Vedioscore>();
+		}
+		return list;
 	}
 }

@@ -10,5 +10,5 @@ import com.vms.db.bean.Vediotape;
 public interface IVedioscoreDAO extends IBaseRootDAO {
 	public List<User> findAllExaminer() throws Exception;
 	
-	public List<Vedioscore> findScoresOfUserAndTapes(User user, List<Vediotape> tapes);
+	public List<Vedioscore> findScoresOfUserAndTapes(User user, List<Vediotape> tapes) throws Exception;
 }

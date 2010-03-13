@@ -200,12 +200,13 @@ public class VediotapeService implements IVediotapeService {
 		} else {
 			vScore = 0.9f;
 		}
+		vScore *= 100;
 		if (result) {
 			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(
 					Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(
 							videoID), -1, -1, "", false);
 			for (Vedioscore vs : scoreList) {
-				float acc = Math.abs(vs.getScore() - vScore) / vScore * 100;
+				float acc = Math.abs(vs.getScore() - vScore);
 				vs.setAccuracy(acc);
 				vedioscoreDAO.saveOrUpdateObject(vs);
 			}
