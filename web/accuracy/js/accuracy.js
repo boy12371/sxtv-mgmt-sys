@@ -28,14 +28,12 @@ function initAccuracyTable() {
 		}
 	};
 	
-	var startDate = YAHOO.util.Dom.get("startDate").value; 
-	var endDate = YAHOO.util.Dom.get("endDate").value;
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=accuracy&dir=asc&startDateStr=" + startDate + "&endDateStr=" + endDate, // Initial
+		initialRequest :"sort=accuracy&dir=desc", // Initial
 		sortedBy : {
 			key :"accuracy",
-			dir :YAHOO.widget.DataTable.CLASS_ASC
+			dir :YAHOO.widget.DataTable.CLASS_DESC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator( {rowsPerPage:10})
 	};
@@ -55,8 +53,8 @@ function initAccuracyTable() {
 }
 
 function filterFunc(){
-	var startDate = YAHOO.util.Dom.get("startDate").value; 
-	var endDate = YAHOO.util.Dom.get("endDate").value;
+	var startDate = document.getElementsByName("startDateStr")[0].value; 
+	var endDate = document.getElementsByName("endDateStr")[0].value;
 	if((null==startDate || ""==startDate) || (null==endDate || ""==endDate)) return;
 	var callback = {
 			success:myDataTable.onDataReturnInitializeTable,
@@ -65,7 +63,7 @@ function filterFunc(){
 			scope:myDataTable
 			};
 	myDataTable.getDataSource().sendRequest(
-			"startDateStr="+startDateStr+"&endDateStr="+endDateStr,
+			"startDateStr="+startDate+"&endDateStr="+endDate,
 			callback
 			);
 }
