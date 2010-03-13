@@ -11,6 +11,7 @@
 	<include file="com/vms/action/sysconfig/struts_sysconfig.xml"></include>
 	<include file="com/vms/action/examine/struts.xml"/>
 	<include file="com/vms/action/arrange/struts.xml"/>
+	<include file="com/vms/action/accuracy/struts.xml"/>
 	<include file="com/vms/action/vediotape/vediotape_struts.xml"/>
 	<include file="com/vms/action/audit/audit_struts.xml"/>
 	<include file="com/vms/action/search/search_struts.xml"/>
