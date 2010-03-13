@@ -34,7 +34,7 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 	}
 	
 	public List<Vedioscore> findScoresOfUserAndTapes(User user, List<Vediotape> tapes) throws Exception{
-		String hql = "from Vedioscore s where s.vedio in (:tapes)";
+		String hql = "from Vedioscore s where s.vedio in (:tapes) and s.examiner=(:user)";
 		List<Vedioscore> list;
 		if(null == tapes && 0 == tapes.size()){
 			return new ArrayList<Vedioscore>();
@@ -43,6 +43,7 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 //			list = this.getHibernateTemplate().find(hql, tapes);
 			Query query = this.getQuery(hql);
 			query.setParameterList("tapes", tapes);
+			query.setParameter("user", user);
 			list = query.list();
 		}catch(Exception e){
 			logger.error(e.getMessage());

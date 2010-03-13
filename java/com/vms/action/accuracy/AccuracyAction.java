@@ -3,6 +3,8 @@ package com.vms.action.accuracy;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -53,6 +55,9 @@ public class AccuracyAction extends BaseAction {
 	public String getAccuracy() throws Exception {
 		accuracyTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+		if(null==startDateStr || "".equals(startDateStr) || null==endDateStr || "".equals(endDateStr)){
+			toAccuracy();
+		}
 		Date startDate = dFormat.parse(startDateStr);
 		Date endDate = dFormat.parse(endDateStr);
 		List<AccuracyVO> accs = accuracyService.findAllAccuracy(startDate, endDate);
@@ -69,8 +74,16 @@ public class AccuracyAction extends BaseAction {
 				accs.add(temp);
 			}
 		}
+		AccuracyComparator acomp = new AccuracyComparator();
+		Collections.sort(accs,acomp);
 		JSONDataTableUtils.setupJSONDataTable(accs, accuracyTable, accs.size());
 		return SUCCESS;
+	}
+	
+	public class AccuracyComparator implements Comparator<AccuracyVO> {
+		public int compare(AccuracyVO o1, AccuracyVO o2) {
+			return o1.getAccuracy()==o2.getAccuracy() ? 0 : (o1.getAccuracy()>o2.getAccuracy()?-1:1);
+		 }
 	}
 
 	public void setAccuracyService(IAccuracyService accuracyService) {
