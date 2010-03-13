@@ -1,3 +1,4 @@
+var myDataTable;
 function initAccuracyTable() {	
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
@@ -26,27 +27,45 @@ function initAccuracyTable() {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
 	};
+	
+	var startDate = YAHOO.util.Dom.get("startDate").value; 
+	var endDate = YAHOO.util.Dom.get("endDate").value;
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc", // Initial
+		initialRequest :"sort=accuracy&dir=asc&startDateStr=" + startDate + "&endDateStr=" + endDate, // Initial
 		sortedBy : {
-			key :"employeeName",
+			key :"accuracy",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator( {rowsPerPage:10}),
-		formatRow: myRowFormatter
+		paginator :new YAHOO.widget.Paginator( {rowsPerPage:10})
 	};
 	// DataTable instance
-	vat table = new YAHOO.widget.DataTable("accuracyTableDiv", myColumnDefs,
+	myDataTable = new YAHOO.widget.DataTable("accuracyTableDiv", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
-	table.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
 	
 	return {
 		ds :myDataSource,
-		dt :table
+		dt :myDataTable
 	};
+}
+
+function filterFunc(){
+	var startDate = YAHOO.util.Dom.get("startDate").value; 
+	var endDate = YAHOO.util.Dom.get("endDate").value;
+	if((null==startDate || ""==startDate) || (null==endDate || ""==endDate)) return;
+	var callback = {
+			success:myDataTable.onDataReturnInitializeTable,
+			failure:myDataTable.onDataReturnInitializeTable,
+			argument:myDataTable.getState(),
+			scope:myDataTable
+			};
+	myDataTable.getDataSource().sendRequest(
+			"startDateStr="+startDateStr+"&endDateStr="+endDateStr,
+			callback
+			);
 }

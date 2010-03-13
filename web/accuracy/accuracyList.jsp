@@ -35,18 +35,31 @@
 <table class="searchTable">
 	<tr>
 		<td><label>开始日期</label></td>
-		<td><input class="inputField" type="text" /></td>
+		<td><input class="inputField" type="text" name="startDateStr" value="${startDateStr}" id="startDate"/></td>
 		<td><label>结束日期</label></td>
-		<td><input class="inputField" type="text" /></td>
-		<td><label>姓名</label></td>
-		<td><input class="inputField" type="text" /></td>
+		<td><input class="inputField" type="text" name="endDateStr" value="${endDateStr}" id="endDate"/></td>
+<!-- 	<td><label>姓名</label></td>
+		<td><input class="inputField" type="text" /></td>  -->
 		<td>
+			<div id="searchBtnDiv"></div>
 		</td>
 	</tr>
 </table>
 </div>
 
 <div id="accuracyTableDiv" align="center"></div>
+
+<script language="JavaScript">
+var searchBtn = new YAHOO.widget.Button({  
+		label: "查&nbsp;&nbsp;询",  
+		id: "searchBtn",  
+		container: "searchBtnDiv" }
+		); 
+
+searchBtn.on("click",filterFunc);
+
+initAccuracyTable();
+</script>
 
 </body>
 </html>
