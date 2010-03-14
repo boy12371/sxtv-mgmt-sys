@@ -50,6 +50,7 @@
 .sxtv_logo{
 	background-image: url(../image/sxtv_logo.png);
 	background-repeat:no-repeat;
+	background-position:center;
 	text-align:center;
 	width:500px;
 	height:500px;
