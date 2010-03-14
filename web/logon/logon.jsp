@@ -12,11 +12,16 @@
 
 
 <s:form action="doLogon" method="post" namespace="/framework" name="logonForm">
-<div style="text-align:center;">
 <s:actionmessage/>
 <s:actionerror/>
+<div>
+	<img border="0" style="float:left;position:absolute;margin-top:-100px;*margin-top:0px;" src="<%=request.getContextPath() %>/logon/image/cloud.png"/>
+	
+	<div align="center">
 	<div class="sxtv_logo">
-	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:130px;">
+	<div>
+	<img border="0" style="margin-top:-190px;*margin-top:110px;margin-left:-60px;" src="<%=request.getContextPath() %>/logon/image/title_bottom.png"/>
+	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:150px;*margin-top:0px;margin-left:25px;">
 		<tr>
 			<td class="tl"></td>
 			<td class="tc"></td>
@@ -64,6 +69,8 @@
 			<td class="br"></td>
 		</tr>
 	</table>
+	</div>
+	</div>
 	</div>
 </div>
 
