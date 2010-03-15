@@ -34,7 +34,7 @@
 </head>
 <body class="yui-skin-sam">
 
-<h1>观众评价信息</h1>
+<h1>观众评价信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/exam.png" border="0">
 
 <s:actionmessage/>
 <s:actionerror/>

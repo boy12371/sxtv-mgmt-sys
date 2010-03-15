@@ -80,7 +80,10 @@ body {
 
 		<table><tr style="height: 40px;">
 			<td>&nbsp;</td>
-			<td><a id="changePassword" href="#"><img style="border:0; margin-top:10px; width:25px;height: 25px" src="./images/key.png"/></a> <a id="logout" href="#"><img style="border:0; margin-top:8px" src="./images/exit.png"/></a></td>
+			<td>
+				<a id="changePassword" href="#">修改密码</a> 
+				<a id="logout" href="#">退出</a>
+			</td>
 		</tr></table>
 	</div>
 </td>

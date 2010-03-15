@@ -35,7 +35,7 @@
 
 
 
-<h1><img src="${pageContext.request.contextPath}/common/images/company.png" border="0">影视公司信息</h1>
+<h1>影视公司信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/company.png" border="0">
 <p>影视公司相关信息</p>
 
 <s:actionmessage />

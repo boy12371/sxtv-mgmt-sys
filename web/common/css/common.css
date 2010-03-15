@@ -119,3 +119,8 @@ label {
 .searchTable lable {
 	float: left;
 }
+
+.pageImage{
+	float:right;
+	margin-top:-20px;
+}

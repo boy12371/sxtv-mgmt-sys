@@ -33,7 +33,7 @@
 <s:actionmessage />
 <s:actionerror />
 <br />
-<h1><img src="${pageContext.request.contextPath}/common/images/employee.png" border="0">员工信息</h1>
+<h1>员工信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/employee.png" border="0">
 <p>查看所有员工信息</p>
 <!-- Employee Table-->
 <div id="employeeTable" align="center"></div>
@@ -44,7 +44,7 @@
 
 <!-- User Table-->
 
-<h1><img src="${pageContext.request.contextPath}/common/images/user.png" border="0">用户信息</h1>
+<h1>用户信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/user.png" border="0">
 <p>编辑并更新用户信息</p>
 <div id="userTable" align="center"></div>
 <div id="addUser" align="center"></div>

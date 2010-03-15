@@ -20,8 +20,8 @@ USE `sxtvdb`;
 CREATE TABLE `audience` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
-  `age` int(11) DEFAULT '0',
-  `gender` int(4) DEFAULT '0',
+  `age` int(11) DEFAULT NULL,
+  `gender` int(4) DEFAULT NULL,
   `career` varchar(50) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -79,6 +79,7 @@ CREATE TABLE `auditing` (
   `result` int(11) NOT NULL,
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_key` (`vedioID`,`auditor`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
@@ -393,13 +394,13 @@ CREATE TABLE `vedioscore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vedioID` varchar(128) NOT NULL DEFAULT '',
   `examiner` int(11) NOT NULL,
-  `storyScore` float NOT NULL DEFAULT '0',
-  `techScore` float NOT NULL DEFAULT '0',
-  `performScore` float NOT NULL DEFAULT '0',
-  `innovateScore` float NOT NULL DEFAULT '0',
-  `score` float NOT NULL DEFAULT '0',
+  `storyScore` float NOT NULL,
+  `techScore` float NOT NULL,
+  `performScore` float NOT NULL,
+  `innovateScore` float NOT NULL,
+  `score` float NOT NULL,
   `award` int(11) NOT NULL DEFAULT '0',
-  `accuracy` float DEFAULT NULL DEFAULT '0',
+  `accuracy` float DEFAULT NULL,
   `purchase` int(11) NOT NULL DEFAULT '0',
   `dateExamine` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `comments` varchar(512) DEFAULT NULL,
@@ -407,7 +408,7 @@ CREATE TABLE `vedioscore` (
   UNIQUE KEY `unique_key` (`vedioID`,`examiner`),
   KEY `vedioExaminer` (`examiner`),
   KEY `vedioID` (`vedioID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='评分表';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='评分表';
 
 #
 # Dumping data for table vedioscore
@@ -416,9 +417,18 @@ CREATE TABLE `vedioscore` (
 INSERT INTO `vedioscore` VALUES (1,'2',2,22,88,66,99,56.1,1,NULL,1,'2010-02-24 23:54:54',NULL);
 INSERT INTO `vedioscore` VALUES (2,'23g',2,12,11,67,45,31.6,0,NULL,0,'2010-02-27 22:09:25',NULL);
 INSERT INTO `vedioscore` VALUES (3,'12',2,22,22,22,22,22,1,NULL,1,'2010-03-08 22:53:29',NULL);
-INSERT INTO `vedioscore` VALUES (4,'1457',2,77,77,77,77,77,1,8455.56,1,'2010-03-08 23:06:19',NULL);
-INSERT INTO `vedioscore` VALUES (5,'1457',4,99,99,99,99,99,0,10900,0,'2010-03-08 23:08:01',NULL);
-INSERT INTO `vedioscore` VALUES (9,'1457',5,67,67,67,67,67,0,7344.44,0,'2010-03-08 23:25:09',NULL);
+INSERT INTO `vedioscore` VALUES (4,'1457',2,77,77,77,77,77,1,NULL,1,'2010-03-08 23:06:19',NULL);
+INSERT INTO `vedioscore` VALUES (5,'1457',4,99,99,99,99,99,0,NULL,0,'2010-03-08 23:08:01',NULL);
+INSERT INTO `vedioscore` VALUES (9,'1457',5,67,67,67,67,67,0,NULL,0,'2010-03-08 23:25:09',NULL);
+INSERT INTO `vedioscore` VALUES (11,'1',2,66,77,88,99,77,0,17,0,'2010-02-11',NULL);
+INSERT INTO `vedioscore` VALUES (12,'1',4,56,67,78,89,80,0,20,0,'2010-02-12',NULL);
+INSERT INTO `vedioscore` VALUES (13,'1',5,34,34,45,23,60,0,1,0,'2010-02-21',NULL);
+INSERT INTO `vedioscore` VALUES (14,'3',2,88,88,88,88,88,0,8,0,'2010-02-01',NULL);
+INSERT INTO `vedioscore` VALUES (15,'3',4,66,66,66,66,66,0,14,0,'2010-02-01',NULL);
+INSERT INTO `vedioscore` VALUES (16,'3',5,44,44,44,44,44,0,1,0,'2010-02-01',NULL);
+INSERT INTO `vedioscore` VALUES (17,'sw12',2,55,55,55,55,55,0,5,0,'2010-02-01',NULL);
+INSERT INTO `vedioscore` VALUES (18,'sw12',4,67,67,67,67,67,0,17,0,'2010-02-01',NULL);
+INSERT INTO `vedioscore` VALUES (19,'sw12',5,33,33,33,33,33,0,1,0,'2010-02-01',NULL);
 
 #
 # Source for table vediotape
@@ -435,8 +445,8 @@ CREATE TABLE `vediotape` (
   `inputer` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `comments` varchar(512) DEFAULT NULL,
-  `marketShare` float DEFAULT NULL DEFAULT '0',
-  `audienceRating` float DEFAULT NULL DEFAULT '0',
+  `marketShare` float DEFAULT NULL,
+  `audienceRating` float DEFAULT NULL,
   PRIMARY KEY (`vedioID`),
   KEY `vedioCompany` (`companyID`),
   KEY `vedioStatus` (`status`),
@@ -450,7 +460,7 @@ CREATE TABLE `vediotape` (
 #
 
 INSERT INTO `vediotape` VALUES ('0','阿凡达',1,3,1,'2001-01-30','2001-01-31',3,5,NULL,NULL,NULL);
-INSERT INTO `vediotape` VALUES ('1','Fight Club',2,4,1,'2000-01-30','2001-01-31',3,6,NULL,NULL,NULL);
+INSERT INTO `vediotape` VALUES ('1','Fight Club',2,4,1,'2000-01-30','2001-01-31',3,9,NULL,0.5,0.6);
 INSERT INTO `vediotape` VALUES ('12','12qdfw',2,3,1,'2010-02-11','2010-02-11 08:44:47',1,1,'ddvsdfsdsdvsdv',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('12asd','dqw',1,1,1,'2010-02-10','2010-02-10 14:17:59',1,2,'asdacasc',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('12dq','dqwd',2,1,1,'2010-02-10','2010-02-10 14:10:59',1,6,'zxcasc',NULL,NULL);
@@ -460,7 +470,7 @@ INSERT INTO `vediotape` VALUES ('1ssd','zxcasc',1,3,1,'2010-02-10','2010-02-10 1
 INSERT INTO `vediotape` VALUES ('2','12 Monkey',2,4,2,'2001-12-30','2001-01-31',3,7,'',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('23eg','fwefwef',1,2,1,'2010-02-10','2010-02-10 14:21:42',1,2,'sdvvsdv',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('23g','dfbdfbf',2,4,1,'2010-02-10','2010-02-10 14:21:42',1,1,'sdvvsdv',NULL,NULL);
-INSERT INTO `vediotape` VALUES ('3','蝴蝶效应',2,3,1,'2009-01-01','2009-01-02',3,6,NULL,NULL,NULL);
+INSERT INTO `vediotape` VALUES ('3','蝴蝶效应',2,3,1,'2009-01-01','2009-01-02',3,9,NULL,0.7,0.8);
 INSERT INTO `vediotape` VALUES ('324aa','sfwe43',2,1,1,'2010-02-10','2010-02-10 14:21:42',1,2,'sdvvsdv',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('32f','fwef',2,3,2,'2010-02-12','2010-02-12 10:33:18',1,1,'sd',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('32ff2','ffewef',1,2,3,'2010-02-12','2010-02-12 10:33:18',1,1,'sdfwe',NULL,NULL);
@@ -468,7 +478,7 @@ INSERT INTO `vediotape` VALUES ('4','超黑特警',2,4,1,'2009-02-01','2009-02-0
 INSERT INTO `vediotape` VALUES ('sf1','sdfw',1,1,1,'2010-02-11','2010-02-11 08:44:47',1,1,'ddv',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('sf1vsd','weqdfw',1,1,1,'2010-02-11','2010-02-11 08:44:47',1,5,'ddvsdfsd',NULL,NULL);
 INSERT INTO `vediotape` VALUES ('sfw','1v2asdsv',1,1,1,'2010-02-10','2010-02-10 14:20:35',1,5,'sdvsdv',NULL,NULL);
-INSERT INTO `vediotape` VALUES ('sw12','dqwe',2,3,1,'2010-02-12','2010-02-12 10:33:18',1,6,'ssdv',NULL,NULL);
+INSERT INTO `vediotape` VALUES ('sw12','dqwe',2,3,1,'2010-02-12','2010-02-12 10:33:18',1,9,'ssdv',0.6,0.5);
 
 #
 #  Foreign keys for table audiencescore

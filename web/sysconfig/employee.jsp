@@ -26,7 +26,7 @@
 
 
 
-<h1><img src="${pageContext.request.contextPath}/common/images/employee.png" border="0">员工信息</h1>
+<h1>员工信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/employee.png" border="0">
 <p>编辑并更新员工信息</p>
 <s:actionerror />
 <s:form action="doUpdateEmployee" namespace="/sys" method="post">

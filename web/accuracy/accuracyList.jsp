@@ -26,7 +26,7 @@
 </head>
 <body class="yui-skin-sam">
 
-<h1>准确度信息</h1>
+<h1>准确度信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/score.png" border="0">
 <s:actionmessage/>
 <s:actionerror/>
 

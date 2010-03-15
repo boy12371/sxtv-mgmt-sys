@@ -39,7 +39,7 @@
 
 <s:actionerror />
 <s:actionmessage />
-<h1><img src="${pageContext.request.contextPath}/common/images/43.png" border="0">剧目收视率、市场份额</h1>
+<h1>剧目收视率、市场份额</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/43.png" border="0">
 <p>输入剧目编号或名称搜索剧目</p>
 <div align="center"><s:form id="searchForm" action="searchVideoByNameOrIDForMarketRateModify" namespace="/vedio">
 	<table>
@@ -60,7 +60,7 @@
 </s:form></div>
 <s:if test="vv!=null">
 
-	<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0">影带信息</h1>
+	<h1>影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 	<p>影带相关信息</p>
 <div align="center">
 	<table class="inputTable">
@@ -92,7 +92,7 @@
 
 	</table>
 </div>
-	<h1><img src="${pageContext.request.contextPath}/common/images/44.png" border="0">收视率/市场份额</h1>
+	<h1>收视率/市场份额</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/44.png" border="0">
 	<p>录入剧目收视率及市场份额</p>
 	<s:form action="updateMarketRate" namespace="/vedio" method="post">
 <div align="center">

@@ -25,7 +25,7 @@
 <body class="yui-skin-sam">
 
 
-<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0">影带信息</h1>
+<h1>影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0"/>
 <p>影带相关信息</p>
 
 <div align="center">
@@ -59,7 +59,7 @@
 
 </table>
 </div>
-<h1><img src="${pageContext.request.contextPath}/common/images/44.png" border="0">收视率/市场份额</h1>
+<h1>收视率/市场份额</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/44.png" border="0">
 <p>录入剧目收视率及市场份额</p>
 <s:form action="updateMarketRate" namespace="/vedio" method="post">
 <div align="center">

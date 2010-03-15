@@ -31,7 +31,7 @@
 
 <s:actionmessage />
 <s:actionerror />
-<h1><img src="${pageContext.request.contextPath}/common/images/43.png" border="0">剧目收视率、市场份额</h1>
+<h1>剧目收视率、市场份额</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/43.png" border="0">
 <p>搜索或点击剧目名称或编号，输入收视率和市场份额</p>
 <s:form id="searchForm" action="searchVideoByNameOrIDForMarketRate" namespace="/vedio">
 	<div align="center">

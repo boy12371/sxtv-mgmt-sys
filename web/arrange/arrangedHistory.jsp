@@ -26,7 +26,7 @@
 </head>
 <body class="yui-skin-sam">
 <%@ include file="/common/errorMsg.jsp" %>
-<h1>编排信息</h1>
+<h1>编排信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/clock.png" border="0">
 <s:actionmessage/>
 <s:actionerror/>
 

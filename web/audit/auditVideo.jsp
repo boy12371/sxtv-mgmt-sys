@@ -39,7 +39,7 @@
 </head>
 <body class="yui-skin-sam">
 <s:actionerror />
-<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0">剧目详细信息</h1>
+<h1>剧目详细信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 <p>审核并点击相应按钮，确认审核操作</p>
 <s:form action="videoOperation" method="post" namespace="/audit">
 	<div align="center">
@@ -156,7 +156,7 @@
 	</div>
 </s:form>
 <div></div>
-<h1><img src="${pageContext.request.contextPath}/common/images/score.png" border="0">评分信息</h1>
+<h1>评分信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/score.png" border="0">
 <p>评分人员对此剧目的评分情况</p>
 
 <div id="dynamicdata" align="center"></div>

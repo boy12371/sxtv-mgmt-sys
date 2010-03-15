@@ -18,9 +18,9 @@
 		</Module>
 		
 		<Module id="tapeArrange" name="影带编排" url="">
-			<ModuleItem id="arrange" name="编排" url="/tv/arrange/toArrange.action"/>
+			<ModuleItem id="tapeModify" name="挑选影带" url="/tv/vedio/toVideoModification.action"/>  
+			<ModuleItem id="arrange" name="编排影带" url="/tv/arrange/toArrange.action"/>
 			<ModuleItem id="arrangeView" name="历史编排" url="/tv/arrange/toArrangedHistory.action"/>
-			<ModuleItem id="tapeModify" name="修改影带" url="/tv/vedio/toVideoModification.action"/>  
 		</Module>
 		
 		<Module id="feedback" name="市场反馈" url="">

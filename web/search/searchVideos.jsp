@@ -40,7 +40,7 @@
 <title>查询影带信息</title>
 </head>
 <body class="yui-skin-sam">
-<h1><img src="${pageContext.request.contextPath}/common/images/Search.png" border="0">影带查询</h1>
+<h1>影带查询</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/Search.png" border="0">
 <p>填写或选择相关信息，点击查询，搜索影带信息</p>
 <div align="center">
 <table>
@@ -78,7 +78,7 @@
 	</tr>
 </table>
 </div>
-<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0">影带列表</h1>
+<h1>影带列表</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 <p>单击表头，可进行排序</p>
 <div id="dynamicdata" align="center"></div>
 

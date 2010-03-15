@@ -23,7 +23,7 @@
 <body class="yui-skin-sam">
 
 
-<h1><img src="${pageContext.request.contextPath}/common/images/tape.png" border="0" />影带信息</h1>
+<h1>影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0" />
 <p>影带详细信息</p>
 
 <s:actionerror/>

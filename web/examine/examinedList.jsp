@@ -28,7 +28,7 @@
 </head>
 <body class="yui-skin-sam">
 <%@ include file="/common/errorMsg.jsp" %>
-<h1>打分信息</h1>
+<h1>打分信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/exam.png" border="0">
 <p>查看已打分影带</p>
 
 <s:actionmessage/>

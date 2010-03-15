@@ -14,7 +14,7 @@
 </head>
 <body class="yui-skin-sam">
 <s:actionerror/>
-<h1>专业人员打分</h1>
+<h1>专业人员打分</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/exam.png" border="0">
 <p>输入影带分值</p>
 <s:form action="doExamineTape" namespace="/examine" >
 	<s:hidden name="tapeScore.vedioID"/>
