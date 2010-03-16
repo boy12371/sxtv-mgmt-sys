@@ -39,12 +39,13 @@
 </head>
 <body class="yui-skin-sam">
 
-<s:actionerror />
-<s:actionmessage />
+
 
 
 <h1>查看或修改影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/audit.png" border="0">
 <p>输入剧目编号或名称搜索剧目</p>
+<s:actionerror />
+<s:actionmessage />
 <s:form id="searchForm" action="searchVideoByNameOrIDForModification" namespace="/vedio">
 	<div align="center">
 	<table>

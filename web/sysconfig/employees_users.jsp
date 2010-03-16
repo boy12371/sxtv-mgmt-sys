@@ -30,11 +30,12 @@
 </head>
 <body class="yui-skin-sam">
 
-<s:actionmessage />
-<s:actionerror />
+
 <br />
 <h1>员工信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/employee.png" border="0">
 <p>查看所有员工信息</p>
+<s:actionmessage />
+<s:actionerror />
 <!-- Employee Table-->
 <div id="employeeTable" align="center"></div>
 <div id="addEmp" align="center"></div>

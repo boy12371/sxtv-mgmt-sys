@@ -38,9 +38,10 @@
 <title>审核剧目</title>
 </head>
 <body class="yui-skin-sam">
-<s:actionerror />
+
 <h1>剧目详细信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 <p>审核并点击相应按钮，确认审核操作</p>
+<s:actionerror />
 <s:form action="videoOperation" method="post" namespace="/audit">
 	<div align="center">
 

@@ -110,11 +110,13 @@ public class VediotapeMgmtAction extends BaseAction {
 	public String updateMarketRate()throws Exception{
 		try{
 			vedioService.updateVideoRatingMarket(vv.getVedioID(), vedio.getMarketShare(), vedio.getAudienceRating());
+			this.addActionMessage("更新成功");
+			return SUCCESS;
 		}catch(Exception e){
 			logger.error(e);
-		}
-		
-		return SUCCESS;
+		}		
+		this.addActionError("更新失败");
+		return INPUT;
 	}
 	
 	

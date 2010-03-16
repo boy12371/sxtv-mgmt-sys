@@ -26,9 +26,10 @@
 
 
 <body class="yui-skin-sam">
-<s:actionerror />
+
 <h1>影带信息</h1>
 <p>确定并点击按钮，影带将被重新审核</p>
+<s:actionerror />
 <s:form action="doModification" method="post" namespace="/vedio">
 <div align="center">
 

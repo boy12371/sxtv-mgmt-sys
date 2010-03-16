@@ -118,3 +118,13 @@ function initDataTable() {
 	};
 }
 
+function checkNumeric(){
+	var rate = YAHOO.util.Dom.get("audienceRate").value;
+	var share = YAHOO.util.Dom.get("marketShare").value;
+	
+	if(isNaN(rate) || isNaN(share)){
+		jAlert("输入错误，请输入数字", '提示');
+		return false;
+	}
+	return true
+}

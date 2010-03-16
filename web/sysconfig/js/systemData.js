@@ -21,7 +21,8 @@ function initStatusTable() {
 		resultsList :"records",
 		fields : [ "id", "status", "comments" ],
 		metaFields : {
-			totalRecords :"totalRecords" // Access to value in the server response
+			totalRecords :"totalRecords" // Access to value in the server
+											// response
 	}
 	};
 	// DataTable configuration
@@ -63,6 +64,9 @@ function initTopicTable() {
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	};
+	var formatOperation = function(elCell, oRecord, oColumn, sData) {		
+		elCell.innerHTML = href;
+	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -76,6 +80,12 @@ function initTopicTable() {
 	}, {
 		key :"comments",
 		label :"备注"		
+	},{
+		key:"select",
+		label:"操作",
+		formatter:"dropdown", 
+		dropdownOptions:[{label:"选择",value:"none"},{label:"修改",value:"modify"},{label:"删除",value:"delete"}]
+		                 
 	}
 	];
 	// DataSource instance
@@ -84,9 +94,10 @@ function initTopicTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "topicName", "comments" ],
+		fields : [ "id", "topicName", "comments", {key:"select",parser:"string"} ],
 		metaFields : {
-			totalRecords :"totalRecords" // Access to value in the server response
+			totalRecords :"totalRecords" // Access to value in the server
+											// response
 	}
 	};
 	// DataTable configuration
@@ -114,6 +125,19 @@ function initTopicTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
+	 myDataTable.subscribe("dropdownChangeEvent", function(oArgs){
+         var elDropdown = oArgs.target;
+         var oRecord = this.getRecord(elDropdown);
+         var opt = elDropdown.value;
+         alert(elDropdown.value);
+         if(opt == "none"){
+        	 elDropdown.selectIndex=0;
+         }else if(opt == "modify"){
+        	 window.location="/tv/";
+         }else{
+        	 window.location="/tv/";
+         }         
+     });
 	return {
 		ds :myDataSource,
 		dt :myDataTable
@@ -151,7 +175,8 @@ function initSubjectTable() {
 		resultsList :"records",
 		fields : [ "id", "subjectName", "comments" ],
 		metaFields : {
-			totalRecords :"totalRecords" // Access to value in the server response
+			totalRecords :"totalRecords" // Access to value in the server
+											// response
 	}
 	};
 	// DataTable configuration
