@@ -403,32 +403,35 @@ CREATE TABLE `vedioscore` (
   `accuracy` float DEFAULT NULL,
   `purchase` int(11) NOT NULL DEFAULT '0',
   `dateExamine` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
+  `operator` int(11) NOT NULL DEFAULT '0',
+  `orientation` int(11) NOT NULL DEFAULT '0',
   `comments` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_key` (`vedioID`,`examiner`),
   KEY `vedioExaminer` (`examiner`),
-  KEY `vedioID` (`vedioID`)
+  KEY `vedioID` (`vedioID`),
+  KEY `operator` (`operator`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='评分表';
 
 #
 # Dumping data for table vedioscore
 #
 
-INSERT INTO `vedioscore` VALUES (1,'2',2,22,88,66,99,56.1,1,NULL,1,'2010-02-24 23:54:54',NULL);
-INSERT INTO `vedioscore` VALUES (2,'23g',2,12,11,67,45,31.6,0,NULL,0,'2010-02-27 22:09:25',NULL);
-INSERT INTO `vedioscore` VALUES (3,'12',2,22,22,22,22,22,1,NULL,1,'2010-03-08 22:53:29',NULL);
-INSERT INTO `vedioscore` VALUES (4,'1457',2,77,77,77,77,77,1,NULL,1,'2010-03-08 23:06:19',NULL);
-INSERT INTO `vedioscore` VALUES (5,'1457',4,99,99,99,99,99,0,NULL,0,'2010-03-08 23:08:01',NULL);
-INSERT INTO `vedioscore` VALUES (9,'1457',5,67,67,67,67,67,0,NULL,0,'2010-03-08 23:25:09',NULL);
-INSERT INTO `vedioscore` VALUES (11,'1',2,66,77,88,99,77,0,17,0,'2010-02-11',NULL);
-INSERT INTO `vedioscore` VALUES (12,'1',4,56,67,78,89,80,0,20,0,'2010-02-12',NULL);
-INSERT INTO `vedioscore` VALUES (13,'1',5,34,34,45,23,60,0,1,0,'2010-02-21',NULL);
-INSERT INTO `vedioscore` VALUES (14,'3',2,88,88,88,88,88,0,8,0,'2010-02-01',NULL);
-INSERT INTO `vedioscore` VALUES (15,'3',4,66,66,66,66,66,0,14,0,'2010-02-01',NULL);
-INSERT INTO `vedioscore` VALUES (16,'3',5,44,44,44,44,44,0,1,0,'2010-02-01',NULL);
-INSERT INTO `vedioscore` VALUES (17,'sw12',2,55,55,55,55,55,0,5,0,'2010-02-01',NULL);
-INSERT INTO `vedioscore` VALUES (18,'sw12',4,67,67,67,67,67,0,17,0,'2010-02-01',NULL);
-INSERT INTO `vedioscore` VALUES (19,'sw12',5,33,33,33,33,33,0,1,0,'2010-02-01',NULL);
+INSERT INTO `vedioscore` VALUES (1,'2',2,22,88,66,99,56.1,1,NULL,1,'2010-02-24 23:54:54',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (2,'23g',2,12,11,67,45,31.6,0,NULL,0,'2010-02-27 22:09:25',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (3,'12',2,22,22,22,22,22,1,NULL,1,'2010-03-08 22:53:29',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (4,'1457',2,77,77,77,77,77,1,NULL,1,'2010-03-08 23:06:19',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (5,'1457',4,99,99,99,99,99,0,NULL,0,'2010-03-08 23:08:01',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (9,'1457',5,67,67,67,67,67,0,NULL,0,'2010-03-08 23:25:09',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (11,'1',2,66,77,88,99,77,0,17,0,'2010-02-11',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (12,'1',4,56,67,78,89,80,0,20,0,'2010-02-12',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (13,'1',5,34,34,45,23,60,0,1,0,'2010-02-21',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (14,'3',2,88,88,88,88,88,0,8,0,'2010-02-01',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (15,'3',4,66,66,66,66,66,0,14,0,'2010-02-01',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (16,'3',5,44,44,44,44,44,0,1,0,'2010-02-01',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (17,'sw12',2,55,55,55,55,55,0,5,0,'2010-02-01',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (18,'sw12',4,67,67,67,67,67,0,17,0,'2010-02-01',1,0,NULL);
+INSERT INTO `vedioscore` VALUES (19,'sw12',5,33,33,33,33,33,0,1,0,'2010-02-01',1,0,NULL);
 
 #
 # Source for table vediotape
@@ -542,7 +545,8 @@ ADD CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`roleid`) REFERENCES `role` (`id`
 
 ALTER TABLE `vedioscore`
 ADD CONSTRAINT `vedioExaminer` FOREIGN KEY (`examiner`) REFERENCES `user` (`userID`) ON UPDATE CASCADE,
-ADD CONSTRAINT `vedioscore_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`);
+ADD CONSTRAINT `vedioscore_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`),
+ADD CONSTRAINT `vedioscore_ibfk_2` FOREIGN KEY (`operator`) REFERENCES `user` (`userID`);
 
 #
 #  Foreign keys for table vediotape
