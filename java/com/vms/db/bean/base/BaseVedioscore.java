@@ -16,13 +16,15 @@ public abstract class BaseVedioscore  implements Serializable {
 
 	public static String REF = "Vedioscore";
 	public static String PROP_INNOVATE_SCORE = "innovateScore";
+	public static String PROP_VEDIO = "vedio";
 	public static String PROP_EXAMINER = "examiner";
 	public static String PROP_COMMENTS = "comments";
+	public static String PROP_ORIENTATION = "orientation";
 	public static String PROP_DATE_EXAMINE = "dateExamine";
+	public static String PROP_OPERATOR = "operator";
 	public static String PROP_ACCURACY = "accuracy";
 	public static String PROP_TECH_SCORE = "techScore";
 	public static String PROP_PERFORM_SCORE = "performScore";
-	public static String PROP_VEDIO = "vedio";
 	public static String PROP_PURCHASE = "purchase";
 	public static String PROP_ID = "id";
 	public static String PROP_STORY_SCORE = "storyScore";
@@ -50,24 +52,28 @@ public abstract class BaseVedioscore  implements Serializable {
 		java.lang.Integer id,
 		com.vms.db.bean.Vediotape vedio,
 		com.vms.db.bean.User examiner,
+		com.vms.db.bean.User operator,
 		java.lang.Float storyScore,
 		java.lang.Float techScore,
 		java.lang.Float performScore,
 		java.lang.Float innovateScore,
 		java.lang.Float score,
 		java.lang.Integer award,
+		java.lang.Integer orientation,
 		java.lang.Integer purchase,
 		java.util.Date dateExamine) {
 
 		this.setId(id);
 		this.setVedio(vedio);
 		this.setExaminer(examiner);
+		this.setOperator(operator);
 		this.setStoryScore(storyScore);
 		this.setTechScore(techScore);
 		this.setPerformScore(performScore);
 		this.setInnovateScore(innovateScore);
 		this.setScore(score);
 		this.setAward(award);
+		this.setOrientation(orientation);
 		this.setPurchase(purchase);
 		this.setDateExamine(dateExamine);
 		initialize();
@@ -89,6 +95,7 @@ public abstract class BaseVedioscore  implements Serializable {
 	private java.lang.Float innovateScore;
 	private java.lang.Float score;
 	private java.lang.Integer award;
+	private java.lang.Integer orientation;
 	private java.lang.Float accuracy;
 	private java.lang.Integer purchase;
 	private java.util.Date dateExamine;
@@ -97,13 +104,14 @@ public abstract class BaseVedioscore  implements Serializable {
 	// many to one
 	private com.vms.db.bean.Vediotape vedio;
 	private com.vms.db.bean.User examiner;
+	private com.vms.db.bean.User operator;
 
 
 
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="identity"
+     *  generator-class="native"
      *  column="id"
      */
 	public java.lang.Integer getId () {
@@ -225,6 +233,23 @@ public abstract class BaseVedioscore  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: orientation
+	 */
+	public java.lang.Integer getOrientation () {
+		return orientation;
+	}
+
+	/**
+	 * Set the value related to the column: orientation
+	 * @param orientation the orientation value
+	 */
+	public void setOrientation (java.lang.Integer orientation) {
+		this.orientation = orientation;
+	}
+
+
+
+	/**
 	 * Return the value associated with the column: accuracy
 	 */
 	public java.lang.Float getAccuracy () {
@@ -293,15 +318,15 @@ public abstract class BaseVedioscore  implements Serializable {
 
 
 	/**
-	 * Return the value associated with the column: vedio
+	 * Return the value associated with the column: vedioID
 	 */
 	public com.vms.db.bean.Vediotape getVedio () {
 		return vedio;
 	}
 
 	/**
-	 * Set the value related to the column: vedio
-	 * @param vedio the vedio value
+	 * Set the value related to the column: vedioID
+	 * @param vedio the vedioID value
 	 */
 	public void setVedio (com.vms.db.bean.Vediotape vedio) {
 		this.vedio = vedio;
@@ -322,6 +347,23 @@ public abstract class BaseVedioscore  implements Serializable {
 	 */
 	public void setExaminer (com.vms.db.bean.User examiner) {
 		this.examiner = examiner;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: operator
+	 */
+	public com.vms.db.bean.User getOperator () {
+		return operator;
+	}
+
+	/**
+	 * Set the value related to the column: operator
+	 * @param operator the operator value
+	 */
+	public void setOperator (com.vms.db.bean.User operator) {
+		this.operator = operator;
 	}
 
 

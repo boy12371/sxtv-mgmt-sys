@@ -20,6 +20,8 @@
 			not-null="true" length="12" />
 		<property name="award" column="award" type="integer" 
 			not-null="true" length="10" />
+		<property name="orientation" column="orientation" type="integer" 
+			not-null="true" length="10" />
 		<property name="accuracy" column="accuracy" type="java.lang.Float"
 			not-null="false" length="12" />
 		<property name="purchase" column="purchase" type="integer"
@@ -35,6 +37,8 @@
 		<many-to-one name="examiner" column="examiner" class="User"
 			not-null="true">
 		</many-to-one>
-		
+		<many-to-one name="operator" column="operator" class="User"
+			not-null="true">
+		</many-to-one>
 	</class>
 </hibernate-mapping>
