@@ -59,6 +59,18 @@ public class SubjectService implements ISubjectService {
 
 
 
+	@Override
+	public boolean updateSubject(Subject sub) throws Exception {
+		// TODO Auto-generated method stub
+		Subject subject = (Subject) this.subjectDAO.getObject(clz, sub.getId());
+		subject.setSubjectName(sub.getSubjectName());
+		subject.setComments(sub.getComments());
+		this.subjectDAO.saveOrUpdateObject(subject);
+		return true;
+	}
+
+
+
 	
 
 }

@@ -30,16 +30,13 @@ body {
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/framework/js/layout.js"></script>
-
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
-
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
@@ -52,9 +49,6 @@ body {
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" /> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
-
-
-
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
@@ -94,8 +88,8 @@ body {
 	
  <div id="passwordForm" style="display:none">
 	<h1 class="passwordTitle">修改密码</h1>
-    <p><label>原密码&nbsp;</label><input type="password" name="oldPwd" id="oldPwd"/></p>
-    <p><label>新密码&nbsp;</label><input type="password" name="newPwd" id="newPwd"/></p>
+    <p><label>原&nbsp;密&nbsp;码:</label><input type="password" name="oldPwd" id="oldPwd"/></p>
+    <p><label>新&nbsp;密&nbsp;码:</label><input type="password" name="newPwd" id="newPwd"/></p>
 	<p><label>确认密码:&nbsp;</label><input type="password" name="confirmPwd" id="confirmPwd"/></p>
 	<p><input type="button" name="demo1" id="yes" value="确认" />
 	<input type="button" name="cancel" id="cancel" value="取消" /></p>

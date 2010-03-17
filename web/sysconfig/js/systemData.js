@@ -129,11 +129,22 @@ function initTopicTable() {
          var elDropdown = oArgs.target;
          var oRecord = this.getRecord(elDropdown);
          var opt = elDropdown.value;
-         alert(elDropdown.value);
          if(opt == "none"){
         	 elDropdown.selectIndex=0;
          }else if(opt == "modify"){
-        	 window.location="/tv/";
+        	 elDropdown.selectedIndex=0;
+        	 $.blockUI({ message: $('#hiddenDiv'), css: { width: '475px',top:'45%',left:'25%',cursor:'auto' } });
+        	 var subName = YAHOO.util.Dom.get("subName");
+        	 var subComments = YAHOO.util.Dom.get("subComments");
+        	 var subId = YAHOO.util.Dom.get("subId");
+        	 subName.value="";
+        	 subComments.value="";
+        	 subId.value="";
+        	 var yesBtn = YAHOO.util.Dom.get("yes");
+        	 YAHOO.util.Event.addListener(yesBtn, "click", function(){
+        		 subId.value=oRecord.getData("id");
+        		 document.forms[0].submit();        		 
+        	 });        	         	 
          }else{
         	 window.location="/tv/";
          }         

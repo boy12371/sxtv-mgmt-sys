@@ -26,6 +26,8 @@ public class SystemDataMgmt extends BaseAction {
 	private ISubjectService subjectService;
 
 	private JSONDataTable table;
+	private Subject subject;
+	private Topic topic;
 
 	public String toSystemData() {
 		return this.SUCCESS;
@@ -76,6 +78,16 @@ public class SystemDataMgmt extends BaseAction {
 		return this.SUCCESS;
 	}
 
+	
+	public String deleteSubject() throws Exception{
+		this.subjectService.deleteSubject(1);
+		return SUCCESS;
+	}
+	
+	public String modifySubject() throws Exception{
+		this.subjectService.updateSubject(subject);
+		return SUCCESS;
+	}
 	public IStatusService getStatusService() {
 		return statusService;
 	}
@@ -106,6 +118,24 @@ public class SystemDataMgmt extends BaseAction {
 
 	public void setSubjectService(ISubjectService subjectService) {
 		this.subjectService = subjectService;
+	}
+
+	
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 }

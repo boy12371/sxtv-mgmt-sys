@@ -4,7 +4,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="sysconfig" namespace="/sys" extends="basePackapge">
-		
+
 		<!--Employee-->
 		<action name="toEmployees" class="employeeMgmt" method="toEmployees">
 			<result name="success">/sysconfig/employees_users.jsp
@@ -112,19 +112,26 @@
 			<result name="input">/sysconfig/employees_users.jsp
 			</result>
 		</action>
-		
+
 		<action name="doUpdateUser" class="userMgmt" method="doUpdateUser">
 			<result name="success">/sysconfig/employees_users.jsp
 			</result>
 			<result name="input">/sysconfig/user.jsp
 			</result>
 		</action>
-		
-		
+
+
 		<action name="doChangePassword" class="userMgmt" method="doChangePassword" />
-			
-	
-		
+
+
+
+		<action name="modifySubject" class="sysDataMgmt" method="modifySubject">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+
 		<!--User end-->
 	</package>
 </struts>

@@ -16,4 +16,6 @@ public interface ISubjectService {
 			String propertyName, boolean ascending) throws Exception;
 
 	int getSubjectTotalCount() throws Exception;
+	
+	boolean updateSubject(Subject sub)throws Exception;
 }

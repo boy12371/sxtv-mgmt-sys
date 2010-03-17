@@ -90,7 +90,7 @@ function getBroswer(){
 $(document).ready(function() { 
 	 
     $('#changePassword').click(function() { 
-        $.blockUI({ message: $('#passwordForm'), css: { width: '475px',top:'25%',left:'30%' } }); 
+        $.blockUI({ message: $('#passwordForm'), css: { width: '475px',top:'25%',left:'30%',cursor:'auto' } }); 
     }); 
 
     $('#yes').click(function() { 
@@ -133,7 +133,7 @@ $(document).ready(function() {
         	},
         	complete: function() { 
                 // unblock when remote call returns 
-                $.unblockUI(); 
+                $.unblockUI();
             } 
         }); 
     }); 
