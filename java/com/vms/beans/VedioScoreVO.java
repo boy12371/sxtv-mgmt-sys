@@ -7,10 +7,10 @@ import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 
 public class VedioScoreVO {
-	private final static String AwardStr="获奖";
-	private final static String UnAwardStr="否";
+	private final static String AwardStr="推荐";
+	private final static String UnAwardStr="不推荐";
 	private final static String PurchaseStr="购买";
-	private final static String UnPurchaseStr="否";
+	private final static String UnPurchaseStr="不购买";
 	
 	private Integer id;
 	private String vedioID;
@@ -18,6 +18,7 @@ public class VedioScoreVO {
 	private int status;
 	private String examiner;
 	private int userID;
+	private int operator;
 	private float storyScore;
 	private float techScore;
 	private float performScore;
@@ -27,6 +28,7 @@ public class VedioScoreVO {
 	private Date dateExamine;
 	private String award;
 	private String purchase;
+	private int orientation;
 	
 	public VedioScoreVO(){}
 	
@@ -46,6 +48,8 @@ public class VedioScoreVO {
 		this.dateExamine = score.getDateExamine();
 		this.award = 1==score.getAward()? AwardStr : UnAwardStr;
 		this.purchase = 1==score.getPurchase()? PurchaseStr : UnPurchaseStr;
+		this.orientation = score.getOrientation();
+		this.operator = score.getOperator().getId();
 	}
 	
 	public Vedioscore toVedioscore(){
@@ -56,6 +60,7 @@ public class VedioScoreVO {
 		score.setPerformScore(performScore);
 		score.setInnovateScore(innovateScore);
 		score.setDateExamine(new Date());
+		score.setOrientation(new Integer(orientation));
 		if(null == award){
 			score.setAward(new Integer(0));
 		}else{
@@ -75,6 +80,9 @@ public class VedioScoreVO {
 		user.setUserName(examiner);
 		user.setId(userID);
 		score.setExaminer(user);
+		
+		User operator = new User(new Integer(this.operator));
+		score.setOperator(operator);
 		return score;
 	}
 	
@@ -183,6 +191,22 @@ public class VedioScoreVO {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public void setOrientation(int orientation) {
+		this.orientation = orientation;
+	}
+
+	public int getOrientation() {
+		return orientation;
+	}
+
+	public void setOperator(int operator) {
+		this.operator = operator;
+	}
+
+	public int getOperator() {
+		return operator;
 	}
 	
 }
