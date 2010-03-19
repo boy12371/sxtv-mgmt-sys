@@ -71,6 +71,16 @@ public class SubjectService implements ISubjectService {
 
 
 
+	@Override
+	public void disableEnable(int id, boolean enable) throws Exception {
+		// TODO Auto-generated method stub
+		Subject subject = (Subject) this.subjectDAO.getObject(clz, id);
+		subject.setStatus(enable?1:0);
+		this.subjectDAO.saveOrUpdateObject(subject);
+	}
+
+
+
 	
 
 }

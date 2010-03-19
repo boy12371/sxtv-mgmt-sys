@@ -20,9 +20,10 @@ public class Topic extends BaseTopic {
 	/**
 	 * Constructor for required fields
 	 */
-	public Topic(java.lang.Integer id, java.lang.String topicName, java.lang.String comments) {
+	public Topic(java.lang.Integer id, java.lang.String topicName,
+			java.lang.Integer status, java.lang.String comments) {
 
-		super(id, topicName, comments);
+		super(id, topicName, status, comments);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */

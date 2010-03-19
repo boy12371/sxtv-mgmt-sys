@@ -42,7 +42,11 @@ public class TopicService implements ITopicService {
 	@Override
 	public boolean updateTopic(Topic topic) throws Exception {
 		// TODO Auto-generated method stub
-		return false;
+		Topic top = (Topic) this.topicDAO.getObject(clz, topic.getId());
+		top.setTopicName(topic.getTopicName());
+		top.setComments(topic.getComments());
+		this.topicDAO.saveOrUpdateObject(topic);
+		return true;
 	}
 	
 	public ITopicDAO getTopicDAO() {
@@ -58,6 +62,14 @@ public class TopicService implements ITopicService {
 		// TODO Auto-generated method stub
 		return this.topicDAO.getObjectTotalCount(clz, Topic.PROP_ID);
 	
+	}
+
+	@Override
+	public void disableEnableTopic(int id, boolean enable) throws Exception {
+		// TODO Auto-generated method stub
+		Topic topic = (Topic) this.topicDAO.getObject(clz, id);
+		topic.setStatus(enable?1:0);
+		this.topicDAO.saveOrUpdateObject(topic);		
 	}
 
 

@@ -18,4 +18,6 @@ public interface ISubjectService {
 	int getSubjectTotalCount() throws Exception;
 	
 	boolean updateSubject(Subject sub)throws Exception;
+	
+	void disableEnable(int id, boolean enable)throws Exception;
 }

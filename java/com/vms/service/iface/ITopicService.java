@@ -17,5 +17,7 @@ public interface ITopicService {
 	
 	boolean updateTopic(Topic topic) throws Exception;
 	
+	void disableEnableTopic(int id, boolean enable)throws Exception;
+	
 	int getTopicTotalCount() throws Exception;
 }

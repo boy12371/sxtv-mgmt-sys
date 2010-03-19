@@ -33,20 +33,12 @@
 
 </head>
 <body class="yui-skin-sam">
-<s:form id="aform" action="modifySubject" namespace="/sys" method="get">
-<div id="hiddenDiv" style="display:none">
-	<h1 class="popupWindow">题材</h1><input type="hidden" name="sub.id" id="subId"/>
-    <p style="background:#FFFFFF;border-bottom:0"><font style="bold">题材</font>&nbsp;<s:textfield name="sub.subjectName" id="subName"/></p>
-    <p style="background:#FFFFFF;border-bottom:0"><font style="bold">备注</font>&nbsp;<s:textarea name="sub.comments" id="subComments"></s:textarea></p>
-	<p style="background:#FFFFFF;border-bottom:0">
-	<input type="button" id="yes" value="确认" />
-	<input type="button" id="cancel" value="取消" /></p>
- </div>
-</s:form>
-<h1>影带状态</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
-<p>影带状态不可更改</p>
 <s:actionmessage/>
 <s:actionerror/>
+
+<h1>影带状态</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
+<p>影带状态不可更改</p>
+
 <br />
 <div id="vedioStatus" align="center"></div>
 <script type="text/javascript">
@@ -70,5 +62,16 @@
 <script type="text/javascript">
 	YAHOO.example.DynamicData = initSubjectTable();
 </script>
+<div id="hiddenDiv" style="display:none">
+<s:form id="aform" action="" namespace="/sys" method="post">
+	<h1 class="popupWindow">题材</h1><input type="hidden" name="subject.id" id="objID"/>
+    <p style="background:#FFFFFF;border-bottom:0">题&nbsp;材:&nbsp;<s:textfield name="subject.subjectName" id="objName"/></p>
+    <p style="background:#FFFFFF;border-bottom:0">备&nbsp;注:&nbsp;<s:textarea cols="18" rows="4" name="subject.comments" id="objComments"></s:textarea></p>
+	<p style="background:#FFFFFF;border-bottom:0">
+	<input type="button" id="yes" value="确认" />
+	<input type="button" id="cancel" value="取消" /></p>
+
+</s:form>
+ </div>
 </body>
 </html>

@@ -133,6 +133,15 @@ CREATE TABLE `employee` (
   PRIMARY KEY (`employeeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='员工信息';
 
+CREATE TABLE IF NOT EXISTS `scorelevel` (
+  `id` int(11) NOT NULL,
+  `level` int(11) NOT NULL default '0',
+  `start` float NOT NULL default '0',
+  `end` float NOT NULL default '0',
+  `comments` varchar(256) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `level` (`level`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 #
 # Dumping data for table employee
 #
@@ -307,6 +316,7 @@ INSERT INTO `status` VALUES (9,'结束','剧目已播出并收到市场反馈');
 CREATE TABLE `subject` (
   `subjectID` int(11) NOT NULL AUTO_INCREMENT,
   `subjectName` varchar(128) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0=禁用,1=正常',
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY (`subjectID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='栏目';
@@ -325,6 +335,7 @@ INSERT INTO `subject` VALUES (2,'百家碎戏','百家碎戏百家碎戏百家�
 CREATE TABLE `topic` (
   `topicID` int(11) NOT NULL AUTO_INCREMENT,
   `topicName` varchar(128) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0=禁用,1=正常',
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY (`topicID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='题材';

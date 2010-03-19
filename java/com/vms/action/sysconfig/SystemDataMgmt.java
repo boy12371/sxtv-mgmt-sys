@@ -28,6 +28,7 @@ public class SystemDataMgmt extends BaseAction {
 	private JSONDataTable table;
 	private Subject subject;
 	private Topic topic;
+	private boolean enableOperator;
 
 	public String toSystemData() {
 		return this.SUCCESS;
@@ -79,14 +80,55 @@ public class SystemDataMgmt extends BaseAction {
 	}
 
 	
-	public String deleteSubject() throws Exception{
-		this.subjectService.deleteSubject(1);
-		return SUCCESS;
+	public String doDisableEnableSubject() throws Exception{
+		try {
+			this.subjectService.disableEnable(subject.getId(), enableOperator);
+			this.addActionMessage("栏目已禁用");
+			return SUCCESS;
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		this.addActionError("操作失败");
+		return INPUT;
 	}
 	
 	public String modifySubject() throws Exception{
-		this.subjectService.updateSubject(subject);
-		return SUCCESS;
+		try {
+			this.subjectService.updateSubject(subject);
+			this.addActionMessage("修改成功");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		this.addActionError("修改失败");
+		return INPUT;
+	}
+	
+	public String modifyTopic()throws Exception{
+		try {
+			this.topicService.updateTopic(topic);
+			this.addActionMessage("修改成功");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		this.addActionError("修改失败");
+		return INPUT;
+	}
+	
+	public String doDisableEnableTopic()throws Exception{
+		try {
+			topicService.disableEnableTopic(topic.getId(), enableOperator);
+			this.addActionMessage("题材已禁用");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		this.addActionError("操作失败");
+		return INPUT;
 	}
 	public IStatusService getStatusService() {
 		return statusService;
@@ -136,6 +178,14 @@ public class SystemDataMgmt extends BaseAction {
 
 	public void setSubject(Subject subject) {
 		this.subject = subject;
+	}
+
+	public boolean isEnableOperator() {
+		return enableOperator;
+	}
+
+	public void setEnableOperator(boolean enableOperator) {
+		this.enableOperator = enableOperator;
 	}
 
 }

@@ -132,6 +132,27 @@
 			</result>
 		</action>
 
+		<action name="doDisableEnableSubject" class="sysDataMgmt" method="doDisableEnableSubject">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+
+
+		<action name="modifyTopic" class="sysDataMgmt" method="modifyTopic">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+
+		<action name="doDisableEnableTopic" class="sysDataMgmt" method="doDisableEnableTopic">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
 		<!--User end-->
 	</package>
 </struts>

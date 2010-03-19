@@ -20,9 +20,9 @@ public class Subject extends BaseSubject {
 	/**
 	 * Constructor for required fields
 	 */
-	public Subject(java.lang.Integer id, java.lang.String subjectName, java.lang.String comments) {
+	public Subject(java.lang.Integer id, java.lang.String subjectName,java.lang.Integer status, java.lang.String comments) {
 
-		super(id, subjectName, comments);
+		super(id, subjectName, status, comments);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */

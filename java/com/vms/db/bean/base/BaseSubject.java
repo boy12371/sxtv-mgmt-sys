@@ -20,6 +20,7 @@ public abstract class BaseSubject  implements Serializable {
 	public static String REF = "Subject";
 	public static String PROP_COMMENTS = "comments";
 	public static String PROP_SUBJECT_NAME = "subjectName";
+	public static String PROP_STATUS = "status";
 	public static String PROP_ID = "id";
 
 
@@ -41,11 +42,12 @@ public abstract class BaseSubject  implements Serializable {
 	 */
 	public BaseSubject (
 		java.lang.Integer id,
-		java.lang.String subjectName,
+		java.lang.String subjectName,java.lang.Integer status,
 		java.lang.String comments) {
 
 		this.setId(id);
 		this.setSubjectName(subjectName);
+		this.setStatus(status);
 		this.setComments(comments);
 		initialize();
 	}
@@ -61,6 +63,7 @@ public abstract class BaseSubject  implements Serializable {
 
 	// fields
 	private java.lang.String subjectName;
+	private java.lang.Integer status;
 	private java.lang.String comments;
 
 	// collections
@@ -171,6 +174,14 @@ public abstract class BaseSubject  implements Serializable {
 
 	public String toString () {
 		return super.toString();
+	}
+
+	public java.lang.Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(java.lang.Integer status) {
+		this.status = status;
 	}
 
 
