@@ -13,8 +13,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 </head>
 <body class="yui-skin-sam">
-<s:actionerror/>
+
 <h1>专业人员打分</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/exam.png" border="0">
+<s:actionmessage/>
+<s:actionerror/>
 <p>输入影带分值</p>
 <s:form action="doExamineTape" namespace="/examine" >
 	<s:hidden name="tapeScore.vedioID"/>
@@ -90,7 +92,7 @@
 			</tr>
 			<tr>
 				<td><label>获奖备选</label></td>
-				<s:if test="'modify'==perform && '获奖'==tapeScore.award">
+				<s:if test="'modify'==perform && '推荐'==tapeScore.award">
 					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1" checked="checked"/>推荐</td>
 				</s:if><s:else>
 					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1"/>推荐</td>
@@ -100,10 +102,10 @@
 			</tr>
 			<tr>
 				<td><label>导向</label></td>
-				<s:if test="'modify'==perform && '获奖'==tapeScore.award">
-					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1" checked="checked"/>不合格</td>
+				<s:if test="'modify'==perform && 1==tapeScore.orientation">
+					<td><input type="checkbox" class="radioSel" name="tapeScore.orientation" value="1" checked="checked"/>不合格</td>
 				</s:if><s:else>
-					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1"/>不合格</td>
+					<td><input type="checkbox" class="radioSel" name="tapeScore.orientation" value="1"/>不合格</td>
 				</s:else>
 				<td></td>
 				<td></td>
