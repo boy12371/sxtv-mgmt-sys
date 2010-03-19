@@ -33,10 +33,14 @@
 		
 		<action name="toExamineTape" class="examineMgmt" method="toExamineTape">
 			<result>/examine/examineTape.jsp</result>
+			<result name="input">/examine/examineTape.jsp</result>
+			<result name="view">/examine/viewTapeScore.jsp</result>
 		</action>
 		
 		<action name="doExamineTape" class="examineMgmt" method="doExamineTape">
 			<result>/examine/examineTape.jsp</result>
+			<result name="back" type="redirectAction">/examine/toUnExaminedTapes.action</result>
+			<result name="input">/examine/examineTape.jsp</result>
 		</action>
 		
 		<action name="toAudienceExamine" class="audienceExamineMgmt" method="toAudienceExamine">

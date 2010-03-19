@@ -139,6 +139,19 @@ public class ExamineAction extends BaseAction {
 		if("modify".equals(perform)){
 			tapeScore = vedioscoreService.getTapeScoreByIdAndUser(tapeScore.getVedioID(), Integer.parseInt(uid));
 		}else{
+			//has user examined, if examined, page readonly
+			int examiner;
+			if(null != uid && !"".equals(uid)){
+				examiner = Integer.parseInt(uid);
+			}else{
+				examiner = this.getUserInfo().getUserId();
+			}
+			VedioScoreVO temp = vedioscoreService.getTapeScoreByIdAndUser(tapeScore.getVedioID(), examiner);
+			if(null != temp){
+				tapeScore = temp;
+				return "view";
+			}
+			
 			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getName();		
 			tapeScore.setVedioName(name);
 		}
@@ -154,9 +167,15 @@ public class ExamineAction extends BaseAction {
 			userID = this.getUserInfo().getUserId();
 		}
 		tapeScore.setUserID(userID);
+		tapeScore.setOperator(this.getUserInfo().getUserId());
 		vedioscoreService.saveVedioScore(tapeScore);
-		toExamineTape();
-		return SUCCESS;
+		
+		if("modify".equals(perform)){
+			toExamineTape();
+			this.addActionMessage("修改成功。");
+			return SUCCESS;
+		}
+		return "back";
 	}
 	
 	public void setUnExaminedTable(JSONDataTable unExaminedTable) {
