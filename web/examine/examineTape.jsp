@@ -11,6 +11,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
+
 </head>
 <body class="yui-skin-sam">
 
@@ -42,36 +48,36 @@
 			<tr>
 				<td><label>故事</label></td>
 				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore"/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" id="storyScore"/></td>
 				</s:if>
 				<s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" value=""/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" id="storyScore" value=""/></td>
 				</s:else>
 			</tr>
 			<tr>
 				<td><label>技术</label></td>
 				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.techScore"/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.techScore" id="techScore"/></td>
 				</s:if>
 				<s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.techScore" value=""/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.techScore" id="techScore" value=""/></td>
 				</s:else>
 			</tr>
 			<tr>
 				<td><label>表演</label></td>
 				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.performScore"/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.performScore" id="performScore"/></td>
 				</s:if>
 				<s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.performScore" value=""/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.performScore" id="performScore" value=""/></td>
 				</s:else>
 			</tr>
 			<tr>
 				<td><label>创新</label></td>
 				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore"/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" id="innovateScore" /></td>
 				</s:if><s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" value=""/></td>
+					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" id="innovateScore" value=""/></td>
 				</s:else>
 			</tr>
 			<tr>
@@ -122,8 +128,32 @@
 function cancelAction(){
 	window.location="/tv/examine/toUnExaminedTapes.action";
 }
+function okAction(){
+	var storyScore = document.getElementById("storyScore").value;
+	var techScore = document.getElementById("techScore").value;
+	var performScore = document.getElementById("performScore").value;
+	var innovateScore = document.getElementById("innovateScore").value;
+	var exp=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+	var msg="";
+	if(!exp.test(storyScore) || parseFloat(storyScore, 10)>100){
+		msg+="故事得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(!exp.test(techScore) || parseFloat(techScore, 10)>100){
+		msg+="技术得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(!exp.test(performScore) || parseFloat(performScore, 10)>100){
+		msg+="表演得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(!exp.test(innovateScore) || parseFloat(innovateScore, 10)>100){
+		msg+="创新得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(""!=msg){
+		jAlert(msg, "输入错误");
+		return;
+	}
+	document.forms[0].submit();
+}
 var okBtn = new YAHOO.widget.Button({  
-					type: "submit",  
 					label: "确&nbsp;&nbsp;定",  
 					id: "okBtn",  
 					container: "okBtnDiv" }
@@ -135,6 +165,7 @@ var cancelBtn = new YAHOO.widget.Button({
 					container: "cancelBtnDiv" }
 					);
 cancelBtn.on("click",cancelAction);
+okBtn.on("click",okAction);
 </script>
 </body>
 </html>
