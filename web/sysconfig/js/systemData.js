@@ -5,7 +5,6 @@ function initStatusTable() {
 				key : "id",
 				label : "编号",
 				sortable : true
-				,
 			}, {
 				key : "status",
 				label : "状态"
@@ -59,12 +58,12 @@ function initStatusTable() {
 }
 
 function initTopicTable() {
-	var formatUrl = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./sys/toUpdateCompany.action?company.id=";
-		href += sData;
-		href += "'>" + sData + "</a>";
-		elCell.innerHTML = href;
-	};
+	// var formatUrl = function(elCell, oRecord, oColumn, sData) {
+	// var href = "<a href='./sys/toUpdateCompany.action?company.id=";
+	// href += sData;
+	// href += "'>" + sData + "</a>";
+	// elCell.innerHTML = href;
+	// };
 
 	var formatStatus = function(elCell, oRecord, oColumn, sData) {
 		var st = sData == 1 ? "正常" : "禁用";
@@ -73,40 +72,40 @@ function initTopicTable() {
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
-				key : "id",
-				label : "编号",
-				sortable : true,
-				formatter : formatUrl
-			}, {
-				key : "topicName",
-				label : "题材"
-			}, {
-				key : "status",
-				label : "状态",
-				sortable : true,
-				formatter : formatStatus
-			}, {
-				key : "comments",
-				label : "备注"
-			}, {
-				key : "select",
-				label : "操作",
-				formatter : "dropdown",
-				dropdownOptions : [{
-							label : "选择",
-							value : "none"
-						}, {
-							label : "修改",
-							value : "modify"
-						}, {
-							label : "禁用",
-							value : "disable"
-						}, {
-							label : "启用",
-							value : "enable"
-						}]
+		key : "id",
+		label : "编号",
+		sortable : true
+			// ,formatter : formatUrl
+		}, {
+		key : "topicName",
+		label : "题材"
+	}, {
+		key : "status",
+		label : "状态",
+		sortable : true,
+		formatter : formatStatus
+	}, {
+		key : "comments",
+		label : "备注"
+	}, {
+		key : "select",
+		label : "操作",
+		formatter : "dropdown",
+		dropdownOptions : [{
+					label : "选择",
+					value : "none"
+				}, {
+					label : "修改",
+					value : "modify"
+				}, {
+					label : "禁用",
+					value : "disable"
+				}, {
+					label : "启用",
+					value : "enable"
+				}]
 
-			}];
+	}];
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource("/tv/sys/getTopices.action?");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
@@ -149,6 +148,48 @@ function initTopicTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
+
+	var topicBtn = new YAHOO.widget.Button({
+				type : "button",
+				id : "topicBtn",
+				label : "添加题材",
+				container : "topicBtnDiv"
+			});
+	topicBtn.on("click", function() {
+				var form = document.forms[0];
+				var objName = YAHOO.util.Dom.get("objName");
+				var objComments = YAHOO.util.Dom.get("objComments");
+				var objID = YAHOO.util.Dom.get("objID");
+				objName.value = "";
+				objComments.value = "";
+				objID.value = "";
+				$('#headDiv').text("");
+				$('#headDiv').text("添加题材");
+				$.blockUI({
+							message : $('#hiddenDiv'),
+							css : {
+								width : '475px',
+								top : '45%',
+								left : '25%',
+								cursor : 'auto',
+								border: '5px solid #999999'
+							}
+						});
+				var yesBtn = YAHOO.util.Dom.get("yes");
+				YAHOO.util.Event.addListener(yesBtn, "click", function() {
+							$.unblockUI();
+							objName.name = "topic.topicName";
+							objComments.name = "topic.comments";
+							objID.name = "topic.id";
+							form.action = "/tv/sys/doAddTopic.action"
+							form.submit();
+						});
+				var cancelBtn = YAHOO.util.Dom.get("cancel");
+				YAHOO.util.Event.addListener(cancelBtn, "click", function() {
+							$.unblockUI();
+						});
+			});
+
 	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
 		var elDropdown = oArgs.target;
 		var oRecord = this.getRecord(elDropdown);
@@ -158,19 +199,24 @@ function initTopicTable() {
 		objName.value = "";
 		objComments.value = "";
 		objID.value = "";
+		objName.value = oRecord.getData("topicName");
+		objComments.value = oRecord.getData("comments");
 		var form = document.forms[0];
 		var opt = elDropdown.value;
 		if (opt == "none") {
 			elDropdown.selectIndex = 0;
 		} else if (opt == "modify") {
 			elDropdown.selectedIndex = 0;
+			$('#headDiv').text("");
+			$('#headDiv').text("修改题材");
 			$.blockUI({
 						message : $('#hiddenDiv'),
 						css : {
 							width : '475px',
 							top : '45%',
 							left : '25%',
-							cursor : 'auto'
+							cursor : 'auto',
+							border: '5px solid #999999'
 						}
 					});
 
@@ -181,21 +227,22 @@ function initTopicTable() {
 						objComments.name = "topic.comments";
 						objID.name = "topic.id";
 						objID.value = oRecord.getData("id");
+
 						form.action = "/tv/sys/modifyTopic.action"
 						form.submit();
 					});
-			var yesBtn = YAHOO.util.Dom.get("cancel");
-			YAHOO.util.Event.addListener(yesBtn, "click", function() {
+			var cancelBtn = YAHOO.util.Dom.get("cancel");
+			YAHOO.util.Event.addListener(cancelBtn, "click", function() {
 						$.unblockUI();
 					});
 		} else if (opt == "disable") {
+			elDropdown.selectedIndex = 0;
 			if (oRecord.getData("status") == 0
 					|| oRecord.getData("status") == "0") {
-				elDropdown.selectedIndex = 0;
 				jAlert("题材已禁用", "提示");
 				return;
 			}
-			jConfirm("真的要禁用" + oRecord.getData("topicName") + "题材吗?", '警告',
+			jConfirm("真的要禁用《" + oRecord.getData("topicName") + "》题材吗?", '警告',
 					function(r) {
 						if (r) {
 							window.location = "/tv/sys/doDisableEnableTopic.action?enableOperator=false&topic.id="
@@ -203,9 +250,9 @@ function initTopicTable() {
 						}
 					});
 		} else {
+			elDropdown.selectedIndex = 0;
 			if (oRecord.getData("status") == 1
 					|| oRecord.getData("status") == "1") {
-				elDropdown.selectedIndex = 0;
 				jAlert("题材已启用", "提示");
 				return;
 			}
@@ -308,6 +355,47 @@ function initSubjectTable() {
 	myDataTable.subscribe("initEvent", function() {
 				parent.resizeIframe();
 			});
+	var subjectBtn = new YAHOO.widget.Button({
+				type : "button",
+				id : "subjectBtn",
+				label : "添加栏目",
+				container : "subjectBtnDiv"
+			});
+	subjectBtn.on("click", function() {
+				$('#headDiv').text("");
+				$('#headDiv').text("添加栏目");
+				var objName = YAHOO.util.Dom.get("objName");
+				var objComments = YAHOO.util.Dom.get("objComments");
+				var objID = YAHOO.util.Dom.get("objID");
+				objName.value = "";
+				objComments.value = "";
+				objID.value = "";
+				$.blockUI({
+							message : $('#hiddenDiv'),
+							css : {
+								width : '475px',
+								top : '45%',
+								left : '25%',
+								cursor : 'auto',
+								border: '5px solid #999999'
+							}
+						});
+				var yesBtn = YAHOO.util.Dom.get("yes");
+				YAHOO.util.Event.addListener(yesBtn, "click", function() {
+							$.unblockUI();
+							objName.name = "subject.subjectName";
+							objComments.name = "subject.comments";
+							objID.name = "subject.id";
+							var form = document.forms[0];
+							form.action = "/tv/sys/doAddSubject.action"
+							form.submit();
+						});
+				var cancelBtn = YAHOO.util.Dom.get("cancel");
+				YAHOO.util.Event.addListener(cancelBtn, "click", function() {
+							$.unblockUI();
+						});
+			});
+
 	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
 		var elDropdown = oArgs.target;
 		var oRecord = this.getRecord(elDropdown);
@@ -317,19 +405,23 @@ function initSubjectTable() {
 		objName.value = "";
 		objComments.value = "";
 		objID.value = "";
-
+		objName.value = oRecord.getData("subjectName");
+		objComments.value = oRecord.getData("comments");
 		var opt = elDropdown.value;
 		if (opt == "none") {
 			elDropdown.selectIndex = 0;
 		} else if (opt == "modify") {
 			elDropdown.selectedIndex = 0;
+			$('#headDiv').text("");
+			$('#headDiv').text("修改栏目");
 			$.blockUI({
 						message : $('#hiddenDiv'),
 						css : {
 							width : '475px',
 							top : '45%',
 							left : '25%',
-							cursor : 'auto'
+							cursor : 'auto',
+							border: '5px solid #999999'
 						}
 					});
 
@@ -340,18 +432,20 @@ function initSubjectTable() {
 						objComments.name = "subject.comments";
 						objID.name = "subject.id";
 						objID.value = oRecord.getData("id");
+
 						var form = document.forms[0];
 						form.action = "/tv/sys/modifySubject.action"
 						form.submit();
 					});
-			var yesBtn = YAHOO.util.Dom.get("cancel");
-			YAHOO.util.Event.addListener(yesBtn, "click", function() {
+			var cancelBtn = YAHOO.util.Dom.get("cancel");
+			YAHOO.util.Event.addListener(cancelBtn, "click", function() {
 						$.unblockUI();
 					});
+
 		} else if (opt == "disable") {
+			elDropdown.selectedIndex = 0;
 			if (oRecord.getData("status") == 0
 					|| oRecord.getData("status") == "0") {
-				elDropdown.selectedIndex = 0;
 				jAlert("栏目已禁用", "提示");
 				return;
 			}
@@ -363,9 +457,9 @@ function initSubjectTable() {
 						}
 					});
 		} else {
+			elDropdown.selectedIndex = 0;
 			if (oRecord.getData("status") == 1
 					|| oRecord.getData("status") == "1") {
-				elDropdown.selectedIndex = 0;
 				jAlert("栏目已启用", "提示");
 				return;
 			}

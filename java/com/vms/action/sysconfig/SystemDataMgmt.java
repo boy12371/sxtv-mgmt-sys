@@ -80,56 +80,56 @@ public class SystemDataMgmt extends BaseAction {
 	}
 
 	
-	public String doDisableEnableSubject() throws Exception{
-		try {
-			this.subjectService.disableEnable(subject.getId(), enableOperator);
-			this.addActionMessage("栏目已禁用");
-			return SUCCESS;
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		this.addActionError("操作失败");
-		return INPUT;
-	}
+//	public String doDisableEnableSubject() throws Exception{
+//		try {
+//			this.subjectService.disableEnable(subject.getId(), enableOperator);
+//			this.addActionMessage("栏目已禁用");
+//			return SUCCESS;
+//		} catch (Exception e) {
+//			logger.error(e);
+//		}
+//		this.addActionError("操作失败");
+//		return INPUT;
+//	}
+//	
+//	public String modifySubject() throws Exception{
+//		try {
+//			this.subjectService.updateSubject(subject);
+//			this.addActionMessage("修改成功");
+//			return SUCCESS;
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			logger.error(e);
+//		}
+//		this.addActionError("修改失败");
+//		return INPUT;
+//	}
 	
-	public String modifySubject() throws Exception{
-		try {
-			this.subjectService.updateSubject(subject);
-			this.addActionMessage("修改成功");
-			return SUCCESS;
-		} catch (Exception e) {
-			// TODO: handle exception
-			logger.error(e);
-		}
-		this.addActionError("修改失败");
-		return INPUT;
-	}
-	
-	public String modifyTopic()throws Exception{
-		try {
-			this.topicService.updateTopic(topic);
-			this.addActionMessage("修改成功");
-			return SUCCESS;
-		} catch (Exception e) {
-			// TODO: handle exception
-			logger.error(e);
-		}
-		this.addActionError("修改失败");
-		return INPUT;
-	}
-	
-	public String doDisableEnableTopic()throws Exception{
-		try {
-			topicService.disableEnableTopic(topic.getId(), enableOperator);
-			this.addActionMessage("题材已禁用");
-			return SUCCESS;
-		} catch (Exception e) {
-			// TODO: handle exception
-			logger.error(e);
-		}
-		this.addActionError("操作失败");
-		return INPUT;
-	}
+//	public String modifyTopic()throws Exception{
+//		try {
+//			this.topicService.updateTopic(topic);
+//			this.addActionMessage("修改成功");
+//			return SUCCESS;
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			logger.error(e);
+//		}
+//		this.addActionError("修改失败");
+//		return INPUT;
+//	}
+//	
+//	public String doDisableEnableTopic()throws Exception{
+//		try {
+//			topicService.disableEnableTopic(topic.getId(), enableOperator);
+//			this.addActionMessage("题材已禁用");
+//			return SUCCESS;
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			logger.error(e);
+//		}
+//		this.addActionError("操作失败");
+//		return INPUT;
+//	}
 	public IStatusService getStatusService() {
 		return statusService;
 	}

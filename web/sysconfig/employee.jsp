@@ -26,7 +26,8 @@
 
 
 
-<h1>员工信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/employee.png" border="0">
+<h1>员工信息</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/employee.png" border="0">
 <p>编辑并更新员工信息</p>
 <s:actionerror />
 <s:form action="doUpdateEmployee" namespace="/sys" method="post">
@@ -53,6 +54,13 @@
 			<td><sx:datetimepicker cssClass="inputField" name="employee.contractDate" displayFormat="yyyy-MM-dd" /></td>
 		</tr>
 		<tr>
+			<td><label>状态：</label></td>
+			<td><s:if test="employee.status==1">正常
+			</s:if><s:else>
+			禁用
+			</s:else></td>
+		</tr>
+		<tr>
 			<td><label>备注：</label></td>
 			<td><s:textarea cssClass="inputField" name="employee.comments" cols="20" rows="2"></s:textarea></td>
 		</tr>
@@ -60,9 +68,8 @@
 		<tr>
 			<td colspan="2" align="center"><s:hidden name="operation" />
 			<div id="updateDiv" align="center"></div>
-			<s:submit id="updateEmp" value="更新" onclick="executOperations(this.id);" />
-			 <s:if test="employee.status==1">
-				
+			<s:submit id="updateEmp" value="更新" onclick="executOperations(this.id);" /> <s:if test="employee.status==1">
+
 				<input type="button" id="disableEmp" value="注销" onclick="executOperations(this.id);">
 
 			</s:if><s:else>

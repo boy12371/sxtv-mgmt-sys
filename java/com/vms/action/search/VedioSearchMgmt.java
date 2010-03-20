@@ -93,7 +93,7 @@ public class VedioSearchMgmt extends BaseAction {
 	}
 
 	public List<Company> getComList() throws Exception {
-		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true);
+		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true, false);
 	}
 
 	public List<Topic> getTopList() throws Exception {

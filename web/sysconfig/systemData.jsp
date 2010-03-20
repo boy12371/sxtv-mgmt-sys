@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,45 +32,43 @@
 
 </head>
 <body class="yui-skin-sam">
-<s:actionmessage/>
-<s:actionerror/>
+<s:actionmessage />
+<s:actionerror />
 
-<h1>影带状态</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
+<h1>影带状态</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
 <p>影带状态不可更改</p>
 
 <br />
 <div id="vedioStatus" align="center"></div>
-<script type="text/javascript">
-	YAHOO.example.DynamicData = initStatusTable();
-</script>
 
-<h1>影带题材</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
+
+
+<h1>影带题材</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
 <p>可添加或修改题材内容</p>
 <br />
 <div id="vedioTopic" align="center"></div>
+<div id="topicBtnDiv" align="center"></div>
 
-<script type="text/javascript">
-	YAHOO.example.DynamicData = initTopicTable();
-</script>
-
-<h1>影带题材</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
+<h1>栏&nbsp;目</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
 <p>可添加或修改题材内容</p>
 <br />
 <div id="vedioSubject" align="center"></div>
-
+<div id="subjectBtnDiv" align="center"></div>
 <script type="text/javascript">
-	YAHOO.example.DynamicData = initSubjectTable();
+	YAHOO.example.DynamicData = initStatusTable();
+	//YAHOO.example.DynamicData = initTopicTable();
+	//YAHOO.example.DynamicData = initSubjectTable();
 </script>
-<div id="hiddenDiv" style="display:none">
-<s:form id="aform" action="" namespace="/sys" method="post">
-	<h1 class="popupWindow">题材</h1><input type="hidden" name="subject.id" id="objID"/>
-    <p style="background:#FFFFFF;border-bottom:0">题&nbsp;材:&nbsp;<s:textfield name="subject.subjectName" id="objName"/></p>
-    <p style="background:#FFFFFF;border-bottom:0">备&nbsp;注:&nbsp;<s:textarea cols="18" rows="4" name="subject.comments" id="objComments"></s:textarea></p>
-	<p style="background:#FFFFFF;border-bottom:0">
-	<input type="button" id="yes" value="确认" />
-	<input type="button" id="cancel" value="取消" /></p>
+<div id="hiddenDiv" style="display: none"><s:form id="aform" action="" namespace="/sys" method="post">
+	<h1 class="popupWindow" id="headDiv"></h1>
+	<input type="hidden" name="subject.id" id="objID" />
+	<p style="background: #FFFFFF; border-bottom: 0">题&nbsp;材:&nbsp;<s:textfield name="subject.subjectName" id="objName" /></p>
+	<p style="background: #FFFFFF; border-bottom: 0">备&nbsp;注:&nbsp;<s:textarea cols="18" rows="4" name="subject.comments" id="objComments"></s:textarea></p>
+	<p style="background: #FFFFFF; border-bottom: 0"><input type="button" id="yes" value="确认" /> <input type="button" id="cancel" value="取消" /></p>
 
-</s:form>
- </div>
+</s:form></div>
 </body>
 </html>

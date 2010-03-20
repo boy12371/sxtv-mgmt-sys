@@ -7,6 +7,7 @@
 <sx:head />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>影视公司管理</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
@@ -18,12 +19,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 
 </head>
 <body class="yui-skin-sam">
 
 
-<h1>公司信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/company.png" border="0">
+<h1>公司信息</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/company.png" border="0">
 <p>编辑并更新公司信息</p>
 <s:actionerror />
 
@@ -50,22 +55,23 @@
 			<td><label>备注：</label></td>
 			<td><s:textarea cssClass="inputField" name="company.comments" cols="20" rows="2"></s:textarea></td>
 		</tr>
-		
+
 
 		<tr>
 			<td colspan="2" rowspan="2" align="center">
-			<div id="updateBtnDiv"></div></td>
+			<div id="updateBtnDiv"></div>
+			</td>
 		</tr>
 	</table>
 	</div>
 	<script type="text/javascript">
-				var submitToPass = new YAHOO.widget.Button({  
-					type: "submit",  
-					label: "更新",  
-					id: "cancelArrange",  
-					container: "updateBtnDiv" }
-					);
-				</script>
+	var submitToPass = new YAHOO.widget.Button( {
+		type :"submit",
+		label :"更新",
+		id :"cancelArrange",
+		container :"updateBtnDiv"
+	});
+</script>
 </s:form>
 </body>
 </html>

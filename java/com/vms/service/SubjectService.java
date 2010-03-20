@@ -29,6 +29,7 @@ public class SubjectService implements ISubjectService {
 	@Override
 	public void createSubject(Subject subject) throws Exception {
 		// TODO Auto-generated method stub
+		subject.setStatus(1);
 		subjectDAO.saveObject(subject);
 	}
 

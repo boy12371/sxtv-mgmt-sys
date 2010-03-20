@@ -15,6 +15,7 @@ public class TopicService implements ITopicService {
 	@Override
 	public void createTopic(Topic topic) throws Exception {
 		// TODO Auto-generated method stub
+		topic.setStatus(1);
 		topicDAO.saveObject(topic);
 	}
 
@@ -45,7 +46,7 @@ public class TopicService implements ITopicService {
 		Topic top = (Topic) this.topicDAO.getObject(clz, topic.getId());
 		top.setTopicName(topic.getTopicName());
 		top.setComments(topic.getComments());
-		this.topicDAO.saveOrUpdateObject(topic);
+		this.topicDAO.saveOrUpdateObject(top);
 		return true;
 	}
 	

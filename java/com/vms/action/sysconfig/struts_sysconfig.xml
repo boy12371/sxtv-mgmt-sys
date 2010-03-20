@@ -68,6 +68,13 @@
 			<result name="input">/sysconfig/addCompany.jsp
 			</result>
 		</action>
+		
+		<action name="doDisableEnableCompany" class="companyMgmt" method="doDisableEnableCompany">
+			<result name="success">/sysconfig/companies.jsp
+			</result>
+			<result name="input">/sysconfig/companies.jsp
+			</result>
+		</action>
 		<!-- Company end -->
 		<!-- System config -->
 		<action name="toSystemData" class="sysDataMgmt" method="toSystemData">
@@ -124,15 +131,21 @@
 		<action name="doChangePassword" class="userMgmt" method="doChangePassword" />
 
 
-
-		<action name="modifySubject" class="sysDataMgmt" method="modifySubject">
+		<action name="doAddSubject" class="subjectMgmt" method="doAddSubject">
 			<result name="success">/sysconfig/systemData.jsp
 			</result>
 			<result name="input">/sysconfig/systemData.jsp
 			</result>
 		</action>
 
-		<action name="doDisableEnableSubject" class="sysDataMgmt" method="doDisableEnableSubject">
+		<action name="modifySubject" class="subjectMgmt" method="modifySubject">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+
+		<action name="doDisableEnableSubject" class="subjectMgmt" method="doDisableEnableSubject">
 			<result name="success">/sysconfig/systemData.jsp
 			</result>
 			<result name="input">/sysconfig/systemData.jsp
@@ -140,14 +153,21 @@
 		</action>
 
 
-		<action name="modifyTopic" class="sysDataMgmt" method="modifyTopic">
+		<action name="doAddTopic" class="topicMgmt" method="doAddTopic">
 			<result name="success">/sysconfig/systemData.jsp
 			</result>
 			<result name="input">/sysconfig/systemData.jsp
 			</result>
 		</action>
 
-		<action name="doDisableEnableTopic" class="sysDataMgmt" method="doDisableEnableTopic">
+		<action name="modifyTopic" class="topicMgmt" method="modifyTopic">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+
+		<action name="doDisableEnableTopic" class="topicMgmt" method="doDisableEnableTopic">
 			<result name="success">/sysconfig/systemData.jsp
 			</result>
 			<result name="input">/sysconfig/systemData.jsp

@@ -25,4 +25,12 @@
 		
 	</bean>
 	
+	<bean id="subjectMgmt" class="com.vms.action.sysconfig.SubjectMgmtAction" scope="prototype">
+		<property name="subjectService" ref="subjectService" />
+	</bean>
+	
+	<bean id="topicMgmt" class="com.vms.action.sysconfig.TopicMgmtAction" scope="prototype">
+		<property name="topicService" ref="topicService" />
+	</bean>
+	
 </beans>

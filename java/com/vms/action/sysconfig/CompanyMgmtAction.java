@@ -20,22 +20,23 @@ public class CompanyMgmtAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(CompanyMgmtAction.class);
 	private ICompanyService companyService;
 	private Company company;
+	private boolean enableOperator;
 	private JSONDataTable table;
 
 	public String toCompanies() {
 		return SUCCESS;
 	}
 
-	@JSON(serialize=false)
+	@JSON(serialize = false)
 	public String getCompanies() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
 			List<Company> comList = companyService.findAllCompany(table
 					.getStartIndex(), table.getStartIndex()
 					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals(JSONDataTableUtils.SORT_DIRECTION));
+					.equals(JSONDataTableUtils.SORT_DIRECTION), false);
 			JSONDataTableUtils.setupJSONDataTable(comList, table,
-					companyService.getCompanyTotalCount());
+					companyService.getCompanyTotalCount(false));
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -68,16 +69,34 @@ public class CompanyMgmtAction extends BaseAction {
 		return this.SUCCESS;
 	}
 
-	public String doUpdateCompany() {
+	public String doUpdateCompany() throws Exception {
 		boolean success = false;
 		try {
 			success = companyService.updateCompany(company);
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			this.addActionError("添加失败");
-			return this.INPUT;
+			logger.error(e.getMessage());			
 		}
-		return this.SUCCESS;
+		if (success) {
+			this.addActionMessage("添加成功");
+			return this.SUCCESS;
+		}
+		this.addActionError("添加失败");
+		return this.INPUT;
+
+	}
+
+	public String doDisableEnableCompany() throws Exception {
+		try {
+			this.companyService.disableEnableCompany(company.getId(),
+					enableOperator);
+			this.addActionMessage("公司已禁用");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		this.addActionError("操作失败");
+		return this.INPUT;
 	}
 
 	public ICompanyService getCompanyService() {
@@ -96,14 +115,20 @@ public class CompanyMgmtAction extends BaseAction {
 		this.company = company;
 	}
 
-	
-
 	public JSONDataTable getTable() {
 		return table;
 	}
 
 	public void setTable(JSONDataTable table) {
 		this.table = table;
+	}
+
+	public boolean isEnableOperator() {
+		return enableOperator;
+	}
+
+	public void setEnableOperator(boolean enableOperator) {
+		this.enableOperator = enableOperator;
 	}
 
 }

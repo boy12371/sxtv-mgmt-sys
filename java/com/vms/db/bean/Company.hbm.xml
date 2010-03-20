@@ -16,6 +16,8 @@
 			length="50" />
 		<property name="contactPerson" column="contactPerson" type="string"
 			not-null="true" length="50" />
+			<property name="status" column="status" type="integer"
+			not-null="true" length="10" />
 		<property name="comments" column="comments" type="string"
 			not-null="true" length="512" />
 			<!--

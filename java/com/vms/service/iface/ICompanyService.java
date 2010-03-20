@@ -17,11 +17,12 @@ public interface ICompanyService {
 	 * @param endIndex
 	 * @param propertyName 排序列名
 	 * @param ascending  true=升序 false=降序
+	 * @param activeOnly 只查寻状态为1的
 	 * @return
 	 * @throws Exception
 	 */
 	List<Company> findAllCompany(int startIndex, int endIndex,
-			String propertyName, boolean ascending) throws Exception;
+			String propertyName, boolean ascending,boolean activeOnly) throws Exception;
 
 	/**
 	 * 创建公司
@@ -35,7 +36,7 @@ public interface ICompanyService {
 	 * @return
 	 * @throws Exception
 	 */
-	int getCompanyTotalCount() throws Exception;
+	int getCompanyTotalCount(boolean activeOnly) throws Exception;
 	
 	/**
 	 * 更新公司信息 不级联更新
@@ -46,4 +47,6 @@ public interface ICompanyService {
 	boolean updateCompany(Company company) throws Exception;
 	
 	Company getCompanyById(int id)throws Exception;
+	
+	void disableEnableCompany(int id, boolean enable)throws Exception;
 }

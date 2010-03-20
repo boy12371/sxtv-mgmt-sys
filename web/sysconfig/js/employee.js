@@ -20,11 +20,15 @@ function initEmployeeDataTable() {
 		} else {
 			elCell.innerHTML = sData;
 		}
-	}
+	};
 	var formatComments = function(elCell, oRecord, oColumn, sData) {
 		sData = sData.substring(0, 13);
 		elCell.innerHTML = sData;
-	}
+	};
+	var formatStatus = function(elCell, oRecord, oColumn, sData) {
+		var st = sData == 1 ? "正常" : "禁用";
+		elCell.innerHTML = st;
+	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -55,6 +59,11 @@ function initEmployeeDataTable() {
 		key :"tel",
 		label :"电话"
 	}, {
+		key :"status",
+		label :"状态",
+		sortable :true,
+		formatter :formatStatus
+	},{
 		key :"comments",
 		label :"备注",
 		formatter :formatComments
@@ -66,7 +75,7 @@ function initEmployeeDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "name", "gender", "contractDate", "birthday", "tel",
+		fields : [ "id", "name", "gender", "contractDate", "birthday", "tel","status",
 				"comments" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
