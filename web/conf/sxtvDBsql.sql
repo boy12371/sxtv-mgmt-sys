@@ -103,6 +103,7 @@ CREATE TABLE `company` (
   `registrationNo` varchar(128) NOT NULL,
   `phone` varchar(50) DEFAULT '0',
   `contactPerson` varchar(50) DEFAULT '',
+  `status` int(11) NOT NULL DEFAULT '1',
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`companyID`),
   UNIQUE KEY `registrationNo` (`registrationNo`)
@@ -112,10 +113,9 @@ CREATE TABLE `company` (
 # Dumping data for table company
 #
 
-INSERT INTO `company` VALUES (1,'中华影视','12331123123','34534534534','胡戈','第三方万恶服务');
-INSERT INTO `company` VALUES (2,'美国影视','123123','123123','万恶范围阿飞','发送到非 ');
-INSERT INTO `company` VALUES (3,'法国影视','34234','werwef','fwefwef','发送到非万恶 ');
-INSERT INTO `company` VALUES (4,'1234','','','','');
+INSERT INTO `company` VALUES (1,'中华影视','12331123123','34534534534','胡戈',1,'第三方万恶服务');
+INSERT INTO `company` VALUES (2,'美国影视','123123','123123','万恶范围阿飞',1,'发送到非 ');
+INSERT INTO `company` VALUES (3,'法国影视','34234','werwef','fwefwef',1,'发送到非万恶 ');
 
 #
 # Source for table employee
@@ -133,15 +133,6 @@ CREATE TABLE `employee` (
   PRIMARY KEY (`employeeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='员工信息';
 
-CREATE TABLE IF NOT EXISTS `scorelevel` (
-  `id` int(11) NOT NULL,
-  `level` int(11) NOT NULL default '0',
-  `start` float NOT NULL default '0',
-  `end` float NOT NULL default '0',
-  `comments` varchar(256) NOT NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `level` (`level`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 #
 # Dumping data for table employee
 #
@@ -267,6 +258,23 @@ CREATE TABLE `role_resource` (
 
 
 #
+# Source for table scorelevel
+#
+
+CREATE TABLE `scorelevel` (
+  `id` int(11) NOT NULL,
+  `level` int(11) NOT NULL DEFAULT '0',
+  `start` float NOT NULL DEFAULT '0',
+  `end` float NOT NULL DEFAULT '0',
+  `comments` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Dumping data for table scorelevel
+#
+
+
+#
 # Source for table scoreweight
 #
 
@@ -325,8 +333,8 @@ CREATE TABLE `subject` (
 # Dumping data for table subject
 #
 
-INSERT INTO `subject` VALUES (1,'都市碎戏','都市碎戏都市碎戏都市碎戏都市碎戏都市碎戏');
-INSERT INTO `subject` VALUES (2,'百家碎戏','百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏');
+INSERT INTO `subject` VALUES (1,'都市碎戏',1,'都市碎戏都市碎戏都市碎戏都市碎戏都市碎戏');
+INSERT INTO `subject` VALUES (2,'百家碎戏',1,'百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏');
 
 #
 # Source for table topic
@@ -344,10 +352,10 @@ CREATE TABLE `topic` (
 # Dumping data for table topic
 #
 
-INSERT INTO `topic` VALUES (1,'爱情','爱情爱情爱情爱情爱情爱情');
-INSERT INTO `topic` VALUES (2,'亲情','亲情亲情亲情亲情亲情亲情亲情亲情');
-INSERT INTO `topic` VALUES (3,'生活','生活生活生活生活生活生活');
-INSERT INTO `topic` VALUES (4,'社会','社会社会社会社会社会');
+INSERT INTO `topic` VALUES (1,'爱情',1,'爱情爱情爱情爱情爱情爱情');
+INSERT INTO `topic` VALUES (2,'亲情',1,'亲情亲情亲情亲情亲情亲情亲情亲情');
+INSERT INTO `topic` VALUES (3,'生活',1,'生活生活生活生活生活生活');
+INSERT INTO `topic` VALUES (4,'社会',1,'社会社会社会社会社会');
 
 #
 # Source for table user
