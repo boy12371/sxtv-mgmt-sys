@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.vms.common.SessionUserInfo;
+import com.vms.db.bean.Employee;
 import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.db.dao.iface.IUserDAO;
@@ -137,6 +138,12 @@ public class UserService implements IUserService {
 			throws Exception {
 		// TODO Auto-generated method stub
 		return this.resetPassword(id, newPassword);
+	}
+	
+	public User getUserByEmployeeName(String eName) throws Exception{
+		List<Employee> employees = userDAO.findObjectByField(Employee.class, "name", eName, -1, -1, Employee.PROP_ID, true);
+		if(null == employees || 0 == employees.size()) return null;
+		return employees.get(0).getUsers().toArray(new User[0])[0];
 	}
 
 }

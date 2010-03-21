@@ -14,6 +14,7 @@ import com.vms.common.JSONDataTableUtils;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
+import com.vms.service.iface.IUserService;
 import com.vms.service.iface.IVedioscoreService;
 import com.vms.service.iface.IVediotapeService;
 
@@ -26,6 +27,8 @@ public class ExamineAction extends BaseAction {
 	private IVedioscoreService vedioscoreService;
 	
 	private IVediotapeService vediotapeService;
+	
+	private IUserService userService;
 
 	private JSONDataTable unExaminedTable;
 	
@@ -44,6 +47,8 @@ public class ExamineAction extends BaseAction {
 	private String errorMsg;
 	
 	private List<User> examiners;
+	
+	private String examinerByInputer;
 
 	public String toUnExaminedTapes() {
 		return SUCCESS;
@@ -166,9 +171,29 @@ public class ExamineAction extends BaseAction {
 	public String doExamineTape() throws Exception{	
 		int userID;
 		if("modify".equals(perform)){
+			//moidfy by inputer
 			userID = Integer.parseInt(uid);
 		}else{
-			userID = this.getUserInfo().getUserId();
+			if(null != examinerByInputer && !"".equals(examinerByInputer)){
+			//create by inputer
+				User temp = userService.getUserByEmployeeName(examinerByInputer);
+				if(null == temp){
+					this.addActionError("没有找到打分人员" + examinerByInputer + "。");
+					toExamineTape();
+					return INPUT;
+				}
+				userID = temp.getId();
+				
+				VedioScoreVO score = vedioscoreService.getTapeScoreByIdAndUser(tapeScore.getVedioID(), userID);
+				if(null != score){
+					this.addActionError("该影带已经被" + examinerByInputer + "打过分。如果要修改打分，请到修改打分页面修改。");
+					toExamineTape();
+					return INPUT;
+				}
+			}else{
+			//create by examiner
+				userID = this.getUserInfo().getUserId();
+			}
 		}
 		tapeScore.setUserID(userID);
 		tapeScore.setOperator(this.getUserInfo().getUserId());
@@ -268,5 +293,21 @@ public class ExamineAction extends BaseAction {
 
 	public List<User> getExaminers() {
 		return examiners;
+	}
+	
+	public String getExaminerByInputer() {
+		return examinerByInputer;
+	}
+
+	public void setExaminerByInputer(String examinerByInputer) {
+		this.examinerByInputer = examinerByInputer;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
+	public IUserService getUserService() {
+		return userService;
 	}
 }

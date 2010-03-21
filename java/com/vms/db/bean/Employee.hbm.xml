@@ -22,7 +22,7 @@
 			not-null="true" length="10" />
 		<property name="comments" column="comments" type="string"
 			not-null="true" length="512" />
-		<set name="users" inverse="true" fetch="join">
+		<set name="users" inverse="true" fetch="join" lazy="true">
 			<key column="employee" not-null="false" />
 			<one-to-many class="User" />
 		</set>

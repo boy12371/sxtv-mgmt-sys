@@ -8,6 +8,7 @@
 	<bean id="examineMgmt" class="com.vms.action.examine.ExamineAction" scope="prototype">
 		<property name="vedioscoreService" ref="vedioscoreService" />
 		<property name="vediotapeService" ref="vediotapeService" />
+		<property name="userService" ref="userService" />
 	</bean>
 	
 	<bean id="audienceExamineMgmt" class="com.vms.action.examine.AudienceExamineAction" scope="prototype">
