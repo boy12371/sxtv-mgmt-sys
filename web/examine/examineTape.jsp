@@ -45,7 +45,7 @@
 			<tr>
 				<td><label>输入打分人员</label></td>
 				<td>
-					<input id="examiners" class="inputField autoComplete" type="text"> 
+					<input id="examiners" class="inputField autoComplete" type="text" name="examinerByInputer"/> 
 	    			<div id="container"></div>  
 	    		</td>
 			</tr>
