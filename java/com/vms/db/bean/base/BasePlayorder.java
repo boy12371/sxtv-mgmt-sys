@@ -2,10 +2,6 @@ package com.vms.db.bean.base;
 
 import java.io.Serializable;
 
-import com.vms.db.bean.Playorder;
-import com.vms.db.bean.User;
-import com.vms.db.bean.Vediotape;
-
 
 /**
  * This is an object that contains data related to the playorder table.
@@ -79,7 +75,7 @@ public abstract class BasePlayorder  implements Serializable {
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
-     *  generator-class="sequence"
+     *  generator-class="native"
      *  column="Id"
      */
 	public java.lang.Integer getId () {
