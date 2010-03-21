@@ -33,4 +33,9 @@
 		<property name="topicService" ref="topicService" />
 	</bean>
 	
+	
+	<bean id="audienceMgmt" class="com.vms.action.sysconfig.AudienceMgmtAction" scope="prototype">
+		<property name="audicenceService" ref="audicenceService" />
+	</bean>
+	
 </beans>

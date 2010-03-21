@@ -64,9 +64,9 @@
 	<table>
 		<tr>
 			<td><label>收视率</label></td>
-			<td><s:textfield cssClass="inputField" name="vedio.audienceRating" id="audienceRate" /> <s:hidden name="vv.vedioID" /></td>
+			<td><s:textfield cssClass="inputField" name="vedio.audienceRating" id="audienceRate" />% <s:hidden name="vv.vedioID" /></td>
 			<td><label>市场份额</label></td>
-			<td><s:textfield cssClass="inputField" name="vedio.marketShare" id="marketShare" /></td>
+			<td><s:textfield cssClass="inputField" name="vedio.marketShare" id="marketShare" />%</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="right">
@@ -79,7 +79,7 @@
 <script type="text/javascript">
 	var submitBtn = new YAHOO.widget.Button( {
 		type :"button",
-		label :"确c定",
+		label :"确 定",
 		id :"submitBtn",
 		container :"submitBtn"
 	});

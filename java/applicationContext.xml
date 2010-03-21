@@ -105,6 +105,8 @@
 				<value>playorderService</value>
 				<value>arrangeService</value>
 				<value>resourceService</value>
+				<value>audicenceService</value>
+				
 			</list>
 		</property>
 		<property name="interceptorNames">
@@ -173,6 +175,10 @@
 	<bean id="resourceDAO" class="com.vms.db.dao.ResourceDAO">
 		<property name="sessionFactory" ref="sessionFactory" />		
 	</bean>
+	<bean id="audienceDAO" class="com.vms.db.dao.AudienceDAO">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
+	
 	<!--
 			Service **************************************************************
 		-->
@@ -225,6 +231,11 @@
 	</bean>
 	<bean id="resourceService" class="com.vms.service.ResourceService">
 		<property name="resourceDAO" ref="resourceDAO"/>
+		
+	</bean>
+	
+	<bean id="audicenceService" class="com.vms.service.AudienceService">
+		<property name="audienceDAO" ref="audienceDAO"/>
 		
 	</bean>
 	

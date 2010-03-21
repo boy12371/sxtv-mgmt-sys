@@ -124,7 +124,7 @@
 						
 						var rejectBtn = new YAHOO.widget.Button( {
 							type :"button",
-							label :"退 回",
+							label :"淘 汰",
 							id :"rejectBtn",
 							container :"rejectDiv"
 						});

@@ -174,5 +174,26 @@
 			</result>
 		</action>
 		<!--User end-->
+		
+		<action name="toAllAudience" class="audienceMgmt" method="toAllAudience">
+			<result name="success">/sysconfig/audiences.jsp
+			</result>
+		</action>
+		<action name="getAllAudiences" class="audienceMgmt" method="getAllAudiences">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
+		
+		<action name="addAudience" class="audienceMgmt" method="addAudience">
+			<result name="success">/sysconfig/audiences.jsp
+			</result>
+			<result name="input">/sysconfig/addAudience.jsp
+			</result>
+		</action>
+		<action name="toAddAudience" class="audienceMgmt" method="toAddAudience">
+			<result name="success">/sysconfig/addAudience.jsp
+			</result>
+		</action>
 	</package>
 </struts>
