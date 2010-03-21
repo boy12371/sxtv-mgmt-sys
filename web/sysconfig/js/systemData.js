@@ -172,7 +172,7 @@ function initTopicTable() {
 								top : '45%',
 								left : '25%',
 								cursor : 'auto',
-								border: '5px solid #999999'
+								border : '5px solid #999999'
 							}
 						});
 				var yesBtn = YAHOO.util.Dom.get("yes");
@@ -216,7 +216,7 @@ function initTopicTable() {
 							top : '45%',
 							left : '25%',
 							cursor : 'auto',
-							border: '5px solid #999999'
+							border : '5px solid #999999'
 						}
 					});
 
@@ -377,7 +377,7 @@ function initSubjectTable() {
 								top : '45%',
 								left : '25%',
 								cursor : 'auto',
-								border: '5px solid #999999'
+								border : '5px solid #999999'
 							}
 						});
 				var yesBtn = YAHOO.util.Dom.get("yes");
@@ -421,7 +421,7 @@ function initSubjectTable() {
 							top : '45%',
 							left : '25%',
 							cursor : 'auto',
-							border: '5px solid #999999'
+							border : '5px solid #999999'
 						}
 					});
 
@@ -472,6 +472,262 @@ function initSubjectTable() {
 					});
 		}
 	});
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
+	}
+	return {
+		ds : myDataSource,
+		dt : myDataTable
+	};
+}
+
+function initScoreWeightTable() {
+	var formatID = function(elCell, oRecord, oColumn, sData) {
+		var factor = "";
+		if (sData == "innovateScore") {
+			factor = "创 新";
+		} else if (sData == "performScore") {
+			factor = "表 演";
+		} else if (sData == "storyScore") {
+			factor = "故 事";
+		} else {
+			factor = "技 术";
+		}
+		elCell.innerHTML = factor;
+	};
+	var myColumnDefs = [{
+				key : "id",
+				label : "名称",
+				formatter : formatID,
+				sortable : true
+			}, {
+				key : "wieght",
+				label : "权重系数"
+			}, {
+				key : "select",
+				label : "操作",
+				formatter : "dropdown",
+				dropdownOptions : [{
+							label : "选择",
+							value : "none"
+						}, {
+							label : "修改",
+							value : "modify"
+						}]
+
+			}];
+	// DataSource instance
+	var myDataSource = new YAHOO.util.DataSource("/tv/sys/getScoreWeights.action?");
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+
+	myDataSource.responseSchema = {
+		resultsList : "records",
+		fields : ["id", "wieght", {
+					key : "select",
+					parser : "string"
+				}],
+		metaFields : {
+			totalRecords : "totalRecords" // Access to value in the server
+			// response
+		}
+	};
+	// DataTable configuration
+	var myConfigs = {
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
+		dynamicData : true, // Enables dynamic server-driven data
+		sortedBy : {
+			key : "id",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
+		}, // Sets UI initial sort arrow
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 25,
+					template : YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+					rowsPerPageOptions : [25, 50, 100]
+				})
+		// Enables pagination
+	};
+	// DataTable instance
+	var myDataTable = new YAHOO.widget.DataTable("scoreWeight", myColumnDefs,
+			myDataSource, myConfigs);
+	myDataTable.subscribe("initEvent", function() {
+				parent.resizeIframe();
+			});
+	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
+		var elDropdown = oArgs.target;
+		var oRecord = this.getRecord(elDropdown);
+		var objName = YAHOO.util.Dom.get("objName");
+		var objComments = YAHOO.util.Dom.get("objComments");
+		var objID = YAHOO.util.Dom.get("objID");
+		objName.value = "";
+		objComments.value = "";
+		objID.value = "";
+		objName.value = oRecord.getData("wieght");
+		var opt = elDropdown.value;
+		if (opt == "none") {
+			elDropdown.selectIndex = 0;
+		} else if (opt == "modify") {
+			elDropdown.selectedIndex = 0;
+			$('#headDiv').text("");
+			$('#headDiv').text("修改权重系数");
+			$.blockUI({
+						message : $('#hiddenDiv'),
+						css : {
+							width : '475px',
+							top : '45%',
+							left : '25%',
+							cursor : 'auto',
+							border : '5px solid #999999'
+						}
+					});
+
+			var yesBtn = YAHOO.util.Dom.get("yes");
+			YAHOO.util.Event.addListener(yesBtn, "click", function() {
+				$.unblockUI();
+				objID.value = oRecord.getData("factor");
+
+				var form = document.forms[0];
+				form.action = "/tv/sys/modifyScoreWeight.action?sWeight.factor="
+						+ oRecord.getData("factor")
+						+ "&sWeight.weight="
+						+ objName.value;
+				form.submit();
+			});
+			var cancelBtn = YAHOO.util.Dom.get("cancel");
+			YAHOO.util.Event.addListener(cancelBtn, "click", function() {
+						$.unblockUI();
+					});
+
+		}
+	});
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
+	}
+	return {
+		ds : myDataSource,
+		dt : myDataTable
+	};
+}
+
+function initScoreLevelTable() {
+	var myColumnDefs = [{
+				key : "id",
+				label : "名称",
+				sortable : true
+			}, {
+				key : "level",
+				label : "级别"
+			}, {
+				key : "start",
+				label : "级别"
+			}, {
+				key : "end",
+				label : "级别"
+			}, {
+				key : "select",
+				label : "操作",
+				formatter : "dropdown",
+				dropdownOptions : [{
+							label : "选择",
+							value : "none"
+						}, {
+							label : "修改",
+							value : "modify"
+						}]
+
+			}];
+	// DataSource instance
+	var myDataSource = new YAHOO.util.DataSource("/tv/sys/getScorelevels.action?");
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+
+	myDataSource.responseSchema = {
+		resultsList : "records",
+		fields : ["id", "level", "start", "end", {
+					key : "select",
+					parser : "string"
+				}],
+		metaFields : {
+			totalRecords : "totalRecords" // Access to value in the server
+			// response
+		}
+	};
+	// DataTable configuration
+	var myConfigs = {
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
+		dynamicData : true, // Enables dynamic server-driven data
+		sortedBy : {
+			key : "id",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
+		}, // Sets UI initial sort arrow
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 25,
+					template : YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+					rowsPerPageOptions : [25, 50, 100]
+				})
+		// Enables pagination
+	};
+	// DataTable instance
+	var myDataTable = new YAHOO.widget.DataTable("scorelevel", myColumnDefs,
+			myDataSource, myConfigs);
+	myDataTable.subscribe("initEvent", function() {
+				parent.resizeIframe();
+			});
+	var levelBtn = new YAHOO.widget.Button({
+				type : "button",
+				id : "levelBtn",
+				label : "添加级别",
+				container : "levelBtnDiv"
+			});
+	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
+				var elDropdown = oArgs.target;
+				var oRecord = this.getRecord(elDropdown);
+				var objName = YAHOO.util.Dom.get("objName");
+				var objComments = YAHOO.util.Dom.get("objComments");
+				var objID = YAHOO.util.Dom.get("objID");
+				objName.value = "";
+				objComments.value = "";
+				objID.value = "";
+
+				var opt = elDropdown.value;
+				if (opt == "none") {
+					elDropdown.selectIndex = 0;
+				} else if (opt == "modify") {
+					elDropdown.selectedIndex = 0;
+					$('#headDiv').text("");
+					$('#headDiv').text("修改分值");
+					$.blockUI({
+								message : $('#hiddenDiv'),
+								css : {
+									width : '475px',
+									top : '45%',
+									left : '25%',
+									cursor : 'auto',
+									border : '5px solid #999999'
+								}
+							});
+
+					var yesBtn = YAHOO.util.Dom.get("yes");
+					YAHOO.util.Event.addListener(yesBtn, "click", function() {
+								$.unblockUI();
+								objID.value = oRecord.getData("id");
+
+								var form = document.forms[0];
+								form.action = "/tv/sys/modifyScoreLevel.action";
+								form.submit();
+							});
+					var cancelBtn = YAHOO.util.Dom.get("cancel");
+					YAHOO.util.Event.addListener(cancelBtn, "click",
+							function() {
+								$.unblockUI();
+							});
+
+				}
+			});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {

@@ -25,9 +25,9 @@ public class ScoreweightService implements IScoreweightService {
 	}
 
 	@Override
-	public List<Scoreweight> findAllScoreweight() throws Exception {
+	public List<Scoreweight> findAllScoreweight(int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<Scoreweight>)this.scoreweightDAO.findAll(clz);
+		return (List<Scoreweight>)this.scoreweightDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
 	}
 
 	@Override
@@ -45,6 +45,12 @@ public class ScoreweightService implements IScoreweightService {
 
 	public void setScoreweightDAO(IScoreweightDAO scoreweightDAO) {
 		this.scoreweightDAO = scoreweightDAO;
+	}
+
+	@Override
+	public int getTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return this.scoreweightDAO.getObjectTotalCount(clz, Scoreweight.PROP_ID);
 	}
 
 }

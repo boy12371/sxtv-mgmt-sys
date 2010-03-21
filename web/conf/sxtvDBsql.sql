@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2010 年 03 月 21 日 19:58
+-- 生成日期: 2010 年 03 月 21 日 23:40
 -- 服务器版本: 5.0.75
 -- PHP 版本: 5.2.6-3ubuntu4
 
@@ -301,19 +301,22 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
 --
 
 CREATE TABLE IF NOT EXISTS `scorelevel` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `level` int(11) NOT NULL default '0',
   `start` float NOT NULL default '0',
   `end` float NOT NULL default '0',
   `comments` varchar(256) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `level` (`level`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `scorelevel`
 --
 
+INSERT INTO `scorelevel` (`id`, `level`, `start`, `end`, `comments`) VALUES
+(1, 1, 90, 100, '1111111111111111'),
+(2, 2, 80, 89, '222222222222');
 
 -- --------------------------------------------------------
 
@@ -360,7 +363,7 @@ INSERT INTO `status` (`statusID`, `status`, `comments`) VALUES
 (3, '通过', '审核已通过，等待指定播放时间'),
 (5, '待排', '剧目已经通过并等待编排。'),
 (6, '待播', '审核通过，并已指定时间，等待播放'),
-(7, '退回', '审核未通过，直接退带'),
+(7, '淘汰', '审核未通过，直接退带'),
 (8, '已播', '剧目已播出，尚未得到市场反馈'),
 (9, '结束', '剧目已播出并收到市场反馈');
 
@@ -560,7 +563,7 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('3', '蝴蝶效应', 2, 3, 1, '2009-01-01', '2009-01-02 00:00:00', 3, 9, NULL, 0.7, 0.8),
 ('324aa', 'sfwe43', 2, 1, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdvvsdv', NULL, NULL),
 ('32f', 'fwef', 2, 3, 2, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'sd', NULL, NULL),
-('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'sdfwe', NULL, NULL),
+('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 3, 'sdfwe', NULL, NULL),
 ('4', '超黑特警', 2, 4, 1, '2009-02-01', '2009-02-02 00:00:00', 3, 5, NULL, NULL, NULL),
 ('sf1', 'sdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 1, 'ddv', NULL, NULL),
 ('sf1vsd', 'weqdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 5, 'ddvsdfsd', NULL, NULL),

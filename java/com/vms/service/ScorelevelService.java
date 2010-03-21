@@ -7,7 +7,7 @@ import com.vms.db.dao.iface.IScorelevelDAO;
 import com.vms.service.iface.IScorelevelService;
 
 public class ScorelevelService implements IScorelevelService {
-	
+
 	private Class clz = Scorelevel.class;
 	private IScorelevelDAO scorelevelDAO;
 
@@ -21,20 +21,23 @@ public class ScorelevelService implements IScorelevelService {
 	@Override
 	public void deleteLevel(int id) throws Exception {
 		// TODO Auto-generated method stub
-		Scorelevel level= (Scorelevel) this.scorelevelDAO.getObject(clz, id);
+		Scorelevel level = (Scorelevel) this.scorelevelDAO.getObject(clz, id);
 		this.scorelevelDAO.deleteObject(level);
 	}
 
 	@Override
-	public List<Scorelevel> findAllScorelevel() throws Exception {
+	public List<Scorelevel> findAllScorelevel(int startIndex, int endIndex,
+			String propertyName, boolean ascending) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<Scorelevel>)this.scorelevelDAO.findAll(clz);
+		return (List<Scorelevel>) this.scorelevelDAO.findObjectByFields(clz,
+				null, startIndex, endIndex, propertyName, ascending);
 	}
 
 	@Override
 	public void updateLevel(Scorelevel level) throws Exception {
 		// TODO Auto-generated method stub
-		Scorelevel lev= (Scorelevel) this.scorelevelDAO.getObject(clz, level.getId());
+		Scorelevel lev = (Scorelevel) this.scorelevelDAO.getObject(clz, level
+				.getId());
 		lev.setComments(level.getComments());
 		lev.setEnd(level.getEnd());
 		lev.setLevel(level.getLevel());
@@ -48,6 +51,12 @@ public class ScorelevelService implements IScorelevelService {
 
 	public void setScorelevelDAO(IScorelevelDAO scorelevelDAO) {
 		this.scorelevelDAO = scorelevelDAO;
+	}
+
+	@Override
+	public int getTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return this.scorelevelDAO.getObjectTotalCount(clz, Scorelevel.PROP_ID);
 	}
 
 }

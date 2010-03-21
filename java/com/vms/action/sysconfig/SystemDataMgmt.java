@@ -7,9 +7,13 @@ import org.apache.log4j.Logger;
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
+import com.vms.db.bean.Scorelevel;
+import com.vms.db.bean.Scoreweight;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Subject;
 import com.vms.db.bean.Topic;
+import com.vms.service.iface.IScorelevelService;
+import com.vms.service.iface.IScoreweightService;
 import com.vms.service.iface.IStatusService;
 import com.vms.service.iface.ISubjectService;
 import com.vms.service.iface.ITopicService;
@@ -24,6 +28,8 @@ public class SystemDataMgmt extends BaseAction {
 	private IStatusService statusService;
 	private ITopicService topicService;
 	private ISubjectService subjectService;
+	private IScorelevelService scorelevelService;
+	private IScoreweightService scoreweightService;
 
 	private JSONDataTable table;
 	private Subject subject;
@@ -79,57 +85,39 @@ public class SystemDataMgmt extends BaseAction {
 		return this.SUCCESS;
 	}
 
-	
-//	public String doDisableEnableSubject() throws Exception{
-//		try {
-//			this.subjectService.disableEnable(subject.getId(), enableOperator);
-//			this.addActionMessage("栏目已禁用");
-//			return SUCCESS;
-//		} catch (Exception e) {
-//			logger.error(e);
-//		}
-//		this.addActionError("操作失败");
-//		return INPUT;
-//	}
-//	
-//	public String modifySubject() throws Exception{
-//		try {
-//			this.subjectService.updateSubject(subject);
-//			this.addActionMessage("修改成功");
-//			return SUCCESS;
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			logger.error(e);
-//		}
-//		this.addActionError("修改失败");
-//		return INPUT;
-//	}
-	
-//	public String modifyTopic()throws Exception{
-//		try {
-//			this.topicService.updateTopic(topic);
-//			this.addActionMessage("修改成功");
-//			return SUCCESS;
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			logger.error(e);
-//		}
-//		this.addActionError("修改失败");
-//		return INPUT;
-//	}
-//	
-//	public String doDisableEnableTopic()throws Exception{
-//		try {
-//			topicService.disableEnableTopic(topic.getId(), enableOperator);
-//			this.addActionMessage("题材已禁用");
-//			return SUCCESS;
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			logger.error(e);
-//		}
-//		this.addActionError("操作失败");
-//		return INPUT;
-//	}
+	public String getScoreWeights() throws Exception {
+		table = JSONDataTableUtils.initJSONDataTable(getRequest());
+		try {
+			List<Scoreweight> sList = this.scoreweightService
+					.findAllScoreweight(table.getStartIndex(), table
+							.getStartIndex()
+							+ table.getRowsPerPage(), table.getSort(), table
+							.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(sList, table,
+					scoreweightService.getTotalCount());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return this.SUCCESS;
+	}
+
+	public String getScorelevels() throws Exception {
+		table = JSONDataTableUtils.initJSONDataTable(getRequest());
+		try {
+			List<Scorelevel> sList = this.scorelevelService
+					.findAllScorelevel(table.getStartIndex(), table
+							.getStartIndex()
+							+ table.getRowsPerPage(), table.getSort(), table
+							.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(sList, table,
+					scorelevelService.getTotalCount());
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage());
+		}
+		return this.SUCCESS;
+	}
+
 	public IStatusService getStatusService() {
 		return statusService;
 	}
@@ -162,8 +150,6 @@ public class SystemDataMgmt extends BaseAction {
 		this.subjectService = subjectService;
 	}
 
-	
-
 	public Topic getTopic() {
 		return topic;
 	}
@@ -186,6 +172,22 @@ public class SystemDataMgmt extends BaseAction {
 
 	public void setEnableOperator(boolean enableOperator) {
 		this.enableOperator = enableOperator;
+	}
+
+	public IScorelevelService getScorelevelService() {
+		return scorelevelService;
+	}
+
+	public void setScorelevelService(IScorelevelService scorelevelService) {
+		this.scorelevelService = scorelevelService;
+	}
+
+	public IScoreweightService getScoreweightService() {
+		return scoreweightService;
+	}
+
+	public void setScoreweightService(IScoreweightService scoreweightService) {
+		this.scoreweightService = scoreweightService;
 	}
 
 }

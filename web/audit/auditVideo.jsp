@@ -93,7 +93,7 @@
 					<script type="text/javascript">
 						var rejectBtn = new YAHOO.widget.Button( {
 							type :"button",
-							label :"退回",
+							label :"淘汰",
 							id :"submitBtn",
 							container :"rejectDiv"
 						});

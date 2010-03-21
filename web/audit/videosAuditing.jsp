@@ -80,7 +80,7 @@
 <option value="2">待审剧目</option>
 <option value="3">通过剧目</option>
 <option value="5">待排剧目</option>
-<option value="7">退回剧目</option>
+<option value="7">淘汰剧目</option>
 <!-- option value="5">重审剧目</option-->
 </select>
 

@@ -15,7 +15,9 @@
 	<bean id="sysDataMgmt" class="com.vms.action.sysconfig.SystemDataMgmt" scope="prototype">
 		<property name="topicService" ref="topicService" />
 		<property name="statusService" ref="statusService" />
-		<property name="subjectService" ref="subjectService" />		
+		<property name="subjectService" ref="subjectService" />
+		<property name="scorelevelService" ref="scorelevelService" />	
+		<property name="scoreweightService" ref="scoreweightService" />			
 	</bean>
 	
 	<bean id="userMgmt" class="com.vms.action.sysconfig.UserMgmtAction" scope="prototype">

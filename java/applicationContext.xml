@@ -47,6 +47,7 @@
 				<value>com/vms/db/bean/Role.hbm.xml</value>
 				<value>com/vms/db/bean/RoleResource.hbm.xml</value>
 				<value>com/vms/db/bean/UserRole.hbm.xml</value>
+				<value>com/vms/db/bean/Scorelevel.hbm.xml</value>				
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -106,6 +107,8 @@
 				<value>arrangeService</value>
 				<value>resourceService</value>
 				<value>audicenceService</value>
+				<value>scoreweightService</value>
+				<value>scorelevelService</value>
 				
 			</list>
 		</property>
@@ -179,6 +182,14 @@
 		<property name="sessionFactory" ref="sessionFactory" />		
 	</bean>
 	
+	
+	<bean id="scoreweightDAO" class="com.vms.db.dao.ScoreweightDAO">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
+	
+	<bean id="scorelevelDAO" class="com.vms.db.dao.ScorelevelDAO">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
 	<!--
 			Service **************************************************************
 		-->
@@ -236,6 +247,16 @@
 	
 	<bean id="audicenceService" class="com.vms.service.AudienceService">
 		<property name="audienceDAO" ref="audienceDAO"/>
+		
+	</bean>
+	
+	<bean id="scoreweightService" class="com.vms.service.ScoreweightService">
+		<property name="scoreweightDAO" ref="scoreweightDAO"/>
+		
+	</bean>
+	
+	<bean id="scorelevelService" class="com.vms.service.ScorelevelService">
+		<property name="scorelevelDAO" ref="scorelevelDAO"/>
 		
 	</bean>
 	

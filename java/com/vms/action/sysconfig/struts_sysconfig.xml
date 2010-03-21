@@ -96,6 +96,20 @@
 				<param name="root">table</param>
 			</result>
 		</action>
+		
+		
+		
+		
+		<action name="getScoreWeights" class="sysDataMgmt" method="getScoreWeights">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
+		<action name="getScorelevels" class="sysDataMgmt" method="getScorelevels">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
 		<!-- System end -->
 		<!--User -->
 		<action name="getUsers" class="userMgmt" method="getUsers">

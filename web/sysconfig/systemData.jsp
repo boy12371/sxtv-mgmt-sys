@@ -57,10 +57,34 @@
 <br />
 <div id="vedioSubject" align="center"></div>
 <div id="subjectBtnDiv" align="center"></div>
+
+
+<h1>评分权重</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
+<p>可添加或修改权重</p>
+<br />
+<div id="scoreWeight" align="center"></div>
+
+<!-- div id="weightBtnDiv" align="center"></div-->
+
+
+
+<h1>评分级别</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
+<p>可添加或修改级别</p>
+<br />
+<div id="scorelevel" align="center"></div>
+<div id="levelBtnDiv" align="center"></div>
+
+
+
+
 <script type="text/javascript">
 	YAHOO.example.DynamicData = initStatusTable();
 	YAHOO.example.DynamicData = initTopicTable();
 	YAHOO.example.DynamicData = initSubjectTable();
+	YAHOO.example.DynamicData = initScoreWeightTable();
+	YAHOO.example.DynamicData = initScoreLevelTable();
 </script>
 <div id="hiddenDiv" style="display: none"><s:form id="aform" action="" namespace="" method="post">
 	<h1 class="popupWindow" id="headDiv"></h1>
