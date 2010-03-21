@@ -11,6 +11,8 @@ public class SessionUserInfo {
 	private String username;
 
 	private String password;
+	
+	private int role;
 
 //	private Map<String, Integer> permissions = new HashMap<String, Integer>();
 
@@ -63,5 +65,13 @@ public class SessionUserInfo {
 
 	public void setAuthoritedResource(List<String> authoritedResource) {
 		this.authoritedResource = authoritedResource;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+
+	public int getRole() {
+		return role;
 	}
 }

@@ -126,7 +126,8 @@ public class UserService implements IUserService {
 			userInfo.setUsername(username);
 			userInfo.setPassword(password);
 			userInfo.setUserId(user.getId());
-			userInfo.setAuthoritedResource(user.getGrantedResource());
+			userInfo.setAuthoritedResource(user.getGrantedResource());	
+			userInfo.setRole(user.getRoles().toArray(new Role[0])[0].getId());
 		}
 		return userInfo;
 	}

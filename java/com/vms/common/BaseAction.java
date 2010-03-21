@@ -22,6 +22,12 @@ ServletRequestAware, ServletResponseAware {
 	protected HttpServletResponse response;
 
 	protected HttpSession session;
+	
+	protected CommonVariable commonVar = new CommonVariable();
+
+	public CommonVariable getCommonVar() {
+		return commonVar;
+	}
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
@@ -32,7 +38,7 @@ ServletRequestAware, ServletResponseAware {
 		this.response = response;
 	}
 	
-	protected SessionUserInfo getUserInfo(){
+	public SessionUserInfo getUserInfo(){
 		return (SessionUserInfo)session.getAttribute("SessionUserInfo");
 	}
 	

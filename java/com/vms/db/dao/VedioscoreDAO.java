@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 
 import com.vms.action.accuracy.AccuracyAction;
+import com.vms.common.CommonVariable;
 import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.db.bean.UserRole;
@@ -26,7 +27,7 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 	
 	public List<User> findAllExaminer() throws Exception{
 		List<User> users = new ArrayList<User>();
-		List<UserRole> urs = this.findObjectByField(UserRole.class, "roleid", new Role(3), -1, -1, "roleid", true);
+		List<UserRole> urs = this.findObjectByField(UserRole.class, "roleid", new Role(CommonVariable.ROLE_EXAMINER), -1, -1, "roleid", true);
 		for(UserRole ur:urs){
 			users.add(ur.getUserid());
 		}

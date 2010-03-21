@@ -42,6 +42,8 @@ public class ExamineAction extends BaseAction {
 	private String perform;
 	
 	private String errorMsg;
+	
+	private List<User> examiners;
 
 	public String toUnExaminedTapes() {
 		return SUCCESS;
@@ -155,7 +157,9 @@ public class ExamineAction extends BaseAction {
 			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getName();		
 			tapeScore.setVedioName(name);
 		}
-		
+		if(this.getUserInfo().getRole() == this.commonVar.ROLE_INPUTER){
+			examiners = vedioscoreService.findAllExaminer();
+		}
 		return SUCCESS;
 	}
 	
@@ -256,5 +260,13 @@ public class ExamineAction extends BaseAction {
 
 	public String getErrorMsg() {
 		return errorMsg;
+	}
+
+	public void setExaminers(List<User> examiners) {
+		this.examiners = examiners;
+	}
+
+	public List<User> getExaminers() {
+		return examiners;
 	}
 }
