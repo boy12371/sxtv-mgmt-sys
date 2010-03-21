@@ -6,11 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
@@ -36,7 +41,15 @@
 				<td><label>打分人员</label></td>
 				<td><s:property value="tapeScore.examiner"/></td>
 			</tr>
-			</s:if>
+			</s:if><s:elseif test="userInfo.role == 2">
+			<tr>
+				<td><label>输入打分人员</label></td>
+				<td>
+					<input id="examiners" class="inputField autoComplete" type="text"> 
+	    			<div id="container"></div>  
+	    		</td>
+			</tr>
+			</s:elseif>
 			<tr>
 				<td><label>影带编号</label></td>
 				<td><s:property value="tapeScore.vedioID"/></td>
@@ -125,6 +138,27 @@
 </s:form>
 
 <script language="JavaScript">
+<s:if test="userInfo.role == 2">
+var examiners = new Array();
+<s:iterator value="examiners" status="st">
+	var name = "<s:property value='employee.name' escape='false'/>";
+	examiners[examiners.length] = name;
+</s:iterator>
+
+YAHOO.example.BasicLocal = function() { 
+	// Use a LocalDataSource 
+	var oDS = new YAHOO.util.LocalDataSource(examiners); 
+	// Instantiate the AutoComplete 
+	var oAC = new YAHOO.widget.AutoComplete("examiners", "container", oDS); 
+	oAC.prehighlightClassName = "yui-ac-prehighlight"; 
+	oAC.useShadow = true;   
+	return { 
+		oDS: oDS, 
+		oAC: oAC 
+	}; 
+}(); 
+</s:if>
+
 function cancelAction(){
 	window.location="/tv/examine/toUnExaminedTapes.action";
 }
