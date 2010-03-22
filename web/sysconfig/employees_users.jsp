@@ -62,7 +62,7 @@
 		type :"link",
 		id :"linkbutton7",
 		label :"添加新用户",
-		href :"./systoAddUser.action",
+		href :"./sys/toAddUser.action",
 		container :"addUser"
 	});
 	YAHOO.example.DynamicData = initEmployeeDataTable();

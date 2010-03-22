@@ -156,7 +156,7 @@ function initTopicTable() {
 				container : "topicBtnDiv"
 			});
 	topicBtn.on("click", function() {
-				var form = document.forms[0];
+				var form = YAHOO.util.Dom.get("commonform");
 				var objName = YAHOO.util.Dom.get("objName");
 				var objComments = YAHOO.util.Dom.get("objComments");
 				var objID = YAHOO.util.Dom.get("objID");
@@ -164,7 +164,11 @@ function initTopicTable() {
 				objComments.value = "";
 				objID.value = "";
 				$('#headDiv').text("");
+				$('#titleName').text("");
+				$('#titleComments').text("");
 				$('#headDiv').text("添加题材");
+				$('#titleName').text("题材");
+				$('#titleComments').text("备注");
 				$.blockUI({
 							message : $('#hiddenDiv'),
 							css : {
@@ -201,14 +205,18 @@ function initTopicTable() {
 		objID.value = "";
 		objName.value = oRecord.getData("topicName");
 		objComments.value = oRecord.getData("comments");
-		var form = document.forms[0];
+		var form = YAHOO.util.Dom.get("commonform");
 		var opt = elDropdown.value;
 		if (opt == "none") {
 			elDropdown.selectIndex = 0;
 		} else if (opt == "modify") {
 			elDropdown.selectedIndex = 0;
 			$('#headDiv').text("");
+			$('#titleName').text("");
+			$('#titleComments').text("");
 			$('#headDiv').text("修改题材");
+			$('#titleName').text("题材");
+			$('#titleComments').text("备注");
 			$.blockUI({
 						message : $('#hiddenDiv'),
 						css : {
@@ -363,7 +371,11 @@ function initSubjectTable() {
 			});
 	subjectBtn.on("click", function() {
 				$('#headDiv').text("");
+				$('#titleName').text("");
+				$('#titleComments').text("");
 				$('#headDiv').text("添加栏目");
+				$('#titleName').text("栏目");
+				$('#titleComments').text("备注");
 				var objName = YAHOO.util.Dom.get("objName");
 				var objComments = YAHOO.util.Dom.get("objComments");
 				var objID = YAHOO.util.Dom.get("objID");
@@ -386,7 +398,7 @@ function initSubjectTable() {
 							objName.name = "subject.subjectName";
 							objComments.name = "subject.comments";
 							objID.name = "subject.id";
-							var form = document.forms[0];
+							var form = YAHOO.util.Dom.get("commonform");
 							form.action = "/tv/sys/doAddSubject.action"
 							form.submit();
 						});
@@ -413,7 +425,11 @@ function initSubjectTable() {
 		} else if (opt == "modify") {
 			elDropdown.selectedIndex = 0;
 			$('#headDiv').text("");
+			$('#titleName').text("");
+			$('#titleComments').text("");
 			$('#headDiv').text("修改栏目");
+			$('#titleName').text("栏目");
+			$('#titleComments').text("备注");
 			$.blockUI({
 						message : $('#hiddenDiv'),
 						css : {
@@ -433,7 +449,7 @@ function initSubjectTable() {
 						objID.name = "subject.id";
 						objID.value = oRecord.getData("id");
 
-						var form = document.forms[0];
+						var form = YAHOO.util.Dom.get("commonform");
 						form.action = "/tv/sys/modifySubject.action"
 						form.submit();
 					});
@@ -501,7 +517,6 @@ function initScoreWeightTable() {
 	var myColumnDefs = [{
 				key : "id",
 				label : "名称",
-				formatter : formatID,
 				sortable : true
 			}, {
 				key : "wieght",
@@ -558,22 +573,22 @@ function initScoreWeightTable() {
 	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
 		var elDropdown = oArgs.target;
 		var oRecord = this.getRecord(elDropdown);
-		var objName = YAHOO.util.Dom.get("objName");
-		var objComments = YAHOO.util.Dom.get("objComments");
-		var objID = YAHOO.util.Dom.get("objID");
-		objName.value = "";
-		objComments.value = "";
-		objID.value = "";
-		objName.value = oRecord.getData("wieght");
+
 		var opt = elDropdown.value;
 		if (opt == "none") {
 			elDropdown.selectIndex = 0;
 		} else if (opt == "modify") {
 			elDropdown.selectedIndex = 0;
+			$('#weight').text("");
 			$('#headDiv').text("");
 			$('#headDiv').text("修改权重系数");
+			$('#weight').text(oRecord.getData("id"));
+			var weightValue = YAHOO.util.Dom.get("weightValue");
+			weightValue.value = "";
+			weightValue.value = oRecord.getData("wieght");
+
 			$.blockUI({
-						message : $('#hiddenDiv'),
+						message : $('#hiddenWeightDiv'),
 						css : {
 							width : '475px',
 							top : '45%',
@@ -583,19 +598,17 @@ function initScoreWeightTable() {
 						}
 					});
 
-			var yesBtn = YAHOO.util.Dom.get("yes");
+			var yesBtn = YAHOO.util.Dom.get("weightYes");
 			YAHOO.util.Event.addListener(yesBtn, "click", function() {
 				$.unblockUI();
-				objID.value = oRecord.getData("factor");
-
-				var form = document.forms[0];
-				form.action = "/tv/sys/modifyScoreWeight.action?sWeight.factor="
+				var form = YAHOO.util.Dom.get("weightform");
+				form.action = "/tv/sys/modifyScoreWeight.action?scoreWeight.factor="
 						+ oRecord.getData("factor")
-						+ "&sWeight.weight="
-						+ objName.value;
+						+ "&scoreWeight.weight="
+						+ weightValue.value;
 				form.submit();
 			});
-			var cancelBtn = YAHOO.util.Dom.get("cancel");
+			var cancelBtn = YAHOO.util.Dom.get("weightCancel");
 			YAHOO.util.Event.addListener(cancelBtn, "click", function() {
 						$.unblockUI();
 					});
@@ -624,10 +637,10 @@ function initScoreLevelTable() {
 				label : "级别"
 			}, {
 				key : "start",
-				label : "级别"
+				label : "起点分值"
 			}, {
 				key : "end",
-				label : "级别"
+				label : "结束分值"
 			}, {
 				key : "select",
 				label : "操作",
@@ -683,51 +696,76 @@ function initScoreLevelTable() {
 				label : "添加级别",
 				container : "levelBtnDiv"
 			});
-	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
-				var elDropdown = oArgs.target;
-				var oRecord = this.getRecord(elDropdown);
-				var objName = YAHOO.util.Dom.get("objName");
-				var objComments = YAHOO.util.Dom.get("objComments");
-				var objID = YAHOO.util.Dom.get("objID");
-				objName.value = "";
-				objComments.value = "";
-				objID.value = "";
-
-				var opt = elDropdown.value;
-				if (opt == "none") {
-					elDropdown.selectIndex = 0;
-				} else if (opt == "modify") {
-					elDropdown.selectedIndex = 0;
-					$('#headDiv').text("");
-					$('#headDiv').text("修改分值");
-					$.blockUI({
-								message : $('#hiddenDiv'),
-								css : {
-									width : '475px',
-									top : '45%',
-									left : '25%',
-									cursor : 'auto',
-									border : '5px solid #999999'
-								}
-							});
-
-					var yesBtn = YAHOO.util.Dom.get("yes");
-					YAHOO.util.Event.addListener(yesBtn, "click", function() {
-								$.unblockUI();
-								objID.value = oRecord.getData("id");
-
-								var form = document.forms[0];
-								form.action = "/tv/sys/modifyScoreLevel.action";
-								form.submit();
-							});
-					var cancelBtn = YAHOO.util.Dom.get("cancel");
-					YAHOO.util.Event.addListener(cancelBtn, "click",
-							function() {
-								$.unblockUI();
-							});
-
-				}
+	levelBtn.on("click", function() {
+				var levelStart = YAHOO.util.Dom.get("levelStart");
+				var levelEnd = YAHOO.util.Dom.get("levelEnd");
+				levelStart.value = "";
+				levelEnd.value = "";
+				$('#levelLabel').text("增加级别");
+				$.blockUI({
+							message : $('#hiddenLevelDiv'),
+							css : {
+								width : '475px',
+								top : '45%',
+								left : '25%',
+								cursor : 'auto',
+								border : '5px solid #999999'
+							}
+						});
+				var yesBtn = YAHOO.util.Dom.get("yes");
+				YAHOO.util.Event.addListener(yesBtn, "click", function() {
+							$.unblockUI();
+							var form = YAHOO.util.Dom.get("levelform");
+							form.action = "/tv/sys/doScoreLevel.action"
+							form.submit();
+						});
+				var cancelBtn = YAHOO.util.Dom.get("cancel");
+				YAHOO.util.Event.addListener(cancelBtn, "click", function() {
+							$.unblockUI();
+						});
 			});
+
+	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
+		var elDropdown = oArgs.target;
+		var oRecord = this.getRecord(elDropdown);
+		var levelStart = YAHOO.util.Dom.get("levelStart");
+		var levelEnd = YAHOO.util.Dom.get("levelEnd");
+		var opt = elDropdown.value;
+		if (opt == "none") {
+			elDropdown.selectIndex = 0;
+		} else if (opt == "modify") {
+			elDropdown.selectedIndex = 0;
+			$('#levelLabel').text("");
+			$('#levelLabel').text(oRecord.getData("level"));
+			levelStart.value = oRecord.getData("start");
+			levelEnd.value = oRecord.getData("end");
+
+			$.blockUI({
+						message : $('#hiddenLevelDiv'),
+						css : {
+							width : '475px',
+							top : '45%',
+							left : '25%',
+							cursor : 'auto',
+							border : '5px solid #999999'
+						}
+					});
+
+			var yesBtn = YAHOO.util.Dom.get("levelYes");
+			YAHOO.util.Event.addListener(yesBtn, "click", function() {
+						$.unblockUI();
+						var form = YAHOO.util.Dom.get("levelform");
+						form.action = "/tv/sys/modifyScoreLevel.action?level.id="
+								+ oRecord.getData("id");
+						form.submit();
+					});
+			var cancelBtn = YAHOO.util.Dom.get("levelCancel");
+			YAHOO.util.Event.addListener(cancelBtn, "click", function() {
+						$.unblockUI();
+					});
+
+		}
+	});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
