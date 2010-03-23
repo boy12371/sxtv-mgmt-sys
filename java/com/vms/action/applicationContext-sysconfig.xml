@@ -40,4 +40,9 @@
 		<property name="audicenceService" ref="audicenceService" />
 	</bean>
 	
+	<bean id="levelWeightMgmt" class="com.vms.action.sysconfig.LeveWeightMgmtAction" scope="prototype">
+		<property name="scorelevelService" ref="scorelevelService" />
+		<property name="scoreweightService" ref="scoreweightService" />
+	</bean>
+	
 </beans>

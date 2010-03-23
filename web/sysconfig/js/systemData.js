@@ -602,10 +602,11 @@ function initScoreWeightTable() {
 			YAHOO.util.Event.addListener(yesBtn, "click", function() {
 				$.unblockUI();
 				var form = YAHOO.util.Dom.get("weightform");
-				form.action = "/tv/sys/modifyScoreWeight.action?scoreWeight.factor="
-						+ oRecord.getData("factor")
-						+ "&scoreWeight.weight="
+				form.action = "/tv/sys/modifyWeight.action?scoreweight.id="
+						+ oRecord.getData("id")
+						+ "&scoreweight.wieght="
 						+ weightValue.value;
+						alert(form.action);
 				form.submit();
 			});
 			var cancelBtn = YAHOO.util.Dom.get("weightCancel");
@@ -716,7 +717,7 @@ function initScoreLevelTable() {
 				YAHOO.util.Event.addListener(yesBtn, "click", function() {
 							$.unblockUI();
 							var form = YAHOO.util.Dom.get("levelform");
-							form.action = "/tv/sys/doScoreLevel.action"
+							form.action = "/tv/sys/addScoreLevel.action"
 							form.submit();
 						});
 				var cancelBtn = YAHOO.util.Dom.get("cancel");
@@ -755,7 +756,7 @@ function initScoreLevelTable() {
 			YAHOO.util.Event.addListener(yesBtn, "click", function() {
 						$.unblockUI();
 						var form = YAHOO.util.Dom.get("levelform");
-						form.action = "/tv/sys/modifyScoreLevel.action?level.id="
+						form.action = "/tv/sys/modifyLevel.action?scorelevel.id="
 								+ oRecord.getData("id");
 						form.submit();
 					});

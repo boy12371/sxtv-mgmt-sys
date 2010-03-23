@@ -14,6 +14,8 @@ public class ScorelevelService implements IScorelevelService {
 	@Override
 	public void createLevel(Scorelevel level) throws Exception {
 		// TODO Auto-generated method stub
+		int id = scorelevelDAO.getMaxScoreleveID();
+		level.setLevel(id+1);
 		this.scorelevelDAO.saveObject(level);
 
 	}
@@ -38,9 +40,8 @@ public class ScorelevelService implements IScorelevelService {
 		// TODO Auto-generated method stub
 		Scorelevel lev = (Scorelevel) this.scorelevelDAO.getObject(clz, level
 				.getId());
-		lev.setComments(level.getComments());
+//		lev.setComments(level.getComments());
 		lev.setEnd(level.getEnd());
-		lev.setLevel(level.getLevel());
 		lev.setStart(level.getStart());
 		this.scorelevelDAO.saveOrUpdateObject(lev);
 	}

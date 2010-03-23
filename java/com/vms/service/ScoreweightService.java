@@ -11,14 +11,14 @@ public class ScoreweightService implements IScoreweightService {
 	private IScoreweightDAO scoreweightDAO;
 
 	@Override
-	public void createLevel(Scoreweight weight) throws Exception {
+	public void createWeight(Scoreweight weight) throws Exception {
 		// TODO Auto-generated method stub
 		this.scoreweightDAO.saveObject(weight);
 		
 	}
 
 	@Override
-	public void deleteLevel(int id) throws Exception {
+	public void deleteWeight(int id) throws Exception {
 		// TODO Auto-generated method stub
 		Scoreweight weight = (Scoreweight) this.scoreweightDAO.getObject(clz, id);
 		this.scoreweightDAO.deleteObject(weight);
@@ -31,7 +31,7 @@ public class ScoreweightService implements IScoreweightService {
 	}
 
 	@Override
-	public void updateLevel(Scoreweight weight) throws Exception {
+	public void updateWeight(Scoreweight weight) throws Exception {
 		// TODO Auto-generated method stub
 		Scoreweight wei = (Scoreweight) this.scoreweightDAO.getObject(clz, weight.getId());
 		wei.setWieght(weight.getWieght());

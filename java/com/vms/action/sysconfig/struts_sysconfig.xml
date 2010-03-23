@@ -209,5 +209,28 @@
 			<result name="success">/sysconfig/addAudience.jsp
 			</result>
 		</action>
+		
+		
+		<action name="modifyWeight" class="levelWeightMgmt" method="modifyWeight">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+		
+		<action name="modifyLevel" class="levelWeightMgmt" method="modifyLevel">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+		
+		<action name="addScoreLevel" class="levelWeightMgmt" method="addScoreLevel">
+			<result name="success">/sysconfig/systemData.jsp
+			</result>
+			<result name="input">/sysconfig/systemData.jsp
+			</result>
+		</action>
+		
 	</package>
 </struts>
