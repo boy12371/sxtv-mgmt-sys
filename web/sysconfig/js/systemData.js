@@ -702,7 +702,8 @@ function initScoreLevelTable() {
 				var levelEnd = YAHOO.util.Dom.get("levelEnd");
 				levelStart.value = "";
 				levelEnd.value = "";
-				$('#levelLabel').text("增加级别");
+				$('#levelTitle').text("增加级别");
+				$('#levelName').text("");
 				$.blockUI({
 							message : $('#hiddenLevelDiv'),
 							css : {
@@ -736,6 +737,7 @@ function initScoreLevelTable() {
 			elDropdown.selectIndex = 0;
 		} else if (opt == "modify") {
 			elDropdown.selectedIndex = 0;
+			$('#levelTitle').text("修改级别");
 			$('#levelLabel').text("");
 			$('#levelLabel').text(oRecord.getData("level"));
 			levelStart.value = oRecord.getData("start");

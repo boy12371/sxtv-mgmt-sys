@@ -109,9 +109,9 @@
 
 
 <div id="hiddenLevelDiv" style="display: none"><s:form id="levelform" action="" namespace="" method="post">
-	<h1 class="popupWindow">修改级别</h1>
+	<h1 class="popupWindow" id="levelTitle"></h1>
 	<input type="hidden" name="" id="levelID" />
-	<p style="background: #FFFFFF; border-bottom: 0">级别:&nbsp;<span id="levelLabel"></span></p>
+	<p style="background: #FFFFFF; border-bottom: 0" id="levelName">级别:&nbsp;<span id="levelLabel"></span></p>
 	<p style="background: #FFFFFF; border-bottom: 0">起点分值:&nbsp;<s:textfield name="scorelevel.start" id="levelStart" /></p>
 	<p style="background: #FFFFFF; border-bottom: 0">结束分值:&nbsp;<s:textfield name="scorelevel.end" id="levelEnd" /></p>
 	<p style="background: #FFFFFF; border-bottom: 0"><input type="button" id="levelYes" value="确认" /> <input type="button" id="levelCancel" value="取消" /></p>
