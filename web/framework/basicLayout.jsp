@@ -161,6 +161,13 @@ YAHOO.example.Centered = autoCompleteVideoName();
 	window.onresize = function() {
 		resizeContentDiv();
 	}
+
+	var userInfo = {
+		userId:${userInfo.userId},
+		username:"${userInfo.username}",
+		password:"${userInfo.password}",
+		role:${userInfo.role}
+	};
 </script>
 </body>
 </html>
