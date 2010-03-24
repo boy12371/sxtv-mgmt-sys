@@ -15,15 +15,16 @@
 	</field>
 	<field name="company.registrationNo">
 		<field-validator type="stringlength">
-			<param name="min">0</param>
-			<param name="max">400</param>
-			<message>备注不应超过200字</message>
+			<param name="minLength">0</param>
+			<param name="maxLength">100</param>
+			<param name="trim">true</param>
+			<message>注册号不应超过100字符</message>
 		</field-validator>		
 	</field>
 	<field name="company.contactPerson">
 		<field-validator type="regex">
-			<param name="expression">^[\u4E00-\u9FA5\w]+$</param>
-			<message>姓名必须由不包含英文字母、空格、或其他字符，的汉字组成</message>
+			<param name="expression">^[\u4E00-\u9FA5]+$</param>
+			<message>姓名必须由不包含英文字母、空格、或其他字符的汉字组成</message>
 		</field-validator>		
 	</field>
 	<field name="company.phone">
@@ -34,8 +35,9 @@
 	</field>
 	<field name="company.comments">
 		<field-validator type="stringlength">
-			<param name="min">0</param>
-			<param name="max">400</param>
+			<param name="minLength">0</param>
+			<param name="maxLength">400</param>
+			<param name="trim">true</param>
 			<message>备注不应超过200字</message>
 		</field-validator>
 	</field>

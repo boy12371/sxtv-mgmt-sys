@@ -30,6 +30,7 @@
 <img class="pageImage" src="${pageContext.request.contextPath}/common/images/employee.png" border="0">
 <p>编辑并更新员工信息</p>
 <s:actionerror />
+<s:fielderror></s:fielderror>
 <s:form action="doUpdateEmployee" namespace="/sys" method="post">
 	<div align="center">
 	<table class="inputTable">

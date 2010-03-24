@@ -11,13 +11,13 @@
 		</field-validator>
 	</field>
 	<field name="user.userPass">
-		<field-validator type="required">
+		<field-validator type="requiredstring">
 			<message>密码不能为空</message>
 		</field-validator>
 		<field-validator type="stringlength">
-			<param name="min">6</param>
-			<param name="max">20</param>
-			<message>密码长度应在${min}-${max}个字符之间</message>
+			<param name="minLength">6</param>
+			<param name="maxLength">20</param>
+			<message>密码长度应在${minLength}-${maxLength}个字符之间</message>
 		</field-validator>
 	</field>
 	<field name="roleIDs">

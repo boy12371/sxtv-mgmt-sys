@@ -31,7 +31,7 @@
 <img class="pageImage" src="${pageContext.request.contextPath}/common/images/company.png" border="0">
 <p>编辑并更新公司信息</p>
 <s:actionerror />
-
+<s:fielderror />
 <s:form action="doUpdateCompany" namespace="/sys" method="post">
 	<div align="center">
 	<table class="inputTable">

@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class IdentifyFilter implements Filter {
 
@@ -37,18 +38,21 @@ public class IdentifyFilter implements Filter {
 			for (String url : excluedURLs) {
 				if (requestURI.indexOf(url) != -1) {
 					mustAuth = false;
+					break;
 				}
 			}
 		}
 
 		if (mustAuth) {
-			Object sessionUser = request.getSession().getAttribute("SessionUserInfo");
-			if (sessionUser == null) {
-				response.sendRedirect("/tv/logon/toLogon.action");
-			}
+			HttpSession session = request.getSession(false);
+			if(session ==null || session.getAttribute("SessionUserInfo")==null){
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			}		
+		}else{
+			chain.doFilter(request, response);
 		}
 
-		chain.doFilter(request, response);
+		
 
 	}
 

@@ -10,8 +10,7 @@
 		</id>
 		<property name="companyName" column="companyName" type="string"
 			not-null="true" length="128" />
-		<property name="registrationNo" column="registrationNo" type="string"
-			not-null="true" length="128" />
+		<property name="registrationNo" column="registrationNo" type="string" length="128" />
 		<property name="phone" column="phone" type="string" not-null="true"
 			length="50" />
 		<property name="contactPerson" column="contactPerson" type="string"

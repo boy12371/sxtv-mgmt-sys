@@ -11,6 +11,7 @@ import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
+import com.vms.db.dao.iface.IRoleDAO;
 import com.vms.db.dao.iface.IUserDAO;
 import com.vms.service.iface.IUserService;
 
@@ -18,6 +19,7 @@ import com.vms.service.iface.IUserService;
 public class UserService implements IUserService {
 
 	private IUserDAO userDAO;
+	private IRoleDAO roleDAO;
 	private Class clz = User.class;
 
 	@Override
@@ -26,12 +28,14 @@ public class UserService implements IUserService {
 		Set<Role> userRoles = new HashSet<Role>();
 		if(roles!=null && !roles.isEmpty()){
 			for (int i = 0; i < roles.size(); i++) {
-				Role role =new Role();
-				role.setId(roles.get(i));
+				Role role = (Role) roleDAO.getObject(Role.class, roles.get(i));
+//				Role role =new Role();
+//				role.setId(roles.get(i));
 				userRoles.add(role);
 			}
 		}
-		user.setRoles(userRoles);		
+		user.setRoles(userRoles);
+		user.setStatus(new Integer(1));
 		userDAO.saveObject(user);
 	}
 
@@ -154,6 +158,14 @@ public class UserService implements IUserService {
 		propertiesValues.put(User.PROP_USER_NAME, userName);
 		User _user = (User) userDAO.getUniqueResultByProperty(clz, propertiesValues);
 		return _user;
+	}
+
+	public IRoleDAO getRoleDAO() {
+		return roleDAO;
+	}
+
+	public void setRoleDAO(IRoleDAO roleDAO) {
+		this.roleDAO = roleDAO;
 	}
 
 }

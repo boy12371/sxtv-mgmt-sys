@@ -93,7 +93,8 @@ public class UserMgmtAction extends BaseAction {
 		boolean succeed = true;
 		try {
 			if(operation.equals("updateUserRole")){
-				this.userRoleService.updateRolesForUser(user, roleIDs);
+				userRoleService.removeRolesFromUser(user);
+				userRoleService.updateRolesForUser(user, roleIDs);
 			}else{
 				succeed = userService.updateUser(operation, user, roleIDs);	
 			}
@@ -185,13 +186,6 @@ public class UserMgmtAction extends BaseAction {
 		this.operation = operation;
 	}
 
-	public List getRoleIDs() {
-		return roleIDs;
-	}
-
-	public void setRoleIDs(List roleIDs) {
-		this.roleIDs = roleIDs;
-	}
 
 	public String getPassword() {
 		return password;
@@ -209,6 +203,23 @@ public class UserMgmtAction extends BaseAction {
 		this.newPass = newPass;
 	}
 
+	public IUserRoleService getUserRoleService() {
+		return userRoleService;
+	}
+
+	public void setUserRoleService(IUserRoleService userRoleService) {
+		this.userRoleService = userRoleService;
+	}
+
+	public List<Integer> getRoleIDs() {
+		return roleIDs;
+	}
+
+	public void setRoleIDs(List<Integer> roleIDs) {
+		this.roleIDs = roleIDs;
+	}
+
+	
 	
 
 }

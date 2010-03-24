@@ -24,6 +24,7 @@
 		<property name="userService" ref="userService" />
 		<property name="employeeService" ref="employeeService" />
 		<property name="roleService" ref="roleService" />
+		<property name="userRoleService" ref="userRoleService" />
 		
 	</bean>
 	

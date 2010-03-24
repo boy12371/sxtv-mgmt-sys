@@ -25,29 +25,29 @@
 <h1>公司信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/company.png" border="0">
 <p>编辑并添加公司信息</p>
 <s:actionerror />
-
+<s:fielderror />
 <s:form action="doAddCompany" namespace="/sys" method="post">
 	<div align="center">
 	<table class="inputTable">
 		<tr>
 			<td><label>公司名称：</label></td>
-			<td><s:textfield cssClass="inputField" name="company.companyName" /><s:fielderror fieldName="company.companyName"/></td>
+			<td><s:textfield cssClass="inputField" name="company.companyName" /></td>
 		</tr>
 		<tr>
 			<td><label>注册号：</label></td>
-			<td><s:textfield cssClass="inputField" name="company.registrationNo" /><s:fielderror fieldName="company.registrationNo"/></td>
+			<td><s:textfield cssClass="inputField" name="company.registrationNo" /></td>
 		</tr>
 		<tr>
 			<td><label>联系人：</label></td>
-			<td><s:textfield cssClass="inputField" name="company.contactPerson" /><s:fielderror fieldName="company.contactPerson"/></td>
+			<td><s:textfield cssClass="inputField" name="company.contactPerson" /></td>
 		</tr>
 		<tr>
 			<td><label>电话：</label></td>
-			<td><s:textfield cssClass="inputField" name="company.phone" /><s:fielderror fieldName="company.phone"/></td>
+			<td><s:textfield cssClass="inputField" name="company.phone" /></td>
 		</tr>
 		<tr>
 			<td><label>备注：</label></td>
-			<td><s:textarea cssClass="inputField" name="company.comments" cols="20" rows="2"><s:fielderror fieldName="company.comments"/></s:textarea></td>
+			<td><s:textarea cssClass="inputField" name="company.comments" cols="20" rows="2"></s:textarea></td>
 
 		</tr>
 		

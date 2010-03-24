@@ -10,7 +10,7 @@
 		</field-validator>
 		<field-validator type="regex">
 			<param name="expression">^[\u4E00-\u9FA5]+$</param>
-			<message>姓名必须由不包含英文字母、空格、或其他字符，的汉字组成</message>
+			<message>姓名必须由不包含英文字母、空格、或其他字符的汉字组成</message>
 		</field-validator>
 	</field>
 	<field name="employee.birthday">
@@ -25,8 +25,8 @@
 	</field>
 	<field name="employee.comments">
 		<field-validator type="stringlength">
-			<param name="min">0</param>
-			<param name="max">400</param>
+			<param name="minLength">0</param>
+			<param name="maxLength">400</param>
 			<message>备注不应超过200字</message>
 		</field-validator>
 	</field>

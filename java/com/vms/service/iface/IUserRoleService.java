@@ -14,7 +14,7 @@ public interface IUserRoleService {
 	 */
 	void addRoleForUser(UserRole ur)throws Exception;
 	
-	void removeRoleFromUser(UserRole ur) throws Exception;
+	void removeRolesFromUser(User user) throws Exception;
 	
 	void updateRolesForUser(User user, List<Integer> roles)throws Exception;
 	

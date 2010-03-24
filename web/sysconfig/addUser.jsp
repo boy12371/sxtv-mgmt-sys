@@ -22,6 +22,7 @@
 <h1>员工用户</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/user.png" border="0">
 <p>编辑并添加用户信息</p>
 <s:actionerror />
+<s:fielderror></s:fielderror>
 <s:form action="doAddUser" namespace="/sys" method="post">
 	<div align="center">
 	<table class="inputTable">

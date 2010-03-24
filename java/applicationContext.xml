@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="command" />
+		<property name="password" value="root" />
 	</bean>
 	
 	
@@ -109,6 +109,7 @@
 				<value>audicenceService</value>
 				<value>scoreweightService</value>
 				<value>scorelevelService</value>
+				<value>userRoleService</value>
 				
 			</list>
 		</property>
@@ -224,12 +225,14 @@
 	</bean>
 	<bean id="userService" class="com.vms.service.UserService">
 		<property name="userDAO" ref="userDAO" />
+		<property name="roleDAO" ref="roleDAO"/>
 	</bean>
 	<bean id="roleService" class="com.vms.service.RoleService">
 		<property name="roleDAO" ref="roleDAO" />
 	</bean>
 	<bean id="userRoleService" class="com.vms.service.UserRoleService">
 		<property name="userRoleDAO" ref="userRoleDAO" />
+		<property name="roleDAO" ref="roleDAO" />
 	</bean>
 	<bean id="audienceScoreService" class="com.vms.service.AudienceScoreService">
 		<property name="audienceScoreDAO" ref="audienceScoreDAO" />

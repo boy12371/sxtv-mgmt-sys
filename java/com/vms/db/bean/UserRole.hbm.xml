@@ -7,14 +7,14 @@
 	<class
 		name="UserRole"
 		table="user_role"
-	>
+		>
 		<meta attribute="sync-DAO">false</meta>
 
 		<id
 			name="id"
 			type="integer"
 			column="id"
-		>
+			>
 			<generator class="native"/>
 		</id>
 
@@ -22,22 +22,21 @@
 			name="comments"
 			column="comments"
 			type="string"
-			not-null="true"
 			length="512"
-		/>
+			/>
 		<many-to-one
 			name="roleid"
 			column="roleid"
 			class="Role"
 			not-null="true"
-		>
+			>
 		</many-to-one>
 		<many-to-one
 			name="userid"
 			column="userid"
 			class="User"
 			not-null="true"
-		>
+			>
 		</many-to-one>
 
 
