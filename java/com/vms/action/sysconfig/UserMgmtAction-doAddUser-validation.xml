@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="user.userName">
+		<field-validator type="requiredstring">
+			<message>用户名不能为空</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression">^[\w]{6,20}$</param>
+			<message>用户名必须由6-20个以下字符组成：a-Z, A-Z, _, 0-9</message>
+		</field-validator>
+	</field>
+	<field name="user.userPass">
+		<field-validator type="required">
+			<message>密码不能为空</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="min">6</param>
+			<param name="max">20</param>
+			<message>密码长度应在${min}-${max}个字符之间</message>
+		</field-validator>
+	</field>
+	<field name="roleIDs">
+		<field-validator type="required">
+			<message>至少要为用户指定一个角色</message>
+		</field-validator>
+	</field>
+</validators>

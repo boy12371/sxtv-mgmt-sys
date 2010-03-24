@@ -1,7 +1,12 @@
 package com.vms.service;
 
 
+import java.util.List;
+
+import com.vms.db.bean.Role;
+import com.vms.db.bean.User;
 import com.vms.db.bean.UserRole;
+import com.vms.db.dao.UserRoleDAO;
 import com.vms.db.dao.iface.IUserRoleDAO;
 import com.vms.service.iface.IUserRoleService;
 
@@ -27,6 +32,24 @@ public class UserRoleService implements IUserRoleService {
 
 	public void setUserRoleDAO(IUserRoleDAO userRoleDAO) {
 		this.userRoleDAO = userRoleDAO;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void updateRolesForUser(User user, List<Integer> roles)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<UserRole> uRoles = (List<UserRole>)userRoleDAO.findObjectByField(clz, UserRole.PROP_USERID, user.getId(), -1, -1, UserRole.PROP_ID, true);
+		for (UserRole userRole : uRoles) {
+			userRoleDAO.deleteObject(userRole);
+		}
+		for (Integer integer : roles) {
+			UserRole ur = new UserRole();
+			ur.setRoleid(new Role(integer));
+			ur.setUserid(user);
+			userRoleDAO.saveObject(ur);
+		}
 	}
 
 }

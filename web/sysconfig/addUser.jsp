@@ -35,10 +35,7 @@
 		<tr>
 			<td><label>密码：</label></td>
 			<td><s:password cssClass="inputField" name="user.userPass" /></td>
-			</tr>
-		<tr><td><label>重复密码：</label></td>
-			<td><s:password cssClass="inputField" name="pwdRepeat" /></td>
-		</tr>
+			</tr>		
 		<tr>
 			<td colspan="1"><label>权限：</label></td>
 			<td colspan="3"><label>&nbsp;</label></td>

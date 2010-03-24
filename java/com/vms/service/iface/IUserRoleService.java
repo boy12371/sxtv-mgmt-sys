@@ -1,5 +1,8 @@
 package com.vms.service.iface;
 
+import java.util.List;
+
+import com.vms.db.bean.User;
 import com.vms.db.bean.UserRole;
 
 public interface IUserRoleService {
@@ -13,5 +16,6 @@ public interface IUserRoleService {
 	
 	void removeRoleFromUser(UserRole ur) throws Exception;
 	
+	void updateRolesForUser(User user, List<Integer> roles)throws Exception;
 	
 }

@@ -83,8 +83,9 @@
 <option value="7">淘汰剧目</option>
 <!-- option value="5">重审剧目</option-->
 </select>
-
+<div id="printBtn" align="right"></div>
 <div id="dynamicdata" align="center"></div>
+
 <script type="text/javascript">
 YAHOO.util.Event.addListener(window, "load", initDataTable);
 </script>

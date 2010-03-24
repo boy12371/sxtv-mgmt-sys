@@ -185,6 +185,17 @@ function initDataTable() {
 	// DataTable instance
 	var filter = YAHOO.util.Dom.get("filter");
 	YAHOO.util.Event.addListener(filter, "change", fireEvent);
+	var printBtn = new YAHOO.widget.Button({
+		type : "button",
+		id : "topicBtn",
+		label : "打印",
+		container : "printBtn"
+	});
+	
+	printBtn.on("click",function(){
+		alert(myDataSource.liveData);
+		alert(myDataTable.configs.initialRequest);
+	});
 	return {
 		ds : myDataSource,
 		dt : myDataTable

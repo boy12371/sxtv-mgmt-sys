@@ -1,15 +1,19 @@
 package com.vms.service;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import com.vms.common.BaseException;
 import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Employee;
 import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.db.dao.iface.IUserDAO;
 import com.vms.service.iface.IUserService;
+
 
 public class UserService implements IUserService {
 
@@ -90,9 +94,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean updateUser(String operation, User user, List roleIDs) throws Exception {
 		// TODO Auto-generated method stub
-		if (operation.equals("updateUserRole")) {
-			return updateUserRole(user.getId());
-		} else if (operation.equals("disableUser")) {
+		if (operation.equals("disableUser")) {
 			return disableUser(user.getId());
 		} else if (operation.equals("resetPwd")) {
 			return resetPassword(user.getId(), "123456");
@@ -144,6 +146,14 @@ public class UserService implements IUserService {
 		List<Employee> employees = userDAO.findObjectByField(Employee.class, "name", eName, -1, -1, Employee.PROP_ID, true);
 		if(null == employees || 0 == employees.size()) return null;
 		return employees.get(0).getUsers().toArray(new User[0])[0];
+	}
+
+	@Override
+	public User getUserByUserName(String userName) throws Exception {
+		Map<String, Object> propertiesValues =new HashMap<String, Object>();
+		propertiesValues.put(User.PROP_USER_NAME, userName);
+		User _user = (User) userDAO.getUniqueResultByProperty(clz, propertiesValues);
+		return _user;
 	}
 
 }

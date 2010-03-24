@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+
+	
+	<field name="company.companyName">
+		<field-validator type="requiredstring">
+			<message>公司名不能为空</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression">^[\u4E00-\u9FA5\w]+$</param>
+			<message>公司名可由a-z, A-Z, 0-9, _, - 及汉字组成</message>
+		</field-validator>
+	</field>
+	<field name="company.registrationNo">
+		<field-validator type="stringlength">
+			<param name="min">0</param>
+			<param name="max">400</param>
+			<message>备注不应超过200字</message>
+		</field-validator>		
+	</field>
+	<field name="company.contactPerson">
+		<field-validator type="regex">
+			<param name="expression">^[\u4E00-\u9FA5\w]+$</param>
+			<message>姓名必须由不包含英文字母、空格、或其他字符，的汉字组成</message>
+		</field-validator>		
+	</field>
+	<field name="company.phone">
+		<field-validator type="regex">
+			<param name="expression">^[\d\-]+$</param>
+			<message>电话可由0-9的数字及-组成</message>
+		</field-validator>		
+	</field>
+	<field name="company.comments">
+		<field-validator type="stringlength">
+			<param name="min">0</param>
+			<param name="max">400</param>
+			<message>备注不应超过200字</message>
+		</field-validator>
+	</field>
+</validators>

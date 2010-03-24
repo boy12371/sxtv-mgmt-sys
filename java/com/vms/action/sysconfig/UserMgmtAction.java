@@ -18,6 +18,7 @@ import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 import com.vms.service.iface.IEmployeeService;
 import com.vms.service.iface.IRoleService;
+import com.vms.service.iface.IUserRoleService;
 import com.vms.service.iface.IUserService;
 
 public class UserMgmtAction extends BaseAction {
@@ -30,6 +31,7 @@ public class UserMgmtAction extends BaseAction {
 	private IUserService userService;
 	private IEmployeeService employeeService;
 	private IRoleService roleService;
+	private IUserRoleService userRoleService;
 
 	private User user;
 	private List<Integer> roleIDs;
@@ -37,7 +39,7 @@ public class UserMgmtAction extends BaseAction {
 	private String operation;
 	private String password;
 	private String newPass;
-	private String confirmPass;
+	
 
 	public String toAddUser() throws Exception {
 		return this.SUCCESS;
@@ -45,14 +47,20 @@ public class UserMgmtAction extends BaseAction {
 
 	public String doAddUser() throws Exception {
 		try {
-			userService.createUser(user, roleIDs);
+			if(userService.getUserByUserName(user.getUserName())==null){
+				userService.createUser(user, roleIDs);
+				this.addActionMessage("用户创建成功");
+				return SUCCESS;
+			}else{
+				this.addActionError("用户已存在");
+				return INPUT;
+			}			
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e.getMessage());			
 			this.addActionError("用户创建失败");
 			return INPUT;
 		}
-		this.addActionMessage("用户创建成功");
-		return this.SUCCESS;
+		
 	}
 
 	public String getUsers() throws Exception {
@@ -73,27 +81,23 @@ public class UserMgmtAction extends BaseAction {
 
 	public String toUpdateUser() throws Exception {
 		try {
-			user = userService.getUserById(user.getId());
-			Set<Role> r = user.getRoles();
-			Iterator<Role> it = r.iterator();
-			while (it.hasNext()) {
-				Role role = it.next();
-				System.out.println(role.getId() + "===" + role.getName());
-
-			}
-
+			user = userService.getUserById(user.getId());			
 		} catch (Exception e) {
 			logger.error(e);
 			return INPUT;
 		}
-
 		return SUCCESS;
 	}
 
 	public String doUpdateUser() throws Exception {
-		boolean succeed = false;
+		boolean succeed = true;
 		try {
-			succeed = userService.updateUser(operation, user, roleIDs);
+			if(operation.equals("updateUserRole")){
+				this.userRoleService.updateRolesForUser(user, roleIDs);
+			}else{
+				succeed = userService.updateUser(operation, user, roleIDs);	
+			}
+			
 		} catch (Exception e) {
 			logger.error(e);
 			this.addActionError("操作失败.");
@@ -205,12 +209,6 @@ public class UserMgmtAction extends BaseAction {
 		this.newPass = newPass;
 	}
 
-	public String getConfirmPass() {
-		return confirmPass;
-	}
-
-	public void setConfirmPass(String confirmPass) {
-		this.confirmPass = confirmPass;
-	}
+	
 
 }

@@ -6,7 +6,7 @@
 <head>
 <sx:head />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>影视公司管理</title>
+<title>添加观众信息</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
@@ -18,6 +18,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
+
 </head>
 <body class="yui-skin-sam">
 
@@ -25,8 +26,9 @@
 <h1>观众信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/company.png" border="0">
 <p>添加观众信息</p>
 <s:actionerror />
+<s:fielderror />
 
-<s:form action="addAudience" namespace="/sys" method="post">
+<s:form action="/sys/addAudience.action" method="post" validate="true">
 	<div align="center">
 	<table class="inputTable">
 		<tr>
@@ -35,7 +37,7 @@
 		</tr>
 		<tr>
 			<td><label>年龄：</label></td>
-			<td><s:textfield cssClass="inputField" name="audience.age" /></td>
+			<td><s:textfield cssClass="inputField" name="audience.age" value="0"/></td>
 		</tr>
 		<tr>
 			<td><label>性别：</label></td>

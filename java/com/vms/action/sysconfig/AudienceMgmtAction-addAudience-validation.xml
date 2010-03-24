@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="audience.name">
+		<field-validator type="requiredstring">
+			<message>姓名不能为空</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression">^[\u4E00-\u9FA5]+$</param>
+			<message>姓名必须由不包含英文字母、空格、或其他字符，的汉字组成</message>
+		</field-validator>
+	</field>
+	<field name="audience.age">
+		<field-validator type="required">
+			<message>年龄不能为空</message>
+		</field-validator>		
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">100</param>
+			<message>年龄必须是${min}-${max}之间的数字</message>
+		</field-validator>
+	</field>
+	<field name="audience.career">
+		<field-validator type="regex">
+			<param name="expression">^[\u4E00-\u9FA5]+$</param>
+			<message>职业必须由不包含英文字母、空格、或其他字符，的汉字组成</message>
+		</field-validator>
+	</field>
+	<field name="audience.comments">
+		<field-validator type="stringlength">
+			<param name="min">0</param>
+			<param name="max">400</param>
+			<message>备注不应超过200字</message>
+		</field-validator>
+	</field>
+</validators>

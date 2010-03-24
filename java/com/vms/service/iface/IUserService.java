@@ -25,4 +25,5 @@ public interface IUserService {
 	boolean updateUserPassword(int id, String newPassword)throws Exception;
 	SessionUserInfo authenticate(String username, String password) throws Exception;
 	User getUserByEmployeeName(String eName) throws Exception;
+	User getUserByUserName(String userName)throws Exception;
 }
