@@ -85,10 +85,10 @@ function initHistoryTable() {
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
-	    key :"vedioID",
+	    key :"id",
 	    label :"影带编号"
 	}, {
-		key :"name",
+		key :"vedioName",
 		label :"影带名称"
 	}, {
 		key :"playDate",
@@ -105,7 +105,7 @@ function initHistoryTable() {
 		label :"收带日期",
 		formatter :formatDate
 	}, {
-		key :"company",
+		key :"companyID",
 		label :"公司"
 	}];
 
@@ -115,7 +115,7 @@ function initHistoryTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "vedioID", "name", "playDate", "subject", "topic", "dateComing", "company", "marked"],
+		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "companyID", "marked"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}

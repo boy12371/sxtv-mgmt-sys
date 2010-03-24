@@ -77,12 +77,12 @@ function initUnArrangeTable() {
 		width : 30,
 	    formatter :formatAddTape
 	}, {
-	    key :"vedioID",
+	    key :"id",
 	    label :"影带编号",
 	    sortable :true,
 	    sortOptions:{sortFunction:sortCustom}
 	}, {
-		key :"name",
+		key :"vedioName",
 		label :"影带名称"
 	}, {
 		key :"subject",
@@ -101,7 +101,7 @@ function initUnArrangeTable() {
 		formatter :formatDate,
 		sortOptions:{sortFunction:sortCustom}
 	}, {
-		key :"company",
+		key :"companyID",
 		label :"公司",
 		sortable :true,
 		sortOptions:{sortFunction:sortCustom}
@@ -113,7 +113,7 @@ function initUnArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "vedioID", "name", "subject", "topic", "dateComing", "company", "marked", "comments"],
+		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "companyID", "marked", "comments"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -169,10 +169,10 @@ function initArrangeTable() {
 		formatter :formatRemoveTape,
 		width:30
 	}, {
-	    key :"vedioID",
+	    key :"id",
 	    label :"影带编号"
 	}, {
-		key :"name",
+		key :"vedioName",
 		label :"影带名称"
 	}, {
 		key :"playDate",
@@ -189,7 +189,7 @@ function initArrangeTable() {
 		label :"收带日期",
 		formatter :formatDate
 	}, {
-		key :"company",
+		key :"companyID",
 		label :"公司"
 	}];
 
@@ -199,7 +199,7 @@ function initArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "vedioID", "name", "playDate", "subject", "topic", "dateComing", "company", "marked"],
+		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "companyID", "marked"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -267,21 +267,21 @@ function initArrangeReorderEvent(){
 				var srcRecord = arrangeTable.getRecord(this.srcIndex);
 				var destRecord = arrangeTable.getRecord(this.destIndex);
 				var temp;
-				temp = this.srcData.vedioID;
- 				arrangeTable.updateCell(srcRecord, "vedioID" ,this.destData.vedioID);
- 				arrangeTable.updateCell(destRecord, "vedioID" ,temp);
- 				temp = this.srcData.name;
- 				arrangeTable.updateCell(srcRecord, "name" ,this.destData.name);
- 				arrangeTable.updateCell(destRecord, "name" ,temp);
+				temp = this.srcData.id;
+ 				arrangeTable.updateCell(srcRecord, "id" ,this.destData.id);
+ 				arrangeTable.updateCell(destRecord, "id" ,temp);
+ 				temp = this.srcData.vedioName;
+ 				arrangeTable.updateCell(srcRecord, "vedioName" ,this.destData.vedioName);
+ 				arrangeTable.updateCell(destRecord, "vedioName" ,temp);
  				temp = this.srcData.subject;
  				arrangeTable.updateCell(srcRecord, "subject" ,this.destData.subject);
  				arrangeTable.updateCell(destRecord, "subject" ,temp);
  				temp = this.srcData.topic;
  				arrangeTable.updateCell(srcRecord, "topic" ,this.destData.topic);
  				arrangeTable.updateCell(destRecord, "topic" ,temp);
- 				temp = this.srcData.company;
- 				arrangeTable.updateCell(srcRecord, "company" ,this.destData.company);
- 				arrangeTable.updateCell(destRecord, "company" ,temp);
+ 				temp = this.srcData.companyID;
+ 				arrangeTable.updateCell(srcRecord, "companyID" ,this.destData.companyID);
+ 				arrangeTable.updateCell(destRecord, "companyID" ,temp);
  				
  				var srcTemp = this.srcData.dateComing;
  				var destTemp = this.destData.dateComing;
@@ -345,7 +345,7 @@ function getFirstVoidRecord(dataTable){
 	var rSet = dataTable.getRecordSet().getRecords();
 	if(null == rSet) return -1;
 	for(var i=0;i<rSet.length;i++){
-		var x = rSet[i].getData("vedioID");
+		var x = rSet[i].getData("id");
 		if(null == x || "" == x) return i;
 	}
 	return -1;
@@ -356,11 +356,11 @@ function addTapeToArrange(rID){
 	unArrangeTable.deleteRow(rID);
 	var pos = getFirstVoidRecord(arrangeTable);
 	var newRecord = arrangeTable.getRecord(pos);
-	arrangeTable.updateCell(newRecord, "vedioID" ,xData.vedioID);
-	arrangeTable.updateCell(newRecord, "name" ,xData.name);
+	arrangeTable.updateCell(newRecord, "id" ,xData.id);
+	arrangeTable.updateCell(newRecord, "vedioName" ,xData.vedioName);
 	arrangeTable.updateCell(newRecord, "subject" ,xData.subject);
 	arrangeTable.updateCell(newRecord, "topic" ,xData.topic);
-	arrangeTable.updateCell(newRecord, "company" ,xData.company);
+	arrangeTable.updateCell(newRecord, "companyID" ,xData.companyID);
 	arrangeTable.updateCell(newRecord, "dateComing" ,xData.dateComing);
 	newRecord.getData().marked=1;
 	
@@ -370,18 +370,18 @@ function removeTapeFromArrange(rID){
 	var xRecord = arrangeTable.getRecord(rID);
 	var xData = xRecord.getData();
 	var nData = {};
-	nData.vedioID = xData.vedioID;
-	nData.name = xData.name;
+	nData.id = xData.id;
+	nData.vedioName = xData.vedioName;
 	nData.subject = xData.subject;
 	nData.topic = xData.topic;
-	nData.company = xData.company;
+	nData.companyID = xData.companyID;
 	nData.dateComing = xData.dateComing;
-	if(null==xData.vedioID || ""==xData.vedioID) return;
-	arrangeTable.updateCell(xRecord, "vedioID", "");
-	arrangeTable.updateCell(xRecord, "name", "");
+	if(null==xData.id || ""==xData.id) return;
+	arrangeTable.updateCell(xRecord, "id", "");
+	arrangeTable.updateCell(xRecord, "vedioName", "");
 	arrangeTable.updateCell(xRecord, "subject", "");
 	arrangeTable.updateCell(xRecord, "topic", "");
-	arrangeTable.updateCell(xRecord, "company" , "");
+	arrangeTable.updateCell(xRecord, "companyID" , "");
 	arrangeTable.updateCell(xRecord, "dateComing", "");
 	xData.marked = 0;
 	unArrangeTable.addRow(nData,0);
@@ -405,7 +405,7 @@ function submitAction(){
 		if(typeof(xData.marked)=="undefined"){
 			xData.marked = 0;
 		}
-		if( null != xData.vedioID && "" != xData.vedioID){
+		if( null != xData.id && "" != xData.id){
 			submitArray[submitArray.length] = xData;
 		}
 	}
