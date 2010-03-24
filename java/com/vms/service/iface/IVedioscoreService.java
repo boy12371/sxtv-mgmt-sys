@@ -9,7 +9,7 @@ import com.vms.db.bean.User;
 
 public interface IVedioscoreService {
 	
-	public List<VedioTapeVO> getAllUnExaminedVedioes(int startIndex, int endIndex) throws Exception;
+	public List<VedioTapeVO> getAllUnExaminedVedioes(int startIndex, int endIndex, String orderName, boolean dir) throws Exception;
 	
 	/***
 	 * 获取所有对此剧目的评分
@@ -42,4 +42,6 @@ public interface IVedioscoreService {
 	public List<User> findAllExaminer() throws Exception;
 	
 	public List<User> findExaminedUsersOfTape(String videoID) throws Exception;
+	
+	public void updateTapeExamineStatus(VedioScoreVO scoreVO) throws Exception;
 }

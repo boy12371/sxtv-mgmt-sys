@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
+import com.vms.common.CommonVariable;
 import com.vms.db.bean.Scoreweight;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
@@ -28,7 +29,7 @@ public class VedioscoreService implements IVedioscoreService {
 	}
 
 	@Override
-	public List<VedioTapeVO> getAllUnExaminedVedioes(int startIndex, int endIndex) throws Exception {
+	public List<VedioTapeVO> getAllUnExaminedVedioes(int startIndex, int endIndex, String orderName, boolean dir) throws Exception {
 		//get all examiners
 		List<User> users = findAllExaminer();
 		List<String> names = new ArrayList<String>();
@@ -37,7 +38,7 @@ public class VedioscoreService implements IVedioscoreService {
 		}
 		
 		Status status = new Status(1);
-		List<Vediotape> tapes = vediotapeDAO.findVedioesByStatus(status, startIndex, endIndex);
+		List<Vediotape> tapes = vediotapeDAO.findVedioesByStatus(status, startIndex, endIndex, orderName, dir);
 		List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
 		for (Vediotape tape : tapes) {
 			List<User> examinedUsers = findExaminedUsersOfTape(tape.getId());
@@ -75,13 +76,16 @@ public class VedioscoreService implements IVedioscoreService {
 		score.setScore(sum);
 
 		vedioscoreDAO.saveOrUpdateObject(score);
-		int examinerNum = vedioscoreDAO.findAllExaminer().size();
-		List<User> examinedUser = findExaminedUsersOfTape(scoreVO.getVedioID());
-		if(examinerNum <= examinedUser.size()){
+	}
+	
+	public void updateTapeExamineStatus(VedioScoreVO scoreVO) throws Exception{
+//		int examinerNum = vedioscoreDAO.findAllExaminer().size();
+//		List<User> examinedUser = findExaminedUsersOfTape(scoreVO.getVedioID());
+//		if(examinerNum <= examinedUser.size()){
 			Vediotape tape = (Vediotape)vediotapeDAO.loadObject(Vediotape.class, scoreVO.getVedioID());
-			tape.setStatus(new Status(2));
+			tape.setStatus(new Status(CommonVariable.VIDEO_STATUS_AUDITING));
 			vediotapeDAO.saveOrUpdateObject(tape);
-		}
+//		}
 	}
 
 	private Map<String, Float> getWeights() throws Exception {

@@ -43,6 +43,10 @@
 			<result name="input">/examine/examineTape.jsp</result>
 		</action>
 		
+		<action name="completeExamine" class="examineMgmt" method="completeExamine">
+			<result type="redirectAction">/examine/toUnExaminedTapes.action</result>
+		</action>
+		
 		<action name="toAudienceExamine" class="audienceExamineMgmt" method="toAudienceExamine">
 			<result>/examine/audienceExamine.jsp</result>
 			<result name="input">/examine/audienceExamine.jsp</result>

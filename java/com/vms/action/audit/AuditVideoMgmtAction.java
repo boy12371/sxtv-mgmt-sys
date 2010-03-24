@@ -93,7 +93,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 		SessionUserInfo user = this.getUserInfo();
 		boolean flag=false;
 		try {
-			flag = videoService.auditingVideo(vv.getVedioID(), user, operation);	
+			flag = videoService.auditingVideo(vv.getId(), user, operation);	
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);			

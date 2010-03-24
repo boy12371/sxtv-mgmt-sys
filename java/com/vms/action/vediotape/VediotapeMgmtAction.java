@@ -109,7 +109,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	public String updateMarketRate()throws Exception{
 		try{
-			vedioService.updateVideoRatingMarket(vv.getVedioID(), vedio.getMarketShare(), vedio.getAudienceRating());
+			vedioService.updateVideoRatingMarket(vv.getId(), vedio.getMarketShare(), vedio.getAudienceRating());
 			this.addActionMessage("更新成功");
 			return SUCCESS;
 		}catch(Exception e){
@@ -208,7 +208,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	public String doModification()throws Exception{
 		try {
 			SessionUserInfo user = this.getUserInfo();
-			this.vedioService.auditingVideo(vv.getVedioID(), user, Integer.parseInt(vv.getStatus()));
+			this.vedioService.auditingVideo(vv.getId(), user, Integer.parseInt(vv.getStatus()));
 			this.addActionMessage("影带已进入重审状态,等待审核");
 			return SUCCESS;
 		} catch (Exception e) {

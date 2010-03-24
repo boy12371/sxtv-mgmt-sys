@@ -13,7 +13,7 @@ import com.vms.db.bean.Vediotape;
 
 public interface IVediotapeDAO extends IBaseRootDAO {
 
-	List<Vediotape> findVedioesByStatus(Status status, int startIndex, int endIndex) throws Exception;
+	public List<Vediotape> findVedioesByStatus(Status status, int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception;
 
 	/**
 	 * 查询所有状态为待审、重审、修改、通过 的影带总数

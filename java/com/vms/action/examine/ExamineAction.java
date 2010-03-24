@@ -63,7 +63,10 @@ public class ExamineAction extends BaseAction {
 		List<VedioTapeVO> tapes;
 		try {
 			if((null==vid || "".equals(vid)) && (null==vname || "".equals(vname))){
-				tapes = vedioscoreService.getAllUnExaminedVedioes(unExaminedTable.getStartIndex(), unExaminedTable.getStartIndex()+ unExaminedTable.getRowsPerPage());
+				tapes = vedioscoreService.getAllUnExaminedVedioes(unExaminedTable.getStartIndex(), 
+						unExaminedTable.getStartIndex()+ unExaminedTable.getRowsPerPage(),
+						unExaminedTable.getSort(),
+						unExaminedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 				Status status = new Status(1);
 				JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, vedioscoreService.getVedioCountByStatus(status));
 			}else{
@@ -93,7 +96,7 @@ public class ExamineAction extends BaseAction {
 			
 			
 		} catch (Exception e) {
-			logger.error(e.getStackTrace());
+			logger.error(e.getMessage());
 			throw e;
 		}
 		return SUCCESS;
@@ -109,7 +112,7 @@ public class ExamineAction extends BaseAction {
 						vid, 
 						examinedTable.getStartIndex(), 
 						examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
-						examinedTable.getSort(), examinedTable.getDir().equals("JSONDataTableUtils.SORT_DIRECTION")
+						examinedTable.getSort(), examinedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION)
 						);
 			}else{
 				Vediotape tape = vediotapeService.getVediotapeByName(vname);
@@ -119,7 +122,7 @@ public class ExamineAction extends BaseAction {
 						tape.getId(), 
 						examinedTable.getStartIndex(), 
 						examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
-						examinedTable.getSort(), examinedTable.getDir().equals("JSONDataTableUtils.SORT_DIRECTION")
+						examinedTable.getSort(), examinedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION)
 						);
 				}else{
 					scores = new ArrayList<VedioScoreVO>();
@@ -159,7 +162,7 @@ public class ExamineAction extends BaseAction {
 				return "view";
 			}
 			
-			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getName();		
+			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getVedioName();		
 			tapeScore.setVedioName(name);
 		}
 		if(this.getUserInfo().getRole() == this.commonVar.ROLE_INPUTER){
@@ -205,6 +208,11 @@ public class ExamineAction extends BaseAction {
 			return SUCCESS;
 		}
 		return "back";
+	}
+	
+	public String completeExamine() throws Exception{
+		vedioscoreService.updateTapeExamineStatus(tapeScore);
+		return SUCCESS;
 	}
 	
 	public void setUnExaminedTable(JSONDataTable unExaminedTable) {

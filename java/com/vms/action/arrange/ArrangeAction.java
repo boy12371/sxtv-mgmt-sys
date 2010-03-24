@@ -127,7 +127,7 @@ public class ArrangeAction extends BaseAction {
 			for (int i = 0; i < size; i++) {
 				JSONObject obj =jsonArray.getJSONObject(i);
 				Playorder po = new Playorder();
-				po.setVedioID(new Vediotape(obj.getString("vedioID")));
+				po.setVedioID(new Vediotape(obj.getString("id")));
 				DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");         
 				po.setPlayDate(dFormat.parse(obj.getString("playDate")));
 				po.setArrangeDate(new Date());

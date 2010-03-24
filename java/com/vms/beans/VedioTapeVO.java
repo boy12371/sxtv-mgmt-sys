@@ -7,11 +7,11 @@ import java.util.Map;
 import com.vms.db.bean.Vediotape;
 
 public class VedioTapeVO {
-	private String vedioID;
-	private String name;
+	private String id;
+	private String vedioName;
 	private String subject;
 	private String topic;
-	private String company;
+	private String companyID;
 	private Date dateComing;
 	private String status;
 	private float marketShare;
@@ -32,23 +32,17 @@ public class VedioTapeVO {
 	public VedioTapeVO(){}
 	
 	public VedioTapeVO(Vediotape tape){
-		this.vedioID = tape.getId();
-		this.name = tape.getVedioName();
+		this.setId(tape.getId());
+		this.setVedioName(tape.getVedioName());
 		this.subject = tape.getSubject().getSubjectName();
 		this.topic = tape.getTopic().getTopicName();
-		this.company = tape.getCompanyID().getCompanyName();
+		this.setCompanyID(tape.getCompanyID().getCompanyName());
 		this.dateComing = tape.getDateComing();
 		this.status = tape.getStatus().getStatus();
 		this.marketShare = null==tape.getMarketShare() ? 0 : tape.getMarketShare();
 		this.audienceRating = null==tape.getAudienceRating() ? 0 : tape.getAudienceRating();
 	}
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getSubject() {
 		return subject;
 	}
@@ -61,12 +55,7 @@ public class VedioTapeVO {
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
-	public String getCompany() {
-		return company;
-	}
-	public void setCompany(String company) {
-		this.company = company;
-	}
+
 	public java.util.Date getDateComing() {
 		return dateComing;
 	}
@@ -90,14 +79,6 @@ public class VedioTapeVO {
 	}
 	public void setAudienceRating(float audienceRating) {
 		this.audienceRating = audienceRating;
-	}
-
-	public void setVedioID(String vedioID) {
-		this.vedioID = vedioID;
-	}
-
-	public String getVedioID() {
-		return vedioID;
 	}
 
 	public Map<String, Integer> getWatching() {
@@ -146,6 +127,30 @@ public class VedioTapeVO {
 
 	public List<String> getUnexaminedEmployees() {
 		return unexaminedEmployees;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setVedioName(String vedioName) {
+		this.vedioName = vedioName;
+	}
+
+	public String getVedioName() {
+		return vedioName;
+	}
+
+	public void setCompanyID(String companyID) {
+		this.companyID = companyID;
+	}
+
+	public String getCompanyID() {
+		return companyID;
 	}
 	
 }

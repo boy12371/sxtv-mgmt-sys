@@ -42,7 +42,7 @@ public class AudienceExamineAction extends BaseAction {
 
 	public String toAudienceExamine() throws Exception {
 		try{
-			tape = tapeService.getTapeByID(tape.getVedioID());
+			tape = tapeService.getTapeByID(tape.getId());
 			setAudience(audienceExamineService.getAllAudience("name", true));
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
@@ -55,10 +55,10 @@ public class AudienceExamineAction extends BaseAction {
 		audienceExamineTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
 			List<AudienceExamineVO> AEs = audienceExamineService.getAudienceScoreOfTape(
-					tape.getVedioID(), -1, -1, 
+					tape.getId(), -1, -1, 
 					audienceExamineTable.getSort(),
 					audienceExamineTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(AEs, audienceExamineTable, audienceExamineService.getCountAudienceOfTape(tape.getVedioID()));
+			JSONDataTableUtils.setupJSONDataTable(AEs, audienceExamineTable, audienceExamineService.getCountAudienceOfTape(tape.getId()));
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 			throw e;
@@ -79,7 +79,7 @@ public class AudienceExamineAction extends BaseAction {
 				aev.setTapeID(tapeID);
 				if(null == tape){
 					tape = new VedioTapeVO();
-					tape.setVedioID(tapeID);
+					tape.setId(tapeID);
 				}
 				
 				aev.setResult(obj.getString("result"));
