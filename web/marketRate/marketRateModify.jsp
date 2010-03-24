@@ -65,13 +65,13 @@
 
 		<tr>
 			<td><label>影带编号</label></td>
-			<td><s:property value="vv.vedioID" /></td>
+			<td><s:property value="vv.id" /></td>
 			</tr><tr><td><label>剧目名称</label></td>
-			<td><s:property value="vv.name" /></td>
+			<td><s:property value="vv.vedioName" /></td>
 		</tr>
 		<tr>
 			<td><label>影视公司</label></td>
-			<td><s:property value="vv.company" /></td>
+			<td><s:property value="vv.companyID" /></td>
 			</tr><tr><td><label>收带时间</label></td>
 			<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
 		</tr>
@@ -97,7 +97,7 @@
 		<table>
 			<tr>
 				<td><label>收视率</label></td>
-				<td><s:textfield cssClass="inputField" name="vedio.audienceRating" /> <s:hidden name="vv.vedioID" /></td>
+				<td><s:textfield cssClass="inputField" name="vedio.audienceRating" /> <s:hidden name="vv.id" /></td>
 				<td><label>市场份额</label></td>
 				<td><s:textfield cssClass="inputField" name="vedio.marketShare" /></td>
 			</tr>
