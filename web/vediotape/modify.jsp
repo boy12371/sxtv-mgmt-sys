@@ -36,10 +36,10 @@
 	<table class="inputTable">
 		<tr>
 			<td><label>编号</label></td>
-			<td><s:property value="vv.vedioID" /><s:hidden name="vv.vedioID" /></td>
+			<td><s:property value="vv.id" /><s:hidden name="vv.id" /></td>
 </tr><tr>
 			<td><label>剧目名称</label></td>
-			<td><s:property value="vv.name" /></td>
+			<td><s:property value="vv.vedioName" /></td>
 
 		</tr>
 		<tr>
@@ -51,7 +51,7 @@
 		</tr>
 		<tr>
 			<td><label>影视公司</label></td>
-			<td><s:property value="vv.company" /></td>
+			<td><s:property value="vv.companyID" /></td>
 			</tr><tr><td><label>收录日期</label></td>
 			<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
 
