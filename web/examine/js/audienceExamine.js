@@ -37,7 +37,7 @@ function initDataTable() {
 
 	// DataSource instance
 	var vedioID = document.getElementById("vedioID").innerHTML;
-	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getAudienceExamine.action?tape.vedioID=" + vedioID + "&");
+	var myDataSource = new YAHOO.util.DataSource("/tv/examine/getAudienceExamine.action?tape.id=" + vedioID + "&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 
 	myDataSource.responseSchema = {

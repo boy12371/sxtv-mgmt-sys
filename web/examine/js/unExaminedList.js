@@ -10,12 +10,15 @@ function initDataTable() {
 		}
 	};
 	var formatSelect = function(elCell, oRecord, oColumn, sData) {
-		var data = encodeURIComponent(oRecord.getData().vedioID);
+		var data = encodeURIComponent(oRecord.getData().id);
 		var sel = document.createElement("select");
 		sel.id = "scoreSel_" + data;
 		sel.options.add(new Option("选择评价类型","0")); 
 		sel.options.add(new Option("专业人员打分","1")); 
 		sel.options.add(new Option("普通观众评价","2"));
+		if(parent.userInfo.role == 2){
+			sel.options.add(new Option("打分完成","3"));
+		}
 		sel.onchange = eval("(1,function(){selFunc(\"" + data + "\");})");
 		elCell.appendChild(sel);
 	};
@@ -25,8 +28,10 @@ function initDataTable() {
 		var val = sel.options[index].value;
 		if("1" == val){
 			window.location="/tv/examine/toExamineTape.action?tapeScore.vedioID=" + vedioID;
+		}else if("2" == val){
+			window.location="/tv/examine/toAudienceExamine.action?tape.id=" + vedioID;
 		}else{
-			window.location="/tv/examine/toAudienceExamine.action?tape.vedioID=" + vedioID;
+			window.location="/tv/examine/completeExamine.action?tapeScore.vedioID=" + vedioID;
 		}
 	}
 	
@@ -73,17 +78,21 @@ function initDataTable() {
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
-	    key :"vedioID",
-	    label :"影带编号"
+	    key :"id",
+	    label :"影带编号",
+	    sortable :true
 	}, {
-		key :"name",
-		label :"影带名称"
+		key :"vedioName",
+		label :"影带名称",
+		sortable :true
 	}, {
 		key :"subject",
-		label :"栏目"		
+		label :"栏目",
+		sortable :true
 	}, {
 		key :"topic",
-		label :"题材"		
+		label :"题材",
+		sortable :true
 	}, {
 		key :"dateComing",
 		label :"收带日期",
@@ -94,8 +103,9 @@ function initDataTable() {
 		label :"打分进度",
 		formatter : formatProgress
 	}, {
-		key :"company",
-		label :"公司"
+		key :"companyID",
+		label :"公司",
+		sortable :true
 	}, {
 		key :"",
 		lable :"影带评价",
@@ -108,7 +118,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "vedioID", "name", "subject", "topic", "dateComing", "status", "company", "examinedEmployees", "unexaminedEmployees" ],
+		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "status", "companyID", "examinedEmployees", "unexaminedEmployees" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -122,19 +132,25 @@ function initDataTable() {
 			key :"dateComing",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator( {rowsPerPage :10})
+		paginator :new YAHOO.widget.Paginator( {
+				rowsPerPage :25,
+				template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+				rowsPerPageOptions : [ 25, 50, 100 ]
+		})
 		// Enables pagination
 	};
 
 	// DataTable instance
 
-	myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
-			myDataSource, myConfigs);
+	myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs, myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	};
+	myDataTable.subscribe("initEvent", function() { 
+		parent.resizeIframe();
+	});
 	
 	myDataSource.subscribe("dataErrorEvent", function(request,callback){
 		displayErrorMsg(eval(request.response.responseText));

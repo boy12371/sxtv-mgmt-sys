@@ -43,11 +43,11 @@
 	<table class="inputTable">
 		<tr>
 			<td><label>影带编号：</label></td>
-			<td id="vedioID"><s:property value="tape.vedioID"/></td>
+			<td id="vedioID"><s:property value="tape.id"/></td>
 		</tr>
 		<tr>
 			<td><label>影带名称：</label></td>
-			<td id="vedioName"><s:property value="tape.name"/></td>
+			<td id="vedioName"><s:property value="tape.vedioName"/></td>
 		</tr>
 		<tr>
 			<td><label>输入观众名：</label></td>
