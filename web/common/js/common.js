@@ -1,4 +1,3 @@
-
 function autoCompleteVideoName() {
 	var myDataSource = new YAHOO.util.XHRDataSource(
 			"/tv/search/autoCompleteForVideoName.action");
@@ -62,14 +61,25 @@ function highLightRow(elTr, oRecord) {
 		var dateString = data.substring(0, idx);
 		var inputDate = parseDate(dateString);
 		var date = new Date();
-		var duration = Math.abs(date - inputDate) / 1000 / 60 / 60 / 24;
-		if (duration > 10) {
+		var duration = Math.abs(date - inputDate)/1000/60/60/24;
+		if (duration > 30) {
 			elTr.className = elTr.className + " mark2";
 		}
 
 	}
 	return true;
 }
+
+var myPaginator = new YAHOO.widget.Paginator({
+			rowsPerPage :25,
+			firstPageLinkLabel :"第一页",
+			lastPageLinkLabel :" 尾页",
+			previousPageLinkLabel :" 上一页",
+			nextPageLinkLabel :" 下一页",
+			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50,100 ]
+		});
 
 function displayErrorMsg(msg) {
 	var ul = document.getElementById("errorMsgUL");

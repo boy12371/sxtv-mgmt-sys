@@ -123,11 +123,12 @@ function initDataTable() {
 			key : "dateInput",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator : new YAHOO.widget.Paginator({
-					rowsPerPage : 25,
-					template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
-					rowsPerPageOptions : [ 25, 50, 100 ]
-				}), // Enables pagination
+		paginator : myPaginator,
+//			new YAHOO.widget.Paginator({
+//					rowsPerPage : 25,
+//					template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+//					rowsPerPageOptions : [ 25, 50, 100 ]
+//				}), // Enables pagination
 		generateRequest : requestBuilder,
 		formatRow: highLightRow
 	};
