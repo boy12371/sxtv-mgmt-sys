@@ -23,6 +23,7 @@
 	src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
 <body class="yui-skin-sam">
 

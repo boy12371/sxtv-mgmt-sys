@@ -102,8 +102,8 @@ public class VedioscoreService implements IVedioscoreService {
 			String propertyName, boolean ascending) throws Exception {
 		// TODO Auto-generated method stub
 		List<VedioScoreVO> voList = new ArrayList<VedioScoreVO>();
-		List<Vedioscore> list = vedioscoreDAO.findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(
-				videoID), startIndex, endIndex, propertyName, ascending);
+		Vediotape video = (Vediotape) vediotapeDAO.getObject(Vediotape.class, videoID);
+		List<Vedioscore> list = vedioscoreDAO.findObjectByField(Vedioscore.class, Vedioscore.PROP_VEDIO, video, startIndex, endIndex, propertyName, ascending);
 		if (list != null && !list.isEmpty()) {
 			for (Vedioscore vedioscore : list) {
 				voList.add(new VedioScoreVO(vedioscore));

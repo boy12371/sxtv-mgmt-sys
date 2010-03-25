@@ -22,7 +22,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/sysconfig/js/company.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>

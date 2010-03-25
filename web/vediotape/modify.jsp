@@ -18,7 +18,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 
 
 <title>Insert title here</title>

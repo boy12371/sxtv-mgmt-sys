@@ -95,7 +95,6 @@ CREATE TABLE IF NOT EXISTS `auditing` (
   `result` int(11) NOT NULL,
   `comments` varchar(512) default '',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `unique_key` (`vedioID`,`auditor`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)

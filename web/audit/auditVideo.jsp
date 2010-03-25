@@ -35,6 +35,7 @@
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/audit/js/audit.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 <title>审核剧目</title>
 </head>
 <body class="yui-skin-sam">

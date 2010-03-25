@@ -1,3 +1,12 @@
+function formatDate(elCell, oRecord, oColumn, sData) {
+		var idx = sData.indexOf("T");
+		if (idx != -1) {
+			elCell.innerHTML = sData.substring(0, idx);
+		} else {
+			elCell.innerHTML = sData;
+		}
+	}
+
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
@@ -123,12 +132,21 @@ function initDataTable() {
 			key : "dateInput",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator : myPaginator,
-//			new YAHOO.widget.Paginator({
-//					rowsPerPage : 25,
-//					template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
-//					rowsPerPageOptions : [ 25, 50, 100 ]
-//				}), // Enables pagination
+		paginator : new YAHOO.widget.Paginator({
+			rowsPerPage :25,
+			firstPageLinkLabel :"第一页",
+			lastPageLinkLabel :" 尾页",
+			previousPageLinkLabel :" 上一页",
+			nextPageLinkLabel :" 下一页",
+			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50,100 ]
+		}),
+// new YAHOO.widget.Paginator({
+// rowsPerPage : 25,
+// template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
+// rowsPerPageOptions : [ 25, 50, 100 ]
+// }), // Enables pagination
 		generateRequest : requestBuilder,
 		formatRow: highLightRow
 	};
@@ -244,7 +262,8 @@ function initScoreDataTable(videoID) {
 			}, {
 				key : "dateExamine",
 				label : "评分日期",
-				sortable : true
+				sortable : true,
+				formatter: formatDate
 			}, {
 				key : "award",
 				label : "获奖",
@@ -259,7 +278,7 @@ function initScoreDataTable(videoID) {
 			}];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/getVideoScores.action?");
+	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/getVideoScores.action?&videoID="+YAHOO.util.Dom.get("videoID").value+"&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.responseSchema = {
 		resultsList : "records",
@@ -273,17 +292,22 @@ function initScoreDataTable(videoID) {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=score&dir=asc&startIndex=0&results=25&videoID="+YAHOO.util.Dom.get("videoID").value,
+		initialRequest : "sort=score&dir=asc&startIndex=0&results=25",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "score",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-					rowsPerPage : 25,
-					template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
-					rowsPerPageOptions : [ 25, 50, 100 ]
-				})
+			rowsPerPage :25,
+			firstPageLinkLabel :"第一页",
+			lastPageLinkLabel :" 尾页",
+			previousPageLinkLabel :" 上一页",
+			nextPageLinkLabel :" 下一页",
+			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50,100 ]
+		})
 
 	};
 	

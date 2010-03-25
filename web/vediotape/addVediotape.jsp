@@ -48,7 +48,7 @@
 	src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>

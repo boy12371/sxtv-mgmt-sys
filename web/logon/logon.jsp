@@ -6,15 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/logon/css/logon.css" />
-<link rel="Shortcut Icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
+<link rel="icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
 </head>
 
 <body>
 
 
 <s:form action="doLogon" method="post" namespace="/framework" name="logonForm">
-<s:actionmessage/>
-<s:actionerror/>
+
 <div>
 	<img border="0" style="float:left;position:absolute;margin-top:-100px;*margin-top:0px;" src="<%=request.getContextPath() %>/logon/image/cloud.png"/>
 	
@@ -22,7 +21,8 @@
 	<div class="sxtv_logo">
 	<div>
 	<img border="0" style="margin-top:-190px;*margin-top:110px;margin-left:-60px;" src="<%=request.getContextPath() %>/logon/image/title_bottom.png"/>
-	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:150px;*margin-top:0px;margin-left:25px;">
+	<s:actionmessage/>
+<s:actionerror/><table cellspacing="0" cellpadding="0" border="0" style="margin-top:150px;*margin-top:0px;margin-left:25px;">
 		<tr>
 			<td class="tl"></td>
 			<td class="tc"></td>

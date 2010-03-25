@@ -140,7 +140,9 @@ function initDataTable() {
 	myDataTable.subscribe("cellMouseoutEvent",
 			myDataTable.onEventUnhighlightCell);
 	myDataTable.subscribe("cellClickEvent", myDataTable.onEventShowCellEditor);
-
+	myDataTable.subscribe("rowAddEvent", function(record) {
+		parent.resizeIframe();
+	});
 	getData = function() {
 		var _vid = YAHOO.util.Dom.get("vid").value;
 		var _vname = YAHOO.util.Dom.get("vname").value;
@@ -179,6 +181,10 @@ function initDataTable() {
 				// Process the JSON data returned from the server
 			var obj = o.responseText;
 			if (obj.indexOf("SUCCESS") != -1) {
+				
+				
+				
+				
 				myDataTable.addRow(getData(), 0);
 			} else {
 				jAlert(obj, '提示');
@@ -204,6 +210,7 @@ function initDataTable() {
 				+ videoName);
 		YAHOO.util.Connect.asyncRequest('GET', encodeURI(url), callbacks);
 	}
+
 	var handleClick = function() {
 		var dataSet = myDataTable.getRecordSet().getRecords();
 		if (dataSet.length == 0) {
@@ -291,7 +298,7 @@ function initDataTable() {
 			}
 		}
 	};
-
+	
 	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu", {
 		trigger :myDataTable.getTbodyEl()
 	});
@@ -437,10 +444,15 @@ function initToArrangeTable() {
 			key :"dateInput",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		},
-		paginator :new YAHOO.widget.Paginator( {
+		paginator :new YAHOO.widget.Paginator({
 			rowsPerPage :25,
-			template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
-			rowsPerPageOptions : [ 25, 50, 100 ]
+			firstPageLinkLabel :"第一页",
+			lastPageLinkLabel :" 尾页",
+			previousPageLinkLabel :" 上一页",
+			nextPageLinkLabel :" 下一页",
+			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50,100 ]
 		})
 
 	};
@@ -600,10 +612,15 @@ function initToPassTable() {
 			key :"dateInput",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		},
-		paginator :new YAHOO.widget.Paginator( {
+		paginator :new YAHOO.widget.Paginator({
 			rowsPerPage :25,
-			template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
-			rowsPerPageOptions : [ 25, 50, 100 ]
+			firstPageLinkLabel :"第一页",
+			lastPageLinkLabel :" 尾页",
+			previousPageLinkLabel :" 上一页",
+			nextPageLinkLabel :" 下一页",
+			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50,100 ]
 		})
 
 	};

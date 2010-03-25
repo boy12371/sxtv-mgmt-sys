@@ -25,27 +25,28 @@ public class BasicLayout extends BaseAction{
 	}
 
 	public void setUserInfo(SessionUserInfo userInfo) {
-		this.userInfo = userInfo;
-		super.setUserInfo(userInfo);
+		this.userInfo = userInfo;		
 	}
 
 	private List<TabElementBean> tabs;
 	
 	public String doLogon() throws Exception{
-		if(userInfo==null){
+		if(userInfo==null || userInfo.getUsername().length()==0 || userInfo.getPassword().length()==0){
 			this.addActionError("用户名或密码错误");
 			return INPUT;
+		}else{
+			userInfo = userService.authenticate(userInfo.getUsername(), userInfo.getPassword());
+			if(null == userInfo){ 
+				this.addActionError("用户名或密码错误");
+				return INPUT;
+				//throw new BaseException("", "验证失败，用户名或密码错误。")
+			}else{
+				super.setUserInfo(userInfo);
+				TabViewManager tabManager = TabViewManager.getInstance(this.session);
+				tabs = tabManager.getTabs();
+				return SUCCESS;	
+			}			
 		}
-		userInfo = userService.authenticate(userInfo.getUsername(), userInfo.getPassword());
-		if(null == userInfo){ 
-			this.addActionError("用户名或密码错误");
-			return INPUT;
-			//throw new BaseException("", "验证失败，用户名或密码错误。")
-		}
-		this.setUserInfo(userInfo);
-		TabViewManager tabManager = TabViewManager.getInstance(this.session);
-		tabs = tabManager.getTabs();
-		return SUCCESS;
 	}
 
 	public void setTabs(List<TabElementBean> tabs) {

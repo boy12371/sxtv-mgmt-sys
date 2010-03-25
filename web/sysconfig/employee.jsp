@@ -21,6 +21,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
 <body class="yui-skin-sam">
 
