@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
   `id` int(11) NOT NULL auto_increment,
   `roleid` int(11) NOT NULL,
   `resourceid` int(11) NOT NULL,
-  `comments` varchar(512) NOT NULL,
+  `comments` varchar(512),
   PRIMARY KEY  (`id`),
   UNIQUE KEY `union_key` (`roleid`,`resourceid`),
   KEY `resourceid` (`resourceid`)
@@ -450,7 +450,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   `id` int(11) NOT NULL auto_increment,
   `userid` int(11) NOT NULL,
   `roleid` int(11) NOT NULL,
-  `comments` varchar(512) NOT NULL,
+  `comments` varchar(512),
   PRIMARY KEY  (`id`),
   UNIQUE KEY `union index` (`userid`,`roleid`),
   KEY `roleid` (`roleid`)
