@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/logon/css/logon.css" />
+<link rel="Shortcut Icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
 </head>
 
 <body>
