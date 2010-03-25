@@ -125,6 +125,6 @@ function checkNumeric(){
 	if(isNaN(rate) || isNaN(share)){
 		jAlert("输入错误，请输入数字", '提示');
 		return false;
-	}
+	}	
 	return true
 }

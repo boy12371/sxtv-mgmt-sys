@@ -32,6 +32,10 @@ public class BasicLayout extends BaseAction{
 	private List<TabElementBean> tabs;
 	
 	public String doLogon() throws Exception{
+		if(userInfo==null){
+			this.addActionError("用户名或密码错误");
+			return INPUT;
+		}
 		userInfo = userService.authenticate(userInfo.getUsername(), userInfo.getPassword());
 		if(null == userInfo){ 
 			this.addActionError("用户名或密码错误");
