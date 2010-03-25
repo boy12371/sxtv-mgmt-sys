@@ -97,6 +97,13 @@ label {
 	color: #FFFFFF;
 }
 
+
+
+.yui-skin-sam .yui-dt tr.mark2,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-desc,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-desc
+	{
+	background-color: #8C493F;
+	color: #FFFFFF;
+}
 .autoComplete {
 	width: 200px !important;
 	position: inherit !important;

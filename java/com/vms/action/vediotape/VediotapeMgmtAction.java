@@ -71,7 +71,6 @@ public class VediotapeMgmtAction extends BaseAction {
 	private List<Vediotape> convertJASSONStringToVedio() throws ParseException{
 		JSONArray jasonArray = JSONArray.fromObject(this.jasonDataString);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		
 		if(jasonArray.isArray() && !jasonArray.isEmpty()){
 			List<Vediotape> vedios = new ArrayList<Vediotape>();
 			SessionUserInfo userInfo = this.getUserInfo();
@@ -86,9 +85,8 @@ public class VediotapeMgmtAction extends BaseAction {
 				v.setTopic(new Topic(obj.getInt(Vediotape.PROP_TOPIC)));
 				v.setSubject(new Subject(obj.getInt(Vediotape.PROP_SUBJECT)));
 				v.setStatus(new Status(1));
-				v.setDateComing(format.parse(obj.getString(Vediotape.PROP_DATE_COMING)));
+				v.setDateComing(date);
 				v.setComments(obj.getString(Vediotape.PROP_COMMENTS));
-				//v.setInputer(new User(userInfo.getUserId()));
 				v.setInputer(new User(userInfo.getUserId()));				
 				v.setDateInput(date);
 				vedios.add(v);

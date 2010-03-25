@@ -9,7 +9,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="vedioName" column="vedioName" type="string" not-null="true" length="128" />
-		<property name="dateComing" column="dateComing" type="date" not-null="true" length="10" />
+		<property name="dateComing" column="dateComing" type="timestamp" not-null="true" length="10" />
 		<property name="dateInput" column="dateInput" type="timestamp" not-null="true" length="19" />
 		<property name="comments" column="comments" type="string" not-null="false" length="512" />
 		<property name="marketShare" column="marketShare" type="java.lang.Float" not-null="false" length="12" />

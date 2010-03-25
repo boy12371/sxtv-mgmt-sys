@@ -529,7 +529,7 @@ CREATE TABLE IF NOT EXISTS `vediotape` (
   `subject` int(11) NOT NULL,
   `topic` int(11) NOT NULL,
   `companyID` int(11) NOT NULL,
-  `dateComing` date NOT NULL default '1000-01-01',
+  `dateComing` datetime NOT NULL default '1000-01-01 00:00:00',
   `dateInput` datetime NOT NULL default '1000-01-01 00:00:00',
   `inputer` int(11) NOT NULL,
   `status` int(11) NOT NULL,

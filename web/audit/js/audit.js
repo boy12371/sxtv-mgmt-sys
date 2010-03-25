@@ -128,7 +128,8 @@ function initDataTable() {
 					template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
 					rowsPerPageOptions : [ 25, 50, 100 ]
 				}), // Enables pagination
-		generateRequest : requestBuilder
+		generateRequest : requestBuilder,
+		formatRow: highLightRow
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,

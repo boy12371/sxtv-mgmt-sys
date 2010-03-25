@@ -47,6 +47,8 @@ public class IdentifyFilter implements Filter {
 			HttpSession session = request.getSession(false);
 			if(session ==null || session.getAttribute("SessionUserInfo")==null){
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			}else{
+				chain.doFilter(request, response);
 			}		
 		}else{
 			chain.doFilter(request, response);
