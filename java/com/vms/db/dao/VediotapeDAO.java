@@ -77,7 +77,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 			int startIndex, int endIndex, String propertyName, boolean ascending) {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
-
+		crt.setCacheable(true);
 		if (propertiesValues != null) {
 			Set<String> keys = propertiesValues.keySet();
 			Iterator<String> it = keys.iterator();
@@ -105,6 +105,7 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 			int endIndex, boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
+		crt.setCacheable(true);
 		crt.add(Restrictions.in(scopeName, values));
 		Order order = DaoUtils.getOrder(propertyName, asceding);
 		if (order != null) {

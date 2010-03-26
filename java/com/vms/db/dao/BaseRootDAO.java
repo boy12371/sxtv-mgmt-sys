@@ -68,7 +68,7 @@ public class BaseRootDAO extends HibernateDaoSupport implements IBaseRootDAO {
 			String propertyName, boolean ascending) throws Exception {
 		// TODO Auto-generated method stub
 		Criteria crt = this.getCriteria(clz);
-
+		crt.setCacheable(true);
 		if (propertiesValues != null) {
 			Set<String> keys = propertiesValues.keySet();
 			Iterator<String> it = keys.iterator();

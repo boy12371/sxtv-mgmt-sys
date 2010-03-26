@@ -5,6 +5,7 @@
 <hibernate-mapping package="com.vms.db.bean">
 	<class name="Vediotape" table="vediotape">
 		<meta attribute="sync-DAO">true</meta>
+		<cache usage="read-write" region="com.vms.db.bean.Vediotape"/>		
 		<id name="id" type="string" column="vedioID">
 			<generator class="assigned" />
 		</id>

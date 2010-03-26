@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="command" />
 	</bean>
 	
 	
@@ -55,8 +55,10 @@
 				hibernate.dialect=org.hibernate.dialect.MySQLDialect
 				hibernate.hbm2ddl.auto=update  
                 hibernate.show_sql=true
-                hibernate.format_sql=true  
-                
+                hibernate.format_sql=true
+                hibernate.cache.use_second_level_cache=true //使用二级缓存
+       	        hibernate.cache.use_query_cache=true //不使用查询缓存，因为命中率不高
+        	    hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider //使用Ehcache              
 			</value>
 		</property>
 	</bean>
