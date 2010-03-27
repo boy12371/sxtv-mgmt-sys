@@ -187,6 +187,7 @@ public class ArrangeAction extends BaseAction {
 		arrangeTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
 			List<VedioTapeVO> tapes = arrangeService.findArrangedTapes(selDate);
+			Date now = new Date();
 			//make records the date of which has no tape to play.
 			for(int i=1;i<=numDayOfMonth;i++){
 				boolean insert = true;
@@ -201,6 +202,9 @@ public class ArrangeAction extends BaseAction {
 					Date playDate = new Date(selDate.getYear(),selDate.getMonth(),i);
 					voidTape.setPlayDate(playDate);
 					tapes.add(i-1,voidTape);
+				}
+				if(now.getMonth()==selDate.getMonth() && now.getDate()>i ){
+					tapes.get(i-1).setMarked(-1);
 				}
 			}
 			
