@@ -2,6 +2,7 @@ package com.vms.action.audit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import net.sf.json.JSONObject;
 
@@ -11,9 +12,11 @@ import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.JSONDataTable;
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
+import com.vms.beans.Video;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.common.SessionUserInfo;
+import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.IAudienceScoreService;
 import com.vms.service.iface.IVedioscoreService;
@@ -44,18 +47,30 @@ public class AuditVideoMgmtAction extends BaseAction {
 		try {
 			List<Vediotape> videosList = new ArrayList();
 			if (filter != 0) {
-				videosList = videoService.findVideotapeByStatus(filter, table.getSort(), table.getStartIndex(), table
+				videosList = videoService.findVideotapeByStatus(filter, table
+						.getSort(), table.getStartIndex(), table
 						.getStartIndex()
-						+ table.getRowsPerPage(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
-				JSONDataTableUtils.setupJSONDataTable(videosList, table, videoService
-						.getTotalCountForVideosByStatus(filter));
+						+ table.getRowsPerPage(), table.getDir().equals(
+						JSONDataTableUtils.SORT_DIRECTION));
+				JSONDataTableUtils.setupJSONDataTable(videosList, table,
+						videoService.getTotalCountForVideosByStatus(filter));
 			} else {
-				videosList = videoService.findAllVideotapesForAudit(table.getSort(), table.getStartIndex(), table
+				videosList = videoService.findAllVideotapesForAudit(table
+						.getSort(), table.getStartIndex(), table
 						.getStartIndex()
-						+ table.getRowsPerPage(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
-				JSONDataTableUtils.setupJSONDataTable(videosList, table, videoService
-						.getTotalCountForAllVideotapesForAudit());
-			
+						+ table.getRowsPerPage(), table.getDir().equals(
+						JSONDataTableUtils.SORT_DIRECTION));
+//				List<Video> vList = new ArrayList<Video>();
+//				for (Vediotape vo : videosList) {
+//					Video v = new Video(vo.getComments(), vo.getCompanyID(), vo
+//							.getDateComing(), vo.getDateInput(), vo.getId(), vo
+//							.getStatus(), vo.getSubject(), vo.getTopic(), vo
+//							.getVedioName());
+//					v.setAvgScore(this.calculateAvgScore(vo.getVedioscores()));
+//					vList.add(v);
+//				}
+				JSONDataTableUtils.setupJSONDataTable(videosList, table,
+						videoService.getTotalCountForAllVideotapesForAudit());
 			}
 
 		} catch (Exception e) {
@@ -66,48 +81,65 @@ public class AuditVideoMgmtAction extends BaseAction {
 
 	}
 
-//	public String toAuditingVideo() throws Exception {
-//		try {
-//			List<AudienceExamineVO> ae = audienceScoreService.getAudienceScoreOfTape(videoID, -1, -1, "", true);
-//			vv = videoService.getVideotapeById(videoID, ae);
-//			// vedioscoreService.getUserExaminedVedioesByVideoId(videoID,
-//			// startIndex, endIndex, propertyName, ascending);
-//			return SUCCESS;
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			return INPUT;
-//		}
-//	}
+	private float calculateAvgScore(Set<Vedioscore> scores){
+		float avScore = 0;
+		if (null != scores && !scores.isEmpty()) {
+			float total = 0;
+			while (scores.iterator().hasNext()) {
+				Vedioscore sc = scores.iterator().next();
+				total = +sc.getScore();
+			}
+			if (total != 0) {
+				avScore = total / scores.size();
+			}
+		}
+		return avScore;
+	}
+	// public String toAuditingVideo() throws Exception {
+	// try {
+	// List<AudienceExamineVO> ae =
+	// audienceScoreService.getAudienceScoreOfTape(videoID, -1, -1, "", true);
+	// vv = videoService.getVideotapeById(videoID, ae);
+	// // vedioscoreService.getUserExaminedVedioesByVideoId(videoID,
+	// // startIndex, endIndex, propertyName, ascending);
+	// return SUCCESS;
+	// } catch (Exception e) {
+	// // TODO: handle exception
+	// return INPUT;
+	// }
+	// }
 
 	public String getVideoScores() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
-		List<VedioScoreVO> data = vedioscoreService.findUserExamineScoreByVideoId(videoID, table.getStartIndex(),
-				table.getStartIndex() + table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+		List<VedioScoreVO> data = vedioscoreService
+				.findUserExamineScoreByVideoId(videoID, table.getStartIndex(),
+						table.getStartIndex() + table.getRowsPerPage(), table
+								.getSort(), table.getDir().equals(
+								JSONDataTableUtils.SORT_DIRECTION));
 		JSONDataTableUtils.setupJSONDataTable(data, table, vedioscoreService
 				.getTotalCountUserExamineScoreByVideoId(videoID));
 		return SUCCESS;
 	}
 
-	
-	public String videoAuditOperation() throws Exception{
+	public String videoAuditOperation() throws Exception {
 		SessionUserInfo user = this.getUserInfo();
-		boolean flag=false;
+		boolean flag = false;
 		try {
-			flag = videoService.auditingVideo(vv.getId(), user, operation);	
+			flag = videoService.auditingVideo(vv.getId(), user, operation);
 		} catch (Exception e) {
 			// TODO: handle exception
-			logger.error(e);			
+			logger.error(e);
 		}
-		
-		if(!flag){
+
+		if (!flag) {
 			this.addActionError("审核失败.");
 			return INPUT;
 		}
 		this.addActionMessage("审核成功.");
 		return SUCCESS;
-		
+
 	}
-	
+
 	public IVediotapeService getVideoService() {
 
 		return videoService;
@@ -137,11 +169,10 @@ public class AuditVideoMgmtAction extends BaseAction {
 		return audienceScoreService;
 	}
 
-	public void setAudienceScoreService(IAudienceScoreService audienceScoreService) {
+	public void setAudienceScoreService(
+			IAudienceScoreService audienceScoreService) {
 		this.audienceScoreService = audienceScoreService;
 	}
-
-	
 
 	public String getVideoID() {
 		return videoID;
