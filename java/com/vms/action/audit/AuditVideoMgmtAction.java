@@ -12,7 +12,7 @@ import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.JSONDataTable;
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
-import com.vms.beans.Video;
+
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.common.SessionUserInfo;
