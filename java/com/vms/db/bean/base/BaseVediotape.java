@@ -35,6 +35,7 @@ public abstract class BaseVediotape implements Serializable {
 	public static String PROP_VEDIO_NAME = "vedioName";
 	public static String PROP_ID = "id";
 	public static String PROP_DATE_INPUT = "dateInput";
+	public static String PROP_AUDIENCESCORE ="audiencescore";
 
 	// constructors
 	public BaseVediotape() {
@@ -95,6 +96,7 @@ public abstract class BaseVediotape implements Serializable {
 	private java.util.Set<com.vms.db.bean.Vedioscore> vedioscores;
 	private java.util.Set<com.vms.db.bean.Playorder> playorders;
 	private java.util.Set<com.vms.db.bean.Playchangelog> playchangelogs;
+	private java.util.Set<com.vms.db.bean.Audiencescore> audiencescore;
 
 	/**
 	 * Return the unique identifier of this class
@@ -400,6 +402,15 @@ public abstract class BaseVediotape implements Serializable {
 
 	public String toString() {
 		return super.toString();
+	}
+
+	public java.util.Set<com.vms.db.bean.Audiencescore> getAudiencescore() {
+		return audiencescore;
+	}
+
+	public void setAudiencescore(
+			java.util.Set<com.vms.db.bean.Audiencescore> audiencescore) {
+		this.audiencescore = audiencescore;
 	}
 
 }

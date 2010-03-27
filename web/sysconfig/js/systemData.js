@@ -33,21 +33,21 @@ function initStatusTable() {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("vedioStatus", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
 			});
 	// Update totalRecords on the fly with value from server
@@ -135,21 +135,21 @@ function initTopicTable() {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("vedioTopic", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
 			});
 	// Update totalRecords on the fly with value from server
@@ -182,7 +182,7 @@ function initTopicTable() {
 				$.blockUI({
 							message : $('#hiddenDiv'),
 							css : {
-								width : '475px',
+								width : '400px',
 								top : '45%',
 								left : '25%',
 								cursor : 'auto',
@@ -230,7 +230,7 @@ function initTopicTable() {
 			$.blockUI({
 						message : $('#hiddenDiv'),
 						css : {
-							width : '475px',
+							width : '400px',
 							top : '45%',
 							left : '25%',
 							cursor : 'auto',
@@ -360,22 +360,22 @@ function initSubjectTable() {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
-		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+		paginator : new YAHOO.widget.Paginator({
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("vedioSubject", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
 			});
 	var subjectBtn = new YAHOO.widget.Button({
@@ -400,7 +400,7 @@ function initSubjectTable() {
 				$.blockUI({
 							message : $('#hiddenDiv'),
 							css : {
-								width : '475px',
+								width : '400px',
 								top : '45%',
 								left : '25%',
 								cursor : 'auto',
@@ -448,7 +448,7 @@ function initSubjectTable() {
 			$.blockUI({
 						message : $('#hiddenDiv'),
 						css : {
-							width : '475px',
+							width : '400px',
 							top : '45%',
 							left : '25%',
 							cursor : 'auto',
@@ -573,21 +573,21 @@ function initScoreWeightTable() {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("scoreWeight", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
 			});
 	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
@@ -610,7 +610,7 @@ function initScoreWeightTable() {
 			$.blockUI({
 						message : $('#hiddenWeightDiv'),
 						css : {
-							width : '475px',
+							width : '400px',
 							top : '45%',
 							left : '25%',
 							cursor : 'auto',
@@ -620,15 +620,14 @@ function initScoreWeightTable() {
 
 			var yesBtn = YAHOO.util.Dom.get("weightYes");
 			YAHOO.util.Event.addListener(yesBtn, "click", function() {
-				$.unblockUI();
-				var form = YAHOO.util.Dom.get("weightform");
-				form.action = "/tv/sys/modifyWeight.action?scoreweight.id="
-						+ oRecord.getData("id")
-						+ "&scoreweight.wieght="
-						+ weightValue.value;
+						$.unblockUI();
+						var form = YAHOO.util.Dom.get("weightform");
+						form.action = "/tv/sys/modifyWeight.action?scoreweight.id="
+								+ oRecord.getData("id")
+								+ "&scoreweight.wieght=" + weightValue.value;
 						alert(form.action);
-				form.submit();
-			});
+						form.submit();
+					});
 			var cancelBtn = YAHOO.util.Dom.get("weightCancel");
 			YAHOO.util.Event.addListener(cancelBtn, "click", function() {
 						$.unblockUI();
@@ -699,21 +698,21 @@ function initScoreLevelTable() {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};
 	// DataTable instance
 	var myDataTable = new YAHOO.widget.DataTable("scorelevel", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
 			});
 	var levelBtn = new YAHOO.widget.Button({
@@ -732,7 +731,7 @@ function initScoreLevelTable() {
 				$.blockUI({
 							message : $('#hiddenLevelDiv'),
 							css : {
-								width : '475px',
+								width : '400px',
 								top : '45%',
 								left : '25%',
 								cursor : 'auto',
@@ -771,7 +770,7 @@ function initScoreLevelTable() {
 			$.blockUI({
 						message : $('#hiddenLevelDiv'),
 						css : {
-							width : '475px',
+							width : '400px',
 							top : '45%',
 							left : '25%',
 							cursor : 'auto',

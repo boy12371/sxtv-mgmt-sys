@@ -42,6 +42,36 @@ function initDataTable() {
 	var formatStatus = function(elCell, oRecord, oColumn, sData) {
 		elCell.innerHTML = sData.status;
 	}
+	var formatScroes = function(elCell, oRecord, oColumn, sData) {
+		if(sData.length==0){
+			elCell.innerHTML = "0";
+		}else{
+			var avgScore = 0;
+			var total =0;
+			for ( var i = 0; i < sData.length; i++) {
+					total += sData[i].score;
+			}
+			var s = (total/sData.length).toString();
+			s = s.substring(0, s.indexOf(".")+3);
+			elCell.innerHTML = s;
+		}
+	}
+	var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
+		if(sData.length==0){
+			elCell.innerHTML = "0/0";
+		}else{
+			var yes = 0;
+			var no =0;
+			for ( var i = 0; i < sData.length; i++) {
+					if(sData[i].result==1){
+						yes += 1;
+					}else{
+						no += 1;
+					}
+			}
+			elCell.innerHTML = yes+"/"+no;
+		}
+	}
 	// Column definitions
 	var myColumnDefs = [{
 				key : "id",
@@ -77,6 +107,14 @@ function initDataTable() {
 				sortable : true,
 				formatter : formatStatus
 			}, {
+				key : "vedioscores",
+				label : "综合平均分",
+				formatter : formatScroes
+			}, {
+				key : "audiencescore",
+				label : "观众投票(看/不看)",
+				formatter : formatAudienceScore
+			}, {
 				key : "comments",
 				label : "备注"
 			}];
@@ -87,7 +125,7 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "comments"],
+				"dateInput", "status", "vedioscores", "audiencescore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -160,7 +198,7 @@ function initDataTable() {
 		return oPayload;
 	};
 	
-	myDataTable.subscribe("initEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
 	});
 	
@@ -320,7 +358,7 @@ function initScoreDataTable(videoID) {
 		return oPayload;
 	}
 	// DataTable instance
-	myDataTable.subscribe("initEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
 	});
 	return {

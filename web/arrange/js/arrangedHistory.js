@@ -138,7 +138,7 @@ function initHistoryTable() {
 		return oPayload;
 	};
 	
-	historyTable.subscribe("initEvent", function() { 
+	historyTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
 	});
 	

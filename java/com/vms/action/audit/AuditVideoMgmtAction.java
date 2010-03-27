@@ -60,15 +60,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 						.getStartIndex()
 						+ table.getRowsPerPage(), table.getDir().equals(
 						JSONDataTableUtils.SORT_DIRECTION));
-//				List<Video> vList = new ArrayList<Video>();
-//				for (Vediotape vo : videosList) {
-//					Video v = new Video(vo.getComments(), vo.getCompanyID(), vo
-//							.getDateComing(), vo.getDateInput(), vo.getId(), vo
-//							.getStatus(), vo.getSubject(), vo.getTopic(), vo
-//							.getVedioName());
-//					v.setAvgScore(this.calculateAvgScore(vo.getVedioscores()));
-//					vList.add(v);
-//				}
+
 				JSONDataTableUtils.setupJSONDataTable(videosList, table,
 						videoService.getTotalCountForAllVideotapesForAudit());
 			}
@@ -80,34 +72,6 @@ public class AuditVideoMgmtAction extends BaseAction {
 		return SUCCESS;
 
 	}
-
-	private float calculateAvgScore(Set<Vedioscore> scores){
-		float avScore = 0;
-		if (null != scores && !scores.isEmpty()) {
-			float total = 0;
-			while (scores.iterator().hasNext()) {
-				Vedioscore sc = scores.iterator().next();
-				total = +sc.getScore();
-			}
-			if (total != 0) {
-				avScore = total / scores.size();
-			}
-		}
-		return avScore;
-	}
-	// public String toAuditingVideo() throws Exception {
-	// try {
-	// List<AudienceExamineVO> ae =
-	// audienceScoreService.getAudienceScoreOfTape(videoID, -1, -1, "", true);
-	// vv = videoService.getVideotapeById(videoID, ae);
-	// // vedioscoreService.getUserExaminedVedioesByVideoId(videoID,
-	// // startIndex, endIndex, propertyName, ascending);
-	// return SUCCESS;
-	// } catch (Exception e) {
-	// // TODO: handle exception
-	// return INPUT;
-	// }
-	// }
 
 	public String getVideoScores() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());

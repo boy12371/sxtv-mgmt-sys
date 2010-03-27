@@ -329,7 +329,7 @@ function initArrangeReorderEvent(){
 			this.destData = arrangeTable.getRecord(this.destEl).getData(); 
 		} 
 	}); 
-	arrangeTable.subscribe("initEvent", function() { 
+	arrangeTable.subscribe("renderEvent", function() { 
 		var i, id, 
 		allRows = this.getTbodyEl().rows; 
 		for(i=0; i<allRows.length; i++) { 

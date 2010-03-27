@@ -248,6 +248,12 @@ public class VediotapeMgmtAction extends BaseAction {
 	
 	
 	public String isVediotapeExsits() throws Exception {
+		boolean isAddNew = true;
+		String vedioID = "";
+		if(null != this.getRequest().getParameter("vedioID")){
+			vedioID = this.getRequest().getParameter("vedioID");
+			isAddNew = false;
+		}
 		String vedioName = this.getRequest().getParameter("vedioName");
 		String x = java.net.URLDecoder.decode(vedioName, "UTF-8");
 		this.getResponse().setCharacterEncoding("UTF-8");
@@ -255,11 +261,20 @@ public class VediotapeMgmtAction extends BaseAction {
 		vedio = this.vedioService.getVediotapeByName(x);
 		
 		StringBuffer sb =new StringBuffer();
-		if(vedio!=null){
-			sb.append("影带已存在，请检查影带名称");
+		if(isAddNew){
+			if(vedio!=null){
+				sb.append("影带已存在，请检查影带名称");
+			}else{
+				sb.append("SUCCESS");
+			}
 		}else{
-			sb.append("SUCCESS");
-		}		
+			if(!vedio.getId().equals(vedioID)){
+				sb.append("影带已存在，请检查影带名称");
+			}else{
+				sb.append("SUCCESS");
+			}
+		}
+				
 		out.println(sb.toString());
 		out.close();
 		return NONE;

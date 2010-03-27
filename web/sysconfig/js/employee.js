@@ -112,7 +112,7 @@ function initEmployeeDataTable() {
 
 	var myDataTable = new YAHOO.widget.DataTable("employeeTable", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("initEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
 	});
 	// Update totalRecords on the fly with value from server
@@ -218,7 +218,7 @@ function initUserDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	myDataTable.subscribe("initEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
 	});
 	return {

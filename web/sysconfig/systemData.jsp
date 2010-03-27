@@ -108,7 +108,7 @@
 
 
 
-<div id="hiddenLevelDiv" style="display: none"><s:form id="levelform" action="" namespace="" method="post">
+<div id="hiddenLevelDiv" style="display: none;"><s:form id="levelform" action="" namespace="" method="post">
 	<h1 class="popupWindow" id="levelTitle"></h1>
 	<input type="hidden" name="" id="levelID" />
 	<p style="background: #FFFFFF; border-bottom: 0" id="levelName">级别:&nbsp;<span id="levelLabel"></span></p>

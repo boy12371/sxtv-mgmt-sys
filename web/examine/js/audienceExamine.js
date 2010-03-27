@@ -80,7 +80,7 @@ function initDataTable() {
 		return oPayload;
 	}
 	
-	myDataTable.subscribe("initEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
 	});
 	return {

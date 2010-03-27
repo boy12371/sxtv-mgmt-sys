@@ -112,7 +112,7 @@ function initDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
 			});
 
@@ -244,7 +244,7 @@ function initAudienceDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
 			});
 	return {

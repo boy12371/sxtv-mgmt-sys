@@ -1,6 +1,7 @@
 package com.vms.service;
 
 import java.io.Serializable;
+import java.net.Socket;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,7 @@ import com.vms.common.SearchCondition;
 import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.Auditing;
 import com.vms.db.bean.Company;
+import com.vms.db.bean.Scorelevel;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Subject;
 import com.vms.db.bean.Topic;
@@ -27,6 +29,7 @@ import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IAuditingDAO;
 import com.vms.db.dao.iface.IVedioscoreDAO;
 import com.vms.db.dao.iface.IVediotapeDAO;
+import com.vms.service.iface.IScorelevelService;
 import com.vms.service.iface.IVediotapeService;
 
 public class VediotapeService implements IVediotapeService {
@@ -34,6 +37,7 @@ public class VediotapeService implements IVediotapeService {
 	private IVediotapeDAO vediotapeDAO;
 	private IAuditingDAO auditingDAO;
 	private IVedioscoreDAO vedioscoreDAO;
+	private IScorelevelService scorelevelService;
 	private Class clz = com.vms.db.bean.Vediotape.class;
 
 	@Override
@@ -191,15 +195,12 @@ public class VediotapeService implements IVediotapeService {
 		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] {
 				market, rate, 8, videoID });
 		float vScore = 0;
-		if (rate < 0.7) {
-			vScore = 0.6f;
-		} else if (rate >= 0.7 && rate < 0.8) {
-			vScore = 0.7f;
-		} else if (rate >= 0.8 && rate < 0.9) {
-			vScore = 0.8f;
-		} else {
-			vScore = 0.9f;
-		}
+		List<Scorelevel> levels = this.findAllLevels();
+		for (Scorelevel scorelevel : levels) {
+			if(rate > scorelevel.getStart() && rate <= scorelevel.getEnd()){
+				vScore = (scorelevel.getStart()+scorelevel.getEnd()) / 2;
+			}
+		}		
 		vScore *= 100;
 		if (result) {
 			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(
@@ -214,6 +215,10 @@ public class VediotapeService implements IVediotapeService {
 		return true;
 	}
 
+	private List<Scorelevel> findAllLevels() throws Exception{
+		List<Scorelevel> levels = this.scorelevelService.findAllScorelevel(-1, -1, Scorelevel.PROP_ID, true);
+		return levels;
+	}
 	@Override
 	public boolean updateVideoInfo(Vediotape video) throws Exception {
 		// TODO Auto-generated method stub
@@ -302,6 +307,14 @@ public class VediotapeService implements IVediotapeService {
 		// TODO Auto-generated method stub
 		this.vediotapeDAO.saveOrUpdateObject(video);
 		return true;
+	}
+
+	public IScorelevelService getScorelevelService() {
+		return scorelevelService;
+	}
+
+	public void setScorelevelService(IScorelevelService scorelevelService) {
+		this.scorelevelService = scorelevelService;
 	}
 
 }

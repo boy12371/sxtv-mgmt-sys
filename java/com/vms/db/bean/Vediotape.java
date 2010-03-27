@@ -6,9 +6,6 @@ import com.vms.db.bean.base.BaseVediotape;
 
 public class Vediotape extends BaseVediotape {
 	private static final long serialVersionUID = 1L;
-	
-	
-
 	/* [CONSTRUCTOR MARKER BEGIN] */
 	public Vediotape() {
 		super();
@@ -31,7 +28,6 @@ public class Vediotape extends BaseVediotape {
 		super(id, topic, inputer, status, subject, companyID, vedioName, dateComing, dateInput);
 	}
 
-	
 
 	/* [CONSTRUCTOR MARKER END] */
 
