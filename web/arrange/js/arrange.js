@@ -157,13 +157,17 @@ function initArrangeTable() {
 	var formatRemoveTape = function(elCell, oRecord, oColumn, sData) {
 		var img = document.createElement("img");
 		img.border = 0;
-		img.src="./images/remove.png"
-		img.onclick = eval("(1,function(){removeTapeFromArrange(\"" + oRecord.getId() + "\");})");
-		img.onmouseover=function(){
-			this.src="./images/minus.png";
-		}
-		img.onmouseout=function(){
-			 this.src="./images/remove.png";
+		if(oRecord.getData().marked == -1){
+			img.src="./images/remove_disabled.png"
+		}else{
+			img.src="./images/remove.png"
+			img.onclick = eval("(1,function(){removeTapeFromArrange(\"" + oRecord.getId() + "\");})");
+			img.onmouseover=function(){
+				this.src="./images/minus.png";
+			}
+			img.onmouseout=function(){
+				this.src="./images/remove.png";
+			}
 		}
 		elCell.appendChild(img);
 		elCell.style.padding="2px";
@@ -355,7 +359,8 @@ function getFirstVoidRecord(dataTable){
 	if(null == rSet) return -1;
 	for(var i=0;i<rSet.length;i++){
 		var x = rSet[i].getData("id");
-		if(null == x || "" == x) return i;
+		var marked = rSet[i].getData("marked");
+		if((null == x || "" == x) && marked != -1) return i;
 	}
 	return -1;
 }
@@ -364,6 +369,7 @@ function addTapeToArrange(rID){
 	var xData = unArrangeTable.getRecord(rID).getData();
 	unArrangeTable.deleteRow(rID);
 	var pos = getFirstVoidRecord(arrangeTable);
+	if(-1 == pos) return;
 	var newRecord = arrangeTable.getRecord(pos);
 	arrangeTable.updateCell(newRecord, "id" ,xData.id);
 	arrangeTable.updateCell(newRecord, "vedioName" ,xData.vedioName);
