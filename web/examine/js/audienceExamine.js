@@ -9,13 +9,7 @@ function initDataTable() {
 			elCell.innerHTML = sData;
 		}
 	};
-	var myRowFormatter = function(elTr, oRecord){
-		var xData = oRecord.getData();
-		if(typeof(xData.marked)!="undefined" && 1<=xData.marked){
-			elTr.className = elTr.className + " markedRow";
-		}
-		return true;
-	};
+
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -27,7 +21,8 @@ function initDataTable() {
 		label :"影带名称",
 	}, {
 		key :"result",
-		label :"评价结果"		
+		label :"评价结果",
+		editor: new YAHOO.widget.RadioCellEditor({radioOptions:["看&nbsp;&nbsp;","不看&nbsp;"],disableBtns:true})		
 	}, {
 		key :"dateExamine",
 		label :"评价日期",  
@@ -42,7 +37,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : ["id", "audience", "tapeName", "result", "dateExamine"],
+		fields : ["id", "tapeID", "audience", "tapeName", "result", "dateExamine"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -67,13 +62,21 @@ function initDataTable() {
 			rowsPerPageOptions : [25, 50,100 ]
 		}),
 		// Enables pagination
-		formatRow: myRowFormatter
 	};
 
 	// DataTable instance
 
-	myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
-			myDataSource, myConfigs);
+	myDataTable = new YAHOO.widget.DataTable("cellediting", myColumnDefs, myDataSource, myConfigs);
+	var highlightEditableCell = function(oArgs) { 
+			var elCell = oArgs.target; 
+			if(YAHOO.util.Dom.hasClass(elCell, "yui-dt-editable")) { 
+			this.highlightCell(elCell); 
+		} 
+	}; 
+	myDataTable.subscribe("cellMouseoverEvent", highlightEditableCell); 
+	myDataTable.subscribe("cellMouseoutEvent", myDataTable.onEventUnhighlightCell); 
+	myDataTable.subscribe("cellClickEvent", myDataTable.onEventShowCellEditor); 
+	
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
@@ -140,7 +143,12 @@ function submitAction(){
 	var records = myDataTable.getRecordSet().getRecords();
 	for(var i=0;i<records.length;i++){
 		var xData = records[i].getData();
-		if(typeof(xData.marked)!="undefined" && 1<=xData.marked){
+		if(xData.result.length>=3 || (typeof(xData.marked)!="undefined" && 1<=xData.marked)){
+			if(xData.result.length>=3){
+				xData.result = xData.result.replace(/(^\s*)|(\s*$)/g, "");
+				xData.marked = 2;
+				xData.dateExamine = "";
+			}
 			submitArray[submitArray.length] = xData;
 		}
 	}

@@ -9,3 +9,10 @@
 	height:5px;
 	background-color:#73C167;		
 }
+
+.yui-dt-editor label{
+	color: black !important;
+	float: none !important;
+	font-weight: normal !important;
+	display: inline !important;
+}
