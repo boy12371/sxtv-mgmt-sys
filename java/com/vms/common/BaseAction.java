@@ -23,11 +23,9 @@ ServletRequestAware, ServletResponseAware {
 
 	protected HttpSession session;
 	
-	protected CommonVariable commonVar = new CommonVariable();
+	//protected CommonVariable commonVar = new CommonVariable();
 
-	public CommonVariable getCommonVar() {
-		return commonVar;
-	}
+	
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;

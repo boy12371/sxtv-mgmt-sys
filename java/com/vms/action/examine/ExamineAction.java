@@ -165,7 +165,7 @@ public class ExamineAction extends BaseAction {
 			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getVedioName();		
 			tapeScore.setVedioName(name);
 		}
-		if(this.getUserInfo().getRole() == this.commonVar.ROLE_INPUTER){
+		if(this.getUserInfo().getRoles().contains(CommonVariable.ROLE_INPUTER)){
 			examiners = vedioscoreService.findAllExaminer();
 		}
 		return SUCCESS;

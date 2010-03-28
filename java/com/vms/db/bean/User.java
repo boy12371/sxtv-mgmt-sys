@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.vms.common.SessionUserInfo;
 import com.vms.db.bean.base.BaseUser;
 
 public class User extends BaseUser {

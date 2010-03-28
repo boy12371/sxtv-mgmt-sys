@@ -12,7 +12,7 @@ public class SessionUserInfo {
 
 	private String password;
 	
-	private int role;
+	private List<Integer> roles;
 
 //	private Map<String, Integer> permissions = new HashMap<String, Integer>();
 
@@ -67,11 +67,13 @@ public class SessionUserInfo {
 		this.authoritedResource = authoritedResource;
 	}
 
-	public void setRole(int role) {
-		this.role = role;
+	public List<Integer> getRoles() {
+		return roles;
 	}
 
-	public int getRole() {
-		return role;
+	public void setRoles(List<Integer> roles) {
+		this.roles = roles;
 	}
+
+	
 }

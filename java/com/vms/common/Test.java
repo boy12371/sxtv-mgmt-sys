@@ -19,19 +19,23 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-//		//
-		IPlayorderService service = (IPlayorderService) ctx.getBean("playorderService");
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.DATE, 26);
-		cal.set(Calendar.MONTH, Calendar.FEBRUARY);
-		System.out.println(cal.getTime()+"=====");
-		List list  = service.findPlayedVideosByDate(cal.getTime());
-		System.out.println(list.size());
+//		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+////		//
+//		IPlayorderService service = (IPlayorderService) ctx.getBean("playorderService");
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(Calendar.DATE, 26);
+//		cal.set(Calendar.MONTH, Calendar.FEBRUARY);
+//		System.out.println(cal.getTime()+"=====");
+//		List list  = service.findPlayedVideosByDate(cal.getTime());
+//		System.out.println(list.size());
 		
 		
+		System.out.println(EncryptUtil.encryptString("a"));
 		
+		System.out.println("===========================");
+		System.out.println(EncryptUtil.encryptString("a|a"));
 		
+		System.out.println(EncryptUtil.encryptString("a"));
 //		
 //		GrantedAuthority[] gas = user.getAuthorities();
 //		System.out.println(gas.length);
