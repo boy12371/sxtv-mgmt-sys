@@ -145,7 +145,8 @@ function initUnArrangeTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	
+	unArrangeTable.subscribe("rowMouseoverEvent", unArrangeTable.onEventHighlightRow);
+	unArrangeTable.subscribe("rowMouseoutEvent", unArrangeTable.onEventUnhighlightRow);
 	return {
 		ds :myDataSource,
 		dt :unArrangeTable
@@ -234,7 +235,8 @@ function initArrangeTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	};
-	
+	arrangeTable.subscribe("rowMouseoverEvent", arrangeTable.onEventHighlightRow);
+	arrangeTable.subscribe("rowMouseoutEvent", arrangeTable.onEventUnhighlightRow);
 	return {
 		ds :myDataSource,
 		dt :arrangeTable
