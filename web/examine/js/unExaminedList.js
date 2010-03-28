@@ -164,7 +164,9 @@ function initDataTable() {
 	myDataSource.subscribe("requestEvent", function(request,callback){
 		clearErrorMsg();
 	});
-
+	
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	return {
 		ds :myDataSource,
 		dt :myDataTable

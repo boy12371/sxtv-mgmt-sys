@@ -118,6 +118,9 @@ function initDataTable() {
 		displayErrorMsg(eval(request.response.responseText));
 	});
 	
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	
 	myDataSource.subscribe("requestEvent", function(request,callback){
 		clearErrorMsg();
 	});
