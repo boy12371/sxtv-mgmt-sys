@@ -89,14 +89,14 @@ function initDataTable() {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};
@@ -113,18 +113,23 @@ function initDataTable() {
 		return oPayload;
 	}
 	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
 				parent.resizeIframe();
 			});
-
-	myDataTable.subscribe("columnSortEvent", function(column, dir) {
-				alert(dir);
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
 			});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
 		var elDropdown = oArgs.target;
-		//var oRecord = this.getRecord(elDropdown);
+		// var oRecord = this.getRecord(elDropdown);
 		var rowIndex = elDropdown.parentNode.parentNode.parentNode.rowIndex;
-		
-		var oRecord = this.getRecord(2);
+
+		var oRecord = this.getRecord(elDropdown);
 		var opt = elDropdown.value;
 		if (opt == "none") {
 			elDropdown.selectIndex = 0;
@@ -170,8 +175,8 @@ function initAudienceDataTable() {
 		elCell.innerHTML = oData;
 	}
 	var formatGender = function(elCell, oRecord, oColumn, oData) {
-		
-		elCell.innerHTML = oData==1?"男":"女";
+
+		elCell.innerHTML = oData == 1 ? "男" : "女";
 	}
 	// Column definitions
 	var myColumnDefs = [{
@@ -188,7 +193,7 @@ function initAudienceDataTable() {
 			}, {
 				key : "gender",
 				label : "性别",
-				formatter: formatGender,
+				formatter : formatGender,
 				sortable : true
 			}, {
 				key : "career",
@@ -214,21 +219,21 @@ function initAudienceDataTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",	
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};
@@ -244,7 +249,16 @@ function initAudienceDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
 				parent.resizeIframe();
 			});
 	return {

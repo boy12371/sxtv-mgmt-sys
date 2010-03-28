@@ -23,45 +23,55 @@
 <body class="yui-skin-sam">
 
 
-<h1>影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0" />
+<h1>影带信息</h1>
+<img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0" />
 <p>影带详细信息</p>
 
-<s:actionerror/>
+<s:actionerror />
 <div align="center">
 <table class="inputTable">
 	<tr>
 		<td><label>影带编号</label></td>
-		<td> <s:property value="video.id"/>
-</tr><tr>
+		<td><s:property value="video.id" />
+	</tr>
+	<tr>
 		</td>
 		<td><label>剧目名称</label></td>
-		<td><s:property value="video.vedioName"/></td>
+		<td><s:property value="video.vedioName" /></td>
 	</tr>
 	<tr>
 		<td><label>影视公司</label></td>
-		<td><s:property value="video.companyID.id"/></td>
-		</tr><tr><td><label>送带日期</label></td>
-		<td><s:date name="video.dateComing"/></td>
+		<td><s:property value="video.companyID.id" /></td>
+	</tr>
+	<tr>
+		<td><label>送带日期</label></td>
+		<td><s:date name="video.dateComing" /></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
-		<td><s:property value="video.subject.subjectName"/></td>
-		</tr><tr><td><label>题材</label></td>
-		<td><s:property value="video.topic.topicName"/></td>
+		<td><s:property value="video.subject.subjectName" /></td>
+	</tr>
+	<tr>
+		<td><label>题材</label></td>
+		<td><s:property value="video.topic.topicName" /></td>
 
 	</tr>
 	<tr>
 		<td><label>市场份额</label></td>
-		<td><s:property value="video.marketShare"/></td>
-		</tr><tr><td><label>收视率</label></td>
-		<td><s:property value="video.audienceRating"/></td>
+		<td><s:property value="video.marketShare" /></td>
+	</tr>
+	<tr>
+		<td><label>收视率</label></td>
+		<td><s:property value="video.audienceRating" /></td>
 
 	</tr>
 	<tr>
-		<td><label>状态  </label></td>
-		<td><s:property value="video.status.status"/></td>
-		</tr><tr><td><label>备注</label></td>
-		<td><s:property value="video.comments"/></td>
+		<td><label>状态 </label></td>
+		<td><s:property value="video.status.status" /></td>
+	</tr>
+	<tr>
+		<td><label>备注</label></td>
+		<td><s:property value="video.comments" /></td>
 
 	</tr>
 	<!-- 
@@ -81,15 +91,11 @@
 
 	</tr>
 	 -->
-	
+
 	<tr>
-		<td colspan="4" align="center">
-		<span id="go" class="yui-button yui-push-button">
-        <span class="first-child">
-            <button type="button"> 确 定 </button>
-        </span>
-        </span>
-</td>
+		<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
+		<button type="button">确 定</button>
+		</span> </span></td>
 	</tr>
 </table>
 </div>

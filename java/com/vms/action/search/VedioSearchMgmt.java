@@ -38,6 +38,7 @@ public class VedioSearchMgmt extends BaseAction {
 	private Vediotape video;
 	private SearchCondition sc;
 	private String query;
+	private String vid;
 
 	
 	
@@ -74,6 +75,17 @@ public class VedioSearchMgmt extends BaseAction {
 
 	}
 
+	public String toVideoDetail()throws Exception{
+		List<Vediotape> list = vedioService.findVediotapeByProperty(Vediotape.PROP_ID, vid, -1, -1, "", false);
+		if(list!=null && !list.isEmpty()){
+			this.video = list.get(0);
+			return SUCCESS;
+		}else{
+			this.addActionError("影带未找到");
+			return INPUT;
+		}
+		
+	}
 	public String searchVideos() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
@@ -195,5 +207,11 @@ public class VedioSearchMgmt extends BaseAction {
 
 	public void setSc(SearchCondition sc) {
 		this.sc = sc;
+	}
+	public String getVid() {
+		return vid;
+	}
+	public void setVid(String vid) {
+		this.vid = vid;
 	}
 }

@@ -1,17 +1,10 @@
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		if (oRecord.getData("status").id != 4
-				&& oRecord.getData("status").id != 3) {
-			var href = "<a href='./audit/findVideoByNameOrID?optionName=auditing&vid=";
-			href += sData;
-			href += "'>" + sData + "</a>";
-
-			elCell.innerHTML = href;
-		} else {
-			elCell.innerHTML = sData;
-		}
-
+		var href = "<a href='./search/toVideoDetail.action?vid=";
+		href += sData;
+		href += "'>" + sData + "</a>";
+		elCell.innerHTML = href;
 	}
 
 	var formatCompany = function(elCell, oRecord, oColumn, sData) {
@@ -153,16 +146,23 @@ function initDataTable() {
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("renderEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
+	
+	
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	var fireEvent = function(resetRecordOffset) {
 		var oState = myDataTable.getState(), request, oCallback;
 		if (resetRecordOffset) {

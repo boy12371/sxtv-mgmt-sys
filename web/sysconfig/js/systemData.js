@@ -48,8 +48,17 @@ function initStatusTable() {
 	var myDataTable = new YAHOO.widget.DataTable("vedioStatus", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
 				parent.resizeIframe();
 			});
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -63,13 +72,6 @@ function initStatusTable() {
 }
 
 function initTopicTable() {
-	// var formatUrl = function(elCell, oRecord, oColumn, sData) {
-	// var href = "<a href='./sys/toUpdateCompany.action?company.id=";
-	// href += sData;
-	// href += "'>" + sData + "</a>";
-	// elCell.innerHTML = href;
-	// };
-
 	var formatStatus = function(elCell, oRecord, oColumn, sData) {
 		var st = sData == 1 ? "正常" : "禁用";
 		elCell.innerHTML = st;
@@ -150,8 +152,17 @@ function initTopicTable() {
 	var myDataTable = new YAHOO.widget.DataTable("vedioTopic", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
 				parent.resizeIframe();
 			});
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -376,8 +387,17 @@ function initSubjectTable() {
 	var myDataTable = new YAHOO.widget.DataTable("vedioSubject", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
 				parent.resizeIframe();
 			});
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	var subjectBtn = new YAHOO.widget.Button({
 				type : "button",
 				id : "subjectBtn",
@@ -588,8 +608,17 @@ function initScoreWeightTable() {
 	var myDataTable = new YAHOO.widget.DataTable("scoreWeight", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
 				parent.resizeIframe();
 			});
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	myDataTable.subscribe("dropdownChangeEvent", function(oArgs) {
 		var elDropdown = oArgs.target;
 		var oRecord = this.getRecord(elDropdown);
@@ -713,8 +742,17 @@ function initScoreLevelTable() {
 	var myDataTable = new YAHOO.widget.DataTable("scorelevel", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
 				parent.resizeIframe();
 			});
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	var levelBtn = new YAHOO.widget.Button({
 				type : "button",
 				id : "levelBtn",

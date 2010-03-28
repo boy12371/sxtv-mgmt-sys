@@ -113,7 +113,13 @@ function initDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	myDataTable.subscribe("renderEvent", function() { 
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
 	

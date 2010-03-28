@@ -75,7 +75,7 @@
 				<script type="text/javascript">
 				var submitToPass = new YAHOO.widget.Button({  
 					type: "submit",  
-					label: "修改完成",  
+					label: "批为编排",  
 					id: "finishModify",  
 					container: "submitDiv" }
 					);

@@ -112,9 +112,15 @@ function initEmployeeDataTable() {
 
 	var myDataTable = new YAHOO.widget.DataTable("employeeTable", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("renderEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -218,9 +224,15 @@ function initUserDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	myDataTable.subscribe("renderEvent", function() { 
+	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	return {
 		ds :myDataSource,
 		dt :myDataTable

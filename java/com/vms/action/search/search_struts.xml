@@ -14,6 +14,11 @@
 			<result name="input">/search/videoDetails.jsp</result>
 		</action>
 		
+		<action name="toVideoDetail" class="searchMgmt" method="toVideoDetail">
+			<result name="success">/search/videoDetails.jsp</result>
+			<result name="input">/search/searchVideos.jsp</result>
+		</action>
+		
 		<action name="searchVideos" class="searchMgmt" method="searchVideos">
 			<result type="json">
 				<param name="root">table</param>

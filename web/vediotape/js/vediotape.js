@@ -499,8 +499,14 @@ function initToArrangeTable() {
 	var myDataTable = new YAHOO.widget.DataTable("makeToArrange", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -705,8 +711,14 @@ function initToPassTable() {
 			myDataSource, myConfigs);
 
 	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {

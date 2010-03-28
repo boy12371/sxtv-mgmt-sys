@@ -180,11 +180,6 @@ function initDataTable() {
 			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
 			rowsPerPageOptions : [25, 50,100 ]
 		}),
-// new YAHOO.widget.Paginator({
-// rowsPerPage : 25,
-// template :YAHOO.widget.Paginator.TEMPLATE_ROWS_PER_PAGE,
-// rowsPerPageOptions : [ 25, 50, 100 ]
-// }), // Enables pagination
 		generateRequest : requestBuilder,
 		formatRow: highLightRow
 	};
@@ -197,8 +192,13 @@ function initDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	};
-	
-	myDataTable.subscribe("renderEvent", function() { 
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
 	
@@ -357,8 +357,13 @@ function initScoreDataTable(videoID) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	// DataTable instance
-	myDataTable.subscribe("renderEvent", function() { 
+	myDataSource.subscribe("requestEvent", function() { 
+		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	});
+	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
+	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable.subscribe("renderEvent", function() {
+		$.unblockUI();
 		parent.resizeIframe();
 	});
 	return {
