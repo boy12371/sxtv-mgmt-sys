@@ -131,7 +131,7 @@ YAHOO.example.Centered = autoCompleteVideoName();
 <div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='no' style="height: 650px"
 	src="" onload="resizeIframe();return false;"> </iframe></div>
 <div style="margin-top: 30px;" /></div>
-
+<!-- 
 <div class="footer" align="center">
 	<ul>
 	<li><a href="#">首页</a>|</li>
@@ -146,6 +146,7 @@ YAHOO.example.Centered = autoCompleteVideoName();
 	<li><a href="#">Contact Us</a></li>
 	</ul>
 </div>
+ -->
 <script language="JavaScript">
 	( function() {
 		var tabView = new YAHOO.widget.TabView('tabView');
