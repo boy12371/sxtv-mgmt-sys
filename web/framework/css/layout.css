@@ -135,3 +135,8 @@ ul,li{list-style:none; padding:0; margin:0;}
 	padding: 0em;
 	margin: 0em;
 }
+
+.globalLink{
+	border-style:none;
+	color:#FFFFFF;
+}

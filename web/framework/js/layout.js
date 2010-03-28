@@ -85,7 +85,9 @@ function getBroswer(){
 	return browser;
 }
 
-
+function logout(){
+	window.location="/tv/logon/doLogout.action";
+}
 
 $(document).ready(function() { 
 	 
