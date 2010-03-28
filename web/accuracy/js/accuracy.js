@@ -12,7 +12,7 @@ function initAccuracyTable() {
 		sortable :true
 	},  {
 		key :"accuracy",
-		label :"准确度",
+		label :"准确度(%)",
 		sortable :true
 	}];
 
