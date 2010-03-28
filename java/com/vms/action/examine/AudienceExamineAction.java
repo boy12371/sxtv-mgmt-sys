@@ -89,8 +89,9 @@ public class AudienceExamineAction extends BaseAction {
 				}
 				aes.add(aev);
 			}
+			audienceExamineService.updateAudienceScore(aes);
 		}
-		audienceExamineService.updateAudienceScore(aes);
+		
 		//back to original page
 		toAudienceExamine();
 		return SUCCESS;
