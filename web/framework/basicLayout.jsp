@@ -77,8 +77,9 @@ body {
 		<table><tr style="height: 40px;">
 			<td>&nbsp;</td>
 			<td>
-				<a id="changePassword" href="#">修改密码</a> 
-				<a id="logout" href="#">退出</a>
+				<a id="changePassword" href="#" class="globalLink">修改密码</a> 
+				<span style="color:#FFFFFF">&nbsp;|&nbsp;</span>
+				<a id="logout" href="#" class="globalLink" onclick="logout();return false;">退出</a>
 			</td>
 		</tr></table>
 	</div>
