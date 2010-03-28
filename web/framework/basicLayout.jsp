@@ -132,7 +132,8 @@ YAHOO.example.Centered = autoCompleteVideoName();
 		</s:iterator>
 	</ul>
 	</div>
-</s:iterator></div>
+</s:iterator>
+</div>
 </div>
 
 <div style="overflow-y: auto; overflow-x: hidden" id="contentDiv">
@@ -178,7 +179,7 @@ YAHOO.example.Centered = autoCompleteVideoName();
 		userId:${userInfo.userId},
 		username:"${userInfo.username}",
 		password:"${userInfo.password}",
-		role:${userInfo.roles}
+		role:${userInfo.role}
 	};
 </script>
 </body>
