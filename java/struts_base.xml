@@ -29,6 +29,9 @@
 		<action name="toLogon" class="com.vms.action.LogonAction" method="toLogon">
 			<result name="success">/logon/logon.jsp</result>
 		</action>
+		<action name="doLogout" class="com.vms.action.LogonAction" method="doLogout">
+			<result name="success">/logon/logon.jsp</result>
+		</action>
 	</package>
   
 
