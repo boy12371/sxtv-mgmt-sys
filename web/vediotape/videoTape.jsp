@@ -75,7 +75,7 @@
 		<table class="inputTable">
 			<tr>
 				<td><label>影带编号</label></td>
-				<td><s:property value="vedio.id" /> <s:hidden name="vedio.id" /><s:hidden name="vedio.marketShare" /><s:hidden name="vedio.audienceRating" /></td>
+				<td><s:property value="vedio.id" /> <s:hidden name="vedio.id" id="vedioID" /><s:hidden name="vedio.marketShare" /><s:hidden name="vedio.audienceRating" /></td>
 			</tr>
 			<tr>
 				<td><label>剧目名称</label></td>
@@ -143,13 +143,14 @@ function validateVideoName() {
 	}
 
 	var videoName = YAHOO.util.Dom.get("vname").value;
+	var vedioID = YAHOO.util.Dom.get("vedioID").value;
 	if (videoName.length == 0) {
 		jAlert("信息不完整", '错误');
 		return;
 	}
 
 	var url = encodeURI("/tv/vedio/isVediotapeExsits.action?vedioName="
-			+ videoName);
+			+ videoName+"&vedioID="+vedioID);
 	YAHOO.util.Connect.asyncRequest('GET', encodeURI(url), callbacks);
 }
 	var submitBtn = new YAHOO.widget.Button( {

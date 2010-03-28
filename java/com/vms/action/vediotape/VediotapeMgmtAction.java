@@ -268,11 +268,16 @@ public class VediotapeMgmtAction extends BaseAction {
 				sb.append("SUCCESS");
 			}
 		}else{
-			if(!vedio.getId().equals(vedioID)){
-				sb.append("影带已存在，请检查影带名称");
-			}else{
+			if(vedio == null){
 				sb.append("SUCCESS");
+			}else{
+				if(!vedio.getId().equals(vedioID)){
+					sb.append("影带已存在，请检查影带名称");
+				}else{
+					sb.append("SUCCESS");
+				}
 			}
+			
 		}
 				
 		out.println(sb.toString());
