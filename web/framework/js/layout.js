@@ -66,10 +66,25 @@ function resizeTabview(){
 	var subULs = document.getElementsByTagName("ul");
 	for(var i=0,j=0;i<subULs.length;i++){
 		if("subTabUL" == subULs[i].className){
-			subULs[i].style.marginLeft = tabOffset + j*76 + "px";
+			var lis = subULs[i].getElementsByTagName("li");
+			var sumLis=0;
+			for(var k=0;k<lis.length;k++){
+				sumLis += computeLiWidth(lis[k]);
+			}
+			subULs[i].style.marginLeft = tabOffset + j*76 - (sumLis-76)/2 + "px";
 			j++
 		}
 	}
+}
+
+function computeLiWidth(li){
+	if(null == li) return 0;
+	var a = li.getElementsByTagName("a")[0];
+	var temp = a.innerHTML;
+	temp = temp.replace(/(^\s*)|(\s*$)/g, "");
+	var length = temp.length; 
+	//numOFtabName * fontSize +  padding*2
+	return length*13 + 14*2;
 }
 
 function getBroswer(){

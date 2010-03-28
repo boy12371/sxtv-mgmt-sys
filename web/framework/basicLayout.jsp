@@ -115,12 +115,20 @@ YAHOO.example.Centered = autoCompleteVideoName();
 
 </ul>
 
-<div class="yui-content subTabview" id="subTabview"><s:iterator value="tabs" status="st">
+<div class="yui-content subTabview" id="subTabview">
+<s:iterator value="tabs" status="st">
 	<div id="tab<s:property value='#st.index'/>">
 	<ul class="subTabUL">
-		<s:iterator value="subTabs">
-			<li><a href="<s:property value='url'/>" target="contentFrame" id="<s:property value='id'/>"
-				onclick="highLightSubtab(this);refreshIframe(this);return false;"> <s:property value="name" /> </a></li>
+		<s:iterator value="subTabs" status="xt">
+			<s:if test="#xt.index == 0">
+			<li style="background-image:none;">
+			</s:if><s:else>
+			<li>
+			</s:else>
+				<a href="<s:property value='url'/>" target="contentFrame" id="<s:property value='id'/>" onclick="highLightSubtab(this);refreshIframe(this);return false;"> 
+					<s:property value="name" /> 
+				</a>
+			</li>
 		</s:iterator>
 	</ul>
 	</div>
