@@ -13,6 +13,8 @@ public class SessionUserInfo {
 	private String password;
 	
 	private List<Integer> roles;
+	
+	private String strRoles;
 
 //	private Map<String, Integer> permissions = new HashMap<String, Integer>();
 
@@ -75,5 +77,11 @@ public class SessionUserInfo {
 		this.roles = roles;
 	}
 
-	
+	public void setStrRoles(String strRoles) {
+		this.strRoles = strRoles;
+	}
+
+	public String getStrRoles() {
+		return strRoles;
+	}	
 }
