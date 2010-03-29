@@ -31,7 +31,11 @@ public class AccuracyService implements IAccuracyService{
 			AccuracyVO acc = new AccuracyVO();
 			acc.setUserName(user.getUserName());
 			acc.setEmployeeName(user.getEmployee().getName());
-			acc.setAccuracy(computeAccuracyOfTapes(uScore));
+			if(null == uScore || 0 == uScore.size()){
+				acc.setAccuracy(-1);
+			}else{
+				acc.setAccuracy(computeAccuracyOfTapes(uScore));
+			}
 			accs.add(acc);
 		}
 		return accs;
