@@ -179,7 +179,7 @@ YAHOO.example.Centered = autoCompleteVideoName();
 		userId:${userInfo.userId},
 		username:"${userInfo.username}",
 		password:"${userInfo.password}",
-		role:${userInfo.roles}
+		strRoles:"${userInfo.strRoles}"
 	};
 </script>
 </body>
