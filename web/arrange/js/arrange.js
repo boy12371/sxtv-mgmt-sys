@@ -281,6 +281,7 @@ function initArrangeReorderEvent(){
 				//exchange data of 2 records
 				var srcRecord = arrangeTable.getRecord(this.srcIndex);
 				var destRecord = arrangeTable.getRecord(this.destIndex);
+				if(srcRecord.getData().marked!=-1 && destRecord.getData().marked!=-1){
 				var temp;
 				temp = this.srcData.id;
  				arrangeTable.updateCell(srcRecord, "id" ,this.destData.id);
@@ -313,6 +314,7 @@ function initArrangeReorderEvent(){
  				srcRecord.getData().marked=1;
  				destRecord.getData().marked=1;
 				DDM.refreshCache(); 
+				}
 			} 
 			 
 			Dom.setStyle(this.proxyEl, "visibility", "hidden"); 
