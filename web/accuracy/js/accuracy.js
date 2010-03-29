@@ -1,5 +1,12 @@
 var myDataTable;
 function initAccuracyTable() {	
+	var formatNum = function(elCell, oRecord, oColumn, sData) {
+		if (sData == -1) {
+			elCell.innerHTML = "无评分影带";
+		} else {
+			elCell.innerHTML = sData + "";
+		}
+	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -13,6 +20,7 @@ function initAccuracyTable() {
 	},  {
 		key :"accuracy",
 		label :"准确度(%)",
+		formatter :formatNum,
 		sortable :true
 	}];
 
