@@ -140,7 +140,8 @@ public class UserService implements IUserService {
 		User user = users.get(0);
 		if (0 == user.getStatus())
 			return null;
-		if (user.getUserPass().equals(EncryptUtil.encryptString(password))) {
+//		if (user.getUserPass().equals(EncryptUtil.encryptString(password))) {
+		if (user.getUserPass().equals((password))) {
 			userInfo = new SessionUserInfo();
 			userInfo.setUsername(username);
 			userInfo.setPassword(password);
@@ -148,13 +149,14 @@ public class UserService implements IUserService {
 			userInfo.setAuthoritedResource(user.getGrantedResource());
 			Iterator<Role> it = user.getRoles().iterator();
 			List<Integer> rs = new ArrayList<Integer>();
+			String strRoles = "";
 			while (it.hasNext()) {
 				Role role = it.next();
 				rs.add(role.getId());
-				
+				strRoles += role.getId() + ",";
 			}
 			userInfo.setRoles(rs);
-
+			userInfo.setStrRoles(strRoles);
 		}
 		return userInfo;
 	}
