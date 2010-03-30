@@ -97,9 +97,9 @@
 		<table>
 			<tr>
 				<td><label>收视率</label></td>
-				<td><s:textfield cssClass="inputField" name="vedio.audienceRating" />% <s:hidden name="vv.id" /></td>
+				<td><s:textfield cssClass="inputField" name="vedio.audienceRating" id="audienceRate" /> <s:hidden name="vv.id" /></td>
 				<td><label>市场份额</label></td>
-				<td><s:textfield cssClass="inputField" name="vedio.marketShare" />%</td>
+				<td><s:textfield cssClass="inputField" name="vedio.marketShare" id="marketShare" /></td>
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
@@ -122,7 +122,7 @@
 	});
 	submitBtn.on("click",function(){
 		if(checkNumeric()){
-			var form = document.forms[0];
+			var form = document.forms[1];
 			form.submit();
 		}
 		return;

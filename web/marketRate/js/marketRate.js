@@ -136,6 +136,14 @@ function checkNumeric(){
 	if(isNaN(rate) || isNaN(share)){
 		jAlert("输入错误，请输入数字", '提示');
 		return false;
-	}	
+	}
+	if(parseInt(rate)<0 || parseInt(rate) >100){
+		jAlert("收视率应在0-100之间", '提示');
+		return false;	
+	}
+	if(parseInt(share)<0 || parseInt(share) >100){
+		jAlert("收视率应在0-100之间", '提示');
+		return false;	
+	}
 	return true
 }

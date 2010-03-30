@@ -27,6 +27,7 @@ import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IAuditingDAO;
+import com.vms.db.dao.iface.IScorelevelDAO;
 import com.vms.db.dao.iface.IVedioscoreDAO;
 import com.vms.db.dao.iface.IVediotapeDAO;
 import com.vms.service.iface.IScorelevelService;
@@ -37,7 +38,7 @@ public class VediotapeService implements IVediotapeService {
 	private IVediotapeDAO vediotapeDAO;
 	private IAuditingDAO auditingDAO;
 	private IVedioscoreDAO vedioscoreDAO;
-	private IScorelevelService scorelevelService;
+	private IScorelevelDAO scorelevelDAO;
 	private Class clz = com.vms.db.bean.Vediotape.class;
 
 	@Override
@@ -201,7 +202,7 @@ public class VediotapeService implements IVediotapeService {
 				vScore = (scorelevel.getStart()+scorelevel.getEnd()) / 2;
 			}
 		}		
-		vScore *= 100;
+		
 		if (result) {
 			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(
 					Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(
@@ -216,7 +217,7 @@ public class VediotapeService implements IVediotapeService {
 	}
 
 	private List<Scorelevel> findAllLevels() throws Exception{
-		List<Scorelevel> levels = this.scorelevelService.findAllScorelevel(-1, -1, Scorelevel.PROP_ID, true);
+		List<Scorelevel> levels = this.scorelevelDAO.findAll(Scorelevel.class);
 		return levels;
 	}
 	@Override
@@ -309,12 +310,14 @@ public class VediotapeService implements IVediotapeService {
 		return true;
 	}
 
-	public IScorelevelService getScorelevelService() {
-		return scorelevelService;
+	public IScorelevelDAO getScorelevelDAO() {
+		return scorelevelDAO;
 	}
 
-	public void setScorelevelService(IScorelevelService scorelevelService) {
-		this.scorelevelService = scorelevelService;
+	public void setScorelevelDAO(IScorelevelDAO scorelevelDAO) {
+		this.scorelevelDAO = scorelevelDAO;
 	}
+
+
 
 }

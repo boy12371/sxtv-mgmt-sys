@@ -10,7 +10,7 @@ function formatDate(elCell, oRecord, oColumn, sData) {
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		if (oRecord.getData("status").id != 5 ) {
+		if (oRecord.getData("status").id == 2 ) {
 			var href = "<a href='./audit/findVideoByNameOrID?optionName=auditing&vid=";
 			href += sData;
 			href += "'>" + sData + "</a>";
@@ -250,9 +250,48 @@ function initDataTable() {
 		container : "printBtn"
 	});
 	
-	printBtn.on("click",function(){
-		alert(myDataSource.liveData);
-		alert(myDataTable.configs.initialRequest);
+	printBtn.on("click",function(e){
+		 var filter = YAHOO.util.Dom.get('filter');
+		 var url = myDataSource.liveData+"sort=dateInput&dir=asc&startIndex=-1&results=0&filter="+filter.value;
+		 
+		
+		    // Define the callbacks for the asyncRequest
+		    var callbacks = {
+		        success : function (o) {
+		            YAHOO.log("RAW JSON DATA: " + o.responseText);
+		            // Process the JSON data returned from the server
+		            var jsonObj;
+		            try {
+		            	jsonObj = YAHOO.lang.JSON.parse(o.responseText);
+		            }
+		            catch (x) {
+		                alert("JSON Parse failed!");
+		                return;
+		            }
+		            var cset = myDataTable.getColumnSet();
+		            var cLen = cset.getDefinitions().length;
+		            for(var k=0; k< cLen; k++){
+		   			 var c = cset.getColumn(k);
+		   			 alert(c.label);
+		            }
+		            var records = jsonObj.records;
+		            var len = records.length;
+		            for (var i = 0; i < len; i++) {
+		                var rc = records[i];
+		                alert(rc.vedioName);
+		            }
+		        },
+
+		        failure : function (o) {
+		            if (!YAHOO.util.Connect.isCallInProgress(o)) {
+		                alert("Async call failed!");
+		            }
+		        },
+		        timeout : 3000
+		    }
+		    // Make the call to the server for JSON data
+		    YAHOO.util.Connect.asyncRequest('GET',url, callbacks);
+
 	});
 	return {
 		ds : myDataSource,
