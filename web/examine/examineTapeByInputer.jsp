@@ -5,17 +5,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 
+
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/examine/js/examineTapeByInputer.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
@@ -54,50 +67,26 @@
 			</tr>
 			<tr>
 				<td><label>故事</label></td>
-				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" id="storyScore"/></td>
-				</s:if>
-				<s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" id="storyScore" value=""/></td>
-				</s:else>
+				<td><s:textfield cssClass="inputField" name="tapeScore.storyScore" id="storyScore" value=""/></td>
 			</tr>
 			<tr>
 				<td><label>技术</label></td>
-				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.techScore" id="techScore"/></td>
-				</s:if>
-				<s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.techScore" id="techScore" value=""/></td>
-				</s:else>
+				<td><s:textfield cssClass="inputField" name="tapeScore.techScore" id="techScore" value=""/></td>
 			</tr>
 			<tr>
 				<td><label>表演</label></td>
-				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.performScore" id="performScore"/></td>
-				</s:if>
-				<s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.performScore" id="performScore" value=""/></td>
-				</s:else>
+				<td><s:textfield cssClass="inputField" name="tapeScore.performScore" id="performScore" value=""/></td>
 			</tr>
 			<tr>
 				<td><label>创新</label></td>
-				<s:if test="'modify'==perform">
-					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" id="innovateScore" /></td>
-				</s:if><s:else>
-					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" id="innovateScore" value=""/></td>
-				</s:else>
+				<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" id="innovateScore" value=""/></td>
 			</tr>
 			<tr>
 				<td><label>购买意向</label></td>
 				<td>
 					<table><tr>
-					<s:if test="'modify'==perform && '购买'==tapeScore.purchase">
-						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="1" checked="checked"/>购买</td>
-						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="0"/>不购买</td>
-					</s:if><s:else>
-						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="1"/>购买</td>
+						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="1" id="purchase"/>购买</td>
 						<td><input type="radio" class="radioSel" name="tapeScore.purchase" value="0" checked="checked"/>不购买</td>
-					</s:else>
 					</tr></table>
 				</td>
 				<td></td>
@@ -105,21 +94,13 @@
 			</tr>
 			<tr>
 				<td><label>获奖备选</label></td>
-				<s:if test="'modify'==perform && '推荐'==tapeScore.award">
-					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1" checked="checked"/>推荐</td>
-				</s:if><s:else>
-					<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1"/>推荐</td>
-				</s:else>
+				<td><input type="checkbox" class="radioSel" name="tapeScore.award" value="1" id="award"/>推荐</td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td><label>导向</label></td>
-				<s:if test="'modify'==perform && 1==tapeScore.orientation">
-					<td><input type="checkbox" class="radioSel" name="tapeScore.orientation" value="1" checked="checked"/>不合格</td>
-				</s:if><s:else>
-					<td><input type="checkbox" class="radioSel" name="tapeScore.orientation" value="1"/>不合格</td>
-				</s:else>
+				<td><input type="checkbox" class="radioSel" name="tapeScore.orientation" value="1" id="orientation"/>不合格</td>
 				<td></td>
 				<td></td>
 			</tr>
@@ -128,8 +109,11 @@
 			<div id="okBtnDiv" style="display:inline;margin-right:50px;"></div>
 		</div>
 	</div>
+	
+	<p>已打分值</p>
+	<div id="dynamicdata" align="center"></div>
 </s:form>
-<div id="dynamicdata" align="center"></div>
+
 <script language="JavaScript">
 var examiners = new Array();
 <s:iterator value="examiners" status="st">
@@ -183,7 +167,9 @@ var okBtn = new YAHOO.widget.Button({
 					id: "okBtn",  
 					container: "okBtnDiv" }
 					); 
-okBtn.on("click",okAction);
+okBtn.on("click",addData);
+
+initDataTable();
 </script>
 </body>
 </html>
