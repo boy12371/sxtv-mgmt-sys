@@ -200,6 +200,7 @@ public class VediotapeService implements IVediotapeService {
 		for (Scorelevel scorelevel : levels) {
 			if(rate > scorelevel.getStart() && rate <= scorelevel.getEnd()){
 				vScore = (scorelevel.getStart()+scorelevel.getEnd()) / 2;
+				break;
 			}
 		}		
 		
