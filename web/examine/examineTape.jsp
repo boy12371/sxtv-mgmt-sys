@@ -42,7 +42,7 @@
 				<td><label>打分人员</label></td>
 				<td><s:property value="tapeScore.examiner"/></td>
 			</tr>
-			</s:if><s:elseif test="userInfo.role == 2">
+			</s:if><s:elseif test="%{userInfo.strRoles.indexOf(\"2\") != -1}">
 			<tr>
 				<td><label>输入打分人员</label></td>
 				<td>
@@ -139,7 +139,7 @@
 </s:form>
 
 <script language="JavaScript">
-<s:if test="userInfo.role == 2">
+<s:if test="%{userInfo.strRoles.indexOf(\"2\") != -1}">
 var examiners = new Array();
 <s:iterator value="examiners" status="st">
 	var name = "<s:property value='employee.name' escape='false'/>";
