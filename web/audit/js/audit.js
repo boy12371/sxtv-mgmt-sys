@@ -6,6 +6,16 @@ function formatDate(elCell, oRecord, oColumn, sData) {
 			elCell.innerHTML = sData;
 		}
 	}
+function getDateFromDataTimePicker(pickerID) {
+    var picker = dojo.widget.byId(pickerID);
+    //string value
+    var stringValue = picker.getValue();
+    alert(stringValue);
+    
+    //date value
+    var dateValue = picker.getDate();
+    alert(dateValue);
+ }
 
 function initDataTable() {
 
@@ -205,27 +215,10 @@ function initDataTable() {
 	var fireEvent = function(resetRecordOffset) {
 		var oState = myDataTable.getState(), request, oCallback;
 
-		/*
-		 * We don't always want to reset the recordOffset. If we want the
-		 * Paginator to be set to the first page, pass in a value of true to
-		 * this method. Otherwise, pass in false or anything falsy and the
-		 * paginator will remain at the page it was set at before.
-		 */
 		if (resetRecordOffset) {
 			oState.pagination.recordOffset = 0;
 		}
 
-		/*
-		 * If the column sort direction needs to be updated, that may be done
-		 * here. It is beyond the scope of this example, but the
-		 * DataTable::sortColumn() method has code that can be used with some
-		 * modification.
-		 */
-
-		/*
-		 * This example uses onDataReturnSetRows because that method will clear
-		 * out the old data in the DataTable, making way for the new data.
-		 */
 		oCallback = {
 			success : myDataTable.onDataReturnSetRows,
 			failure : myDataTable.onDataReturnSetRows,
@@ -243,6 +236,28 @@ function initDataTable() {
 	// DataTable instance
 	var filter = YAHOO.util.Dom.get("filter");
 	YAHOO.util.Event.addListener(filter, "change", fireEvent);
+	
+	var generatePrintTable = function(){
+		//getDateFromDataTimePicker("fromDate");
+		var filter = YAHOO.util.Dom.get('filter');
+		
+		var from = dojo.widget.byId("fromDate");
+		var to = dojo.widget.byId("fromDate");		
+	    var fromValue = from.getValue();
+	    var toValue = to.getValue();
+
+	    var startDate = fromValue.substring(0,fromValue.indexOf("T"));
+	    var endDate = toValue.substring(0,toValue.indexOf("T"));
+	    var paramValue="sort=dateInput&dir=asc&startIndex=-1&results=0&sc.status.id=" + filter.value + "&sc.startDate="+ startDate + "&sc.endDate=" + endDate;
+	    escape(paramValue);
+	    var queryString = "/tv/search/toPrintVideosReport.action?query="+escape(paramValue);
+	    $.unblockUI();
+	    window.open(queryString, "打印预览");
+	    
+	}
+	var yesBtn = YAHOO.util.Dom.get("yes");
+	YAHOO.util.Event.addListener(yesBtn, "click", generatePrintTable);
+	
 	var printBtn = new YAHOO.widget.Button({
 		type : "button",
 		id : "topicBtn",
@@ -251,46 +266,47 @@ function initDataTable() {
 	});
 	
 	printBtn.on("click",function(e){
-		 var filter = YAHOO.util.Dom.get('filter');
-		 var url = myDataSource.liveData+"sort=dateInput&dir=asc&startIndex=-1&results=0&filter="+filter.value;
-		 
-		
-		    // Define the callbacks for the asyncRequest
-		    var callbacks = {
-		        success : function (o) {
-		            YAHOO.log("RAW JSON DATA: " + o.responseText);
-		            // Process the JSON data returned from the server
-		            var jsonObj;
-		            try {
-		            	jsonObj = YAHOO.lang.JSON.parse(o.responseText);
-		            }
-		            catch (x) {
-		                alert("JSON Parse failed!");
-		                return;
-		            }
-		            var cset = myDataTable.getColumnSet();
-		            var cLen = cset.getDefinitions().length;
-		            for(var k=0; k< cLen; k++){
-		   			 var c = cset.getColumn(k);
-		   			 alert(c.label);
-		            }
-		            var records = jsonObj.records;
-		            var len = records.length;
-		            for (var i = 0; i < len; i++) {
-		                var rc = records[i];
-		                alert(rc.vedioName);
-		            }
-		        },
-
-		        failure : function (o) {
-		            if (!YAHOO.util.Connect.isCallInProgress(o)) {
-		                alert("Async call failed!");
-		            }
-		        },
-		        timeout : 3000
-		    }
-		    // Make the call to the server for JSON data
-		    YAHOO.util.Connect.asyncRequest('GET',url, callbacks);
+		$.blockUI({ message: $('#printDate'), css: { width: '400px',top:'25%',left:'30%',cursor:'auto' } }); 
+//		 var filter = YAHOO.util.Dom.get('filter');
+//		 var url = myDataSource.liveData+"sort=dateInput&dir=asc&startIndex=-1&results=0&filter="+filter.value;
+//		 
+//		
+//		    // Define the callbacks for the asyncRequest
+//		    var callbacks = {
+//		        success : function (o) {
+//		            YAHOO.log("RAW JSON DATA: " + o.responseText);
+//		            // Process the JSON data returned from the server
+//		            var jsonObj;
+//		            try {
+//		            	jsonObj = YAHOO.lang.JSON.parse(o.responseText);
+//		            }
+//		            catch (x) {
+//		                alert("JSON Parse failed!");
+//		                return;
+//		            }
+//		            var cset = myDataTable.getColumnSet();
+//		            var cLen = cset.getDefinitions().length;
+//		            for(var k=0; k< cLen; k++){
+//		   			 var c = cset.getColumn(k);
+//		   			 alert(c.label);
+//		            }
+//		            var records = jsonObj.records;
+//		            var len = records.length;
+//		            for (var i = 0; i < len; i++) {
+//		                var rc = records[i];
+//		                alert(rc.vedioName);
+//		            }
+//		        },
+//
+//		        failure : function (o) {
+//		            if (!YAHOO.util.Connect.isCallInProgress(o)) {
+//		                alert("Async call failed!");
+//		            }
+//		        },
+//		        timeout : 3000
+//		    }
+//		    // Make the call to the server for JSON data
+//		    YAHOO.util.Connect.asyncRequest('GET',url, callbacks);
 
 	});
 	return {

@@ -32,10 +32,7 @@ public class Test {
 		
 		System.out.println(EncryptUtil.encryptString("a"));
 		
-		System.out.println("===========================");
-		System.out.println(EncryptUtil.encryptString("a|a"));
-		
-		System.out.println(EncryptUtil.encryptString("a"));
+	
 //		
 //		GrantedAuthority[] gas = user.getAuthorities();
 //		System.out.println(gas.length);

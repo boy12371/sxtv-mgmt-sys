@@ -27,6 +27,36 @@ function initDataTable() {
 	var formatStatus = function(elCell, oRecord, oColumn, sData) {
 		elCell.innerHTML = sData.status;
 	}
+	var formatScroes = function(elCell, oRecord, oColumn, sData) {
+		if(sData.length==0){
+			elCell.innerHTML = "0";
+		}else{
+			var avgScore = 0;
+			var total =0;
+			for ( var i = 0; i < sData.length; i++) {
+					total += sData[i].score;
+			}
+			var s = (total/sData.length).toString();
+			s = s.substring(0, s.indexOf(".")+3);
+			elCell.innerHTML = s;
+		}
+	}
+	var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
+		if(sData.length==0){
+			elCell.innerHTML = "0/0";
+		}else{
+			var yes = 0;
+			var no =0;
+			for ( var i = 0; i < sData.length; i++) {
+					if(sData[i].result==1){
+						yes += 1;
+					}else{
+						no += 1;
+					}
+			}
+			elCell.innerHTML = yes+"/"+no;
+		}
+	}
 	// Column definitions
 	var myColumnDefs = [{
 				key : "id",
@@ -52,7 +82,7 @@ function initDataTable() {
 				sortable : true,
 				formatter : formatCompany
 			}, {
-				key : "dateComing",
+				key : "dateInput",
 				label : "收带日期",
 				sortable : true,
 				formatter : formatDate
@@ -70,6 +100,14 @@ function initDataTable() {
 				label : "收视率",
 				sortable : true
 			}, {
+				key : "vedioscores",
+				label : "综合平均分",
+				formatter : formatScroes
+			}, {
+				key : "audiencescore",
+				label : "观众投票(看/不看)",
+				formatter : formatAudienceScore
+			}, {
 				key : "comments",
 				label : "备注"
 			}];
@@ -80,8 +118,7 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
-				"dateComing", "status", "marketShare", "audienceRating",
-				"comments"],
+				"dateInput", "status", "marketShare", "audienceRating","vedioscores", "audiencescore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -124,11 +161,11 @@ function initDataTable() {
 	}
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=dateComing&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=dateInput&dir=asc&startIndex=0&results=25",
 		initialLoad : false,
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
-			key : "dateComing",
+			key : "dateInput",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
@@ -221,3 +258,4 @@ function initDataTable() {
 	};
 
 }
+

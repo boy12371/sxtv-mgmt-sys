@@ -29,5 +29,15 @@
 			<result name="success">/search/searchVideos.jsp</result>
 			
 		</action>
+		
+		<action name="toPrintVideosReport" class="searchMgmt" method="toPrintVideosReport">
+			<result name="success">/search/videoExcelTable.jsp</result>
+			<result name="input">/search/videoExcelTable.jsp</result>
+		</action>
+		<action name="doPrintVideosReport" class="searchMgmt" method="doPrintVideosReport">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
 	</package>
 </struts>

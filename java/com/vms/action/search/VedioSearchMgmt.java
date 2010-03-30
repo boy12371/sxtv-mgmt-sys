@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 
 import com.vms.beans.JSONDataTable;
@@ -39,6 +41,8 @@ public class VedioSearchMgmt extends BaseAction {
 	private SearchCondition sc;
 	private String query;
 	private String vid;
+	private String jsonData;
+	
 
 	
 	
@@ -103,7 +107,28 @@ public class VedioSearchMgmt extends BaseAction {
 		}
 		return this.SUCCESS;
 	}
-
+	
+	public String toPrintVideosReport(){		
+		return SUCCESS;
+	}
+	
+	public String doPrintVideosReport() throws Exception {
+		table = JSONDataTableUtils.initJSONDataTable(getRequest());
+		try {
+			List<Vediotape> dataList = this.vedioService.findVidesByConditions(
+					sc, table.getSort(), table.getStartIndex(), table
+							.getStartIndex()
+							+ table.getRowsPerPage(), table.getDir().equals(
+							JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(dataList, table, vedioService
+					.getTotalCountForVidesByConditions(sc));	
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		return this.SUCCESS;
+	}
+	
 	public List<Company> getComList() throws Exception {
 		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true, false);
 	}
@@ -213,5 +238,11 @@ public class VedioSearchMgmt extends BaseAction {
 	}
 	public void setVid(String vid) {
 		this.vid = vid;
+	}
+	public String getJsonData() {
+		return jsonData;
+	}
+	public void setJsonData(String jsonData) {
+		this.jsonData = jsonData;
 	}
 }
