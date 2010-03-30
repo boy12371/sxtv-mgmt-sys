@@ -35,6 +35,7 @@
 			<result>/examine/examineTape.jsp</result>
 			<result name="input">/examine/examineTape.jsp</result>
 			<result name="view">/examine/viewTapeScore.jsp</result>
+			<result name="inputerExam">/examine/examineTapeByInputer.jsp</result>
 		</action>
 		
 		<action name="doExamineTape" class="examineMgmt" method="doExamineTape">

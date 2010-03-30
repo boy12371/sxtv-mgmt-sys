@@ -168,6 +168,9 @@ public class ExamineAction extends BaseAction {
 		if(this.getUserInfo().getRoles().contains(CommonVariable.ROLE_INPUTER)){
 			examiners = vedioscoreService.findAllExaminer();
 		}
+		if(getUserInfo().getRoles().contains(new Integer(CommonVariable.ROLE_INPUTER))){
+			return "inputerExam";
+		}
 		return SUCCESS;
 	}
 	
