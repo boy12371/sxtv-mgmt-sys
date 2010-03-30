@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2010 年 03 月 28 日 11:16
+-- 生成日期: 2010 年 03 月 31 日 00:41
 -- 服务器版本: 5.0.75
 -- PHP 版本: 5.2.6-3ubuntu4
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `auditing` (
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='审核' AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='审核' AUTO_INCREMENT=47 ;
 
 --
 -- 转存表中的数据 `auditing`
@@ -149,7 +149,11 @@ INSERT INTO `auditing` (`id`, `vedioID`, `auditor`, `auditDate`, `result`, `comm
 (39, '32ff2', 1, '2010-03-28 10:51:00', 5, NULL),
 (40, '1457', 1, '2010-03-28 10:51:00', 5, NULL),
 (41, '32ff2', 1, '2010-03-28 10:51:13', 3, NULL),
-(42, '32ff2', 1, '2010-03-28 11:02:58', 5, NULL);
+(42, '32ff2', 1, '2010-03-28 11:02:58', 5, NULL),
+(43, '1457', 1, '2010-03-28 17:09:39', 3, NULL),
+(44, 'sfw', 1, '2010-03-28 22:56:56', 3, NULL),
+(45, '32ff2', 1, '2010-03-28 22:57:05', 3, NULL),
+(46, '1457', 1, '2010-03-28 22:57:10', 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,14 +177,14 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `contactPerson`, `status`, `comments`) VALUES
-(1, '中华影视', '12331123123', '34534534534', '胡戈', 0, '第三方万恶服务'),
+(1, '中华影视', '12331123123', '34534534534', '胡戈', 1, '第三方万恶服务'),
 (2, '美国影视', '123123', '123123', '万恶范围阿飞', 1, '发送到非 '),
-(3, '法国影视', '34234', 'werwef', 'fwefwef', 0, '发送到非万恶 '),
+(3, '法国影视', '34234', 'werwef', 'fwefwef', 1, '发送到非万恶 '),
 (4, '3werwer', '', '234234', 'fwefwef', 1, ''),
 (5, '土耳其影视公司', '8987786', '', '', 1, ''),
 (6, 'dsvsdv', 'fwefwefwefwef', '234234', '快速', 1, 'ffffffffffffffffffffffwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwefwefwefwef'),
 (7, '韩国影视公司', '1231209809302983', '09807986', '乐山大佛', 1, '似懂非懂发'),
-(8, 'sdf ', '', '', '', 0, '');
+(8, 'sdf ', '', '', '', 1, '');
 
 -- --------------------------------------------------------
 
@@ -349,9 +353,9 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
 CREATE TABLE IF NOT EXISTS `scorelevel` (
   `id` int(11) NOT NULL auto_increment,
   `level` int(11) NOT NULL default '0',
-  `start` float NOT NULL default '0',
-  `end` float NOT NULL default '0',
-  `comments` varchar(256) NOT NULL,
+  `start` int(11) NOT NULL default '0',
+  `end` int(11) NOT NULL default '0',
+  `levelscore` float NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `level` (`level`),
   UNIQUE KEY `level_2` (`level`),
@@ -362,12 +366,11 @@ CREATE TABLE IF NOT EXISTS `scorelevel` (
 -- 转存表中的数据 `scorelevel`
 --
 
-INSERT INTO `scorelevel` (`id`, `level`, `start`, `end`, `comments`) VALUES
-(1, 1, 0, 60, ''),
-(2, 2, 60, 70, ''),
-(3, 3, 70, 80, ''),
-(4, 4, 80, 90, ''),
-(5, 5, 90, 100, '');
+INSERT INTO `scorelevel` (`id`, `level`, `start`, `end`, `levelscore`) VALUES
+(1, 1, 1, 3, 95),
+(2, 2, 4, 10, 90),
+(3, 3, 11, 15, 85),
+(4, 4, 16, 10000000, 70);
 
 -- --------------------------------------------------------
 
@@ -439,8 +442,8 @@ CREATE TABLE IF NOT EXISTS `subject` (
 INSERT INTO `subject` (`subjectID`, `subjectName`, `status`, `comments`) VALUES
 (1, '都市碎戏', 1, '都市碎戏都'),
 (2, '百家碎戏', 1, '百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏'),
-(3, '狼人虎剧', 1, '西安电视台'),
-(4, '物业剧场', 1, '斯蒂芬');
+(3, '狼人虎剧', 0, '西安电视台'),
+(4, '物业剧场', 0, '斯蒂芬');
 
 -- --------------------------------------------------------
 
@@ -466,7 +469,7 @@ INSERT INTO `topic` (`topicID`, `topicName`, `status`, `comments`) VALUES
 (3, '生活', 1, '生活生活生活生活生活生活'),
 (4, '社会', 1, '社会社会社会社会社会5u56u'),
 (5, '民生', 1, '民生民生民生民生'),
-(6, '都市碎戏', 1, '都市碎戏都');
+(6, '爱情', 1, '爱情爱情爱情');
 
 -- --------------------------------------------------------
 
@@ -489,7 +492,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`userID`, `userName`, `userPass`, `employee`, `status`) VALUES
-(1, 'tiger', 'tiger', 1, 1),
+(1, 'tiger', 'c4ca4238a0b923820dcc509a6f75849b', 1, 1),
 (2, 'cat', '123', 2, 1),
 (3, 'pencil', '123', 3, 1),
 (4, 'dog', '123', 4, 1),
@@ -561,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `vedioscore` (
   KEY `vedioExaminer` (`examiner`),
   KEY `vedioID` (`vedioID`),
   KEY `operator` (`operator`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='评分表' AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='评分表' AUTO_INCREMENT=22 ;
 
 --
 -- 转存表中的数据 `vedioscore`
@@ -583,7 +586,8 @@ INSERT INTO `vedioscore` (`id`, `vedioID`, `examiner`, `storyScore`, `techScore`
 (17, 'sw12', 2, 55, 55, 55, 55, 55, 0, 5, 0, '2010-02-01 00:00:00', 1, 0, NULL),
 (18, 'sw12', 4, 67, 67, 67, 67, 67, 0, 17, 0, '2010-02-01 00:00:00', 1, 0, NULL),
 (19, 'sw12', 5, 33, 33, 33, 33, 33, 0, 1, 0, '2010-02-01 00:00:00', 1, 0, NULL),
-(20, '23g', 1, 0.5, 0.23, 0.4, 0.6, 0.546, 0, NULL, 0, '2010-03-23 23:55:58', 1, 1, NULL);
+(20, '23g', 1, 0.5, 0.23, 0.4, 0.6, 0.546, 0, NULL, 0, '2010-03-23 23:55:58', 1, 1, NULL),
+(21, '9991', 1, 20, 25, 35, 45, 37, 1, NULL, 1, '2010-03-28 11:22:40', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -632,7 +636,7 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('3', '蝴蝶效应', 2, 3, 1, '2009-01-01', '2009-01-02 00:00:00', 3, 2, NULL, 0.7, 0.8),
 ('324aa', 'sfwe43', 2, 1, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 7, 'sdvvsdv', NULL, NULL),
 ('32f', 'fwef', 2, 3, 2, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'sd', NULL, NULL),
-('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 5, 'sdfwe', NULL, NULL),
+('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 3, 'sdfwe', NULL, NULL),
 ('3334df', 'dsss', 1, 1, 2, '2010-03-28', '2010-03-28 09:43:42', 1, 1, 'cvsdv', NULL, NULL),
 ('4', '超黑特警', 2, 4, 1, '2009-02-01', '2009-02-02 00:00:00', 3, 5, NULL, NULL, NULL),
 ('452s11', 'ddfe1', 1, 3, 2, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
@@ -648,12 +652,14 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('452sd', 'fwfwef', 1, 2, 1, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdv', NULL, NULL),
 ('6556hg', 'hhthth', 2, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'bfgbfg', NULL, NULL),
 ('6880hg', 'ghrh', 1, 1, 3, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'vbnfgnfgn', NULL, NULL),
+('9991', '老大的幸福', 1, 3, 3, '2010-03-28', '2010-03-28 11:21:21', 1, 1, '纷飞', NULL, NULL),
+('9992', '老二的幸福', 2, 4, 1, '2010-03-28', '2010-03-28 11:21:21', 1, 1, '纷纷', NULL, NULL),
 ('dthw23', 'rhrhrth', 2, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'bfgbfg', NULL, NULL),
-('ert34', 'fggrgrg', 1, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'bfgbfg', NULL, NULL),
-('sf1', 'sdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 1, 'ddv', NULL, NULL),
+('ert34', 'fggrgrg', 1, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 9, 'bfgbfg', 43.2, 30.5),
+('sf1', 'sdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 9, 'ddv', 34, 37),
 ('sf1vsd', 'weqdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 5, 'ddvsdfsd', NULL, NULL),
-('sfw', '1v2asdsv', 1, 1, 1, '2010-02-10', '2010-02-10 14:20:35', 1, 5, 'sdvsdv', NULL, NULL),
-('sw12', 'dqwe', 2, 3, 1, '2010-02-12', '2010-02-12 10:33:18', 1, 9, 'ssdv', 0.6, 0.5);
+('sfw', '1v2asdsv', 1, 1, 1, '2010-02-10', '2010-02-10 14:20:35', 1, 3, 'sdvsdv', NULL, NULL),
+('sw12', 'dqwe', 2, 3, 1, '2010-02-12', '2010-02-12 10:33:18', 1, 9, 'ssdv', 47, 43);
 
 --
 -- 限制导出的表
