@@ -12,14 +12,14 @@ public class BaseScorelevel implements Serializable {
 	public static String PROP_LEVEL = "level";
 	public static String PROP_START = "start";
 	public static String PROP_END = "end";
-	public static String PROP_COMMENTS = "comments";
+	public static String PROP_COMMENTS = "levelScore";
 	public static String PROP_ID = "id";
 
 	private java.lang.Integer id;
 	private java.lang.Integer level;
-	private java.lang.Float start;
-	private java.lang.Float end;
-	private java.lang.String comments;
+	private java.lang.Integer start;
+	private java.lang.Integer end;
+	private java.lang.Float levelScore;
 
 	private int hashCode = Integer.MIN_VALUE;
 
@@ -32,10 +32,10 @@ public class BaseScorelevel implements Serializable {
 
 	}
 
-	public BaseScorelevel(String comments, Float end, Integer id,
-			Integer level, Float start) {
+	public BaseScorelevel(Float levelScore, Integer end, Integer id,
+			Integer level, Integer start) {
 		super();
-		this.comments = comments;
+		this.levelScore = levelScore;
 		this.end = end;
 		this.id = id;
 		this.level = level;
@@ -59,29 +59,25 @@ public class BaseScorelevel implements Serializable {
 		this.level = level;
 	}
 
-	public java.lang.Float getStart() {
+	public java.lang.Integer getStart() {
 		return start;
 	}
 
-	public void setStart(java.lang.Float start) {
+	public void setStart(java.lang.Integer start) {
 		this.start = start;
 	}
 
-	public java.lang.Float getEnd() {
+	public java.lang.Integer getEnd() {
 		return end;
 	}
 
-	public void setEnd(java.lang.Float end) {
+	public void setEnd(java.lang.Integer end) {
 		this.end = end;
 	}
 
-	public java.lang.String getComments() {
-		return comments;
-	}
+	
 
-	public void setComments(java.lang.String comments) {
-		this.comments = comments;
-	}
+
 
 	public boolean equals(Object obj) {
 		if (null == obj)
@@ -112,6 +108,14 @@ public class BaseScorelevel implements Serializable {
 
 	public String toString() {
 		return super.toString();
+	}
+
+	public java.lang.Float getLevelScore() {
+		return levelScore;
+	}
+
+	public void setLevelScore(java.lang.Float levelScore) {
+		this.levelScore = levelScore;
 	}
 
 }

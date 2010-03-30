@@ -6,6 +6,8 @@ import com.vms.db.bean.base.BaseVediotape;
 
 public class Vediotape extends BaseVediotape {
 	private static final long serialVersionUID = 1L;
+	
+	private float score;
 	/* [CONSTRUCTOR MARKER BEGIN] */
 	public Vediotape() {
 		super();
@@ -26,6 +28,14 @@ public class Vediotape extends BaseVediotape {
 			java.lang.String vedioName, java.util.Date dateComing, java.util.Date dateInput) {
 
 		super(id, topic, inputer, status, subject, companyID, vedioName, dateComing, dateInput);
+	}
+
+	public float getScore() {
+		return score;
+	}
+
+	public void setScore(float score) {
+		this.score = score;
 	}
 
 

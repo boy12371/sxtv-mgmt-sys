@@ -11,10 +11,10 @@
 		</id>
 
 		<property name="level" column="level" type="integer" not-null="true" length="10"/>
-		<property name="start" column="start" type="java.lang.Float" not-null="true" length="12"/>
-		<property name="end" column="end" type="java.lang.Float" not-null="true" length="12"/>
-		<property name="comments" column="comments" type="string"
-			not-null="false" length="512" />
+		<property name="start" column="start" type="integer" not-null="true" length="12"/>
+		<property name="end" column="end" type="integer" not-null="true" length="12"/>
+		<property name="levelScore" column="levelscore" type="java.lang.Float"
+			not-null="false" length="12"/>
 
 	</class>	
 </hibernate-mapping>

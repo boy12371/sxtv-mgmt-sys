@@ -129,6 +129,27 @@ public class VedioSearchMgmt extends BaseAction {
 		return this.SUCCESS;
 	}
 	
+	
+	public String toVideoSequence(){
+		return SUCCESS;
+	}
+	
+	public String doSearchAndSequenceVideos(){
+		table = JSONDataTableUtils.initJSONDataTable(getRequest());
+		try {
+			List<Vediotape> dataList = this.vedioService.findVideosByRateOrder(
+					sc, table.getSort(), table.getStartIndex(), table
+							.getStartIndex()
+							+ table.getRowsPerPage(), table.getDir().equals(
+							JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList.size());
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+
+		}
+		return this.SUCCESS;
+	}
 	public List<Company> getComList() throws Exception {
 		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true, false);
 	}

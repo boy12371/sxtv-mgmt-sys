@@ -72,9 +72,10 @@ public class VediotapeService implements IVediotapeService {
 	public List<Vediotape> findAllVideotapesForAudit(String propertyName,
 			int startIndex, int endIndex, boolean asceding) throws Exception {
 		// TODO Auto-generated method stub
-		Status[] values = { new Status(2), new Status(3), new Status(5), new Status(7) };
-		return vediotapeDAO.findAllVideosInScope(Vediotape.PROP_STATUS,
-				values, propertyName, startIndex, endIndex, asceding);
+		Status[] values = { new Status(2), new Status(3), new Status(5),
+				new Status(7) };
+		return vediotapeDAO.findAllVideosInScope(Vediotape.PROP_STATUS, values,
+				propertyName, startIndex, endIndex, asceding);
 
 	}
 
@@ -194,16 +195,16 @@ public class VediotapeService implements IVediotapeService {
 		// TODO Auto-generated method stub
 		String hql = "update Vediotape v set v.marketShare=?, v.audienceRating=?, v.status.id=? where v.id=?";
 		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] {
-				market, rate, 8, videoID });
+				market, rate, 9, videoID });
 		float vScore = 0;
 		List<Scorelevel> levels = this.findAllLevels();
 		for (Scorelevel scorelevel : levels) {
-			if(rate > scorelevel.getStart() && rate <= scorelevel.getEnd()){
-				vScore = (scorelevel.getStart()+scorelevel.getEnd()) / 2;
+			if (rate > scorelevel.getStart() && rate <= scorelevel.getEnd()) {
+				vScore = (scorelevel.getStart() + scorelevel.getEnd()) / 2;
 				break;
 			}
-		}		
-		
+		}
+
 		if (result) {
 			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(
 					Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(
@@ -217,10 +218,11 @@ public class VediotapeService implements IVediotapeService {
 		return true;
 	}
 
-	private List<Scorelevel> findAllLevels() throws Exception{
+	private List<Scorelevel> findAllLevels() throws Exception {
 		List<Scorelevel> levels = this.scorelevelDAO.findAll(Scorelevel.class);
 		return levels;
 	}
+
 	@Override
 	public boolean updateVideoInfo(Vediotape video) throws Exception {
 		// TODO Auto-generated method stub
@@ -267,16 +269,18 @@ public class VediotapeService implements IVediotapeService {
 		if (condition.getName() != null && !"".equals(condition.getName())) {
 			fieldsValues.put(Vediotape.PROP_VEDIO_NAME, condition.getName());
 		}
-		if (condition.getCompany() != null && condition.getCompany().getId()!=0) {
+		if (condition.getCompany() != null
+				&& condition.getCompany().getId() != 0) {
 			fieldsValues.put(Vediotape.PROP_COMPANY_ID, condition.getCompany());
 		}
-		if (condition.getTopic() != null && condition.getTopic().getId()!=0) {
+		if (condition.getTopic() != null && condition.getTopic().getId() != 0) {
 			fieldsValues.put(Vediotape.PROP_TOPIC, condition.getTopic());
 		}
-		if (condition.getSubject() != null && condition.getSubject().getId()!=0) {
+		if (condition.getSubject() != null
+				&& condition.getSubject().getId() != 0) {
 			fieldsValues.put(Vediotape.PROP_SUBJECT, condition.getSubject());
 		}
-		if (condition.getStatus() != null && condition.getStatus().getId()!=0) {
+		if (condition.getStatus() != null && condition.getStatus().getId() != 0) {
 			fieldsValues.put(Vediotape.PROP_STATUS, condition.getStatus());
 		}
 		if (condition.getStartingDate() != null) {
@@ -286,6 +290,38 @@ public class VediotapeService implements IVediotapeService {
 			fieldsValues.put("endDate", condition.getEndingDate());
 		}
 		return fieldsValues;
+	}
+	
+	@Override
+	public List<Vediotape> findVideosByRateOrder(SearchCondition condition,
+			String propertyName, int startIndex, int endIndex, boolean asceding)
+			throws Exception {
+
+		List<Vediotape> vList = this.findVidesByConditions(condition,
+				Vediotape.PROP_AUDIENCE_RATING, -1, -1, true);
+		List<Scorelevel> levels = this.findAllLevels();
+
+		for (int i = 0; i < vList.size(); i++) {
+			Vediotape tape = vList.get(i);
+			for (int j = 0; j < levels.size(); j++) {
+				Scorelevel level = levels.get(j);
+				if(i>=level.getStart() && i<=level.getEnd()){
+					tape.setScore(level.getLevelScore());
+					break;
+				}
+			}
+		}
+		
+//		for (Scorelevel level : levels) {
+//			for (int i = 0; i < vList.size(); i++) {
+//				Vediotape tape = vList.get(i);
+//				if(i>= level.getStart() && i<= level.getEnd()){
+////					tape.setScore(level.getComments());					
+//				}
+//			}
+//		}
+		return vList;
+
 	}
 
 	public IAuditingDAO getAuditingDAO() {
@@ -318,7 +354,5 @@ public class VediotapeService implements IVediotapeService {
 	public void setScorelevelDAO(IScorelevelDAO scorelevelDAO) {
 		this.scorelevelDAO = scorelevelDAO;
 	}
-
-
 
 }

@@ -19,9 +19,9 @@ public class Scorelevel extends BaseScorelevel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Scorelevel(String comments, Float end, Integer id, Integer level,
-			Float start) {
-		super(comments, end, id, level, start);
+	public Scorelevel(Float levelScore, Integer end, Integer id, Integer level,
+			Integer start) {
+		super(levelScore, end, id, level, start);
 		// TODO Auto-generated constructor stub
 	}
 	

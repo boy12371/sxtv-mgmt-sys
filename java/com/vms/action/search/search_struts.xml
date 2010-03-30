@@ -39,5 +39,17 @@
 				<param name="root">table</param>
 			</result>
 		</action>
+		
+		
+		<action name="toVideoSequence" class="searchMgmt" method="toVideoSequence">
+			<result name="success">/search/videoSequence.jsp</result>
+			
+		</action>
+		
+		<action name="doSearchAndSequenceVideos" class="searchMgmt" method="doSearchAndSequenceVideos">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
 	</package>
 </struts>

@@ -67,4 +67,8 @@ public interface IVediotapeService {
 
 	public int getTotalCountForVidesByConditions(SearchCondition condition)
 			throws Exception;
+	
+	List<Vediotape> findVideosByRateOrder(SearchCondition condition,
+			String propertyName, int startIndex, int endIndex, boolean asceding)
+			throws Exception;
 }
