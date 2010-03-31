@@ -80,6 +80,9 @@
 </div>
 <h1>影带列表</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 <p>单击表头，可进行排序</p>
+
+<div id="printBtn" align="right"></div>
+
 <div id="dynamicdata" align="center"></div>
 
 <script type="text/javascript">

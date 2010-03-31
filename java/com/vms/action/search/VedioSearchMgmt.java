@@ -120,8 +120,7 @@ public class VedioSearchMgmt extends BaseAction {
 							.getStartIndex()
 							+ table.getRowsPerPage(), table.getDir().equals(
 							JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(dataList, table, vedioService
-					.getTotalCountForVidesByConditions(sc));	
+			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList.size());	
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);

@@ -215,7 +215,7 @@ function initDataTable() {
 			argument : oState,
 			scope : myDataTable
 		};
-		request = myDataTable.get("generateRequest")(oState, myDataTable);
+		
 
 		var vid = YAHOO.util.Dom.get("vid").value;
 		var vname = YAHOO.util.Dom.get("vname").value;
@@ -229,13 +229,58 @@ function initDataTable() {
 				&& vsubject == 0 && vtopic == 0 && vstatus == 0
 				&& startDate.length == 0 && endDate.length == 0) {
 			jAlert('至少要填写或选择一个选项', '提示');
-			// alert("至少要填写或选择一个选项");
 			return;
 		}
+		request = myDataTable.get("generateRequest")(oState, myDataTable);
 		myDataSource.sendRequest(request, oCallback);
 
 	}
-
+	checkSelectItems = function(){
+		var vid = YAHOO.util.Dom.get("vid").value;
+		var vname = YAHOO.util.Dom.get("vname").value;
+		var vcompany = YAHOO.util.Dom.get("vcompany").value;
+		var vsubject = YAHOO.util.Dom.get("vsubject").value;
+		var vtopic = YAHOO.util.Dom.get("vtopic").value;
+		var vstatus = YAHOO.util.Dom.get("vstatus").value;
+		var startDate = dojo.widget.byId("startDate").getValue();
+		var endDate = dojo.widget.byId("endDate").getValue();
+		if (vid.length == 0 && vname.length == 0 && vcompany == 0
+				&& vsubject == 0 && vtopic == 0 && vstatus == 0
+				&& startDate.length == 0 && endDate.length == 0) {
+			jAlert('至少要填写或选择一个选项', '提示');			
+			return "";
+		}else{
+			var params="";
+			params += "&sc.id=" + vid + "&sc.name=" + vname
+			+ "&sc.company.id=" + vcompany + "&sc.subject.id=" + vsubject
+			+ "&sc.topic.id=" + vtopic + "&sc.status.id=" + vstatus
+			+ "&sc.startDate="
+			+ startDate.substring(0, startDate.indexOf("T"))
+			+ "&sc.endDate=" + endDate.substring(0, endDate.indexOf("T"));
+			return params;
+		}		
+	}
+	var generatePrintTable = function(resetRecordOffset){
+		//getDateFromDataTimePicker("fromDate");
+		var p = "&startIndex=-1&sort=dateInput&dir=asc";
+		var params = checkSelectItems();
+		if(params.length != 0){
+			 var queryString = "/tv/search/toPrintVideosReport.action?query="+escape(p+params);
+		}else{
+			return;
+		}
+		alert(queryString);
+	    window.open(queryString, "打印预览");	    
+	}
+	
+	var printBtn = new YAHOO.widget.Button({
+		type : "button",
+		id : "topicBtn",
+		label : "打印",
+		container : "printBtn"
+	});
+	printBtn.on("click",generatePrintTable); 
+	
 	var searchBtn = new YAHOO.widget.Button("go");// YAHOO.util.Dom.get("filter");
 	searchBtn.on("click", fireEvent);
 
@@ -379,8 +424,7 @@ function initOrderDataTable() {
 				formatter : formatAudienceScore
 			}, {
 				key : "score",
-				label : "参考得分",
-				formatter : formatAudienceScore
+				label : "参考得分"
 			}, {
 				key : "comments",
 				label : "备注"
@@ -409,23 +453,21 @@ function initOrderDataTable() {
 		var vcompany = YAHOO.util.Dom.get("vcompany").value;
 		var vsubject = YAHOO.util.Dom.get("vsubject").value;
 		var vtopic = YAHOO.util.Dom.get("vtopic").value;
-		var vstatus = YAHOO.util.Dom.get("vstatus").value;
 		var startDate = dojo.widget.byId("startDate").getValue();
 		var endDate = dojo.widget.byId("endDate").getValue();
 
 		startIndex = (oState.pagination) ? oState.pagination.recordOffset : -1;
-		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
+		// results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
 		sort = (oState.sortedBy)
 				? oState.sortedBy.key
 				: oSelf.getColumnSet().keys[0].getKey();
 		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC)
-				? "asc"
-				: "desc";
+				? "desc"
+				: "asc";
 		var queryString = "&startIndex=" + startIndex
 				+ "&sort=" + sort + "&dir=" + dir;
 		queryString += "&sc.company.id=" + vcompany + "&sc.subject.id=" + vsubject
-				+ "&sc.topic.id=" + vtopic + "&sc.status.id=" + vstatus
-				+ "&sc.startDate="
+				+ "&sc.topic.id=" + vtopic + "&sc.status.id=9&sc.startDate="
 				+ startDate.substring(0, startDate.indexOf("T"))
 				+ "&sc.endDate=" + endDate.substring(0, endDate.indexOf("T"));
 
@@ -433,22 +475,30 @@ function initOrderDataTable() {
 	}
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=audienceRating&dir=asc&startIndex=-1&results=25",
+		initialRequest : "sort=audienceRating&dir=asc&startIndex=-1&results=0",
 		initialLoad : false,
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "audienceRating",
-			dir : YAHOO.widget.DataTable.CLASS_ASC
-		},
+			dir : YAHOO.widget.DataTable.CLASS_DESC
+		},paginator : new YAHOO.widget.Paginator({
+			rowsPerPage : 25,
+			firstPageLinkLabel : " ",
+			lastPageLinkLabel : "  ",
+			previousPageLinkLabel : " ",
+			nextPageLinkLabel : " ",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}"
+		}),
 		generateRequest : requestBuilder
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
-//	myDataTable.subscribe("renderEvent", function() {
-//				$.unblockUI();
-//				parent.resizeIframe();
-//			});
+	myDataTable.subscribe("renderEvent", function() {
+				$.unblockUI();
+				// parent.resizeIframe();
+			});
 
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
@@ -467,30 +517,28 @@ function initOrderDataTable() {
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	var fireEvent = function(resetRecordOffset) {
 		var oState = myDataTable.getState(), request, oCallback;
-//		if (resetRecordOffset) {
-//			oState.pagination.recordOffset = 0;
-//		}
+		 if (resetRecordOffset) {
+		 oState.pagination.recordOffset = 0;
+		 }
 		oCallback = {
 			success : myDataTable.onDataReturnSetRows,
 			failure : myDataTable.onDataReturnSetRows,
 			argument : oState,
 			scope : myDataTable
 		};
-		request = myDataTable.get("generateRequest")(oState, myDataTable);
-
 		
 		var vcompany = YAHOO.util.Dom.get("vcompany").value;
 		var vsubject = YAHOO.util.Dom.get("vsubject").value;
 		var vtopic = YAHOO.util.Dom.get("vtopic").value;
-		var vstatus = YAHOO.util.Dom.get("vstatus").value;
+// var vstatus = YAHOO.util.Dom.get("vstatus").value;
 		var startDate = dojo.widget.byId("startDate").getValue();
 		var endDate = dojo.widget.byId("endDate").getValue();
-		if (vcompany == 0 && vsubject == 0 && vtopic == 0 && vstatus == 0
-				&& startDate.length == 0 && endDate.length == 0) {
+		if (vcompany == 0 && vsubject == 0 && vtopic == 0 && startDate.length == 0 && endDate.length == 0) {
 			jAlert('至少要填写或选择一个选项', '提示');
 			// alert("至少要填写或选择一个选项");
 			return;
 		}
+		request = myDataTable.get("generateRequest")(oState, myDataTable);
 		myDataSource.sendRequest(request, oCallback);
 
 	}
@@ -509,10 +557,6 @@ function initOrderDataTable() {
 	var vtopic = YAHOO.util.Dom.get("vtopic");
 	vtopic.insertBefore(new Option("请选择", 0), vtopic.options[0]);
 	vtopic.selectedIndex = 0;
-
-	var vstatus = YAHOO.util.Dom.get("vstatus");
-	vstatus.insertBefore(new Option("请选择", 0), vstatus.options[0]);
-	vstatus.selectedIndex = 0;
 
 	return {
 		ds : myDataSource,

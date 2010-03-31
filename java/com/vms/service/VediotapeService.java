@@ -298,14 +298,14 @@ public class VediotapeService implements IVediotapeService {
 			throws Exception {
 
 		List<Vediotape> vList = this.findVidesByConditions(condition,
-				Vediotape.PROP_AUDIENCE_RATING, -1, -1, true);
+				Vediotape.PROP_AUDIENCE_RATING, -1, -1, asceding);
 		List<Scorelevel> levels = this.findAllLevels();
 
 		for (int i = 0; i < vList.size(); i++) {
 			Vediotape tape = vList.get(i);
 			for (int j = 0; j < levels.size(); j++) {
 				Scorelevel level = levels.get(j);
-				if(i>=level.getStart() && i<=level.getEnd()){
+				if((i+1)>=level.getStart() && (i+1)<=level.getEnd()){
 					tape.setScore(level.getLevelScore());
 					break;
 				}

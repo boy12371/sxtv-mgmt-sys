@@ -54,7 +54,7 @@
 		<td><label>栏目</label></td>
 		<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" name="video.subject.id" /></td>
 		<td><label>状态</label></td>
-		<td><s:select cssClass="selectField" list="statusList" listKey="id" listValue="status" id="vstatus" name="video.status.id"/></td>
+		<td> 已播 </td>
 
 	</tr>
 	<tr>
@@ -64,15 +64,15 @@
 		<td><sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" id="endDate" /></td>
 
 	</tr>
-
 	<tr>
-		<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
+		<td colspan="4" align="center">
+		<span id="go" class="yui-button yui-push-button"> <span class="first-child">
 		<button type="button">查 询</button>
 		</span> </span></td>
 	</tr>
 </table>
 </div>
-<h1>影带配额明列表</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
+<h1>影带排名列表</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 <!-- p>单击表头，可进行排序</p-->
 <div id="dynamicdata" align="center"></div>
 

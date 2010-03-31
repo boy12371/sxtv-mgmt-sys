@@ -237,36 +237,36 @@ function initDataTable() {
 	var filter = YAHOO.util.Dom.get("filter");
 	YAHOO.util.Event.addListener(filter, "change", fireEvent);
 	
-	var generatePrintTable = function(){
-		//getDateFromDataTimePicker("fromDate");
-		var filter = YAHOO.util.Dom.get('filter');
-		
-		var from = dojo.widget.byId("fromDate");
-		var to = dojo.widget.byId("fromDate");		
-	    var fromValue = from.getValue();
-	    var toValue = to.getValue();
-
-	    var startDate = fromValue.substring(0,fromValue.indexOf("T"));
-	    var endDate = toValue.substring(0,toValue.indexOf("T"));
-	    var paramValue="sort=dateInput&dir=asc&startIndex=-1&results=0&sc.status.id=" + filter.value + "&sc.startDate="+ startDate + "&sc.endDate=" + endDate;
-	    escape(paramValue);
-	    var queryString = "/tv/search/toPrintVideosReport.action?query="+escape(paramValue);
-	    $.unblockUI();
-	    window.open(queryString, "打印预览");
-	    
-	}
-	var yesBtn = YAHOO.util.Dom.get("yes");
-	YAHOO.util.Event.addListener(yesBtn, "click", generatePrintTable);
-	
-	var printBtn = new YAHOO.widget.Button({
-		type : "button",
-		id : "topicBtn",
-		label : "打印",
-		container : "printBtn"
-	});
-	
-	printBtn.on("click",function(e){
-		$.blockUI({ message: $('#printDate'), css: { width: '400px',top:'25%',left:'30%',cursor:'auto' } }); 
+//	var generatePrintTable = function(){
+//		//getDateFromDataTimePicker("fromDate");
+//		var filter = YAHOO.util.Dom.get('filter');
+//		
+//		var from = dojo.widget.byId("fromDate");
+//		var to = dojo.widget.byId("fromDate");		
+//	    var fromValue = from.getValue();
+//	    var toValue = to.getValue();
+//
+//	    var startDate = fromValue.substring(0,fromValue.indexOf("T"));
+//	    var endDate = toValue.substring(0,toValue.indexOf("T"));
+//	    var paramValue="sort=dateInput&dir=asc&startIndex=-1&results=0&sc.status.id=" + filter.value + "&sc.startDate="+ startDate + "&sc.endDate=" + endDate;
+//	    //escape(paramValue);
+//	    var queryString = "/tv/search/toPrintVideosReport.action?query="+escape(paramValue);
+//	    $.unblockUI();
+//	    window.open(queryString, "打印预览");
+//	    
+//	}
+//	var yesBtn = YAHOO.util.Dom.get("yes");
+//	YAHOO.util.Event.addListener(yesBtn, "click", generatePrintTable);
+//	
+//	var printBtn = new YAHOO.widget.Button({
+//		type : "button",
+//		id : "topicBtn",
+//		label : "打印",
+//		container : "printBtn"
+//	});
+//	
+//	printBtn.on("click",function(e){
+//		$.blockUI({ message: $('#printDate'), css: { width: '400px',top:'25%',left:'30%',cursor:'auto' } }); 
 //		 var filter = YAHOO.util.Dom.get('filter');
 //		 var url = myDataSource.liveData+"sort=dateInput&dir=asc&startIndex=-1&results=0&filter="+filter.value;
 //		 
