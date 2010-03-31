@@ -48,12 +48,12 @@
 	}
 	
 .sxtv_logo{
-	background-image: url(../image/sxtv_logo.png);
+/*	background-image: url(../image/sxtv_logo.png);
 	background-repeat:no-repeat;
 	background-position:center;
+	height:500px;*/
 	text-align:center;
 	width:500px;
-	height:500px;
 	margin:auto;
 	margin-top:100px;
 	}

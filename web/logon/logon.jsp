@@ -21,8 +21,8 @@
 	<div class="sxtv_logo">
 	<div>
 	<img border="0" style="margin-top:-190px;*margin-top:110px;margin-left:-60px;" src="<%=request.getContextPath() %>/logon/image/title_bottom.png"/>
-	<s:actionmessage/>
-<s:actionerror/><table cellspacing="0" cellpadding="0" border="0" style="margin-top:150px;*margin-top:0px;margin-left:25px;">
+	<s:actionmessage/><s:actionerror/>
+	<table cellspacing="0" cellpadding="0" border="0" style="margin-top:150px;*margin-top:0px;margin-left:25px;">
 		<tr>
 			<td class="tl"></td>
 			<td class="tc"></td>
@@ -71,6 +71,10 @@
 		</tr>
 	</table>
 	</div>
+	</div>
+	<div style="margin-top:10px"> 
+		<div style="font-size:13px;color:#666666;display:inline">Copyright @ 2010-2015 All rights reserved by SXTVS</div> 
+		<img border="0" style="margin-bottom:-13px;" src="<%=request.getContextPath() %>/logon/image/sxtv_logo_min.png"/>
 	</div>
 	</div>
 </div>
