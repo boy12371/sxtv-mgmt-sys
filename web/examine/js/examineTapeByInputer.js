@@ -24,13 +24,16 @@ function initDataTable() {
 		editor: new YAHOO.widget.TextboxCellEditor({validator:YAHOO.widget.DataTable.validateNumber})
 	}, {
 		key :"award",
-		label :"获奖情况"
+		label :"获奖情况",
+		editor: new YAHOO.widget.RadioCellEditor({radioOptions:["推荐","不推荐"],disableBtns:true})
 	}, {
 		key :"purchase",
-		label :"购买意见"
+		label :"购买意见",
+		editor: new YAHOO.widget.RadioCellEditor({radioOptions:["购买","不购买"],disableBtns:true})
 	}, {
 		key :"orientation",
-		label :"导向"
+		label :"导向",
+		editor: new YAHOO.widget.RadioCellEditor({radioOptions:["无问题","有问题"],disableBtns:true})
 	}];
 
 	// DataSource instance
@@ -78,9 +81,12 @@ function getData(){
 	var techScore=document.getElementById("techScore").value;
 	var performScore=document.getElementById("performScore").value;
 	var innovateScore=document.getElementById("innovateScore").value;
-	var purchase=document.getElementById("purchase").value;
-	var award=document.getElementById("award").value;
-	var orientation=document.getElementById("orientation").value;
+	var purchaseObj=document.getElementById("purchase");
+	var purchase= purchaseObj.checked?"购买":"不购买";
+	var awardObj=document.getElementById("award");
+	var award= awardObj.checked?"推荐":"不推荐";
+	var orientationObj=document.getElementById("orientation");
+	var orientation= orientationObj.checked?"不合格":"合格";
 	var data={
 		examiner:examiner,
 		storyScore:storyScore,
@@ -95,7 +101,48 @@ function getData(){
 }
 
 function addData(){
+	if(!okAction()) return;
 	var data = getData();
 	myDataTable.addRow(data,0);
 }
 
+function okAction(){
+	var storyScore = document.getElementById("storyScore").value;
+	var techScore = document.getElementById("techScore").value;
+	var performScore = document.getElementById("performScore").value;
+	var innovateScore = document.getElementById("innovateScore").value;
+	var exp=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+	var msg="";
+	if(!exp.test(storyScore) || parseFloat(storyScore, 10)>100){
+		msg+="故事得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(!exp.test(techScore) || parseFloat(techScore, 10)>100){
+		msg+="技术得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(!exp.test(performScore) || parseFloat(performScore, 10)>100){
+		msg+="表演得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(!exp.test(innovateScore) || parseFloat(innovateScore, 10)>100){
+		msg+="创新得分必须是一个介于0和100之间的数字！<br>";
+	}
+	if(""!=msg){
+		jAlert(msg, "输入错误");
+		return false;
+	}
+	return true;
+}
+
+function submitData(){
+	var submitArray = new Array();
+	var records = myDataTable.getRecordSet().getRecords();
+	for(var i=0;i<records.length;i++){
+		var xData = records[i].getData();
+		xData.purchase = xData.purchase=="购买"?1:0;
+		xData.award = xData.award=="推荐"?1:0;
+		xData.orientation = xData.orientation=="不合格"?1:0;
+		submitArray[submitArray.length] = xData;
+	}
+	var newResult = document.getElementById("newResult");
+	newResult.value = YAHOO.lang.JSON.stringify(submitArray);
+	document.forms[0].submit();
+}

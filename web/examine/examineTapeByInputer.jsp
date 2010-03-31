@@ -43,11 +43,9 @@
 <s:actionmessage/>
 <s:actionerror/>
 <p>输入影带分值</p>
-<s:form action="doExamineTape" namespace="/examine" >
-	<s:hidden name="tapeScore.vedioID"/>
-	<s:hidden name="tapeScore.id"/>
-	<s:hidden name="uid"/>
-	<s:hidden name="perform"/>
+<s:form action="doExamineTapeByInputer" namespace="/examine" >
+	<s:hidden name="vid"/>
+	<s:hidden name="newResult" id="newResult"/>
 	<div align="center">
 		<table class="inputTable">
 			<tr>
@@ -106,12 +104,13 @@
 			</tr>
 		</table>
 		<div style="margin-top:20px;">
-			<div id="okBtnDiv" style="display:inline;margin-right:50px;"></div>
+			<div id="okBtnDiv" align="center"></div>
 		</div>
 	</div>
 	
 	<p>已打分值</p>
 	<div id="dynamicdata" align="center"></div>
+	<div id="submitBtnDiv" align="center" style="margin-top:20px;"></div>
 </s:form>
 
 <script language="JavaScript">
@@ -137,37 +136,23 @@ YAHOO.example.BasicLocal = function() {
 function cancelAction(){
 	window.location="/tv/examine/toUnExaminedTapes.action";
 }
-function okAction(){
-	var storyScore = document.getElementById("storyScore").value;
-	var techScore = document.getElementById("techScore").value;
-	var performScore = document.getElementById("performScore").value;
-	var innovateScore = document.getElementById("innovateScore").value;
-	var exp=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
-	var msg="";
-	if(!exp.test(storyScore) || parseFloat(storyScore, 10)>100){
-		msg+="故事得分必须是一个介于0和100之间的数字！<br>";
-	}
-	if(!exp.test(techScore) || parseFloat(techScore, 10)>100){
-		msg+="技术得分必须是一个介于0和100之间的数字！<br>";
-	}
-	if(!exp.test(performScore) || parseFloat(performScore, 10)>100){
-		msg+="表演得分必须是一个介于0和100之间的数字！<br>";
-	}
-	if(!exp.test(innovateScore) || parseFloat(innovateScore, 10)>100){
-		msg+="创新得分必须是一个介于0和100之间的数字！<br>";
-	}
-	if(""!=msg){
-		jAlert(msg, "输入错误");
-		return;
-	}
-	document.forms[0].submit();
+function submitAction(){
+	submitData();
 }
+
 var okBtn = new YAHOO.widget.Button({  
 					label: "确&nbsp;&nbsp;定",  
 					id: "okBtn",  
 					container: "okBtnDiv" }
 					); 
 okBtn.on("click",addData);
+
+var submitBtn = new YAHOO.widget.Button({  
+	label: "提&nbsp;&nbsp;交",  
+	id: "submitBtn",  
+	container: "submitBtnDiv" }
+	); 
+submitBtn.on("click",submitAction);
 
 initDataTable();
 </script>
