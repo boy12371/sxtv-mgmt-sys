@@ -21,7 +21,7 @@ function initDataTable() {
 	}, {
 		key :"innovateScore",
 		label :"创新",
-		editor: new YAHOO.widget.TextboxCellEditor({validator:YAHOO.widget.DataTable.validateNumber})
+		editor: new YAHOO.widget.TextboxCellEditor({validator:scoreValidate})
 	}, {
 		key :"award",
 		label :"获奖情况",
@@ -35,7 +35,14 @@ function initDataTable() {
 		label :"导向",
 		editor: new YAHOO.widget.RadioCellEditor({radioOptions:["无问题","有问题"],disableBtns:true})
 	}];
-
+	
+	var scoreValidate = function(inputValue, currentValue, editorInstance){
+		var exp=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+		if(!exp.test(techScore) || parseFloat(techScore, 10)>100){
+			return;
+		}
+		return inputValue;
+	}
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource( []);
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
@@ -129,7 +136,14 @@ function okAction(){
 		jAlert(msg, "输入错误");
 		return false;
 	}
-	return true;
+	var e=document.getElementById("examiners").value;
+	for(var i=0;i<examiners.length;i++){
+		if(e == examiners[i]){
+			return true;
+		}
+	}
+	jAlert(e+"不是打分人员。", "输入错误");
+	return false;
 }
 
 function submitData(){
