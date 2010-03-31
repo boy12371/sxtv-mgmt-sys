@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/sxtvdb" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="command" />
 	</bean>
 	
 	
@@ -265,11 +265,46 @@
 	<!--
 			Proxy Service ********************************************************
 		-->
-		
+	<!-- 	
 	<bean id="frameMgmt" class="com.vms.framework.action.BasicLayout" scope="prototype">
 		<property name="userService" ref="userService" />
 	</bean>	
 	
 	
+	<bean id="updateJob" class="com.vms.common.AutoJobToUpdatePlayedVideoStatus">
+		<property name="playorderService" ref="playorderService"/>
+		<property name="vediotapeService" ref="vediotapeService"/>
+	</bean>
+	
+	<bean id="z" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+		<property name="triggers">  
+			<list>      
+				<ref bean="cronUpdateTrigger"/>  
+			</list>  
+		</property>  
+	</bean>
+	 -->   
+	<!--jobBean用于设定启动时运用的Bean与方法
+	<bean id="scheduledUpdateJobDetail"    
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		<property name="targetObject">  
+			<ref  bean="updateJob"/>    
+		</property>  
+		<property name="targetMethod">  
+			<value>doUpdateStatus</value>  
+		</property>  
+	</bean>  
+	-->  
+	<!--定时器设定起动频率&启动时间我设的是每5秒起动一次 (0 0 4 * * ?每日四点起动....)
+	<bean id="cronUpdateTrigger"   
+		class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		<property  name="jobDetail">
+			<ref bean="scheduledUpdateJobDetail"/>  
+		</property>  
+		<property name="cronExpression">
+			<value>0/50 * * * * ?</value>    
+		</property>  
+	</bean>
+	-->  
 	
 </beans>
