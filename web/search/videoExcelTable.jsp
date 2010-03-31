@@ -28,44 +28,36 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/search/js/search.js"></script>
 
 <style type="text/css">
-td {
-	font-size: 12px;
-	font-family: Verdana, tahoma
+.yui-skin-sam tr.yui-dt-odd td.yui-dt-asc, .yui-skin-sam tr.yui-dt-odd td.yui-dt-desc{
+	background-color: #FFFFFF;
 }
-
-.winUI {
-	margin: 0 auto;
-	border: solid 1px #d4d0c8;
+.yui-skin-sam tr.yui-dt-even td.yui-dt-asc, .yui-skin-sam tr.yui-dt-even td.yui-dt-desc{
+	background-color: #FFFFFF;
 }
-
-.winUI tr td,.winUI thead td,tfoot td {
-	border-left: 1px solid buttonhighlight;
-	border-top: 1px solid buttonhighlight;
-	border-bottom: 1px solid buttonshadow;
-	border-right: 1px solid buttonshadow;
+.yui-skin-sam tr.yui-dt-odd{
+	background-color: #FFFFFF;
 }
-
-.winUI thead td,tfoot td {
-	background-color: #ece9d8;
-	cursor: pointer;
-	padding: 4px;
-	font-weight: bold;
-}
-
 .yui-skin-sam .yui-dt th{
 	border-left: 1px solid buttonhighlight; 
     border-top: 1px solid buttonhighlight; 
     border-bottom: 1px solid buttonshadow; 
     border-right: 1px solid buttonshadow;
     background-color: #ece9d8;
+    background-image: none;
 	cursor: pointer;
 	padding: 4px;
 	font-weight: bold;
 }
+.yui-skin-sam .yui-dt td {
+	border:clear;
+	border-color:#CBCBCB;
+	border-style:solid;
+	border-width:1px;
+}
 </style>
 <title>打印预览</title>
 </head>
-<body>
+<body class="yui-skin-sam">
 <s:actionerror />
 <p id="query"><s:property value="query" /></p>
 
@@ -215,11 +207,6 @@ td {
 			oPayload.totalRecords = oResponse.meta.totalRecords;
 			return oPayload;
 		}
-
-		myDataTable.subscribe("rowMouseoverEvent",
-				myDataTable.onEventHighlightRow);
-		myDataTable.subscribe("rowMouseoutEvent",
-				myDataTable.onEventUnhighlightRow);
 
 		return {
 			ds :myDataSource,
