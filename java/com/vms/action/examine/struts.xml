@@ -44,6 +44,11 @@
 			<result name="input">/examine/examineTape.jsp</result>
 		</action>
 		
+		<action name="doExamineTapeByInputer" class="examineMgmt" method="doExamineTapeByInputer">
+			<result type="redirectAction">/examine/toUnExaminedTapes.action</result>
+			<result name="input">/examine/examineTapeByInputer.jsp</result>
+		</action>
+		
 		<action name="completeExamine" class="examineMgmt" method="completeExamine">
 			<result type="redirectAction">/examine/toUnExaminedTapes.action</result>
 		</action>

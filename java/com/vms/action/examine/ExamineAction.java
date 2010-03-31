@@ -3,8 +3,12 @@ package com.vms.action.examine;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 
+import com.vms.beans.AudienceExamineVO;
 import com.vms.beans.JSONDataTable;
 import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
@@ -49,6 +53,8 @@ public class ExamineAction extends BaseAction {
 	private List<User> examiners;
 	
 	private String examinerByInputer;
+	
+	private String newResult;
 
 	public String toUnExaminedTapes() {
 		return SUCCESS;
@@ -168,7 +174,8 @@ public class ExamineAction extends BaseAction {
 		if(this.getUserInfo().getRoles().contains(CommonVariable.ROLE_INPUTER)){
 			examiners = vedioscoreService.findAllExaminer();
 		}
-		if(getUserInfo().getRoles().contains(new Integer(CommonVariable.ROLE_INPUTER))){
+		if(getUserInfo().getRoles().contains(new Integer(CommonVariable.ROLE_INPUTER)) && !"modify".equals(perform)){
+			vid=tapeScore.getVedioID();
 			return "inputerExam";
 		}
 		return SUCCESS;
@@ -211,6 +218,33 @@ public class ExamineAction extends BaseAction {
 			return SUCCESS;
 		}
 		return "back";
+	}
+	
+	public String doExamineTapeByInputer() throws Exception{
+		JSONArray jsonArray = JSONArray.fromObject(newResult);
+//		List<VedioScoreVO> scores = new ArrayList<VedioScoreVO>();
+		if(jsonArray.isArray() && !jsonArray.isEmpty()){
+			int size = jsonArray.size();
+			for (int i = 0; i < size; i++) {
+				JSONObject obj =jsonArray.getJSONObject(i);
+				VedioScoreVO s = new VedioScoreVO();
+				s.setVedioID(vid);
+				s.setExaminer(obj.getString("examiner"));
+				s.setStoryScore((float)obj.getDouble("storyScore"));
+				s.setTechScore((float)obj.getDouble("techScore"));
+				s.setPerformScore((float)obj.getDouble("performScore"));
+				s.setInnovateScore((float)obj.getDouble("innovateScore"));
+				s.setOperator(this.getUserInfo().getUserId());
+				s.setAward(obj.getInt("award") + "");
+				s.setPurchase(obj.getInt("purchase") + "");
+				s.setOrientation(obj.getInt("orientation"));
+				User temp = userService.getUserByEmployeeName(s.getExaminer());
+				s.setUserID(temp.getId());
+//				scores.add(s);
+				vedioscoreService.saveVedioScore(s);
+			}
+		}
+		return SUCCESS;
 	}
 	
 	public String completeExamine() throws Exception{
@@ -320,5 +354,13 @@ public class ExamineAction extends BaseAction {
 
 	public IUserService getUserService() {
 		return userService;
+	}
+
+	public String getNewResult() {
+		return newResult;
+	}
+
+	public void setNewResult(String newResult) {
+		this.newResult = newResult;
 	}
 }
