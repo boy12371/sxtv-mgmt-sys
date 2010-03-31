@@ -7,65 +7,57 @@ function initDataTable() {
 		elCell.innerHTML = href;
 	}
 
-	var formatCompany = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.companyName;
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.topicName;
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.subjectName;
-	}
-	var formatDate = function(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
-		} else {
-			elCell.innerHTML = sData;
-		}
-	}
-	var formatStatus = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.status;
-	}
-
 	// Column definitions
-	var myColumnDefs = [ {
-		key :"id",
-		label :"编号",
-		sortable :true,
-		formatter :formatLink
+	var myColumnDefs = [{
+		key : "id",
+		label : "编号",
+		sortable : true,
+		formatter : formatLink
 	}, {
-		key :"vedioName",
-		label :"剧目名称"
+		key : "vedioName",
+		label : "剧目名称"
 	}, {
-		key :"topic",
-		label :"题材",
-		sortable :true,
-		formatter :formatTopic
+		key : "topic",
+		label : "题材",
+		sortable : true,
+		formatter : formatTopic
 	}, {
-		key :"subject",
-		label :"栏目",
-		sortable :true,
-		formatter :formatSubject
+		key : "subject",
+		label : "栏目",
+		sortable : true,
+		formatter : formatSubject
 	}, {
-		key :"companyID",
-		label :"影视公司",
-		sortable :true,
-		formatter :formatCompany
+		key : "companyID",
+		label : "影视公司",
+		sortable : true,
+		formatter : formatCompany
 	}, {
-		key :"dateInput",
-		label :"收带日期",
-		sortable :true,
-		formatter :formatDate
+		key : "dateInput",
+		label : "收带日期",
+		sortable : true,
+		formatter : formatDate
 	}, {
-		key :"status",
-		label :"状态",
-		sortable :true,
-		formatter :formatStatus
+		key : "status",
+		label : "状态",
+		sortable : true,
+		formatter : formatStatus
 	}, {
-		key :"comments",
-		label :"备注"
-	} ];
+		key : "vedioscores",
+		label : "综合平均分",
+		formatter : formatScroes
+	}, {
+		key : "audiencescore",
+		label : "观众投票(看/不看)",
+		formatter : formatAudienceScore
+	}, {
+		key : "vedioscores",
+		label : "获奖备选(是/否)",
+		formatter : formatAward
+	}, {
+		key : "comments",
+		label : "备注",
+		formatter : formatorComments
+	}];
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.XHRDataSource(
@@ -75,7 +67,8 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "comments" ],
+					"dateInput", "status", "vedioscores", "vedioscores",
+					"audiencescore", "comments" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 	// response

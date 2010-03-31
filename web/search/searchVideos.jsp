@@ -65,9 +65,9 @@
 	</tr>
 	<tr>
 		<td><label>从</label></td>
-		<td><sx:datetimepicker name="startDate" displayFormat="yyyy-MM-dd" id="startDate"/></td>
+		<td><sx:datetimepicker name="startDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="startDate" value="%{'today'}"/></td>
 		<td><label>至</label></td>
-		<td><sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" id="endDate" /></td>
+		<td><sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="endDate" value="%{'today'}"/></td>
 
 	</tr>
 

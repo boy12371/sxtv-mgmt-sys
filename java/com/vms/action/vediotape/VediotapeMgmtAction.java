@@ -158,7 +158,7 @@ public class VediotapeMgmtAction extends BaseAction {
 						return INPUT;
 					}					
 				}else if(optionName.equals("marketRate") || optionName.equals("modifyMarketRate")){
-					if(status == CommonVariable.VIDEO_STATUS_PLAYED){
+					if(status == CommonVariable.VIDEO_STATUS_PLAYED || status == CommonVariable.VIDEO_STATUS_FINISHED){
 						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
 						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
 						return SUCCESS;

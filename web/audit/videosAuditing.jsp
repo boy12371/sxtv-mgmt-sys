@@ -131,10 +131,10 @@
 	<tr>
 		<td>从:<sx:datetimepicker cssClass="inputField"
 			displayFormat="yyyy-MM-dd" id="fromDate" toggleType="explode"
-			value="today" /></td>
+			value="today" toggleType="explode" /></td>
 		<td>至:<sx:datetimepicker cssClass="inputField"
 			displayFormat="yyyy-MM-dd" id="toDate" toggleType="explode"
-			value="today" /></td>
+			value="today" toggleType="explode" /></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="button" name="demo1" id="yes"

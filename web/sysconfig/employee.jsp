@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<td><label>出生日期：</label></td>
-			<td><sx:datetimepicker cssClass="inputField" name="employee.birthday" displayFormat="yyyy-MM-dd" /></td>
+			<td><sx:datetimepicker cssClass="inputField" name="employee.birthday" displayFormat="yyyy-MM-dd" toggleType="explode" value="%{'today'}"/></td>
 		</tr>
 		<tr>
 			<td><label>电话：</label></td>
@@ -53,7 +53,7 @@
 		</tr>
 		<tr>
 			<td><label>入职日期：</label></td>
-			<td><sx:datetimepicker cssClass="inputField" name="employee.contractDate" displayFormat="yyyy-MM-dd" /></td>
+			<td><sx:datetimepicker cssClass="inputField" name="employee.contractDate" displayFormat="yyyy-MM-dd" toggleType="explode" value="%{'today'}"/></td>
 		</tr>
 		<tr>
 			<td><label>状态：</label></td>

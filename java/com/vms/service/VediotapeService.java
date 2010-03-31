@@ -194,28 +194,28 @@ public class VediotapeService implements IVediotapeService {
 			float rate) throws Exception {
 		// TODO Auto-generated method stub
 		String hql = "update Vediotape v set v.marketShare=?, v.audienceRating=?, v.status.id=? where v.id=?";
-		boolean result = vediotapeDAO.updateVideotape(hql, new Object[] {
+		return vediotapeDAO.updateVideotape(hql, new Object[] {
 				market, rate, 9, videoID });
-		float vScore = 0;
-		List<Scorelevel> levels = this.findAllLevels();
-		for (Scorelevel scorelevel : levels) {
-			if (rate > scorelevel.getStart() && rate <= scorelevel.getEnd()) {
-				vScore = (scorelevel.getStart() + scorelevel.getEnd()) / 2;
-				break;
-			}
-		}
-
-		if (result) {
-			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(
-					Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(
-							videoID), -1, -1, "", false);
-			for (Vedioscore vs : scoreList) {
-				float acc = Math.abs(vs.getScore() - vScore);
-				vs.setAccuracy(acc);
-				vedioscoreDAO.saveOrUpdateObject(vs);
-			}
-		}
-		return true;
+//		float vScore = 0;
+//		List<Scorelevel> levels = this.findAllLevels();
+//		for (Scorelevel scorelevel : levels) {
+//			if (rate > scorelevel.getStart() && rate <= scorelevel.getEnd()) {
+//				vScore = (scorelevel.getStart() + scorelevel.getEnd()) / 2;
+//				break;
+//			}
+//		}
+//
+//		if (result) {
+//			List<Vedioscore> scoreList = vedioscoreDAO.findObjectByField(
+//					Vedioscore.class, Vedioscore.PROP_VEDIO, new Vediotape(
+//							videoID), -1, -1, "", false);
+//			for (Vedioscore vs : scoreList) {
+//				float acc = Math.abs(vs.getScore() - vScore);
+//				vs.setAccuracy(acc);
+//				vedioscoreDAO.saveOrUpdateObject(vs);
+//			}
+//		}
+//		return true;
 	}
 
 	private List<Scorelevel> findAllLevels() throws Exception {

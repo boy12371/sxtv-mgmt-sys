@@ -181,10 +181,7 @@ function initDataTable() {
 				// Process the JSON data returned from the server
 			var obj = o.responseText;
 			if (obj.indexOf("SUCCESS") != -1) {
-				
-				
-				
-				
+
 				myDataTable.addRow(getData(), 0);
 			} else {
 				jAlert(obj, '提示');
@@ -298,7 +295,7 @@ function initDataTable() {
 			}
 		}
 	};
-	
+
 	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu", {
 		trigger :myDataTable.getTbodyEl()
 	});
@@ -354,56 +351,6 @@ function initToArrangeTable() {
 		elCell.innerHTML = href;
 	}
 
-	var formatCompany = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.companyName;
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.topicName;
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.subjectName;
-	}
-	var formatDate = function(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
-		} else {
-			elCell.innerHTML = sData;
-		}
-	}
-	var formatStatus = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.status;
-	}
-	var formatScroes = function(elCell, oRecord, oColumn, sData) {
-		if(sData.length==0){
-			elCell.innerHTML = "0";
-		}else{
-			var avgScore = 0;
-			var total =0;
-			for ( var i = 0; i < sData.length; i++) {
-					total += sData[i].score;
-			}
-			var s = (total/sData.length).toString();
-			s = s.substring(0, s.indexOf(".")+3);
-			elCell.innerHTML = s;
-		}
-	}
-	var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
-		if(sData.length==0){
-			elCell.innerHTML = "0/0";
-		}else{
-			var yes = 0;
-			var no =0;
-			for ( var i = 0; i < sData.length; i++) {
-					if(sData[i].result==1){
-						yes += 1;
-					}else{
-						no += 1;
-					}
-			}
-			elCell.innerHTML = yes+"/"+no;
-		}
-	}
 	// Column definitions
 	var myColumnDefs = [
 			{
@@ -446,16 +393,21 @@ function initToArrangeTable() {
 				sortable :true,
 				formatter :formatStatus
 			}, {
-				key : "vedioscores",
-				label : "综合平均分",
-				formatter : formatScroes
+				key :"vedioscores",
+				label :"综合平均分",
+				formatter :formatScroes
 			}, {
-				key : "audiencescore",
-				label : "观众投票(看/不看)",
-				formatter : formatAudienceScore
+				key :"audiencescore",
+				label :"观众投票(看/不看)",
+				formatter :formatAudienceScore
+			}, {
+				key :"vedioscores",
+				label :"获奖备选(是/否)",
+				formatter :formatAward
 			}, {
 				key :"comments",
-				label :"备注"
+				label :"备注",
+				formatter :formatorComments
 			} ];
 
 	// DataSource instance
@@ -466,7 +418,8 @@ function initToArrangeTable() {
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "vedioscores", "audiencescore", "comments" ],
+				"dateInput", "status", "vedioscores", "vedioscores",
+				"audiencescore", "comments" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 	// response
@@ -481,16 +434,17 @@ function initToArrangeTable() {
 			key :"dateInput",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		},
-		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
-		})
+		paginator :new YAHOO.widget.Paginator(
+				{
+					rowsPerPage :25,
+					firstPageLinkLabel :"第一页",
+					lastPageLinkLabel :" 尾页",
+					previousPageLinkLabel :" 上一页",
+					nextPageLinkLabel :" 下一页",
+					template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+					pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+					rowsPerPageOptions : [ 25, 50, 100 ]
+				})
 
 	};
 
@@ -502,11 +456,14 @@ function initToArrangeTable() {
 		$.unblockUI();
 		parent.resizeIframe();
 	});
-	myDataSource.subscribe("requestEvent", function() { 
-		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	myDataSource.subscribe("requestEvent", function() {
+		$.blockUI( {
+			message :"<h1>数据加载中......</h1>"
+		});
 	});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
-	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -565,56 +522,6 @@ function initToPassTable() {
 		elCell.innerHTML = href;
 	}
 
-	var formatCompany = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.companyName;
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.topicName;
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.subjectName;
-	}
-	var formatDate = function(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
-		} else {
-			elCell.innerHTML = sData;
-		}
-	}
-	var formatStatus = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.status;
-	}
-	var formatScroes = function(elCell, oRecord, oColumn, sData) {
-		if(sData.length==0){
-			elCell.innerHTML = "0";
-		}else{
-			var avgScore = 0;
-			var total =0;
-			for ( var i = 0; i < sData.length; i++) {
-					total += sData[i].score;
-			}
-			var s = (total/sData.length).toString();
-			s = s.substring(0, s.indexOf(".")+3);
-			elCell.innerHTML = s;
-		}
-	}
-	var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
-		if(sData.length==0){
-			elCell.innerHTML = "0/0";
-		}else{
-			var yes = 0;
-			var no =0;
-			for ( var i = 0; i < sData.length; i++) {
-					if(sData[i].result==1){
-						yes += 1;
-					}else{
-						no += 1;
-					}
-			}
-			elCell.innerHTML = yes+"/"+no;
-		}
-	}
 	// Column definitions
 	var myColumnDefs = [
 			{
@@ -624,38 +531,38 @@ function initToPassTable() {
 				resizeable :false,
 				formatter :FormatCheckboxCell
 			}, {
-				key :"id",
-				label :"编号",
-				sortable :true,
-				formatter :formatLink
+				key : "id",
+				label : "编号",
+				sortable : true,
+				formatter : formatLink
 			}, {
-				key :"vedioName",
-				label :"剧目名称"
+				key : "vedioName",
+				label : "剧目名称"
 			}, {
-				key :"topic",
-				label :"题材",
-				sortable :true,
-				formatter :formatTopic
+				key : "topic",
+				label : "题材",
+				sortable : true,
+				formatter : formatTopic
 			}, {
-				key :"subject",
-				label :"栏目",
-				sortable :true,
-				formatter :formatSubject
+				key : "subject",
+				label : "栏目",
+				sortable : true,
+				formatter : formatSubject
 			}, {
-				key :"companyID",
-				label :"影视公司",
-				sortable :true,
-				formatter :formatCompany
+				key : "companyID",
+				label : "影视公司",
+				sortable : true,
+				formatter : formatCompany
 			}, {
-				key :"dateInput",
-				label :"收带日期",
-				sortable :true,
-				formatter :formatDate
+				key : "dateInput",
+				label : "收带日期",
+				sortable : true,
+				formatter : formatDate
 			}, {
-				key :"status",
-				label :"状态",
-				sortable :true,
-				formatter :formatStatus
+				key : "status",
+				label : "状态",
+				sortable : true,
+				formatter : formatStatus
 			}, {
 				key : "vedioscores",
 				label : "综合平均分",
@@ -665,8 +572,13 @@ function initToPassTable() {
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
 			}, {
-				key :"comments",
-				label :"备注"
+				key : "vedioscores",
+				label : "获奖备选(是/否)",
+				formatter : formatAward
+			}, {
+				key : "comments",
+				label : "备注",
+				formatter : formatorComments
 			} ];
 
 	// DataSource instance
@@ -677,7 +589,8 @@ function initToPassTable() {
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status","vedioscores", "audiencescore", "comments" ],
+					"dateInput", "status", "vedioscores", "vedioscores",
+					"audiencescore", "comments" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 	// response
@@ -692,16 +605,17 @@ function initToPassTable() {
 			key :"dateInput",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		},
-		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
-		})
+		paginator :new YAHOO.widget.Paginator(
+				{
+					rowsPerPage :25,
+					firstPageLinkLabel :"第一页",
+					lastPageLinkLabel :" 尾页",
+					previousPageLinkLabel :" 上一页",
+					nextPageLinkLabel :" 下一页",
+					template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+					pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+					rowsPerPageOptions : [ 25, 50, 100 ]
+				})
 
 	};
 
@@ -714,11 +628,14 @@ function initToPassTable() {
 		$.unblockUI();
 		parent.resizeIframe();
 	});
-	myDataSource.subscribe("requestEvent", function() { 
-		$.blockUI({ message: "<h1>数据加载中......</h1>" });
+	myDataSource.subscribe("requestEvent", function() {
+		$.blockUI( {
+			message :"<h1>数据加载中......</h1>"
+		});
 	});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
-	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -761,7 +678,7 @@ function initButtons() {
 
 	var submitToPass = new YAHOO.widget.Button( {
 		type :"button",
-		label :"批为通过",
+		label :"撤销编排",
 		id :"toPassBtn",
 		container :"submitToPass"
 	});

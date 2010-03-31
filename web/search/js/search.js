@@ -7,56 +7,6 @@ function initDataTable() {
 		elCell.innerHTML = href;
 	}
 
-	var formatCompany = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.companyName;
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.topicName;
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.subjectName;
-	}
-	var formatDate = function(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
-		} else {
-			elCell.innerHTML = sData;
-		}
-	}
-	var formatStatus = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.status;
-	}
-	var formatScroes = function(elCell, oRecord, oColumn, sData) {
-		if (sData.length == 0) {
-			elCell.innerHTML = "0";
-		} else {
-			var avgScore = 0;
-			var total = 0;
-			for (var i = 0; i < sData.length; i++) {
-				total += sData[i].score;
-			}
-			var s = (total / sData.length).toString();
-			s = s.substring(0, s.indexOf(".") + 3);
-			elCell.innerHTML = s;
-		}
-	}
-	var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
-		if (sData.length == 0) {
-			elCell.innerHTML = "0/0";
-		} else {
-			var yes = 0;
-			var no = 0;
-			for (var i = 0; i < sData.length; i++) {
-				if (sData[i].result == 1) {
-					yes += 1;
-				} else {
-					no += 1;
-				}
-			}
-			elCell.innerHTML = yes + "/" + no;
-		}
-	}
 	// Column definitions
 	var myColumnDefs = [{
 				key : "id",
@@ -108,6 +58,10 @@ function initDataTable() {
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
 			}, {
+				key : "vedioscores",
+				label : "获奖备选(是/否)",
+				formatter : formatAward
+			},{
 				key : "comments",
 				label : "备注"
 			}];
@@ -119,7 +73,7 @@ function initDataTable() {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores", "audiencescore", "comments"],
+				"vedioscores","vedioscores", "audiencescore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response

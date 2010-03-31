@@ -1,87 +1,30 @@
-function formatDate(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
-		} else {
-			elCell.innerHTML = sData;
-		}
-	}
+
 function getDateFromDataTimePicker(pickerID) {
-    var picker = dojo.widget.byId(pickerID);
-    //string value
-    var stringValue = picker.getValue();
-    alert(stringValue);
-    
-    //date value
-    var dateValue = picker.getDate();
-    alert(dateValue);
- }
+	var picker = dojo.widget.byId(pickerID);
+	// string value
+	var stringValue = picker.getValue();
+	alert(stringValue);
+
+	// date value
+	var dateValue = picker.getDate();
+	alert(dateValue);
+}
 
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		if (oRecord.getData("status").id == 2 ) {
+		if (oRecord.getData("status").id == 2) {
 			var href = "<a href='./audit/findVideoByNameOrID?optionName=auditing&vid=";
 			href += sData;
 			href += "'>" + sData + "</a>";
-			
+
 			elCell.innerHTML = href;
-		}else{
-			elCell.innerHTML = sData;
-		}
-
-	}
-
-	var formatCompany = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.companyName;
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.topicName;
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.subjectName;
-	}
-	var formatDate = function(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
 		} else {
 			elCell.innerHTML = sData;
 		}
+
 	}
-	var formatStatus = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.status;
-	}
-	var formatScroes = function(elCell, oRecord, oColumn, sData) {
-		if(sData.length==0){
-			elCell.innerHTML = "0";
-		}else{
-			var avgScore = 0;
-			var total =0;
-			for ( var i = 0; i < sData.length; i++) {
-					total += sData[i].score;
-			}
-			var s = (total/sData.length).toString();
-			s = s.substring(0, s.indexOf(".")+3);
-			elCell.innerHTML = s;
-		}
-	}
-	var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
-		if(sData.length==0){
-			elCell.innerHTML = "0/0";
-		}else{
-			var yes = 0;
-			var no =0;
-			for ( var i = 0; i < sData.length; i++) {
-					if(sData[i].result==1){
-						yes += 1;
-					}else{
-						no += 1;
-					}
-			}
-			elCell.innerHTML = yes+"/"+no;
-		}
-	}
+
 	// Column definitions
 	var myColumnDefs = [{
 				key : "id",
@@ -125,8 +68,13 @@ function initDataTable() {
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
 			}, {
+				key : "vedioscores",
+				label : "获奖备选(是/否)",
+				formatter : formatAward
+			}, {
 				key : "comments",
-				label : "备注"
+				label : "备注",
+				formatter : formatorComments
 			}];
 
 	// DataSource instance
@@ -135,7 +83,8 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "vedioscores", "audiencescore", "comments"],
+				"dateInput", "status", "vedioscores", "vedioscores",
+				"audiencescore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -181,17 +130,17 @@ function initDataTable() {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		}),
-		generateRequest : requestBuilder,
-		formatRow: highLightRow
+		generateRequest : requestBuilder
+		// ,formatRow: highLightRow
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
@@ -202,16 +151,19 @@ function initDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	};
-	myDataSource.subscribe("requestEvent", function() { 
-		$.blockUI({ message: "<h1>数据加载中......</h1>" });
-	});
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
-	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	myDataTable.subscribe("renderEvent", function() {
-		$.unblockUI();
-		parent.resizeIframe();
-	});
-	
+				$.unblockUI();
+				parent.resizeIframe();
+			});
+
 	var fireEvent = function(resetRecordOffset) {
 		var oState = myDataTable.getState(), request, oCallback;
 
@@ -236,79 +188,84 @@ function initDataTable() {
 	// DataTable instance
 	var filter = YAHOO.util.Dom.get("filter");
 	YAHOO.util.Event.addListener(filter, "change", fireEvent);
-	
-//	var generatePrintTable = function(){
-//		//getDateFromDataTimePicker("fromDate");
-//		var filter = YAHOO.util.Dom.get('filter');
-//		
-//		var from = dojo.widget.byId("fromDate");
-//		var to = dojo.widget.byId("fromDate");		
-//	    var fromValue = from.getValue();
-//	    var toValue = to.getValue();
-//
-//	    var startDate = fromValue.substring(0,fromValue.indexOf("T"));
-//	    var endDate = toValue.substring(0,toValue.indexOf("T"));
-//	    var paramValue="sort=dateInput&dir=asc&startIndex=-1&results=0&sc.status.id=" + filter.value + "&sc.startDate="+ startDate + "&sc.endDate=" + endDate;
-//	    //escape(paramValue);
-//	    var queryString = "/tv/search/toPrintVideosReport.action?query="+escape(paramValue);
-//	    $.unblockUI();
-//	    window.open(queryString, "打印预览");
-//	    
-//	}
-//	var yesBtn = YAHOO.util.Dom.get("yes");
-//	YAHOO.util.Event.addListener(yesBtn, "click", generatePrintTable);
-//	
-//	var printBtn = new YAHOO.widget.Button({
-//		type : "button",
-//		id : "topicBtn",
-//		label : "打印",
-//		container : "printBtn"
-//	});
-//	
-//	printBtn.on("click",function(e){
-//		$.blockUI({ message: $('#printDate'), css: { width: '400px',top:'25%',left:'30%',cursor:'auto' } }); 
-//		 var filter = YAHOO.util.Dom.get('filter');
-//		 var url = myDataSource.liveData+"sort=dateInput&dir=asc&startIndex=-1&results=0&filter="+filter.value;
-//		 
-//		
-//		    // Define the callbacks for the asyncRequest
-//		    var callbacks = {
-//		        success : function (o) {
-//		            YAHOO.log("RAW JSON DATA: " + o.responseText);
-//		            // Process the JSON data returned from the server
-//		            var jsonObj;
-//		            try {
-//		            	jsonObj = YAHOO.lang.JSON.parse(o.responseText);
-//		            }
-//		            catch (x) {
-//		                alert("JSON Parse failed!");
-//		                return;
-//		            }
-//		            var cset = myDataTable.getColumnSet();
-//		            var cLen = cset.getDefinitions().length;
-//		            for(var k=0; k< cLen; k++){
-//		   			 var c = cset.getColumn(k);
-//		   			 alert(c.label);
-//		            }
-//		            var records = jsonObj.records;
-//		            var len = records.length;
-//		            for (var i = 0; i < len; i++) {
-//		                var rc = records[i];
-//		                alert(rc.vedioName);
-//		            }
-//		        },
-//
-//		        failure : function (o) {
-//		            if (!YAHOO.util.Connect.isCallInProgress(o)) {
-//		                alert("Async call failed!");
-//		            }
-//		        },
-//		        timeout : 3000
-//		    }
-//		    // Make the call to the server for JSON data
-//		    YAHOO.util.Connect.asyncRequest('GET',url, callbacks);
 
-	});
+	// var generatePrintTable = function(){
+	// //getDateFromDataTimePicker("fromDate");
+	// var filter = YAHOO.util.Dom.get('filter');
+	//		
+	// var from = dojo.widget.byId("fromDate");
+	// var to = dojo.widget.byId("fromDate");
+	// var fromValue = from.getValue();
+	// var toValue = to.getValue();
+	//
+	// var startDate = fromValue.substring(0,fromValue.indexOf("T"));
+	// var endDate = toValue.substring(0,toValue.indexOf("T"));
+	// var
+	// paramValue="sort=dateInput&dir=asc&startIndex=-1&results=0&sc.status.id="
+	// + filter.value + "&sc.startDate="+ startDate + "&sc.endDate=" + endDate;
+	// //escape(paramValue);
+	// var queryString =
+	// "/tv/search/toPrintVideosReport.action?query="+escape(paramValue);
+	// $.unblockUI();
+	// window.open(queryString, "打印预览");
+	//	    
+	// }
+	// var yesBtn = YAHOO.util.Dom.get("yes");
+	// YAHOO.util.Event.addListener(yesBtn, "click", generatePrintTable);
+	//	
+	// var printBtn = new YAHOO.widget.Button({
+	// type : "button",
+	// id : "topicBtn",
+	// label : "打印",
+	// container : "printBtn"
+	// });
+	//	
+	// printBtn.on("click",function(e){
+	// $.blockUI({ message: $('#printDate'), css: { width:
+	// '400px',top:'25%',left:'30%',cursor:'auto' } });
+	// var filter = YAHOO.util.Dom.get('filter');
+	// var url =
+	// myDataSource.liveData+"sort=dateInput&dir=asc&startIndex=-1&results=0&filter="+filter.value;
+	//		 
+	//		
+	// // Define the callbacks for the asyncRequest
+	// var callbacks = {
+	// success : function (o) {
+	// YAHOO.log("RAW JSON DATA: " + o.responseText);
+	// // Process the JSON data returned from the server
+	// var jsonObj;
+	// try {
+	// jsonObj = YAHOO.lang.JSON.parse(o.responseText);
+	// }
+	// catch (x) {
+	// alert("JSON Parse failed!");
+	// return;
+	// }
+	// var cset = myDataTable.getColumnSet();
+	// var cLen = cset.getDefinitions().length;
+	// for(var k=0; k< cLen; k++){
+	// var c = cset.getColumn(k);
+	// alert(c.label);
+	// }
+	// var records = jsonObj.records;
+	// var len = records.length;
+	// for (var i = 0; i < len; i++) {
+	// var rc = records[i];
+	// alert(rc.vedioName);
+	// }
+	// },
+	//
+	// failure : function (o) {
+	// if (!YAHOO.util.Connect.isCallInProgress(o)) {
+	// alert("Async call failed!");
+	// }
+	// },
+	// timeout : 3000
+	// }
+	// // Make the call to the server for JSON data
+	// YAHOO.util.Connect.asyncRequest('GET',url, callbacks);
+
+	// });
 	return {
 		ds : myDataSource,
 		dt : myDataTable
@@ -316,7 +273,7 @@ function initDataTable() {
 
 }
 
-function initScoreDataTable(videoID) {	
+function initScoreDataTable(videoID) {
 	var formatDate = function(elCell, oRecord, oColumn, sData) {
 		var idx = sData.indexOf("T");
 		if (idx != -1) {
@@ -336,7 +293,7 @@ function initScoreDataTable(videoID) {
 				key : "score",
 				label : "综合得分",
 				sortable : true
-			},{
+			}, {
 				key : "storyScore",
 				label : "故事",
 				sortable : true
@@ -356,7 +313,7 @@ function initScoreDataTable(videoID) {
 				key : "dateExamine",
 				label : "评分日期",
 				sortable : true,
-				formatter: formatDate
+				formatter : formatDate
 			}, {
 				key : "award",
 				label : "获奖",
@@ -365,18 +322,20 @@ function initScoreDataTable(videoID) {
 				key : "purchase",
 				label : "购买意见",
 				sortable : true
-			},{
-				key:"examiner",
-				label:"评分人"
+			}, {
+				key : "examiner",
+				label : "评分人"
 			}];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/getVideoScores.action?&videoID="+YAHOO.util.Dom.get("videoID").value+"&");
+	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/getVideoScores.action?&videoID="
+			+ YAHOO.util.Dom.get("videoID").value + "&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.responseSchema = {
 		resultsList : "records",
-		fields : ["vedioName", "score", "storyScore", "techScore", "performScore",
-				"innovateScore", "dateExamine", "award", "purchase","examiner"],
+		fields : ["vedioName", "score", "storyScore", "techScore",
+				"performScore", "innovateScore", "dateExamine", "award",
+				"purchase", "examiner"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -392,18 +351,18 @@ function initScoreDataTable(videoID) {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
-			lastPageLinkLabel :" 尾页",
-			previousPageLinkLabel :" 上一页",
-			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPage : 25,
+			firstPageLinkLabel : "第一页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
+			rowsPerPageOptions : [25, 50, 100]
 		})
 
 	};
-	
+
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
@@ -412,15 +371,18 @@ function initScoreDataTable(videoID) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	myDataSource.subscribe("requestEvent", function() { 
-		$.blockUI({ message: "<h1>数据加载中......</h1>" });
-	});
+	myDataSource.subscribe("requestEvent", function() {
+				$.blockUI({
+							message : "<h1>数据加载中......</h1>"
+						});
+			});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
-	myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable
+			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	myDataTable.subscribe("renderEvent", function() {
-		$.unblockUI();
-		parent.resizeIframe();
-	});
+				$.unblockUI();
+				parent.resizeIframe();
+			});
 	return {
 		ds : myDataSource,
 		dt : myDataTable
