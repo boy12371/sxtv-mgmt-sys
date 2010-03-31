@@ -33,7 +33,6 @@
 		<Module id="search" name="统计查询" url="">
 		<ModuleItem id="searchVideo" name="影带信息查询" url="/tv/search/toGenericSeaching.action"/>
 		<ModuleItem id="orderVideo" name="影带排名" url="/tv/search/toVideoSequence.action" />
-			
 		</Module>
 		
 		<Module id="accuracy" name="员工准确度" url="/tv/accuracy/toAccuracy.action">

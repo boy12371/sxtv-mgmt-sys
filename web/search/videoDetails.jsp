@@ -22,7 +22,7 @@
 </head>
 <body class="yui-skin-sam">
 
-
+<div width="65%">
 <h1>影带信息</h1>
 <img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0" />
 <p>影带详细信息</p>
@@ -99,6 +99,6 @@
 	</tr>
 </table>
 </div>
-
+</div>
 </body>
 </html>

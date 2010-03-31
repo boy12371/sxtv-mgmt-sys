@@ -87,19 +87,32 @@
 	YAHOO.example.DynamicData = initScoreLevelTable();
 </script>
 <div id="hiddenDiv" style="display: none"><s:form id="commonform" action="" namespace="" method="post">
-	<h1 class="popupWindow" id="headDiv"></h1>
+	<h1 class="popupWindowTitle" id="headDiv"></h1>
 	<input type="hidden" name="subject.id" id="objID" />
-	<p style="background: #FFFFFF; border-bottom: 0"><span id="titleName">题材:</span>&nbsp;<s:textfield name="subject.subjectName" id="objName" /></p>
-	<p style="background: #FFFFFF; border-bottom: 0"><span id="titleComments">备注:</span>&nbsp;<s:textarea cols="18" rows="4" name="subject.comments" id="objComments"></s:textarea></p>
-	<p style="background: #FFFFFF; border-bottom: 0"><input type="button" id="yes" value="确认" /> <input type="button" id="cancel" value="取消" /></p>
+<table width="100%">
+	<tr>
+		<td style="text-align: right; width: 40%;"><span id="titleName">题材:</span>&nbsp;</td>
+		<td style="text-align:left"><s:textfield name="subject.subjectName" id="objName" /></td>
+	</tr>
+	<tr>
+		<td style="text-align: right; width: 40%;valign:top"><span id="titleComments">备注:</span></td>
+		<td style="text-align:left"><s:textarea cols="18" rows="4" name="subject.comments" id="objComments"></s:textarea></td>
+	
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align: center"><input type="button" id="yes" value="确认" /><input type="button" id="cancel" value="取消" /></td>
+		
+	</tr>
 
+</table>
+	
 </s:form></div>
 
 
 
 
 <div id="hiddenWeightDiv" style="display: none"><s:form id="weightform" action="" namespace="" method="post">
-	<h1 class="popupWindow">修改权重</h1>
+	<h1 class="popupWindowTitle">修改权重</h1>
 	<input type="hidden" name="" id="weightID" />
 	<p style="background: #FFFFFF; border-bottom: 0">权重系数:&nbsp;<span id="weight"></span></p>
 	<p style="background: #FFFFFF; border-bottom: 0">系数:&nbsp;<s:textfield name="" id="weightValue" /></p>	
@@ -109,7 +122,7 @@
 
 
 <div id="hiddenLevelDiv" style="display: none;"><s:form id="levelform" action="" namespace="" method="post">
-	<h1 class="popupWindow" id="levelTitle"></h1>
+	<h1 class="popupWindowTitle" id="levelTitle"></h1>
 	<input type="hidden" name="" id="levelID" />
 	<p style="background: #FFFFFF; border-bottom: 0" id="levelName">级别:&nbsp;<span id="levelLabel"></span></p>
 	<p style="background: #FFFFFF; border-bottom: 0">起点分值:&nbsp;<s:textfield name="scorelevel.start" id="levelStart" /></p>

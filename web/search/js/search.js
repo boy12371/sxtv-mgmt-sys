@@ -268,69 +268,18 @@ function initOrderDataTable() {
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
 		var href = "<a href='./search/toVideoDetail.action?vid=";
 		href += sData;
-		href += "'>" + sData + "</a>";
+		href += "' target='blank'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	}
 
-	var formatCompany = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.companyName;
-	}
-	var formatTopic = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.topicName;
-	}
-	var formatSubject = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.subjectName;
-	}
-	var formatDate = function(elCell, oRecord, oColumn, sData) {
-		var idx = sData.indexOf("T");
-		if (idx != -1) {
-			elCell.innerHTML = sData.substring(0, idx);
-		} else {
-			elCell.innerHTML = sData;
-		}
-	}
-	var formatStatus = function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = sData.status;
-	}
-	var formatScroes = function(elCell, oRecord, oColumn, sData) {
-		if (sData.length == 0) {
-			elCell.innerHTML = "0";
-		} else {
-			var avgScore = 0;
-			var total = 0;
-			for (var i = 0; i < sData.length; i++) {
-				total += sData[i].score;
-			}
-			var s = (total / sData.length).toString();
-			s = s.substring(0, s.indexOf(".") + 3);
-			elCell.innerHTML = s;
-		}
-	}
-	var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
-		if (sData.length == 0) {
-			elCell.innerHTML = "0/0";
-		} else {
-			var yes = 0;
-			var no = 0;
-			for (var i = 0; i < sData.length; i++) {
-				if (sData[i].result == 1) {
-					yes += 1;
-				} else {
-					no += 1;
-				}
-			}
-			elCell.innerHTML = yes + "/" + no;
-		}
-	}
 	// Column definitions
 	var myColumnDefs = [{
 				key : "order",
 				label : "排名",
 				formatter : formatOrder
-			}, {
+			},{
 				key : "id",
 				label : "编号",
-				sortable : true,
 				formatter : formatLink
 			}, {
 				key : "vedioName",
@@ -338,36 +287,29 @@ function initOrderDataTable() {
 			}, {
 				key : "topic",
 				label : "题材",
-				sortable : true,
 				formatter : formatTopic
 			}, {
 				key : "subject",
 				label : "栏目",
-				sortable : true,
 				formatter : formatSubject
 			}, {
 				key : "companyID",
 				label : "影视公司",
-				sortable : true,
 				formatter : formatCompany
 			}, {
 				key : "dateInput",
 				label : "收带日期",
-				sortable : true,
 				formatter : formatDate
 			}, {
 				key : "status",
 				label : "状态",
-				sortable : true,
 				formatter : formatStatus
 			}, {
 				key : "marketShare",
-				label : "市场份额",
-				sortable : true
+				label : "市场份额"
 			}, {
 				key : "audienceRating",
-				label : "收视率",
-				sortable : true
+				label : "收视率"
 			}, {
 				key : "vedioscores",
 				label : "综合平均分",
@@ -377,9 +319,10 @@ function initOrderDataTable() {
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
 			}, {
-				key : "score",
-				label : "参考得分"
-			}, {
+				key : "vedioscores",
+				label : "获奖备选(是/否)",
+				formatter : formatAward
+			},{
 				key : "comments",
 				label : "备注"
 			}];
@@ -391,7 +334,7 @@ function initOrderDataTable() {
 		resultsList : "records",
 		fields : ["order", "id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores", "audiencescore", "score", "comments"],
+				"vedioscores","vedioscores", "audiencescore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -435,15 +378,16 @@ function initOrderDataTable() {
 		sortedBy : {
 			key : "audienceRating",
 			dir : YAHOO.widget.DataTable.CLASS_DESC
-		},paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
-			firstPageLinkLabel : " ",
-			lastPageLinkLabel : "  ",
-			previousPageLinkLabel : " ",
-			nextPageLinkLabel : " ",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}"
-		}),
+		},
+//		paginator : new YAHOO.widget.Paginator({
+//			rowsPerPage : 25,
+//			firstPageLinkLabel : " ",
+//			lastPageLinkLabel : "  ",
+//			previousPageLinkLabel : " ",
+//			nextPageLinkLabel : " ",
+//			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+//			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}"
+//		}),
 		generateRequest : requestBuilder
 	};
 
@@ -451,7 +395,7 @@ function initOrderDataTable() {
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 				$.unblockUI();
-				// parent.resizeIframe();
+				parent.resizeIframe();
 			});
 
 	// Update totalRecords on the fly with value from server
@@ -471,9 +415,9 @@ function initOrderDataTable() {
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	var fireEvent = function(resetRecordOffset) {
 		var oState = myDataTable.getState(), request, oCallback;
-		 if (resetRecordOffset) {
-		 oState.pagination.recordOffset = 0;
-		 }
+//		 if (resetRecordOffset) {
+//		 oState.pagination.recordOffset = 0;
+//		 }
 		oCallback = {
 			success : myDataTable.onDataReturnSetRows,
 			failure : myDataTable.onDataReturnSetRows,
