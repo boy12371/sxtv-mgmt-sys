@@ -29,7 +29,7 @@ public class AutoJobToUpdatePlayedVideoStatus{
 				Vediotape v = playorder.getVedioID();
 				v.setStatus(new Status(8));
 				if(vediotapeService.updateVideo(v)){
-					logger.info(cal.getTime().toLocaleString()+" system update status to 8(played) of video: "+ v.getVedioName()+"/id:"+v.getId());
+					logger.warn((cal.getTime().toLocaleString()+" system update status to 8(played) of video: "+ v.getVedioName()+"/id:"+v.getId()));
 					
 				}		
 			}	

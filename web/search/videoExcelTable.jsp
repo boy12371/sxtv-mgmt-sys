@@ -53,15 +53,19 @@
 	border-color:#CBCBCB;
 	border-style:solid;
 	border-width:1px;
+	border-bottom-style: insert
 }
 </style>
 <title>打印预览</title>
 </head>
 <body class="yui-skin-sam">
 <s:actionerror />
-<p id="query"><s:property value="query" /></p>
+<h1>
+ <s:property value="sc.startDate"/>——<s:property value="sc.endDate"/> 
+</h1>
+<p>&nbsp;</p>
 
-<div id="excelTable"></div>
+<div id="excelTable" align="center"></div>
 
 <script type="text/javascript">
 	function initExcelTable() {
