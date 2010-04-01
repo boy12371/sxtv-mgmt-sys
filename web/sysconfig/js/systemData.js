@@ -26,21 +26,21 @@ function initStatusTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
+			rowsPerPage : 10,
 			firstPageLinkLabel : "第一页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
 			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50, 100]
+			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -130,21 +130,21 @@ function initTopicTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
+			rowsPerPage : 10,
 			firstPageLinkLabel : "第一页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
 			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50, 100]
+			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -365,21 +365,21 @@ function initSubjectTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
+			rowsPerPage : 10,
 			firstPageLinkLabel : "第一页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
 			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50, 100]
+			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -586,21 +586,21 @@ function initScoreWeightTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
+			rowsPerPage : 10,
 			firstPageLinkLabel : "第一页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
 			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50, 100]
+			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -654,7 +654,7 @@ function initScoreWeightTable() {
 						form.action = "/tv/sys/modifyWeight.action?scoreweight.id="
 								+ oRecord.getData("id")
 								+ "&scoreweight.wieght=" + weightValue.value;
-						alert(form.action);
+						// alert(form.action);
 						form.submit();
 					});
 			var cancelBtn = YAHOO.util.Dom.get("weightCancel");
@@ -675,7 +675,6 @@ function initScoreWeightTable() {
 		dt : myDataTable
 	};
 }
-
 function initScoreLevelTable() {
 	var myColumnDefs = [{
 				key : "id",
@@ -690,6 +689,9 @@ function initScoreLevelTable() {
 			}, {
 				key : "end",
 				label : "结束分值"
+			},{
+				key : "levelScore",
+				label : "参考分值"
 			}, {
 				key : "select",
 				label : "操作",
@@ -709,7 +711,7 @@ function initScoreLevelTable() {
 
 	myDataSource.responseSchema = {
 		resultsList : "records",
-		fields : ["id", "level", "start", "end", {
+		fields : ["id", "level", "start", "end", "levelScore", {
 					key : "select",
 					parser : "string"
 				}],

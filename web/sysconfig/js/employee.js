@@ -96,14 +96,14 @@ function initEmployeeDataTable() {
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :25,
+			rowsPerPage :10,
 			firstPageLinkLabel :"第一页",
 			lastPageLinkLabel :" 尾页",
 			previousPageLinkLabel :" 上一页",
 			nextPageLinkLabel :" 下一页",
 			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPageOptions : [10, 20,30 ]
 		})
 	// Enables pagination
 	};
@@ -202,14 +202,14 @@ function initUserDataTable() {
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :25,
+			rowsPerPage :10,
 			firstPageLinkLabel :"第一页",
 			lastPageLinkLabel :" 尾页",
 			previousPageLinkLabel :" 上一页",
 			nextPageLinkLabel :" 下一页",
 			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			rowsPerPageOptions : [10, 20,30]
 		})
 	// Enables pagination
 	};

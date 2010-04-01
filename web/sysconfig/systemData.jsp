@@ -125,8 +125,9 @@
 	<h1 class="popupWindowTitle" id="levelTitle"></h1>
 	<input type="hidden" name="" id="levelID" />
 	<p style="background: #FFFFFF; border-bottom: 0" id="levelName">级别:&nbsp;<span id="levelLabel"></span></p>
-	<p style="background: #FFFFFF; border-bottom: 0">起点分值:&nbsp;<s:textfield name="scorelevel.start" id="levelStart" /></p>
-	<p style="background: #FFFFFF; border-bottom: 0">结束分值:&nbsp;<s:textfield name="scorelevel.end" id="levelEnd" /></p>
+	<p style="background: #FFFFFF; border-bottom: 0">起点排名:&nbsp;<s:textfield name="scorelevel.start" id="levelStart" /></p>
+	<p style="background: #FFFFFF; border-bottom: 0">结束排名:&nbsp;<s:textfield name="scorelevel.end" id="levelEnd" /></p>
+	<p style="background: #FFFFFF; border-bottom: 0">参考分值:&nbsp;<s:textfield name="scorelevel.levelScore" id="levelScore" /></p>
 	<p style="background: #FFFFFF; border-bottom: 0"><input type="button" id="levelYes" value="确认" /> <input type="button" id="levelCancel" value="取消" /></p>
 
 </s:form></div>
