@@ -219,7 +219,7 @@ public class VediotapeService implements IVediotapeService {
 	}
 
 	private List<Scorelevel> findAllLevels() throws Exception {
-		List<Scorelevel> levels = this.scorelevelDAO.findAll(Scorelevel.class);
+		List<Scorelevel> levels = this.scorelevelDAO.findObjectByFields(Scorelevel.class, null, -1, -1, Scorelevel.PROP_LEVEL, true);
 		return levels;
 	}
 

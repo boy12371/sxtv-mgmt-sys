@@ -74,6 +74,7 @@
 </div>
 <h1>影带排名列表</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 <!-- p>单击表头，可进行排序</p-->
+<div id="colDiv">ddddd</div>
 <div id="dynamicdata" align="center"></div>
 
 <script type="text/javascript">

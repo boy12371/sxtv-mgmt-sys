@@ -43,6 +43,7 @@ public class ScorelevelService implements IScorelevelService {
 //		lev.setComments(level.getComments());
 		lev.setEnd(level.getEnd());
 		lev.setStart(level.getStart());
+		lev.setLevelScore(level.getLevelScore());
 		this.scorelevelDAO.saveOrUpdateObject(lev);
 	}
 

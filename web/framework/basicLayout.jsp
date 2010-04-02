@@ -7,6 +7,7 @@
 <sx:head />
 
 <link rel="shortcuticon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
+<link rel="icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <style type="text/css">

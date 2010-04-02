@@ -77,7 +77,8 @@ function initDataTable() {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores","purchase","awarding", "audiencescore", "comments"],
+				"vedioscores", "purchase", "awarding", "audiencescore",
+				"comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -173,7 +174,6 @@ function initDataTable() {
 			argument : oState,
 			scope : myDataTable
 		};
-		
 
 		var vid = YAHOO.util.Dom.get("vid").value;
 		var vname = YAHOO.util.Dom.get("vname").value;
@@ -193,7 +193,7 @@ function initDataTable() {
 		myDataSource.sendRequest(request, oCallback);
 
 	}
-	checkSelectItems = function(){
+	checkSelectItems = function() {
 		var vid = YAHOO.util.Dom.get("vid").value;
 		var vname = YAHOO.util.Dom.get("vname").value;
 		var vcompany = YAHOO.util.Dom.get("vcompany").value;
@@ -205,40 +205,41 @@ function initDataTable() {
 		if (vid.length == 0 && vname.length == 0 && vcompany == 0
 				&& vsubject == 0 && vtopic == 0 && vstatus == 0
 				&& startDate.length == 0 && endDate.length == 0) {
-			jAlert('至少要填写或选择一个选项', '提示');			
+			jAlert('至少要填写或选择一个选项', '提示');
 			return "";
-		}else{
-			var params="";
-			params += "&sc.id=" + vid + "&sc.name=" + vname
-			+ "&sc.company.id=" + vcompany + "&sc.subject.id=" + vsubject
-			+ "&sc.topic.id=" + vtopic + "&sc.status.id=" + vstatus
-			+ "&sc.startDate="
-			+ startDate.substring(0, startDate.indexOf("T"))
-			+ "&sc.endDate=" + endDate.substring(0, endDate.indexOf("T"));
+		} else {
+			var params = "";
+			params += "&sc.id=" + vid + "&sc.name=" + vname + "&sc.company.id="
+					+ vcompany + "&sc.subject.id=" + vsubject + "&sc.topic.id="
+					+ vtopic + "&sc.status.id=" + vstatus + "&sc.startDate="
+					+ startDate.substring(0, startDate.indexOf("T"))
+					+ "&sc.endDate="
+					+ endDate.substring(0, endDate.indexOf("T"));
 			return params;
-		}		
+		}
 	}
-	var generatePrintTable = function(resetRecordOffset){
-		//getDateFromDataTimePicker("fromDate");
+	var generatePrintTable = function(resetRecordOffset) {
+		// getDateFromDataTimePicker("fromDate");
 		var p = "&startIndex=-1&sort=dateInput&dir=asc";
 		var params = checkSelectItems();
-		if(params.length != 0){
-			 var queryString = "/tv/search/toPrintVideosReport.action?query="+escape(p+params);
-		}else{
+		if (params.length != 0) {
+			var queryString = "/tv/search/toPrintVideosReport.action?query="
+					+ escape(p + params);
+		} else {
 			return;
 		}
-		alert(queryString);
-	    window.open(queryString, "打印预览");	    
+
+		window.open(queryString, "打印预览");
 	}
-	
+
 	var printBtn = new YAHOO.widget.Button({
-		type : "button",
-		id : "topicBtn",
-		label : "打印",
-		container : "printBtn"
-	});
-	printBtn.on("click",generatePrintTable); 
-	
+				type : "button",
+				id : "topicBtn",
+				label : "打印",
+				container : "printBtn"
+			});
+	printBtn.on("click", generatePrintTable);
+
 	var searchBtn = new YAHOO.widget.Button("go");// YAHOO.util.Dom.get("filter");
 	searchBtn.on("click", fireEvent);
 
@@ -266,8 +267,9 @@ function initDataTable() {
 }
 
 function initOrderDataTable() {
-	var formatOrder =  function(elCell, oRecord, oColumn, sData) {
-		elCell.innerHTML = oRecord.getCount()+1;
+	var rowIndex = 0;
+	var formatOrder = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = (rowIndex += 1);
 	}
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
 		var href = "<a href='./search/toVideoDetail.action?vid=";
@@ -281,7 +283,7 @@ function initOrderDataTable() {
 				key : "order",
 				label : "排名",
 				formatter : formatOrder
-			},{
+			}, {
 				key : "id",
 				label : "编号",
 				formatter : formatLink
@@ -330,7 +332,7 @@ function initOrderDataTable() {
 				key : "audiencescore",
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
-			},{
+			}, {
 				key : "comments",
 				label : "备注"
 			}];
@@ -342,7 +344,8 @@ function initOrderDataTable() {
 		resultsList : "records",
 		fields : ["order", "id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores","purchase","awarding", "audiencescore", "comments"],
+				"vedioscores", "purchase", "awarding", "audiencescore",
+				"comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -369,10 +372,11 @@ function initOrderDataTable() {
 		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC)
 				? "desc"
 				: "asc";
-		var queryString = "&startIndex=" + startIndex
-				+ "&sort=" + sort + "&dir=" + dir;
-		queryString += "&sc.company.id=" + vcompany + "&sc.subject.id=" + vsubject
-				+ "&sc.topic.id=" + vtopic + "&sc.status.id=9&sc.startDate="
+		var queryString = "&startIndex=" + startIndex + "&sort=" + sort
+				+ "&dir=" + dir;
+		queryString += "&sc.company.id=" + vcompany + "&sc.subject.id="
+				+ vsubject + "&sc.topic.id=" + vtopic
+				+ "&sc.status.id=9&sc.startDate="
 				+ startDate.substring(0, startDate.indexOf("T"))
 				+ "&sc.endDate=" + endDate.substring(0, endDate.indexOf("T"));
 
@@ -387,21 +391,16 @@ function initOrderDataTable() {
 			key : "audienceRating",
 			dir : YAHOO.widget.DataTable.CLASS_DESC
 		},
-//		paginator : new YAHOO.widget.Paginator({
-//			rowsPerPage : 25,
-//			firstPageLinkLabel : " ",
-//			lastPageLinkLabel : "  ",
-//			previousPageLinkLabel : " ",
-//			nextPageLinkLabel : " ",
-//			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-//			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}"
-//		}),
+		paginator : new YAHOO.widget.Paginator({
+					rowsPerPage : 25
+				}),
 		generateRequest : requestBuilder
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
+				rowIndex = 0;
 				$.unblockUI();
 				parent.resizeIframe();
 			});
@@ -421,25 +420,51 @@ function initOrderDataTable() {
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+
+//	var colDiv = YAHOO.util.Dom.get("colDiv");
+//
+//	addColumns = function() {
+//
+//		for (var i = 0, l = myColumnDefs.length; i < l; i++) {
+//			var column = myColumnDefs[i];
+//			var checkbox = document.createElement("INPUT");
+//			checkbox.type = "checkbox";
+//			checkbox.name = "colCkbox";
+//			checkbox.value = column.key;
+//			checkbox.checked = false;
+//			checkbox.addListener("click",function(){
+//				alert(this.checked);
+//			});
+//			// checkbox.appendChild(column.label);
+//			colDiv.appendChild(checkbox);
+//			
+//			var label = document.createElement("LABEL");
+//			label.innerHTML= column.label;
+//			colDiv.appendChild(label);
+//		}
+//	};
+
 	var fireEvent = function(resetRecordOffset) {
+		//addColumns();
 		var oState = myDataTable.getState(), request, oCallback;
-//		 if (resetRecordOffset) {
-//		 oState.pagination.recordOffset = 0;
-//		 }
+		if (resetRecordOffset) {
+			oState.pagination.recordOffset = 0;
+		}
 		oCallback = {
 			success : myDataTable.onDataReturnSetRows,
 			failure : myDataTable.onDataReturnSetRows,
 			argument : oState,
 			scope : myDataTable
 		};
-		
+
 		var vcompany = YAHOO.util.Dom.get("vcompany").value;
 		var vsubject = YAHOO.util.Dom.get("vsubject").value;
 		var vtopic = YAHOO.util.Dom.get("vtopic").value;
-// var vstatus = YAHOO.util.Dom.get("vstatus").value;
+		// var vstatus = YAHOO.util.Dom.get("vstatus").value;
 		var startDate = dojo.widget.byId("startDate").getValue();
 		var endDate = dojo.widget.byId("endDate").getValue();
-		if (vcompany == 0 && vsubject == 0 && vtopic == 0 && startDate.length == 0 && endDate.length == 0) {
+		if (vcompany == 0 && vsubject == 0 && vtopic == 0
+				&& startDate.length == 0 && endDate.length == 0) {
 			jAlert('至少要填写或选择一个选项', '提示');
 			// alert("至少要填写或选择一个选项");
 			return;

@@ -14,6 +14,7 @@ public abstract class BaseScoreweight implements Serializable {
 
 	public static String REF = "Scoreweight";
 	public static String PROP_WIEGHT = "weight";
+	public static String PROP_WIEGHTNAME = "weightName";
 	public static String PROP_ID = "id";
 
 	// constructors
