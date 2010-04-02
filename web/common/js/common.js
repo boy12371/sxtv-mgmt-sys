@@ -139,6 +139,7 @@ var formatScroes = function(elCell, oRecord, oColumn, sData) {
 }
 
 var formatAward = function(elCell, oRecord, oColumn, sData) {
+	sData = oRecord.getData("vedioscores");
 	if (sData.length == 0) {
 		elCell.innerHTML = "0/0";
 	} else {
@@ -154,6 +155,25 @@ var formatAward = function(elCell, oRecord, oColumn, sData) {
 		elCell.innerHTML = yes + "/" + no;
 	}
 }
+
+var formatPurchase = function(elCell, oRecord, oColumn, sData) {
+	sData = oRecord.getData("vedioscores");
+	if (sData.length == 0) {
+		elCell.innerHTML = "0/0";
+	} else {
+		var yes = 0;
+		var no = 0;
+		for (var i = 0; i < sData.length; i++) {
+			if (sData[i].purchase == 1) {
+				yes += 1;
+			} else {
+				no += 1;
+			}
+		}
+		elCell.innerHTML = yes + "买" + no + "否";
+	}
+}
+
 
 var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
 	if (sData.length == 0) {

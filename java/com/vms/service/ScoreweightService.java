@@ -34,7 +34,7 @@ public class ScoreweightService implements IScoreweightService {
 	public void updateWeight(Scoreweight weight) throws Exception {
 		// TODO Auto-generated method stub
 		Scoreweight wei = (Scoreweight) this.scoreweightDAO.getObject(clz, weight.getId());
-		wei.setWieght(weight.getWieght());
+		wei.setWeight(weight.getWeight());
 		this.scoreweightDAO.saveOrUpdateObject(wei);
 
 	}

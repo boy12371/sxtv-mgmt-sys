@@ -536,25 +536,12 @@ function initSubjectTable() {
 }
 
 function initScoreWeightTable() {
-	var formatID = function(elCell, oRecord, oColumn, sData) {
-		var factor = "";
-		if (sData == "innovateScore") {
-			factor = "创 新";
-		} else if (sData == "performScore") {
-			factor = "表 演";
-		} else if (sData == "storyScore") {
-			factor = "故 事";
-		} else {
-			factor = "技 术";
-		}
-		elCell.innerHTML = factor;
-	};
-	var myColumnDefs = [{
-				key : "id",
-				label : "名称",
-				sortable : true
+
+	var myColumnDefs = [ {
+				key : "weightName",
+				label : "名称"
 			}, {
-				key : "wieght",
+				key : "weight",
 				label : "权重系数"
 			}, {
 				key : "select",
@@ -575,7 +562,7 @@ function initScoreWeightTable() {
 
 	myDataSource.responseSchema = {
 		resultsList : "records",
-		fields : ["id", "wieght", {
+		fields : ["id", "weight", "weightName", {
 					key : "select",
 					parser : "string"
 				}],
@@ -588,10 +575,10 @@ function initScoreWeightTable() {
 	var myConfigs = {
 		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
 		dynamicData : true, // Enables dynamic server-driven data
-		sortedBy : {
-			key : "id",
-			dir : YAHOO.widget.DataTable.CLASS_ASC
-		}, // Sets UI initial sort arrow
+//		sortedBy : {
+//			key : "id",
+//			dir : YAHOO.widget.DataTable.CLASS_ASC
+//		},
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 10,
 			firstPageLinkLabel : "第一页",
@@ -631,10 +618,10 @@ function initScoreWeightTable() {
 			$('#weight').text("");
 			$('#headDiv').text("");
 			$('#headDiv').text("修改权重系数");
-			$('#weight').text(oRecord.getData("id"));
+			$('#weight').text(oRecord.getData("weightName"));
 			var weightValue = YAHOO.util.Dom.get("weightValue");
 			weightValue.value = "";
-			weightValue.value = oRecord.getData("wieght");
+			weightValue.value = oRecord.getData("weight");
 
 			$.blockUI({
 						message : $('#hiddenWeightDiv'),
@@ -653,8 +640,7 @@ function initScoreWeightTable() {
 						var form = YAHOO.util.Dom.get("weightform");
 						form.action = "/tv/sys/modifyWeight.action?scoreweight.id="
 								+ oRecord.getData("id")
-								+ "&scoreweight.wieght=" + weightValue.value;
-						// alert(form.action);
+								+ "&scoreweight.weight=" + weightValue.value;
 						form.submit();
 					});
 			var cancelBtn = YAHOO.util.Dom.get("weightCancel");
@@ -676,11 +662,13 @@ function initScoreWeightTable() {
 	};
 }
 function initScoreLevelTable() {
-	var myColumnDefs = [{
-				key : "id",
-				label : "名称",
-				sortable : true
-			}, {
+	var myColumnDefs = [
+//			{
+//				key : "id",
+//				label : "名称",
+//				sortable : true
+//			}, 
+				{
 				key : "level",
 				label : "级别"
 			}, {
@@ -689,7 +677,7 @@ function initScoreLevelTable() {
 			}, {
 				key : "end",
 				label : "结束分值"
-			},{
+			}, {
 				key : "levelScore",
 				label : "参考分值"
 			}, {
@@ -725,7 +713,7 @@ function initScoreLevelTable() {
 		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
-			key : "id",
+			key : "level",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
@@ -764,8 +752,10 @@ function initScoreLevelTable() {
 	levelBtn.on("click", function() {
 				var levelStart = YAHOO.util.Dom.get("levelStart");
 				var levelEnd = YAHOO.util.Dom.get("levelEnd");
+				var levelScore = YAHOO.util.Dom.get("levelScore");
 				levelStart.value = "";
 				levelEnd.value = "";
+				levelScore.value = "";
 				$('#levelTitle').text("增加级别");
 				$('#levelName').text("");
 				$.blockUI({
@@ -778,14 +768,14 @@ function initScoreLevelTable() {
 								border : '5px solid #999999'
 							}
 						});
-				var yesBtn = YAHOO.util.Dom.get("yes");
+				var yesBtn = YAHOO.util.Dom.get("levelYes");
 				YAHOO.util.Event.addListener(yesBtn, "click", function() {
 							$.unblockUI();
 							var form = YAHOO.util.Dom.get("levelform");
 							form.action = "/tv/sys/addScoreLevel.action"
 							form.submit();
 						});
-				var cancelBtn = YAHOO.util.Dom.get("cancel");
+				var cancelBtn = YAHOO.util.Dom.get("levelCancel");
 				YAHOO.util.Event.addListener(cancelBtn, "click", function() {
 							$.unblockUI();
 						});
@@ -796,6 +786,7 @@ function initScoreLevelTable() {
 		var oRecord = this.getRecord(elDropdown);
 		var levelStart = YAHOO.util.Dom.get("levelStart");
 		var levelEnd = YAHOO.util.Dom.get("levelEnd");
+		var levelScore = YAHOO.util.Dom.get("levelScore");
 		var opt = elDropdown.value;
 		if (opt == "none") {
 			elDropdown.selectIndex = 0;
@@ -806,7 +797,7 @@ function initScoreLevelTable() {
 			$('#levelLabel').text(oRecord.getData("level"));
 			levelStart.value = oRecord.getData("start");
 			levelEnd.value = oRecord.getData("end");
-
+			levelScore.value = oRecord.getData("levelScore");
 			$.blockUI({
 						message : $('#hiddenLevelDiv'),
 						css : {

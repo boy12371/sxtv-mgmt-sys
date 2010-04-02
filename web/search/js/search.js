@@ -54,14 +54,18 @@ function initDataTable() {
 				label : "综合平均分",
 				formatter : formatScroes
 			}, {
+				key : "purchase",
+				label : "购买意见",
+				formatter : formatPurchase
+			}, {
+				key : "awarding",
+				label : "获奖备选(是/否)",
+				formatter : formatAward
+			}, {
 				key : "audiencescore",
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
 			}, {
-				key : "vedioscores",
-				label : "获奖备选(是/否)",
-				formatter : formatAward
-			},{
 				key : "comments",
 				label : "备注"
 			}];
@@ -73,7 +77,7 @@ function initDataTable() {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores","vedioscores", "audiencescore", "comments"],
+				"vedioscores","purchase","awarding", "audiencescore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -315,13 +319,17 @@ function initOrderDataTable() {
 				label : "综合平均分",
 				formatter : formatScroes
 			}, {
+				key : "purchase",
+				label : "购买意见",
+				formatter : formatPurchase
+			}, {
+				key : "awarding",
+				label : "获奖备选(是/否)",
+				formatter : formatAward
+			}, {
 				key : "audiencescore",
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
-			}, {
-				key : "vedioscores",
-				label : "获奖备选(是/否)",
-				formatter : formatAward
 			},{
 				key : "comments",
 				label : "备注"
@@ -334,7 +342,7 @@ function initOrderDataTable() {
 		resultsList : "records",
 		fields : ["order", "id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores","vedioscores", "audiencescore", "comments"],
+				"vedioscores","purchase","awarding", "audiencescore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response

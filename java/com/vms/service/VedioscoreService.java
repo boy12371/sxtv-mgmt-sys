@@ -92,7 +92,7 @@ public class VedioscoreService implements IVedioscoreService {
 		Map<String, Float> map = new HashMap<String, Float>();
 		List<Scoreweight> weights = vedioscoreDAO.findAll(Scoreweight.class);
 		for (Scoreweight w : weights) {
-			map.put(w.getId(), w.getWieght());
+			map.put(w.getId(), w.getWeight());
 		}
 		return map;
 	}
