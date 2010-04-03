@@ -48,6 +48,15 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 			query.setParameterList("tapes", tapes);
 			query.setParameter("user", user);
 			list = query.list();
+			
+			for(Vedioscore vs:list){
+				for(Vediotape vt: tapes){
+					if(vs.getVedio().getId().equals(vt.getId())){
+						vs.getVedio().setScore(vt.getScore());
+						break;
+					}
+				}
+			}
 		}catch(Exception e){
 			logger.error(e.getMessage());
 			e.printStackTrace();

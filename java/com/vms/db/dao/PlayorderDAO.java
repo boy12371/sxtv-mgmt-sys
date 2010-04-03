@@ -1,6 +1,8 @@
 package com.vms.db.dao;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 import com.vms.common.DaoUtils;
 import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
+import com.vms.db.bean.Scorelevel;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
@@ -74,12 +77,39 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 		return crt.list();
 	}
 	
+	public class scoreComparator implements Comparator<Playorder> {
+		public int compare(Playorder o1, Playorder o2) {
+			float s1 = o1.getVedioID().getAudienceRating();
+			float s2 = o2.getVedioID().getAudienceRating();
+			return s1==s2?0:(s1<s2?1:-1);
+		}
+	}
 	@Override
 	public List<Playorder> findPlayorderBetweenDateWithFeedback(Date startDate, Date endDate) throws Exception {
 		Criteria crt = this.getCriteria(Playorder.class);
 		crt.add(Restrictions.between(Playorder.PROP_PLAY_DATE, startDate, endDate))
 		.createCriteria(Playorder.PROP_VEDIO_I_D).add(Restrictions.eq(Vediotape.PROP_STATUS, new Status(9)));
-		return (List<Playorder>)crt.list();
+		
+//		Order order = DaoUtils.getOrder("vedioID.audienceRating", false);
+//		if (order != null) {
+//			crt.addOrder(order);
+//		}
+		List<Playorder> vList = crt.list();
+		Comparator<Playorder> comparator = new scoreComparator();
+		Collections.sort(vList, comparator);
+
+		List<Scorelevel> levels = this.findObjectByFields(Scorelevel.class, null, -1, -1, Scorelevel.PROP_LEVEL, true);
+		for (int i = 0; i < vList.size(); i++) {
+			Vediotape tape = vList.get(i).getVedioID();
+			for (int j = 0; j < levels.size(); j++) {
+				Scorelevel level = levels.get(j);
+				if((i+1)>=level.getStart() && (i+1)<=level.getEnd()){
+					tape.setScore(level.getLevelScore());
+					break;
+				}
+			}
+		}
+		return vList;
 	}
 
 	@Override
@@ -139,5 +169,5 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 		return (List<Playorder>)crt.list();
 		
 	}
-
+	
 }
