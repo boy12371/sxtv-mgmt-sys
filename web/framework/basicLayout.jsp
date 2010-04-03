@@ -70,7 +70,7 @@ body {
 				<img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/>
 			</td>
 			<td>
-				<input type="text" class="inputSearch" id="searchinput" name="query"/><div id="searchcontainer"></div>
+				<input type="text" class="inputSearch" style="position:relative;" id="searchinput" name="query"/><div id="searchcontainer"></div>
 			</td>
 			<td><div id="goBtnDiv" class="goBtn"></div></td>
 		</tr></table>
