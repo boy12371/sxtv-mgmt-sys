@@ -17,7 +17,7 @@ function selectMonthFunc(self){
 			);
 }
 
-var formatDate = function(elCell, oRecord, oColumn, sData) {
+var formatDateArrange = function(elCell, oRecord, oColumn, sData) {
 	if(null==sData || ""==sData || sData.indexOf("1000")!=-1){
 		elCell.innerHTML = "";
 		return;
@@ -98,7 +98,7 @@ function initUnArrangeTable() {
 		key :"dateComing",
 		label :"收带日期",
 		sortable :true,
-		formatter :formatDate,
+		formatter :formatDateArrange,
 		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"companyID",
@@ -191,7 +191,7 @@ function initArrangeTable() {
 	}, {
 		key :"playDate",
 		label :"播放日期",
-		formatter :formatDate
+		formatter :formatDateArrange
 	}, {
 		key :"subject",
 		label :"栏目"		
@@ -201,7 +201,7 @@ function initArrangeTable() {
 	}, {
 		key :"dateComing",
 		label :"收带日期",
-		formatter :formatDate
+		formatter :formatDateArrange
 	}, {
 		key :"companyID",
 		label :"公司"
