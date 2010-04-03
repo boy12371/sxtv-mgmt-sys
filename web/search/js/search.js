@@ -420,32 +420,32 @@ function initOrderDataTable() {
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
-
-//	var colDiv = YAHOO.util.Dom.get("colDiv");
-//
-//	addColumns = function() {
-//
-//		for (var i = 0, l = myColumnDefs.length; i < l; i++) {
-//			var column = myColumnDefs[i];
-//			var checkbox = document.createElement("INPUT");
-//			checkbox.type = "checkbox";
-//			checkbox.name = "colCkbox";
-//			checkbox.value = column.key;
-//			checkbox.checked = false;
-//			checkbox.addListener("click",function(){
-//				alert(this.checked);
-//			});
-//			// checkbox.appendChild(column.label);
-//			colDiv.appendChild(checkbox);
-//			
-//			var label = document.createElement("LABEL");
-//			label.innerHTML= column.label;
-//			colDiv.appendChild(label);
-//		}
-//	};
+	var columnSet = myDataTable.getColumnSet();
+	var showHideColumn = function(e){
+		alert(this.checked);
+	}
+	var colDiv = YAHOO.util.Dom.get("colDiv");
+	addColumns = function() {
+		if(colDiv.innerHTML.length==0){
+			for (var i = 0; i < myColumnDefs.length; i++) {
+				var column = myColumnDefs[i];
+				var checkbox = document.createElement("INPUT");
+				checkbox.type = "checkbox";
+				checkbox.name = "colCkbox";
+				checkbox.value = column.key;
+				checkbox.checked = false;
+				colDiv.appendChild(checkbox);
+				var p = document.createElement("SPAN");
+				p.innerHTML = column.label;
+				colDiv.appendChild(p);
+				YAHOO.util.Event.addListener(checkbox,"click",showHideColumn);
+			}
+		}
+	};
 
 	var fireEvent = function(resetRecordOffset) {
-		//addColumns();
+		
+		addColumns();
 		var oState = myDataTable.getState(), request, oCallback;
 		if (resetRecordOffset) {
 			oState.pagination.recordOffset = 0;
