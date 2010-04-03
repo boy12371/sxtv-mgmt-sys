@@ -44,7 +44,9 @@ public class VedioscoreService implements IVedioscoreService {
 			List<User> examinedUsers = findExaminedUsersOfTape(tape.getId());
 			List<String> examinedNames = new ArrayList<String>();
 			for(User user:examinedUsers){
-				examinedNames.add(user.getEmployee().getName());
+				if(names.contains(user.getEmployee().getName())){
+					examinedNames.add(user.getEmployee().getName());
+				}
 			}
 			List<String> temp = new ArrayList<String>(names);
 			temp.removeAll(examinedNames);
