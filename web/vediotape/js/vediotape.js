@@ -22,7 +22,8 @@ function initDataTable() {
 	}
 	var formatorRemarks = function(elCell, oRecord, oColumn, oData) {
 		if (oData.length > 35) {
-			elCell.innerHTML = oData.substring(0, 35) + ".....";
+			elCell.innerHTML = oData.substring(0, 10) + ".....";
+			elCell.title = oData;
 		} else {
 			elCell.innerHTML = oData;
 		}
@@ -119,7 +120,7 @@ function initDataTable() {
 		})
 	} ];
 
-	var myDataSource = new YAHOO.util.DataSource( []);
+	var myDataSource = new YAHOO.util.DataSource([]);
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 	myDataSource.responseSchema = {
 		fields : [ "vid", "vname", "vcompany", "vtopic", "vsubject",

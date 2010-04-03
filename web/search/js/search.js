@@ -413,6 +413,7 @@ function initOrderDataTable() {
 		return oPayload;
 	}
 	myDataSource.subscribe("requestEvent", function() {
+			addColumnsName();
 				var path = '${pageContext.request.contextPath}';
 				$.blockUI({
 							message : "<h1>数据加载中......</h1>"
@@ -423,10 +424,19 @@ function initOrderDataTable() {
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	var columnSet = myDataTable.getColumnSet();
 	var showHideColumn = function(e){
-		alert(this.checked);
+		var column = columnSet. getColumn(this.value);
+		if(this.checked){
+			myDataTable.hideColumn(column);
+		}else{
+			myDataTable.showColumn(column);
+		}
 	}
 	var colDiv = YAHOO.util.Dom.get("colDiv");
-	addColumns = function() {
+	var colLink = YAHOO.util.Dom.get("tableOption");
+	YAHOO.util.Event.addListener(colLink,"click",function(){
+		colDiv.style.display = colDiv.style.display=="block"?"none":"block";
+	});
+	addColumnsName = function() {
 		if(colDiv.innerHTML.length==0){
 			for (var i = 0; i < myColumnDefs.length; i++) {
 				var column = myColumnDefs[i];
@@ -439,14 +449,18 @@ function initOrderDataTable() {
 				var p = document.createElement("SPAN");
 				p.innerHTML = column.label;
 				colDiv.appendChild(p);
+				if(i%4==1){
+					var br = document.createElement("BR");
+					colDiv.appendChild(br);
+				}
+				
 				YAHOO.util.Event.addListener(checkbox,"click",showHideColumn);
+				colDiv.style.display="none";
 			}
 		}
 	};
-
+//	myDataTable.subscribe("initEvent", addColumnsName);
 	var fireEvent = function(resetRecordOffset) {
-		
-		addColumns();
 		var oState = myDataTable.getState(), request, oCallback;
 		if (resetRecordOffset) {
 			oState.pagination.recordOffset = 0;

@@ -80,10 +80,10 @@
 
 
 <script type="text/javascript">
-	//YAHOO.example.DynamicData = initStatusTable();
-	//YAHOO.example.DynamicData = initTopicTable();
-	//YAHOO.example.DynamicData = initSubjectTable();
-	//YAHOO.example.DynamicData = initScoreWeightTable();
+	YAHOO.example.DynamicData = initStatusTable();
+	YAHOO.example.DynamicData = initTopicTable();
+	YAHOO.example.DynamicData = initSubjectTable();
+	YAHOO.example.DynamicData = initScoreWeightTable();
 	YAHOO.example.DynamicData = initScoreLevelTable();
 </script>
 <div id="hiddenDiv" style="display: none"><s:form id="commonform" action="" namespace="" method="post">

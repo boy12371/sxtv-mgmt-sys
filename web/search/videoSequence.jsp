@@ -73,10 +73,10 @@
 </table>
 </div>
 <h1>影带排名列表</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
-<!-- p>单击表头，可进行排序</p-->
-<div>列
-	<div id="colDiv"></div>
-</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<a href="#" id="tableOption" style="font-size:12px">选项</a>
+	<div id="colDiv" style="z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
+
 <div id="dynamicdata" align="center"></div>
 
 <script type="text/javascript">
