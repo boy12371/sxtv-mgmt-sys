@@ -58,25 +58,31 @@ public class AccuracyAction extends BaseAction {
 		if(null==startDateStr || "".equals(startDateStr) || null==endDateStr || "".equals(endDateStr)){
 			toAccuracy();
 		}
-		Date startDate = dFormat.parse(startDateStr);
-		Date endDate = dFormat.parse(endDateStr);
-		List<AccuracyVO> accs = accuracyService.findAllAccuracy(startDate, endDate);
-		if(null != examiner && "".equals(examiner)){
-			AccuracyVO temp=null;
-			for(AccuracyVO a:accs){
-				if(examiner.equals(a.getEmployeeName())){
-					temp = a;
-					break;
+		try {
+			Date startDate = dFormat.parse(startDateStr);
+			Date endDate = dFormat.parse(endDateStr);
+			List<AccuracyVO> accs = accuracyService.findAllAccuracy(startDate,
+					endDate);
+			if (null != examiner && "".equals(examiner)) {
+				AccuracyVO temp = null;
+				for (AccuracyVO a : accs) {
+					if (examiner.equals(a.getEmployeeName())) {
+						temp = a;
+						break;
+					}
+				}
+				accs.clear();
+				if (null != temp) {
+					accs.add(temp);
 				}
 			}
-			accs.clear();
-			if(null != temp){
-				accs.add(temp);
-			}
+
+			AccuracyComparator acomp = new AccuracyComparator();
+			Collections.sort(accs, acomp);
+			JSONDataTableUtils.setupJSONDataTable(accs, accuracyTable, accs.size());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		AccuracyComparator acomp = new AccuracyComparator();
-		Collections.sort(accs,acomp);
-		JSONDataTableUtils.setupJSONDataTable(accs, accuracyTable, accs.size());
 		return SUCCESS;
 	}
 	
