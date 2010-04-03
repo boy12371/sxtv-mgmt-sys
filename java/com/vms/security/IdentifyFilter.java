@@ -30,7 +30,9 @@ public class IdentifyFilter implements Filter {
 		// TODO Auto-generated method stub
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
-		
+		response.setHeader("Pragma","No-cache");
+		response.setHeader("Cache-Control","no-cache");
+		response.setDateHeader("Expires", 0); 
 
 		String requestURI = request.getRequestURI();
 		boolean mustAuth = true;
