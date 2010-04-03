@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.vms.beans.AccuracyVO;
+import com.vms.common.SearchCondition;
 import com.vms.db.bean.Playorder;
+import com.vms.db.bean.Scorelevel;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
@@ -41,26 +43,15 @@ public class AccuracyService implements IAccuracyService{
 		return accs;
 	}
 	
+	
 	private float computeAccuracyOfTapes(List<Vedioscore> scores){
 		float accSum = 0;
 		float mSum = 0;
 		for(Vedioscore s:scores){
 			float uScore = s.getScore();
-			//FIXME the way to compute mScore should be fix.
-			float vScore = 0;
-			float rate = s.getVedio().getAudienceRating();
-			if (rate < 0.7) {
-				vScore = 0.6f;
-			} else if (rate >= 0.7 && rate < 0.8) {
-				vScore = 0.7f;
-			} else if (rate >= 0.8 && rate < 0.9) {
-				vScore = 0.8f;
-			} else {
-				vScore = 0.9f;
-			}
-			vScore *= 100;
-			accSum += s.getAccuracy();
-			mSum += vScore;
+			float mScore = s.getVedio().getScore();
+			accSum += Math.abs(uScore - mScore);
+			mSum += mScore;
 		}
 		float acc = (1 - accSum / mSum) * 100 ;
 		return acc;
