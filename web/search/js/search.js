@@ -3,7 +3,7 @@ function initDataTable() {
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
 		var href = "<a href='./search/toVideoDetail.action?vid=";
 		href += sData;
-		href += "'>" + sData + "</a>";
+		href += "' target='blank'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	}
 
@@ -67,7 +67,8 @@ function initDataTable() {
 				formatter : formatAudienceScore
 			}, {
 				key : "comments",
-				label : "备注"
+				label : "备注",
+				formatter : formatorComments
 			}];
 
 	// DataSource instance
