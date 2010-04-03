@@ -78,8 +78,8 @@ function initAccuracyTable() {
 }
 
 function filterFunc(){
-	var startDate = document.getElementsByName("startDateStr")[0].value; 
-	var endDate = document.getElementsByName("endDateStr")[0].value;
+	var startDate = dojo.widget.byId("startDateStr").getValue(); 
+	var endDate = dojo.widget.byId("endDateStr").getValue(); 
 	if((null==startDate || ""==startDate) || (null==endDate || ""==endDate)) return;
 	var callback = {
 			success:myDataTable.onDataReturnInitializeTable,
