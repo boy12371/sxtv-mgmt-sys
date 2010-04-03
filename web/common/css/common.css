@@ -106,7 +106,7 @@ label {
 }
 .autoComplete {
 	width: 200px !important;
-	position: inherit !important;
+	position: relative !important;
 }
 
 .yui-ac-container {
