@@ -2,10 +2,10 @@
 -- version 3.2.5
 -- http://www.phpmyadmin.net
 --
--- 主机: localhost
--- 生成日期: 2010 年 03 月 31 日 00:41
--- 服务器版本: 5.0.75
--- PHP 版本: 5.2.6-3ubuntu4
+-- Host: localhost
+-- Generation Time: Apr 03, 2010 at 09:51 PM
+-- Server version: 5.0.75
+-- PHP Version: 5.2.6-3ubuntu4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,13 +16,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `sxtvdb`
+-- Database: `sxtvdb`
 --
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `audience`
+-- Table structure for table `audience`
 --
 
 CREATE TABLE IF NOT EXISTS `audience` (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `audience` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
--- 转存表中的数据 `audience`
+-- Dumping data for table `audience`
 --
 
 INSERT INTO `audience` (`id`, `name`, `age`, `gender`, `career`, `comments`) VALUES
@@ -53,7 +53,7 @@ INSERT INTO `audience` (`id`, `name`, `age`, `gender`, `career`, `comments`) VAL
 -- --------------------------------------------------------
 
 --
--- 表的结构 `audiencescore`
+-- Table structure for table `audiencescore`
 --
 
 CREATE TABLE IF NOT EXISTS `audiencescore` (
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `audiencescore` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
--- 转存表中的数据 `audiencescore`
+-- Dumping data for table `audiencescore`
 --
 
 INSERT INTO `audiencescore` (`id`, `vedioID`, `audienceID`, `dateExamine`, `result`, `comments`) VALUES
@@ -87,7 +87,7 @@ INSERT INTO `audiencescore` (`id`, `vedioID`, `audienceID`, `dateExamine`, `resu
 -- --------------------------------------------------------
 
 --
--- 表的结构 `auditing`
+-- Table structure for table `auditing`
 --
 
 CREATE TABLE IF NOT EXISTS `auditing` (
@@ -101,10 +101,10 @@ CREATE TABLE IF NOT EXISTS `auditing` (
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='审核' AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='审核' AUTO_INCREMENT=66 ;
 
 --
--- 转存表中的数据 `auditing`
+-- Dumping data for table `auditing`
 --
 
 INSERT INTO `auditing` (`id`, `vedioID`, `auditor`, `auditDate`, `result`, `comments`) VALUES
@@ -153,12 +153,31 @@ INSERT INTO `auditing` (`id`, `vedioID`, `auditor`, `auditDate`, `result`, `comm
 (43, '1457', 1, '2010-03-28 17:09:39', 3, NULL),
 (44, 'sfw', 1, '2010-03-28 22:56:56', 3, NULL),
 (45, '32ff2', 1, '2010-03-28 22:57:05', 3, NULL),
-(46, '1457', 1, '2010-03-28 22:57:10', 5, NULL);
+(46, '1457', 1, '2010-03-28 22:57:10', 5, NULL),
+(47, '1', 1, '2010-03-31 20:53:45', 7, NULL),
+(48, '0', 1, '2010-03-31 21:48:10', 3, NULL),
+(49, '0', 1, '2010-03-31 21:48:20', 5, NULL),
+(50, '0', 1, '2010-03-31 21:48:26', 3, NULL),
+(51, '12asd', 1, '2010-03-31 21:50:26', 3, NULL),
+(52, '0', 1, '2010-03-31 21:51:25', 5, NULL),
+(53, '12asd', 1, '2010-03-31 21:51:25', 5, NULL),
+(54, 'sfw', 1, '2010-03-31 21:51:25', 5, NULL),
+(55, '32ff2', 1, '2010-03-31 21:51:25', 5, NULL),
+(56, '0', 1, '2010-03-31 21:51:54', 3, NULL),
+(57, '4', 1, '2010-03-31 21:51:54', 3, NULL),
+(58, '12asd', 1, '2010-03-31 21:51:54', 3, NULL),
+(59, 'sfw', 1, '2010-03-31 21:51:55', 3, NULL),
+(60, 'sf1vsd', 1, '2010-03-31 21:51:55', 3, NULL),
+(61, '32ff2', 1, '2010-03-31 21:51:55', 3, NULL),
+(62, '1457', 1, '2010-03-31 21:51:55', 3, NULL),
+(63, '0', 1, '2010-03-31 21:52:54', 5, NULL),
+(64, '4', 1, '2010-03-31 21:52:54', 5, NULL),
+(65, '12asd', 1, '2010-03-31 21:52:54', 5, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `company`
+-- Table structure for table `company`
 --
 
 CREATE TABLE IF NOT EXISTS `company` (
@@ -173,11 +192,11 @@ CREATE TABLE IF NOT EXISTS `company` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='公司信息' AUTO_INCREMENT=9 ;
 
 --
--- 转存表中的数据 `company`
+-- Dumping data for table `company`
 --
 
 INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `contactPerson`, `status`, `comments`) VALUES
-(1, '中华影视', '12331123123', '34534534534', '胡戈', 1, '第三方万恶服务'),
+(1, '中华影视', '12331123123', '34534534534', '胡戈', 0, '第三方万恶服务'),
 (2, '美国影视', '123123', '123123', '万恶范围阿飞', 1, '发送到非 '),
 (3, '法国影视', '34234', 'werwef', 'fwefwef', 1, '发送到非万恶 '),
 (4, '3werwer', '', '234234', 'fwefwef', 1, ''),
@@ -189,7 +208,7 @@ INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `c
 -- --------------------------------------------------------
 
 --
--- 表的结构 `employee`
+-- Table structure for table `employee`
 --
 
 CREATE TABLE IF NOT EXISTS `employee` (
@@ -202,10 +221,10 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `status` int(11) NOT NULL default '1' COMMENT '0=禁用，1=正常',
   `comments` varchar(512) default '',
   PRIMARY KEY  (`employeeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='员工信息' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='员工信息' AUTO_INCREMENT=12 ;
 
 --
--- 转存表中的数据 `employee`
+-- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gender`, `tel`, `status`, `comments`) VALUES
@@ -218,12 +237,13 @@ INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gende
 (7, '赵流', '2006-01-16', '2008-01-22', 0, '123123', 1, '扫的服务阿飞'),
 (8, '王其', '2010-01-17', '1982-01-12', 0, '维吾尔', 1, '斯蒂芬'),
 (9, '身体', '2010-03-24', '2010-03-24', 1, '3fwefwe', 1, 'sdfsdf'),
-(10, '色图', '2010-03-24', '2010-03-24', 1, '', 1, 'asdqwd');
+(10, '色图', '2010-03-24', '2010-03-24', 1, '', 1, 'asdqwd'),
+(11, '章子怡', '2010-04-01', '2010-04-01', 1, '', 1, '');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `playchangelog`
+-- Table structure for table `playchangelog`
 --
 
 CREATE TABLE IF NOT EXISTS `playchangelog` (
@@ -240,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `playchangelog` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
--- 转存表中的数据 `playchangelog`
+-- Dumping data for table `playchangelog`
 --
 
 INSERT INTO `playchangelog` (`Id`, `vedioID`, `auditor`, `fromDate`, `toDate`, `operation`, `date`) VALUES
@@ -256,7 +276,7 @@ INSERT INTO `playchangelog` (`Id`, `vedioID`, `auditor`, `fromDate`, `toDate`, `
 -- --------------------------------------------------------
 
 --
--- 表的结构 `playorder`
+-- Table structure for table `playorder`
 --
 
 CREATE TABLE IF NOT EXISTS `playorder` (
@@ -271,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `playorder` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='节目编排' AUTO_INCREMENT=34 ;
 
 --
--- 转存表中的数据 `playorder`
+-- Dumping data for table `playorder`
 --
 
 INSERT INTO `playorder` (`Id`, `playDate`, `vedioID`, `arrangeDate`, `auditor`) VALUES
@@ -283,7 +303,7 @@ INSERT INTO `playorder` (`Id`, `playDate`, `vedioID`, `arrangeDate`, `auditor`) 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `resources`
+-- Table structure for table `resources`
 --
 
 CREATE TABLE IF NOT EXISTS `resources` (
@@ -294,14 +314,14 @@ CREATE TABLE IF NOT EXISTS `resources` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- 转存表中的数据 `resources`
+-- Dumping data for table `resources`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
@@ -312,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- 转存表中的数据 `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`id`, `name`, `comments`) VALUES
@@ -326,7 +346,7 @@ INSERT INTO `role` (`id`, `name`, `comments`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `role_resource`
+-- Table structure for table `role_resource`
 --
 
 CREATE TABLE IF NOT EXISTS `role_resource` (
@@ -340,14 +360,14 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- 转存表中的数据 `role_resource`
+-- Dumping data for table `role_resource`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `scorelevel`
+-- Table structure for table `scorelevel`
 --
 
 CREATE TABLE IF NOT EXISTS `scorelevel` (
@@ -360,44 +380,46 @@ CREATE TABLE IF NOT EXISTS `scorelevel` (
   UNIQUE KEY `level` (`level`),
   UNIQUE KEY `level_2` (`level`),
   KEY `level_3` (`level`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- 转存表中的数据 `scorelevel`
+-- Dumping data for table `scorelevel`
 --
 
 INSERT INTO `scorelevel` (`id`, `level`, `start`, `end`, `levelscore`) VALUES
-(1, 1, 1, 3, 95),
-(2, 2, 4, 10, 90),
-(3, 3, 11, 15, 85),
-(4, 4, 16, 10000000, 70);
+(1, 1, 1, 2, 95),
+(2, 2, 3, 10, 90),
+(3, 3, 11, 20, 85),
+(4, 4, 21, 50, 80),
+(6, 5, 51, 100, 70);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `scoreweight`
+-- Table structure for table `scoreweight`
 --
 
 CREATE TABLE IF NOT EXISTS `scoreweight` (
   `factor` varchar(50) NOT NULL default '',
-  `wieght` float NOT NULL default '0',
+  `weight` float NOT NULL default '0',
+  `weightName` varchar(128),
   PRIMARY KEY  (`factor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `scoreweight`
+-- Dumping data for table `scoreweight`
 --
 
-INSERT INTO `scoreweight` (`factor`, `wieght`) VALUES
-('innovateScore', 0.3),
-('performScore', 0.3),
-('storyScore', 0.4),
-('techScore', 0.2);
+INSERT INTO `scoreweight` (`factor`, `weight`, `weightName`) VALUES
+('innovateScore', 0.12, '创新'),
+('performScore', 0.4, '表演'),
+('storyScore', 0.4, '故事'),
+('techScore', 0.2, '技术');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `status`
+-- Table structure for table `status`
 --
 
 CREATE TABLE IF NOT EXISTS `status` (
@@ -408,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='状态' AUTO_INCREMENT=10 ;
 
 --
--- 转存表中的数据 `status`
+-- Dumping data for table `status`
 --
 
 INSERT INTO `status` (`statusID`, `status`, `comments`) VALUES
@@ -424,7 +446,7 @@ INSERT INTO `status` (`statusID`, `status`, `comments`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `subject`
+-- Table structure for table `subject`
 --
 
 CREATE TABLE IF NOT EXISTS `subject` (
@@ -433,22 +455,24 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `status` int(11) NOT NULL COMMENT '0=禁用,1=正常',
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`subjectID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='栏目' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='栏目' AUTO_INCREMENT=7 ;
 
 --
--- 转存表中的数据 `subject`
+-- Dumping data for table `subject`
 --
 
 INSERT INTO `subject` (`subjectID`, `subjectName`, `status`, `comments`) VALUES
-(1, '都市碎戏', 1, '都市碎戏都'),
+(1, 'AAA', 1, 'aaaaaa'),
 (2, '百家碎戏', 1, '百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏'),
 (3, '狼人虎剧', 0, '西安电视台'),
-(4, '物业剧场', 0, '斯蒂芬');
+(4, '物业剧场', 0, '斯蒂芬'),
+(5, 'asdf', 1, 'sdfwef'),
+(6, 'B栏目', 1, 'B栏目B栏目B栏目');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `topic`
+-- Table structure for table `topic`
 --
 
 CREATE TABLE IF NOT EXISTS `topic` (
@@ -457,24 +481,26 @@ CREATE TABLE IF NOT EXISTS `topic` (
   `status` int(11) NOT NULL COMMENT '0=禁用,1=正常',
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`topicID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='题材' AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='题材' AUTO_INCREMENT=9 ;
 
 --
--- 转存表中的数据 `topic`
+-- Dumping data for table `topic`
 --
 
 INSERT INTO `topic` (`topicID`, `topicName`, `status`, `comments`) VALUES
-(1, '冒险', 1, '冒险冒险冒险冒险'),
+(1, 'AAAA', 1, 'sdfwef'),
 (2, '社会', 1, '社会社会社会社会社会5u56u'),
 (3, '生活', 1, '生活生活生活生活生活生活'),
 (4, '社会', 1, '社会社会社会社会社会5u56u'),
 (5, '民生', 1, '民生民生民生民生'),
-(6, '爱情', 1, '爱情爱情爱情');
+(6, '爱情', 1, '爱情爱情爱情'),
+(7, 'htttt', 1, 'rthrth'),
+(8, 'BBBB', 1, 'sdfsdffBBBB');
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -488,7 +514,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户' AUTO_INCREMENT=12 ;
 
 --
--- 转存表中的数据 `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`userID`, `userName`, `userPass`, `employee`, `status`) VALUES
@@ -504,7 +530,7 @@ INSERT INTO `user` (`userID`, `userName`, `userPass`, `employee`, `status`) VALU
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user_role`
+-- Table structure for table `user_role`
 --
 
 CREATE TABLE IF NOT EXISTS `user_role` (
@@ -515,14 +541,13 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `union index` (`userid`,`roleid`),
   KEY `roleid` (`roleid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=26 ;
 
 --
--- 转存表中的数据 `user_role`
+-- Dumping data for table `user_role`
 --
 
 INSERT INTO `user_role` (`id`, `userid`, `roleid`, `comments`) VALUES
-(1, 1, 1, ''),
 (2, 2, 3, ''),
 (3, 3, 2, ''),
 (4, 4, 3, ''),
@@ -535,12 +560,14 @@ INSERT INTO `user_role` (`id`, `userid`, `roleid`, `comments`) VALUES
 (20, 9, 6, NULL),
 (21, 10, 4, NULL),
 (22, 11, 1, NULL),
-(23, 11, 3, NULL);
+(23, 11, 3, NULL),
+(24, 1, 1, NULL),
+(25, 1, 2, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `vedioscore`
+-- Table structure for table `vedioscore`
 --
 
 CREATE TABLE IF NOT EXISTS `vedioscore` (
@@ -564,10 +591,10 @@ CREATE TABLE IF NOT EXISTS `vedioscore` (
   KEY `vedioExaminer` (`examiner`),
   KEY `vedioID` (`vedioID`),
   KEY `operator` (`operator`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='评分表' AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='评分表' AUTO_INCREMENT=23 ;
 
 --
--- 转存表中的数据 `vedioscore`
+-- Dumping data for table `vedioscore`
 --
 
 INSERT INTO `vedioscore` (`id`, `vedioID`, `examiner`, `storyScore`, `techScore`, `performScore`, `innovateScore`, `score`, `award`, `accuracy`, `purchase`, `dateExamine`, `operator`, `orientation`, `comments`) VALUES
@@ -587,12 +614,13 @@ INSERT INTO `vedioscore` (`id`, `vedioID`, `examiner`, `storyScore`, `techScore`
 (18, 'sw12', 4, 67, 67, 67, 67, 67, 0, 17, 0, '2010-02-01 00:00:00', 1, 0, NULL),
 (19, 'sw12', 5, 33, 33, 33, 33, 33, 0, 1, 0, '2010-02-01 00:00:00', 1, 0, NULL),
 (20, '23g', 1, 0.5, 0.23, 0.4, 0.6, 0.546, 0, NULL, 0, '2010-03-23 23:55:58', 1, 1, NULL),
-(21, '9991', 1, 20, 25, 35, 45, 37, 1, NULL, 1, '2010-03-28 11:22:40', 1, 0, NULL);
+(21, '9991', 1, 20, 25, 35, 45, 37, 1, NULL, 1, '2010-03-28 11:22:40', 1, 0, NULL),
+(22, '13sfw2w', 2, 32, 33, 34, 35, 40.1, 1, NULL, 1, '2010-03-31 23:19:09', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `vediotape`
+-- Table structure for table `vediotape`
 --
 
 CREATE TABLE IF NOT EXISTS `vediotape` (
@@ -617,17 +645,18 @@ CREATE TABLE IF NOT EXISTS `vediotape` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `vediotape`
+-- Dumping data for table `vediotape`
 --
 
 INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`, `dateComing`, `dateInput`, `inputer`, `status`, `comments`, `marketShare`, `audienceRating`) VALUES
-('0', '阿凡达', 1, 3, 1, '2001-01-30', '2001-01-31 00:00:00', 3, 5, NULL, NULL, NULL),
-('1', 'Fight Club', 2, 4, 1, '2000-01-30', '2001-01-31 00:00:00', 3, 2, NULL, 0.5, 0.6),
+('0', '阿凡达', 1, 3, 1, '2001-01-30', '2001-01-31 00:00:00', 3, 5, 'sdfsdf撒旦佛诶我始终里斯哦我里斯哦诶提问品味来刺激斯蒂夫俄，每次vd sdvs   老婆的哦fsw  瑞特全文俄热', NULL, NULL),
+('1', 'Fight Club', 2, 4, 1, '2000-01-30', '2001-01-31 00:00:00', 3, 7, NULL, 0.5, 0.6),
 ('12', '12qdfw', 2, 3, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 1, 'ddvsdfsdsdvsdv', NULL, NULL),
 ('123s', 'fwefxfdg', 1, 4, 1, '2010-03-25', '2010-03-25 22:04:05', 1, 1, 'sdfwef', NULL, NULL),
-('12asd', 'dqw', 1, 1, 1, '2010-02-10', '2010-02-10 14:17:59', 1, 2, 'asdacasc', NULL, NULL),
+('12asd', 'dqw', 1, 1, 1, '2010-02-10', '2010-02-10 14:17:59', 1, 5, 'asdacasc', NULL, NULL),
 ('12dq', 'dqwd', 2, 1, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 6, 'zxcasc', NULL, NULL),
-('1457', 'X战警', 2, 4, 2, '2010-03-08', '2010-03-08 22:55:39', 2, 5, 'xxxxxx', 70, 50),
+('13sfw2w', '我们都是炎黄子孙', 3, 5, 5, '2010-03-31', '2010-03-31 23:17:47', 1, 1, 'fwefwefwefwefwef', NULL, NULL),
+('1457', 'X战警', 2, 4, 2, '2010-03-08', '2010-03-08 22:55:39', 2, 3, 'xxxxxx', 70, 50),
 ('1ewfv', 'zxvcsdv', 1, 3, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdv', NULL, NULL),
 ('1ssd', 'zxcasc', 1, 3, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 1, 'zxcasczx zx zx zx zx ', NULL, NULL),
 ('2', '12 Monkey', 2, 4, 2, '2001-12-30', '2001-01-31 00:00:00', 3, 7, '', NULL, NULL),
@@ -642,8 +671,8 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('452s11', 'ddfe1', 1, 3, 2, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
 ('452s12', 'ddfe2', 1, 3, 1, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
 ('452s13', 'ddfe3', 1, 3, 2, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
-('452s14', 'ddfe4', 1, 3, 5, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
-('452s15', 'ddfe5', 2, 3, 5, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
+('452s14', 'ddfe4', 1, 3, 5, '2010-03-25', '2010-03-25 22:17:55', 1, 9, 'xcvsdvsdvsdvs', 56.7, 45.3),
+('452s15', 'ddfe5', 2, 3, 5, '2010-03-25', '2010-03-25 22:17:55', 1, 9, 'xcvsdvsdvsdvs', 47.5, 56),
 ('452s1d', 'ddfe', 1, 2, 2, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
 ('452s6', 'ddfe6', 2, 3, 5, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
 ('452s7', 'ddfe7', 2, 3, 5, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
@@ -657,23 +686,23 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('dthw23', 'rhrhrth', 2, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'bfgbfg', NULL, NULL),
 ('ert34', 'fggrgrg', 1, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 9, 'bfgbfg', 43.2, 30.5),
 ('sf1', 'sdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 9, 'ddv', 34, 37),
-('sf1vsd', 'weqdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 5, 'ddvsdfsd', NULL, NULL),
+('sf1vsd', 'weqdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 3, 'ddvsdfsd', NULL, NULL),
 ('sfw', '1v2asdsv', 1, 1, 1, '2010-02-10', '2010-02-10 14:20:35', 1, 3, 'sdvsdv', NULL, NULL),
 ('sw12', 'dqwe', 2, 3, 1, '2010-02-12', '2010-02-12 10:33:18', 1, 9, 'ssdv', 47, 43);
 
 --
--- 限制导出的表
+-- Constraints for dumped tables
 --
 
 --
--- 限制表 `audiencescore`
+-- Constraints for table `audiencescore`
 --
 ALTER TABLE `audiencescore`
   ADD CONSTRAINT `audiencescore_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`),
   ADD CONSTRAINT `audiencescore_ibfk_2` FOREIGN KEY (`audienceID`) REFERENCES `audience` (`id`);
 
 --
--- 限制表 `auditing`
+-- Constraints for table `auditing`
 --
 ALTER TABLE `auditing`
   ADD CONSTRAINT `auditing_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`) ON UPDATE CASCADE,
@@ -681,41 +710,41 @@ ALTER TABLE `auditing`
   ADD CONSTRAINT `auditing_ibfk_3` FOREIGN KEY (`result`) REFERENCES `status` (`statusID`) ON UPDATE CASCADE;
 
 --
--- 限制表 `playchangelog`
+-- Constraints for table `playchangelog`
 --
 ALTER TABLE `playchangelog`
   ADD CONSTRAINT `playchangelog_ibfk_1` FOREIGN KEY (`auditor`) REFERENCES `user` (`userID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `playchangelog_ibfk_2` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`) ON UPDATE CASCADE;
 
 --
--- 限制表 `playorder`
+-- Constraints for table `playorder`
 --
 ALTER TABLE `playorder`
   ADD CONSTRAINT `playorder_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `playorder_ibfk_2` FOREIGN KEY (`auditor`) REFERENCES `user` (`userID`) ON UPDATE CASCADE;
 
 --
--- 限制表 `role_resource`
+-- Constraints for table `role_resource`
 --
 ALTER TABLE `role_resource`
   ADD CONSTRAINT `role_resource_ibfk_1` FOREIGN KEY (`roleid`) REFERENCES `role` (`id`),
   ADD CONSTRAINT `role_resource_ibfk_2` FOREIGN KEY (`resourceid`) REFERENCES `resources` (`id`);
 
 --
--- 限制表 `user`
+-- Constraints for table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `userEmployee` FOREIGN KEY (`employee`) REFERENCES `employee` (`employeeID`) ON UPDATE CASCADE;
 
 --
--- 限制表 `user_role`
+-- Constraints for table `user_role`
 --
 ALTER TABLE `user_role`
   ADD CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`userID`),
   ADD CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`roleid`) REFERENCES `role` (`id`);
 
 --
--- 限制表 `vedioscore`
+-- Constraints for table `vedioscore`
 --
 ALTER TABLE `vedioscore`
   ADD CONSTRAINT `vedioExaminer` FOREIGN KEY (`examiner`) REFERENCES `user` (`userID`) ON UPDATE CASCADE,
@@ -723,7 +752,7 @@ ALTER TABLE `vedioscore`
   ADD CONSTRAINT `vedioscore_ibfk_2` FOREIGN KEY (`operator`) REFERENCES `user` (`userID`);
 
 --
--- 限制表 `vediotape`
+-- Constraints for table `vediotape`
 --
 ALTER TABLE `vediotape`
   ADD CONSTRAINT `inputer` FOREIGN KEY (`inputer`) REFERENCES `user` (`userID`) ON UPDATE CASCADE,
