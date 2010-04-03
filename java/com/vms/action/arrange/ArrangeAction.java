@@ -159,6 +159,7 @@ public class ArrangeAction extends BaseAction {
 			if(delFlag) delOrders.add(oldOrder);
 		}
 		arrangeService.deletePlayOrder(delOrders, this.getUserInfo().getUserId());
+		toArrange();
 		return SUCCESS;
 	}
 	
