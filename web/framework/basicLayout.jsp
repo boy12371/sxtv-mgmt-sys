@@ -182,6 +182,9 @@ YAHOO.example.Centered = autoCompleteVideoName();
 		password:"${userInfo.password}",
 		strRoles:"${userInfo.strRoles}"
 	};
+
+	var defTab = document.getElementById("search");
+	defTab.onclick();
 </script>
 </body>
 </html>
