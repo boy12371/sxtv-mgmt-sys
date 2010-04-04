@@ -15,10 +15,10 @@ function initDataTable() {
 	{
 	    key :"audience",
 	    label :"观众名称",
-	    sortable :true,
+	    sortable :true
 	}, {
 		key :"tapeName",
-		label :"影带名称",
+		label :"影带名称"
 	}, {
 		key :"result",
 		label :"评价结果",
@@ -60,7 +60,7 @@ function initDataTable() {
 			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
 			rowsPerPageOptions : [25, 50,100 ]
-		}),
+		})
 		// Enables pagination
 	};
 
