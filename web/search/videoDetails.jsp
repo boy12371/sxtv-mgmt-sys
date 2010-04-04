@@ -93,12 +93,22 @@
 	 -->
 
 	<tr>
-		<td colspan="4" align="center"><span id="go" class="yui-button yui-push-button"> <span class="first-child">
-		<button type="button">确 定</button>
-		</span> </span></td>
+		<td colspan="4" align="center">
+			<div id="btnDiv"></div>
+		</td>
 	</tr>
 </table>
-</div>
+<script type="text/javascript">
+	var btn = new YAHOO.widget.Button( {
+		type :"button",
+		label :"关闭",
+		id :"submitBtn",
+		container :"btnDiv"
+	});
+	btn.on("click", function() {
+		window.close();
+	});
+</script></div>
 </div>
 </body>
 </html>

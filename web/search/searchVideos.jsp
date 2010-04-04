@@ -80,6 +80,8 @@
 </div>
 <h1>影带列表</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 <p>单击表头，可进行排序</p>
+<a href="#" id="tableOption" style="font-size:12px">选项</a>
+	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 
 <div id="printBtn" align="right"></div>
 

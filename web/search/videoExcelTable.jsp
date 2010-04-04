@@ -69,7 +69,7 @@ document.write("打印日期: "+date.getFullYear()+"年"+date.getMonth()+1+"月"
 </script>
 </h4>
 <a href="#" id="tableOption" style="font-size:12px">选项</a>
-	<div id="colDiv" style="z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
+	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 
 <div id="excelTable" align="center" style="margin-top:-50"></div>
 
@@ -203,7 +203,7 @@ document.write("打印日期: "+date.getFullYear()+"年"+date.getMonth()+1+"月"
 					var p = document.createElement("SPAN");
 					p.innerHTML = column.label;
 					colDiv.appendChild(p);
-					if(i%4==1){
+					if(i%2==1){
 						var br = document.createElement("BR");
 						colDiv.appendChild(br);
 					}
