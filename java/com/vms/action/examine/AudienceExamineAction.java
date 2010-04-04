@@ -53,6 +53,9 @@ public class AudienceExamineAction extends BaseAction {
 	
 	public String getAudienceExamine() throws Exception {
 		audienceExamineTable = JSONDataTableUtils.initJSONDataTable(getRequest());
+		if("audience".equals(audienceExamineTable.getSort())){
+			audienceExamineTable.setSort("audienceID");
+		}
 		try {
 			List<AudienceExamineVO> AEs = audienceExamineService.getAudienceScoreOfTape(
 					tape.getId(), -1, -1, 
