@@ -1,4 +1,3 @@
-
 function getDateFromDataTimePicker(pickerID) {
 	var picker = dojo.widget.byId(pickerID);
 	// string value
@@ -88,7 +87,7 @@ function initDataTable() {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "vedioscores", "vedioscores",
-				"audiencescore", "purchase","awarding", "comments"],
+				"audiencescore", "purchase", "awarding", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
@@ -164,6 +163,7 @@ function initDataTable() {
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
 	myDataTable.subscribe("renderEvent", function() {
+				addColumnsName();
 				$.unblockUI();
 				parent.resizeIframe();
 			});
@@ -192,7 +192,45 @@ function initDataTable() {
 	// DataTable instance
 	var filter = YAHOO.util.Dom.get("filter");
 	YAHOO.util.Event.addListener(filter, "change", fireEvent);
+	var columnSet = myDataTable.getColumnSet();
+	var showHideColumn = function(e) {
+		var column = columnSet.getColumn(this.value);
+		if (this.checked) {
+			myDataTable.hideColumn(column);
+		} else {
+			myDataTable.showColumn(column);
+		}
+	}
+	var colDiv = YAHOO.util.Dom.get("colDiv");
+	var colLink = YAHOO.util.Dom.get("tableOption");
+	YAHOO.util.Event.addListener(colLink, "click", function() {
+				colDiv.style.display = colDiv.style.display == "block"
+						? "none"
+						: "block";
+			});
+	addColumnsName = function() {
+		if (colDiv.innerHTML.length == 0) {
+			for (var i = 0; i < myColumnDefs.length; i++) {
+				var column = myColumnDefs[i];
+				var checkbox = document.createElement("INPUT");
+				checkbox.type = "checkbox";
+				checkbox.name = "colCkbox";
+				checkbox.value = column.key;
+				checkbox.checked = false;
+				colDiv.appendChild(checkbox);
+				var p = document.createElement("SPAN");
+				p.innerHTML = column.label;
+				colDiv.appendChild(p);
+				if (i % 2 == 1) {
+					var br = document.createElement("BR");
+					colDiv.appendChild(br);
+				}
 
+				YAHOO.util.Event.addListener(checkbox, "click", showHideColumn);
+				colDiv.style.display = "none";
+			}
+		}
+	};
 	// var generatePrintTable = function(){
 	// //getDateFromDataTimePicker("fromDate");
 	// var filter = YAHOO.util.Dom.get('filter');
