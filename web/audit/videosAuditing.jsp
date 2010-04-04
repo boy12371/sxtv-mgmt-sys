@@ -114,14 +114,16 @@
 	border="0">
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 
-<select class="selectField" style="margin-left: 67px" id="filter">
+<select class="selectField" id="filter">
 	<option value="0">All</option>
 	<option value="2">待审剧目</option>
 	<option value="3">通过剧目</option>
 	<option value="5">待排剧目</option>
 	<option value="7">淘汰剧目</option>
 	<!-- option value="5">重审剧目</option-->
-</select>
+</select><br/>
+<a href="#" id="tableOption" style="font-size:12px">选项</a>
+	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 
 <div id="dynamicdata" align="center"></div>
 
