@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2010 at 09:51 PM
+-- Generation Time: Apr 04, 2010 at 04:43 PM
 -- Server version: 5.0.75
 -- PHP Version: 5.2.6-3ubuntu4
 
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `contactPerson`, `status`, `comments`) VALUES
-(1, '中华影视', '12331123123', '34534534534', '胡戈', 0, '第三方万恶服务'),
+(1, '中华影视公司', '12331123123', '34534534534', '胡戈', 0, '第三方万恶服务'),
 (2, '美国影视', '123123', '123123', '万恶范围阿飞', 1, '发送到非 '),
 (3, '法国影视', '34234', 'werwef', 'fwefwef', 1, '发送到非万恶 '),
 (4, '3werwer', '', '234234', 'fwefwef', 1, ''),
@@ -311,12 +311,100 @@ CREATE TABLE IF NOT EXISTS `resources` (
   `url` varchar(512) NOT NULL,
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `resources`
 --
 
+INSERT INTO `resources` (`id`, `url`, `comments`) VALUES
+(1, 'toAddingVedio.action', ''),
+(2, 'isVediotapeExsits.action', ''),
+(3, 'doAddingVedio.action', ''),
+(4, 'toMarketRate.action', ''),
+(5, 'toMarketRateModify.action', ''),
+(6, 'searchVideoByName.action', ''),
+(7, 'updateMarketRate.action', ''),
+(8, 'searchVideoByNameOrID.action', ''),
+(9, 'searchVideoByNameOrIDForModification.action', ''),
+(10, 'searchVideoByNameOrIDForMarketRate.action', ''),
+(11, 'searchVideoByNameOrIDForMarketRateModify.action', ''),
+(12, 'updateVideoInfo.action', ''),
+(13, 'toUpdateVideoInfo.action', ''),
+(14, 'toVideoModification.action', ''),
+(15, 'doModification.action', ''),
+(16, 'doModificationBatch.action', ''),
+(17, 'toEmployees.action', ''),
+(18, 'getEmployees.action', ''),
+(19, 'toAddEmployee.action', ''),
+(20, 'toUpdateEmployee.action', ''),
+(21, 'doUpdateEmployee.action', ''),
+(22, 'doAddEmployee.action', ''),
+(23, 'toCompanies.action', ''),
+(24, 'getCompanies.action', ''),
+(25, 'toUpdateCompany.action', ''),
+(26, 'doUpdateCompany.action', ''),
+(27, 'toAddCompany.action', ''),
+(28, 'doAddCompany.action', ''),
+(29, 'doDisableEnableCompany.action', ''),
+(30, 'toSystemData.action', ''),
+(31, 'getStatuses.action', ''),
+(32, 'getTopices.action', ''),
+(33, 'getSubjects.action', ''),
+(34, 'getScoreWeights.action', ''),
+(35, 'getScorelevels.action', ''),
+(36, 'getUsers.action', ''),
+(37, 'toAddUser.action', ''),
+(38, 'doAddUser.action', ''),
+(39, 'toUpdateUser.action', ''),
+(40, 'doUpdateUser.action', ''),
+(41, 'doChangePassword.action', ''),
+(42, 'doAddSubject.action', ''),
+(43, 'modifySubject.action', ''),
+(44, 'doDisableEnableSubject.action', ''),
+(45, 'doAddTopic.action', ''),
+(46, 'modifyTopic.action', ''),
+(47, 'doDisableEnableTopic.action', ''),
+(48, 'toAllAudience.action', ''),
+(49, 'getAllAudiences.action', ''),
+(50, 'addAudience.action', ''),
+(51, 'toAddAudience.action', ''),
+(52, 'modifyWeight.action', ''),
+(53, 'modifyLevel.action', ''),
+(54, 'addScoreLevel.action', ''),
+(55, 'autoCompleteForVideoName.action', ''),
+(56, 'searchVideoByName.action', ''),
+(57, 'toVideoDetail.action', ''),
+(58, 'searchVideos.action', ''),
+(59, 'toGenericSeaching.action', ''),
+(60, 'toPrintVideosReport.action', ''),
+(61, 'doPrintVideosReport.action', ''),
+(62, 'toVideoSequence.action', ''),
+(63, 'doSearchAndSequenceVideos.action', ''),
+(64, 'toUnExaminedTapes.action', ''),
+(65, 'toExaminedTapes.action', ''),
+(66, 'getUnExaminedTapes.action', ''),
+(67, 'getExaminedTapes.action', ''),
+(68, 'toExamineTape.action', ''),
+(69, 'doExamineTape.action', ''),
+(70, 'doExamineTapeByInputer.action', ''),
+(71, 'completeExamine.action', ''),
+(72, 'toAudienceExamine.action', ''),
+(73, 'getAudienceExamine.action', ''),
+(74, 'doAudienceExamine.action', ''),
+(75, 'toAuditVideos.action', ''),
+(76, 'filterVideos.action', ''),
+(77, 'getVideoScores.action', ''),
+(78, 'videoOperation.action', ''),
+(79, 'findVideoByNameOrID.action', ''),
+(80, 'toArrange.action', ''),
+(81, 'getUnarrangedTapes.action', ''),
+(82, 'getArrangedTapes.action', ''),
+(83, 'doArrange.action', ''),
+(84, 'toArrangedHistory.action', ''),
+(85, 'getArrangedHistory.action', ''),
+(86, 'toAccuracy.action', ''),
+(87, 'getAccuracy.action', '');
 
 -- --------------------------------------------------------
 
@@ -329,19 +417,20 @@ CREATE TABLE IF NOT EXISTS `role` (
   `name` varchar(25) NOT NULL,
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`id`, `name`, `comments`) VALUES
-(1, 'ADMIN', '管理员'),
-(2, 'INPUTER', '录入'),
-(3, 'EXAMINER', '打分'),
-(4, 'AUDITOR', '审核'),
-(5, 'ARRANGER', '编排'),
-(6, 'NORMAL', '普通');
+(1, '系统管理员', '管理员'),
+(2, '收录员', '录入'),
+(3, '评分员', '打分'),
+(4, '审核员', '审核'),
+(5, '编排员', '编排'),
+(6, '普通', '普通'),
+(7, '档案管理员', '公司，观众管理');
 
 -- --------------------------------------------------------
 
@@ -402,7 +491,7 @@ INSERT INTO `scorelevel` (`id`, `level`, `start`, `end`, `levelscore`) VALUES
 CREATE TABLE IF NOT EXISTS `scoreweight` (
   `factor` varchar(50) NOT NULL default '',
   `weight` float NOT NULL default '0',
-  `weightName` varchar(128),
+  `weightName` varchar(128) default NULL,
   PRIMARY KEY  (`factor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -462,7 +551,7 @@ CREATE TABLE IF NOT EXISTS `subject` (
 --
 
 INSERT INTO `subject` (`subjectID`, `subjectName`, `status`, `comments`) VALUES
-(1, 'AAA', 1, 'aaaaaa'),
+(1, '都市碎戏1', 1, '都市都市都市都市都市1'),
 (2, '百家碎戏', 1, '百家碎戏百家碎戏百家碎戏百家碎戏百家碎戏'),
 (3, '狼人虎剧', 0, '西安电视台'),
 (4, '物业剧场', 0, '斯蒂芬'),
@@ -481,21 +570,24 @@ CREATE TABLE IF NOT EXISTS `topic` (
   `status` int(11) NOT NULL COMMENT '0=禁用,1=正常',
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`topicID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='题材' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='题材' AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `topic`
 --
 
 INSERT INTO `topic` (`topicID`, `topicName`, `status`, `comments`) VALUES
-(1, 'AAAA', 1, 'sdfwef'),
+(1, '言情', 1, '言情言情'),
 (2, '社会', 1, '社会社会社会社会社会5u56u'),
 (3, '生活', 1, '生活生活生活生活生活生活'),
 (4, '社会', 1, '社会社会社会社会社会5u56u'),
 (5, '民生', 1, '民生民生民生民生'),
 (6, '爱情', 1, '爱情爱情爱情'),
-(7, 'htttt', 1, 'rthrth'),
-(8, 'BBBB', 1, 'sdfsdffBBBB');
+(7, '科技', 1, '科技科技科技'),
+(8, '学术', 1, '学术学术学术'),
+(9, '探秘', 1, '探秘探秘探秘'),
+(10, '考古', 1, '考古考古考古'),
+(11, '历史', 1, '历史历史历史');
 
 -- --------------------------------------------------------
 
@@ -656,10 +748,14 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('12asd', 'dqw', 1, 1, 1, '2010-02-10', '2010-02-10 14:17:59', 1, 5, 'asdacasc', NULL, NULL),
 ('12dq', 'dqwd', 2, 1, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 6, 'zxcasc', NULL, NULL),
 ('13sfw2w', '我们都是炎黄子孙', 3, 5, 5, '2010-03-31', '2010-03-31 23:17:47', 1, 1, 'fwefwefwefwefwef', NULL, NULL),
-('1457', 'X战警', 2, 4, 2, '2010-03-08', '2010-03-08 22:55:39', 2, 3, 'xxxxxx', 70, 50),
+('1457', 'X战警', 2, 4, 2, '2010-03-08', '2010-03-08 22:55:39', 2, 6, 'xxxxxx', 70, 50),
 ('1ewfv', 'zxvcsdv', 1, 3, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdv', NULL, NULL),
 ('1ssd', 'zxcasc', 1, 3, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 1, 'zxcasczx zx zx zx zx ', NULL, NULL),
 ('2', '12 Monkey', 2, 4, 2, '2001-12-30', '2001-01-31 00:00:00', 3, 7, '', NULL, NULL),
+('21323', '334', 1, 1, 7, '2010-04-03', '2010-04-03 23:39:47', 1, 1, 'erwer3r', NULL, NULL),
+('21365', '爱丽丝', 2, 6, 5, '2010-04-03', '2010-04-03 23:39:47', 1, 1, 'erwer3r', NULL, NULL),
+('23442', '的份额', 3, 6, 5, '2010-04-03', '2010-04-03 22:21:40', 1, 1, 'sdfe', NULL, NULL),
+('23444', 'fwed', 2, 3, 2, '2010-04-03', '2010-04-03 22:21:40', 1, 1, 'sdfe', NULL, NULL),
 ('23eg', 'fwefwef', 1, 2, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdvvsdv', NULL, NULL),
 ('23g', 'dfbdfbf', 2, 4, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 1, 'sdvvsdv', NULL, NULL),
 ('3', '蝴蝶效应', 2, 3, 1, '2009-01-01', '2009-01-02 00:00:00', 3, 2, NULL, 0.7, 0.8),
