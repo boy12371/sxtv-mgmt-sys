@@ -105,6 +105,7 @@ label {
 	color: #FFFFFF;
 }
 .autoComplete {
+	width: 200px !important;
 	position: relative !important;
 }
 
