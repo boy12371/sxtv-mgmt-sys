@@ -38,6 +38,7 @@
 .logon_btn {
 	background-image: url(../image/logon_button.png);
 	background-repeat:no-repeat;
+	cursor :pointer;
 	width:100px;
 	height:30px;
 	font-weight:bold;
