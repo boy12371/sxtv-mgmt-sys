@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.vms.db.bean.Audiencescore;
+import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 
-public class VedioTapeVO {
+public class VedioTapeVO{
 	private String id;
 	private String vedioName;
 	private String subject;
@@ -16,6 +18,8 @@ public class VedioTapeVO {
 	private String status;
 	private float marketShare;
 	private float audienceRating;
+	private float avgScore;
+	private String audiScore;
 	
 	private Map<String,Integer> watching;
 	
@@ -41,6 +45,25 @@ public class VedioTapeVO {
 		this.status = tape.getStatus().getStatus();
 		this.marketShare = null==tape.getMarketShare() ? 0 : tape.getMarketShare();
 		this.audienceRating = null==tape.getAudienceRating() ? 0 : tape.getAudienceRating();
+		if(null != tape.getVedioscores() && 0 != tape.getVedioscores().size()){
+			float sum = 0;
+			for(Vedioscore s:tape.getVedioscores()){
+				sum += s.getScore();
+			}
+			this.avgScore = sum/tape.getVedioscores().size();
+		}
+		if(null != tape.getAudiencescore() && 0 != tape.getAudiencescore().size()){
+			int look = 0;
+			int unlook = 0;
+			for(Audiencescore s:tape.getAudiencescore()){
+				if(s.getResult()==1){
+					look++;
+				}else{
+					unlook++;
+				}
+			}
+			this.audiScore = look+"/"+unlook;;
+		}
 	}
 
 	public String getSubject() {
@@ -151,6 +174,22 @@ public class VedioTapeVO {
 
 	public String getCompanyID() {
 		return companyID;
+	}
+
+	public void setAvgScore(float avgScore) {
+		this.avgScore = avgScore;
+	}
+
+	public float getAvgScore() {
+		return avgScore;
+	}
+
+	public void setAudiScore(String audiScore) {
+		this.audiScore = audiScore;
+	}
+
+	public String getAudiScore() {
+		return audiScore;
 	}
 	
 }
