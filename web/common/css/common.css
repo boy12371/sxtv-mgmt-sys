@@ -113,6 +113,14 @@ label {
 	width: 202px !important;
 }
 
+.yui-ac-content {
+	*margin-left: -100px !important;	
+}
+
+.yui-ac-shadow {
+	*margin-left: -100px !important;	
+}
+
 .searchTable {
 	width: 70%;
 	height: auto;
