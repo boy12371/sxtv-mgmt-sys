@@ -53,19 +53,25 @@
 	border-color:#CBCBCB;
 	border-style:solid;
 	border-width:1px;
-	border-bottom-style: insert
+	border-bottom-style: insert,
+	text-align: center
 }
 </style>
 <title>打印预览</title>
 </head>
 <body class="yui-skin-sam">
 <s:actionerror />
-<h1>
- <s:property value="sc.startDate"/>——<s:property value="sc.endDate"/> 
-</h1>
-<p>&nbsp;</p>
+<br /><br /><br />
+<h4>
+<script type="text/javascript">
+var date = new Date();
+document.write("打印日期: "+date.getFullYear()+"年"+date.getMonth()+1+"月"+ date.getDate()+"日");
+</script>
+</h4>
+<a href="#" id="tableOption" style="font-size:12px">选项</a>
+	<div id="colDiv" style="z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 
-<div id="excelTable" align="center"></div>
+<div id="excelTable" align="center" style="margin-top:-50"></div>
 
 <script type="text/javascript">
 	function initExcelTable() {
@@ -79,58 +85,7 @@
 			href += sData;
 			href += "'>" + sData + "</a>";
 			elCell.innerHTML = href;
-		}
-
-		var formatCompany = function(elCell, oRecord, oColumn, sData) {
-			elCell.innerHTML = sData.companyName;
-		}
-		var formatTopic = function(elCell, oRecord, oColumn, sData) {
-			elCell.innerHTML = sData.topicName;
-		}
-		var formatSubject = function(elCell, oRecord, oColumn, sData) {
-			elCell.innerHTML = sData.subjectName;
-		}
-		var formatDate = function(elCell, oRecord, oColumn, sData) {
-			var idx = sData.indexOf("T");
-			if (idx != -1) {
-				elCell.innerHTML = sData.substring(0, idx);
-			} else {
-				elCell.innerHTML = sData;
-			}
-		}
-		var formatStatus = function(elCell, oRecord, oColumn, sData) {
-			elCell.innerHTML = sData.status;
-		}
-		var formatScroes = function(elCell, oRecord, oColumn, sData) {
-			if (sData.length == 0) {
-				elCell.innerHTML = "0";
-			} else {
-				var avgScore = 0;
-				var total = 0;
-				for ( var i = 0; i < sData.length; i++) {
-					total += sData[i].score;
-				}
-				var s = (total / sData.length).toString();
-				s = s.substring(0, s.indexOf(".") + 3);
-				elCell.innerHTML = s;
-			}
-		}
-		var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
-			if (sData.length == 0) {
-				elCell.innerHTML = "0/0";
-			} else {
-				var yes = 0;
-				var no = 0;
-				for ( var i = 0; i < sData.length; i++) {
-					if (sData[i].result == 1) {
-						yes += 1;
-					} else {
-						no += 1;
-					}
-				}
-				elCell.innerHTML = yes + "/" + no;
-			}
-		}
+		}		
 		// Column definitions
 		var myColumnDefs = [ {
 			key :"id",
@@ -182,7 +137,8 @@
 			formatter : formatAudienceScore
 		}, {
 			key :"comments",
-			label :"备注"
+			label :"备注",
+			formatter : formatorComments
 		} ];
 
 		// DataSource instance
@@ -207,7 +163,8 @@
 			sortedBy : {
 				key :"dateInput",
 				dir :YAHOO.widget.DataTable.CLASS_ASC
-			}
+			},
+			caption:"<h1>百家,都市审看记录统计</h1>"
 		};
 
 		var myDataTable = new YAHOO.widget.DataTable("excelTable",
@@ -219,7 +176,46 @@
 			oPayload.totalRecords = oResponse.meta.totalRecords;
 			return oPayload;
 		}
-
+		var columnSet = myDataTable.getColumnSet();
+		var showHideColumn = function(e){
+			var column = columnSet. getColumn(this.value);
+			if(this.checked){
+				myDataTable.hideColumn(column);
+			}else{
+				myDataTable.showColumn(column);
+			}
+		}
+		var colDiv = YAHOO.util.Dom.get("colDiv");
+		var colLink = YAHOO.util.Dom.get("tableOption");
+		YAHOO.util.Event.addListener(colLink,"click",function(){
+			colDiv.style.display = colDiv.style.display=="block"?"none":"block";
+		});
+		addColumnsName = function() {
+			if(colDiv.innerHTML.length==0){
+				for (var i = 0; i < myColumnDefs.length; i++) {
+					var column = myColumnDefs[i];
+					var checkbox = document.createElement("INPUT");
+					checkbox.type = "checkbox";
+					checkbox.name = "colCkbox";
+					checkbox.value = column.key;
+					checkbox.checked = false;
+					colDiv.appendChild(checkbox);
+					var p = document.createElement("SPAN");
+					p.innerHTML = column.label;
+					colDiv.appendChild(p);
+					if(i%4==1){
+						var br = document.createElement("BR");
+						colDiv.appendChild(br);
+					}
+					
+					YAHOO.util.Event.addListener(checkbox,"click",showHideColumn);
+					colDiv.style.display="none";
+				}
+			}
+		};
+		myDataTable.subscribe("renderEvent", function() {
+			addColumnsName();
+		});
 		return {
 			ds :myDataSource,
 			dt :myDataTable

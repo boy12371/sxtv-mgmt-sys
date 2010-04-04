@@ -156,7 +156,6 @@ function initDataTable() {
 		return oPayload;
 	}
 	myDataSource.subscribe("requestEvent", function() {
-				var path = '${pageContext.request.contextPath}';
 				$.blockUI({
 							message : "<h1>数据加载中......</h1>"
 						});
@@ -402,6 +401,7 @@ function initOrderDataTable() {
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 				rowIndex = 0;
+				addColumnsName();
 				$.unblockUI();
 				parent.resizeIframe();
 			});
@@ -413,7 +413,7 @@ function initOrderDataTable() {
 		return oPayload;
 	}
 	myDataSource.subscribe("requestEvent", function() {
-			addColumnsName();
+			
 				var path = '${pageContext.request.contextPath}';
 				$.blockUI({
 							message : "<h1>数据加载中......</h1>"
