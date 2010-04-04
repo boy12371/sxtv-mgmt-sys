@@ -238,9 +238,19 @@ public class ExamineAction extends BaseAction {
 				User temp = userService.getUserByEmployeeName(s.getExaminer());
 				s.setUserID(temp.getId());
 //				scores.add(s);
+				VedioScoreVO score = vedioscoreService.getTapeScoreByIdAndUser(s.getVedioID(), s.getUserID());
+				if(null != score){
+					this.addActionError("该影带已经被" + s.getExaminer() + "打过分。如果要修改打分，请到修改打分页面修改。");
+					tapeScore = vedioscoreService.getTapeScoreByIdAndUser(s.getVedioID(), s.getUserID());
+					if(this.getUserInfo().getRoles().contains(CommonVariable.ROLE_INPUTER)){
+						examiners = vedioscoreService.findAllExaminer();
+					}
+					return INPUT;
+				}
 				vedioscoreService.saveVedioScore(s);
 			}
 		}
+		this.addActionMessage("打分成功。");
 		return SUCCESS;
 	}
 	
