@@ -47,7 +47,7 @@
 		</Module>
 		
 		<Module id="sysConfig" name="系统设置" url="">
-			<ModuleItem name="影视公司管理" url="/tv/sys/toCompanies.action"/>
+			<ModuleItem id="sysCompany" name="影视公司管理" url="/tv/sys/toCompanies.action"/>
 			<ModuleItem id="sysProperties" name="系统参数" url="/tv/sys/toSystemData.action"/>
 		</Module>
 	</MainConsole>
