@@ -176,7 +176,6 @@ function initDataTable() {
 function filterFunc(){
 	var vid = YAHOO.util.Dom.get("vid").value; 
 	var vname= YAHOO.util.Dom.get("searchinput").value;
-	if((null==vid || ""==vid) && (null==vname || ""==vname)) return;
 	var callback = {
 			success:myDataTable.onDataReturnInitializeTable,
 			failure:myDataTable.onDataReturnInitializeTable,
