@@ -93,10 +93,7 @@ public class ExamineAction extends BaseAction {
 						return INPUT;
 					}
 				}
-				tapes= new ArrayList<VedioTapeVO>();
-				for (Vediotape tape : list) {
-					tapes.add(new VedioTapeVO(tape));
-				}
+				tapes = vedioscoreService.setTapeExamineInfo(list);
 				JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, 1);
 			}
 			
