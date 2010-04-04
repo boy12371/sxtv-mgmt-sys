@@ -95,7 +95,7 @@ function initDataTable() {
 function addAction(){
 	var tapeID = document.getElementById("vedioID").innerHTML;
 	var tapeName = document.getElementById("vedioName").innerHTML;
-	var audience = document.getElementById("audienceName").value;
+	var audienceName = document.getElementById("audienceName").value;
 	if(null==audience || ""==audience){
 		jAlert("请输入观众姓名。");
 		return;
@@ -104,12 +104,23 @@ function addAction(){
 		jAlert("请选择观众评价。");
 		return;
 	}
+	var isAudience = false;
+	for(var i=0;i<audience.length;i++){
+		if(audienceName == audience[i]){
+			isAudience = true;
+			break;
+		}
+	}
+	if(!isAudience){
+		jAlert(audienceName + "不是一个观众。");
+		return;
+	}
 	var result = document.getElementById("look").checked?"看":"不看";
 	var xData = {
 		id:-1,
 		tapeID:tapeID,
 		tapeName:tapeName,
-		audience:audience,
+		audience:audienceName,
 		result:result,
 		dateExamine:"",
 		//mark this row is new need to be submit. 1:insert 2:update
