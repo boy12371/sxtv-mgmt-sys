@@ -6,6 +6,7 @@ import com.vms.beans.VedioScoreVO;
 import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.User;
+import com.vms.db.bean.Vediotape;
 
 public interface IVedioscoreService {
 	
@@ -44,4 +45,6 @@ public interface IVedioscoreService {
 	public List<User> findExaminedUsersOfTape(String videoID) throws Exception;
 	
 	public void updateTapeExamineStatus(VedioScoreVO scoreVO) throws Exception;
+	
+	public List<VedioTapeVO> setTapeExamineInfo(List<Vediotape> tapes) throws Exception;
 }
