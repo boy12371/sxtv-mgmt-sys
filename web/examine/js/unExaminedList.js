@@ -123,10 +123,11 @@ function initDataTable() {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
 	};
-
+	var vid = YAHOO.util.Dom.get("vid").value; 
+	var vname= YAHOO.util.Dom.get("searchinput").value;
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=25", // Initial
+		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=25&vid="+vid+"&vname="+vname, // Initial
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
 			key :"dateComing",
@@ -183,7 +184,7 @@ function filterFunc(){
 			scope:myDataTable
 			};
 	myDataTable.getDataSource().sendRequest(
-			"sort=dateComing&dir=asc&startIndex=0&results=10&vid="+vid+"&vname="+vname,
+			"sort=dateComing&dir=asc&startIndex=0&results=25&vid="+vid+"&vname="+vname,
 			callback
 			);
 }
