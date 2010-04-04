@@ -39,6 +39,18 @@ public class VedioscoreService implements IVedioscoreService {
 		
 		Status status = new Status(1);
 		List<Vediotape> tapes = vediotapeDAO.findVedioesByStatus(status, startIndex, endIndex, orderName, dir);
+		return setTapeExamineInfo(tapes);
+	}
+	
+	public List<VedioTapeVO> setTapeExamineInfo(List<Vediotape> tapes) throws Exception {
+		//get all examiners
+		List<User> users = findAllExaminer();
+		List<String> names = new ArrayList<String>();
+		for(User user:users){
+			names.add(user.getEmployee().getName());
+		}
+		
+		Status status = new Status(1);
 		List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
 		for (Vediotape tape : tapes) {
 			List<User> examinedUsers = findExaminedUsersOfTape(tape.getId());
