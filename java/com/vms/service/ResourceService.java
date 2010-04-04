@@ -25,4 +25,10 @@ public class ResourceService implements IResourceService{
 		this.resourceDAO = resourceDAO;
 	}
 
+	@Override
+	public void addResource(Resources r) throws Exception {
+		// TODO Auto-generated method stub
+		this.resourceDAO.saveObject(r);
+	}
+
 }
