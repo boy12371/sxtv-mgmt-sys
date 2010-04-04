@@ -101,6 +101,12 @@ function initUnArrangeTable() {
 		formatter :formatDateArrange,
 		sortOptions:{sortFunction:sortCustom}
 	}, {
+		key :"avgScore",
+		label :"综合平均分"
+	}, {
+		key :"audiScore",
+		label :"观众投票(看/不看)"
+	}, {
 		key :"companyID",
 		label :"公司",
 		sortable :true,
@@ -113,7 +119,7 @@ function initUnArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "companyID", "marked", "comments"],
+		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "avgScore", "audiScore", "companyID", "marked", "comments"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -203,6 +209,12 @@ function initArrangeTable() {
 		label :"收带日期",
 		formatter :formatDateArrange
 	}, {
+		key :"avgScore",
+		label :"综合平均分"
+	}, {
+		key :"audiScore",
+		label :"观众投票(看/不看)"
+	}, {
 		key :"companyID",
 		label :"公司"
 	}];
@@ -213,7 +225,7 @@ function initArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "companyID", "marked"],
+		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "avgScore", "audiScore", "companyID", "marked"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -298,6 +310,12 @@ function initArrangeReorderEvent(){
  				temp = this.srcData.companyID;
  				arrangeTable.updateCell(srcRecord, "companyID" ,this.destData.companyID);
  				arrangeTable.updateCell(destRecord, "companyID" ,temp);
+ 				temp = this.srcData.avgScore;
+ 				arrangeTable.updateCell(srcRecord, "avgScore" ,this.destData.avgScore);
+ 				arrangeTable.updateCell(destRecord, "avgScore" ,temp);
+ 				temp = this.srcData.audiScore;
+ 				arrangeTable.updateCell(srcRecord, "audiScore" ,this.destData.audiScore);
+ 				arrangeTable.updateCell(destRecord, "audiScore" ,temp);
  				
  				var srcTemp = this.srcData.dateComing;
  				var destTemp = this.destData.dateComing;
@@ -381,6 +399,8 @@ function addTapeToArrange(rID){
 	arrangeTable.updateCell(newRecord, "topic" ,xData.topic);
 	arrangeTable.updateCell(newRecord, "companyID" ,xData.companyID);
 	arrangeTable.updateCell(newRecord, "dateComing" ,xData.dateComing);
+	arrangeTable.updateCell(newRecord, "avgScore" ,xData.avgScore);
+	arrangeTable.updateCell(newRecord, "audiScore" ,xData.audiScore);
 	newRecord.getData().marked=1;
 	
 }
@@ -395,6 +415,8 @@ function removeTapeFromArrange(rID){
 	nData.topic = xData.topic;
 	nData.companyID = xData.companyID;
 	nData.dateComing = xData.dateComing;
+	nData.avgScore = xData.avgScore;
+	nData.audiScore = xData.audiScore;
 	if(null==xData.id || ""==xData.id) return;
 	arrangeTable.updateCell(xRecord, "id", "");
 	arrangeTable.updateCell(xRecord, "vedioName", "");
@@ -402,6 +424,8 @@ function removeTapeFromArrange(rID){
 	arrangeTable.updateCell(xRecord, "topic", "");
 	arrangeTable.updateCell(xRecord, "companyID" , "");
 	arrangeTable.updateCell(xRecord, "dateComing", "");
+	arrangeTable.updateCell(xRecord, "avgScore" , "");
+	arrangeTable.updateCell(xRecord, "audiScore", "");
 	xData.marked = 0;
 	unArrangeTable.addRow(nData,0);
 	
