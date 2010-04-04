@@ -36,7 +36,7 @@ public class AudienceScoreService implements IAudienceScoreService{
 		tape.setId(vedioID);		
 		conditions.put(Audiencescore.PROP_VEDIO_I_D, tape);
 		
-		List<Audiencescore> AEs= audienceScoreDAO.findObjectByFields(Audiencescore.class,conditions,startIndex,endIndex,propertyName,false);
+		List<Audiencescore> AEs= audienceScoreDAO.findObjectByFields(Audiencescore.class,conditions,startIndex,endIndex,propertyName,ascending);
 		for(Audiencescore AE:AEs){
 			AEVOs.add(new AudienceExamineVO(AE));
 		}
