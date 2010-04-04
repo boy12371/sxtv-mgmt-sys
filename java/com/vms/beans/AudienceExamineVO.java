@@ -36,10 +36,10 @@ public class AudienceExamineVO {
 	public Audiencescore toAudiencescore(){
 		Audiencescore as = new Audiencescore();
 		as.setVedioID(new Vediotape(tapeID));
-		if(result.equals(yes)){
-			as.setResult(1);
-		}else{
+		if(result.indexOf(no)!=-1){
 			as.setResult(0);
+		}else{
+			as.setResult(1);
 		}
 		if(null == dateExamine){
 			as.setDateExamine(new Date());
