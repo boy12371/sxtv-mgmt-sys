@@ -91,7 +91,7 @@ public class AudienceExamineAction extends BaseAction {
 			}
 			audienceExamineService.updateAudienceScore(aes);
 		}
-		
+		this.addActionMessage("评价成功。");
 		//back to original page
 		toAudienceExamine();
 		return SUCCESS;
