@@ -8,6 +8,8 @@ public class TabElementBean {
 
 	private String url;
 	
+	private String id;
+	
 	private List<TabElementBean> subTabs;
 
 	/**
@@ -39,6 +41,14 @@ public class TabElementBean {
 
 	public String getUrl() {
 		return url;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 }

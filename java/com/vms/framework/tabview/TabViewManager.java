@@ -60,6 +60,8 @@ public class TabViewManager {
 				mainTab.setName(tabName);
 				String tabURL = attributesModule.getNamedItem("url").getNodeValue();
 				mainTab.setUrl(tabURL);
+				String tabId = attributesModule.getNamedItem("id").getNodeValue();
+				mainTab.setId(tabId);
 				
 				//get the its all child info
 				//if the child node isn't layout, don't used
@@ -79,6 +81,8 @@ public class TabViewManager {
 							subTab.setName(subTabName);
 							String subTabURL = attributesModuleItem.getNamedItem("url").getNodeValue();
 							subTab.setUrl(subTabURL);
+							String subTabId = attributesModule.getNamedItem("id").getNodeValue();
+							subTab.setId(subTabId);
 							
 							subTabs.add(subTab);
 						}
