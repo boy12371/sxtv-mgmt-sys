@@ -22,6 +22,8 @@ public class AudienceExamineVO {
 	
 	private Date dateExamine;
 	
+	private int marked;
+	
 	public AudienceExamineVO(){}
 	
 	public AudienceExamineVO(Audiencescore as){
@@ -31,6 +33,7 @@ public class AudienceExamineVO {
 		this.tapeName = as.getVedioID().getVedioName();
 		this.result = as.getResult()==0?no:yes;
 		this.dateExamine = as.getDateExamine();
+		this.marked = 2;
 	}
 	
 	public Audiencescore toAudiencescore(){
@@ -98,4 +101,13 @@ public class AudienceExamineVO {
 	public Integer getId() {
 		return id;
 	}
+
+	public int getMarked() {
+		return marked;
+	}
+
+	public void setMarked(int marked) {
+		this.marked = marked;
+	}
+	
 }
