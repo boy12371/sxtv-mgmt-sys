@@ -139,10 +139,11 @@ function initDataTable() {
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
 			rowsPerPageOptions : [25, 50, 100]
 		}), // Enables pagination
-		generateRequest : requestBuilder
+		generateRequest : requestBuilder,
+		width:"auto"
 	};
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 				addColumnsName();
