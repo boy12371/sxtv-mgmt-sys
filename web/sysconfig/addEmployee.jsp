@@ -35,7 +35,7 @@
 
 <s:actionerror />
 <s:fielderror />
-<s:form action="/sys/doAddEmployee" method="post">
+<s:form action="doAddEmployee" method="post" namespace="/sys">
 	<div align="center">
 	<table class="inputTable">
 		<tr>

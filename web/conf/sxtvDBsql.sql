@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2010 at 07:52 PM
+-- Generation Time: Apr 05, 2010 at 09:49 PM
 -- Server version: 5.0.75
 -- PHP Version: 5.2.6-3ubuntu4
 
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `company` (
   `status` int(11) NOT NULL default '1' COMMENT '0=禁用,1=正常',
   `comments` varchar(512) default '',
   PRIMARY KEY  (`companyID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='公司信息' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='公司信息' AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `company`
@@ -203,7 +203,8 @@ INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `c
 (5, '土耳其影视公司', '8987786', '', '', 1, ''),
 (6, 'dsvsdv', 'fwefwefwefwef', '234234', '快速', 1, 'ffffffffffffffffffffffwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwefwefwefwef'),
 (7, '韩国影视公司', '1231209809302983', '09807986', '乐山大佛', 1, '似懂非懂发'),
-(8, 'sdf ', '', '', '', 1, '');
+(8, 'sdf ', '', '', '', 1, ''),
+(9, '奥地利影视公司', '123123', '839227', '蕾丝', 1, '违反违反');
 
 -- --------------------------------------------------------
 
@@ -221,14 +222,14 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `status` int(11) NOT NULL default '1' COMMENT '0=禁用，1=正常',
   `comments` varchar(512) default '',
   PRIMARY KEY  (`employeeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='员工信息' AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='员工信息' AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gender`, `tel`, `status`, `comments`) VALUES
-(1, '王文婷', '1983-02-19', '2006-01-16', 0, '13991366931', 0, 'dddd'),
+(1, '王文婷', '1983-02-19', '2006-01-16', 0, '13991366931', 1, 'dddd'),
 (2, '王萌', '2010-01-21', '1970-01-01', 0, '13991366930', 1, '王萌王萌王萌王萌王萌王萌王萌王萌王萌王萌'),
 (3, '周强', '2010-01-21', '2010-01-21', 1, '13991366931', 1, '这是一个员工'),
 (4, '周zhou', '2010-01-21', '2010-01-21', 1, '13991366931', 1, '这是一个员工'),
@@ -238,7 +239,8 @@ INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gende
 (8, '王其', '2010-01-17', '1982-01-12', 0, '维吾尔', 1, '斯蒂芬'),
 (9, '身体', '2010-03-24', '2010-03-24', 1, '3fwefwe', 1, 'sdfsdf'),
 (10, '色图', '2010-03-24', '2010-03-24', 1, '', 1, 'asdqwd'),
-(11, '章子怡', '2010-04-01', '2010-04-01', 1, '', 1, '');
+(11, '章子怡', '2010-04-01', '2010-04-01', 1, '', 1, ''),
+(12, '李宇春', '2010-04-05', '2010-04-05', 1, '的服务俄', 1, '无关热管');
 
 -- --------------------------------------------------------
 
@@ -449,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `union_key` (`roleid`,`resourceid`),
   KEY `resourceid` (`resourceid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=113 ;
 
 --
 -- Dumping data for table `role_resource`
@@ -542,7 +544,32 @@ INSERT INTO `role_resource` (`id`, `roleid`, `resourceid`, `comments`) VALUES
 (84, 3, 71, ''),
 (85, 3, 72, ''),
 (86, 3, 73, ''),
-(87, 3, 74, '');
+(87, 3, 74, ''),
+(88, 2, 41, ''),
+(89, 3, 41, ''),
+(90, 4, 41, ''),
+(91, 5, 41, ''),
+(92, 6, 41, ''),
+(93, 7, 41, ''),
+(94, 8, 41, ''),
+(95, 9, 41, ''),
+(96, 1, 6, ''),
+(97, 3, 6, ''),
+(98, 4, 6, ''),
+(99, 5, 6, ''),
+(100, 2, 6, ''),
+(101, 7, 6, ''),
+(102, 8, 6, ''),
+(103, 1, 55, ''),
+(104, 2, 55, ''),
+(105, 3, 55, ''),
+(106, 4, 55, ''),
+(107, 5, 55, ''),
+(108, 6, 55, ''),
+(109, 7, 55, ''),
+(110, 8, 55, ''),
+(111, 9, 55, ''),
+(112, 8, 2, '');
 
 -- --------------------------------------------------------
 
@@ -560,7 +587,7 @@ CREATE TABLE IF NOT EXISTS `scorelevel` (
   UNIQUE KEY `level` (`level`),
   UNIQUE KEY `level_2` (`level`),
   KEY `level_3` (`level`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `scorelevel`
@@ -571,7 +598,8 @@ INSERT INTO `scorelevel` (`id`, `level`, `start`, `end`, `levelscore`) VALUES
 (2, 2, 3, 10, 90),
 (3, 3, 11, 20, 85),
 (4, 4, 21, 50, 80),
-(6, 5, 51, 100, 70);
+(6, 5, 51, 100, 70),
+(7, 6, 1000, 1231231, 45);
 
 -- --------------------------------------------------------
 
@@ -591,9 +619,9 @@ CREATE TABLE IF NOT EXISTS `scoreweight` (
 --
 
 INSERT INTO `scoreweight` (`factor`, `weight`, `weightName`) VALUES
-('innovateScore', 0.12, '创新'),
+('innovateScore', 0.1, '创新'),
 ('performScore', 0.4, '表演'),
-('storyScore', 0.4, '故事'),
+('storyScore', 0.3, '故事'),
 ('techScore', 0.2, '技术');
 
 -- --------------------------------------------------------
@@ -635,7 +663,7 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `status` int(11) NOT NULL COMMENT '0=禁用,1=正常',
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`subjectID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='栏目' AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='栏目' AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `subject`
@@ -647,7 +675,8 @@ INSERT INTO `subject` (`subjectID`, `subjectName`, `status`, `comments`) VALUES
 (3, '狼人虎剧', 0, '西安电视台'),
 (4, '物业剧场', 0, '斯蒂芬'),
 (5, 'asdf', 1, 'sdfwef'),
-(6, 'B栏目', 1, 'B栏目B栏目B栏目');
+(6, '栏目B', 1, 'B栏目B栏目B'),
+(7, '栏目A', 1, 'fwef');
 
 -- --------------------------------------------------------
 
@@ -661,7 +690,7 @@ CREATE TABLE IF NOT EXISTS `topic` (
   `status` int(11) NOT NULL COMMENT '0=禁用,1=正常',
   `comments` varchar(512) NOT NULL,
   PRIMARY KEY  (`topicID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='题材' AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='题材' AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `topic`
@@ -678,7 +707,8 @@ INSERT INTO `topic` (`topicID`, `topicName`, `status`, `comments`) VALUES
 (8, '学术', 1, '学术学术学术'),
 (9, '探秘', 1, '探秘探秘探秘'),
 (10, '考古', 1, '考古考古考古'),
-(11, '历史', 1, '历史历史历史');
+(11, '历史', 1, '历史历史历史ff'),
+(12, '友情', 1, '友情友情友情');
 
 -- --------------------------------------------------------
 
@@ -694,21 +724,22 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` int(11) NOT NULL default '1' COMMENT '0=禁用，1=正常',
   PRIMARY KEY  (`userID`),
   KEY `userEmployee` (`employee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户' AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户' AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`userID`, `userName`, `userPass`, `employee`, `status`) VALUES
-(1, 'tiger', 'c4ca4238a0b923820dcc509a6f75849b', 1, 1),
-(2, 'cat', '123', 2, 1),
-(3, 'pencil', '123', 3, 1),
+(1, 'tiger', '43b90920409618f188bfc6923f16b9fa', 1, 1),
+(2, 'cat', 'c4ca4238a0b923820dcc509a6f75849b', 2, 1),
+(3, 'pencil', 'a8f6830bce790a8a67fc2e84e12093ba', 3, 1),
 (4, 'dog', '123', 4, 1),
 (5, 'chick', '123', 5, 1),
 (9, 'fefwefwef', 'weffef', 7, 1),
 (10, 'cewerwere', 'fwefwef', 8, 1),
-(11, 'fdweffff', 'ffffff', 9, 1);
+(11, 'fdweffff', 'ffffff', 9, 1),
+(12, 'zhangziyi', 'dc198f0856e0563246d3acca724cf5cd', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -724,15 +755,17 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `union index` (`userid`,`roleid`),
   KEY `roleid` (`roleid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `user_role`
 --
 
 INSERT INTO `user_role` (`id`, `userid`, `roleid`, `comments`) VALUES
-(2, 1, 1, NULL),
-(3, 1, 6, NULL);
+(8, 12, 2, NULL),
+(10, 2, 2, NULL),
+(11, 1, 1, NULL),
+(12, 1, 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -841,6 +874,7 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('32f', 'fwef', 2, 3, 2, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'sd', NULL, NULL),
 ('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 3, 'sdfwe', NULL, NULL),
 ('3334df', 'dsss', 1, 1, 2, '2010-03-28', '2010-03-28 09:43:42', 1, 1, 'cvsdv', NULL, NULL),
+('33422', '里斯哦俄', 1, 2, 2, '2010-04-05', '2010-04-05 21:04:14', 2, 1, 'fefwefwef', NULL, NULL),
 ('4', '超黑特警', 2, 4, 1, '2009-02-01', '2009-02-02 00:00:00', 3, 5, NULL, NULL, NULL),
 ('452s11', 'ddfe1', 1, 3, 2, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
 ('452s12', 'ddfe2', 1, 3, 1, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdvsdvs', NULL, NULL),
