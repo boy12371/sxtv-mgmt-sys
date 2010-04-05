@@ -123,11 +123,26 @@ function initDataTable() {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
 	};
-	var vid = YAHOO.util.Dom.get("vid").value; 
-	var vname= YAHOO.util.Dom.get("searchinput").value;
+	
+	var requestBuilder = function (oState, oSelf) {
+		var sort, dir, startIndex, results; 
+		var startIndex, results;
+		oState = oState || {pagination: null, sortedBy: null};
+		sort = (oState.sortedBy) ? oState.sortedBy.key : oSelf.getColumnSet().keys[0].getKey();
+		dir = (oState.sortedBy && oState.sortedBy.dir === myDataTable.CLASS_DESC) ? "desc" : "asc"; 
+		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
+		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
+		
+		var vid = YAHOO.util.Dom.get("vid").value; 
+		var vname= YAHOO.util.Dom.get("searchinput").value;
+		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
+		+ sort + "&dir=" + dir + "&vid="+vid+"&vname="+vname;
+	};
+	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=25&vid="+vid+"&vname="+vname, // Initial
+		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=25", // Initial
+		generateRequest: requestBuilder,
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
 			key :"dateComing",
@@ -175,8 +190,7 @@ function initDataTable() {
 }
 
 function filterFunc(){
-	var vid = YAHOO.util.Dom.get("vid").value; 
-	var vname= YAHOO.util.Dom.get("searchinput").value;
+	var oState = myDataTable.getState();
 	var callback = {
 			success:myDataTable.onDataReturnInitializeTable,
 			failure:myDataTable.onDataReturnInitializeTable,
@@ -184,7 +198,7 @@ function filterFunc(){
 			scope:myDataTable
 			};
 	myDataTable.getDataSource().sendRequest(
-			"sort=dateComing&dir=asc&startIndex=0&results=25&vid="+vid+"&vname="+vname,
+			myDataTable.get("generateRequest")(oState, myDataTable),
 			callback
 			);
 }
