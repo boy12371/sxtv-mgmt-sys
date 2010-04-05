@@ -65,7 +65,7 @@
 <h4>
 <script type="text/javascript">
 var date = new Date();
-document.write("打印日期: "+date.getFullYear()+"年"+date.getMonth()+1+"月"+ date.getDate()+"日");
+document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"月"+ date.getDate()+"日");
 </script>
 </h4>
 <a href="#" id="tableOption" style="font-size:12px">选项</a>
@@ -85,7 +85,11 @@ document.write("打印日期: "+date.getFullYear()+"年"+date.getMonth()+1+"月"
 			href += sData;
 			href += "'>" + sData + "</a>";
 			elCell.innerHTML = href;
-		}		
+		}
+		var formattorDing = function(elCell, oRecord, oColumn, sData){
+			elCell.innerHTML="<input type=checkbox name=ding />";
+			}
+				
 		// Column definitions
 		var myColumnDefs = [ {
 			key :"id",
@@ -139,7 +143,14 @@ document.write("打印日期: "+date.getFullYear()+"年"+date.getMonth()+1+"月"
 			key :"comments",
 			label :"备注",
 			formatter : formatorComments
-		} ];
+		}, {
+			key :"dingpian",
+			label :"定片",
+			formatter : formattorDing
+		},{
+			key :"remark",
+			label : "说明"
+			}];
 
 		// DataSource instance
 		var myDataSource = new YAHOO.util.XHRDataSource(
