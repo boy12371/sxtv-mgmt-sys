@@ -136,14 +136,34 @@ function okAction(){
 		jAlert(msg, "输入错误");
 		return false;
 	}
+	var isExaminer = false;
 	var e=document.getElementById("examiners").value;
 	for(var i=0;i<examiners.length;i++){
 		if(e == examiners[i]){
-			return true;
+			isExaminer = true;
+			break;
 		}
 	}
-	jAlert(e+"不是打分人员。", "输入错误");
-	return false;
+	if(!isExaminer){
+		jAlert(e+"不是打分人员。", "输入错误");
+		return false;
+	}
+	if(getExaminerFormTable(e)!=null){
+		jAlert(e+"已经输入过打分，若要修改，请在下面表格中修改。", "输入错误");
+		return false;
+	}
+	
+	return true;
+}
+
+function getExaminerFormTable(name){
+	for(var i=0,record=myDataTable.getRecord(i); null != record; i++,record=myDataTable.getRecord(i)){
+		var xData = record.getData();
+		if(xData.examiner == name){
+			return i;
+		}
+	}
+	return null;
 }
 
 function submitData(){

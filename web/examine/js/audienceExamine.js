@@ -37,7 +37,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : ["id", "tapeID", "audience", "tapeName", "result", "dateExamine"],
+		fields : ["id", "tapeID", "audience", "tapeName", "result", "dateExamine", "marked"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -117,7 +117,6 @@ function addAction(){
 	}
 	var result = document.getElementById("look").checked?"看":"不看";
 	var xData = {
-		id:-1,
 		tapeID:tapeID,
 		tapeName:tapeName,
 		audience:audienceName,
@@ -129,20 +128,21 @@ function addAction(){
 	cXData = xData;
 	var pos = getRecordFormTable(xData);
 	if(null != pos){
-		jConfirm(
-			"该观众已经评价过此影带，如果确定，原来的评价将被更新，否则请取消。",
-			"确认",
-			function(r){
-			if(r){
-				var id = myDataTable.getRecord(pos).getData("id");
-				cXData.marked = 2;
-				cXData.id = id;
-				myDataTable.deleteRow(pos);  
-				myDataTable.addRow(xData,0);
-			}else{
-				return;
-			}	
-		});
+//		jConfirm(
+//			"该观众已经评价过此影带，如果确定，原来的评价将被更新，否则请取消。",
+//			"确认",
+//			function(r){
+//			if(r){
+//				var id = myDataTable.getRecord(pos).getData("id");
+//				cXData.id = id;
+//				myDataTable.deleteRow(pos);  
+//				myDataTable.addRow(xData,0);
+//			}else{
+//				return;
+//			}	
+//		});
+		jAlert(audienceName+"已经输入过评价，若要修改，请在下面表格中修改。", "输入错误");
+		return false;
 	}else{
 		myDataTable.addRow(xData,0);
 //		markRow(0);
@@ -157,7 +157,6 @@ function submitAction(){
 		if(xData.result.length>=3 || (typeof(xData.marked)!="undefined" && 1<=xData.marked)){
 			if(xData.result.length>=3){
 				xData.result = xData.result.replace(/(^\s*)|(\s*$)/g, "");
-				xData.marked = 2;
 				xData.dateExamine = "";
 			}
 			submitArray[submitArray.length] = xData;
