@@ -108,7 +108,7 @@
 		</div>
 	</div>
 	
-	<p>已打分值</p>
+	<p>打分信息</p>
 	<div id="dynamicdata" align="center"></div>
 	<div id="submitBtnDiv" align="center" style="margin-top:20px;"></div>
 </s:form>
