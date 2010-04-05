@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 style="font-color:red">Access Denied....</h1>
+	<h1 style="font-color:red">拒绝访问</h1>
+	<h6>对不起，您无权访问当前页面数据，请联系管理员</h6>
 </body>
 </html>

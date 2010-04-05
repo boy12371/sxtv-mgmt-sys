@@ -6,7 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <SCRIPT LANGUAGE="JavaScript">
-	window.location="/tv/logon/toLogon.action";
+window.location="/tv/logon/toLogon.action";
+if (window != top)
+	top.location.href = location.href; 
+	
 </SCRIPT>
 <body>
 </body>
