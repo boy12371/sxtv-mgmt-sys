@@ -28,8 +28,8 @@ public class AuthenticationInterceptor extends AbstractInterceptor {
 			}
 			
 		}
-		return action.invoke();
-		//return "403";
+		//return action.invoke();
+		return "403";
 	}
 
 }

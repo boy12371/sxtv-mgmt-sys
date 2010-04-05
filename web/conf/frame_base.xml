@@ -38,16 +38,15 @@
 		<Module id="accuracy" name="员工准确度" url="/tv/accuracy/toAccuracy.action">
 		</Module>
 		
-		<Module id="userMgmt" name="用户管理" url="">
-			<ModuleItem id="employeeMgmt" name="员工-用户" url="/tv/sys/toEmployees.action"/>
-			<ModuleItem id="employeeAdd" name="添加员工" url="/tv/sys/toAddEmployee.action"/>
-			<ModuleItem id="userAdd" name="创建用户" url="/tv/sys/toAddUser.action"/>			
+		<Module id="userMgmt" name="资料管理" url="">
 			<ModuleItem id="audience" name="观众管理" url="/tv/sys/toAllAudience.action"/>
-			<ModuleItem id="permission" name="权限管理" url="#"/>
 		</Module>
 		
 		<Module id="sysConfig" name="系统设置" url="">
 			<ModuleItem id="sysCompany" name="影视公司管理" url="/tv/sys/toCompanies.action"/>
+			<ModuleItem id="employeeMgmt" name="员工-用户" url="/tv/sys/toEmployees.action"/>
+			<ModuleItem id="employeeAdd" name="添加员工" url="/tv/sys/toAddEmployee.action"/>
+			<ModuleItem id="userAdd" name="创建用户" url="/tv/sys/toAddUser.action"/>
 			<ModuleItem id="sysProperties" name="系统参数" url="/tv/sys/toSystemData.action"/>
 		</Module>
 	</MainConsole>
