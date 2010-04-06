@@ -54,7 +54,11 @@ public class AccuracyAction extends BaseAction {
 		startDateStr = dFormat.format(startDate);
 		endDateStr = dFormat.format(endDate);
 		
-		setSubjects(accuracyService.getAllSubjects());
+		Subject allSubject = new Subject();
+		allSubject.setId(-2);
+		allSubject.setSubjectName("所有栏目");
+		subjects = accuracyService.getAllSubjects();
+		subjects.add(0, allSubject);
 		return SUCCESS;
 	}
 	
