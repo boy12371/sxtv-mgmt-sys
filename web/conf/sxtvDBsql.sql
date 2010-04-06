@@ -14,6 +14,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+CREATE DATABASE `sxtvdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `sxtvdb`;
 
 --
 -- Database: `sxtvdb`
@@ -457,119 +459,118 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
 -- Dumping data for table `role_resource`
 --
 
-INSERT INTO `role_resource` (`id`, `roleid`, `resourceid`, `comments`) VALUES
-(1, 1, 17, ''),
-(2, 1, 18, ''),
-(3, 1, 19, ''),
-(4, 1, 20, ''),
-(5, 1, 21, ''),
-(6, 1, 22, ''),
-(7, 1, 23, ''),
-(8, 1, 24, ''),
-(9, 1, 25, ''),
-(10, 1, 26, ''),
-(11, 1, 27, ''),
-(12, 1, 28, ''),
-(13, 1, 29, ''),
-(14, 1, 30, ''),
-(15, 1, 31, ''),
-(16, 1, 32, ''),
-(17, 1, 33, ''),
-(18, 1, 34, ''),
-(19, 1, 35, ''),
-(20, 1, 36, ''),
-(21, 1, 37, ''),
-(22, 1, 38, ''),
-(23, 1, 39, ''),
-(24, 1, 40, ''),
-(25, 1, 41, ''),
-(26, 1, 42, ''),
-(27, 1, 43, ''),
-(28, 1, 44, ''),
-(29, 1, 45, ''),
-(30, 1, 46, ''),
-(31, 1, 47, ''),
-(32, 1, 52, ''),
-(33, 1, 53, ''),
-(34, 1, 54, ''),
-(35, 6, 57, ''),
-(36, 6, 58, ''),
-(37, 6, 59, ''),
-(38, 6, 60, ''),
-(39, 6, 61, ''),
-(40, 6, 62, ''),
-(41, 6, 63, ''),
-(42, 6, 6, ''),
-(43, 2, 1, ''),
-(44, 2, 2, ''),
-(45, 2, 3, ''),
-(46, 8, 8, ''),
-(47, 8, 12, ''),
-(48, 8, 13, ''),
-(49, 4, 75, ''),
-(50, 4, 76, ''),
-(51, 4, 77, ''),
-(52, 4, 78, ''),
-(53, 4, 79, ''),
-(54, 5, 9, ''),
-(55, 5, 14, ''),
-(56, 5, 15, ''),
-(57, 5, 16, ''),
-(58, 5, 80, ''),
-(59, 5, 81, ''),
-(60, 5, 82, ''),
-(61, 5, 83, ''),
-(62, 5, 84, ''),
-(63, 5, 85, ''),
-(64, 7, 48, ''),
-(65, 7, 49, ''),
-(66, 7, 50, ''),
-(67, 7, 51, ''),
-(68, 9, 4, ''),
-(69, 9, 5, ''),
-(70, 9, 6, ''),
-(71, 9, 10, ''),
-(72, 9, 11, ''),
-(73, 9, 76, ''),
-(74, 5, 76, ''),
-(75, 10, 86, ''),
-(76, 10, 87, ''),
-(77, 3, 64, ''),
-(78, 3, 65, ''),
-(79, 3, 66, ''),
-(80, 3, 67, ''),
-(81, 3, 68, ''),
-(82, 3, 69, ''),
-(83, 3, 70, ''),
-(84, 3, 71, ''),
-(85, 3, 72, ''),
-(86, 3, 73, ''),
-(87, 3, 74, ''),
-(88, 2, 41, ''),
-(89, 3, 41, ''),
-(90, 4, 41, ''),
-(91, 5, 41, ''),
-(92, 6, 41, ''),
-(93, 7, 41, ''),
-(94, 8, 41, ''),
-(95, 9, 41, ''),
-(96, 1, 6, ''),
-(97, 3, 6, ''),
-(98, 4, 6, ''),
-(99, 5, 6, ''),
-(100, 2, 6, ''),
-(101, 7, 6, ''),
-(102, 8, 6, ''),
-(103, 1, 55, ''),
-(104, 2, 55, ''),
-(105, 3, 55, ''),
-(106, 4, 55, ''),
-(107, 5, 55, ''),
-(108, 6, 55, ''),
-(109, 7, 55, ''),
-(110, 8, 55, ''),
-(111, 9, 55, ''),
-(112, 8, 2, '');
+INSERT INTO `role_resource` VALUES (1,1,17,'');
+INSERT INTO `role_resource` VALUES (2,1,18,'');
+INSERT INTO `role_resource` VALUES (3,1,19,'');
+INSERT INTO `role_resource` VALUES (4,1,20,'');
+INSERT INTO `role_resource` VALUES (5,1,21,'');
+INSERT INTO `role_resource` VALUES (6,1,22,'');
+INSERT INTO `role_resource` VALUES (7,1,23,'');
+INSERT INTO `role_resource` VALUES (8,1,24,'');
+INSERT INTO `role_resource` VALUES (9,1,25,'');
+INSERT INTO `role_resource` VALUES (10,1,26,'');
+INSERT INTO `role_resource` VALUES (11,1,27,'');
+INSERT INTO `role_resource` VALUES (12,1,28,'');
+INSERT INTO `role_resource` VALUES (13,1,29,'');
+INSERT INTO `role_resource` VALUES (14,1,30,'');
+INSERT INTO `role_resource` VALUES (15,1,31,'');
+INSERT INTO `role_resource` VALUES (16,1,32,'');
+INSERT INTO `role_resource` VALUES (17,1,33,'');
+INSERT INTO `role_resource` VALUES (18,1,34,'');
+INSERT INTO `role_resource` VALUES (19,1,35,'');
+INSERT INTO `role_resource` VALUES (20,1,36,'');
+INSERT INTO `role_resource` VALUES (21,1,37,'');
+INSERT INTO `role_resource` VALUES (22,1,38,'');
+INSERT INTO `role_resource` VALUES (23,1,39,'');
+INSERT INTO `role_resource` VALUES (24,1,40,'');
+INSERT INTO `role_resource` VALUES (25,1,41,'');
+INSERT INTO `role_resource` VALUES (26,1,42,'');
+INSERT INTO `role_resource` VALUES (27,1,43,'');
+INSERT INTO `role_resource` VALUES (28,1,44,'');
+INSERT INTO `role_resource` VALUES (29,1,45,'');
+INSERT INTO `role_resource` VALUES (30,1,46,'');
+INSERT INTO `role_resource` VALUES (31,1,47,'');
+INSERT INTO `role_resource` VALUES (32,1,52,'');
+INSERT INTO `role_resource` VALUES (33,1,53,'');
+INSERT INTO `role_resource` VALUES (34,1,54,'');
+INSERT INTO `role_resource` VALUES (35,6,57,'');
+INSERT INTO `role_resource` VALUES (36,6,58,'');
+INSERT INTO `role_resource` VALUES (37,6,59,'');
+INSERT INTO `role_resource` VALUES (38,6,60,'');
+INSERT INTO `role_resource` VALUES (39,6,61,'');
+INSERT INTO `role_resource` VALUES (40,6,62,'');
+INSERT INTO `role_resource` VALUES (41,6,63,'');
+INSERT INTO `role_resource` VALUES (42,6,6,'');
+INSERT INTO `role_resource` VALUES (43,2,1,'');
+INSERT INTO `role_resource` VALUES (44,2,2,'');
+INSERT INTO `role_resource` VALUES (45,2,3,'');
+INSERT INTO `role_resource` VALUES (46,8,8,'');
+INSERT INTO `role_resource` VALUES (47,8,12,'');
+INSERT INTO `role_resource` VALUES (48,8,13,'');
+INSERT INTO `role_resource` VALUES (49,4,75,'');
+INSERT INTO `role_resource` VALUES (50,4,76,'');
+INSERT INTO `role_resource` VALUES (51,4,77,'');
+INSERT INTO `role_resource` VALUES (52,4,78,'');
+INSERT INTO `role_resource` VALUES (53,4,79,'');
+INSERT INTO `role_resource` VALUES (54,5,9,'');
+INSERT INTO `role_resource` VALUES (55,5,14,'');
+INSERT INTO `role_resource` VALUES (56,5,15,'');
+INSERT INTO `role_resource` VALUES (57,5,16,'');
+INSERT INTO `role_resource` VALUES (58,5,80,'');
+INSERT INTO `role_resource` VALUES (59,5,81,'');
+INSERT INTO `role_resource` VALUES (60,5,82,'');
+INSERT INTO `role_resource` VALUES (61,5,83,'');
+INSERT INTO `role_resource` VALUES (62,5,84,'');
+INSERT INTO `role_resource` VALUES (63,5,85,'');
+INSERT INTO `role_resource` VALUES (64,7,48,'');
+INSERT INTO `role_resource` VALUES (65,7,49,'');
+INSERT INTO `role_resource` VALUES (66,7,50,'');
+INSERT INTO `role_resource` VALUES (67,7,51,'');
+INSERT INTO `role_resource` VALUES (68,9,4,'');
+INSERT INTO `role_resource` VALUES (69,9,5,'');
+INSERT INTO `role_resource` VALUES (70,9,6,'');
+INSERT INTO `role_resource` VALUES (71,9,10,'');
+INSERT INTO `role_resource` VALUES (72,9,11,'');
+INSERT INTO `role_resource` VALUES (73,9,76,'');
+INSERT INTO `role_resource` VALUES (74,5,76,'');
+INSERT INTO `role_resource` VALUES (75,10,86,'');
+INSERT INTO `role_resource` VALUES (76,10,87,'');
+INSERT INTO `role_resource` VALUES (77,3,64,'');
+INSERT INTO `role_resource` VALUES (78,3,65,'');
+INSERT INTO `role_resource` VALUES (79,3,66,'');
+INSERT INTO `role_resource` VALUES (80,3,67,'');
+INSERT INTO `role_resource` VALUES (81,3,68,'');
+INSERT INTO `role_resource` VALUES (82,3,69,'');
+INSERT INTO `role_resource` VALUES (88,2,41,'');
+INSERT INTO `role_resource` VALUES (89,3,41,'');
+INSERT INTO `role_resource` VALUES (90,4,41,'');
+INSERT INTO `role_resource` VALUES (91,5,41,'');
+INSERT INTO `role_resource` VALUES (92,6,41,'');
+INSERT INTO `role_resource` VALUES (93,7,41,'');
+INSERT INTO `role_resource` VALUES (94,8,41,'');
+INSERT INTO `role_resource` VALUES (95,9,41,'');
+INSERT INTO `role_resource` VALUES (96,1,6,'');
+INSERT INTO `role_resource` VALUES (97,3,6,'');
+INSERT INTO `role_resource` VALUES (98,4,6,'');
+INSERT INTO `role_resource` VALUES (99,5,6,'');
+INSERT INTO `role_resource` VALUES (100,2,6,'');
+INSERT INTO `role_resource` VALUES (101,7,6,'');
+INSERT INTO `role_resource` VALUES (102,8,6,'');
+INSERT INTO `role_resource` VALUES (103,1,55,'');
+INSERT INTO `role_resource` VALUES (104,2,55,'');
+INSERT INTO `role_resource` VALUES (105,3,55,'');
+INSERT INTO `role_resource` VALUES (106,4,55,'');
+INSERT INTO `role_resource` VALUES (107,5,55,'');
+INSERT INTO `role_resource` VALUES (108,6,55,'');
+INSERT INTO `role_resource` VALUES (109,7,55,'');
+INSERT INTO `role_resource` VALUES (110,8,55,'');
+INSERT INTO `role_resource` VALUES (111,9,55,'');
+INSERT INTO `role_resource` VALUES (112,8,2,'');
+INSERT INTO `role_resource` VALUES (113,8,70,'');
+INSERT INTO `role_resource` VALUES (114,8,71,'');
+INSERT INTO `role_resource` VALUES (115,8,72,'');
+INSERT INTO `role_resource` VALUES (116,8,73,'');
+INSERT INTO `role_resource` VALUES (117,8,74,'');
 
 -- --------------------------------------------------------
 
