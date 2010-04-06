@@ -103,6 +103,9 @@ function initDataTable() {
 		label :"打分进度",
 		formatter : formatProgress
 	}, {
+		key :"audiScore",
+		label :"观众投票(看/不看)"
+	}, {
 		key :"companyID",
 		label :"公司",
 		sortable :true
@@ -118,7 +121,7 @@ function initDataTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "status", "companyID", "examinedEmployees", "unexaminedEmployees" ],
+		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "status", "audiScore", "companyID", "examinedEmployees", "unexaminedEmployees" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
