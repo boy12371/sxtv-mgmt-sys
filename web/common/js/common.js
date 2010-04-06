@@ -191,3 +191,19 @@ var formatAudienceScore = function(elCell, oRecord, oColumn, sData) {
 		elCell.innerHTML = yes + "/" + no;
 	}
 }
+
+function fixTableWidthWithScrollBar(divId){
+	//change datatable css for scroll bar 
+	var elements=YAHOO.util.Dom.getElementsByClassName('yui-dt-bd', 'div',divId);
+	for(var i=0;i<elements.length;i++){
+    	YAHOO.util.Dom.setStyle(elements[i],"border","0px");
+    	YAHOO.util.Dom.setStyle(elements[i],"background-color","transparent");
+	}
+
+	var elementsh=YAHOO.util.Dom.getElementsByClassName('yui-dt-hd','div',divId);
+	for(var i=0;i<elementsh.length;i++){
+	YAHOO.util.Dom.setStyle(elementsh[i],"border","0px");
+    	YAHOO.util.Dom.setStyle(elementsh[i],"background-color","transparent");
+	}
+
+}

@@ -142,11 +142,12 @@ function initDataTable() {
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
 			rowsPerPageOptions : [25, 50, 100]
 		}),
-		generateRequest : requestBuilder
+		generateRequest : requestBuilder,
+		width:"auto"
 		// ,formatRow: highLightRow
 	};
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
@@ -401,11 +402,12 @@ function initScoreDataTable(videoID) {
 			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
 			rowsPerPageOptions : [25, 50, 100]
-		})
+		}),
+		width:"auto"
 
 	};
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,

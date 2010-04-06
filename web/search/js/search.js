@@ -300,7 +300,9 @@ function initDataTable() {
 	var vstatus = YAHOO.util.Dom.get("vstatus");
 	vstatus.insertBefore(new Option("请选择", 0), vstatus.options[0]);
 	vstatus.selectedIndex = 0;
-
+	
+//	fixTableWidthWithScrollBar("dynamicdata");
+	
 	return {
 		ds : myDataSource,
 		dt : myDataTable
@@ -436,10 +438,11 @@ function initOrderDataTable() {
 		paginator : new YAHOO.widget.Paginator({
 					rowsPerPage : 25
 				}),
-		generateRequest : requestBuilder
+		generateRequest : requestBuilder,
+		width:"auto"
 	};
 
-	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 				rowIndex = 0;
@@ -554,3 +557,4 @@ function initOrderDataTable() {
 	};
 
 }
+
