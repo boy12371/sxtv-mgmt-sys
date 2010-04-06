@@ -536,9 +536,7 @@ INSERT INTO `role_resource` VALUES (74,5,76,'');
 INSERT INTO `role_resource` VALUES (75,10,86,'');
 INSERT INTO `role_resource` VALUES (76,10,87,'');
 INSERT INTO `role_resource` VALUES (77,3,64,'');
-INSERT INTO `role_resource` VALUES (78,3,65,'');
 INSERT INTO `role_resource` VALUES (79,3,66,'');
-INSERT INTO `role_resource` VALUES (80,3,67,'');
 INSERT INTO `role_resource` VALUES (81,3,68,'');
 INSERT INTO `role_resource` VALUES (82,3,69,'');
 INSERT INTO `role_resource` VALUES (88,2,41,'');
@@ -571,8 +569,12 @@ INSERT INTO `role_resource` VALUES (114,8,71,'');
 INSERT INTO `role_resource` VALUES (115,8,72,'');
 INSERT INTO `role_resource` VALUES (116,8,73,'');
 INSERT INTO `role_resource` VALUES (117,8,74,'');
-
--- --------------------------------------------------------
+INSERT INTO `role_resource` VALUES (118,8,64,'');
+INSERT INTO `role_resource` VALUES (119,8,65,'');
+INSERT INTO `role_resource` VALUES (120,8,66,'');
+INSERT INTO `role_resource` VALUES (121,8,67,'');
+INSERT INTO `role_resource` VALUES (123,8,68,'');
+INSERT INTO `role_resource` VALUES (124,8,69,'');
 
 --
 -- Table structure for table `scorelevel`
