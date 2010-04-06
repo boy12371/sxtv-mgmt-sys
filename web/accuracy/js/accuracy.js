@@ -36,9 +36,25 @@ function initAccuracyTable() {
 		}
 	};
 	
+	var requestBuilder = function (oState, oSelf) {
+		var sort, dir, startIndex, results; 
+		var startIndex, results;
+		oState = oState || {pagination: null, sortedBy: null};
+		sort = (oState.sortedBy) ? oState.sortedBy.key : oSelf.getColumnSet().keys[0].getKey();
+		dir = (oState.sortedBy && oState.sortedBy.dir === myDataTable.CLASS_DESC) ? "desc" : "asc"; 
+		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
+		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
+		
+		var startDate = dojo.widget.byId("startDateStr").getValue(); 
+		var endDate = dojo.widget.byId("endDateStr").getValue(); 
+		var selSubject = YAHOO.util.Dom.get("selSubject").value;
+		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
+		+ sort + "&dir=" + dir + "&startDateStr="+startDate+"&endDateStr="+endDate+"&selSubject="+selSubject;
+	};
 	// DataTable configuration
 	var myConfigs = {
 		initialRequest :"sort=accuracy&dir=desc", // Initial
+		generateRequest: requestBuilder,
 		sortedBy : {
 			key :"accuracy",
 			dir :YAHOO.widget.DataTable.CLASS_DESC
@@ -78,9 +94,6 @@ function initAccuracyTable() {
 }
 
 function filterFunc(){
-	var startDate = dojo.widget.byId("startDateStr").getValue(); 
-	var endDate = dojo.widget.byId("endDateStr").getValue(); 
-	if((null==startDate || ""==startDate) || (null==endDate || ""==endDate)) return;
 	var callback = {
 			success:myDataTable.onDataReturnInitializeTable,
 			failure:myDataTable.onDataReturnInitializeTable,
@@ -88,7 +101,7 @@ function filterFunc(){
 			scope:myDataTable
 			};
 	myDataTable.getDataSource().sendRequest(
-			"startDateStr="+startDate+"&endDateStr="+endDate,
+			myDataTable.get("generateRequest")(myDataTable.getState(), myDataTable),
 			callback
 			);
 }

@@ -45,11 +45,9 @@
 		<td><label>开始日期</label></td>
 		<td><sx:datetimepicker cssClass="inputField" displayFormat="yyyy-MM-dd" id="startDateStr" name="startDateStr" toggleType="explode" value="startDateStr"/></td>
 		<td><label>结束日期</label></td>
-		<td>
-		<sx:datetimepicker cssClass="inputField" displayFormat="yyyy-MM-dd" id="endDateStr" name="endDateStr" value="endDateStr" toggleType="explode" /></td>
+		<td><sx:datetimepicker cssClass="inputField" displayFormat="yyyy-MM-dd" id="endDateStr" name="endDateStr" value="endDateStr" toggleType="explode" /></td>
+		<td><s:select name="selSubject" id="selSubject" headerKey="-1" headerValue="选择栏目" list="subjects" listKey="id" listValue="subjectName"/></td>
 
-<!-- 	<td><label>姓名</label></td>
-		<td><input class="inputField" type="text" /></td>  -->
 		<td>
 			<div id="searchBtnDiv"></div>
 		</td>
