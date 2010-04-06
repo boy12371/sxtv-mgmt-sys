@@ -18,6 +18,7 @@ import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
 import com.vms.db.bean.Scorelevel;
 import com.vms.db.bean.Status;
+import com.vms.db.bean.Subject;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IPlayorderDAO;
@@ -85,15 +86,15 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO  implements IPlayor
 		}
 	}
 	@Override
-	public List<Playorder> findPlayorderBetweenDateWithFeedback(Date startDate, Date endDate) throws Exception {
-		Criteria crt = this.getCriteria(Playorder.class);
-		crt.add(Restrictions.between(Playorder.PROP_PLAY_DATE, startDate, endDate))
-		.createCriteria(Playorder.PROP_VEDIO_I_D).add(Restrictions.eq(Vediotape.PROP_STATUS, new Status(9)));
-		
-//		Order order = DaoUtils.getOrder("vedioID.audienceRating", false);
-//		if (order != null) {
-//			crt.addOrder(order);
-//		}
+	public List<Playorder> findPlayorderBetweenDateWithFeedback(Date startDate, Date endDate,  int selSubject) throws Exception {
+		Subject subject = new Subject(selSubject);
+		Criteria temp = this.getCriteria(Playorder.class);
+		Criteria crt = temp.add(Restrictions.between(Playorder.PROP_PLAY_DATE, startDate, endDate)).createCriteria(Playorder.PROP_VEDIO_I_D);
+		crt.add(Restrictions.eq(Vediotape.PROP_STATUS, new Status(9)));
+		if(selSubject > 0){
+			crt.add(Restrictions.eq(Vediotape.PROP_SUBJECT, subject));
+		}
+
 		List<Playorder> vList = crt.list();
 		Comparator<Playorder> comparator = new scoreComparator();
 		Collections.sort(vList, comparator);

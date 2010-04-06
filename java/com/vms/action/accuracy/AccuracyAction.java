@@ -15,6 +15,7 @@ import com.vms.beans.AccuracyVO;
 import com.vms.beans.JSONDataTable;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
+import com.vms.db.bean.Subject;
 import com.vms.service.iface.IAccuracyService;
 
 public class AccuracyAction extends BaseAction {
@@ -33,7 +34,11 @@ public class AccuracyAction extends BaseAction {
 	
 	private String examiner;
 	
-	public String toAccuracy(){
+	private List<Subject> subjects;
+	
+	private int selSubject;
+	
+	public String toAccuracy() throws Exception{
 		Date startDate = new Date();
 		startDate.setDate(1);
 		startDate.setMonth(startDate.getMonth()-1);
@@ -49,6 +54,7 @@ public class AccuracyAction extends BaseAction {
 		startDateStr = dFormat.format(startDate);
 		endDateStr = dFormat.format(endDate);
 		
+		setSubjects(accuracyService.getAllSubjects());
 		return SUCCESS;
 	}
 	
@@ -61,8 +67,7 @@ public class AccuracyAction extends BaseAction {
 		try {
 			Date startDate = dFormat.parse(startDateStr);
 			Date endDate = dFormat.parse(endDateStr);
-			List<AccuracyVO> accs = accuracyService.findAllAccuracy(startDate,
-					endDate);
+			List<AccuracyVO> accs = accuracyService.findAllAccuracy(startDate, endDate, selSubject);
 			if (null != examiner && "".equals(examiner)) {
 				AccuracyVO temp = null;
 				for (AccuracyVO a : accs) {
@@ -130,5 +135,21 @@ public class AccuracyAction extends BaseAction {
 
 	public String getExaminer() {
 		return examiner;
+	}
+
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
+	public List<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public void setSelSubject(int selSubject) {
+		this.selSubject = selSubject;
+	}
+
+	public int getSelSubject() {
+		return selSubject;
 	}
 }

@@ -5,9 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.vms.beans.AccuracyVO;
-import com.vms.common.SearchCondition;
 import com.vms.db.bean.Playorder;
-import com.vms.db.bean.Scorelevel;
+import com.vms.db.bean.Subject;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
@@ -19,9 +18,9 @@ public class AccuracyService implements IAccuracyService{
 	private IPlayorderDAO playorderDAO;
 	private IVedioscoreDAO vedioscoreDAO;
 
-	public List<AccuracyVO> findAllAccuracy(Date startDate, Date endDate) throws Exception{
+	public List<AccuracyVO> findAllAccuracy(Date startDate, Date endDate, int subject) throws Exception{
 		List<AccuracyVO> accs = new ArrayList<AccuracyVO>();
-		List<Playorder> playorder = playorderDAO.findPlayorderBetweenDateWithFeedback(startDate, endDate);
+		List<Playorder> playorder = playorderDAO.findPlayorderBetweenDateWithFeedback(startDate, endDate, subject);
 		List<User> users = vedioscoreDAO.findAllExaminer();
 		List<Vediotape> tapes = new ArrayList<Vediotape>();
 		for(Playorder p:playorder){
@@ -55,6 +54,10 @@ public class AccuracyService implements IAccuracyService{
 		}
 		float acc = (1 - accSum / mSum) * 100 ;
 		return acc;
+	}
+	
+	public List<Subject> getAllSubjects() throws Exception{
+		return playorderDAO.findObjectByField(Subject.class, "status", 1, -1, -1, null, true);
 	}
 	
 	public void setPlayorderDAO(IPlayorderDAO playorderDAO) {
