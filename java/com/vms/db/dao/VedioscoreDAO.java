@@ -27,7 +27,7 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 	
 	public List<User> findAllExaminer() throws Exception{
 		List<User> users = new ArrayList<User>();
-		List<UserRole> urs = this.findObjectByField(UserRole.class, "roleid", new Role(CommonVariable.ROLE_EXAMINER), -1, -1, "roleid", true);
+		List<UserRole> urs = this.findObjectByField(UserRole.class, "roleid", new Role(3), -1, -1, "roleid", true);
 		for(UserRole ur:urs){
 			if(ur.getUserid().getStatus()==1 && ur.getUserid().getEmployee().getStatus()==1){
 				users.add(ur.getUserid());

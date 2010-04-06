@@ -11,11 +11,4 @@ public class CommonVariable {
 	public final static int VIDEO_STATUS_PLAYED = 8;
 	public final static int VIDEO_STATUS_FINISHED = 9;
 	
-	public final static Integer ROLE_ADMIN = 1;
-	public final static Integer ROLE_INPUTER = 2;
-	public final static Integer ROLE_EXAMINER = 3;
-	public final static Integer ROLE_AUDITOR = 4;
-	public final static Integer ROLE_ARRANGER = 5;
-	public final static Integer ROLE_NORMAL = 6;
-
 }

@@ -168,10 +168,10 @@ public class ExamineAction extends BaseAction {
 			String name = vedioscoreService.getTapeByID(tapeScore.getVedioID()).getVedioName();		
 			tapeScore.setVedioName(name);
 		}
-		if(this.getUserInfo().getRoles().contains(CommonVariable.ROLE_INPUTER)){
+		if(this.getUserInfo().getRoles().contains(8)){
 			examiners = vedioscoreService.findAllExaminer();
 		}
-		if(getUserInfo().getRoles().contains(new Integer(CommonVariable.ROLE_INPUTER)) && !"modify".equals(perform)){
+		if(getUserInfo().getRoles().contains(new Integer(8)) && !"modify".equals(perform)){
 			vid=tapeScore.getVedioID();
 			return "inputerExam";
 		}
@@ -242,7 +242,7 @@ public class ExamineAction extends BaseAction {
 				if(null != score){
 					this.addActionError("该影带已经被" + s.getExaminer() + "打过分。如果要修改打分，请到修改打分页面修改。");
 					tapeScore = vedioscoreService.getTapeScoreByIdAndUser(s.getVedioID(), s.getUserID());
-					if(this.getUserInfo().getRoles().contains(CommonVariable.ROLE_INPUTER)){
+					if(this.getUserInfo().getRoles().contains(8)){
 						examiners = vedioscoreService.findAllExaminer();
 					}
 					return INPUT;
