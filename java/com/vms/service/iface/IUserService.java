@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.vms.common.SessionUserInfo;
+import com.vms.db.bean.Role;
 import com.vms.db.bean.User;
 
 public interface IUserService {
@@ -26,4 +27,6 @@ public interface IUserService {
 	SessionUserInfo authenticate(String username, String password) throws Exception;
 	User getUserByEmployeeName(String eName) throws Exception;
 	User getUserByUserName(String userName)throws Exception;
+	
+	List<String> getUserGrantedResource(Set<Role> roles)throws Exception;
 }

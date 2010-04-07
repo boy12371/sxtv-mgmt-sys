@@ -67,7 +67,6 @@ public abstract class BaseRole  implements Serializable {
 	private java.util.Set<com.vms.db.bean.Resources> resources;
 
 
-
 	/**
 	 * Return the unique identifier of this class
      * @hibernate.id
@@ -174,6 +173,7 @@ public abstract class BaseRole  implements Serializable {
 	public String toString () {
 		return super.toString();
 	}
+
 
 
 

@@ -141,12 +141,11 @@ public class UserService implements IUserService {
 		if (0 == user.getStatus())
 			return null;
 		if (user.getUserPass().equals(EncryptUtil.encryptString(password))) {
-//		if (user.getUserPass().equals((password))) {
 			userInfo = new SessionUserInfo();
 			userInfo.setUsername(username);
 			userInfo.setPassword(password);
 			userInfo.setUserId(user.getId());
-			userInfo.setAuthoritedResource(user.getGrantedResource());
+			//userInfo.setAuthoritedResource(user.getGrantedResource());
 			Iterator<Role> it = user.getRoles().iterator();
 			List<Integer> rs = new ArrayList<Integer>();
 			String strRoles = "";
@@ -157,6 +156,7 @@ public class UserService implements IUserService {
 			}
 			userInfo.setRoles(rs);
 			userInfo.setStrRoles(strRoles);
+			userInfo.setAuthoritedResource(this.getUserGrantedResource(user.getRoles()));
 		}
 		return userInfo;
 	}
@@ -191,6 +191,24 @@ public class UserService implements IUserService {
 
 	public void setRoleDAO(IRoleDAO roleDAO) {
 		this.roleDAO = roleDAO;
+	}
+
+	@Override
+	public List<String> getUserGrantedResource(Set<Role> roles) throws Exception {
+		// TODO Auto-generated method stub
+		List<String> grantedResource = new ArrayList<String>(); 
+		Iterator<Role> it = roles.iterator();
+		while (it.hasNext()) {
+			Role role = it.next();
+			Iterator<Resources> rIt  = role.getResources().iterator();
+			while (rIt.hasNext()) {
+				Resources r = rIt.next();
+				if(!grantedResource.contains(r.getUrl())){
+					grantedResource.add(r.getUrl());
+				}
+			}
+		}
+        return grantedResource;		
 	}
 
 }

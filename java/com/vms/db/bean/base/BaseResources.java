@@ -63,8 +63,6 @@ public abstract class BaseResources  implements Serializable {
 	private java.lang.String url;
 	private java.lang.String comments;
 
-	// collections
-	private java.util.Set<Role> roles;
 
 
 
@@ -124,25 +122,25 @@ public abstract class BaseResources  implements Serializable {
 
 
 
-	/**
-	 * Return the value associated with the column: Roles
-	 */
-	public java.util.Set<Role> getRoles () {
-		return roles;
-	}
-
-	/**
-	 * Set the value related to the column: Roles
-	 * @param roles the Roles value
-	 */
-	public void setRoles (java.util.Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public void addToRoles (Role role) {
-		if (null == getRoles()) setRoles(new java.util.TreeSet<Role>());
-		getRoles().add(role);
-	}
+//	/**
+//	 * Return the value associated with the column: Roles
+//	 */
+//	public java.util.Set<Role> getRoles () {
+//		return roles;
+//	}
+//
+//	/**
+//	 * Set the value related to the column: Roles
+//	 * @param roles the Roles value
+//	 */
+//	public void setRoles (java.util.Set<Role> roles) {
+//		this.roles = roles;
+//	}
+//
+//	public void addToRoles (Role role) {
+//		if (null == getRoles()) setRoles(new java.util.TreeSet<Role>());
+//		getRoles().add(role);
+//	}
 
 
 
@@ -172,6 +170,7 @@ public abstract class BaseResources  implements Serializable {
 	public String toString () {
 		return super.toString();
 	}
+
 
 
 }

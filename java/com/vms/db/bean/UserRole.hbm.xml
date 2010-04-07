@@ -4,41 +4,16 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.vms.db.bean">
-	<class
-		name="UserRole"
-		table="user_role"
-		>
+	<class name="UserRole" table="user_role">
 		<meta attribute="sync-DAO">false</meta>
-
-		<id
-			name="id"
-			type="integer"
-			column="id"
-			>
+		<id	name="id" type="integer" column="id">
 			<generator class="native"/>
 		</id>
 
-		<property
-			name="comments"
-			column="comments"
-			type="string"
-			length="512"
-			/>
-		<many-to-one
-			name="roleid"
-			column="roleid"
-			class="Role"
-			not-null="true"
-			>
+		<property name="comments" column="comments" type="string" length="512"/>
+		<many-to-one name="roleid" column="roleid" class="Role"	not-null="true" lazy="no-proxy">
 		</many-to-one>
-		<many-to-one
-			name="userid"
-			column="userid"
-			class="User"
-			not-null="true"
-			>
+		<many-to-one name="userid" column="userid" class="User"	not-null="true" lazy="no-proxy">
 		</many-to-one>
-
-
 	</class>	
 </hibernate-mapping>

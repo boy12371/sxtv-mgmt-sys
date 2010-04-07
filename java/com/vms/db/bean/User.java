@@ -40,23 +40,23 @@ public class User extends BaseUser {
 			status);
 	}
 	
-	public List<String> getGrantedResource() {
-		// TODO Auto-generated method stub
-		Iterator<Role> it = this.getRoles().iterator();
-		List<String> grantedResource = new ArrayList<String>();  
-		while (it.hasNext()) {
-			Role role = it.next();
-			Iterator<Resources> rIt  = role.getResources().iterator();
-			while (rIt.hasNext()) {
-				Resources r = rIt.next();
-				if(!grantedResource.contains(r.getUrl())){
-					grantedResource.add(r.getUrl());
-				}
-				
-			}
-		}
-        return grantedResource;
-	}
+//	public List<String> getGrantedResource() {
+//		// TODO Auto-generated method stub
+//		Iterator<Role> it = this.getRoles().iterator();
+//		List<String> grantedResource = new ArrayList<String>();  
+//		while (it.hasNext()) {
+//			Role role = it.next();
+//			Iterator<Resources> rIt  = role.getResources().iterator();
+//			while (rIt.hasNext()) {
+//				Resources r = rIt.next();
+//				if(!grantedResource.contains(r.getUrl())){
+//					grantedResource.add(r.getUrl());
+//				}
+//				
+//			}
+//		}
+//        return grantedResource;
+//	}
 
 	/* [CONSTRUCTOR MARKER END] */
 
