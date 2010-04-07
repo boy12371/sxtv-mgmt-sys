@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2010 at 09:49 PM
+-- Generation Time: Apr 07, 2010 at 11:20 PM
 -- Server version: 5.0.75
 -- PHP Version: 5.2.6-3ubuntu4
 
@@ -14,8 +14,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-CREATE DATABASE `sxtvdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `sxtvdb`;
 
 --
 -- Database: `sxtvdb`
@@ -35,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `audience` (
   `career` varchar(50) default '',
   `comments` varchar(255) default '',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `audience`
@@ -50,7 +48,8 @@ INSERT INTO `audience` (`id`, `name`, `age`, `gender`, `career`, `comments`) VAL
 (6, '郭富城', 47, 1, '歌手', '快老年人了'),
 (7, '刘德华碎', 0, 1, '', ''),
 (8, '斯蒂芬', 0, 1, '万恶非 ', '斯蒂芬我阿飞万恶'),
-(9, '山东我', 0, 1, '范文芳', ' 风格如果');
+(9, '山东我', 0, 1, '范文芳', ' 风格如果'),
+(10, '鸟的高', 66, 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -103,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `auditing` (
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`),
   KEY `result` (`result`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='审核' AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='审核' AUTO_INCREMENT=74 ;
 
 --
 -- Dumping data for table `auditing`
@@ -174,7 +173,15 @@ INSERT INTO `auditing` (`id`, `vedioID`, `auditor`, `auditDate`, `result`, `comm
 (62, '1457', 1, '2010-03-31 21:51:55', 3, NULL),
 (63, '0', 1, '2010-03-31 21:52:54', 5, NULL),
 (64, '4', 1, '2010-03-31 21:52:54', 5, NULL),
-(65, '12asd', 1, '2010-03-31 21:52:54', 5, NULL);
+(65, '12asd', 1, '2010-03-31 21:52:54', 5, NULL),
+(66, '23eg', 2, '2010-04-07 21:22:22', 7, NULL),
+(67, '1ewfv', 2, '2010-04-07 21:22:27', 3, NULL),
+(68, '1ewfv', 2, '2010-04-07 21:37:43', 5, NULL),
+(69, '1ewfv', 2, '2010-04-07 21:37:48', 3, NULL),
+(70, '1ewfv', 2, '2010-04-07 21:39:31', 5, NULL),
+(71, '1ewfv', 2, '2010-04-07 21:39:38', 3, NULL),
+(72, '1', 2, '2010-04-07 21:39:49', 5, NULL),
+(73, '0', 2, '2010-04-07 21:40:01', 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -191,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `company` (
   `status` int(11) NOT NULL default '1' COMMENT '0=禁用,1=正常',
   `comments` varchar(512) default '',
   PRIMARY KEY  (`companyID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='公司信息' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='公司信息' AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `company`
@@ -206,7 +213,8 @@ INSERT INTO `company` (`companyID`, `companyName`, `registrationNo`, `phone`, `c
 (6, 'dsvsdv', 'fwefwefwefwef', '234234', '快速', 1, 'ffffffffffffffffffffffwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwefwefwefwef'),
 (7, '韩国影视公司', '1231209809302983', '09807986', '乐山大佛', 1, '似懂非懂发'),
 (8, 'sdf ', '', '', '', 1, ''),
-(9, '奥地利影视公司', '123123', '839227', '蕾丝', 1, '违反违反');
+(9, '奥地利影视公司', '123123', '839227', '蕾丝', 1, '违反违反'),
+(10, '英格兰影视', '234234121', '9887612', '大放送', 1, '123123');
 
 -- --------------------------------------------------------
 
@@ -224,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `status` int(11) NOT NULL default '1' COMMENT '0=禁用，1=正常',
   `comments` varchar(512) default '',
   PRIMARY KEY  (`employeeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='员工信息' AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='员工信息' AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `employee`
@@ -234,7 +242,7 @@ INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gende
 (1, '王文婷', '1983-02-19', '2006-01-16', 0, '13991366931', 1, 'dddd'),
 (2, '王萌', '2010-01-21', '1970-01-01', 0, '13991366930', 1, '王萌王萌王萌王萌王萌王萌王萌王萌王萌王萌'),
 (3, '周强', '2010-01-21', '2010-01-21', 1, '13991366931', 1, '这是一个员工'),
-(4, '周zhou', '2010-01-21', '2010-01-21', 1, '13991366931', 1, '这是一个员工'),
+(4, '周小强', '2010-04-07', '2010-04-07', 1, '13991366931', 1, '这是一个员工份额非'),
 (5, '李斯', '2010-01-25', '2010-01-20', 1, '123123123', 1, '的期望的钱'),
 (6, '张武', '2006-01-09', '2007-01-15', 0, '123124234', 0, '撕得粉碎大放送'),
 (7, '赵流', '2006-01-16', '2008-01-22', 0, '123123', 1, '扫的服务阿飞'),
@@ -242,7 +250,8 @@ INSERT INTO `employee` (`employeeID`, `name`, `birthday`, `contractDate`, `gende
 (9, '身体', '2010-03-24', '2010-03-24', 1, '3fwefwe', 1, 'sdfsdf'),
 (10, '色图', '2010-03-24', '2010-03-24', 1, '', 1, 'asdqwd'),
 (11, '章子怡', '2010-04-01', '2010-04-01', 1, '', 1, ''),
-(12, '李宇春', '2010-04-05', '2010-04-05', 1, '的服务俄', 1, '无关热管');
+(12, '李宇春', '2010-04-05', '2010-04-05', 1, '的服务俄', 1, '无关热管'),
+(13, '赵雅芝', '2010-04-07', '2010-04-07', 0, '5632343', 1, '1232343');
 
 -- --------------------------------------------------------
 
@@ -261,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `playchangelog` (
   PRIMARY KEY  (`Id`),
   KEY `auditor` (`auditor`),
   KEY `vedioID` (`vedioID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `playchangelog`
@@ -275,7 +284,9 @@ INSERT INTO `playchangelog` (`Id`, `vedioID`, `auditor`, `fromDate`, `toDate`, `
 (23, 'sfw', 2, NULL, '2010-02-05 00:00:00', '加入', '2010-02-27 17:16:22'),
 (24, '4', 2, '2010-02-04 00:00:00', NULL, '移除', '2010-02-27 17:16:58'),
 (25, 'sfw', 2, '2010-02-05 00:00:00', NULL, '移除', '2010-02-27 17:16:58'),
-(26, '1457', 5, NULL, '2010-03-28 00:00:00', '加入', '2010-03-08 23:50:14');
+(26, '1457', 5, NULL, '2010-03-28 00:00:00', '加入', '2010-03-08 23:50:14'),
+(27, '12asd', 2, NULL, '2010-04-15 00:00:00', '加入', '2010-04-07 21:42:07'),
+(28, '12asd', 2, '2010-04-15 00:00:00', NULL, '移除', '2010-04-07 21:42:17');
 
 -- --------------------------------------------------------
 
@@ -292,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `playorder` (
   PRIMARY KEY  (`Id`),
   KEY `vedioID` (`vedioID`),
   KEY `auditor` (`auditor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='节目编排' AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='节目编排' AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `playorder`
@@ -453,128 +464,132 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `union_key` (`roleid`,`resourceid`),
   KEY `resourceid` (`resourceid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=113 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=126 ;
 
 --
 -- Dumping data for table `role_resource`
 --
 
-INSERT INTO `role_resource` VALUES (1,1,17,'');
-INSERT INTO `role_resource` VALUES (2,1,18,'');
-INSERT INTO `role_resource` VALUES (3,1,19,'');
-INSERT INTO `role_resource` VALUES (4,1,20,'');
-INSERT INTO `role_resource` VALUES (5,1,21,'');
-INSERT INTO `role_resource` VALUES (6,1,22,'');
-INSERT INTO `role_resource` VALUES (7,1,23,'');
-INSERT INTO `role_resource` VALUES (8,1,24,'');
-INSERT INTO `role_resource` VALUES (9,1,25,'');
-INSERT INTO `role_resource` VALUES (10,1,26,'');
-INSERT INTO `role_resource` VALUES (11,1,27,'');
-INSERT INTO `role_resource` VALUES (12,1,28,'');
-INSERT INTO `role_resource` VALUES (13,1,29,'');
-INSERT INTO `role_resource` VALUES (14,1,30,'');
-INSERT INTO `role_resource` VALUES (15,1,31,'');
-INSERT INTO `role_resource` VALUES (16,1,32,'');
-INSERT INTO `role_resource` VALUES (17,1,33,'');
-INSERT INTO `role_resource` VALUES (18,1,34,'');
-INSERT INTO `role_resource` VALUES (19,1,35,'');
-INSERT INTO `role_resource` VALUES (20,1,36,'');
-INSERT INTO `role_resource` VALUES (21,1,37,'');
-INSERT INTO `role_resource` VALUES (22,1,38,'');
-INSERT INTO `role_resource` VALUES (23,1,39,'');
-INSERT INTO `role_resource` VALUES (24,1,40,'');
-INSERT INTO `role_resource` VALUES (25,1,41,'');
-INSERT INTO `role_resource` VALUES (26,1,42,'');
-INSERT INTO `role_resource` VALUES (27,1,43,'');
-INSERT INTO `role_resource` VALUES (28,1,44,'');
-INSERT INTO `role_resource` VALUES (29,1,45,'');
-INSERT INTO `role_resource` VALUES (30,1,46,'');
-INSERT INTO `role_resource` VALUES (31,1,47,'');
-INSERT INTO `role_resource` VALUES (32,1,52,'');
-INSERT INTO `role_resource` VALUES (33,1,53,'');
-INSERT INTO `role_resource` VALUES (34,1,54,'');
-INSERT INTO `role_resource` VALUES (35,6,57,'');
-INSERT INTO `role_resource` VALUES (36,6,58,'');
-INSERT INTO `role_resource` VALUES (37,6,59,'');
-INSERT INTO `role_resource` VALUES (38,6,60,'');
-INSERT INTO `role_resource` VALUES (39,6,61,'');
-INSERT INTO `role_resource` VALUES (40,6,62,'');
-INSERT INTO `role_resource` VALUES (41,6,63,'');
-INSERT INTO `role_resource` VALUES (42,6,6,'');
-INSERT INTO `role_resource` VALUES (43,2,1,'');
-INSERT INTO `role_resource` VALUES (44,2,2,'');
-INSERT INTO `role_resource` VALUES (45,2,3,'');
-INSERT INTO `role_resource` VALUES (46,8,8,'');
-INSERT INTO `role_resource` VALUES (47,8,12,'');
-INSERT INTO `role_resource` VALUES (48,8,13,'');
-INSERT INTO `role_resource` VALUES (49,4,75,'');
-INSERT INTO `role_resource` VALUES (50,4,76,'');
-INSERT INTO `role_resource` VALUES (51,4,77,'');
-INSERT INTO `role_resource` VALUES (52,4,78,'');
-INSERT INTO `role_resource` VALUES (53,4,79,'');
-INSERT INTO `role_resource` VALUES (54,5,9,'');
-INSERT INTO `role_resource` VALUES (55,5,14,'');
-INSERT INTO `role_resource` VALUES (56,5,15,'');
-INSERT INTO `role_resource` VALUES (57,5,16,'');
-INSERT INTO `role_resource` VALUES (58,5,80,'');
-INSERT INTO `role_resource` VALUES (59,5,81,'');
-INSERT INTO `role_resource` VALUES (60,5,82,'');
-INSERT INTO `role_resource` VALUES (61,5,83,'');
-INSERT INTO `role_resource` VALUES (62,5,84,'');
-INSERT INTO `role_resource` VALUES (63,5,85,'');
-INSERT INTO `role_resource` VALUES (64,7,48,'');
-INSERT INTO `role_resource` VALUES (65,7,49,'');
-INSERT INTO `role_resource` VALUES (66,7,50,'');
-INSERT INTO `role_resource` VALUES (67,7,51,'');
-INSERT INTO `role_resource` VALUES (68,9,4,'');
-INSERT INTO `role_resource` VALUES (69,9,5,'');
-INSERT INTO `role_resource` VALUES (70,9,6,'');
-INSERT INTO `role_resource` VALUES (71,9,10,'');
-INSERT INTO `role_resource` VALUES (72,9,11,'');
-INSERT INTO `role_resource` VALUES (73,9,76,'');
-INSERT INTO `role_resource` VALUES (74,5,76,'');
-INSERT INTO `role_resource` VALUES (75,10,86,'');
-INSERT INTO `role_resource` VALUES (76,10,87,'');
-INSERT INTO `role_resource` VALUES (77,3,64,'');
-INSERT INTO `role_resource` VALUES (79,3,66,'');
-INSERT INTO `role_resource` VALUES (81,3,68,'');
-INSERT INTO `role_resource` VALUES (82,3,69,'');
-INSERT INTO `role_resource` VALUES (88,2,41,'');
-INSERT INTO `role_resource` VALUES (89,3,41,'');
-INSERT INTO `role_resource` VALUES (90,4,41,'');
-INSERT INTO `role_resource` VALUES (91,5,41,'');
-INSERT INTO `role_resource` VALUES (92,6,41,'');
-INSERT INTO `role_resource` VALUES (93,7,41,'');
-INSERT INTO `role_resource` VALUES (94,8,41,'');
-INSERT INTO `role_resource` VALUES (95,9,41,'');
-INSERT INTO `role_resource` VALUES (96,1,6,'');
-INSERT INTO `role_resource` VALUES (97,3,6,'');
-INSERT INTO `role_resource` VALUES (98,4,6,'');
-INSERT INTO `role_resource` VALUES (99,5,6,'');
-INSERT INTO `role_resource` VALUES (100,2,6,'');
-INSERT INTO `role_resource` VALUES (101,7,6,'');
-INSERT INTO `role_resource` VALUES (102,8,6,'');
-INSERT INTO `role_resource` VALUES (103,1,55,'');
-INSERT INTO `role_resource` VALUES (104,2,55,'');
-INSERT INTO `role_resource` VALUES (105,3,55,'');
-INSERT INTO `role_resource` VALUES (106,4,55,'');
-INSERT INTO `role_resource` VALUES (107,5,55,'');
-INSERT INTO `role_resource` VALUES (108,6,55,'');
-INSERT INTO `role_resource` VALUES (109,7,55,'');
-INSERT INTO `role_resource` VALUES (110,8,55,'');
-INSERT INTO `role_resource` VALUES (111,9,55,'');
-INSERT INTO `role_resource` VALUES (112,8,2,'');
-INSERT INTO `role_resource` VALUES (113,8,70,'');
-INSERT INTO `role_resource` VALUES (114,8,71,'');
-INSERT INTO `role_resource` VALUES (115,8,72,'');
-INSERT INTO `role_resource` VALUES (116,8,73,'');
-INSERT INTO `role_resource` VALUES (117,8,74,'');
-INSERT INTO `role_resource` VALUES (118,8,64,'');
-INSERT INTO `role_resource` VALUES (119,8,65,'');
-INSERT INTO `role_resource` VALUES (120,8,66,'');
-INSERT INTO `role_resource` VALUES (121,8,67,'');
-INSERT INTO `role_resource` VALUES (123,8,68,'');
-INSERT INTO `role_resource` VALUES (124,8,69,'');
+INSERT INTO `role_resource` (`id`, `roleid`, `resourceid`, `comments`) VALUES
+(1, 1, 17, ''),
+(2, 1, 18, ''),
+(3, 1, 19, ''),
+(4, 1, 20, ''),
+(5, 1, 21, ''),
+(6, 1, 22, ''),
+(7, 1, 23, ''),
+(8, 1, 24, ''),
+(9, 1, 25, ''),
+(10, 1, 26, ''),
+(11, 1, 27, ''),
+(12, 1, 28, ''),
+(13, 1, 29, ''),
+(14, 1, 30, ''),
+(15, 1, 31, ''),
+(16, 1, 32, ''),
+(17, 1, 33, ''),
+(18, 1, 34, ''),
+(19, 1, 35, ''),
+(20, 1, 36, ''),
+(21, 1, 37, ''),
+(22, 1, 38, ''),
+(23, 1, 39, ''),
+(24, 1, 40, ''),
+(25, 1, 41, ''),
+(26, 1, 42, ''),
+(27, 1, 43, ''),
+(28, 1, 44, ''),
+(29, 1, 45, ''),
+(30, 1, 46, ''),
+(31, 1, 47, ''),
+(32, 1, 52, ''),
+(33, 1, 53, ''),
+(34, 1, 54, ''),
+(35, 6, 57, ''),
+(36, 6, 58, ''),
+(37, 6, 59, ''),
+(38, 6, 60, ''),
+(39, 6, 61, ''),
+(40, 6, 62, ''),
+(41, 6, 63, ''),
+(42, 6, 6, ''),
+(43, 2, 1, ''),
+(44, 2, 2, ''),
+(45, 2, 3, ''),
+(46, 8, 8, ''),
+(47, 8, 12, ''),
+(48, 8, 13, ''),
+(49, 4, 75, ''),
+(50, 4, 76, ''),
+(51, 4, 77, ''),
+(52, 4, 78, ''),
+(53, 4, 79, ''),
+(54, 5, 9, ''),
+(55, 5, 14, ''),
+(56, 5, 15, ''),
+(57, 5, 16, ''),
+(58, 5, 80, ''),
+(59, 5, 81, ''),
+(60, 5, 82, ''),
+(61, 5, 83, ''),
+(62, 5, 84, ''),
+(63, 5, 85, ''),
+(64, 7, 48, ''),
+(65, 7, 49, ''),
+(66, 7, 50, ''),
+(67, 7, 51, ''),
+(68, 9, 4, ''),
+(69, 9, 5, ''),
+(70, 9, 6, ''),
+(71, 9, 10, ''),
+(72, 9, 11, ''),
+(73, 9, 76, ''),
+(74, 5, 76, ''),
+(75, 10, 86, ''),
+(76, 10, 87, ''),
+(77, 3, 64, ''),
+(79, 3, 66, ''),
+(81, 3, 68, ''),
+(82, 3, 69, ''),
+(88, 2, 41, ''),
+(89, 3, 41, ''),
+(90, 4, 41, ''),
+(91, 5, 41, ''),
+(92, 6, 41, ''),
+(93, 7, 41, ''),
+(94, 8, 41, ''),
+(95, 9, 41, ''),
+(96, 1, 6, ''),
+(97, 3, 6, ''),
+(98, 4, 6, ''),
+(99, 5, 6, ''),
+(100, 2, 6, ''),
+(101, 7, 6, ''),
+(102, 8, 6, ''),
+(103, 1, 55, ''),
+(104, 2, 55, ''),
+(105, 3, 55, ''),
+(106, 4, 55, ''),
+(107, 5, 55, ''),
+(108, 6, 55, ''),
+(109, 7, 55, ''),
+(110, 8, 55, ''),
+(111, 9, 55, ''),
+(112, 8, 2, ''),
+(113, 8, 70, ''),
+(114, 8, 71, ''),
+(115, 8, 72, ''),
+(116, 8, 73, ''),
+(117, 8, 74, ''),
+(118, 8, 64, ''),
+(119, 8, 65, ''),
+(120, 8, 66, ''),
+(121, 8, 67, ''),
+(123, 8, 68, ''),
+(124, 8, 69, ''),
+(125, 9, 7, '');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `scorelevel`
@@ -735,7 +750,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`userID`, `userName`, `userPass`, `employee`, `status`) VALUES
 (1, 'tiger', '43b90920409618f188bfc6923f16b9fa', 1, 1),
-(2, 'cat', 'c4ca4238a0b923820dcc509a6f75849b', 2, 1),
+(2, 'cat', 'd077f244def8a70e5ea758bd8352fcd8', 2, 1),
 (3, 'pencil', 'a8f6830bce790a8a67fc2e84e12093ba', 3, 1),
 (4, 'dog', '123', 4, 1),
 (5, 'chick', '123', 5, 1),
@@ -758,17 +773,31 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `union index` (`userid`,`roleid`),
   KEY `roleid` (`roleid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `user_role`
 --
 
 INSERT INTO `user_role` (`id`, `userid`, `roleid`, `comments`) VALUES
-(8, 12, 2, NULL),
-(10, 2, 2, NULL),
 (11, 1, 1, NULL),
-(12, 1, 6, NULL);
+(12, 1, 6, NULL),
+(19, 3, 3, NULL),
+(20, 3, 6, NULL),
+(21, 4, 3, NULL),
+(22, 4, 6, NULL),
+(23, 5, 3, NULL),
+(24, 5, 6, NULL),
+(25, 9, 3, NULL),
+(26, 9, 6, NULL),
+(27, 10, 3, NULL),
+(28, 10, 6, NULL),
+(29, 11, 3, NULL),
+(30, 11, 6, NULL),
+(31, 12, 3, NULL),
+(32, 12, 6, NULL),
+(44, 2, 6, NULL),
+(45, 2, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -797,7 +826,7 @@ CREATE TABLE IF NOT EXISTS `vedioscore` (
   KEY `vedioExaminer` (`examiner`),
   KEY `vedioID` (`vedioID`),
   KEY `operator` (`operator`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='评分表' AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='评分表' AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `vedioscore`
@@ -821,7 +850,8 @@ INSERT INTO `vedioscore` (`id`, `vedioID`, `examiner`, `storyScore`, `techScore`
 (19, 'sw12', 5, 33, 33, 33, 33, 33, 0, 1, 0, '2010-02-01 00:00:00', 1, 0, NULL),
 (20, '23g', 1, 0.5, 0.23, 0.4, 0.6, 0.546, 0, NULL, 0, '2010-03-23 23:55:58', 1, 1, NULL),
 (21, '9991', 1, 20, 25, 35, 45, 37, 1, NULL, 1, '2010-03-28 11:22:40', 1, 0, NULL),
-(22, '13sfw2w', 2, 32, 33, 34, 35, 40.1, 1, NULL, 1, '2010-03-31 23:19:09', 1, 0, NULL);
+(22, '13sfw2w', 2, 32, 33, 34, 35, 40.1, 1, NULL, 1, '2010-03-31 23:19:09', 1, 0, NULL),
+(23, '1ssd', 2, 34, 25, 54, 23, 39.1, 1, NULL, 0, '2010-04-07 21:09:13', 2, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -855,27 +885,27 @@ CREATE TABLE IF NOT EXISTS `vediotape` (
 --
 
 INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`, `dateComing`, `dateInput`, `inputer`, `status`, `comments`, `marketShare`, `audienceRating`) VALUES
-('0', '阿凡达', 1, 3, 1, '2001-01-30', '2001-01-31 00:00:00', 3, 5, 'sdfsdf撒旦佛诶我始终里斯哦我里斯哦诶提问品味来刺激斯蒂夫俄，每次vd sdvs   老婆的哦fsw  瑞特全文俄热', NULL, NULL),
-('1', 'Fight Club', 2, 4, 1, '2000-01-30', '2001-01-31 00:00:00', 3, 7, NULL, 0.5, 0.6),
+('0', '阿凡达', 1, 3, 1, '2001-01-30', '2001-01-31 00:00:00', 3, 3, 'sdfsdf撒旦佛诶我始终里斯哦我里斯哦诶提问品味来刺激斯蒂夫俄，每次vd sdvs   老婆的哦fsw  瑞特全文俄热', NULL, NULL),
+('1', 'Fight Club', 2, 4, 1, '2000-01-30', '2001-01-31 00:00:00', 3, 5, NULL, 0.5, 0.6),
 ('12', '12qdfw', 2, 3, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 1, 'ddvsdfsdsdvsdv', NULL, NULL),
-('123s', 'fwefxfdg', 1, 4, 1, '2010-03-25', '2010-03-25 22:04:05', 1, 1, 'sdfwef', NULL, NULL),
+('123s', '今天打老虎3', 1, 4, 1, '2010-03-25', '2010-03-25 22:04:05', 1, 1, 'sdfwef', NULL, NULL),
 ('12asd', 'dqw', 1, 1, 1, '2010-02-10', '2010-02-10 14:17:59', 1, 5, 'asdacasc', NULL, NULL),
 ('12dq', 'dqwd', 2, 1, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 6, 'zxcasc', NULL, NULL),
 ('13sfw2w', '我们都是炎黄子孙', 3, 5, 5, '2010-03-31', '2010-03-31 23:17:47', 1, 1, 'fwefwefwefwefwef', NULL, NULL),
-('1457', 'X战警', 2, 4, 2, '2010-03-08', '2010-03-08 22:55:39', 2, 8, 'xxxxxx', 70, 50),
-('1ewfv', 'zxvcsdv', 1, 3, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdv', NULL, NULL),
+('1457', 'X战警', 2, 4, 2, '2010-03-08', '2010-03-08 22:55:39', 2, 9, 'xxxxxx', 70.6, 50.5),
+('1ewfv', 'zxvcsdv', 1, 3, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 3, 'sdv', NULL, NULL),
 ('1ssd', 'zxcasc', 1, 3, 1, '2010-02-10', '2010-02-10 14:10:59', 1, 1, 'zxcasczx zx zx zx zx ', NULL, NULL),
-('2', '12 Monkey', 2, 4, 2, '2001-12-30', '2001-01-31 00:00:00', 3, 7, '', NULL, NULL),
+('2', '12 Monkey', 2, 4, 2, '2001-12-30', '2001-01-31 00:00:00', 3, 3, '', NULL, NULL),
 ('21323', '334', 1, 1, 7, '2010-04-03', '2010-04-03 23:39:47', 1, 1, 'erwer3r', NULL, NULL),
 ('21365', '爱丽丝', 2, 6, 5, '2010-04-03', '2010-04-03 23:39:47', 1, 1, 'erwer3r', NULL, NULL),
 ('23442', '的份额', 3, 6, 5, '2010-04-03', '2010-04-03 22:21:40', 1, 1, 'sdfe', NULL, NULL),
 ('23444', 'fwed', 2, 3, 2, '2010-04-03', '2010-04-03 22:21:40', 1, 1, 'sdfe', NULL, NULL),
-('23eg', 'fwefwef', 1, 2, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 2, 'sdvvsdv', NULL, NULL),
+('23eg', 'fwefwef', 1, 2, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 7, 'sdvvsdv', NULL, NULL),
 ('23g', 'dfbdfbf', 2, 4, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 1, 'sdvvsdv', NULL, NULL),
 ('3', '蝴蝶效应', 2, 3, 1, '2009-01-01', '2009-01-02 00:00:00', 3, 2, NULL, 0.7, 0.8),
 ('324aa', 'sfwe43', 2, 1, 1, '2010-02-10', '2010-02-10 14:21:42', 1, 7, 'sdvvsdv', NULL, NULL),
 ('32f', 'fwef', 2, 3, 2, '2010-02-12', '2010-02-12 10:33:18', 1, 1, 'sd', NULL, NULL),
-('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 3, 'sdfwe', NULL, NULL),
+('32ff2', 'ffewef', 1, 2, 3, '2010-02-12', '2010-02-12 10:33:18', 1, 2, 'sdfwe', NULL, NULL),
 ('3334df', 'dsss', 1, 1, 2, '2010-03-28', '2010-03-28 09:43:42', 1, 1, 'cvsdv', NULL, NULL),
 ('33422', '里斯哦俄', 1, 2, 2, '2010-04-05', '2010-04-05 21:04:14', 2, 1, 'fefwefwef', NULL, NULL),
 ('4', '超黑特警', 2, 4, 1, '2009-02-01', '2009-02-02 00:00:00', 3, 5, NULL, NULL, NULL),
@@ -892,13 +922,14 @@ INSERT INTO `vediotape` (`vedioID`, `vedioName`, `subject`, `topic`, `companyID`
 ('452sd', 'fwfwef', 1, 2, 1, '2010-03-25', '2010-03-25 22:17:55', 1, 1, 'xcvsdvsdv', NULL, NULL),
 ('6556hg', 'hhthth', 2, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'bfgbfg', NULL, NULL),
 ('6880hg', 'ghrh', 1, 1, 3, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'vbnfgnfgn', NULL, NULL),
+('7863452', '今天打老虎', 3, 4, 4, '2010-04-07', '2010-04-07 20:46:49', 2, 1, '斯蒂芬我人体机能题', NULL, NULL),
 ('9991', '老大的幸福', 1, 3, 3, '2010-03-28', '2010-03-28 11:21:21', 1, 1, '纷飞', NULL, NULL),
 ('9992', '老二的幸福', 2, 4, 1, '2010-03-28', '2010-03-28 11:21:21', 1, 1, '纷纷', NULL, NULL),
 ('dthw23', 'rhrhrth', 2, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 1, 'bfgbfg', NULL, NULL),
 ('ert34', 'fggrgrg', 1, 3, 1, '2010-03-25', '2010-03-25 22:05:44', 1, 9, 'bfgbfg', 43.2, 30.5),
 ('sf1', 'sdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 9, 'ddv', 34, 37),
-('sf1vsd', 'weqdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 3, 'ddvsdfsd', NULL, NULL),
-('sfw', '1v2asdsv', 1, 1, 1, '2010-02-10', '2010-02-10 14:20:35', 1, 3, 'sdvsdv', NULL, NULL),
+('sf1vsd', 'weqdfw', 1, 1, 1, '2010-02-11', '2010-02-11 08:44:47', 1, 2, 'ddvsdfsd', NULL, NULL),
+('sfw', '1v2asdsv', 1, 1, 1, '2010-02-10', '2010-02-10 14:20:35', 1, 2, 'sdvsdv', NULL, NULL),
 ('sw12', 'dqwe', 2, 3, 1, '2010-02-12', '2010-02-12 10:33:18', 1, 9, 'ssdv', 47, 43);
 
 --
