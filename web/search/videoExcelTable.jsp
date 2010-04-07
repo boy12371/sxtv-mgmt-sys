@@ -23,7 +23,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
+<script type="text/javascript"  2007  2008  2009  src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/search/js/search.js"></script>
 
@@ -70,13 +70,14 @@ document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"�
 </h4>
 <a href="#" id="tableOption" style="font-size:12px">选项</a>
 	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
-
+<s:hidden name="query" id="queryString"/>
 <div id="excelTable" align="center" style="margin-top:-50"></div>
 
 <script type="text/javascript">
 	function initExcelTable() {
 		var query = '<s:property value="query"/>';
-		var initRequest = query.replace(/amp;/g, "");
+		//query.replace(/amp;/g, "")
+		var initRequest = encodeURI(encodeURI(YAHOO.util.Dom.get("queryString").value));
 		if (initRequest.length == 0) {
 			return;
 		}

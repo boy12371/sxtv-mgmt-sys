@@ -1,6 +1,7 @@
 package com.vms.action.search;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -108,7 +109,8 @@ public class VedioSearchMgmt extends BaseAction {
 		return this.SUCCESS;
 	}
 	
-	public String toPrintVideosReport(){		
+	public String toPrintVideosReport() throws UnsupportedEncodingException{
+		query = java.net.URLDecoder.decode(query, "UTF-8");
 		return SUCCESS;
 	}
 	

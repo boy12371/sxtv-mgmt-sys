@@ -346,7 +346,7 @@ function initToArrangeTable() {
 		}
 	}
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForModification?optionName=modification&vid=";
+		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForModification.action?optionName=modification&vid=";
 		href += sData;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;
@@ -517,7 +517,7 @@ function initToPassTable() {
 		}
 	}
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForModification?optionName=modification&vid=";
+		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForModification.action?optionName=modification&vid=";
 		href += sData;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;

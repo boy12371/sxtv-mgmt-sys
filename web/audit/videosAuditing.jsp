@@ -116,7 +116,7 @@
 
 <select class="selectField" id="filter">
 	<option value="0">All</option>
-	<option value="2">待审剧目</option>
+	<option value="2" selected="selected">待审剧目</option>
 	<option value="3">通过剧目</option>
 	<option value="5">待排剧目</option>
 	<option value="7">淘汰剧目</option>

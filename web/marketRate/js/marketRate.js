@@ -1,7 +1,7 @@
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForMarketRate?optionName=marketRate&vid=";
+		var href = "<a href='/tv/vedio/searchVideoByNameOrIDForMarketRate.action?optionName=marketRate&vid=";
 		href += sData;
 		href += "'>" + sData + "</a>";
 		elCell.innerHTML = href;

@@ -225,23 +225,22 @@ public class VediotapeDAO extends com.vms.db.dao.BaseRootDAO implements IVediota
 				String key = (String) it.next();
 				if (key.equals(Vediotape.PROP_VEDIO_NAME)) {
 					crt.add(Restrictions.ilike(key, "%"+fieldsValues.get(key)+"%"));
-					break;
-				}
-				if (key.equals("startDate")) {
+					
+				}else if (key.equals("startDate")) {
 					if (fieldsValues.get(key) != null) {
 						crt.add(Restrictions.ge(Vediotape.PROP_DATE_COMING, fieldsValues.get(key)));
-						break;
+						
 					}
 
-				}
-				if (key.equals("endDate")) {
+				}else if (key.equals("endDate")) {
 					if (fieldsValues.get(key) != null) {
 						crt.add(Restrictions.le(Vediotape.PROP_DATE_COMING, fieldsValues.get(key)));
-						break;
+						
 					}
-
+				}else{
+					crt.add(Restrictions.eq(key, fieldsValues.get(key)));	
 				}
-				crt.add(Restrictions.eq(key, fieldsValues.get(key)));
+				
 			}
 		}
 		

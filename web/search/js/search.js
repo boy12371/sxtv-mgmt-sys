@@ -118,7 +118,7 @@ function initDataTable() {
 				+ startDate.substring(0, startDate.indexOf("T"))
 				+ "&sc.endDate=" + endDate.substring(0, endDate.indexOf("T"));
 
-		return queryString;
+		return encodeURI(encodeURI(queryString));
 	}
 	// DataTable configuration
 	var myConfigs = {
@@ -251,12 +251,12 @@ function initDataTable() {
 			return "";
 		} else {
 			var params = "";
-			params += "&sc.id=" + vid + "&sc.name=" + vname + "&sc.company.id="
+			params += "&sc.id=" + vid + "&sc.company.id="
 					+ vcompany + "&sc.subject.id=" + vsubject + "&sc.topic.id="
 					+ vtopic + "&sc.status.id=" + vstatus + "&sc.startDate="
 					+ startDate.substring(0, startDate.indexOf("T"))
 					+ "&sc.endDate="
-					+ endDate.substring(0, endDate.indexOf("T"));
+					+ endDate.substring(0, endDate.indexOf("T"))+"&sc.name=" + encodeURI(vname);
 			return params;
 		}
 	}
@@ -424,7 +424,7 @@ function initOrderDataTable() {
 				+ startDate.substring(0, startDate.indexOf("T"))
 				+ "&sc.endDate=" + endDate.substring(0, endDate.indexOf("T"));
 
-		return queryString;
+		return encodeURI(encodeURI(queryString));
 	}
 	// DataTable configuration
 	var myConfigs = {

@@ -13,7 +13,7 @@ function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
 		if (oRecord.getData("status").id == 2) {
-			var href = "<a href='./audit/findVideoByNameOrID?optionName=auditing&vid=";
+			var href = "<a href='./audit/findVideoByNameOrID.action?optionName=auditing&vid=";
 			href += sData;
 			href += "'>" + sData + "</a>";
 
@@ -126,7 +126,7 @@ function initDataTable() {
 	}
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=dateInput&dir=asc&startIndex=0&results=25&filter=0",
+		initialRequest : "sort=dateInput&dir=asc&startIndex=0&results=25&filter=2",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "dateInput",
@@ -423,7 +423,7 @@ function initScoreDataTable(videoID) {
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
-	myDataTable.subscribe("renderEvent", function() {
+	myDataTable.subscribe("initEvent", function() {
 				$.unblockUI();
 				parent.resizeIframe();
 			});

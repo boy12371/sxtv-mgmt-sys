@@ -1,5 +1,6 @@
 package com.vms.common;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,12 +32,12 @@ public class SearchCondition {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName() throws UnsupportedEncodingException {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String name) throws UnsupportedEncodingException {
+		this.name = java.net.URLDecoder.decode(name, "UTF-8");
 	}
 
 	public Company getCompany() {
