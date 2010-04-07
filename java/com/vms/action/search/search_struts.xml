@@ -22,6 +22,9 @@
 		<action name="searchVideos" class="searchMgmt" method="searchVideos">
 			<result type="json">
 				<param name="root">table</param>
+				 <param name="excludeProperties">
+				 	table.records.*\.inputer.*\.roles.*\.resources
+  				</param>
 			</result>
 		</action>
 		
