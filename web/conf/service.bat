@@ -51,6 +51,8 @@ goto end
 :okHome
 if not "%CATALINA_BASE%" == "" goto gotBase
 set CATALINA_BASE=%CATALINA_HOME%
+set JRE_HOME=%CATALINA_HOME%\..\jre
+set JAVA_HOME=%CATALINA_HOME%\..
 :gotBase
  
 set EXECUTABLE=%CATALINA_HOME%\bin\tomcat6.exe
