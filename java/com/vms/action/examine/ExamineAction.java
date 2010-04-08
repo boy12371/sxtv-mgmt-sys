@@ -120,6 +120,8 @@ public class ExamineAction extends BaseAction {
 						examinedTable.getSort(), examinedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION)
 						);
 			}else{
+				//for chinese characters, need to convert to utf-8
+				vname = new String(vname.getBytes("iso-8859-1"),"utf-8");
 				Vediotape tape = vediotapeService.getVediotapeByName(vname);
 				if(null != tape){
 					vid = tape.getId();
