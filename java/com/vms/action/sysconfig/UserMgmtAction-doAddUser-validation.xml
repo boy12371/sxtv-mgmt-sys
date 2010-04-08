@@ -10,7 +10,7 @@
 			<message>用户名必须由6-20个以下字符组成：a-Z, A-Z, _, 0-9</message>
 		</field-validator>
 	</field>
-	<field name="user.userPass">
+	<!-- field name="user.userPass">
 		<field-validator type="requiredstring">
 			<message>密码不能为空</message>
 		</field-validator>
@@ -19,7 +19,7 @@
 			<param name="maxLength">20</param>
 			<message>密码长度应在${minLength}-${maxLength}个字符之间</message>
 		</field-validator>
-	</field>
+	</field-->
 	<field name="roleIDs">
 		<field-validator type="required">
 			<message>至少要为用户指定一个角色</message>
