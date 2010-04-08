@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="VMS" default="usage" basedir=".">
+	<!-- =================================================================== -->
+	<!-- Configuration properties                                            -->
+	<!-- =================================================================== -->
+
+	<property environment="env" />
+		
+	<property name="conf.home" value="web/conf" />
+
+	<property name="source.home" value="java" />
+
+	<property name="web.home" value="web" />
+
+	<property name="lib.home" value="web/WEB-INF/lib" />
+
+	<property name="build.home" value="build" />
+
+	<property name="dist.home" value="dist" />
+
+	<property name="webapp.name" value="tv"/>
+		
+	<property name="build.web.home" value="${build.home}/${webapp.name}"/>
+		
+	<!-- =================================================================== -->
+	<!-- Compiler Options                                                    -->
+	<!-- =================================================================== -->
+
+	<property name="compile.debug" value="true" />
+
+	<property name="compile.deprecation" value="false" />
+
+	<property name="compile.optimize" value="true" />
+		
+	<path id="compile.classpath">
+		<fileset file="${lib.home}/*.jar" />
+		<fileset file="lib/*.jar" />
+	</path>
+	
+	<target name="usage" description="Target list">
+		<echo>###########################################################</echo>
+		<echo>Target:</echo>
+		<echo></echo>
+		<echo>clean		Clean history build.</echo>
+		<echo>build		Build cloud gui application.</echo>
+		<echo>###########################################################</echo>
+		
+		<input message="Please select a target: " validargs="clean,build" addproperty="ant.task"/>
+		<antcall target="${ant.task}"/>
+	</target>
+	
+	<target name="clean" description="Clean history build.">
+		<delete dir="${build.home}"/>
+	</target>
+	
+	<target name="build" description="Build." depends="prepare">
+		<copy todir="${build.web.home}" filtering="on">
+			<fileset dir="${web.home}" />
+		</copy>
+		
+		<mkdir dir="${build.web.home}/WEB-INF/classes" />
+		
+		<antcall target="compile"></antcall>
+		
+		<copy todir="${build.web.home}/WEB-INF/classes" filtering="on">
+			<fileset dir="${source.home}" excludes="**/*.java" />
+		</copy>
+		
+		<copy todir="${build.home}/bin" >
+			<fileset dir="bin" />
+		</copy>
+		
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Propere build environment.                                          -->
+	<!-- =================================================================== -->
+	<target name="prepare" description="Build ci gui application.">
+		<mkdir dir="${build.home}"/>
+		<mkdir dir="${build.web.home}"/>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Compile the java source.                                            -->
+	<!-- =================================================================== -->
+	<target name="compile">
+		<javac srcdir="${source.home}" 
+			destdir="${build.web.home}/WEB-INF/classes" 
+			debug="${compile.debug}" 
+			deprecation="${compile.deprecation}" 
+			optimize="${compile.optimize}">
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+</project>
