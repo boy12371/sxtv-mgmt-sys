@@ -33,10 +33,10 @@
 		<tr><td><label>员工：</label></td>
 			<td><s:select cssClass="selectField" name="user.employee.id" list="empList" listKey="id" listValue="name" /></td>
 		</tr>
-		<tr>
+		<!-- tr>
 			<td><label>密码：</label></td>
 			<td><s:password cssClass="inputField" name="user.userPass" /></td>
-			</tr>		
+			</tr-->		
 		<tr>
 			<td colspan="1"><label>权限：</label></td>
 			<td colspan="3"><label>&nbsp;</label></td>
