@@ -673,10 +673,10 @@ function initScoreLevelTable() {
 				label : "级别"
 			}, {
 				key : "start",
-				label : "起点分值"
+				label : "起点排名"
 			}, {
 				key : "end",
-				label : "结束分值"
+				label : "结束排名"
 			}, {
 				key : "levelScore",
 				label : "参考分值"
@@ -758,6 +758,7 @@ function initScoreLevelTable() {
 				levelScore.value = "";
 				$('#levelTitle').text("增加级别");
 				$('#levelName').text("");
+				$('#levelName').innerHTML="<input type='text' value='' name='scorelevel.level'>";
 				$.blockUI({
 							message : $('#hiddenLevelDiv'),
 							css : {
