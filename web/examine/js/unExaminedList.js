@@ -138,6 +138,7 @@ function initDataTable() {
 		
 		var vid = YAHOO.util.Dom.get("vid").value; 
 		var vname= YAHOO.util.Dom.get("searchinput").value;
+		vname = encodeURIComponent(vname);
 		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
 		+ sort + "&dir=" + dir + "&vid="+vid+"&vname="+vname;
 	};
