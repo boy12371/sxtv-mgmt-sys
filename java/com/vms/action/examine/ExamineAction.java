@@ -77,6 +77,8 @@ public class ExamineAction extends BaseAction {
 				JSONDataTableUtils.setupJSONDataTable(tapes, unExaminedTable, vedioscoreService.getVedioCountByStatus(status));
 			}else{
 				List<Vediotape> list;
+				//for chinese characters, need to convert to utf-8
+				vname = new String(vname.getBytes("iso-8859-1"),"utf-8");
 				if(null!=vid && !"".equals(vid)){
 					list = vediotapeService.findVediotapeByProperty(Vediotape.PROP_ID, vid, -1, -1, "", false);
 				}else{
