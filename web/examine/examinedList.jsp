@@ -45,10 +45,8 @@
 			<input class="inputField autoComplete" type="text" id="searchinput" name="vname" style="width: 200px" />
 			<div id="searchcontainer"></div>
 		</td>
-	</tr>
-	<tr>
-		<td colspan="4" align="center">
-			<div style="margin-top:30px;" id="searchBtnDiv"></div>
+		<td>
+			<div id="searchBtnDiv"></div>
 		</td>
 	</tr>
 </table>

@@ -134,6 +134,7 @@ function initDataTable() {
 function filterFunc(){
 	vid = YAHOO.util.Dom.get("vid").value; 
 	vname= YAHOO.util.Dom.get("searchinput").value;
+	vname = encodeURIComponent(vname);
 	if((null==vid || ""==vid) && (null==vname || ""==vname)) return;
 	clearErrorMsg();
 	YAHOO.example.DynamicData = initDataTable();
