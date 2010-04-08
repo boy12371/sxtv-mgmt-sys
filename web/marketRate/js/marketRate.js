@@ -41,7 +41,7 @@ function initDataTable() {
 		label : "状态",
 		sortable : true,
 		formatter : formatStatus
-	}, {
+	},/*** {
 		key : "vedioscores",
 		label : "综合平均分",
 		formatter : formatScroes
@@ -53,7 +53,7 @@ function initDataTable() {
 		key : "vedioscores",
 		label : "获奖备选(是/否)",
 		formatter : formatAward
-	}, {
+	}, **/{
 		key : "comments",
 		label : "备注",
 		formatter : formatorComments
