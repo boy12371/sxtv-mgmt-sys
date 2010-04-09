@@ -1,3 +1,0 @@
-<Context path="/tv" reloadable="true" docBase="@DOC_BASE@" privileged="true" antiResourceLocking="false" antiJARLocking="false">
-</Context>
-
