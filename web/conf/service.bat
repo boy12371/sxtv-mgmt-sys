@@ -30,9 +30,9 @@ rem $Id: service.bat 734543 2009-01-14 23:00:49Z markt $
 rem ---------------------------------------------------------------------------
 
 rem Guess CATALINA_HOME if not defined
-set CURRENT_DIR=%cd%
+set CURRENT_DIR=%~dp0
 if not "%CATALINA_HOME%" == "" goto gotHome
-set CATALINA_HOME=%cd%
+set CATALINA_HOME=%CURRENT_DIR%\..
 if exist "%CATALINA_HOME%\bin\tomcat6.exe" goto okHome
 rem CD to the upper dir
 cd ..
