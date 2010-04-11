@@ -52,7 +52,7 @@ function initUnArrangeTable() {
 		var xData = oRecord.getData();
 		if(typeof(xData.marked)!="undefined" && 9==xData.marked){
 //			elTr.className = elTr.className + YAHOO.widget.DataTable.CLASS_HIGHLIGHTED;
-			elTr.className = elTr.className + " mark";
+			elTr.className = elTr.className + " markedRow";
 			elTr.title = xData.comments;
 		}
 		return true;
