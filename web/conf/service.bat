@@ -32,7 +32,7 @@ rem ---------------------------------------------------------------------------
 rem Guess CATALINA_HOME if not defined
 set CURRENT_DIR=%~dp0
 if not "%CATALINA_HOME%" == "" goto gotHome
-set CATALINA_HOME=%CURRENT_DIR%\..
+set CATALINA_HOME=%CURRENT_DIR%..
 if exist "%CATALINA_HOME%\bin\tomcat6.exe" goto okHome
 rem CD to the upper dir
 cd ..
@@ -117,13 +117,15 @@ set PR_LOGPATH=
 set PR_CLASSPATH=
 set PR_JVM=
 rem Set extra parameters
-"%EXECUTABLE%" //US//%SERVICE_NAME% --JvmOptions "-Dcatalina.base=%CATALINA_BASE%;-Dcatalina.home=%CATALINA_HOME%;-Djava.endorsed.dirs=%CATALINA_HOME%\endorsed" --StartMode jvm --StopMode jvm
+"%EXECUTABLE%" //US//%SERVICE_NAME% --JvmOptions "-Xms256M;-Xmx1024M;-Dcatalina.base=%CATALINA_BASE%;-Dcatalina.home=%CATALINA_HOME%;-Djava.endorsed.dirs=%CATALINA_HOME%\endorsed" --StartMode jvm --StopMode jvm
 rem More extra parameters
 set PR_LOGPATH=%CATALINA_BASE%\logs
 set PR_STDOUTPUT=auto
 set PR_STDERROR=auto
 "%EXECUTABLE%" //US//%SERVICE_NAME% ++JvmOptions "-Djava.io.tmpdir=%CATALINA_BASE%\temp;-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager;-Djava.util.logging.config.file=%CATALINA_BASE%\conf\logging.properties" --JvmMs 128 --JvmMx 256
 echo The service '%SERVICE_NAME%' has been installed.
+sc config %SERVICE_NAME% start= auto
+sc start %SERVICE_NAME%
 
 :end
 cd %CURRENT_DIR%
