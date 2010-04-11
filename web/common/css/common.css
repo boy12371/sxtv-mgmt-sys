@@ -87,23 +87,20 @@ label {
 }
 
 .markedRow {
-	background-color: #3F7AB2;
-	color: #FFFFFF;
+	color: #FF0000;
 }
-
+/*
 .yui-skin-sam .yui-dt tr.mark,.yui-skin-sam .yui-dt tr.mark td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-desc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-desc
 	{
 	background-color: #3F7AB2;
 	color: #FFFFFF;
 }
-
-
-
 .yui-skin-sam .yui-dt tr.mark2,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-desc,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark2 td.yui-dt-desc
 	{
 	background-color: #DB3A3A;
 	color: #FFFFFF;
 }
+*/
 .autoComplete {
 	width: 200px !important;
 	position: relative !important;
