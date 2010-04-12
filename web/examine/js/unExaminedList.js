@@ -175,7 +175,7 @@ function initDataTable() {
 	};
 	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
-//		$.unblockUI();
+		$.unblockUI();
 	});
 	
 	myDataSource.subscribe("dataErrorEvent", function(request,callback){
@@ -184,9 +184,9 @@ function initDataTable() {
 	
 	myDataSource.subscribe("requestEvent", function(request,callback){
 		clearErrorMsg();
-//		$.blockUI({
-//			message : "<h1>数据加载中......</h1>"
-//		});
+		$.blockUI({
+			message : "<h1>数据加载中......</h1>"
+		});
 	});
 	
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);

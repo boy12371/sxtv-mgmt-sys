@@ -112,6 +112,7 @@ function initDataTable() {
 	
 	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
+		$.unblockUI();
 	});
 	
 	myDataSource.subscribe("dataErrorEvent", function(request,callback){
@@ -123,6 +124,9 @@ function initDataTable() {
 	
 	myDataSource.subscribe("requestEvent", function(request,callback){
 		clearErrorMsg();
+		$.blockUI({
+			message : "<h1>数据加载中......</h1>"
+		});
 	});
 	
 	return {
