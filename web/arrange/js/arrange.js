@@ -50,10 +50,19 @@ function initUnArrangeTable() {
 	
 	var myRowFormatter = function(elTr, oRecord){
 		var xData = oRecord.getData();
+		var oldCls = elTr.className;
+		elTr.title = "";
+		if(typeof(xData.orientation)!="undefined" && 0<xData.orientation){
+			elTr.className = oldCls + " oriente";
+			elTr.title = xData.orientation+"个打分员认为导向有问题。";
+		}
 		if(typeof(xData.marked)!="undefined" && 9==xData.marked){
-//			elTr.className = elTr.className + YAHOO.widget.DataTable.CLASS_HIGHLIGHTED;
-			elTr.className = elTr.className + " markedRow";
-			elTr.title = xData.comments;
+			elTr.className = oldCls + " markedRow";
+			if("" != elTr.title){
+				elTr.title += "\n"+xData.comments;
+			}else{
+				elTr.title += xData.comments;
+			}
 		}
 		return true;
 	};
@@ -102,7 +111,7 @@ function initUnArrangeTable() {
 		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"avgScore",
-		label :"综合平均分"
+		label :"平均分"
 	}, {
 		key :"audiScore",
 		label :"观众投票(看/不看)"
@@ -119,7 +128,7 @@ function initUnArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "avgScore", "audiScore", "companyID", "marked", "comments"],
+		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "avgScore", "audiScore", "companyID", "marked", "comments", "orientation"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -210,7 +219,7 @@ function initArrangeTable() {
 		formatter :formatDateArrange
 	}, {
 		key :"avgScore",
-		label :"综合平均分"
+		label :"平均分"
 	}, {
 		key :"audiScore",
 		label :"观众投票(看/不看)"
