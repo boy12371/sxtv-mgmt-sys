@@ -110,7 +110,7 @@ CREATE TABLE `employee` (
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '0=禁用，1=正常',
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`employeeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工信息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='员工信息';
 
 #
 # Dumping data for table employee
@@ -445,12 +445,7 @@ CREATE TABLE `scorelevel` (
 # Dumping data for table scorelevel
 #
 
-INSERT INTO `scorelevel` VALUES (1,1,1,2,95);
-INSERT INTO `scorelevel` VALUES (2,2,3,10,90);
-INSERT INTO `scorelevel` VALUES (3,3,11,20,85);
-INSERT INTO `scorelevel` VALUES (4,4,21,50,80);
-INSERT INTO `scorelevel` VALUES (6,5,51,100,70);
-INSERT INTO `scorelevel` VALUES (7,6,1000,1231231,45);
+INSERT INTO `scorelevel` VALUES (1,1,1,3,95);
 
 #
 # Source for table scoreweight
@@ -562,7 +557,7 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `union index` (`userid`,`roleid`),
   KEY `roleid` (`roleid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 #
 # Dumping data for table user_role
