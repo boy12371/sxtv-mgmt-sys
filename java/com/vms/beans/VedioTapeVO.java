@@ -20,6 +20,7 @@ public class VedioTapeVO{
 	private float audienceRating;
 	private float avgScore;
 	private String audiScore;
+	private int orientation;
 	
 	private Map<String,Integer> watching;
 	
@@ -45,10 +46,14 @@ public class VedioTapeVO{
 		this.status = tape.getStatus().getStatus();
 		this.marketShare = null==tape.getMarketShare() ? 0 : tape.getMarketShare();
 		this.audienceRating = null==tape.getAudienceRating() ? 0 : tape.getAudienceRating();
+		orientation = 0;
 		if(null != tape.getVedioscores() && 0 != tape.getVedioscores().size()){
 			float sum = 0;
 			for(Vedioscore s:tape.getVedioscores()){
 				sum += s.getScore();
+				if(s.getOrientation()==1){
+					orientation++;
+				}
 			}
 			this.avgScore = sum/tape.getVedioscores().size();
 		}
@@ -190,6 +195,14 @@ public class VedioTapeVO{
 
 	public String getAudiScore() {
 		return audiScore;
+	}
+
+	public void setOrientation(int orientation) {
+		this.orientation = orientation;
+	}
+
+	public int getOrientation() {
+		return orientation;
 	}
 	
 }
