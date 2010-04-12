@@ -199,6 +199,7 @@ function initDataTable() {
 
 function filterFunc(){
 	var oState = myDataTable.getState();
+	oState.pagination.recordOffset = 0;
 	var callback = {
 			success:myDataTable.onDataReturnInitializeTable,
 			failure:myDataTable.onDataReturnInitializeTable,

@@ -83,7 +83,7 @@ function initDataTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateExamine&dir=asc&startIndex=0&results=10", // Initial
+		initialRequest :"sort=dateExamine&dir=asc&startIndex=0&results=25", // Initial
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
 			key :"dateExamine",
