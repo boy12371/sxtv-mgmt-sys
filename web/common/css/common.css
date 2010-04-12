@@ -87,7 +87,11 @@ label {
 }
 
 .markedRow {
-	color: #FF0000;
+	color: rgb(252,131,2);
+}
+
+.oriente{
+	color: #FF0000;	
 }
 /*
 .yui-skin-sam .yui-dt tr.mark,.yui-skin-sam .yui-dt tr.mark td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-desc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-desc
