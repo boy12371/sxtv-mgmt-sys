@@ -111,6 +111,7 @@ function addData(){
 	if(!okAction()) return;
 	var data = getData();
 	myDataTable.addRow(data,0);
+	parent.resizeIframe();
 }
 
 function okAction(){
