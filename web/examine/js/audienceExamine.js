@@ -145,6 +145,7 @@ function addAction(){
 		return false;
 	}else{
 		myDataTable.addRow(xData,0);
+		parent.resizeIframe();
 //		markRow(0);
 	}
 }
