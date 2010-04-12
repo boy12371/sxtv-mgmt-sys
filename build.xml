@@ -66,10 +66,6 @@
 			<fileset dir="${source.home}" excludes="**/*.java" />
 		</copy>
 		
-		<copy todir="${build.home}/bin" >
-			<fileset dir="bin" />
-		</copy>
-		
 	</target>
 	
 	<!-- =================================================================== -->
@@ -89,6 +85,7 @@
 			debug="${compile.debug}" 
 			deprecation="${compile.deprecation}" 
 			optimize="${compile.optimize}">
+			<compilerarg line="-encoding UTF-8 "/>
 			<classpath refid="compile.classpath" />
 		</javac>
 	</target>
