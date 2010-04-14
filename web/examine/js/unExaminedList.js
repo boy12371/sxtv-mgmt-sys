@@ -180,6 +180,7 @@ function initDataTable() {
 	
 	myDataSource.subscribe("dataErrorEvent", function(request,callback){
 		displayErrorMsg(eval(request.response.responseText));
+		$.unblockUI();
 	});
 	
 	myDataSource.subscribe("requestEvent", function(request,callback){

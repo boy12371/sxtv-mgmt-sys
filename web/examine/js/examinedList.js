@@ -117,6 +117,7 @@ function initDataTable() {
 	
 	myDataSource.subscribe("dataErrorEvent", function(request,callback){
 		displayErrorMsg(eval(request.response.responseText));
+		$.unblockUI();
 	});
 	
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
