@@ -45,15 +45,18 @@ function initAccuracyTable() {
 		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
 		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
 		
-		var startDate = dojo.widget.byId("startDateStr").getValue(); 
-		var endDate = dojo.widget.byId("endDateStr").getValue(); 
-		var selSubject = YAHOO.util.Dom.get("selSubject").value;
+		var selYear = YAHOO.util.Dom.get("selectYear").value;
+		var selMonth = YAHOO.util.Dom.get("selectMonth").value;
+		var selDate = selYear + "-" + selMonth;
 		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
-		+ sort + "&dir=" + dir + "&startDateStr="+startDate+"&endDateStr="+endDate+"&selSubject="+selSubject;
+		+ sort + "&dir=" + dir + "&selDate=" + selDate;
 	};
 	// DataTable configuration
+	var selYear = YAHOO.util.Dom.get("selectYear").value;
+	var selMonth = YAHOO.util.Dom.get("selectMonth").value;
+	var selDate = selYear + "-" + selMonth;
 	var myConfigs = {
-		initialRequest :"sort=accuracy&dir=desc", // Initial
+		initialRequest :"sort=accuracy&dir=desc&selDate=" + selDate, // Initial
 		generateRequest: requestBuilder,
 		sortedBy : {
 			key :"accuracy",

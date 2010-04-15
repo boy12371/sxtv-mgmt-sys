@@ -43,11 +43,11 @@
 <table class="searchTable">
 	<tr>
 		<td><label>选择查询年月：</label></td>
-		<td><s:select id="selectYear" list="years" value="defYear" cssClass="selectField" cssStyle="width:100px;margin:0px;"/></td>
+		<td><s:select id="selectYear" list="years" value="defYear" cssClass="selectField" cssStyle="width:150px;margin:0px;"/></td>
 		<td><s:select id="selectMonth" 
 			list="#{'01':'1月','02':'2月','03':'3月','04':'4月','05':'5月','06':'6月','07':'7月','08':'8月','09':'9月','10':'10月','11':'11月','12':'12月'}"
 			value="defMonth" 
-			cssClass="selectField" cssStyle="width:100px;margin:0px;"/>
+			cssClass="selectField" cssStyle="width:150px;margin:0px;"/>
 		</td>
 		<td>
 			<div id="searchBtnDiv"></div>
