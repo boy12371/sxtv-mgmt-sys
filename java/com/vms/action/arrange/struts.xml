@@ -28,6 +28,10 @@
 			<result>/arrange/arrangedHistory.jsp</result>
 		</action>
 		
+		<action name="toArrangePrint" class="arrangeMgmt" method="toArrangePrint">
+			<result>/arrange/arrangePrint.jsp</result>
+		</action>
+		
 		<action name="getArrangedHistory" class="arrangeMgmt" method="getArrangedHistory">
 			<result type="json">
 				<param name="root">arrangeTable</param>

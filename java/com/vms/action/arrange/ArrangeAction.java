@@ -171,6 +171,10 @@ public class ArrangeAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String toArrangePrint() throws Exception{
+		return SUCCESS;
+	}
+	
 	public String getArrangedHistory() throws Exception {
 		Date selDate;
 		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
