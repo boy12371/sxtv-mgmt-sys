@@ -262,6 +262,7 @@ INSERT INTO `resources` VALUES (84,'toArrangedHistory.action','');
 INSERT INTO `resources` VALUES (85,'getArrangedHistory.action','');
 INSERT INTO `resources` VALUES (86,'toAccuracy.action','');
 INSERT INTO `resources` VALUES (87,'getAccuracy.action','');
+INSERT INTO `resources` VALUES (88,'toArrangePrint.action','');
 
 #
 # Source for table role
@@ -424,7 +425,7 @@ INSERT INTO `role_resource` VALUES (121,8,67,'');
 INSERT INTO `role_resource` VALUES (123,8,68,'');
 INSERT INTO `role_resource` VALUES (124,8,69,'');
 INSERT INTO `role_resource` VALUES (125,9,7,'');
-
+INSERT INTO `role_resource` VALUES (126,5,88,'');
 #
 # Source for table scorelevel
 #
