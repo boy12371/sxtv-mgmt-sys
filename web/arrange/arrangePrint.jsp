@@ -21,55 +21,56 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/arrange/js/arrangedHistory.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/arrange/js/arrangePrint.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+
+<style type="text/css">
+.yui-skin-sam tr.yui-dt-odd td.yui-dt-asc, .yui-skin-sam tr.yui-dt-odd td.yui-dt-desc{
+	background-color: #FFFFFF;
+}
+.yui-skin-sam tr.yui-dt-even td.yui-dt-asc, .yui-skin-sam tr.yui-dt-even td.yui-dt-desc{
+	background-color: #FFFFFF;
+}
+.yui-skin-sam tr.yui-dt-odd{
+	background-color: #FFFFFF;
+}
+.yui-skin-sam .yui-dt th{
+	border-left: 1px solid buttonhighlight; 
+    border-top: 1px solid buttonhighlight; 
+    border-bottom: 1px solid buttonshadow; 
+    border-right: 1px solid buttonshadow;
+    background-color: #ece9d8;
+    background-image: none;
+	cursor: pointer;
+	padding: 4px;
+	font-weight: bold;
+}
+.yui-skin-sam .yui-dt td {
+	border:clear;
+	border-color:#CBCBCB;
+	border-style:solid;
+	border-width:1px;
+	text-align: center;
+}
+</style>
+<title>打印预览</title>
 </head>
 <body class="yui-skin-sam">
-<%@ include file="/common/errorMsg.jsp" %>
-<h1>编排信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/clock.png" border="0">
-<s:actionmessage/>
-<s:actionerror/>
+<s:actionerror />
+<br/><br/><br/>
 
-<p>编排影带历史</p>
-<br />
-
-<div id="selectDateDiv" style="width: 800px; height: 30px; margin-left: 68px;">
-	<table style="width:100%"><tr>
-		<td>
-			<table><tr>
-			<td><label>选择查询年月：</label></td>
-			<td><select id="selectYear" class="selectField" onchange="selectYearFunc(this)" style="width:100px;margin:0px;"></select></td>
-			<td><select id="selectMonth" class="selectField" onchange="selectMonthFunc(this)" style="width:100px;margin:0px;"></select></td>
-			</tr></table>
-		</td>
-		<td>
-			<div id="printDiv" style="float:right;margin-top:-10px;"></div>
-		</td>
-	</tr></table>
-</div>
+<div id="date" align="center" style="margin-bottom:20px;"><h1 id="title"></h1></div>
 <div id="historyDiv" align="center"></div>
-<s:form action="toArrangedHistory" namespace="/arrange" >
-	<s:hidden name="month" id="month"/>
+<s:form action="" namespace="/arrange" >
 </s:form>
 <script type="text/javascript">
-	var firstArrangedDate = "<s:property value='firstArrangedDate'/>";
-	var nowDate = "<s:property value='nowDate'/>";
-	
-	var printBtn = new YAHOO.widget.Button({  
-		label: "打&nbsp;&nbsp;印",  
-		id: "printBtn",  
-		container: "printDiv" }
-		); 
-	printBtn.on("click",printAction);
-	function printAction(){
-		var year = YAHOO.util.Dom.get("selectYear").value;
-		var month = YAHOO.util.Dom.get("selectMonth").value;
-		selMonth = year + "-" + month; 	
-		var url="/tv/arrange/toArrangePrint.action?selMonth=" + selMonth;
-		window.open(url, "打印预览");
+	var selMonth="${param.selMonth}";
+	if("" != selMonth){
+		var date = selMonth.split("-");
+		var hObj = document.getElementById("title");
+		hObj.innerHTML= date[0]+"年"+date[1]+"月节目编排单";
 	}
-	
-	initSelectElements();
+	initPrintTable();
 </script>
 
 </body>

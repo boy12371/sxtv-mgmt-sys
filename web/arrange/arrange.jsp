@@ -37,11 +37,23 @@
 <p>已编排影带列表，点击第一列图标可将影带移除编排列表，拖动记录可以调节播放时间。</p>
 <br />
 <div id="selectMonthDiv" style="width: 800px; height: 30px; margin-left: 68px;">
-	<s:select list="monthList" listKey="key" listValue="value" 
-		id="selectMonth" 
-		onchange="selectMonthFunc(this)"
-		cssStyle="float:right;width:100px;margin:0px;"
-	/>
+	<table style="width:100%"><tr>
+		<td>
+			<table><tr>
+			<td><label>选择编排月份：</label></td>
+			<td>
+				<s:select list="monthList" listKey="key" listValue="value" 
+					id="selectMonth" 
+					onchange="selectMonthFunc(this)"
+					cssStyle="float:right;width:100px;margin:0px;"
+				/>
+			</td>
+			</tr></table>
+		</td>
+		<td>
+			<div id="printDiv" style="float:right;margin-top:-10px;"></div>
+		</td>
+	</tr></table>
 </div>
 <div id="arrangeTableDiv" align="center"></div>
 <div align="center">
@@ -53,6 +65,21 @@
 </s:form>
 <script type="text/javascript">
 	initUnArrangeTable();
+
+	var printBtn = new YAHOO.widget.Button({  
+		label: "打&nbsp;&nbsp;印",  
+		id: "printBtn",  
+		container: "printDiv" }
+		); 
+	printBtn.on("click",printAction);
+	function printAction(){
+		var selDate = YAHOO.util.Dom.get("selectMonth").value;
+		var date = selDate.split("-");
+		var year = parseInt(date[0],10)+1900;
+		var selMonth = year + "-" + date[1]; 	
+		var url="/tv/arrange/toArrangePrint.action?selMonth=" + selMonth;
+		window.open(url, "打印预览");
+	}
 
 	var submitBtn = new YAHOO.widget.Button({  
 		label: "提&nbsp;&nbsp;交",  
