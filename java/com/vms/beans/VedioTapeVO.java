@@ -18,7 +18,7 @@ public class VedioTapeVO{
 	private String status;
 	private float marketShare;
 	private float audienceRating;
-	private float avgScore;
+	private Float avgScore;
 	private String audiScore;
 	private int orientation;
 	
@@ -55,7 +55,9 @@ public class VedioTapeVO{
 					orientation++;
 				}
 			}
-			this.avgScore = sum/tape.getVedioscores().size();
+			if(0 != sum){
+				this.avgScore = sum/tape.getVedioscores().size();
+			}
 		}
 		if(null != tape.getAudiencescore() && 0 != tape.getAudiencescore().size()){
 			int look = 0;
@@ -181,11 +183,11 @@ public class VedioTapeVO{
 		return companyID;
 	}
 
-	public void setAvgScore(float avgScore) {
+	public void setAvgScore(Float avgScore) {
 		this.avgScore = avgScore;
 	}
 
-	public float getAvgScore() {
+	public Float getAvgScore() {
 		return avgScore;
 	}
 
