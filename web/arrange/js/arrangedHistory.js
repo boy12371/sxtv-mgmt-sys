@@ -105,6 +105,12 @@ function initHistoryTable() {
 		label :"收带日期",
 		formatter :formatDate
 	}, {
+		key :"avgScore",
+		label :"平均分"
+	}, {
+		key :"audiScore",
+		label :"观众投票(看/不看)"
+	}, {
 		key :"companyID",
 		label :"公司"
 	}];
@@ -115,7 +121,7 @@ function initHistoryTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "companyID", "marked"],
+		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "companyID", "marked", "avgScore", "audiScore"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
