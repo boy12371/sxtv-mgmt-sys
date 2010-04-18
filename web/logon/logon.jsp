@@ -9,7 +9,7 @@
 <link rel="icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
 </head>
 
-<body>
+<body onkeydown="if(event.keyCode==13){userlogon();}">
 
 
 <s:form action="doLogon" method="post" namespace="/framework" name="logonForm">
