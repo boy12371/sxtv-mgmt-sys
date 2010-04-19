@@ -83,7 +83,7 @@ function initDataTable() {
 }
 
 function getData(){
-	var examiner=document.getElementById("examiners").value;
+	var examiner=YAHOO.util.Dom.get("examiners").value;
 	var storyScore=document.getElementById("storyScore").value;
 	var techScore=document.getElementById("techScore").value;
 	var performScore=document.getElementById("performScore").value;
@@ -138,15 +138,19 @@ function okAction(){
 		return false;
 	}
 	var isExaminer = false;
-	var e=document.getElementById("examiners").value;
-	for(var i=0;i<examiners.length;i++){
-		if(e == examiners[i]){
-			isExaminer = true;
-			break;
-		}
-	}
-	if(!isExaminer){
-		jAlert(e+"不是打分人员。", "输入错误");
+	var e=YAHOO.util.Dom.get("examiners").value;
+//	for(var i=0;i<examiners.length;i++){
+//		if(e == examiners[i]){
+//			isExaminer = true;
+//			break;
+//		}
+//	}
+//	if(!isExaminer){
+//		jAlert(e+"不是打分人员。", "输入错误");
+//		return false;
+//	}
+	if("" == e || null == e){
+		jAlert("请选择打分人员。", "输入错误");
 		return false;
 	}
 	if(getExaminerFormTable(e)!=null){

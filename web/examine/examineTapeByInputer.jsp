@@ -49,10 +49,9 @@
 	<div align="center">
 		<table class="inputTable">
 			<tr>
-				<td><label>输入打分人员</label></td>
+				<td><label>选择打分人员</label></td>
 				<td>
-					<input id="examiners" class="inputField autoComplete" type="text" name="examinerByInputer"/> 
-	    			<div id="container"></div>  
+					<s:select cssStyle="width:200px;" id="examiners" list="examiners" listKey="employee.name" listValue="employee.name" headerKey="" headerValue="请选择"></s:select>
 	    		</td>
 			</tr>
 			<tr>
@@ -114,25 +113,6 @@
 </s:form>
 
 <script language="JavaScript">
-var examiners = new Array();
-<s:iterator value="examiners" status="st">
-	var name = "<s:property value='employee.name' escape='false'/>";
-	examiners[examiners.length] = name;
-</s:iterator>
-
-YAHOO.example.BasicLocal = function() { 
-	// Use a LocalDataSource 
-	var oDS = new YAHOO.util.LocalDataSource(examiners); 
-	// Instantiate the AutoComplete 
-	var oAC = new YAHOO.widget.AutoComplete("examiners", "container", oDS); 
-	oAC.prehighlightClassName = "yui-ac-prehighlight"; 
-	oAC.useShadow = true;   
-	return { 
-		oDS: oDS, 
-		oAC: oAC 
-	}; 
-}(); 
-
 function cancelAction(){
 	window.location="/tv/examine/toUnExaminedTapes.action";
 }
