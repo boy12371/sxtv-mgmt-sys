@@ -23,55 +23,90 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
-<script type="text/javascript"  2007  2008  2009  src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
+<script type="text/javascript" 2007  2008  2009  src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/search/js/search.js"></script>
 
 <style type="text/css">
-.yui-skin-sam tr.yui-dt-odd td.yui-dt-asc, .yui-skin-sam tr.yui-dt-odd td.yui-dt-desc{
+.yui-skin-sam tr.yui-dt-odd td.yui-dt-asc,.yui-skin-sam tr.yui-dt-odd td.yui-dt-desc
+	{
 	background-color: #FFFFFF;
 }
-.yui-skin-sam tr.yui-dt-even td.yui-dt-asc, .yui-skin-sam tr.yui-dt-even td.yui-dt-desc{
+
+.yui-skin-sam tr.yui-dt-even td.yui-dt-asc,.yui-skin-sam tr.yui-dt-even td.yui-dt-desc
+	{
 	background-color: #FFFFFF;
 }
-.yui-skin-sam tr.yui-dt-odd{
+
+.yui-skin-sam tr.yui-dt-odd {
 	background-color: #FFFFFF;
 }
-.yui-skin-sam .yui-dt th{
-	border-left: 1px solid buttonhighlight; 
-    border-top: 1px solid buttonhighlight; 
-    border-bottom: 1px solid buttonshadow; 
-    border-right: 1px solid buttonshadow;
-    background-color: #ece9d8;
-    background-image: none;
+
+.yui-skin-sam .yui-dt th {
+	border-left: 1px solid buttonhighlight;
+	border-top: 1px solid buttonhighlight;
+	border-bottom: 1px solid buttonshadow;
+	border-right: 1px solid buttonshadow;
+	background-color: #ece9d8;
+	background-image: none;
 	cursor: pointer;
 	padding: 4px;
 	font-weight: bold;
 }
+
 .yui-skin-sam .yui-dt td {
-	border:clear;
-	border-color:#CBCBCB;
-	border-style:solid;
-	border-width:1px;
-	border-bottom-style: insert,
-	text-align: center
+	border: clear;
+	border-color: #CBCBCB;
+	border-style: solid;
+	border-width: 1px;
+	border-bottom-style: insert, text-align :         center
 }
 </style>
+<style type="text/css" media="print">
+.noprint {
+	display: none
+}
+</style>
+
 <title>打印预览</title>
 </head>
 <body class="yui-skin-sam">
 <s:actionerror />
-<br /><br /><br />
-<h4>
-<script type="text/javascript">
+<br />
+<br />
+<br />
+<h4><script>
 var date = new Date();
-document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"月"+ date.getDate()+"日");
+document.write("打印日期: " + date.getFullYear() + "年" + (date.getMonth() + 1)+ "月" + date.getDate() + "日");
+</script></h4>
+
+
+
+<script type="text/javascript">
+	function printsetup(){
+  　　	// 打印页面设置
+  　　	wb.execwb(8,1);
+  　　}
+  　　function printpreview(){
+	  　　//打印页面预览      　　　　
+	  　　wb.execwb(7,1);
+  　　}
+ 
+  　　function printit(){
+	  　　if (confirm('确定打印吗？')) {
+	  　　wb.execwb(6,6)
+	  　　}
+  　　} 
 </script>
-</h4>
-<a href="#" id="tableOption" style="font-size:12px">选项</a>
-	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
-<s:hidden name="query" id="queryString"/>
-<div id="excelTable" align="center" style="margin-top:-50"></div>
+<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" id="wb" name="wb" width="0"></OBJECT>
+<div class="noprint">
+<input type="button" id="tableOption" value="选项"/>
+<input type=button name=button_show value="打印预览" onclick="javascript:printpreview();">
+<input type=button name=button_fh value="关闭" onclick="javascript:window.close();"> 
+</div>
+<div id="colDiv" style="display: none; z-index: 1002; position: absolute; background-color: white; overflow: auto; border: 5px solid #999999"></div>
+<s:hidden name="query" id="queryString" />
+<div id="excelTable" align="center" style="margin-top: -50"></div>
 
 <script type="text/javascript">
 	function initExcelTable() {
@@ -87,10 +122,10 @@ document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"�
 			href += "'>" + sData + "</a>";
 			elCell.innerHTML = href;
 		}
-		var formattorDing = function(elCell, oRecord, oColumn, sData){
-			elCell.innerHTML="<input type=checkbox name=ding />";
-			}
-				
+		var formattorDing = function(elCell, oRecord, oColumn, sData) {
+			elCell.innerHTML = "<input type=checkbox name=ding />";
+		}
+
 		// Column definitions
 		var myColumnDefs = [ {
 			key :"id",
@@ -128,30 +163,30 @@ document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"�
 			key :"vedioscores",
 			label :"综合平均分",
 			formatter :formatScroes
-		},{
-			key : "purchase",
-			label : "购买意见",
-			formatter : formatPurchase
 		}, {
-			key : "awarding",
-			label : "获奖备选(是/否)",
-			formatter : formatAward
+			key :"purchase",
+			label :"购买意见",
+			formatter :formatPurchase
 		}, {
-			key : "audiencescore",
-			label : "观众投票(看/不看)",
-			formatter : formatAudienceScore
+			key :"awarding",
+			label :"获奖备选(是/否)",
+			formatter :formatAward
+		}, {
+			key :"audiencescore",
+			label :"观众投票(看/不看)",
+			formatter :formatAudienceScore
 		}, {
 			key :"comments",
 			label :"备注",
-			formatter : formatorComments
+			formatter :formatorComments
 		}, {
 			key :"dingpian",
 			label :"定片",
-			formatter : formattorDing
-		},{
+			formatter :formattorDing
+		}, {
 			key :"remark",
-			label : "说明"
-			}];
+			label :"说明"
+		} ];
 
 		// DataSource instance
 		var myDataSource = new YAHOO.util.XHRDataSource(
@@ -161,7 +196,8 @@ document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"�
 			resultsList :"records",
 			fields : [ "id", "vedioName", "topic", "subject", "companyID",
 					"dateInput", "status", "marketShare", "audienceRating",
-					"vedioscores","purchase","awarding", "audiencescore", "comments" ],
+					"vedioscores", "purchase", "awarding", "audiencescore",
+					"comments" ],
 			metaFields : {
 				totalRecords :"totalRecords" // Access to value in the server
 		// response
@@ -176,7 +212,7 @@ document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"�
 				key :"dateInput",
 				dir :YAHOO.widget.DataTable.CLASS_ASC
 			},
-			caption:"<h1>百家,都市审看记录统计</h1>"
+			caption :"<h1>百家,都市审看记录统计</h1>"
 		};
 
 		var myDataTable = new YAHOO.widget.DataTable("excelTable",
@@ -189,22 +225,23 @@ document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"�
 			return oPayload;
 		}
 		var columnSet = myDataTable.getColumnSet();
-		var showHideColumn = function(e){
-			var column = columnSet. getColumn(this.value);
-			if(this.checked){
+		var showHideColumn = function(e) {
+			var column = columnSet.getColumn(this.value);
+			if (this.checked) {
 				myDataTable.hideColumn(column);
-			}else{
+			} else {
 				myDataTable.showColumn(column);
 			}
 		}
 		var colDiv = YAHOO.util.Dom.get("colDiv");
 		var colLink = YAHOO.util.Dom.get("tableOption");
-		YAHOO.util.Event.addListener(colLink,"click",function(){
-			colDiv.style.display = colDiv.style.display=="block"?"none":"block";
+		YAHOO.util.Event.addListener(colLink, "click", function() {
+			colDiv.style.display = colDiv.style.display == "block" ? "none"
+					: "block";
 		});
 		addColumnsName = function() {
-			if(colDiv.innerHTML.length==0){
-				for (var i = 0; i < myColumnDefs.length; i++) {
+			if (colDiv.innerHTML.length == 0) {
+				for ( var i = 0; i < myColumnDefs.length; i++) {
 					var column = myColumnDefs[i];
 					var checkbox = document.createElement("INPUT");
 					checkbox.type = "checkbox";
@@ -215,13 +252,14 @@ document.write("打印日期: "+date.getFullYear()+"年"+(date.getMonth()+1)+"�
 					var p = document.createElement("SPAN");
 					p.innerHTML = column.label;
 					colDiv.appendChild(p);
-					if(i%2==1){
+					if (i % 2 == 1) {
 						var br = document.createElement("BR");
 						colDiv.appendChild(br);
 					}
-					
-					YAHOO.util.Event.addListener(checkbox,"click",showHideColumn);
-					colDiv.style.display="none";
+
+					YAHOO.util.Event.addListener(checkbox, "click",
+							showHideColumn);
+					colDiv.style.display = "none";
 				}
 			}
 		};

@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<sx:head />
+<sx:head extraLocales="UTF-8"/>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>员工管理</title>
@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<td><label>出生日期：</label></td>
-			<td><sx:datetimepicker cssClass="inputField" name="employee.birthday" displayFormat="yyyy-MM-dd" toggleType="explode" value="%{'today'}"/></td>
+			<td><sx:datetimepicker cssClass="inputField" name="employee.birthday" displayFormat="yyyy-MM-dd" toggleType="explode" value="%{'today'}" language="UTF-8" weekStartsOn="0"/></td>
 		</tr>
 		<tr>
 			<td><label>电话：</label></td>
@@ -53,7 +53,7 @@
 		</tr>
 		<tr>
 			<td><label>入职日期：</label></td>
-			<td><sx:datetimepicker cssClass="inputField" name="employee.contractDate" displayFormat="yyyy-MM-dd" toggleType="explode" value="%{'today'}"/></td>
+			<td><sx:datetimepicker cssClass="inputField" name="employee.contractDate" displayFormat="yyyy-MM-dd" toggleType="explode" value="%{'today'}" language="UTF-8" weekStartsOn="0"/></td>
 		</tr>
 		<tr>
 			<td><label>状态：</label></td>

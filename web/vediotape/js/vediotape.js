@@ -300,7 +300,7 @@ function initDataTable() {
 	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu", {
 		trigger :myDataTable.getTbodyEl()
 	});
-	myContextMenu.addItem("Delete Item");
+	myContextMenu.addItem("删除");
 	// Render the ContextMenu instance to the parent container of the DataTable
 	myContextMenu.render("cellediting");
 	myContextMenu.clickEvent.subscribe(onContextMenuClick, myDataTable);

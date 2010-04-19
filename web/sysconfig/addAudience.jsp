@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<sx:head />
+<sx:head extraLocales="UTF-8"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加观众信息</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />

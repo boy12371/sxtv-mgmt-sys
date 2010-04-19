@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow:hidden;">
 <head>
-<sx:head />
+<sx:head extraLocales="UTF-8"/>
 
 <link rel="shortcuticon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
 <link rel="icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>

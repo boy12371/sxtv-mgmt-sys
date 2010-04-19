@@ -423,7 +423,7 @@ function initScoreDataTable(videoID) {
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
-	myDataTable.subscribe("initEvent", function() {
+	myDataTable.subscribe("renderEvent", function() {
 				$.unblockUI();
 				parent.resizeIframe();
 			});

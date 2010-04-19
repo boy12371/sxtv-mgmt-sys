@@ -51,6 +51,7 @@ function initStatusTable() {
 				$.unblockUI();
 				parent.resizeIframe();
 			});
+	
 	myDataSource.subscribe("requestEvent", function() {
 				$.blockUI({
 							message : "<h1>数据加载中......</h1>"

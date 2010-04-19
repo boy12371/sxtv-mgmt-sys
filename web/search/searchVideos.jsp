@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<sx:head />
+<sx:head extraLocales="UTF-8"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
@@ -65,9 +65,9 @@
 	</tr>
 	<tr>
 		<td><label>从</label></td>
-		<td><sx:datetimepicker name="startDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="startDate" value="%{'today'}"/></td>
+		<td><sx:datetimepicker name="startDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="startDate" value="%{'today'}" language="UTF-8" weekStartsOn="0"/></td>
 		<td><label>至</label></td>
-		<td><sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="endDate" value="%{'today'}"/></td>
+		<td><sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="endDate" value="%{'today'}" language="UTF-8"  weekStartsOn="0"/></td>
 
 	</tr>
 

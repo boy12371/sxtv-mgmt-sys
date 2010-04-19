@@ -146,11 +146,12 @@ function initDataTable() {
 	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
-				addColumnsName();
 				$.unblockUI();
 				parent.resizeIframe();
 			});
-
+	myDataTable.subscribe("initEvent", function() {
+				addColumnsName();			
+			});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {

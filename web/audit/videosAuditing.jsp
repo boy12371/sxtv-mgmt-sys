@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<sx:head />
+<sx:head extraLocales="UTF-8"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link rel="stylesheet" type="text/css"
@@ -133,10 +133,10 @@
 	<tr>
 		<td>从:<sx:datetimepicker cssClass="inputField"
 			displayFormat="yyyy-MM-dd" id="fromDate" toggleType="explode"
-			value="today" toggleType="explode" /></td>
+			value="today" toggleType="explode" language="UTF-8" weekStartsOn="0"/></td>
 		<td>至:<sx:datetimepicker cssClass="inputField"
 			displayFormat="yyyy-MM-dd" id="toDate" toggleType="explode"
-			value="today" toggleType="explode" /></td>
+			value="today" toggleType="explode" language="UTF-8" weekStartsOn="0"/></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="button" name="demo1" id="yes"
