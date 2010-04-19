@@ -164,7 +164,7 @@ public class ExamineAction extends BaseAction {
 				examiner = this.getUserInfo().getUserId();
 			}
 			VedioScoreVO temp = vedioscoreService.getTapeScoreByIdAndUser(tapeScore.getVedioID(), examiner);
-			if(null != temp){
+			if(null != temp && !this.getUserInfo().getRoles().contains(8)){
 				tapeScore = temp;
 				return "view";
 			}
