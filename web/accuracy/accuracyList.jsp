@@ -52,6 +52,9 @@
 		<td>
 			<div id="searchBtnDiv"></div>
 		</td>
+		<td>
+			<div id="printDiv"></div>
+		</td>
 	</tr>
 </table>
 </div>
@@ -68,6 +71,20 @@ var searchBtn = new YAHOO.widget.Button({
 searchBtn.on("click",filterFunc);
 
 initAccuracyTable();
+
+var printBtn = new YAHOO.widget.Button({  
+	label: "打&nbsp;&nbsp;印",  
+	id: "printBtn",  
+	container: "printDiv" }
+	); 
+printBtn.on("click",printAction);
+function printAction(){
+	var selYear = YAHOO.util.Dom.get("selectYear").value;
+	var selMonth = YAHOO.util.Dom.get("selectMonth").value;
+	var selDate = selYear + "-" + selMonth;
+	var url="/tv/accuracy/toAccuracyPrint.action?selDate=" + selDate;
+	window.open(url, "打印预览");
+}
 </script>
 
 </body>
