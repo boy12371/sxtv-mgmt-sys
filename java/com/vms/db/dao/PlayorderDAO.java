@@ -104,7 +104,7 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 		Criteria temp = this.getCriteria(Playorder.class);
 		Criteria crt = temp.add(
 				Restrictions.between(Playorder.PROP_PLAY_DATE, startDate,
-						endDate)).createCriteria(Playorder.PROP_VEDIO_I_D);
+						endDate)).createCriteria(Playorder.PROP_VEDIO);
 		crt.add(Restrictions.eq(Vediotape.PROP_STATUS, new Status(9)));
 		if (selSubject > 0) {
 			crt.add(Restrictions.eq(Vediotape.PROP_SUBJECT, subject));
@@ -133,7 +133,7 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 	public void savePlayorder(List<Playorder> pos, int userID) throws Exception {
 		for (Playorder p : pos) {
 			Map<String, Object> conditions = new HashMap<String, Object>();
-			conditions.put(Playorder.PROP_VEDIO_I_D, p.getVedioID());
+			conditions.put(Playorder.PROP_VEDIO, p.getVedioID());
 			// conditions.put(Playorder.PROP_AUDITOR, p.getAuditor());
 			// update play change log
 			Playchangelog plog = new Playchangelog();
@@ -178,9 +178,6 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 		cal.set(Calendar.SECOND, 59);
 		Date endTime = cal.getTime();
 
-		System.out.println(startTime);
-		System.out.println(endTime);
-
 		Criteria crt = this.getCriteria(Playorder.class);
 
 		crt.add(Restrictions.ge(Playorder.PROP_PLAY_DATE, startTime));
@@ -190,41 +187,42 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 	}
 
 	@Override
-	public	List<Vediotape> findVideosByRateOrder(SearchCondition condition)
+	public List<Vediotape> findVideosByRateOrder(SearchCondition condition)
 			throws ParseException {
 		StringBuffer queryString = new StringBuffer(
-				"SELECT o.vedioID FROM Playorder o WHERE o.playDate >= ? AND o.platDate <= ? ");
+				"FROM Playorder o WHERE o.playDate between :startDate AND :endDate");
 		if (condition.getCompany() != null
 				&& condition.getCompany().getId() != 0) {
-			queryString.append("o.vedioID.companyID.id = ? ");
+			queryString.append(" AND o.vedioID.companyID.id = :company ");
 		}
 		if (condition.getTopic() != null && condition.getTopic().getId() != 0) {
-			queryString.append("o.vedioID.topic.id = ? ");
+			queryString.append(" AND o.vedioID.topic.id = :topic ");
 		}
 		if (condition.getSubject() != null
 				&& condition.getSubject().getId() != 0) {
-			queryString.append("o.vedioID.subject.id = ? ");
+			queryString.append(" AND o.vedioID.subject.id = :subject ");
 		}
-		queryString.append(" ORDER BY o.vedioID.audienceRating ASC");
-		Query query = this.getQuery(queryString.toString());
-		query.setDate(0, condition.getStartingDate());
-		query.setDate(1, condition.getEndingDate());
+		queryString.append(" ORDER BY o.vedioID.audienceRating DESC");
+		Query query = this.getQuery(queryString.toString()).setDate(
+				"startDate", condition.getStartingDate()).setDate("endDate",
+				condition.getEndingDate());
+
 		if (condition.getCompany() != null
 				&& condition.getCompany().getId() != 0) {
-			query.setInteger(2, condition.getCompany().getId());
+			query.setInteger("company", condition.getCompany().getId());
 		}
 		if (condition.getTopic() != null && condition.getTopic().getId() != 0) {
-			query.setInteger(3, condition.getTopic().getId());
+			query.setInteger("topic", condition.getTopic().getId());
 		}
 		if (condition.getSubject() != null
 				&& condition.getSubject().getId() != 0) {
-			query.setInteger(4, condition.getSubject().getId());
+			query.setInteger("subject", condition.getSubject().getId());
 		}
 		List<Playorder> orders = query.list();
-		List<Vediotape> vs =new ArrayList<Vediotape>();
-		if(orders!=null && !orders.isEmpty()){
+		List<Vediotape> vs = new ArrayList<Vediotape>();
+		if (orders != null && !orders.isEmpty()) {
 			for (Playorder playorder : orders) {
-				vs.add(playorder.getVedioID());	
+				vs.add(playorder.getVedioID());
 			}
 		}
 		return vs;

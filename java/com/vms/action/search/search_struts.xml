@@ -54,5 +54,15 @@
 				<param name="root">table</param>
 			</result>
 		</action>
+		
+		<action name="toPrintVideosSequenceOrderReport" class="searchMgmt" method="toPrintVideosSequenceOrderReport">
+			<result name="success">/search/VideosSequenceOrderExcelTable.jsp</result>
+			<result name="input">/search/VideosSequenceOrderExcelTable.jsp</result>
+		</action>
+		<action name="doPrintVideosSequenceOrderReport" class="searchMgmt" method="doPrintVideosSequenceOrderReport">
+			<result type="json">
+				<param name="root">table</param>
+			</result>
+		</action>
 	</package>
 </struts>

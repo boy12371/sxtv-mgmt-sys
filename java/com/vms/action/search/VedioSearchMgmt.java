@@ -41,17 +41,18 @@ public class VedioSearchMgmt extends BaseAction {
 	private Vediotape video;
 	private SearchCondition sc;
 	private String query;
+	private boolean isSequenceOrder;
 	private String vid;
 	private String jsonData;
-	
 
-	
-	
-	public String toGenericSeaching()throws Exception{
+	public String toGenericSeaching() throws Exception {
 		return this.SUCCESS;
 	}
+
 	public String autoCompleteForVideoName() throws Exception {
-		List<String> names = vedioService.findVideoNamesForAutoComplete(java.net.URLDecoder.decode(query, "UTF-8"));
+		List<String> names = vedioService
+				.findVideoNamesForAutoComplete(java.net.URLDecoder.decode(
+						query, "UTF-8"));
 		List<VideoNameJSON> nameList = new ArrayList<VideoNameJSON>();
 		table = new JSONDataTable();
 		if (names != null && !names.isEmpty()) {
@@ -80,17 +81,19 @@ public class VedioSearchMgmt extends BaseAction {
 
 	}
 
-	public String toVideoDetail()throws Exception{
-		List<Vediotape> list = vedioService.findVediotapeByProperty(Vediotape.PROP_ID, vid, -1, -1, "", false);
-		if(list!=null && !list.isEmpty()){
+	public String toVideoDetail() throws Exception {
+		List<Vediotape> list = vedioService.findVediotapeByProperty(
+				Vediotape.PROP_ID, vid, -1, -1, "", false);
+		if (list != null && !list.isEmpty()) {
 			this.video = list.get(0);
 			return SUCCESS;
-		}else{
+		} else {
 			this.addActionError("影带未找到");
 			return INPUT;
 		}
-		
+
 	}
+
 	public String searchVideos() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
@@ -108,17 +111,38 @@ public class VedioSearchMgmt extends BaseAction {
 		}
 		return this.SUCCESS;
 	}
-	
-	public String toPrintVideosReport() throws UnsupportedEncodingException{
+
+	public String toPrintVideosReport() throws UnsupportedEncodingException {
 		query = java.net.URLDecoder.decode(query, "UTF-8");
 		return SUCCESS;
 	}
-	
+
 	public String doPrintVideosReport() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Vediotape> dataList = this.vedioService.findVidesByConditions(
-					sc, table.getSort(), table.getStartIndex(), table
+			List<Vediotape> dataList = this.vedioService
+							.findVidesByConditions(sc, table.getSort(), table
+									.getStartIndex(), table.getStartIndex()
+									+ table.getRowsPerPage(), table.getDir().equals(
+									JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList.size());	
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		return this.SUCCESS;
+	}
+
+	public String toPrintVideosSequenceOrderReport() throws UnsupportedEncodingException {
+		query = java.net.URLDecoder.decode(query, "UTF-8");
+		return SUCCESS;
+	}
+
+	public String doPrintVideosSequenceOrderReport() throws Exception {
+		table = JSONDataTableUtils.initJSONDataTable(getRequest());
+		try {			
+			List<Vediotape> dataList =this.vedioService.findVideosByRateOrder(sc, table
+							.getSort(), table.getStartIndex(), table
 							.getStartIndex()
 							+ table.getRowsPerPage(), table.getDir().equals(
 							JSONDataTableUtils.SORT_DIRECTION));
@@ -129,13 +153,11 @@ public class VedioSearchMgmt extends BaseAction {
 		}
 		return this.SUCCESS;
 	}
-	
-	
-	public String toVideoSequence(){
+	public String toVideoSequence() {
 		return SUCCESS;
 	}
-	
-	public String doSearchAndSequenceVideos(){
+
+	public String doSearchAndSequenceVideos() {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
 			List<Vediotape> dataList = this.vedioService.findVideosByRateOrder(
@@ -143,7 +165,8 @@ public class VedioSearchMgmt extends BaseAction {
 							.getStartIndex()
 							+ table.getRowsPerPage(), table.getDir().equals(
 							JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList.size());
+			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList
+					.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
@@ -151,8 +174,10 @@ public class VedioSearchMgmt extends BaseAction {
 		}
 		return this.SUCCESS;
 	}
+
 	public List<Company> getComList() throws Exception {
-		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true, false);
+		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true,
+				false);
 	}
 
 	public List<Topic> getTopList() throws Exception {
@@ -255,16 +280,29 @@ public class VedioSearchMgmt extends BaseAction {
 	public void setSc(SearchCondition sc) {
 		this.sc = sc;
 	}
+
 	public String getVid() {
 		return vid;
 	}
+
 	public void setVid(String vid) {
 		this.vid = vid;
 	}
+
 	public String getJsonData() {
 		return jsonData;
 	}
+
 	public void setJsonData(String jsonData) {
 		this.jsonData = jsonData;
 	}
+
+	public boolean isSequenceOrder() {
+		return isSequenceOrder;
+	}
+
+	public void setSequenceOrder(boolean isSequenceOrder) {
+		this.isSequenceOrder = isSequenceOrder;
+	}
+
 }

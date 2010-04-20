@@ -72,6 +72,7 @@
 </head>
 <body class="yui-skin-sam">
 <s:actionerror />
+
 <br />
 <br />
 <br />
@@ -116,13 +117,16 @@ document.write("打印日期: " + date.getFullYear() + "年" + (date.getMonth() 
 		if (initRequest.length == 0) {
 			return;
 		}
-		
-		var formattorDing = function(elCell, oRecord, oColumn, sData) {
-			elCell.innerHTML = "<input type=checkbox name=ding />";
+		var rowIndex = 0;
+		var formatOrder = function(elCell, oRecord, oColumn, sData) {
+			elCell.innerHTML = (rowIndex += 1);
 		}
-
 		// Column definitions
 		var myColumnDefs = [ {
+			key : "order",
+			label : "排名",
+			formatter : formatOrder
+		},{
 			key :"id",
 			label :"编号"
 		}, {
@@ -174,18 +178,11 @@ document.write("打印日期: " + date.getFullYear() + "年" + (date.getMonth() 
 			key :"comments",
 			label :"备注",
 			formatter :formatorComments
-		}, {
-			key :"dingpian",
-			label :"定片",
-			formatter :formattorDing
-		}, {
-			key :"remark",
-			label :"说明"
-		} ];
+		}];
 
 		// DataSource instance
 		var myDataSource = new YAHOO.util.XHRDataSource(
-				"/tv/search/doPrintVideosReport.action?");
+				"/tv/search/doPrintVideosSequenceOrderReport.action?");
 		myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 		myDataSource.responseSchema = {
 			resultsList :"records",
@@ -204,8 +201,8 @@ document.write("打印日期: " + date.getFullYear() + "年" + (date.getMonth() 
 			initialLoad :true,
 			dynamicData :true, // Enables dynamic server-driven data
 			sortedBy : {
-				key :"dateInput",
-				dir :YAHOO.widget.DataTable.CLASS_ASC
+				key :"audienceRating",
+				dir :YAHOO.widget.DataTable.CLASS_DESC
 			},
 			caption :"<h1>百家,都市审看记录统计</h1>"
 		};

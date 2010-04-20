@@ -76,7 +76,7 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <a href="#" id="tableOption" style="font-size:12px">选项</a>
 	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
-
+<div id="printBtn" align="right"></div>
 <div id="dynamicdata" align="center"></div>
 
 <script type="text/javascript">

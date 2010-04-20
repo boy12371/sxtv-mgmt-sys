@@ -15,7 +15,7 @@ import java.io.Serializable;
 public abstract class BasePlayorder  implements Serializable {
 
 	public static String REF = "Playorder";
-	public static String PROP_VEDIO_I_D = "vedioID";
+	public static String PROP_VEDIO = "vedioID";
 	public static String PROP_AUDITOR = "auditor";
 	public static String PROP_ID = "id";
 	public static String PROP_PLAY_DATE = "playDate";

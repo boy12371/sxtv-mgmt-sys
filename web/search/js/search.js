@@ -537,6 +537,48 @@ function initOrderDataTable() {
 
 	}
 
+	
+	checkSelectItems = function() {
+		var vcompany = YAHOO.util.Dom.get("vcompany").value;
+		var vsubject = YAHOO.util.Dom.get("vsubject").value;
+		var vtopic = YAHOO.util.Dom.get("vtopic").value;
+		var startDate = dojo.widget.byId("startDate").getValue();
+		var endDate = dojo.widget.byId("endDate").getValue();
+		if (vcompany == 0 && vsubject == 0 && vtopic == 0 && startDate.length == 0 && endDate.length == 0) {
+			jAlert('至少要填写或选择一个选项', '提示');
+			return "";
+		} else {
+			var params = "";
+			params += "&isSequenceOrder=true&sc.company.id="
+					+ vcompany + "&sc.subject.id=" + vsubject + "&sc.topic.id="
+					+ vtopic + "&sc.status.id=9&sc.startDate="
+					+ startDate.substring(0, startDate.indexOf("T"))
+					+ "&sc.endDate=" + endDate.substring(0, endDate.indexOf("T"));
+			return params;
+		}
+	}
+	var generatePrintTable = function(resetRecordOffset) {
+		// getDateFromDataTimePicker("fromDate");
+		var p = "&startIndex=-1&sort=audienceRating&dir=desc";
+		var params = checkSelectItems();
+		if (params.length != 0) {
+			var queryString = "/tv/search/toPrintVideosSequenceOrderReport.action?query="
+					+ escape(p + params);
+		} else {
+			return;
+		}
+
+		window.open(queryString, "打印预览");
+	}
+
+	var printBtn = new YAHOO.widget.Button({
+				type : "button",
+				id : "topicBtn",
+				label : "打印",
+				container : "printBtn"
+			});
+	printBtn.on("click", generatePrintTable);
+	
 	var searchBtn = new YAHOO.widget.Button("go");// YAHOO.util.Dom.get("filter");
 	searchBtn.on("click", fireEvent);
 
