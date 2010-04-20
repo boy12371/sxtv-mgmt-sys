@@ -36,7 +36,7 @@
 
 <p>已编排影带列表，点击第一列图标可将影带移除编排列表，拖动记录可以调节播放时间。</p>
 <br />
-<div id="selectMonthDiv" style="width: 800px; height: 30px; margin-left: 68px;">
+<div id="selectMonthDiv" style="width:800px;height:30px;margin-left:68px;margin-bottom:10px;">
 	<table style="width:100%"><tr>
 		<td>
 			<table><tr>
@@ -51,7 +51,7 @@
 			</tr></table>
 		</td>
 		<td>
-			<div id="printDiv" style="float:right;margin-top:-10px;"></div>
+			<div id="printDiv" style="float:right;"></div>
 		</td>
 	</tr></table>
 </div>

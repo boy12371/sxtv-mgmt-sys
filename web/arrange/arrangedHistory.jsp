@@ -33,7 +33,7 @@
 <p>编排影带历史</p>
 <br />
 
-<div id="selectDateDiv" style="width: 800px; height: 30px; margin-left: 68px;">
+<div id="selectDateDiv" style="width: 800px; height: 30px; margin-left:68px;margin-bottom:10px;">
 	<table style="width:100%"><tr>
 		<td>
 			<table><tr>
@@ -43,7 +43,7 @@
 			</tr></table>
 		</td>
 		<td>
-			<div id="printDiv" style="float:right;margin-top:-10px;"></div>
+			<div id="printDiv" style="float:right;"></div>
 		</td>
 	</tr></table>
 </div>
