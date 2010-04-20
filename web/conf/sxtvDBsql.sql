@@ -89,7 +89,7 @@ CREATE TABLE `company` (
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '0=禁用,1=正常',
   `comments` varchar(512) DEFAULT '',
   PRIMARY KEY (`companyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='公司信息';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='公司信息';
 
 #
 # Dumping data for table company
