@@ -41,6 +41,10 @@ public class AccuracyAction extends BaseAction {
 	
 	private String examiner;
 	
+	public String toAccuracyPrint() throws Exception{
+		return SUCCESS;
+	}
+	
 	public String toAccuracy() throws Exception{
 		Date fDate = arrangeService.getFirstArrangedDate();
 		SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd");

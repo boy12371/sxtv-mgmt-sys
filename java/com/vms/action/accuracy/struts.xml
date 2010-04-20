@@ -9,6 +9,10 @@
 			<result name="input">/accuracy/accuracyList.jsp</result>
 		</action>
 		
+		<action name="toAccuracyPrint" class="accuracyMgmt" method="toAccuracyPrint">
+			<result>/accuracy/accuracyPrint.jsp</result>
+		</action>
+		
 		<action name="getAccuracy" class="accuracyMgmt" method="getAccuracy">
 			<result type="json">
 				<param name="root">accuracyTable</param>
