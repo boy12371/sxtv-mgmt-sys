@@ -263,7 +263,7 @@ INSERT INTO `resources` VALUES (85,'getArrangedHistory.action','');
 INSERT INTO `resources` VALUES (86,'toAccuracy.action','');
 INSERT INTO `resources` VALUES (87,'getAccuracy.action','');
 INSERT INTO `resources` VALUES (88,'toArrangePrint.action','');
-INSERT INTO `resources` VALUES (89, 'toPrintVideosSequenceOrderReport.action', ''),
+INSERT INTO `resources` VALUES (89, 'toPrintVideosSequenceOrderReport.action', '');
 INSERT INTO `resources` VALUES (90, 'doPrintVideosSequenceOrderReport.action', '');
 INSERT INTO `resources` VALUES (91, 'toAccuracyPrint.action','');
 #
@@ -428,7 +428,7 @@ INSERT INTO `role_resource` VALUES (123,8,68,'');
 INSERT INTO `role_resource` VALUES (124,8,69,'');
 INSERT INTO `role_resource` VALUES (125,9,7,'');
 INSERT INTO `role_resource` VALUES (126,5,88,'');
-INSERT INTO `role_resource` VALUES (127,6,89,''),
+INSERT INTO `role_resource` VALUES (127,6,89,'');
 INSERT INTO `role_resource` VALUES (128,6,90,'');
 INSERT INTO `role_resource` VALUES (129,10,91,'');
 #
