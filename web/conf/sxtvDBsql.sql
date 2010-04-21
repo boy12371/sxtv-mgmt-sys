@@ -150,11 +150,13 @@ CREATE TABLE `playorder` (
   `vedioID` varchar(128) NOT NULL DEFAULT '',
   `arrangeDate` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `auditor` int(11) NOT NULL DEFAULT '0',
+  `status` int(11) DEFAULT '1' COMMENT '0= 异常， 1=正常',
   PRIMARY KEY (`Id`),
   KEY `vedioID` (`vedioID`),
-  KEY `auditor` (`auditor`)
+  KEY `auditor` (`auditor`),
+  CONSTRAINT `playorder_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`) ON UPDATE CASCADE,
+  CONSTRAINT `playorder_ibfk_2` FOREIGN KEY (`auditor`) REFERENCES `user` (`userID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='节目编排';
-
 #
 # Dumping data for table playorder
 #
