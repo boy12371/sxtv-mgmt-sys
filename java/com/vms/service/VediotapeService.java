@@ -358,4 +358,10 @@ public class VediotapeService implements IVediotapeService {
 		this.playorderDAO = playorderDAO;
 	}
 
+	@Override
+	public Vediotape getVediotapeByID(String vid) throws Exception {
+		// TODO Auto-generated method stub
+		return (Vediotape) this.vediotapeDAO.getObject(clz, vid);
+	}
+
 }

@@ -37,6 +37,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	private ICompanyService companyService;
 	private ISubjectService subjectService;
 	private ITopicService topicService;
+	private IStatusService statusService;
 	private IAudienceScoreService audienceScoreService;
 	private String vname;
 	private String vid;
@@ -45,20 +46,19 @@ public class VediotapeMgmtAction extends BaseAction {
 	private Vediotape vedio;
 	private VedioTapeVO vv;
 	private String jasonDataString;
-	
+
 	private List<String> toApproved;
 	private List<String> toPassed;
-	
-	
-	public String toAddingVedio() throws Exception {		
+
+	public String toAddingVedio() throws Exception {
 		return SUCCESS;
 	}
 
 	public String doAddingVedio() throws Exception {
 		List<Vediotape> vedios = this.convertJASSONStringToVedio();
-		try{
-			vedioService.createVediotapes(vedios);	
-		}catch(Exception e){
+		try {
+			vedioService.createVediotapes(vedios);
+		} catch (Exception e) {
 			logger.error(e);
 			this.addActionError("添加失败");
 			return INPUT;
@@ -67,105 +67,125 @@ public class VediotapeMgmtAction extends BaseAction {
 		return this.SUCCESS;
 	}
 
-	
-	private List<Vediotape> convertJASSONStringToVedio() throws ParseException{
+	private List<Vediotape> convertJASSONStringToVedio() throws ParseException {
 		JSONArray jasonArray = JSONArray.fromObject(this.jasonDataString);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		if(jasonArray.isArray() && !jasonArray.isEmpty()){
+		if (jasonArray.isArray() && !jasonArray.isEmpty()) {
 			List<Vediotape> vedios = new ArrayList<Vediotape>();
 			SessionUserInfo userInfo = this.getUserInfo();
-			Date date =new Date();
+			Date date = new Date();
 			int size = jasonArray.size();
 			for (int i = 0; i < size; i++) {
-				JSONObject obj =jasonArray.getJSONObject(i);
-				Vediotape v =new Vediotape();
+				JSONObject obj = jasonArray.getJSONObject(i);
+				Vediotape v = new Vediotape();
 				v.setId(obj.getString(Vediotape.PROP_ID));
 				v.setVedioName(obj.getString(Vediotape.PROP_VEDIO_NAME));
-				v.setCompanyID(new Company(obj.getInt(Vediotape.PROP_COMPANY_ID)));
+				v.setCompanyID(new Company(obj
+						.getInt(Vediotape.PROP_COMPANY_ID)));
 				v.setTopic(new Topic(obj.getInt(Vediotape.PROP_TOPIC)));
 				v.setSubject(new Subject(obj.getInt(Vediotape.PROP_SUBJECT)));
 				v.setStatus(new Status(1));
 				v.setDateComing(date);
 				v.setComments(obj.getString(Vediotape.PROP_COMMENTS));
-				v.setInputer(new User(userInfo.getUserId()));				
+				v.setInputer(new User(userInfo.getUserId()));
 				v.setDateInput(date);
 				vedios.add(v);
 			}
 			return vedios;
-		}		
+		}
 		return null;
 	}
-	
-	public String toMarketRate()throws Exception{
+
+	public String toMarketRate() throws Exception {
 		return SUCCESS;
 	}
-	
-	public String toMarketRateModify()throws Exception{
+
+	public String toMarketRateModify() throws Exception {
 		return SUCCESS;
 	}
-	
-	
-	public String updateMarketRate()throws Exception{
-		try{
-			vedioService.updateVideoRatingMarket(vv.getId(), vedio.getMarketShare(), vedio.getAudienceRating());
+
+	public String updateMarketRate() throws Exception {
+		try {
+			vedioService.updateVideoRatingMarket(vv.getId(), vedio
+					.getMarketShare(), vedio.getAudienceRating());
 			this.addActionMessage("更新成功");
 			return SUCCESS;
-		}catch(Exception e){
+		} catch (Exception e) {
 			logger.error(e);
-		}		
+		}
 		this.addActionError("更新失败");
 		return INPUT;
 	}
-	
-	
-	public String searchVideoByNameOrID()throws Exception{
-		
+
+	public String searchVideoByNameOrID() throws Exception {
+
 		List<Vediotape> list = null;
 		try {
-			if(!"".equals(vid)){
-				list = vedioService.findVediotapeByProperty(Vediotape.PROP_ID, vid, -1, -1, "", false);
-			}else{
-				list  = vedioService.findVediotapeByProperty(Vediotape.PROP_VEDIO_NAME, vname, -1, -1, "", false);
-			}	
+			if (!"".equals(vid)) {
+				list = vedioService.findVediotapeByProperty(Vediotape.PROP_ID,
+						vid, -1, -1, "", false);
+			} else {
+				list = vedioService.findVediotapeByProperty(
+						Vediotape.PROP_VEDIO_NAME, vname, -1, -1, "", false);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
-		}		
-		if(list!=null && !list.isEmpty()){
+		}
+		if (list != null && !list.isEmpty()) {
 			this.vedio = list.get(0);
 			int status = vedio.getStatus().getId();
 			String videoid = vedio.getId();
-			if(null != optionName && !"".equals(optionName)){
-				if(optionName.equals("auditing")){
-					if(status == CommonVariable.VIDEO_STATUS_AUDITING || status ==CommonVariable.VIDEO_STATUS_REJECTION || status == CommonVariable.VIDEO_STATUS_PASS ){
-						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
-						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
+			if (null != optionName && !"".equals(optionName)) {
+				if (optionName.equals("auditing")) {
+					if (status == CommonVariable.VIDEO_STATUS_AUDITING
+							|| status == CommonVariable.VIDEO_STATUS_REJECTION
+							|| status == CommonVariable.VIDEO_STATUS_PASS) {
+						List audienceVote = this.audienceScoreService
+								.getAudienceScoreOfTape(videoid, -1, -1, "",
+										true);
+						vv = this.vedioService.getVideotapeById(videoid,
+								audienceVote);
 						return SUCCESS;
-					}else if(status == CommonVariable.VIDEO_STATUS_PRE_ARRANGE) {
-						this.addActionError("影带已进入编排，不能审核");						
+					} else if (status == CommonVariable.VIDEO_STATUS_PRE_ARRANGE) {
+						this.addActionError("影带已进入编排，不能审核");
 						return INPUT;
-					}else{
-						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能审核");
-						return INPUT;
-					}					
-				}else if(optionName.equals("modification")){					
-					if(status == CommonVariable.VIDEO_STATUS_PASS || status == CommonVariable.VIDEO_STATUS_PRE_ARRANGE){
-						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
-						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
-						return SUCCESS;
-					}else{
-						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
-						return INPUT;
-					}					
-				}else if(optionName.equals("marketRate") || optionName.equals("modifyMarketRate")){
-					if(status == CommonVariable.VIDEO_STATUS_PLAYED || status == CommonVariable.VIDEO_STATUS_FINISHED){
-						List audienceVote = this.audienceScoreService.getAudienceScoreOfTape(videoid, -1, -1, "", true);
-						vv = this.vedioService.getVideotapeById(videoid, audienceVote);
-						return SUCCESS;
-					}else{
-						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能操作");
+					} else {
+						this.addActionError("影带状态为"
+								+ vedio.getStatus().getStatus() + "，不能审核");
 						return INPUT;
 					}
+				} else if (optionName.equals("modification")) {
+					if (status == CommonVariable.VIDEO_STATUS_PASS
+							|| status == CommonVariable.VIDEO_STATUS_PRE_ARRANGE) {
+						List audienceVote = this.audienceScoreService
+								.getAudienceScoreOfTape(videoid, -1, -1, "",
+										true);
+						vv = this.vedioService.getVideotapeById(videoid,
+								audienceVote);
+						return SUCCESS;
+					} else {
+						this.addActionError("影带状态为"
+								+ vedio.getStatus().getStatus() + "，不能操作");
+						return INPUT;
+					}
+				} else if (optionName.equals("marketRate")
+						|| optionName.equals("modifyMarketRate")) {
+					if (status == CommonVariable.VIDEO_STATUS_PLAYED
+							|| status == CommonVariable.VIDEO_STATUS_FINISHED) {
+						List audienceVote = this.audienceScoreService
+								.getAudienceScoreOfTape(videoid, -1, -1, "",
+										true);
+						vv = this.vedioService.getVideotapeById(videoid,
+								audienceVote);
+						return SUCCESS;
+					} else {
+						this.addActionError("影带状态为"
+								+ vedio.getStatus().getStatus() + "，不能操作");
+						return INPUT;
+					}
+				}else if (optionName.equals("adjustStatus")){
+					return SUCCESS;
 				}
 			}
 			return this.SUCCESS;
@@ -173,17 +193,17 @@ public class VediotapeMgmtAction extends BaseAction {
 		this.addActionError("影带未找到");
 		return this.INPUT;
 	}
-	
-	
-	public String toUpdateVideoInfo() throws Exception{
+
+	public String toUpdateVideoInfo() throws Exception {
 		return this.SUCCESS;
 	}
-	
+
 	public String updateVideoInfo() throws Exception {
 		try {
 			boolean flag = this.vedioService.updateVideoInfo(vedio);
-			if(flag){
-				vedio = vedioService.findVediotapeByProperty(Vediotape.PROP_ID, vedio.getId(), -1, -1, "", false).get(0);
+			if (flag) {
+				vedio = vedioService.findVediotapeByProperty(Vediotape.PROP_ID,
+						vedio.getId(), -1, -1, "", false).get(0);
 				this.addActionMessage("更新成功");
 				return SUCCESS;
 			}
@@ -194,19 +214,17 @@ public class VediotapeMgmtAction extends BaseAction {
 		this.addActionError("更新失败");
 		return this.INPUT;
 	}
-	
-	
-	
-	public String toVideoModifications()throws Exception{
+
+	public String toVideoModifications() throws Exception {
 		return SUCCESS;
-		
+
 	}
-	
-	
-	public String doModification()throws Exception{
+
+	public String doModification() throws Exception {
 		try {
 			SessionUserInfo user = this.getUserInfo();
-			this.vedioService.auditingVideo(vv.getId(), user, Integer.parseInt(vv.getStatus()));
+			this.vedioService.auditingVideo(vv.getId(), user, Integer
+					.parseInt(vv.getStatus()));
 			this.addActionMessage("影带已进入重审状态,等待审核");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -215,25 +233,25 @@ public class VediotapeMgmtAction extends BaseAction {
 		}
 		this.addActionError("修改影带状态失败");
 		return INPUT;
-		
+
 	}
-	
-	public String doModificationBatch() throws Exception{
+
+	public String doModificationBatch() throws Exception {
 		try {
 			SessionUserInfo user = this.getUserInfo();
-			if(toApproved!=null && !toApproved.isEmpty()){
+			if (toApproved != null && !toApproved.isEmpty()) {
 				for (String vidString : toApproved) {
 					this.vedioService.auditingVideo(vidString, user, 5);
 				}
-				
+
 			}
-			
-			if(toPassed!=null && !toPassed.isEmpty()){
+
+			if (toPassed != null && !toPassed.isEmpty()) {
 				for (String vidString : toPassed) {
 					this.vedioService.auditingVideo(vidString, user, 3);
 				}
-				
-			}			
+
+			}
 			this.addActionMessage("操作成功");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -244,13 +262,10 @@ public class VediotapeMgmtAction extends BaseAction {
 		return INPUT;
 	}
 
-	
-	
-	
 	public String isVediotapeExsits() throws Exception {
 		boolean isAddNew = true;
 		String vedioID = "";
-		if(null != this.getRequest().getParameter("vedioID")){
+		if (null != this.getRequest().getParameter("vedioID")) {
 			vedioID = this.getRequest().getParameter("vedioID");
 			isAddNew = false;
 		}
@@ -259,47 +274,77 @@ public class VediotapeMgmtAction extends BaseAction {
 		this.getResponse().setCharacterEncoding("UTF-8");
 		PrintWriter out = this.getResponse().getWriter();
 		vedio = this.vedioService.getVediotapeByName(x);
-		
-		StringBuffer sb =new StringBuffer();
-		if(isAddNew){
-			if(vedio!=null){
+
+		StringBuffer sb = new StringBuffer();
+		if (isAddNew) {
+			if (vedio != null) {
 				sb.append("影带已存在，请检查影带名称");
-			}else{
+			} else {
 				sb.append("SUCCESS");
 			}
-		}else{
-			if(vedio == null){
+		} else {
+			if (vedio == null) {
 				sb.append("SUCCESS");
-			}else{
-				if(!vedio.getId().equals(vedioID)){
+			} else {
+				if (!vedio.getId().equals(vedioID)) {
 					sb.append("影带已存在，请检查影带名称");
-				}else{
+				} else {
 					sb.append("SUCCESS");
 				}
 			}
-			
+
 		}
-				
+
 		out.println(sb.toString());
 		out.close();
 		return NONE;
 	}
 
-	
-	
-	public List<Company> getComList() throws Exception{
-		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true,true);		
+	public String toAdjustVideoStatus() {
+		return SUCCESS;
 	}
 
+	public String doAdjustVideoStatus() throws Exception {
+		this.vedio = this.vedioService.getVediotapeByID(vedio.getId());
+		Status oldStatus = vedio.getStatus();
+		vedio.setStatus(vedio.getStatus());
+		try {
+			this.vedioService.updateVideo(vedio);
+			SessionUserInfo user = this.getUserInfo();
+			Calendar cal = Calendar.getInstance();
+			logger.warn(cal.getTime().toLocaleString() + " User:"
+					+ user.getUsername() + "/ID: " + user.getUserId()
+					+ " change status of " + "video:" + vedio.getVedioName()
+					+ "/vedioID:" + vedio.getId() + " from "
+					+ oldStatus.getStatus() + "/ID:" + oldStatus.getId()
+					+ " to " + vedio.getStatus() + "/ID:"
+					+ vedio.getStatus().getId() + ". REASON: "
+					+ vedio.getComments());
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage());
+		}
 
-	public List<Topic> getTopList() throws Exception{
-		return topicService.findAllTopics(-1,-1, Topic.PROP_ID, true);
+		return INPUT;
 	}
-	
-	public List<Subject> getSubList() throws Exception{
+
+	public List<Company> getComList() throws Exception {
+		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true,
+				true);
+	}
+
+	public List<Status> getStatusList() throws Exception {
+		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
+	}
+
+	public List<Topic> getTopList() throws Exception {
+		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true);
+	}
+
+	public List<Subject> getSubList() throws Exception {
 		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
 	}
-	
+
 	public ICompanyService getCompanyService() {
 		return companyService;
 	}
@@ -368,7 +413,8 @@ public class VediotapeMgmtAction extends BaseAction {
 		return audienceScoreService;
 	}
 
-	public void setAudienceScoreService(IAudienceScoreService audienceScoreService) {
+	public void setAudienceScoreService(
+			IAudienceScoreService audienceScoreService) {
 		this.audienceScoreService = audienceScoreService;
 	}
 
@@ -403,7 +449,5 @@ public class VediotapeMgmtAction extends BaseAction {
 	public void setToPassed(List<String> toPassed) {
 		this.toPassed = toPassed;
 	}
-
-	
 
 }
