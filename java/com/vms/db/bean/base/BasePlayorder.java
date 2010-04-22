@@ -20,6 +20,7 @@ public abstract class BasePlayorder  implements Serializable {
 	public static String PROP_ID = "id";
 	public static String PROP_PLAY_DATE = "playDate";
 	public static String PROP_ARRANGE_DATE = "arrangeDate";
+	public static String PROP_STATUS ="status";
 
 
 	// constructors
@@ -43,13 +44,14 @@ public abstract class BasePlayorder  implements Serializable {
 		com.vms.db.bean.User auditor,
 		com.vms.db.bean.Vediotape vedioID,
 		java.util.Date playDate,
-		java.util.Date arrangeDate) {
+		java.util.Date arrangeDate,java.lang.Integer status) {
 
 		this.setId(id);
 		this.setAuditor(auditor);
 		this.setVedioID(vedioID);
 		this.setPlayDate(playDate);
 		this.setArrangeDate(arrangeDate);
+		this.setStatus(status);
 		initialize();
 	}
 
@@ -65,6 +67,7 @@ public abstract class BasePlayorder  implements Serializable {
 	// fields
 	private java.util.Date playDate;
 	private java.util.Date arrangeDate;
+	private java.lang.Integer status;
 
 	// many to one
 	private com.vms.db.bean.User auditor;
@@ -187,6 +190,14 @@ public abstract class BasePlayorder  implements Serializable {
 
 	public String toString () {
 		return super.toString();
+	}
+
+	public java.lang.Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(java.lang.Integer status) {
+		this.status = status;
 	}
 
 

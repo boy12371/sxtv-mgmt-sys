@@ -61,6 +61,12 @@ public class PlayorderService implements IPlayorderService {
 
 
 
-	
+	public void updatePlayerOrderStatus(int orderID, int status) throws Exception{
+		Playorder order = (Playorder) this.playorderDAO.getObject(Playorder.class, orderID);
+		if(order!=null){
+			order.setStatus(0);
+			this.playorderDAO.saveOrUpdateObject(order);
+		}		
+	}
 
 }
