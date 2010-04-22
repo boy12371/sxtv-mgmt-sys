@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/logon/css/logon.css" />
-<link rel="icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/common/image/favicon.ico" ></link>
+<link rel="icon" href="${pageContext.request.contextPath}/common/image/favicon.ico" ></link>
 </head>
 
 <body onkeydown="if(event.keyCode==13){userlogon();}">
