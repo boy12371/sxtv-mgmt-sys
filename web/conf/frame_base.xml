@@ -45,8 +45,6 @@
 		<Module id="sysConfig" name="系统设置" url="">
 			<ModuleItem id="sysCompany" name="影视公司管理" url="/tv/sys/toCompanies.action"/>
 			<ModuleItem id="employeeMgmt" name="员工-用户" url="/tv/sys/toEmployees.action"/>
-			<ModuleItem id="employeeAdd" name="添加员工" url="/tv/sys/toAddEmployee.action"/>
-			<ModuleItem id="userAdd" name="创建用户" url="/tv/sys/toAddUser.action"/>
 			<ModuleItem id="sysProperties" name="系统参数" url="/tv/sys/toSystemData.action"/>
 		</Module>
 	</MainConsole>
