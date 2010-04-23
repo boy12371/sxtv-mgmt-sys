@@ -40,20 +40,21 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
 
-<title>查看或修改影带信息</title>
+<title>调整影带状态</title>
 </head>
 <body class="yui-skin-sam">
 
 
-<h1>查看或修改影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/Search.png" border="0">
+<h1>调整影带状态</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/Search.png" border="0">
 <p>输入剧目编号或名称搜索剧目</p>
 <s:actionerror />
 <s:actionmessage />
-<div align="center"><s:form id="searchForm" action="searchVideoByNameOrID" namespace="/vedio">
+<div align="center"><s:form id="searchForm" action="searchVideoByNameOrIDForStatusAdjust" namespace="/vedio">
 	<table>
 		<tr>
 			<td><label>影带编号</label></td>
-			<td><input class="inputField" type="text" name="vid" id="vid" /></td>
+			<td><input class="inputField" type="text" name="vid" id="vid" /><s:hidden
+				name="optionName" value="adjustStatus" /></td>
 
 			<td><label>剧目名称</label></td>
 			<td><input class="inputField autoComplete" type="text" id="searchinput" name="vname" />
@@ -71,7 +72,7 @@
 <s:if test="vedio!=null">
 	<h1>影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/tape.png" border="0">
 	<p>查看或编辑剧目信息并保存</p>
-	<div align="center"><s:form id="updateForm" action="updateVideoInfo" namespace="/vedio" method="post">
+	<div align="center"><s:form id="updateForm" action="doAdjustVideoStatus" namespace="/vedio" method="post" onsubmit="return validateInput();">
 		<table class="inputTable">
 			<tr>
 				<td><label>影带编号</label></td>
@@ -109,13 +110,12 @@
 			
 			<tr>
 				<td><label>调整状态</label></td>
-				<td><s:select list="#{'1':'待审'}" /></td>
+				<td><s:select name="vedio.status.id" list="#{'2':'待审','3':'通过','5':'待徘','7':'淘汰'}" headerKey="-1" headerValue="----" id="statusSelect" /></td>
 			</tr>
 			<tr>
 				<td><label>调整原因</label></td>
-				<td><s:textarea cssClass="inputField" name="vedio.comments"></s:textarea></td>
+				<td><s:textarea cssClass="inputField" name="vedio.comments" id="changeComments"></s:textarea></td>
 			</tr>
-			
 			
 			<tr>
 				<td colspan="2" align="center">
@@ -128,7 +128,20 @@
 
 <script type="text/javascript">
 	YAHOO.example.Centered = autoCompleteVideoName();
-	var searchBtn = new YAHOO.widget.Button("searchBtn");	
+	var searchBtn = new YAHOO.widget.Button("searchBtn");
+	function validateInput(){
+		var status = YAHOO.util.Dom.get("statusSelect");
+		var comments = YAHOO.util.Dom.get("changeComments");
+		if(status.value == -1){
+			jAlert('请选择状态', '错误');
+			return false;
+		}
+		if(comments.value.length == 0){
+			jAlert('调整原因必须填写', '错误');
+			return false;
+		}
+		return true;
+	}	
 </script>
 </body>
 </html>

@@ -37,7 +37,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	private ICompanyService companyService;
 	private ISubjectService subjectService;
 	private ITopicService topicService;
-	private IStatusService statusService;
+	//private IStatusService statusService;
 	private IAudienceScoreService audienceScoreService;
 	private String vname;
 	private String vid;
@@ -185,7 +185,12 @@ public class VediotapeMgmtAction extends BaseAction {
 						return INPUT;
 					}
 				}else if (optionName.equals("adjustStatus")){
-					return SUCCESS;
+					if(status == CommonVariable.VIDEO_STATUS_PLAYED){
+						return SUCCESS;	
+					}else{
+						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能调整状态。");
+					}
+					
 				}
 			}
 			return this.SUCCESS;
@@ -320,6 +325,7 @@ public class VediotapeMgmtAction extends BaseAction {
 					+ " to " + vedio.getStatus() + "/ID:"
 					+ vedio.getStatus().getId() + ". REASON: "
 					+ vedio.getComments());
+			return SUCCESS;
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -333,9 +339,9 @@ public class VediotapeMgmtAction extends BaseAction {
 				true);
 	}
 
-	public List<Status> getStatusList() throws Exception {
-		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
-	}
+//	public List<Status> getStatusList() throws Exception {
+//		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
+//	}
 
 	public List<Topic> getTopList() throws Exception {
 		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true);
