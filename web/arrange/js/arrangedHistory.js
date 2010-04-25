@@ -57,10 +57,11 @@ function refreshTable(){
 	if(null == historyTable){
 		initHistoryTable();
 	}
+	var oState = historyTable.getState();
 	var callback = {
-			success:historyTable.onDataReturnInitializeTable,
-			failure:historyTable.onDataReturnInitializeTable,
-			argument:historyTable.getState(),
+			success:historyTable.onDataReturnSetRows,
+			failure:historyTable.onDataReturnSetRows,
+			argument:oState,
 			scope:historyTable
 			};
 	historyTable.getDataSource().sendRequest(

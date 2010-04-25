@@ -3,12 +3,13 @@ var arrangeTable;
 var selMonth = "";
 
 function selectMonthFunc(self){
+	var oState = arrangeTable.getState();
 	selMonth = YAHOO.util.Dom.get("selectMonth").value; 
 	document.getElementById("month").value = selMonth;	
 	var callback = {
-			success:arrangeTable.onDataReturnInitializeTable,
-			failure:arrangeTable.onDataReturnInitializeTable,
-			argument:arrangeTable.getState(),
+			success:arrangeTable.onDataReturnSetRows,
+			failure:arrangeTable.onDataReturnSetRows,
+			argument:oState,
 			scope:arrangeTable
 			};
 	arrangeTable.getDataSource().sendRequest(
