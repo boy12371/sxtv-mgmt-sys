@@ -153,9 +153,7 @@ CREATE TABLE `playorder` (
   `status` int(11) DEFAULT '1' COMMENT '0= 异常， 1=正常',
   PRIMARY KEY (`Id`),
   KEY `vedioID` (`vedioID`),
-  KEY `auditor` (`auditor`),
-  CONSTRAINT `playorder_ibfk_1` FOREIGN KEY (`vedioID`) REFERENCES `vediotape` (`vedioID`) ON UPDATE CASCADE,
-  CONSTRAINT `playorder_ibfk_2` FOREIGN KEY (`auditor`) REFERENCES `user` (`userID`) ON UPDATE CASCADE
+  KEY `auditor` (`auditor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='节目编排';
 #
 # Dumping data for table playorder
@@ -268,8 +266,8 @@ INSERT INTO `resources` VALUES (88,'toArrangePrint.action','');
 INSERT INTO `resources` VALUES (89, 'toPrintVideosSequenceOrderReport.action', '');
 INSERT INTO `resources` VALUES (90, 'doPrintVideosSequenceOrderReport.action', '');
 INSERT INTO `resources` VALUES (91, 'toAccuracyPrint.action','');
-INSERT INTO `resources` VALUES (92, 'toAdjustVideoStatus', ''),
-INSERT INTO `resources` VALUES (93, 'searchVideoByNameOrIDForStatusAdjust', ''),
+INSERT INTO `resources` VALUES (92, 'toAdjustVideoStatus', '');
+INSERT INTO `resources` VALUES (93, 'searchVideoByNameOrIDForStatusAdjust', '');
 INSERT INTO `resources` VALUES (94, 'doAdjustVideoStatus', '');
 #
 # Source for table role
