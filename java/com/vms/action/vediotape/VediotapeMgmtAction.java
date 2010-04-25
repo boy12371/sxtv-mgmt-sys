@@ -37,7 +37,7 @@ public class VediotapeMgmtAction extends BaseAction {
 	private ICompanyService companyService;
 	private ISubjectService subjectService;
 	private ITopicService topicService;
-	//private IStatusService statusService;
+	// private IStatusService statusService;
 	private IAudienceScoreService audienceScoreService;
 	private String vname;
 	private String vid;
@@ -184,13 +184,15 @@ public class VediotapeMgmtAction extends BaseAction {
 								+ vedio.getStatus().getStatus() + "，不能操作");
 						return INPUT;
 					}
-				}else if (optionName.equals("adjustStatus")){
-					if(status == CommonVariable.VIDEO_STATUS_PLAYED){
-						return SUCCESS;	
-					}else{
-						this.addActionError("影带状态为"+vedio.getStatus().getStatus()+"，不能调整状态。");
+				} else if (optionName.equals("adjustStatus")) {
+					if (status == CommonVariable.VIDEO_STATUS_PLAYED) {
+						return SUCCESS;
+					} else {
+						this.addActionError("影带状态为"
+								+ vedio.getStatus().getStatus() + "，不能调整状态。");
+						vedio = null;
 					}
-					
+
 				}
 			}
 			return this.SUCCESS;
@@ -310,9 +312,11 @@ public class VediotapeMgmtAction extends BaseAction {
 	}
 
 	public String doAdjustVideoStatus() throws Exception {
+		Status newStatus = vedio.getStatus();
+		String comments = vedio.getComments();
 		this.vedio = this.vedioService.getVediotapeByID(vedio.getId());
 		Status oldStatus = vedio.getStatus();
-		vedio.setStatus(vedio.getStatus());
+		vedio.setStatus(newStatus);
 		try {
 			this.vedioService.updateVideo(vedio);
 			SessionUserInfo user = this.getUserInfo();
@@ -321,10 +325,9 @@ public class VediotapeMgmtAction extends BaseAction {
 					+ user.getUsername() + "/ID: " + user.getUserId()
 					+ " change status of " + "video:" + vedio.getVedioName()
 					+ "/vedioID:" + vedio.getId() + " from "
-					+ oldStatus.getStatus() + "/ID:" + oldStatus.getId()
-					+ " to " + vedio.getStatus() + "/ID:"
-					+ vedio.getStatus().getId() + ". REASON: "
-					+ vedio.getComments());
+					+ oldStatus.getId() + " to " + vedio.getStatus().getId()
+					+ ". REASON: " + comments);
+			this.addActionMessage("修改完成");
 			return SUCCESS;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -339,9 +342,9 @@ public class VediotapeMgmtAction extends BaseAction {
 				true);
 	}
 
-//	public List<Status> getStatusList() throws Exception {
-//		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
-//	}
+	// public List<Status> getStatusList() throws Exception {
+	// return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
+	// }
 
 	public List<Topic> getTopList() throws Exception {
 		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true);

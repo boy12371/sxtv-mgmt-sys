@@ -268,6 +268,9 @@ INSERT INTO `resources` VALUES (88,'toArrangePrint.action','');
 INSERT INTO `resources` VALUES (89, 'toPrintVideosSequenceOrderReport.action', '');
 INSERT INTO `resources` VALUES (90, 'doPrintVideosSequenceOrderReport.action', '');
 INSERT INTO `resources` VALUES (91, 'toAccuracyPrint.action','');
+INSERT INTO `resources` VALUES (92, 'toAdjustVideoStatus', ''),
+INSERT INTO `resources` VALUES (93, 'searchVideoByNameOrIDForStatusAdjust', ''),
+INSERT INTO `resources` VALUES (94, 'doAdjustVideoStatus', '');
 #
 # Source for table role
 #
@@ -433,6 +436,9 @@ INSERT INTO `role_resource` VALUES (126,5,88,'');
 INSERT INTO `role_resource` VALUES (127,6,89,'');
 INSERT INTO `role_resource` VALUES (128,6,90,'');
 INSERT INTO `role_resource` VALUES (129,10,91,'');
+INSERT INTO `role_resource` VALUES (130,1,92,'');
+INSERT INTO `role_resource` VALUES (131,1,93,'');
+INSERT INTO `role_resource` VALUES (132,1,94,'');
 #
 # Source for table scorelevel
 #

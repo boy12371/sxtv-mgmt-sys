@@ -129,6 +129,12 @@
 <script type="text/javascript">
 	YAHOO.example.Centered = autoCompleteVideoName();
 	var searchBtn = new YAHOO.widget.Button("searchBtn");
+	var submitBtn = new YAHOO.widget.Button( {
+		type :"submit",
+		label :"确定",
+		id :"submitBtn",
+		container :"submitBtnDiv"
+	});
 	function validateInput(){
 		var status = YAHOO.util.Dom.get("statusSelect");
 		var comments = YAHOO.util.Dom.get("changeComments");
