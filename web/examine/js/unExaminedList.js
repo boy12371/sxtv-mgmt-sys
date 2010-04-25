@@ -202,9 +202,9 @@ function filterFunc(){
 	var oState = myDataTable.getState();
 	oState.pagination.recordOffset = 0;
 	var callback = {
-			success:myDataTable.onDataReturnInitializeTable,
-			failure:myDataTable.onDataReturnInitializeTable,
-			argument:myDataTable.getState(),
+			success:myDataTable.onDataReturnSetRows,
+			failure:myDataTable.onDataReturnSetRows,
+			argument:oState,
 			scope:myDataTable
 			};
 	myDataTable.getDataSource().sendRequest(
