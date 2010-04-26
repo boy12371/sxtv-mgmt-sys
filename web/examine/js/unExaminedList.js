@@ -79,11 +79,11 @@ function initDataTable() {
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
 	    key :"id",
-	    label :"影带编号",
+	    label :"编号",
 	    sortable :true
 	}, {
 		key :"vedioName",
-		label :"影带名称",
+		label :"名称",
 		sortable :true
 	}, {
 		key :"subject",
