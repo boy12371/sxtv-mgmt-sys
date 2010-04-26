@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<title>栏目剧管理系统</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/logon/css/logon.css" />
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/common/image/favicon.ico" ></link>
 <link rel="icon" href="${pageContext.request.contextPath}/common/image/favicon.ico" ></link>
 </head>
 
@@ -16,7 +16,7 @@
 <s:form action="doLogon" method="post" namespace="/framework" name="logonForm">
 
 <div>
-	<img border="0" style="float:left;position:absolute;margin-top:-100px;*margin-top:0px;" src="<%=request.getContextPath() %>/logon/image/cloud.png"/>
+	<img border="0" style="float:left;position:absolute;z-index:-1;margin-top:-100px;*margin-top:0px;" src="<%=request.getContextPath() %>/logon/image/cloud.png"/>
 	
 	<div align="center">
 	<div class="sxtv_logo">
