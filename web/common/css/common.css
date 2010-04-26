@@ -93,6 +93,10 @@ label {
 .oriente{
 	color: #FF0000;	
 }
+
+.markedStatusChange {
+	color: rgb(139, 0, 255);
+}
 /*
 .yui-skin-sam .yui-dt tr.mark,.yui-skin-sam .yui-dt tr.mark td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-desc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-asc,.yui-skin-sam .yui-dt tr.mark td.yui-dt-desc
 	{
