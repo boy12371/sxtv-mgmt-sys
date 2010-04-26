@@ -88,12 +88,12 @@ function initUnArrangeTable() {
 	    formatter :formatAddTape
 	}, {
 	    key :"id",
-	    label :"影带编号",
+	    label :"编号",
 	    sortable :true,
 	    sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"vedioName",
-		label :"影带名称"
+		label :"名称"
 	}, {
 		key :"subject",
 		label :"栏目",
@@ -191,6 +191,20 @@ function initArrangeTable() {
 		elCell.style.width="auto";
 		elCell.style.textAlign="center";
 	};
+	var myRowStatusChange = function(elTr, oRecord){
+		var xData = oRecord.getData();
+		var oldCls = elTr.className;
+		elTr.title = "";
+		if(typeof(xData.marked)!="undefined" && xData.marked==-3){
+			elTr.className = oldCls + " markedStatusChange";
+			if("" != elTr.title){
+				elTr.title += "\n"+xData.comments;
+			}else{
+				elTr.title += xData.comments;
+			}
+		}
+		return true;
+	};
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -200,10 +214,10 @@ function initArrangeTable() {
 		width:30
 	}, {
 	    key :"id",
-	    label :"影带编号"
+	    label :"编号"
 	}, {
 		key :"vedioName",
-		label :"影带名称"
+		label :"名称"
 	}, {
 		key :"playDate",
 		label :"播放日期",
@@ -235,7 +249,7 @@ function initArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "avgScore", "audiScore", "companyID", "marked"],
+		fields : [ "id", "vedioName", "playDate", "subject", "topic", "dateComing", "avgScore", "audiScore", "companyID", "marked", "comments"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
@@ -245,6 +259,7 @@ function initArrangeTable() {
 	var myConfigs = {
 		initialRequest :"sort=playDate&dir=asc&month="+selMonth, // Initial
 		dynamicData :true, // Enables dynamic server-driven data
+		formatRow: myRowStatusChange,
 		sortedBy : {
 			key :"playDate",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
