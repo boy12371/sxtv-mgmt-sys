@@ -132,7 +132,7 @@ public class ArrangeAction extends BaseAction {
 				po.setPlayDate(dFormat.parse(obj.getString("playDate")));
 				po.setArrangeDate(new Date());
 				po.setAuditor(new User(getUserInfo().getUserId()));
-				
+				po.setStatus(new Integer(1));
 				int marked = obj.getInt("marked");
 				if(1<=marked){
 					newOrders.add(po);

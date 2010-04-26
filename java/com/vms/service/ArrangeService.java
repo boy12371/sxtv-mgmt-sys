@@ -39,6 +39,10 @@ public class ArrangeService implements IArrangeService{
 		for(Playorder p:orders){
 			VedioTapeVO tape = new VedioTapeVO(p.getVedioID());
 			tape.setPlayDate(p.getPlayDate());
+			if(null!=p.getStatus()&&p.getStatus()<1){
+				tape.setMarked(-3);
+				tape.setComments("该影带曾被手动更改过状态。");
+			}
 			tapes.add(tape);
 		}
 		return tapes;
