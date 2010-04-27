@@ -12,7 +12,13 @@ function buildArray(array, selectId) {
 		});
 	}
 }
-
+function buildCompaniesDataSource(ods){
+	var obj = YAHOO.util.Dom.get("vcompany");
+	var ops = obj.options;
+	for ( var i = 0; i < ops.length; i++) {
+		ods.push( { comName :ops[i].innerHTML, comID:ops[i].value });
+	}
+}
 function initDataTable() {
 	if (isBuild == false) {
 		buildArray(companies, "vcompany");
@@ -147,11 +153,27 @@ function initDataTable() {
 	getData = function() {
 		var _vid = YAHOO.util.Dom.get("vid").value;
 		var _vname = YAHOO.util.Dom.get("vname").value;
-		var _vcompany = YAHOO.util.Dom.get("vcompany");
-		var _vc = {
-			id :_vcompany.options[_vcompany.selectedIndex].value,
-			companyName :_vcompany.options[_vcompany.selectedIndex].text
-		};
+		var _vcompany = YAHOO.util.Dom.get("comName");
+//		var _vc = {
+//			id :_vcompany.options[_vcompany.selectedIndex].value,
+//			companyName :_vcompany.options[_vcompany.selectedIndex].text
+//		};
+		var _vc = null;
+		var comExsits = false;
+		for ( var i = 0; i < coms.length; i++) {
+			if(_vcompany.value == coms[i].comName){
+				_vc={
+						id : coms[i].comID,
+						companyName : coms[i].comName
+				}
+				comExsits = true;
+				break;
+			}
+		}
+		if(comExsits==false){
+			jAlert("公司名称有误！", '提示');
+			return;
+		}
 		var _vtopic = YAHOO.util.Dom.get("vtopic");
 		var _vt = {
 			id :_vtopic.options[_vtopic.selectedIndex].value,
@@ -182,7 +204,6 @@ function initDataTable() {
 				// Process the JSON data returned from the server
 			var obj = o.responseText;
 			if (obj.indexOf("SUCCESS") != -1) {
-
 				myDataTable.addRow(getData(), 0);
 			} else {
 				jAlert(obj, '提示');

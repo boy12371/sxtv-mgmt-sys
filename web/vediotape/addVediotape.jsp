@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<sx:head extraLocales="UTF-8"/>
+<sx:head extraLocales="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <link rel="stylesheet" type="text/css"
@@ -48,7 +48,8 @@
 	src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/common/js/common.js"></script>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
@@ -87,6 +88,10 @@
 	<p>调描条形码并填写或选择其他相关信息</p>
 
 	<div align="center">
+	<div style="display:none">
+	<s:select cssClass="selectField" list="comList" listKey="id"
+				listValue="companyName" id="vcompany" />
+	</div>
 	<table class="inputTable">
 		<tr>
 			<td><label>影带编号</label></td>
@@ -100,8 +105,9 @@
 		</tr>
 		<tr>
 			<td><label>影视公司</label></td>
-			<td><s:select cssClass="selectField" list="comList" listKey="id"
-				listValue="companyName" id="vcompany" /></td>
+			<td> <input id="comName"
+				class="inputField autoComplete" type="text">
+			<div id="container"></div></td>
 		</tr>
 		<tr>
 			<td><label>题材</label></td>
@@ -147,6 +153,25 @@
 </s:form>
 
 <script type="text/javascript">
+
+	var coms = new Array();
+	buildCompaniesDataSource(coms);
+	YAHOO.example.BasicLocal = function (){
+		var oDS = new YAHOO.util.LocalDataSource(coms);
+		oDS.responseSchema = {fields : ["comName", "comID"]};		
+		// Instantiate the AutoComplete 
+		var oAC = new YAHOO.widget.AutoComplete("comName", "container", oDS); 
+		oAC.prehighlightClassName = "yui-ac-prehighlight"; 
+		oAC.useShadow = true;
+		oAC.applyLocalFilter=true;
+		oAC.queryMatchContains=true;   
+		return { 
+			oDS: oDS, 
+			oAC: oAC 
+		}; 
+	}();
+	
+	
 	YAHOO.util.Event.addListener(window, "load", initDataTable());
 </script>
 

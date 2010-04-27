@@ -58,7 +58,7 @@
 		<tr>
 			<td><label>输入观众名：</label></td>
 			<td>
-	    		<input id="audienceName" class="inputField autoComplete" type="text"> 
+	    		<input id="comp" class="inputField autoComplete" type="text"> 
 	    		<div id="container"></div>  
 			</td>
 		</tr>
