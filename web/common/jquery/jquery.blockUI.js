@@ -197,6 +197,18 @@ function install(el, opts) {
 	// remove the current block (if there is one)
 	if (full && pageBlock)
 		remove(window, {fadeOut:0});
+	
+	//Yong Du change css here to put blockui in the center of browser client area.
+	if(parent!=null && typeof(parent)!="undefined"){
+		var scrTop = parent.document.getElementById("contentDiv").scrollTop;
+		if(0 != scrTop){
+			var viewHeight = window.screen.availHeight;
+			var boxHeight = 300;
+			css.top = (scrTop + (viewHeight)/2 - 300) + "px";
+		}
+	}
+	//end
+
 
 	// if an existing element is being used as the blocking content then we capture
 	// its current place in the DOM (and current display style) so we can restore
@@ -286,25 +298,25 @@ function install(el, opts) {
 
 		// simulate fixed position
 		$.each([lyr1,lyr2,lyr3], function(i,o) {
-			var s = o[0].style;
-			s.position = 'absolute';
-			if (i < 2) {
-				full ? s.setExpression('height','Math.max(document.body.scrollHeight, document.body.offsetHeight) - (jQuery.boxModel?0:'+opts.quirksmodeOffsetHack+') + "px"')
-					 : s.setExpression('height','this.parentNode.offsetHeight + "px"');
-				full ? s.setExpression('width','jQuery.boxModel && document.documentElement.clientWidth || document.body.clientWidth + "px"')
-					 : s.setExpression('width','this.parentNode.offsetWidth + "px"');
-				if (fixL) s.setExpression('left', fixL);
-				if (fixT) s.setExpression('top', fixT);
-			}
-			else if (opts.centerY) {
-				if (full) s.setExpression('top','(document.documentElement.clientHeight || document.body.clientHeight) / 2 - (this.offsetHeight / 2) + (blah = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) + "px"');
-				s.marginTop = 0;
-			}
-			else if (!opts.centerY && full) {
-				var top = (opts.css && opts.css.top) ? parseInt(opts.css.top) : 0;
-				var expression = '((document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) + '+top+') + "px"';
-				s.setExpression('top',expression);
-			}
+//			var s = o[0].style;
+//			s.position = 'absolute';
+//			if (i < 2) {
+//				full ? s.setExpression('height','Math.max(document.body.scrollHeight, document.body.offsetHeight) - (jQuery.boxModel?0:'+opts.quirksmodeOffsetHack+') + "px"')
+//					 : s.setExpression('height','this.parentNode.offsetHeight + "px"');
+//				full ? s.setExpression('width','jQuery.boxModel && document.documentElement.clientWidth || document.body.clientWidth + "px"')
+//					 : s.setExpression('width','this.parentNode.offsetWidth + "px"');
+//				if (fixL) s.setExpression('left', fixL);
+//				if (fixT) s.setExpression('top', fixT);
+//			}
+//			else if (opts.centerY) {
+//				if (full) s.setExpression('top','(document.documentElement.clientHeight || document.body.clientHeight) / 2 - (this.offsetHeight / 2) + (blah = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) + "px"');
+//				s.marginTop = 0;
+//			}
+//			else if (!opts.centerY && full) {
+//				var top = (opts.css && opts.css.top) ? parseInt(opts.css.top) : 0;
+//				var expression = '((document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) + '+top+') + "px"';
+//				s.setExpression('top',expression);
+//			}
 		});
 	}
 
