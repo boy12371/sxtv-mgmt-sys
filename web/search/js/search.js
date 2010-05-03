@@ -146,8 +146,8 @@ function initDataTable() {
 	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
-				$.unblockUI();
 				parent.resizeIframe();
+				$.unblockUI();				
 			});
 	myDataTable.subscribe("initEvent", function() {
 				addColumnsName();			
