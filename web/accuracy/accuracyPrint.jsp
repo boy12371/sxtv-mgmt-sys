@@ -51,17 +51,49 @@
 	text-align: center;
 }
 </style>
+<style type="text/css" media="print">
+.noprint {
+	display: none
+}
+</style>
+
 <title>打印预览</title>
 </head>
 <body class="yui-skin-sam">
 <s:actionerror />
 <br/><br/><br/>
-
+<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" id="wb" name="wb" width="0"></OBJECT>
+<div class="noprint" align="center">
+<div style="margin-left:-620px;">
+<div id="printDiv" style="display:inline"></div>
+<div id="closeDiv" style="display:inline"></div>
+</div>
+</div>
 <div id="date" align="center" style="margin-bottom:20px;"><h1 id="title"></h1></div>
 <div id="accuracyTableDiv" align="center"></div>
 <s:form action="" namespace="/accuracy" >
 </s:form>
 <script type="text/javascript">
+var printBtn = new YAHOO.widget.Button({  
+	label: "打印预览",  
+	id: "printBtn",  
+	container: "printDiv" }
+	); 
+printBtn.on("click",printAction);
+function printAction(){
+	wb.execwb(7,1);
+}
+
+var closeBtn = new YAHOO.widget.Button({  
+	label: "关&nbsp;&nbsp;闭",  
+	id: "closeBtn",  
+	container: "closeDiv" }
+	); 
+closeBtn.on("click",closeAction);
+function closeAction(){
+	window.close();
+}
+
 var selDate="${selDate}";
 if("" != selDate){
 	var date = selDate.split("-");
