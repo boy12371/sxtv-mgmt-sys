@@ -17,10 +17,10 @@ function initPrintTable() {
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
 	    key :"id",
-	    label :"影带编号"
+	    label :"编号"
 	}, {
 		key :"vedioName",
-		label :"影带名称"
+		label :"名称"
 	}, {
 		key :"playDate",
 		label :"播放日期",
