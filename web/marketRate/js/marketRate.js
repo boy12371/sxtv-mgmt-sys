@@ -85,7 +85,7 @@ function initDataTable() {
 		},
 		paginator :new YAHOO.widget.Paginator({
 			rowsPerPage :25,
-			firstPageLinkLabel :"第一页",
+			firstPageLinkLabel :"首页",
 			lastPageLinkLabel :" 尾页",
 			previousPageLinkLabel :" 上一页",
 			nextPageLinkLabel :" 下一页",

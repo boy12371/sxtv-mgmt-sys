@@ -34,7 +34,7 @@ function initStatusTable() {
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 10,
-			firstPageLinkLabel : "第一页",
+			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
@@ -139,7 +139,7 @@ function initTopicTable() {
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 10,
-			firstPageLinkLabel : "第一页",
+			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
@@ -374,7 +374,7 @@ function initSubjectTable() {
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 10,
-			firstPageLinkLabel : "第一页",
+			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
@@ -582,7 +582,7 @@ function initScoreWeightTable() {
 //		},
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 10,
-			firstPageLinkLabel : "第一页",
+			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
@@ -719,7 +719,7 @@ function initScoreLevelTable() {
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 25,
-			firstPageLinkLabel : "第一页",
+			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",

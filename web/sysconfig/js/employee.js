@@ -97,7 +97,7 @@ function initEmployeeDataTable() {
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 10,
-			firstPageLinkLabel : "第一页",
+			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
@@ -221,7 +221,7 @@ function initUserDataTable() {
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
 			rowsPerPage : 10,
-			firstPageLinkLabel : "第一页",
+			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
