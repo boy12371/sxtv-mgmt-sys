@@ -5,6 +5,8 @@
 	<!-- =================================================================== -->
 
 	<property environment="env" />
+	
+	<property name="bin.home" value="bin" />
 		
 	<property name="conf.home" value="web/conf" />
 
@@ -58,8 +60,10 @@
 			<fileset dir="${web.home}" />
 		</copy>
 		
-		<copy todir="${build.home}" filtering="on">
-			<fileset dir="bin" />
+		<mkdir dir="${build.home}/bin" />
+		
+		<copy todir="${build.home}/bin" filtering="on">
+			<fileset dir="${bin.home}" />
 		</copy>
 		
 		<mkdir dir="${build.web.home}/WEB-INF/classes" />
