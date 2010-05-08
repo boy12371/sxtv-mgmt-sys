@@ -58,6 +58,10 @@
 			<fileset dir="${web.home}" />
 		</copy>
 		
+		<copy todir="${build.home}" filtering="on">
+			<fileset dir="bin" />
+		</copy>
+		
 		<mkdir dir="${build.web.home}/WEB-INF/classes" />
 		
 		<antcall target="compile"></antcall>
