@@ -126,6 +126,6 @@ set PR_STDERROR=auto
 echo The service '%SERVICE_NAME%' has been installed.
 sc config %SERVICE_NAME% start= auto
 sc start %SERVICE_NAME%
-
+at 03:00 /every:M,T,W,Th,F %CATALINA_HOME%\..\bin\dbbakup.bat
 :end
 cd %CURRENT_DIR%
