@@ -143,7 +143,7 @@ function initDataTable() {
 		width:"auto"
 	};
 
-	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 				parent.resizeIframe();
@@ -443,7 +443,7 @@ function initOrderDataTable() {
 		width:"auto"
 	};
 
-	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 				rowIndex = 0;

@@ -142,12 +142,11 @@ function initDataTable() {
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
 			rowsPerPageOptions : [25, 50, 100]
 		}),
-		generateRequest : requestBuilder,
-		width:"auto"
+		generateRequest : requestBuilder//,width:"auto"
 		// ,formatRow: highLightRow
 	};
 
-	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
@@ -407,7 +406,7 @@ function initScoreDataTable(videoID) {
 
 	};
 
-	var myDataTable = new YAHOO.widget.ScrollingDataTable("dynamicdata", myColumnDefs,
+	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,

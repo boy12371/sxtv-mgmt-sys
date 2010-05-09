@@ -67,15 +67,13 @@
 </head>
 <body class="yui-skin-sam">
 
-<s:actionerror />
-<s:actionmessage />
-
-
 <h1>查看或修改影带信息</h1>
 <img class="pageImage"
 	src="${pageContext.request.contextPath}/common/images/Search.png"
 	border="0" />
 <p>输入剧目编号或名称搜索剧目</p>
+<s:actionerror />
+<s:actionmessage />
 <s:form id="searchForm" action="findVideoByNameOrID" namespace="/audit">
 	<div align="center">
 
@@ -125,7 +123,7 @@
 <a href="#" id="tableOption" style="font-size:12px">选项</a>
 	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 
-<div id="dynamicdata" align="center"></div>
+<div id="dynamicdata" align="center" style="overflow-x:scroll; border:0px solid;"></div>
 
 <div id="printDate" style="display: none">
 <h1 class="popupWindowTitle">请选择日期</h1>

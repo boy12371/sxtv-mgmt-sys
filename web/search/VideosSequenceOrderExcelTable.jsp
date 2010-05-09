@@ -95,7 +95,7 @@ document.write("打印日期: " + date.getFullYear() + "年" + (date.getMonth() 
  
   　　function printit(){
 	  　　if (confirm('确定打印吗？')) {
-	  　　wb.execwb(6,6)
+	  　　wb.execwb(6,6);
 	  　　}
   　　} 
 </script>

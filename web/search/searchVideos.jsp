@@ -85,7 +85,7 @@
 
 <div id="printBtn" align="right"></div>
 
-<div id="dynamicdata" align="center"></div>
+<div id="dynamicdata" align="center" style="overflow-x:scroll; border:0px solid;"></div>
 
 <script type="text/javascript">
 	YAHOO.util.Event.addListener(window, "load", initDataTable());

@@ -153,7 +153,7 @@
 <img class="pageImage" src="${pageContext.request.contextPath}/common/images/score.png" border="0">
 <p>评分人员对此剧目的评分情况</p>
 
-<div id="dynamicdata" align="center"></div>
+<div id="dynamicdata" align="center" style="overflow-x:scroll; border:0px solid;"></div>
 
 <script type="text/javascript">
 	YAHOO.util.Event.addListener(window, "load", initScoreDataTable());
