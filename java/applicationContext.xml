@@ -187,6 +187,7 @@
 		<property name="auditingDAO" ref="auditingDAO" />
 		<property name="vedioscoreDAO" ref="vedioscoreDAO" />
 		<property name="scorelevelDAO" ref="scorelevelDAO" />
+		<property name="playorderDAO" ref="playorderDAO"/>
 	</bean>
 	<bean id="vedioscoreService" class="com.vms.service.VedioscoreService">
 		<property name="vedioscoreDAO" ref="vedioscoreDAO" />
