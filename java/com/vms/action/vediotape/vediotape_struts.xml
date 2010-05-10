@@ -81,12 +81,12 @@
 		<action name="searchVideoByNameOrIDForStatusAdjust" class="vedioMgmt"
 			method="searchVideoByNameOrID">
 			<result>/vediotape/statusAdjust.jsp</result>
-			<result>/vediotape/statusAdjust.jsp</result>
+			<result name="input">/vediotape/statusAdjust.jsp</result>
 		</action>
 
 		<action name="doAdjustVideoStatus" class="vedioMgmt" method="doAdjustVideoStatus">
 			<result>/vediotape/statusAdjust.jsp</result>
-			<result>/vediotape/statusAdjust.jsp</result>
+			<result  name="input">/vediotape/statusAdjust.jsp</result>
 		</action>
 	</package>
 </struts>
