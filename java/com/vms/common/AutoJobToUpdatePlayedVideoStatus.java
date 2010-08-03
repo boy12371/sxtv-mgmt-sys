@@ -30,9 +30,10 @@ public class AutoJobToUpdatePlayedVideoStatus{
 				v.setStatus(new Status(8));
 				if(vediotapeService.updateVideo(v)){
 					logger.warn((cal.getTime().toLocaleString()+" system update status to 8(played) of video: "+ v.getVedioName()+"/id:"+v.getId()));
-					
 				}		
 			}	
+		}else{
+			logger.warn("0 vedios founds and 0 updated on "+cal.getTime().toLocaleString());
 		}
 	}
 
