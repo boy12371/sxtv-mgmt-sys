@@ -45,7 +45,7 @@
 	</tr>
 	<tr>
 		<td><label>送带日期</label></td>
-		<td><s:date name="video.dateComing" /></td>
+		<td><s:date name="video.dateComing" format="yyyy-MM-dd"/></td>
 	</tr>
 	<tr>
 		<td><label>栏目</label></td>
