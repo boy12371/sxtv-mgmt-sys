@@ -264,7 +264,7 @@
 			<ref bean="scheduledUpdateJobDetail" />
 		</property>
 		<property name="cronExpression">
-			<value>0 30 13 * * ?</value>
+			<value>0 15 10 * * ? *</value>
 		</property>
 	</bean>
 	<!--
