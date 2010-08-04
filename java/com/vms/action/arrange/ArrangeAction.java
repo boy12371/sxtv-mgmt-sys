@@ -165,6 +165,10 @@ public class ArrangeAction extends BaseAction {
 	
 	public String toArrangedHistory() throws Exception{
 		Date fDate = arrangeService.getFirstArrangedDate();
+		if(null==fDate) {
+			this.addActionError("暂无历史数据。");
+			return SUCCESS;
+		}
 		SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd");
 		firstArrangedDate = dateFm.format(fDate);
 		nowDate = dateFm.format(new Date());
