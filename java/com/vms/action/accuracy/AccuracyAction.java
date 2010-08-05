@@ -47,6 +47,10 @@ public class AccuracyAction extends BaseAction {
 	
 	public String toAccuracy() throws Exception{
 		Date fDate = arrangeService.getFirstArrangedDate();
+		if(null==fDate) {
+			this.addActionError("暂无数据。");
+			return SUCCESS;
+		}
 		SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd");
 		String firDate = dateFm.format(fDate);
 		Integer year1st = Integer.parseInt(firDate.split("-")[0]);
