@@ -27,13 +27,14 @@ public class AutoJobToUpdatePlayedVideoStatus{
 		if(list != null && !list.isEmpty()){
 			for (Playorder playorder : list) {
 				Vediotape v = playorder.getVedioID();
+				int formerStatus = v.getStatus().getId();
 				v.setStatus(new Status(8));
 				if(vediotapeService.updateVideo(v)){
-					logger.warn((cal.getTime().toLocaleString()+" system update status to 8(played) of video: "+ v.getVedioName()+"/id:"+v.getId()));
+					logger.info("SYSTEM AUTO JOB===== "+(cal.getTime().toLocaleString()+" system update status from "+formerStatus+"(preparing play) to 8(played) of video: "+ v.getVedioName()+"/id:"+v.getId()));
 				}		
 			}	
 		}else{
-			logger.warn("0 vedios founds and 0 updated on "+cal.getTime().toLocaleString());
+			logger.info("SYSTEM AUTO JOB===== 0 vedios founds and 0 updated on "+cal.getTime().toLocaleString());
 		}
 	}
 
