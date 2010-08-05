@@ -97,6 +97,9 @@ function initAccuracyTable() {
 }
 
 function filterFunc(){
+	var selYear = YAHOO.util.Dom.get("selectYear").value;
+	if(null==selYear || ""==selYear) return;
+	
 	var oState = myDataTable.getState();
 	oState.pagination.recordOffset = 0;
 	var callback = {
