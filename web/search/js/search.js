@@ -601,3 +601,214 @@ function initOrderDataTable() {
 
 }
 
+function initExcelTable(ds) {
+
+	var formattorDing = function(elCell, oRecord, oColumn, sData) {
+		elCell.innerHTML = "<input type=checkbox name=ding />";
+	}
+
+	var sortScores = function(a, b, desc){
+		 if(!YAHOO.lang.isValue(a)) {
+             return (!YAHOO.lang.isValue(b)) ? 0 : 1;
+         }
+         else if(!YAHOO.lang.isValue(b)) {
+             return -1;
+         }
+		 
+		 var _aScores = a.getData("vedioscores");
+		 var _bScores = b.getData("vedioscores");
+		
+		 var _aAvgScore = 0;
+		 var _aTotal = 0;
+			for (var i = 0; i < _aScores.length; i++) {
+				
+				_aTotal += _aScores[i].score;
+			}
+		_aAvgScore = _aTotal / _aScores.length;
+		
+		 var _bAvgScore = 0;
+		 var _bTotal = 0;
+			for (var i = 0; i < _bScores.length; i++) {
+				_bTotal += _bScores[i].score;
+			}
+		_bAvgScore = _bTotal / _bScores.length;
+		
+         // First compare by state
+         var comp = YAHOO.util.Sort.compare;
+         var compState = comp(_aAvgScore, _bAvgScore, desc);
+         return compState;
+	}
+
+	// Column definitions
+	var myColumnDefs = [ {
+		key :"id",
+		label :"编号"
+	}, {
+		key :"vedioName",
+		label :"剧目名称"
+	}, {
+		key :"topic",
+		label :"题材",
+		formatter :formatTopic
+	}, {
+		key :"subject",
+		label :"栏目",
+		formatter :formatSubject
+	}, {
+		key :"companyID",
+		label :"影视公司",
+		formatter :formatCompany
+	}, {
+		key :"dateInput",
+		label :"收带日期",
+		formatter :formatDate
+	}, {
+		key :"status",
+		label :"状态",
+		formatter :formatStatus
+	}, {
+		key :"marketShare",
+		label :"市场份额"
+	}, {
+		key :"audienceRating",
+		label :"收视率"
+	}, {
+		key :"vedioscores",
+		label :"综合平均分",
+		formatter :formatScroes,
+		sortable:true,
+		sortOptions:{sortFunction:sortScores}
+	}, {
+		key :"purchase",
+		label :"购买意见",
+		formatter :formatPurchase
+	}, {
+		key :"awarding",
+		label :"获奖备选(是/否)",
+		formatter :formatAward
+	}, {
+		key :"audiencescore",
+		label :"观众投票(看/不看)",
+		formatter :formatAudienceScore
+	}, {
+		key :"comments",
+		label :"备注",
+		formatter :formatorComments
+	}
+//	,{
+//		key :"dingpian",
+//		label :"定片",
+//		formatter :formattorDing
+//	}, {
+//		key :"remark",
+//		label :"说明"
+//	} 
+	];
+
+	// DataSource instance
+	var myDataSource = new YAHOO.util.DataSource(ds);
+	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+	myDataSource.responseSchema = {
+		resultsList :"records",
+		fields : [ "id", "vedioName", "topic", "subject", "companyID",
+				"dateInput", "status", "marketShare", "audienceRating",
+				"vedioscores", "purchase", "awarding", "audiencescore",
+				"comments" ],
+		metaFields : {
+			totalRecords :"totalRecords" // Access to value in the server
+	// response
+	}
+	}
+	// DataTable configuration
+	var myConfigs = {
+		sortedBy : {
+			key :"dateInput",
+			dir :YAHOO.widget.DataTable.CLASS_ASC
+		},
+		caption :"<h1>百家,都市审看记录统计</h1>"
+	};
+
+	var myDataTable = new YAHOO.widget.DataTable("excelTable",
+			myColumnDefs, myDataSource, myConfigs);
+
+	// Update totalRecords on the fly with value from server
+	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+			oPayload) {
+		oPayload.totalRecords = oResponse.meta.totalRecords;
+		return oPayload;
+	}
+	var columnSet = myDataTable.getColumnSet();
+	var showHideColumn = function(e) {
+		var column = columnSet.getColumn(this.value);
+		if (this.checked) {
+			myDataTable.hideColumn(column);
+		} else {
+			myDataTable.showColumn(column);
+		}
+	}
+	var colDiv = YAHOO.util.Dom.get("colDiv");
+	var colLink = YAHOO.util.Dom.get("tableOption");
+	YAHOO.util.Event.addListener(colLink, "click", function() {
+		colDiv.style.display = colDiv.style.display == "block" ? "none"
+				: "block";
+	});
+	addColumnsName = function() {
+		if (colDiv.innerHTML.length == 0) {
+			for ( var i = 0; i < myColumnDefs.length; i++) {
+				var column = myColumnDefs[i];
+				var checkbox = document.createElement("INPUT");
+				checkbox.type = "checkbox";
+				checkbox.name = "colCkbox";
+				checkbox.value = column.key;
+				checkbox.checked = false;
+				colDiv.appendChild(checkbox);
+				var p = document.createElement("SPAN");
+				p.innerHTML = column.label;
+				colDiv.appendChild(p);
+				if (i % 2 == 1) {
+					var br = document.createElement("BR");
+					colDiv.appendChild(br);
+				}
+
+				YAHOO.util.Event.addListener(checkbox, "click",
+						showHideColumn);
+				colDiv.style.display = "none";
+			}
+		}
+	};
+	myDataTable.subscribe("renderEvent", function() {
+		addColumnsName();
+	});
+	return {
+		ds :myDataSource,
+		dt :myDataTable
+	};
+
+}
+
+function getDataSource(){
+	var callbacks = {
+	        success : function (o) {
+	            YAHOO.log("RAW JSON DATA: " + o.responseText);
+	            // Process the JSON data returned from the server
+	            var records = "";
+	            try {
+	            	records = YAHOO.lang.JSON.parse(o.responseText);
+	            	initExcelTable(records);
+	            }
+	            catch (x) {
+	                alert("JSON Parse failed!");
+	                return;
+	            }
+	        },
+
+	        failure : function (o) {
+	            if (!YAHOO.util.Connect.isCallInProgress(o)) {
+	                alert("Async call failed!");
+	            }
+	        },
+	        timeout : 3000
+	    };
+	YAHOO.util.Connect.asyncRequest('GET',actionUrl, callbacks);
+	
+}
