@@ -109,6 +109,14 @@ label {
 	color: #FFFFFF;
 }
 */
+.yui-skin-sam .yui-dt-liner {
+	font-size:11pt;
+	white-space: nowrap;
+}
+.yui-skin-sam .yui-dt-liner {
+	margin:0;
+	padding:3px 5px;
+}
 .autoComplete {
 	width: 200px !important;
 	position: relative !important;
