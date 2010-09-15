@@ -7,16 +7,19 @@ function buildArray(array, selectId) {
 	var ops = obj.options;
 	for ( var i = 0; i < ops.length; i++) {
 		array.push( {
-			label :ops[i].innerHTML,
-			value :ops[i].value
+			label : ops[i].innerHTML,
+			value : ops[i].value
 		});
 	}
 }
-function buildCompaniesDataSource(ods){
+function buildCompaniesDataSource(ods) {
 	var obj = YAHOO.util.Dom.get("vcompany");
 	var ops = obj.options;
 	for ( var i = 0; i < ops.length; i++) {
-		ods.push( { comName :ops[i].innerHTML, comID:ops[i].value });
+		ods.push( {
+			comName : ops[i].innerHTML,
+			comID : ops[i].value
+		});
 	}
 }
 function initDataTable() {
@@ -40,8 +43,8 @@ function initDataTable() {
 			for ( var i = 0; i < companies.length; i++) {
 				if (_id == companies[i].value) {
 					oData = {
-						id :companies[i].value,
-						companyName :companies[i].label
+						id : companies[i].value,
+						companyName : companies[i].label
 					}
 				}
 			}
@@ -55,8 +58,8 @@ function initDataTable() {
 			for ( var i = 0; i < topices.length; i++) {
 				if (_id == topices[i].value) {
 					oData = {
-						id :topices[i].value,
-						topic :topices[i].label
+						id : topices[i].value,
+						topic : topices[i].label
 					}
 				}
 			}
@@ -71,8 +74,8 @@ function initDataTable() {
 			for ( var i = 0; i < subjects.length; i++) {
 				if (_id == subjects[i].value) {
 					oData = {
-						id :subjects[i].value,
-						subject :subjects[i].label
+						id : subjects[i].value,
+						subject : subjects[i].label
 					}
 				}
 			}
@@ -81,52 +84,52 @@ function initDataTable() {
 	}
 	// var subjectSel = ;
 	var myColumnDefs = [ {
-		key :"vid",
-		label :"编号",
-		sortable :true
+		key : "vid",
+		label : "编号",
+		sortable : true
 	}, {
-		key :"vname",
-		label :"剧目名称",
-		editor :new YAHOO.widget.TextboxCellEditor( {
-			disableBtns :true
+		key : "vname",
+		label : "剧目名称",
+		editor : new YAHOO.widget.TextboxCellEditor( {
+			disableBtns : true
 		})
 	}, {
-		key :"vcompany",
-		label :"影视公司",
-		sortable :true,
-		formatter :formatCompany,
-		editor :new YAHOO.widget.DropdownCellEditor( {
-			dropdownOptions :companies,
-			disableBtns :true
+		key : "vcompany",
+		label : "影视公司",
+		sortable : true,
+		formatter : formatCompany,
+		editor : new YAHOO.widget.DropdownCellEditor( {
+			dropdownOptions : companies,
+			disableBtns : true
 		})
 	}, {
-		key :"vtopic",
-		label :"题材",
-		sortable :true,
-		formatter :formatTopic,
-		editor :new YAHOO.widget.DropdownCellEditor( {
-			dropdownOptions :topices,
-			disableBtns :true
+		key : "vtopic",
+		label : "题材",
+		sortable : true,
+		formatter : formatTopic,
+		editor : new YAHOO.widget.DropdownCellEditor( {
+			dropdownOptions : topices,
+			disableBtns : true
 		})
 	}, {
-		key :"vsubject",
-		label :"栏目",
-		sortable :true,
-		formatter :formatSubject,
-		editor :new YAHOO.widget.DropdownCellEditor( {
-			dropdownOptions :subjects,
-			disableBtns :true
+		key : "vsubject",
+		label : "栏目",
+		sortable : true,
+		formatter : formatSubject,
+		editor : new YAHOO.widget.DropdownCellEditor( {
+			dropdownOptions : subjects,
+			disableBtns : true
 		})
 	}, {
-		key :"vcomments",
-		label :"备注",
-		formatter :formatorRemarks,
-		editor :new YAHOO.widget.TextareaCellEditor( {
-			disableBtns :false
+		key : "vcomments",
+		label : "备注",
+		formatter : formatorRemarks,
+		editor : new YAHOO.widget.TextareaCellEditor( {
+			disableBtns : false
 		})
 	} ];
 
-	var myDataSource = new YAHOO.util.DataSource([]);
+	var myDataSource = new YAHOO.util.DataSource( []);
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
 	myDataSource.responseSchema = {
 		fields : [ "vid", "vname", "vcompany", "vtopic", "vsubject",
@@ -154,45 +157,45 @@ function initDataTable() {
 		var _vid = YAHOO.util.Dom.get("vid").value;
 		var _vname = YAHOO.util.Dom.get("vname").value;
 		var _vcompany = YAHOO.util.Dom.get("comName");
-//		var _vc = {
-//			id :_vcompany.options[_vcompany.selectedIndex].value,
-//			companyName :_vcompany.options[_vcompany.selectedIndex].text
-//		};
+		// var _vc = {
+		// id :_vcompany.options[_vcompany.selectedIndex].value,
+		// companyName :_vcompany.options[_vcompany.selectedIndex].text
+		// };
 		var _vc = null;
 		var comExsits = false;
 		for ( var i = 0; i < coms.length; i++) {
-			if(_vcompany.value == coms[i].comName){
-				_vc={
-						id : coms[i].comID,
-						companyName : coms[i].comName
+			if (_vcompany.value == coms[i].comName) {
+				_vc = {
+					id : coms[i].comID,
+					companyName : coms[i].comName
 				}
 				comExsits = true;
 				break;
 			}
 		}
-		if(comExsits==false){
+		if (comExsits == false) {
 			jAlert("公司名称有误！", '提示');
 			return;
 		}
 		var _vtopic = YAHOO.util.Dom.get("vtopic");
 		var _vt = {
-			id :_vtopic.options[_vtopic.selectedIndex].value,
-			topic :_vtopic.options[_vtopic.selectedIndex].text
+			id : _vtopic.options[_vtopic.selectedIndex].value,
+			topic : _vtopic.options[_vtopic.selectedIndex].text
 		};
 		var _vsubject = YAHOO.util.Dom.get("vsubject");
 		var _vs = {
-			id :_vsubject.options[_vsubject.selectedIndex].value,
-			subject :_vsubject.options[_vsubject.selectedIndex].text
+			id : _vsubject.options[_vsubject.selectedIndex].value,
+			subject : _vsubject.options[_vsubject.selectedIndex].text
 		};
 
 		var _vcomments = YAHOO.util.Dom.get("vcomments").value;
 		return {
-			vid :_vid,
-			vname :_vname,
-			vcompany :_vc,
-			vtopic :_vt,
-			vsubject :_vs,
-			vcomments :_vcomments
+			vid : _vid,
+			vname : _vname,
+			vcompany : _vc,
+			vtopic : _vt,
+			vsubject : _vs,
+			vcomments : _vcomments
 		};
 
 	};
@@ -215,7 +218,7 @@ function initDataTable() {
 				jAlert('Async call failed!', '提示');
 			}
 		},
-		timeout :3000
+		timeout : 3000
 		}
 
 		var videoName = YAHOO.util.Dom.get("vname").value;
@@ -319,44 +322,42 @@ function initDataTable() {
 	};
 
 	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu", {
-		trigger :myDataTable.getTbodyEl()
+		trigger : myDataTable.getTbodyEl()
 	});
 	myContextMenu.addItem("删除");
 	// Render the ContextMenu instance to the parent container of the DataTable
 	myContextMenu.render("cellediting");
 	myContextMenu.clickEvent.subscribe(onContextMenuClick, myDataTable);
 	return {
-		oDS :myDataSource,
-		oDT :myDataTable
+		oDS : myDataSource,
+		oDT : myDataTable
 	};
 }
 
 var toArrangeTableCallBack = {
-		success : function (o) {
-		    YAHOO.log("RAW JSON DATA: " + o.responseText);
-		    // Process the JSON data returned from the server
-		    var records = "";
-		    try {
-		    	records = YAHOO.lang.JSON.parse(o.responseText);
-		    	initToArrangeTable(records);
-		    }
-		    catch (x) {
-		        alert("JSON Parse failed!");
-		        return;
-		    }
-		},
-		
-		failure : function (o) {
-		    if (!YAHOO.util.Connect.isCallInProgress(o)) {
-		        alert("Async call failed!");
-		    }
-		},
-		timeout : 3000
-	
+	success : function(o) {
+		// Process the JSON data returned from the server
+	var records = "";
+	try {
+		records = YAHOO.lang.JSON.parse(o.responseText);
+		initToArrangeTable(records);
+	} catch (x) {
+		alert("JSON Parse failed!");
+		return;
+	}
+},
+
+failure : function(o) {
+	if (!YAHOO.util.Connect.isCallInProgress(o)) {
+		alert("Async call failed!");
+	}
+},
+timeout : 3000
+
 };
 
-function initArrangeTableDataSource(url,callBack){
-	YAHOO.util.Connect.asyncRequest('GET',url, callBack);
+function initArrangeTableDataSource(url, callBack) {
+	YAHOO.util.Connect.asyncRequest('GET', url, callBack);
 }
 
 function initToArrangeTable(ds) {
@@ -404,106 +405,113 @@ function initToArrangeTable(ds) {
 	// Column definitions
 	var myColumnDefs = [
 			{
-				key :"checkbox",
-				label :"<input id='Aheader_checkbox' class='yui-dt-checkbox' type='checkbox'>",
-				sortable :false,
-				resizeable :false,
-				formatter :FormatCheckboxCell
+				key : "checkbox",
+				label : "<input id='Aheader_checkbox' class='yui-dt-checkbox' type='checkbox'>",
+				sortable : false,
+				resizeable : false,
+				formatter : FormatCheckboxCell
 			}, {
-				key :"id",
-				label :"编号",
-				sortable :true,
-				formatter :formatLink
+				key : "id",
+				label : "编号",
+				sortable : true,
+				formatter : formatLink
 			}, {
-				key :"vedioName",
-				label :"剧目名称"
+				key : "vedioName",
+				label : "剧目名称"
 			}, {
-				key :"topic",
-				label :"题材",
-				sortable :true,
-				formatter :formatTopic
+				key : "topic",
+				label : "题材",
+				sortable : true,
+				formatter : formatTopic,
+				sortOptions : {
+					sortFunction : sortTopic
+				}
 			}, {
-				key :"subject",
-				label :"栏目",
-				sortable :true,
-				formatter :formatSubject
+				key : "subject",
+				label : "栏目",
+				sortable : true,
+				formatter : formatSubject,
+				sortOptions : {
+					sortFunction : sortSubject
+				}
 			}, {
-				key :"companyID",
-				label :"影视公司",
-				sortable :true,
-				formatter :formatCompany
+				key : "companyID",
+				label : "影视公司",
+				sortable : true,
+				formatter : formatCompany,
+				sortOptions : {
+					sortFunction : sortCompany
+				}
 			}, {
-				key :"dateInput",
-				label :"收带日期",
-				sortable :true,
-				formatter :formatDate
+				key : "dateInput",
+				label : "收带日期",
+				sortable : true,
+				formatter : formatDate
 			}, {
-				key :"status",
-				label :"状态",
-				sortable :true,
-				formatter :formatStatus
+				key : "status",
+				label : "状态",
+				formatter : formatStatus
 			}, {
-				key :"vedioscores",
-				label :"综合平均分",
-				formatter :formatScroes,
-				sortable:true,
-				sortOptions:{sortFunction:sortScores}
+				key : "vedioscores",
+				label : "综合平均分",
+				formatter : formatScroes,
+				sortable : true,
+				sortOptions : {
+					sortFunction : sortScores
+				}
 			}, {
-				key :"audiencescore",
-				label :"观众投票(看/不看)",
-				formatter :formatAudienceScore
+				key : "audiencescore",
+				label : "观众投票(看/不看)",
+				formatter : formatAudienceScore
 			}, {
-				key :"award",
-				label :"获奖备选(是/否)",
-				formatter :formatAward
+				key : "award",
+				label : "获奖备选(是/否)",
+				formatter : formatAward
 			}, {
-				key :"comments",
-				label :"备注",
-				formatter :formatorComments
+				key : "comments",
+				label : "备注",
+				formatter : formatorComments
 			} ];
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource(ds);
-//			"/tv/audit/filterVideos.action?filter=3&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
-//	myDataSource.connXhrMode = "queueRequests";
 	myDataSource.responseSchema = {
-		resultsList :"records",
+		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "vedioscores", "vedioscores",
 				"audiencescore", "comments" ],
 		metaFields : {
-			totalRecords :"totalRecords" // Access to value in the server
-	// response
-	}
+			totalRecords : "totalRecords"
+		}
 	};
 
 	// DataTable configuration
 	var myConfigs = {
-	//	initialRequest :"sort=dateInput&dir=asc&startIndex=-1&results=25",
-	//	dynamicData :true,
+		// initialRequest :"sort=dateInput&dir=asc&startIndex=-1&results=25",
+		// dynamicData :true,
 		sortedBy : {
-			key :"dateInput",
-			dir :YAHOO.widget.DataTable.CLASS_ASC
+			key : "dateInput",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
 		},
-		paginator :new YAHOO.widget.Paginator(
+		paginator : new YAHOO.widget.Paginator(
 				{
-					rowsPerPage :25,
-					firstPageLinkLabel :"首页",
-					lastPageLinkLabel :" 尾页",
-					previousPageLinkLabel :" 上一页",
-					nextPageLinkLabel :" 下一页",
-					template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-					pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+					rowsPerPage : 25,
+					firstPageLinkLabel : "首页",
+					lastPageLinkLabel : " 尾页",
+					previousPageLinkLabel : " 上一页",
+					nextPageLinkLabel : " 下一页",
+					template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+					pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
 					rowsPerPageOptions : [ 25, 50, 100 ]
 				}),
-		width:"auto"
+		width : "auto"
 	};
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.ScrollingDataTable("makeToArrange", myColumnDefs,
-			myDataSource, myConfigs);
+	var myDataTable = new YAHOO.widget.ScrollingDataTable("makeToArrange",
+			myColumnDefs, myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 		$.unblockUI();
 		addColumnsName();
@@ -511,7 +519,7 @@ function initToArrangeTable(ds) {
 	});
 	myDataSource.subscribe("requestEvent", function() {
 		$.blockUI( {
-			message :"<h1>数据加载中......</h1>"
+			message : "<h1>数据加载中......</h1>"
 		});
 	});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
@@ -526,24 +534,25 @@ function initToArrangeTable(ds) {
 	var headerCheckbox = YAHOO.util.Dom.get("Aheader_checkbox");
 	YAHOO.util.Event.addListener(headerCheckbox, "click",
 			OnHeaderCheckboxClicked);
-	//column select option
+	// column select option
 	var columnSet = myDataTable.getColumnSet();
 	var showHideColumn = function(e) {
 		var container = document.getElementById("makeToArrange");
-		if(typeof(container.originalWidth)=="undefined" || container.originalWidth==null){
+		if (typeof (container.originalWidth) == "undefined"
+				|| container.originalWidth == null) {
 			container.originalWidth = container.offsetWidth;
 		}
-		
+
 		var column = columnSet.getColumn(this.value);
 		if (this.checked) {
 			myDataTable.hideColumn(column);
 		} else {
 			myDataTable.showColumn(column);
 		}
-		
+
 		var tables = container.getElementsByTagName("table");
-		if(null!=tables&&0!=tables.length){
-			if(tables[0].offsetWidth<container.originalWidth){
+		if (null != tables && 0 != tables.length) {
+			if (tables[0].offsetWidth < container.originalWidth) {
 				container.style.width = tables[0].offsetWidth + "px";
 			}
 		}
@@ -552,16 +561,16 @@ function initToArrangeTable(ds) {
 	var colDiv = YAHOO.util.Dom.get("colDiv");
 	var colLink = YAHOO.util.Dom.get("tableOption");
 	YAHOO.util.Event.addListener(colLink, "click", function() {
-				colDiv.style.display = colDiv.style.display == "block"
-						? "none"
-						: "block";
-				return false;
-			});
+		colDiv.style.display = colDiv.style.display == "block" ? "none"
+				: "block";
+		return false;
+	});
 	var addColumnsName = function() {
 		if (colDiv.innerHTML.length == 0) {
-			for (var i = 0; i < myColumnDefs.length; i++) {
+			for ( var i = 0; i < myColumnDefs.length; i++) {
 				var column = myColumnDefs[i];
-				if(column.key=="checkbox") continue;
+				if (column.key == "checkbox")
+					continue;
 				var checkbox = document.createElement("INPUT");
 				checkbox.type = "checkbox";
 				checkbox.name = "colCkbox";
@@ -581,41 +590,38 @@ function initToArrangeTable(ds) {
 			}
 		}
 	};
-	
+
 	return {
-		ds :myDataSource,
-		dt :myDataTable
+		ds : myDataSource,
+		dt : myDataTable
 	};
 
 }
 
-
-
-function initPassTableDataSource(url,callBack){
-	YAHOO.util.Connect.asyncRequest('GET',url, callBack);
+function initPassTableDataSource(url, callBack) {
+	YAHOO.util.Connect.asyncRequest('GET', url, callBack);
 }
 var toToPassTableCallBack = {
-		success : function (o) {
-		    YAHOO.log("RAW JSON DATA: " + o.responseText);
-		    // Process the JSON data returned from the server
-		    var records = "";
-		    try {
-		    	records = YAHOO.lang.JSON.parse(o.responseText);
-		    	initToPassTable(records);
-		    }
-		    catch (x) {
-		        alert("JSON Parse failed!");
-		        return;
-		    }
-		},
-		
-		failure : function (o) {
-		    if (!YAHOO.util.Connect.isCallInProgress(o)) {
-		        alert("Async call failed!");
-		    }
-		},
-		timeout : 3000
-	
+	success : function(o) {
+		YAHOO.log("RAW JSON DATA: " + o.responseText);
+		// Process the JSON data returned from the server
+	var records = "";
+	try {
+		records = YAHOO.lang.JSON.parse(o.responseText);
+		initToPassTable(records);
+	} catch (x) {
+		alert("JSON Parse failed!");
+		return;
+	}
+},
+
+failure : function(o) {
+	if (!YAHOO.util.Connect.isCallInProgress(o)) {
+		alert("Async call failed!");
+	}
+},
+timeout : 3000
+
 };
 var myDataTablePass = null;
 function initToPassTable(ds) {
@@ -663,11 +669,11 @@ function initToPassTable(ds) {
 	// Column definitions
 	var myColumnDefs = [
 			{
-				key :"checkbox",
-				label :"<input id='Pheader_checkbox' class='yui-dt-checkbox' type='checkbox'>",
-				sortable :false,
-				resizeable :false,
-				formatter :FormatCheckboxCell
+				key : "checkbox",
+				label : "<input id='Pheader_checkbox' class='yui-dt-checkbox' type='checkbox'>",
+				sortable : false,
+				resizeable : false,
+				formatter : FormatCheckboxCell
 			}, {
 				key : "id",
 				label : "编号",
@@ -680,17 +686,26 @@ function initToPassTable(ds) {
 				key : "topic",
 				label : "题材",
 				sortable : true,
-				formatter : formatTopic
+				formatter : formatTopic,
+				sortOptions : {
+					sortFunction : sortTopic
+				}
 			}, {
 				key : "subject",
 				label : "栏目",
 				sortable : true,
-				formatter : formatSubject
+				formatter : formatSubject,
+				sortOptions : {
+					sortFunction : sortSubject
+				}
 			}, {
 				key : "companyID",
 				label : "影视公司",
 				sortable : true,
-				formatter : formatCompany
+				formatter : formatCompany,
+				sortOptions : {
+					sortFunction : sortCompany
+				}
 			}, {
 				key : "dateInput",
 				label : "收带日期",
@@ -699,20 +714,21 @@ function initToPassTable(ds) {
 			}, {
 				key : "status",
 				label : "状态",
-				sortable : true,
 				formatter : formatStatus
 			}, {
-				key :"vedioscores",
-				label :"综合平均分",
-				formatter :formatScroes,
-				sortable:true,
-				sortOptions:{sortFunction:sortScores}
+				key : "vedioscores",
+				label : "综合平均分",
+				formatter : formatScroes,
+				sortable : true,
+				sortOptions : {
+					sortFunction : sortScores
+				}
 			}, {
 				key : "audiencescore",
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
 			}, {
-				key : "award",
+				key : "fvedioscores",
 				label : "获奖备选(是/否)",
 				formatter : formatAward
 			}, {
@@ -723,46 +739,42 @@ function initToPassTable(ds) {
 
 	// DataSource instance
 	var myDataSource = new YAHOO.util.DataSource(ds)
-//			"/tv/audit/filterVideos.action?filter=5&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
-//	myDataSource.connXhrMode = "queueRequests";
 	myDataSource.responseSchema = {
-		resultsList :"records",
+		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-					"dateInput", "status", "vedioscores", "vedioscores",
-					"audiencescore", "comments" ],
+				"dateInput", "status", "vedioscores", "audiencescore",
+				"comments" ],
 		metaFields : {
-			totalRecords :"totalRecords" // Access to value in the server
+			totalRecords : "totalRecords" // Access to value in the server
 	// response
 	}
 	};
 
 	// DataTable configuration
 	var myConfigs = {
-//		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25",
-//		dynamicData :true,
 		sortedBy : {
-			key :"dateInput",
-			dir :YAHOO.widget.DataTable.CLASS_ASC
+			key : "dateInput",
+			dir : YAHOO.widget.DataTable.CLASS_ASC
 		},
-		paginator :new YAHOO.widget.Paginator(
+		paginator : new YAHOO.widget.Paginator(
 				{
-					rowsPerPage :25,
-					firstPageLinkLabel :"首页",
-					lastPageLinkLabel :" 尾页",
-					previousPageLinkLabel :" 上一页",
-					nextPageLinkLabel :" 下一页",
-					template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-					pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
+					rowsPerPage : 25,
+					firstPageLinkLabel : "首页",
+					lastPageLinkLabel : " 尾页",
+					previousPageLinkLabel : " 上一页",
+					nextPageLinkLabel : " 下一页",
+					template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+					pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
 					rowsPerPageOptions : [ 25, 50, 100 ]
 				}),
-		width:"auto"
+		width : "auto"
 	};
 
 	// DataTable instance
 
-	var myDataTablePass = new YAHOO.widget.ScrollingDataTable("makeToPass", myColumnDefs,
-			myDataSource, myConfigs);
+	var myDataTablePass = new YAHOO.widget.ScrollingDataTable("makeToPass",
+			myColumnDefs, myDataSource, myConfigs);
 
 	myDataTablePass.subscribe("renderEvent", function() {
 		$.unblockUI();
@@ -771,11 +783,13 @@ function initToPassTable(ds) {
 	});
 	myDataTablePass.subscribe("requestEvent", function() {
 		$.blockUI( {
-			message :"<h1>数据加载中......</h1>"
+			message : "<h1>数据加载中......</h1>"
 		});
 	});
-	myDataTablePass.subscribe("rowMouseoverEvent", myDataTablePass.onEventHighlightRow);
-	myDataTablePass.subscribe("rowMouseoutEvent", myDataTablePass.onEventUnhighlightRow);
+	myDataTablePass.subscribe("rowMouseoverEvent",
+			myDataTablePass.onEventHighlightRow);
+	myDataTablePass.subscribe("rowMouseoutEvent",
+			myDataTablePass.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
 	myDataTablePass.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
@@ -785,25 +799,26 @@ function initToPassTable(ds) {
 	var headerCheckbox = YAHOO.util.Dom.get("Pheader_checkbox");
 	YAHOO.util.Event.addListener(headerCheckbox, "click",
 			OnHeaderCheckboxClicked);
-	
-	//column select option
+
+	// column select option
 	var columnSet = myDataTablePass.getColumnSet();
 	var showHideColumnPass = function(e) {
 		var container = document.getElementById("makeToPass");
-		if(typeof(container.originalWidth)=="undefined" || container.originalWidth==null){
+		if (typeof (container.originalWidth) == "undefined"
+				|| container.originalWidth == null) {
 			container.originalWidth = container.offsetWidth;
 		}
-		
+
 		var column = columnSet.getColumn(this.value);
 		if (this.checked) {
 			myDataTablePass.hideColumn(column);
 		} else {
 			myDataTablePass.showColumn(column);
 		}
-		
+
 		var tables = container.getElementsByTagName("table");
-		if(null!=tables&&0!=tables.length){
-			if(tables[0].offsetWidth<container.originalWidth){
+		if (null != tables && 0 != tables.length) {
+			if (tables[0].offsetWidth < container.originalWidth) {
 				container.style.width = tables[0].offsetWidth + "px";
 			}
 		}
@@ -812,16 +827,16 @@ function initToPassTable(ds) {
 	var colDiv = YAHOO.util.Dom.get("colDivPass");
 	var colLink = YAHOO.util.Dom.get("tableOptionPass");
 	YAHOO.util.Event.addListener(colLink, "click", function() {
-				colDiv.style.display = colDiv.style.display == "block"
-						? "none"
-						: "block";
-				return false;
-			});
+		colDiv.style.display = colDiv.style.display == "block" ? "none"
+				: "block";
+		return false;
+	});
 	var addColumnsNamePass = function() {
 		if (colDiv.innerHTML.length == 0) {
-			for (var i = 0; i < myColumnDefs.length; i++) {
+			for ( var i = 0; i < myColumnDefs.length; i++) {
 				var column = myColumnDefs[i];
-				if(column.key=="checkbox") continue;
+				if (column.key == "checkbox")
+					continue;
 				var checkbox = document.createElement("INPUT");
 				checkbox.type = "checkbox";
 				checkbox.name = "colCkbox";
@@ -836,23 +851,24 @@ function initToPassTable(ds) {
 					colDiv.appendChild(br);
 				}
 
-				YAHOO.util.Event.addListener(checkbox, "click", showHideColumnPass);
+				YAHOO.util.Event.addListener(checkbox, "click",
+						showHideColumnPass);
 				colDiv.style.display = "none";
 			}
 		}
 	};
 	return {
-		ds :myDataSource,
-		dt :myDataTablePass
+		ds : myDataSource,
+		dt : myDataTablePass
 	};
 
 }
 function initButtons() {
 	var submitToPreArrange = new YAHOO.widget.Button( {
-		type :"button",
-		label :"批为编排",
-		id :"toArrageBtn",
-		container :"submitToPreArrange"
+		type : "button",
+		label : "批为编排",
+		id : "toArrageBtn",
+		container : "submitToPreArrange"
 	});
 
 	submitToPreArrange.on("click", function() {
@@ -873,10 +889,10 @@ function initButtons() {
 	});
 
 	var submitToPass = new YAHOO.widget.Button( {
-		type :"button",
-		label :"撤销编排",
-		id :"toPassBtn",
-		container :"submitToPass"
+		type : "button",
+		label : "撤销编排",
+		id : "toPassBtn",
+		container : "submitToPass"
 	});
 	submitToPass.on("click", function() {
 		var toApproved = document.getElementsByName("toApproved");
@@ -896,9 +912,9 @@ function initButtons() {
 	});
 
 	var searchBtn = new YAHOO.widget.Button( {
-		type :"submit",
-		label :"搜索",
-		id :"search",
-		container :"goSearch"
+		type : "submit",
+		label : "搜索",
+		id : "search",
+		container : "goSearch"
 	});
 }

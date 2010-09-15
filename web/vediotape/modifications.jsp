@@ -36,6 +36,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
 
+<style type="text/css">
+.yui-skin-sam .yui-dt-liner {
+font-size:11pt;
+white-space:nowrap;
+}
+</style>
 <title>影带信息</title>
 </head>
 <body class="yui-skin-sam">
@@ -78,8 +84,6 @@
 	<div align="center">
 	<div id="submitToPreArrange"></div>
 	</div>
-
-
 	<h1>待排影带列表</h1>
 	<p>选择并点击按钮，使影带进入通过状态</p>
 	<a href="#" id="tableOptionPass" style="font-size:12px">选项</a>

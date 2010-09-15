@@ -65,6 +65,9 @@
 	font-size:12pt;
 	white-space: nowrap;
 }
+.yui-skin-sam .yui-dt th, .yui-skin-sam .yui-dt th a {
+	font-weight:bold;
+}
 </style>
 <style type="text/css" media="print">
 .noprint {

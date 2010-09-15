@@ -617,29 +617,50 @@ function initExcelTable(ds) {
 	}, {
 		key :"topic",
 		label :"题材",
-		formatter :formatTopic
+		sortable : true,
+		formatter : formatTopic,
+		sortOptions : {
+			sortFunction : sortTopic
+		}
 	}, {
 		key :"subject",
 		label :"栏目",
-		formatter :formatSubject
+		sortable : true,
+		formatter : formatSubject,
+		sortOptions : {
+			sortFunction : sortSubject
+		}
 	}, {
 		key :"companyID",
 		label :"影视公司",
-		formatter :formatCompany
+		sortable : true,
+		formatter : formatCompany,
+		sortOptions : {
+			sortFunction : sortCompany
+		}
 	}, {
 		key :"dateInput",
 		label :"收带日期",
-		formatter :formatDate
+		formatter :formatDate,
+		sortable: true
 	}, {
 		key :"status",
 		label :"状态",
-		formatter :formatStatus
+		formatter :formatStatus,
+		sortable: true,
+		sortOptions:{sortFunction:statusSortor}
 	}, {
 		key :"marketShare",
-		label :"市场份额"
+		label :"市场份额",
+		formatter: mkShareFormatter,
+		sortable: true,
+		sortOptions:{sortFunction:marketShareSortor}
 	}, {
 		key :"audienceRating",
-		label :"收视率"
+		label :"收视率",
+		sortable: true,
+		formatter: auRateFormater,
+		sortOptions:{sortFunction:auRateSortor}
 	}, {
 		key :"vedioscores",
 		label :"综合平均分",
