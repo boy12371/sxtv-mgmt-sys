@@ -453,7 +453,7 @@ function initToArrangeTable(ds) {
 				label :"观众投票(看/不看)",
 				formatter :formatAudienceScore
 			}, {
-				key :"vedioscores",
+				key :"award",
 				label :"获奖备选(是/否)",
 				formatter :formatAward
 			}, {
@@ -496,16 +496,17 @@ function initToArrangeTable(ds) {
 					template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 					pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
 					rowsPerPageOptions : [ 25, 50, 100 ]
-				})
-
+				}),
+		width:"auto"
 	};
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.DataTable("makeToArrange", myColumnDefs,
+	var myDataTable = new YAHOO.widget.ScrollingDataTable("makeToArrange", myColumnDefs,
 			myDataSource, myConfigs);
 	myDataTable.subscribe("renderEvent", function() {
 		$.unblockUI();
+		addColumnsName();
 		parent.resizeIframe();
 	});
 	myDataSource.subscribe("requestEvent", function() {
@@ -525,6 +526,62 @@ function initToArrangeTable(ds) {
 	var headerCheckbox = YAHOO.util.Dom.get("Aheader_checkbox");
 	YAHOO.util.Event.addListener(headerCheckbox, "click",
 			OnHeaderCheckboxClicked);
+	//column select option
+	var columnSet = myDataTable.getColumnSet();
+	var showHideColumn = function(e) {
+		var container = document.getElementById("makeToArrange");
+		if(typeof(container.originalWidth)=="undefined" || container.originalWidth==null){
+			container.originalWidth = container.offsetWidth;
+		}
+		
+		var column = columnSet.getColumn(this.value);
+		if (this.checked) {
+			myDataTable.hideColumn(column);
+		} else {
+			myDataTable.showColumn(column);
+		}
+		
+		var tables = container.getElementsByTagName("table");
+		if(null!=tables&&0!=tables.length){
+			if(tables[0].offsetWidth<container.originalWidth){
+				container.style.width = tables[0].offsetWidth + "px";
+			}
+		}
+		parent.resizeIframe();
+	}
+	var colDiv = YAHOO.util.Dom.get("colDiv");
+	var colLink = YAHOO.util.Dom.get("tableOption");
+	YAHOO.util.Event.addListener(colLink, "click", function() {
+				colDiv.style.display = colDiv.style.display == "block"
+						? "none"
+						: "block";
+				return false;
+			});
+	var addColumnsName = function() {
+		if (colDiv.innerHTML.length == 0) {
+			for (var i = 0; i < myColumnDefs.length; i++) {
+				var column = myColumnDefs[i];
+				if(column.key=="checkbox") continue;
+				var checkbox = document.createElement("INPUT");
+				checkbox.type = "checkbox";
+				checkbox.name = "colCkbox";
+				checkbox.value = column.key;
+				checkbox.checked = false;
+				colDiv.appendChild(checkbox);
+				var p = document.createElement("SPAN");
+				p.innerHTML = column.label;
+				colDiv.appendChild(p);
+				if (i % 2 == 1) {
+					var br = document.createElement("BR");
+					colDiv.appendChild(br);
+				}
+
+				YAHOO.util.Event.addListener(checkbox, "click", showHideColumn);
+				colDiv.style.display = "none";
+			}
+		}
+	};
+	
 	return {
 		ds :myDataSource,
 		dt :myDataTable
@@ -560,12 +617,13 @@ var toToPassTableCallBack = {
 		timeout : 3000
 	
 };
+var myDataTablePass = null;
 function initToPassTable(ds) {
 
 	var OnHeaderCheckboxClicked = function() {
 		var myHeaderCheckbox = YAHOO.util.Dom.get("Pheader_checkbox");
 		var headerChecked = myHeaderCheckbox.checked;
-		var myDataRecords = myDataTable.getRecordSet();
+		var myDataRecords = myDataTablePass.getRecordSet();
 		var checkBoxIds2Check = new Array();
 		for ( var i = 0; i < myDataRecords.getLength(); i++) {
 			checkBoxIds2Check.push(myDataRecords.getRecord(i).getData("id"));
@@ -577,7 +635,7 @@ function initToPassTable(ds) {
 			id2Check.checked = headerChecked;
 		}
 
-	}
+	};
 	// Helps in drawing the checkbox for all rows !
 	var FormatCheckboxCell = function(elCell, oRecord, oColumn, oData) {
 		// Create checkbox
@@ -654,7 +712,7 @@ function initToPassTable(ds) {
 				label : "观众投票(看/不看)",
 				formatter : formatAudienceScore
 			}, {
-				key : "vedioscores",
+				key : "award",
 				label : "获奖备选(是/否)",
 				formatter : formatAward
 			}, {
@@ -697,29 +755,29 @@ function initToPassTable(ds) {
 					template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 					pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
 					rowsPerPageOptions : [ 25, 50, 100 ]
-				})
-
+				}),
+		width:"auto"
 	};
 
 	// DataTable instance
 
-	var myDataTable = new YAHOO.widget.DataTable("makeToPass", myColumnDefs,
+	var myDataTablePass = new YAHOO.widget.ScrollingDataTable("makeToPass", myColumnDefs,
 			myDataSource, myConfigs);
 
-	myDataTable.subscribe("renderEvent", function() {
+	myDataTablePass.subscribe("renderEvent", function() {
 		$.unblockUI();
+		addColumnsNamePass();
 		parent.resizeIframe();
 	});
-	myDataSource.subscribe("requestEvent", function() {
+	myDataTablePass.subscribe("requestEvent", function() {
 		$.blockUI( {
 			message :"<h1>数据加载中......</h1>"
 		});
 	});
-	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
-	myDataTable
-			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTablePass.subscribe("rowMouseoverEvent", myDataTablePass.onEventHighlightRow);
+	myDataTablePass.subscribe("rowMouseoutEvent", myDataTablePass.onEventUnhighlightRow);
 	// Update totalRecords on the fly with value from server
-	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
+	myDataTablePass.handleDataReturnPayload = function(oRequest, oResponse,
 			oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
@@ -727,9 +785,65 @@ function initToPassTable(ds) {
 	var headerCheckbox = YAHOO.util.Dom.get("Pheader_checkbox");
 	YAHOO.util.Event.addListener(headerCheckbox, "click",
 			OnHeaderCheckboxClicked);
+	
+	//column select option
+	var columnSet = myDataTablePass.getColumnSet();
+	var showHideColumnPass = function(e) {
+		var container = document.getElementById("makeToPass");
+		if(typeof(container.originalWidth)=="undefined" || container.originalWidth==null){
+			container.originalWidth = container.offsetWidth;
+		}
+		
+		var column = columnSet.getColumn(this.value);
+		if (this.checked) {
+			myDataTablePass.hideColumn(column);
+		} else {
+			myDataTablePass.showColumn(column);
+		}
+		
+		var tables = container.getElementsByTagName("table");
+		if(null!=tables&&0!=tables.length){
+			if(tables[0].offsetWidth<container.originalWidth){
+				container.style.width = tables[0].offsetWidth + "px";
+			}
+		}
+		parent.resizeIframe();
+	}
+	var colDiv = YAHOO.util.Dom.get("colDivPass");
+	var colLink = YAHOO.util.Dom.get("tableOptionPass");
+	YAHOO.util.Event.addListener(colLink, "click", function() {
+				colDiv.style.display = colDiv.style.display == "block"
+						? "none"
+						: "block";
+				return false;
+			});
+	var addColumnsNamePass = function() {
+		if (colDiv.innerHTML.length == 0) {
+			for (var i = 0; i < myColumnDefs.length; i++) {
+				var column = myColumnDefs[i];
+				if(column.key=="checkbox") continue;
+				var checkbox = document.createElement("INPUT");
+				checkbox.type = "checkbox";
+				checkbox.name = "colCkbox";
+				checkbox.value = column.key;
+				checkbox.checked = false;
+				colDiv.appendChild(checkbox);
+				var p = document.createElement("SPAN");
+				p.innerHTML = column.label;
+				colDiv.appendChild(p);
+				if (i % 2 == 1) {
+					var br = document.createElement("BR");
+					colDiv.appendChild(br);
+				}
+
+				YAHOO.util.Event.addListener(checkbox, "click", showHideColumnPass);
+				colDiv.style.display = "none";
+			}
+		}
+	};
 	return {
 		ds :myDataSource,
-		dt :myDataTable
+		dt :myDataTablePass
 	};
 
 }
