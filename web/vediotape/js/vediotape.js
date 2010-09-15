@@ -331,7 +331,35 @@ function initDataTable() {
 	};
 }
 
-function initToArrangeTable() {
+var toArrangeTableCallBack = {
+		success : function (o) {
+		    YAHOO.log("RAW JSON DATA: " + o.responseText);
+		    // Process the JSON data returned from the server
+		    var records = "";
+		    try {
+		    	records = YAHOO.lang.JSON.parse(o.responseText);
+		    	initToArrangeTable(records);
+		    }
+		    catch (x) {
+		        alert("JSON Parse failed!");
+		        return;
+		    }
+		},
+		
+		failure : function (o) {
+		    if (!YAHOO.util.Connect.isCallInProgress(o)) {
+		        alert("Async call failed!");
+		    }
+		},
+		timeout : 3000
+	
+};
+
+function initArrangeTableDataSource(url,callBack){
+	YAHOO.util.Connect.asyncRequest('GET',url, callBack);
+}
+
+function initToArrangeTable(ds) {
 
 	var OnHeaderCheckboxClicked = function() {
 		var myHeaderCheckbox = YAHOO.util.Dom.get("Aheader_checkbox");
@@ -417,7 +445,9 @@ function initToArrangeTable() {
 			}, {
 				key :"vedioscores",
 				label :"综合平均分",
-				formatter :formatScroes
+				formatter :formatScroes,
+				sortable:true,
+				sortOptions:{sortFunction:sortScores}
 			}, {
 				key :"audiencescore",
 				label :"观众投票(看/不看)",
@@ -433,10 +463,10 @@ function initToArrangeTable() {
 			} ];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.XHRDataSource(
-			"/tv/audit/filterVideos.action?filter=3&");
+	var myDataSource = new YAHOO.util.DataSource(ds);
+//			"/tv/audit/filterVideos.action?filter=3&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
-	myDataSource.connXhrMode = "queueRequests";
+//	myDataSource.connXhrMode = "queueRequests";
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
@@ -450,8 +480,8 @@ function initToArrangeTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25",
-		dynamicData :true,
+	//	initialRequest :"sort=dateInput&dir=asc&startIndex=-1&results=25",
+	//	dynamicData :true,
 		sortedBy : {
 			key :"dateInput",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
@@ -502,7 +532,35 @@ function initToArrangeTable() {
 
 }
 
-function initToPassTable() {
+
+
+function initPassTableDataSource(url,callBack){
+	YAHOO.util.Connect.asyncRequest('GET',url, callBack);
+}
+var toToPassTableCallBack = {
+		success : function (o) {
+		    YAHOO.log("RAW JSON DATA: " + o.responseText);
+		    // Process the JSON data returned from the server
+		    var records = "";
+		    try {
+		    	records = YAHOO.lang.JSON.parse(o.responseText);
+		    	initToPassTable(records);
+		    }
+		    catch (x) {
+		        alert("JSON Parse failed!");
+		        return;
+		    }
+		},
+		
+		failure : function (o) {
+		    if (!YAHOO.util.Connect.isCallInProgress(o)) {
+		        alert("Async call failed!");
+		    }
+		},
+		timeout : 3000
+	
+};
+function initToPassTable(ds) {
 
 	var OnHeaderCheckboxClicked = function() {
 		var myHeaderCheckbox = YAHOO.util.Dom.get("Pheader_checkbox");
@@ -586,9 +644,11 @@ function initToPassTable() {
 				sortable : true,
 				formatter : formatStatus
 			}, {
-				key : "vedioscores",
-				label : "综合平均分",
-				formatter : formatScroes
+				key :"vedioscores",
+				label :"综合平均分",
+				formatter :formatScroes,
+				sortable:true,
+				sortOptions:{sortFunction:sortScores}
 			}, {
 				key : "audiencescore",
 				label : "观众投票(看/不看)",
@@ -604,10 +664,10 @@ function initToPassTable() {
 			} ];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.XHRDataSource(
-			"/tv/audit/filterVideos.action?filter=5&");
+	var myDataSource = new YAHOO.util.DataSource(ds)
+//			"/tv/audit/filterVideos.action?filter=5&");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
-	myDataSource.connXhrMode = "queueRequests";
+//	myDataSource.connXhrMode = "queueRequests";
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
@@ -621,8 +681,8 @@ function initToPassTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25",
-		dynamicData :true,
+//		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25",
+//		dynamicData :true,
 		sortedBy : {
 			key :"dateInput",
 			dir :YAHOO.widget.DataTable.CLASS_ASC

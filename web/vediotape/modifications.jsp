@@ -89,8 +89,10 @@
 	</script>
 </s:form>
 <script type="text/javascript">
-	YAHOO.util.Event.addListener(window, "load", initToArrangeTable);
-	YAHOO.util.Event.addListener(window, "load", initToPassTable);
+initArrangeTableDataSource("/tv/audit/filterVideos.action?filter=3&sort=dateInput&dir=asc&startIndex=-1&results=25",toArrangeTableCallBack);
+initPassTableDataSource("/tv/audit/filterVideos.action?filter=5&sort=dateInput&dir=asc&startIndex=-1&results=25",toToPassTableCallBack);
+	//YAHOO.util.Event.addListener(window, "load", initDataSource);
+	//YAHOO.util.Event.addListener(window, "load", initToPassTable);
 	
 </script>
 

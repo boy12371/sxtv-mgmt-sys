@@ -607,38 +607,6 @@ function initExcelTable(ds) {
 		elCell.innerHTML = "<input type=checkbox name=ding />";
 	}
 
-	var sortScores = function(a, b, desc){
-		 if(!YAHOO.lang.isValue(a)) {
-             return (!YAHOO.lang.isValue(b)) ? 0 : 1;
-         }
-         else if(!YAHOO.lang.isValue(b)) {
-             return -1;
-         }
-		 
-		 var _aScores = a.getData("vedioscores");
-		 var _bScores = b.getData("vedioscores");
-		
-		 var _aAvgScore = 0;
-		 var _aTotal = 0;
-			for (var i = 0; i < _aScores.length; i++) {
-				
-				_aTotal += _aScores[i].score;
-			}
-		_aAvgScore = _aTotal / _aScores.length;
-		
-		 var _bAvgScore = 0;
-		 var _bTotal = 0;
-			for (var i = 0; i < _bScores.length; i++) {
-				_bTotal += _bScores[i].score;
-			}
-		_bAvgScore = _bTotal / _bScores.length;
-		
-         // First compare by state
-         var comp = YAHOO.util.Sort.compare;
-         var compState = comp(_aAvgScore, _bAvgScore, desc);
-         return compState;
-	}
-
 	// Column definitions
 	var myColumnDefs = [ {
 		key :"id",
