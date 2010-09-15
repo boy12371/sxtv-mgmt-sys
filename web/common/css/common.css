@@ -76,9 +76,17 @@ label {
 	padding-right: 2em;
 }
 
+.yui-dt-hidden {
+	border: 0px !important;
+	}
+	
 .yui-skin-sam .yui-dt table {
 	width: 800px;
 }
+
+.yui-skin-sam .yui-dt-scrollable table {
+	width: auto !important;
+	}
 
 .yui-skin-sam tr.yui-dt-highlighted,.yui-skin-sam tr.yui-dt-highlighted td.yui-dt-asc,.yui-skin-sam tr.yui-dt-highlighted td.yui-dt-desc,.yui-skin-sam tr.yui-dt-even td.yui-dt-highlighted,.yui-skin-sam tr.yui-dt-odd td.yui-dt-highlighted
 	{
