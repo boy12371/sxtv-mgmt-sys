@@ -72,6 +72,8 @@
 <s:form id="tableForm" namespace="/vedio" action="doModificationBatch" method="post">
 	<h1>已通过影带列表</h1>
 	<p>选择并点击按钮，使影带进入待编排状态</p>
+	<a href="#" id="tableOption" style="font-size:12px">选项</a>
+	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 	<div id="makeToArrange" align="center"></div>
 	<div align="center">
 	<div id="submitToPreArrange"></div>
@@ -80,6 +82,8 @@
 
 	<h1>待排影带列表</h1>
 	<p>选择并点击按钮，使影带进入通过状态</p>
+	<a href="#" id="tableOptionPass" style="font-size:12px">选项</a>
+	<div id="colDivPass" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 	<div id="makeToPass" align="center"></div>
 	<div align="center">
 	<div id="submitToPass"></div>
