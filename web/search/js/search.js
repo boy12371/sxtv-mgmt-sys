@@ -796,7 +796,7 @@ function getDataSource(){
 	                alert("Async call failed!");
 	            }
 	        },
-	        timeout : 3000
+	        timeout : 30000
 	    };
 	YAHOO.util.Connect.asyncRequest('GET',actionUrl, callbacks);
 	
