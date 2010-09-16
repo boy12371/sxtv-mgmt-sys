@@ -112,7 +112,9 @@ function initUnArrangeTable() {
 		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"avgScore",
-		label :"平均分"
+		label :"平均分",
+		sortable :true,
+		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"audiScore",
 		label :"观众投票(看/不看)"
