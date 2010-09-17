@@ -46,13 +46,18 @@ public class AuditVideoMgmtAction extends BaseAction {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
 			List<Vediotape> videosList = new ArrayList();
+			List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
 			if (filter != 0) {
 				videosList = videoService.findVideotapeByStatus(filter, table
 						.getSort(), table.getStartIndex(), table
 						.getStartIndex()
 						+ table.getRowsPerPage(), table.getDir().equals(
 						JSONDataTableUtils.SORT_DIRECTION));
-				JSONDataTableUtils.setupJSONDataTable(videosList, table,
+				for(Vediotape v:videosList){
+					VedioTapeVO tapev = new VedioTapeVO(v);
+					tapeVOs.add(tapev);
+				}
+				JSONDataTableUtils.setupJSONDataTable(tapeVOs, table,
 						videoService.getTotalCountForVideosByStatus(filter));
 			} else {
 				videosList = videoService.findAllVideotapesForAudit(table
@@ -60,8 +65,11 @@ public class AuditVideoMgmtAction extends BaseAction {
 						.getStartIndex()
 						+ table.getRowsPerPage(), table.getDir().equals(
 						JSONDataTableUtils.SORT_DIRECTION));
-
-				JSONDataTableUtils.setupJSONDataTable(videosList, table,
+				for(Vediotape v:videosList){
+					VedioTapeVO tapev = new VedioTapeVO(v);
+					tapeVOs.add(tapev);
+				}
+				JSONDataTableUtils.setupJSONDataTable(tapeVOs, table,
 						videoService.getTotalCountForAllVideotapesForAudit());
 			}
 
