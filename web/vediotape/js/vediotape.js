@@ -417,56 +417,57 @@ function initToArrangeTable(ds) {
 				formatter : formatLink
 			}, {
 				key : "vedioName",
-				label : "剧目名称"
+				label : "剧目名称",
+				sortable : true
 			}, {
 				key : "topic",
 				label : "题材",
-				sortable : true,
-				formatter : formatTopic,
-				sortOptions : {
-					sortFunction : sortTopic
-				}
+				sortable : true
+//				formatter : formatTopic,
+//				sortOptions : {
+//					sortFunction : sortTopic
+//				}
 			}, {
 				key : "subject",
 				label : "栏目",
-				sortable : true,
-				formatter : formatSubject,
-				sortOptions : {
-					sortFunction : sortSubject
-				}
+				sortable : true
+//				formatter : formatSubject,
+//				sortOptions : {
+//					sortFunction : sortSubject
+//				}
 			}, {
 				key : "companyID",
 				label : "影视公司",
-				sortable : true,
-				formatter : formatCompany,
-				sortOptions : {
-					sortFunction : sortCompany
-				}
+				sortable : true
+//				formatter : formatCompany,
+//				sortOptions : {
+//					sortFunction : sortCompany
+//				}
 			}, {
-				key : "dateInput",
+				key : "dateComing",
 				label : "收带日期",
 				sortable : true,
 				formatter : formatDate
+//			}, {
+//				key : "status",
+//				label : "状态",
+//				formatter : formatStatus
 			}, {
-				key : "status",
-				label : "状态",
-				formatter : formatStatus
-			}, {
-				key : "vedioscores",
+				key : "avgScore",
 				label : "综合平均分",
-				formatter : formatScroes,
-				sortable : true,
-				sortOptions : {
-					sortFunction : sortScores
-				}
+//				formatter : formatScroes,
+				sortable : true
+//				sortOptions : {
+//					sortFunction : sortScores
+//				}
 			}, {
-				key : "audiencescore",
-				label : "观众投票(看/不看)",
-				formatter : formatAudienceScore
+				key : "audiScore",
+				label : "观众投票(看/不看)"
+//				formatter : formatAudienceScore
 			}, {
 				key : "award",
-				label : "获奖备选(是/否)",
-				formatter : formatAward
+				label : "获奖备选(是/否)"
+//				formatter : formatAward
 			}, {
 				key : "comments",
 				label : "备注",
@@ -479,8 +480,8 @@ function initToArrangeTable(ds) {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "vedioscores", "vedioscores",
-				"audiencescore", "comments" ],
+				"dateComing", "status", "avgScore", "award",
+				"audiScore", "comments" ],
 		metaFields : {
 			totalRecords : "totalRecords"
 		}
@@ -491,7 +492,7 @@ function initToArrangeTable(ds) {
 		// initialRequest :"sort=dateInput&dir=asc&startIndex=-1&results=25",
 		// dynamicData :true,
 		sortedBy : {
-			key : "dateInput",
+			key : "dateComing",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		},
 		paginator : new YAHOO.widget.Paginator(
@@ -512,9 +513,10 @@ function initToArrangeTable(ds) {
 
 	var myDataTable = new YAHOO.widget.ScrollingDataTable("makeToArrange",
 			myColumnDefs, myDataSource, myConfigs);
-	myDataTable.subscribe("renderEvent", function() {
+	myDataTable.subscribe("postRenderEvent", function() {
 		$.unblockUI();
 		addColumnsName();
+		resizeScrollTable("makeToArrange");
 		parent.resizeIframe();
 	});
 	myDataSource.subscribe("requestEvent", function() {
@@ -549,13 +551,8 @@ function initToArrangeTable(ds) {
 		} else {
 			myDataTable.showColumn(column);
 		}
-
-		var tables = container.getElementsByTagName("table");
-		if (null != tables && 0 != tables.length) {
-			if (tables[0].offsetWidth < container.originalWidth) {
-				container.style.width = tables[0].offsetWidth + "px";
-			}
-		}
+		
+		resizeScrollTable("makeToArrange");
 		parent.resizeIframe();
 	}
 	var colDiv = YAHOO.util.Dom.get("colDiv");
@@ -681,56 +678,57 @@ function initToPassTable(ds) {
 				formatter : formatLink
 			}, {
 				key : "vedioName",
-				label : "剧目名称"
+				label : "剧目名称",
+				sortable : true
 			}, {
 				key : "topic",
 				label : "题材",
-				sortable : true,
-				formatter : formatTopic,
-				sortOptions : {
-					sortFunction : sortTopic
-				}
+				sortable : true
+//				formatter : formatTopic,
+//				sortOptions : {
+//					sortFunction : sortTopic
+//				}
 			}, {
 				key : "subject",
 				label : "栏目",
-				sortable : true,
-				formatter : formatSubject,
-				sortOptions : {
-					sortFunction : sortSubject
-				}
+				sortable : true
+//				formatter : formatSubject
+//				sortOptions : {
+//					sortFunction : sortSubject
+//				}
 			}, {
 				key : "companyID",
 				label : "影视公司",
-				sortable : true,
-				formatter : formatCompany,
-				sortOptions : {
-					sortFunction : sortCompany
-				}
+				sortable : true
+//				formatter : formatCompany,
+//				sortOptions : {
+//					sortFunction : sortCompany
+//				}
 			}, {
-				key : "dateInput",
+				key : "dateComing",
 				label : "收带日期",
 				sortable : true,
 				formatter : formatDate
+//			}, {
+//				key : "status",
+//				label : "状态",
+//				formatter : formatStatus
 			}, {
-				key : "status",
-				label : "状态",
-				formatter : formatStatus
-			}, {
-				key : "vedioscores",
+				key : "avgScore",
 				label : "综合平均分",
-				formatter : formatScroes,
-				sortable : true,
-				sortOptions : {
-					sortFunction : sortScores
-				}
+//				formatter : formatScroes,
+				sortable : true
+//				sortOptions : {
+//					sortFunction : sortScores
+//				}
 			}, {
-				key : "audiencescore",
-				label : "观众投票(看/不看)",
-				formatter : formatAudienceScore
+				key : "audiScore",
+				label : "观众投票(看/不看)"
+//				formatter : formatAudienceScore
 			}, {
-				key : "fvedioscores",
-				label : "获奖备选(是/否)",
-				formatter : formatAward
+				key : "award",
+				label : "获奖备选(是/否)"
+//				formatter : formatAward
 			}, {
 				key : "comments",
 				label : "备注",
@@ -743,7 +741,7 @@ function initToPassTable(ds) {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "vedioscores", "audiencescore",
+				"dateComing", "status", "avgScore", "audiScore", "award",
 				"comments" ],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
@@ -754,7 +752,7 @@ function initToPassTable(ds) {
 	// DataTable configuration
 	var myConfigs = {
 		sortedBy : {
-			key : "dateInput",
+			key : "dateComing",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		},
 		paginator : new YAHOO.widget.Paginator(
@@ -776,9 +774,10 @@ function initToPassTable(ds) {
 	var myDataTablePass = new YAHOO.widget.ScrollingDataTable("makeToPass",
 			myColumnDefs, myDataSource, myConfigs);
 
-	myDataTablePass.subscribe("renderEvent", function() {
+	myDataTablePass.subscribe("postRenderEvent", function() {
 		$.unblockUI();
 		addColumnsNamePass();
+		resizeScrollTable("makeToPass");
 		parent.resizeIframe();
 	});
 	myDataTablePass.subscribe("requestEvent", function() {
@@ -816,12 +815,7 @@ function initToPassTable(ds) {
 			myDataTablePass.showColumn(column);
 		}
 
-		var tables = container.getElementsByTagName("table");
-		if (null != tables && 0 != tables.length) {
-			if (tables[0].offsetWidth < container.originalWidth) {
-				container.style.width = tables[0].offsetWidth + "px";
-			}
-		}
+		resizeScrollTable("makeToPass");
 		parent.resizeIframe();
 	}
 	var colDiv = YAHOO.util.Dom.get("colDivPass");
