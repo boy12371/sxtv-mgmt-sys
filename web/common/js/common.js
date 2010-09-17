@@ -370,3 +370,12 @@ var statusSortor = function(a, b, desc) {
 	var compState = comp(_aCom.id, _bCom.id, desc);
 	return compState;
 }
+function resizeScrollTable(containerId){
+	var container = document.getElementById(containerId);
+	var tables = container.getElementsByTagName("table");
+	if (null != tables && 0 != tables.length) {
+		if (typeof(container.originalWidth)=="undefined" || tables[0].offsetWidth < container.originalWidth) {
+			container.style.width = tables[0].offsetWidth + "px";
+		}
+	}
+}
