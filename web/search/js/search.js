@@ -50,21 +50,18 @@ function initDataTable() {
 				label : "收视率",
 				sortable : true
 			}, {
-				key : "vedioscores",
-				label : "综合平均分",
-				formatter : formatScroes
+				key : "avgScore",
+				label : "综合平均分"//,formatter : formatScroes
 			}, {
 				key : "purchase",
-				label : "购买意见",
-				formatter : formatPurchase
+				label : "购买意见"
+					//,formatter : formatPurchase
 			}, {
-				key : "awarding",
-				label : "获奖备选(是/否)",
-				formatter : formatAward
+				key : "award",
+				label : "获奖备选"//,	formatter : formatAward
 			}, {
-				key : "audiencescore",
-				label : "观众投票(看/不看)",
-				formatter : formatAudienceScore
+				key : "audiScore",
+				label : "观众投票"//,	formatter : formatAudienceScore
 			}, {
 				key : "comments",
 				label : "备注",
@@ -78,7 +75,7 @@ function initDataTable() {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores", "purchase", "awarding", "audiencescore",
+				"avgScore", "purchase", "award", "audiScore",
 				"comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
@@ -302,7 +299,7 @@ function initDataTable() {
 	vstatus.insertBefore(new Option("请选择", 0), vstatus.options[0]);
 	vstatus.selectedIndex = 0;
 	
-//	fixTableWidthWithScrollBar("dynamicdata");
+// fixTableWidthWithScrollBar("dynamicdata");
 	
 	return {
 		ds : myDataSource,
@@ -617,81 +614,66 @@ function initExcelTable(ds) {
 	}, {
 		key :"topic",
 		label :"题材",
-		sortable : true,
-		formatter : formatTopic,
-		sortOptions : {
-			sortFunction : sortTopic
-		}
+		sortable : true
+		// , formatter : formatTopic,sortOptions : { sortFunction : sortTopic}
 	}, {
 		key :"subject",
 		label :"栏目",
-		sortable : true,
-		formatter : formatSubject,
-		sortOptions : {
-			sortFunction : sortSubject
-		}
+		sortable : true
+		// , formatter : formatSubject, sortOptions : { sortFunction :
+		// sortSubject}
 	}, {
 		key :"companyID",
 		label :"影视公司",
-		sortable : true,
-		formatter : formatCompany,
-		sortOptions : {
-			sortFunction : sortCompany
-		}
+		sortable : true// formatter : formatCompany, sortOptions : {
+						// sortFunction : sortCompany }
 	}, {
-		key :"dateInput",
+		key :"dateComing",
 		label :"收带日期",
 		formatter :formatDate,
 		sortable: true
 	}, {
 		key :"status",
 		label :"状态",
-		formatter :formatStatus,
-		sortable: true,
-		sortOptions:{sortFunction:statusSortor}
+		sortable: true// ,sortOptions:{sortFunction:statusSortor},formatter
+						// :formatStatus
 	}, {
 		key :"marketShare",
 		label :"市场份额",
-		formatter: mkShareFormatter,
-		sortable: true,
-		sortOptions:{sortFunction:marketShareSortor}
+		sortable: true// ,formatter: mkShareFormatter,
+						// sortOptions:{sortFunction:marketShareSortor}
 	}, {
 		key :"audienceRating",
 		label :"收视率",
-		sortable: true,
-		formatter: auRateFormater,
-		sortOptions:{sortFunction:auRateSortor}
+		sortable: true// , formatter: auRateFormater,
+						// sortOptions:{sortFunction:auRateSortor}
 	}, {
-		key :"vedioscores",
+		key :"avgScore",
 		label :"综合平均分",
-		formatter :formatScroes,
-		sortable:true,
-		sortOptions:{sortFunction:sortScores}
+		sortable:true// , formatter :formatScroes,
+						// sortOptions:{sortFunction:sortScores}
 	}, {
 		key :"purchase",
-		label :"购买意见",
-		formatter :formatPurchase
+		label :"购买意见"// , formatter :formatPurchase
 	}, {
-		key :"awarding",
-		label :"获奖备选(是/否)",
-		formatter :formatAward
+		key :"award",
+		label :"获奖备选"// , formatter :formatAward
 	}, {
-		key :"audiencescore",
-		label :"观众投票(看/不看)",
-		formatter :formatAudienceScore
+		key :"audiScore",
+		label :"观众投票"// , formatter :formatAudienceScore
 	}, {
 		key :"comments",
 		label :"备注",
 		formatter :formatorComments
 	}
-//	,{
-//		key :"dingpian",
-//		label :"定片",
-//		formatter :formattorDing
-//	}, {
-//		key :"remark",
-//		label :"说明"
-//	} 
+// ,{
+// key :"dingpian",
+// label :"定片",
+// formatter :formattorDing
+// }, {
+// key :"remark",
+// label :"说明"
+// }
 	];
 
 	// DataSource instance
@@ -700,9 +682,7 @@ function initExcelTable(ds) {
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "marketShare", "audienceRating",
-				"vedioscores", "purchase", "awarding", "audiencescore",
-				"comments" ],
+				"dateComing", "status", "marketShare", "audienceRating", "purchase", "award", "audiScore",	"comments","avgScore" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 	// response
@@ -711,7 +691,7 @@ function initExcelTable(ds) {
 	// DataTable configuration
 	var myConfigs = {
 		sortedBy : {
-			key :"dateInput",
+			key :"dateComing",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		},
 		caption :"<h1>百家,都市审看记录统计</h1>"
@@ -776,6 +756,9 @@ function initExcelTable(ds) {
 }
 
 function getDataSource(){
+	if(actionUrl.length==0){
+		return;
+	}
 	var callbacks = {
 	        success : function (o) {
 	            YAHOO.log("RAW JSON DATA: " + o.responseText);
@@ -784,8 +767,7 @@ function getDataSource(){
 	            try {
 	            	records = YAHOO.lang.JSON.parse(o.responseText);
 	            	initExcelTable(records);
-	            }
-	            catch (x) {
+	            }catch (x) {
 	                alert("JSON Parse failed!");
 	                return;
 	            }
@@ -796,7 +778,7 @@ function getDataSource(){
 	                alert("Async call failed!");
 	            }
 	        },
-	        timeout : 30000
+	        timeout : 10000
 	    };
 	YAHOO.util.Connect.asyncRequest('GET',actionUrl, callbacks);
 	

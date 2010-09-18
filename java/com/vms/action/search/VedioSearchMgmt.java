@@ -2,6 +2,7 @@ package com.vms.action.search;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,13 +12,17 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 
 import com.vms.beans.JSONDataTable;
+import com.vms.beans.VedioTapeVO;
 import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.common.SearchCondition;
+import com.vms.db.bean.Audiencescore;
 import com.vms.db.bean.Company;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Subject;
 import com.vms.db.bean.Topic;
+import com.vms.db.bean.User;
+import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.ICompanyService;
 import com.vms.service.iface.IStatusService;
@@ -97,12 +102,18 @@ public class VedioSearchMgmt extends BaseAction {
 	public String searchVideos() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Vediotape> dataList = this.vedioService.findVidesByConditions(
+			List<Vediotape> dataList =new ArrayList<Vediotape>();
+			List<VideoVO> vList =new ArrayList<VideoVO>();
+			dataList = this.vedioService.findVidesByConditions(
 					sc, table.getSort(), table.getStartIndex(), table
 							.getStartIndex()
 							+ table.getRowsPerPage(), table.getDir().equals(
 							JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(dataList, table, vedioService
+			for (Vediotape vediotape : dataList) {
+				VideoVO vv = new VideoVO(vediotape);
+				vList.add(vv);
+			}
+			JSONDataTableUtils.setupJSONDataTable(vList, table, vedioService
 					.getTotalCountForVidesByConditions(sc));
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -120,12 +131,18 @@ public class VedioSearchMgmt extends BaseAction {
 	public String doPrintVideosReport() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Vediotape> dataList = this.vedioService
-							.findVidesByConditions(sc, table.getSort(), table
-									.getStartIndex(), table.getStartIndex()
-									+ table.getRowsPerPage(), table.getDir().equals(
-									JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList.size());	
+			List<Vediotape> dataList = new ArrayList<Vediotape>();
+			List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
+			dataList = this.vedioService.findVidesByConditions(sc, table
+					.getSort(), table.getStartIndex(), table.getStartIndex()
+					+ table.getRowsPerPage(), table.getDir().equals(
+					JSONDataTableUtils.SORT_DIRECTION));
+			for (Vediotape v : dataList) {
+				VedioTapeVO tapev = new VedioTapeVO(v);
+				tapeVOs.add(tapev);
+			}
+			JSONDataTableUtils.setupJSONDataTable(tapeVOs, table, tapeVOs
+					.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
@@ -133,26 +150,29 @@ public class VedioSearchMgmt extends BaseAction {
 		return this.SUCCESS;
 	}
 
-	public String toPrintVideosSequenceOrderReport() throws UnsupportedEncodingException {
+	public String toPrintVideosSequenceOrderReport()
+			throws UnsupportedEncodingException {
 		query = java.net.URLDecoder.decode(query, "UTF-8");
 		return SUCCESS;
 	}
 
 	public String doPrintVideosSequenceOrderReport() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
-		try {			
-			List<Vediotape> dataList =this.vedioService.findVideosByRateOrder(sc, table
-							.getSort(), table.getStartIndex(), table
+		try {
+			List<Vediotape> dataList = this.vedioService.findVideosByRateOrder(
+					sc, table.getSort(), table.getStartIndex(), table
 							.getStartIndex()
 							+ table.getRowsPerPage(), table.getDir().equals(
 							JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList.size());	
+			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList
+					.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
 		}
 		return this.SUCCESS;
 	}
+
 	public String toVideoSequence() {
 		return SUCCESS;
 	}
@@ -223,6 +243,218 @@ public class VedioSearchMgmt extends BaseAction {
 			this.vname = vname;
 		}
 
+	}
+
+	public class VideoVO {
+		private java.lang.String id;
+
+		// fields
+		private java.lang.String vedioName;
+		private java.util.Date dateComing;
+		private java.util.Date dateInput;
+		private java.lang.String comments;
+		private float marketShare = 0;
+		private float audienceRating = 0;
+		private com.vms.db.bean.Topic topic;
+		private com.vms.db.bean.Subject subject;
+		private com.vms.db.bean.Company companyID;
+		private Status status;
+		// collections
+
+		private String award="";
+		private String purchase="";
+		private String avgScore="0";
+		private String audiScore="";
+
+		public VideoVO(Vediotape tape) {
+			this.setId(tape.getId());
+			this.setVedioName(tape.getVedioName());
+			this.setDateComing(tape.getDateComing());
+			this.setDateInput(tape.getDateInput());
+			this.setComments(tape.getComments());
+			this.setMarketShare(tape.getMarketShare()!=null?tape.getMarketShare():0);
+			this.setAudienceRating(tape.getAudienceRating()!=null?tape.getAudienceRating():0);
+			Topic t = new Topic();
+			t.setId(tape.getTopic().getId());
+			t.setTopicName(tape.getTopic().getTopicName());
+			this.setTopic(t);
+			Subject s = new Subject();
+			s.setId(tape.getSubject().getId());
+			s.setSubjectName(tape.getSubject().getSubjectName());
+			this.setSubject(s);
+			Company c = new Company();
+			c.setId(tape.getCompanyID().getId());
+			c.setCompanyName(tape.getCompanyID().getCompanyName());
+			this.setCompanyID(c);
+			Status st = new Status();
+			st.setId(tape.getStatus().getId());
+			st.setStatus(tape.getStatus().getStatus());
+			this.setStatus(st);
+			if (null != tape.getVedioscores()
+					&& 0 != tape.getVedioscores().size()) {
+				float sum = 0;
+				int award = 0;
+				int unaward = 0;
+				int purchase = 0;
+				int unpurchase = 0;
+				for (Vedioscore s1 : tape.getVedioscores()) {
+					sum += s1.getScore();
+
+					if (s1.getAward() == 1) {
+						award++;
+					} else {
+						unaward++;
+					}
+					if (s1.getPurchase() == 1) {
+						purchase++;
+					} else {
+						unpurchase++;
+					}
+				}
+				if (0 != sum) {
+					float _avgScore = sum / tape.getVedioscores().size();
+					DecimalFormat df = new DecimalFormat("###,###,###.##");
+					this.avgScore = df.format(_avgScore);
+				}
+				this.award = award + "是 / " + unaward + "否";
+				this.purchase = purchase + "买 / " + unpurchase + " 否";
+			}
+			if (null != tape.getAudiencescore()
+					&& 0 != tape.getAudiencescore().size()) {
+				int look = 0;
+				int unlook = 0;
+				for (Audiencescore as : tape.getAudiencescore()) {
+					if (as.getResult() == 1) {
+						look++;
+					} else {
+						unlook++;
+					}
+				}
+				this.audiScore = look + "看 / " + unlook+"不看";
+				
+			}
+
+		}
+
+		public java.lang.String getId() {
+			return id;
+		}
+
+		public void setId(java.lang.String id) {
+			this.id = id;
+		}
+
+		public java.lang.String getVedioName() {
+			return vedioName;
+		}
+
+		public void setVedioName(java.lang.String vedioName) {
+			this.vedioName = vedioName;
+		}
+
+		public java.util.Date getDateComing() {
+			return dateComing;
+		}
+
+		public void setDateComing(java.util.Date dateComing) {
+			this.dateComing = dateComing;
+		}
+
+		public java.util.Date getDateInput() {
+			return dateInput;
+		}
+
+		public void setDateInput(java.util.Date dateInput) {
+			this.dateInput = dateInput;
+		}
+
+		public java.lang.String getComments() {
+			return comments;
+		}
+
+		public void setComments(java.lang.String comments) {
+			this.comments = comments;
+		}
+
+		public com.vms.db.bean.Topic getTopic() {
+			return topic;
+		}
+
+		public void setTopic(com.vms.db.bean.Topic topic) {
+			this.topic = topic;
+		}
+
+		public com.vms.db.bean.Status getStatus() {
+			return status;
+		}
+
+		public void setStatus(com.vms.db.bean.Status status) {
+			this.status = status;
+		}
+
+		public com.vms.db.bean.Subject getSubject() {
+			return subject;
+		}
+
+		public void setSubject(com.vms.db.bean.Subject subject) {
+			this.subject = subject;
+		}
+
+		public com.vms.db.bean.Company getCompanyID() {
+			return companyID;
+		}
+
+		public void setCompanyID(com.vms.db.bean.Company companyID) {
+			this.companyID = companyID;
+		}
+
+		public String getAward() {
+			return award;
+		}
+
+		public void setAward(String award) {
+			this.award = award;
+		}
+
+		public String getPurchase() {
+			return purchase;
+		}
+
+		public void setPurchase(String purchase) {
+			this.purchase = purchase;
+		}
+
+		public String getAvgScore() {
+			return avgScore;
+		}
+
+		public void setAvgScore(String avgScore) {
+			this.avgScore = avgScore;
+		}
+
+		public String getAudiScore() {
+			return audiScore;
+		}
+
+		public void setAudiScore(String audiScore) {
+			this.audiScore = audiScore;
+		}
+
+		public float getMarketShare() {
+			return marketShare;
+		}
+
+		public void setMarketShare(float marketShare) {
+			this.marketShare = marketShare;
+		}
+
+		public float getAudienceRating() {
+			return audienceRating;
+		}
+
+		public void setAudienceRating(float audienceRating) {
+			this.audienceRating = audienceRating;
+		}
 	}
 
 	public JSONDataTable getTable() {

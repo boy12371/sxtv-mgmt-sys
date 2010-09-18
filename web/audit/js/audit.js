@@ -8,20 +8,62 @@ function getDateFromDataTimePicker(pickerID) {
 	var dateValue = picker.getDate();
 	alert(dateValue);
 }
+var datatableCallBack = {
+	success : function(o) {
+		YAHOO.log("RAW JSON DATA: " + o.responseText);
+		// Process the JSON data returned from the server
+	var records = "";
+	try {
+		records = YAHOO.lang.JSON.parse(o.responseText);
+		initDataTable(records);
+	} catch (x) {
+		alert("JSON Parse failed!");
+		return;
+	}
+},
 
-function initDataTable() {
+failure : function(o) {
+	if (!YAHOO.util.Connect.isCallInProgress(o)) {
+		alert("Async call failed!");
+	}
+},
+timeout : 3000
+
+};
+
+function initDataSourceForTable(url, callBack) {
+	YAHOO.util.Connect.asyncRequest('GET', url, callBack);
+}
+
+
+var fireEvent = function(arg0) {
+	var status = arg0.target.value;
+	request = "/tv/audit/filterVideos.action?sort=dateInput&dir=asc&startIndex=-1&filter="+status;
+	initDataSourceForTable(request,datatableCallBack);
+}
+
+// DataTable instance
+
+function initDataTable(ds) {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		if (oRecord.getData("status").id == 2) {
+//		if (oRecord.getData("status").id == 2) {
+//			var href = "<a href='./audit/findVideoByNameOrID.action?optionName=auditing&vid=";
+//			href += sData;
+//			href += "'>" + sData + "</a>";
+//			elCell.innerHTML = href;
+//		} else {
+//			elCell.innerHTML = sData;
+//		}
+		if (oRecord.getData("status") == "待审") {
 			var href = "<a href='./audit/findVideoByNameOrID.action?optionName=auditing&vid=";
 			href += sData;
 			href += "'>" + sData + "</a>";
-
 			elCell.innerHTML = href;
 		} else {
 			elCell.innerHTML = sData;
 		}
-
+	
 	}
 
 	// Column definitions
@@ -36,44 +78,44 @@ function initDataTable() {
 			}, {
 				key : "topic",
 				label : "题材",
-				sortable : true,
-				formatter : formatTopic
+				sortable : true
+				// ,formatter : formatTopic
 			}, {
 				key : "subject",
 				label : "栏目",
-				sortable : true,
-				formatter : formatSubject
+				sortable : true
+				// ,formatter : formatSubject
 			}, {
 				key : "companyID",
 				label : "影视公司",
-				sortable : true,
-				formatter : formatCompany
+				sortable : true//,formatter : formatCompany
 			}, {
-				key : "dateInput",
+				key : "dateComing",
 				label : "收带日期",
 				sortable : true,
 				formatter : formatDate
 			}, {
 				key : "status",
 				label : "状态",
-				sortable : true,
-				formatter : formatStatus
+				sortable : true
+				// ,formatter : formatStatus
 			}, {
-				key : "vedioscores",
+				key : "avgScore",
 				label : "综合平均分",
-				formatter : formatScroes
+				sortable : true
+				// ,formatter : formatScroes
 			}, {
 				key : "purchase",
-				label : "购买意见",
-				formatter : formatPurchase
+				label : "购买意见"
+				// ,formatter : formatPurchase
 			}, {
-				key : "awarding",
-				label : "获奖备选(是/否)",
-				formatter : formatAward
+				key : "award",
+				label : "获奖备选"
+				// ,formatter : formatAward
 			}, {
-				key : "audiencescore",
-				label : "观众投票(看/不看)",
-				formatter : formatAudienceScore
+				key : "audiScore",
+				label : "观众投票"
+				// ,formatter : formatAudienceScore
 			}, {
 				key : "comments",
 				label : "备注",
@@ -81,55 +123,24 @@ function initDataTable() {
 			}];
 
 	// DataSource instance
-	var myDataSource = new YAHOO.util.XHRDataSource("/tv/audit/filterVideos.action?");
+	// var myDataSource = new
+	// YAHOO.util.XHRDataSource("/tv/audit/filterVideos.action?");
+	var myDataSource = new YAHOO.util.DataSource(ds);
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "vedioscores", "vedioscores",
-				"audiencescore", "purchase", "awarding", "comments"],
+				"dateComing", "status", "audiScore", "purchase", "award", "avgScore", "comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 			// response
 		}
 	};
-	requestBuilder = function(oState, oSelf) {
-		/*
-		 * We aren't initializing sort and dir variables. If you are using
-		 * column sorting built into the DataTable, use this set of variable
-		 * initializers. var sort, dir, startIndex, results;
-		 */
-		var startIndex, results, sort, dir;
-
-		oState = oState || {
-			pagination : null,
-			sortedBy : null
-		};
-		var filterValue = YAHOO.util.Dom.get("filter").value;
-		/*
-		 * If using column sorting built into DataTable, these next two lines
-		 * will properly set the current _sortedBy_ column and the
-		 * _sortDirection_ sort = (oState.sortedBy) ? oState.sortedBy.key :
-		 * oSelf.getColumnSet().keys[0].getKey(); dir = (oState.sortedBy &&
-		 * oState.sortedBy.dir === DataTable.CLASS_DESC) ? "desc" : "asc";
-		 */
-		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
-		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
-		sort = (oState.sortedBy)
-				? oState.sortedBy.key
-				: oSelf.getColumnSet().keys[0].getKey();
-		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC)
-				? "desc"
-				: "asc";
-		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
-				+ sort + "&dir=" + dir + "&filter=" + filterValue;
-	}
+	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=dateInput&dir=asc&startIndex=0&results=25&filter=2",
-		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
-			key : "dateInput",
+			key : "dateComing",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
@@ -142,8 +153,7 @@ function initDataTable() {
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
 			rowsPerPageOptions : [25, 50, 100]
 		}),
-		generateRequest : requestBuilder//,width:"auto"
-		// ,formatRow: highLightRow
+		// generateRequest : requestBuilder
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
@@ -168,30 +178,7 @@ function initDataTable() {
 				parent.resizeIframe();
 			});
 
-	var fireEvent = function(resetRecordOffset) {
-		var oState = myDataTable.getState(), request, oCallback;
-
-		if (resetRecordOffset) {
-			oState.pagination.recordOffset = 0;
-		}
-
-		oCallback = {
-			success : myDataTable.onDataReturnSetRows,
-			failure : myDataTable.onDataReturnSetRows,
-			argument : oState,
-			scope : myDataTable
-		};
-
-		// Generate a query string
-		request = myDataTable.get("generateRequest")(oState, myDataTable);
-
-		// Fire off a request for new data.
-		myDataSource.sendRequest(request, oCallback);
-	}
-
-	// DataTable instance
-	var filter = YAHOO.util.Dom.get("filter");
-	YAHOO.util.Event.addListener(filter, "change", fireEvent);
+	
 	var columnSet = myDataTable.getColumnSet();
 	var showHideColumn = function(e) {
 		var column = columnSet.getColumn(this.value);

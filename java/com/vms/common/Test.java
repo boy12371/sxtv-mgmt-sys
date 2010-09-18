@@ -19,6 +19,10 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 
+		float a = 0.2f;
+		System.out.println(a);
+		a = 10/3;
+		System.out.println(a);
 //		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 ////		//
 //		IPlayorderService service = (IPlayorderService) ctx.getBean("playorderService");
@@ -30,7 +34,7 @@ public class Test {
 //		System.out.println(list.size());
 		
 		
-		System.out.println(EncryptUtil.encryptString("a"));
+//		System.out.println(EncryptUtil.encryptString("a"));
 		
 	
 //		

@@ -185,7 +185,7 @@ public class VediotapeMgmtAction extends BaseAction {
 						return INPUT;
 					}
 				} else if (optionName.equals("adjustStatus")) {
-					if (status == CommonVariable.VIDEO_STATUS_PLAYED) {
+					if (status != CommonVariable.VIDEO_STATUS_EXAMINE) {
 						return SUCCESS;
 					} else {
 						this.addActionError("影带状态为"

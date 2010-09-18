@@ -462,11 +462,14 @@ function initToArrangeTable(ds) {
 //				}
 			}, {
 				key : "audiScore",
-				label : "观众投票(看/不看)"
+				label : "观众投票"
 //				formatter : formatAudienceScore
 			}, {
+				key :"purchase",
+				label :"购买意见"// , formatter :formatPurchase
+			}, {
 				key : "award",
-				label : "获奖备选(是/否)"
+				label : "获奖备选"
 //				formatter : formatAward
 			}, {
 				key : "comments",
@@ -481,7 +484,7 @@ function initToArrangeTable(ds) {
 		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
 				"dateComing", "status", "avgScore", "award",
-				"audiScore", "comments" ],
+				"audiScore", "comments","purchase" ],
 		metaFields : {
 			totalRecords : "totalRecords"
 		}
@@ -723,11 +726,14 @@ function initToPassTable(ds) {
 //				}
 			}, {
 				key : "audiScore",
-				label : "观众投票(看/不看)"
+				label : "观众投票"
 //				formatter : formatAudienceScore
 			}, {
+				key :"purchase",
+				label :"购买意见"// , formatter :formatPurchase
+			},{
 				key : "award",
-				label : "获奖备选(是/否)"
+				label : "获奖备选"
 //				formatter : formatAward
 			}, {
 				key : "comments",
@@ -742,7 +748,7 @@ function initToPassTable(ds) {
 		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
 				"dateComing", "status", "avgScore", "audiScore", "award",
-				"comments" ],
+				"comments","purchase" ],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
 	// response

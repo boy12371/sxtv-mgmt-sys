@@ -147,7 +147,10 @@
 </div>
 
 <script type="text/javascript">
-	YAHOO.util.Event.addListener(window, "load", initDataTable);
+	var filter = YAHOO.util.Dom.get("filter");
+	YAHOO.util.Event.addListener(filter, "change", fireEvent);
+	initDataSourceForTable("/tv/audit/filterVideos.action?sort=dateInput&dir=asc&startIndex=-1&filter=2",datatableCallBack);
+	//YAHOO.util.Event.addListener(window, "load", initDataTable);
 </script>
 
 

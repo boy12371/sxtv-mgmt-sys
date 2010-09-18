@@ -1,5 +1,6 @@
 package com.vms.beans;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,7 @@ import com.vms.db.bean.Audiencescore;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 
-public class VedioTapeVO{
+public class VedioTapeVO {
 	private String id;
 	private String vedioName;
 	private String subject;
@@ -18,79 +19,100 @@ public class VedioTapeVO{
 	private String status;
 	private float marketShare;
 	private float audienceRating;
-	private Float avgScore;
-	private String audiScore;
+	private Float avgScore= new Float(0);
+	private String audiScore="";
 	private int orientation;
-	private String award;
-	
-	private Map<String,Integer> watching;
-	
+	private String award="";
+	private String purchase="";
+
+	private Map<String, Integer> watching;
+
 	private Date playDate;
-	
+
 	private int marked;
-	
+
 	private String comments;
-	
+
 	private List<String> examinedEmployees;
-	
+
 	private List<String> unexaminedEmployees;
-	
-	public VedioTapeVO(){}
-	
-	public VedioTapeVO(Vediotape tape){
+
+	public VedioTapeVO() {
+	}
+
+	public VedioTapeVO(Vediotape tape) {
 		this.setId(tape.getId());
 		this.setVedioName(tape.getVedioName());
 		this.subject = tape.getSubject().getSubjectName();
 		this.topic = tape.getTopic().getTopicName();
 		this.setCompanyID(tape.getCompanyID().getCompanyName());
-		this.dateComing = tape.getDateComing();
+		this.dateComing = tape.getDateInput();//.getDateComing();
 		this.status = tape.getStatus().getStatus();
-		this.marketShare = null==tape.getMarketShare() ? 0 : tape.getMarketShare();
-		this.audienceRating = null==tape.getAudienceRating() ? 0 : tape.getAudienceRating();
+		this.comments = tape.getComments();
+		this.marketShare = null == tape.getMarketShare() ? 0 : tape
+				.getMarketShare();
+		this.audienceRating = null == tape.getAudienceRating() ? 0 : tape
+				.getAudienceRating();
 		orientation = 0;
-		if(null != tape.getVedioscores() && 0 != tape.getVedioscores().size()){
+		if (null != tape.getVedioscores() && 0 != tape.getVedioscores().size()) {
 			float sum = 0;
 			int award = 0;
 			int unaward = 0;
-			for(Vedioscore s:tape.getVedioscores()){
+			int purchase = 0;
+			int unpurchase = 0;
+			for (Vedioscore s : tape.getVedioscores()) {
 				sum += s.getScore();
-				if(s.getOrientation()==1){
+				if (s.getOrientation() == 1) {
 					orientation++;
 				}
-				if(s.getAward()==1){
+				if (s.getAward() == 1) {
 					award++;
-				}else{
+				} else {
 					unaward++;
 				}
+				if(s.getPurchase()==1){
+					purchase++;
+				}else{
+					unpurchase ++;
+				}
 			}
-			if(0 != sum){
-				this.avgScore = sum/tape.getVedioscores().size();
+			if (0 != sum) {
+				this.avgScore = sum / tape.getVedioscores().size();
+				DecimalFormat df =new  DecimalFormat("###,###,###.##");
+				String _af = df.format(avgScore);
+				this.avgScore = Float.parseFloat(_af);
 			}
-			this.award = award + "/" + unaward;
+			this.award = award + "是 / " + unaward+"否";
+			this.purchase = purchase+"买 / "+unpurchase+" 否";
 		}
-		if(null != tape.getAudiencescore() && 0 != tape.getAudiencescore().size()){
+		if (null != tape.getAudiencescore()
+				&& 0 != tape.getAudiencescore().size()) {
 			int look = 0;
 			int unlook = 0;
-			for(Audiencescore s:tape.getAudiencescore()){
-				if(s.getResult()==1){
+			for (Audiencescore s : tape.getAudiencescore()) {
+				if (s.getResult() == 1) {
 					look++;
-				}else{
+				} else {
 					unlook++;
 				}
 			}
-			this.audiScore = look+"/"+unlook;;
+			this.audiScore = look + "看 / " + unlook+"不看";
+			
 		}
 	}
 
 	public String getSubject() {
 		return subject;
 	}
+
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+
 	public String getTopic() {
 		return topic;
 	}
+
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
@@ -98,24 +120,31 @@ public class VedioTapeVO{
 	public java.util.Date getDateComing() {
 		return dateComing;
 	}
+
 	public void setDateComing(java.util.Date dateComing) {
 		this.dateComing = dateComing;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public float getMarketShare() {
 		return marketShare;
 	}
+
 	public void setMarketShare(float marketShare) {
 		this.marketShare = marketShare;
 	}
+
 	public float getAudienceRating() {
 		return audienceRating;
 	}
+
 	public void setAudienceRating(float audienceRating) {
 		this.audienceRating = audienceRating;
 	}
@@ -223,5 +252,13 @@ public class VedioTapeVO{
 	public String getAward() {
 		return award;
 	}
-	
+
+	public String getPurchase() {
+		return purchase;
+	}
+
+	public void setPurchase(String purchase) {
+		this.purchase = purchase;
+	}
+
 }

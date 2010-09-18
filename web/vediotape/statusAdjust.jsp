@@ -110,7 +110,7 @@
 			
 			<tr>
 				<td><label>调整状态</label></td>
-				<td><s:select name="vedio.status.id" list="#{'2':'待审','3':'通过','5':'待徘','7':'淘汰'}" headerKey="-1" headerValue="----" id="statusSelect" /></td>
+				<td><s:select name="vedio.status.id" list="#{'2':'待审','3':'通过','5':'待徘','6':'待播','7':'淘汰','8':'已播'}" headerKey="-1" headerValue="----" id="statusSelect" /></td>
 			</tr>
 			<tr>
 				<td><label>调整原因</label></td>

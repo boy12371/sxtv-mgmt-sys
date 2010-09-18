@@ -118,12 +118,12 @@ document.write("打印日期: " + date.getFullYear() + "年" + (date.getMonth() 
 <script type="text/javascript">
 	var query = '<s:property value="query"/>';
 	//query.replace(/amp;/g, "")
-	var actionUrl ="/tv/search/doPrintVideosReport.action?";
+	var actionUrl ="";
 	var initRequest = encodeURI(encodeURI(YAHOO.util.Dom.get("queryString").value));
 	if (initRequest.length == 0) {
 		initRequest="";
 	}else{
-		actionUrl += initRequest;
+		actionUrl ="/tv/search/doPrintVideosReport.action?"+initRequest;
 	}
 	YAHOO.util.Event.addListener(window, "load", getDataSource());
 </script>
