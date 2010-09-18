@@ -1,10 +1,13 @@
+var linkClickEvent = function(oArgs){
+		var a = oArgs.target;
+		var oRecord = this.getRecord(a);
+		var link = "/tv/search/toVideoDetail.action?vid="+oRecord.getData("id");
+		window.open(link,"影带信息",'height=500,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+	}
 function initDataTable() {
 
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./search/toVideoDetail.action?vid=";
-		href += sData;
-		href += "' target='blank'>" + sData + "</a>";
-		elCell.innerHTML = href;
+		elCell.innerHTML = "<a href='#'>"+sData+"</a>";
 	}
 
 	// Column definitions
@@ -12,7 +15,7 @@ function initDataTable() {
 				key : "id",
 				label : "编号",
 				sortable : true,
-				formatter : formatLink
+				formatter:formatLink
 			}, {
 				key : "vedioName",
 				label : "剧目名称"
@@ -51,17 +54,17 @@ function initDataTable() {
 				sortable : true
 			}, {
 				key : "avgScore",
-				label : "综合平均分"//,formatter : formatScroes
+				label : "综合平均分"// ,formatter : formatScroes
 			}, {
 				key : "purchase",
 				label : "购买意见"
-					//,formatter : formatPurchase
+					// ,formatter : formatPurchase
 			}, {
 				key : "award",
-				label : "获奖备选"//,	formatter : formatAward
+				label : "获奖备选"// , formatter : formatAward
 			}, {
 				key : "audiScore",
-				label : "观众投票"//,	formatter : formatAudienceScore
+				label : "观众投票"// , formatter : formatAudienceScore
 			}, {
 				key : "comments",
 				label : "备注",
@@ -163,7 +166,8 @@ function initDataTable() {
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
-
+	
+	myDataTable.subscribe("linkClickEvent", linkClickEvent);
 	var columnSet = myDataTable.getColumnSet();
 	var showHideColumn = function(e) {
 		var column = columnSet.getColumn(this.value);
@@ -314,9 +318,6 @@ function initOrderDataTable() {
 		elCell.innerHTML = (rowIndex += 1);
 	}
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
-		var href = "<a href='./search/toVideoDetail.action?vid=";
-		href += sData;
-		href += "' target='blank'>" + sData + "</a>";
 		elCell.innerHTML = href;
 	}
 
@@ -465,6 +466,7 @@ function initOrderDataTable() {
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
+	myDataTable.subscribe("linkClickEvent", linkClickEvent);
 	var columnSet = myDataTable.getColumnSet();
 	var showHideColumn = function(e) {
 		var column = columnSet.getColumn(this.value);
