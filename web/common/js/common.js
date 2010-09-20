@@ -375,7 +375,15 @@ function resizeScrollTable(containerId){
 	var tables = container.getElementsByTagName("table");
 	if (null != tables && 0 != tables.length) {
 		if (typeof(container.originalWidth)=="undefined" || tables[0].offsetWidth < container.originalWidth) {
-			container.style.width = tables[0].offsetWidth + "px";
+			var tableWidth;
+			if(typeof(container.originalWidth)=="undefined"){
+				if(tables[0].offsetWidth > 920) tableWidth=920;
+				else tableWidth = tables[0].offsetWidth;
+				container.originalWidth = tableWidth;
+				container.style.width = tableWidth + "px";
+			}else{
+				container.style.width = tables[0].offsetWidth + "px";
+			}
 		}
 	}
 }
