@@ -415,10 +415,10 @@ function getFirstVoidRecord(dataTable){
 }
 
 function addTapeToArrange(rID){
+	var pos = getFirstVoidRecord(arrangeTable);
+	if(-1 == pos) {alert("本月所有的日期都已编排。");return;}
 	var xData = unArrangeTable.getRecord(rID).getData();
 	unArrangeTable.deleteRow(rID);
-	var pos = getFirstVoidRecord(arrangeTable);
-	if(-1 == pos) return;
 	var newRecord = arrangeTable.getRecord(pos);
 	arrangeTable.updateCell(newRecord, "id" ,xData.id);
 	arrangeTable.updateCell(newRecord, "vedioName" ,xData.vedioName);
