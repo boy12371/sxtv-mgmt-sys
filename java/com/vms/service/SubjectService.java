@@ -1,6 +1,8 @@
 package com.vms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.vms.db.bean.Subject;
 import com.vms.db.dao.iface.ISubjectDAO;
@@ -37,9 +39,14 @@ public class SubjectService implements ISubjectService {
 
 	@Override
 	public List<Subject> findAllSubjects(int startIndex, int endIndex,
-			String propertyName, boolean ascending) throws Exception {
+			String propertyName, boolean ascending,boolean enabled) throws Exception {
 		// TODO Auto-generated method stub
-		return (List<Subject>)subjectDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
+		Map<String, Object> propertiesValues = null;
+		if (enabled) {
+			propertiesValues = new HashMap<String, Object>();
+			propertiesValues.put(Subject.PROP_STATUS, new Integer(1));
+		}
+		return (List<Subject>)subjectDAO.findObjectByFields(clz, propertiesValues, startIndex, endIndex, propertyName, ascending);
 	}
 
 	@Override

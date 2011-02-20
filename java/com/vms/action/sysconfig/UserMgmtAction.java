@@ -68,7 +68,7 @@ public class UserMgmtAction extends BaseAction {
 
 		try {
 			List<User> users = userService.findAllUser(table.getStartIndex(),
-					table.getStartIndex() + table.getRowsPerPage(), table
+					table.getRowsPerPage(), table
 							.getSort(), table.getDir().equals(
 							JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(users, table, userService

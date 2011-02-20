@@ -30,8 +30,7 @@ public class AudienceMgmtAction extends BaseAction {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		
 		try {
-			List<Audience> auds = this.audicenceService.findAudience(table.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+			List<Audience> auds = this.audicenceService.findAudience(table.getStartIndex(), table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(auds, table, audicenceService.getTotalCount());
 			
 		} catch (Exception e) {

@@ -1,8 +1,9 @@
 package com.vms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.vms.db.bean.Subject;
 import com.vms.db.bean.Topic;
 import com.vms.db.dao.iface.ITopicDAO;
 import com.vms.service.iface.ITopicService;
@@ -32,11 +33,15 @@ public class TopicService implements ITopicService {
 	}
 
 	@Override
-	public List<Topic> findAllTopics(int startIndex, int endIndex, String propertyName, boolean ascending)
+	public List<Topic> findAllTopics(int startIndex, int endIndex, String propertyName, boolean ascending,boolean enabled)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
-		return this.topicDAO.findObjectByFields(clz, null, startIndex, endIndex, propertyName, ascending);
+		Map<String, Object> propertiesValues = null;
+		if (enabled) {
+			propertiesValues = new HashMap<String, Object>();
+			propertiesValues.put(Topic.PROP_STATUS, new Integer(1));
+		}
+		return this.topicDAO.findObjectByFields(clz, propertiesValues, startIndex, endIndex, propertyName, ascending);
 		
 	}
 

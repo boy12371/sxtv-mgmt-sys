@@ -40,8 +40,7 @@ public class EmployeeMgmtAction extends BaseAction {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 
 		try {
-			List<Employee> empList = employeeService.findAllEmployees(table.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+			List<Employee> empList = employeeService.findAllEmployees(table.getStartIndex(), table.getRowsPerPage(), table.getSort(), table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(empList, table, employeeService.getEmployeeTotalCount());
 		} catch (Exception e) {
 			logger.error(e.getMessage());

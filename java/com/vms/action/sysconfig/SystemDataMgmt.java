@@ -43,12 +43,13 @@ public class SystemDataMgmt extends BaseAction {
 	public String getStatuses() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Status> staList = statusService.findAllStatus(table
-					.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals(JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(staList, table, statusService
-					.getStatusTotalCount());
+			List<Status> staList = statusService.findAllStatus(
+					table.getStartIndex(),
+					table.getRowsPerPage(),
+					table.getSort(),
+					table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(staList, table,
+					statusService.getStatusTotalCount());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -58,12 +59,14 @@ public class SystemDataMgmt extends BaseAction {
 	public String getTopices() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Topic> topList = topicService.findAllTopics(table
-					.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals(JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(topList, table, topicService
-					.getTopicTotalCount());
+			List<Topic> topList = topicService.findAllTopics(
+					table.getStartIndex(),
+					table.getRowsPerPage(),
+					table.getSort(),
+					table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION),
+					false);
+			JSONDataTableUtils.setupJSONDataTable(topList, table,
+					topicService.getTopicTotalCount());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -73,10 +76,12 @@ public class SystemDataMgmt extends BaseAction {
 	public String getSubjects() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Subject> subList = subjectService.findAllSubjects(table
-					.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir()
-					.equals(JSONDataTableUtils.SORT_DIRECTION));
+			List<Subject> subList = subjectService.findAllSubjects(
+					table.getStartIndex(),
+					table.getRowsPerPage(),
+					table.getSort(),
+					table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION),
+					false);
 			JSONDataTableUtils.setupJSONDataTable(subList, table,
 					subjectService.getSubjectTotalCount());
 		} catch (Exception e) {
@@ -89,10 +94,12 @@ public class SystemDataMgmt extends BaseAction {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
 			List<Scoreweight> sList = this.scoreweightService
-					.findAllScoreweight(table.getStartIndex(), table
-							.getStartIndex()
-							+ table.getRowsPerPage(), table.getSort(), table
-							.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+					.findAllScoreweight(
+							table.getStartIndex(),
+							table.getRowsPerPage(),
+							table.getSort(),
+							table.getDir().equals(
+									JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(sList, table,
 					scoreweightService.getTotalCount());
 		} catch (Exception e) {
@@ -104,11 +111,11 @@ public class SystemDataMgmt extends BaseAction {
 	public String getScorelevels() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Scorelevel> sList = this.scorelevelService
-					.findAllScorelevel(table.getStartIndex(), table
-							.getStartIndex()
-							+ table.getRowsPerPage(), table.getSort(), table
-							.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
+			List<Scorelevel> sList = this.scorelevelService.findAllScorelevel(
+					table.getStartIndex(),
+					table.getRowsPerPage(),
+					table.getSort(),
+					table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			JSONDataTableUtils.setupJSONDataTable(sList, table,
 					scorelevelService.getTotalCount());
 		} catch (Exception e) {

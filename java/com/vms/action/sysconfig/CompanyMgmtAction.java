@@ -32,8 +32,7 @@ public class CompanyMgmtAction extends BaseAction {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
 			List<Company> comList = companyService.findAllCompany(table
-					.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getSort(), table.getDir()
+					.getStartIndex(), table.getRowsPerPage(), table.getSort(), table.getDir()
 					.equals(JSONDataTableUtils.SORT_DIRECTION), false);
 			JSONDataTableUtils.setupJSONDataTable(comList, table,
 					companyService.getCompanyTotalCount(false));

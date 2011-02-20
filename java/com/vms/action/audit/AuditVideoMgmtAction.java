@@ -49,9 +49,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 			List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
 			if (filter != 0) {
 				videosList = videoService.findVideotapeByStatus(filter, table
-						.getSort(), table.getStartIndex(), table
-						.getStartIndex()
-						+ table.getRowsPerPage(), table.getDir().equals(
+						.getSort(), table.getStartIndex(), table.getRowsPerPage(), table.getDir().equals(
 						JSONDataTableUtils.SORT_DIRECTION));
 				for(Vediotape v:videosList){
 					VedioTapeVO tapev = new VedioTapeVO(v);
@@ -61,9 +59,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 						videoService.getTotalCountForVideosByStatus(filter));
 			} else {
 				videosList = videoService.findAllVideotapesForAudit(table
-						.getSort(), table.getStartIndex(), table
-						.getStartIndex()
-						+ table.getRowsPerPage(), table.getDir().equals(
+						.getSort(), table.getStartIndex(), table.getRowsPerPage(), table.getDir().equals(
 						JSONDataTableUtils.SORT_DIRECTION));
 				for(Vediotape v:videosList){
 					VedioTapeVO tapev = new VedioTapeVO(v);
@@ -84,8 +80,7 @@ public class AuditVideoMgmtAction extends BaseAction {
 	public String getVideoScores() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		List<VedioScoreVO> data = vedioscoreService
-				.findUserExamineScoreByVideoId(videoID, table.getStartIndex(),
-						table.getStartIndex() + table.getRowsPerPage(), table
+				.findUserExamineScoreByVideoId(videoID, table.getStartIndex(), table.getRowsPerPage(), table
 								.getSort(), table.getDir().equals(
 								JSONDataTableUtils.SORT_DIRECTION));
 		JSONDataTableUtils.setupJSONDataTable(data, table, vedioscoreService

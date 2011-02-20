@@ -347,11 +347,11 @@ public class VediotapeMgmtAction extends BaseAction {
 	// }
 
 	public List<Topic> getTopList() throws Exception {
-		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true);
+		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true,true);
 	}
 
 	public List<Subject> getSubList() throws Exception {
-		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
+		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true,true);
 	}
 
 	public ICompanyService getCompanyService() {

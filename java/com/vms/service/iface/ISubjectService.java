@@ -13,7 +13,7 @@ public interface ISubjectService {
 	void createSubject(Subject subject) throws Exception;
 
 	List<Subject> findAllSubjects(int startIndex, int endIndex,
-			String propertyName, boolean ascending) throws Exception;
+			String propertyName, boolean ascending,boolean enabled) throws Exception;
 
 	int getSubjectTotalCount() throws Exception;
 	

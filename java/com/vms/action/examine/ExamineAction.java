@@ -70,7 +70,7 @@ public class ExamineAction extends BaseAction {
 		try {
 			if((null==vid || "".equals(vid)) && (null==vname || "".equals(vname))){
 				tapes = vedioscoreService.getAllUnExaminedVedioes(unExaminedTable.getStartIndex(), 
-						unExaminedTable.getStartIndex()+ unExaminedTable.getRowsPerPage(),
+						unExaminedTable.getRowsPerPage(),
 						unExaminedTable.getSort(),
 						unExaminedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 				Status status = new Status(1);
@@ -116,7 +116,7 @@ public class ExamineAction extends BaseAction {
 				scores = vedioscoreService.findUserExamineScoreByVideoId(
 						vid, 
 						examinedTable.getStartIndex(), 
-						examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
+						examinedTable.getRowsPerPage(),
 						examinedTable.getSort(), examinedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION)
 						);
 			}else{
@@ -128,7 +128,7 @@ public class ExamineAction extends BaseAction {
 					scores = vedioscoreService.findUserExamineScoreByVideoId(
 						tape.getId(), 
 						examinedTable.getStartIndex(), 
-						examinedTable.getStartIndex()+ examinedTable.getRowsPerPage(),
+						examinedTable.getRowsPerPage(),
 						examinedTable.getSort(), examinedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION)
 						);
 				}else{

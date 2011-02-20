@@ -1,13 +1,9 @@
 package com.vms.action.search;
 
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 
@@ -21,7 +17,6 @@ import com.vms.db.bean.Company;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Subject;
 import com.vms.db.bean.Topic;
-import com.vms.db.bean.User;
 import com.vms.db.bean.Vedioscore;
 import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.ICompanyService;
@@ -102,19 +97,17 @@ public class VedioSearchMgmt extends BaseAction {
 	public String searchVideos() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Vediotape> dataList =new ArrayList<Vediotape>();
-			List<VideoVO> vList =new ArrayList<VideoVO>();
-			dataList = this.vedioService.findVidesByConditions(
-					sc, table.getSort(), table.getStartIndex(), table
-							.getStartIndex()
-							+ table.getRowsPerPage(), table.getDir().equals(
-							JSONDataTableUtils.SORT_DIRECTION));
+			List<Vediotape> dataList = new ArrayList<Vediotape>();
+			List<VideoVO> vList = new ArrayList<VideoVO>();
+			dataList = this.vedioService.findVidesByConditions(sc, table
+					.getSort(), table.getStartIndex(), table.getRowsPerPage(),
+					table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			for (Vediotape vediotape : dataList) {
 				VideoVO vv = new VideoVO(vediotape);
 				vList.add(vv);
 			}
-			JSONDataTableUtils.setupJSONDataTable(vList, table, vedioService
-					.getTotalCountForVidesByConditions(sc));
+			JSONDataTableUtils.setupJSONDataTable(vList, table,
+					vedioService.getTotalCountForVidesByConditions(sc));
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
@@ -134,15 +127,14 @@ public class VedioSearchMgmt extends BaseAction {
 			List<Vediotape> dataList = new ArrayList<Vediotape>();
 			List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
 			dataList = this.vedioService.findVidesByConditions(sc, table
-					.getSort(), table.getStartIndex(), table.getStartIndex()
-					+ table.getRowsPerPage(), table.getDir().equals(
-					JSONDataTableUtils.SORT_DIRECTION));
+					.getSort(), table.getStartIndex(), table.getRowsPerPage(),
+					table.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			for (Vediotape v : dataList) {
 				VedioTapeVO tapev = new VedioTapeVO(v);
 				tapeVOs.add(tapev);
 			}
-			JSONDataTableUtils.setupJSONDataTable(tapeVOs, table, tapeVOs
-					.size());
+			JSONDataTableUtils.setupJSONDataTable(tapeVOs, table,
+					tapeVOs.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
@@ -159,13 +151,16 @@ public class VedioSearchMgmt extends BaseAction {
 	public String doPrintVideosSequenceOrderReport() throws Exception {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Vediotape> dataList = this.vedioService.findVideosByRateOrder(
-					sc, table.getSort(), table.getStartIndex(), table
-							.getStartIndex()
-							+ table.getRowsPerPage(), table.getDir().equals(
-							JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList
-					.size());
+			List<Vediotape> dataList = this.vedioService
+					.findVideosByRateOrder(
+							sc,
+							table.getSort(),
+							table.getStartIndex(),
+							table.getRowsPerPage(),
+							table.getDir().equals(
+									JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(dataList, table,
+					dataList.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
@@ -180,13 +175,16 @@ public class VedioSearchMgmt extends BaseAction {
 	public String doSearchAndSequenceVideos() {
 		table = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<Vediotape> dataList = this.vedioService.findVideosByRateOrder(
-					sc, table.getSort(), table.getStartIndex(), table
-							.getStartIndex()
-							+ table.getRowsPerPage(), table.getDir().equals(
-							JSONDataTableUtils.SORT_DIRECTION));
-			JSONDataTableUtils.setupJSONDataTable(dataList, table, dataList
-					.size());
+			List<Vediotape> dataList = this.vedioService
+					.findVideosByRateOrder(
+							sc,
+							table.getSort(),
+							table.getStartIndex(),
+							table.getRowsPerPage(),
+							table.getDir().equals(
+									JSONDataTableUtils.SORT_DIRECTION));
+			JSONDataTableUtils.setupJSONDataTable(dataList, table,
+					dataList.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e);
@@ -201,11 +199,12 @@ public class VedioSearchMgmt extends BaseAction {
 	}
 
 	public List<Topic> getTopList() throws Exception {
-		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true);
+		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true, false);
 	}
 
 	public List<Subject> getSubList() throws Exception {
-		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true);
+		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true,
+				false);
 	}
 
 	public List<Status> getStatusList() throws Exception {
@@ -261,10 +260,10 @@ public class VedioSearchMgmt extends BaseAction {
 		private Status status;
 		// collections
 
-		private String award="";
-		private String purchase="";
-		private String avgScore="0";
-		private String audiScore="";
+		private String award = "";
+		private String purchase = "";
+		private String avgScore = "0";
+		private String audiScore = "";
 
 		public VideoVO(Vediotape tape) {
 			this.setId(tape.getId());
@@ -272,8 +271,10 @@ public class VedioSearchMgmt extends BaseAction {
 			this.setDateComing(tape.getDateComing());
 			this.setDateInput(tape.getDateInput());
 			this.setComments(tape.getComments());
-			this.setMarketShare(tape.getMarketShare()!=null?tape.getMarketShare():0);
-			this.setAudienceRating(tape.getAudienceRating()!=null?tape.getAudienceRating():0);
+			this.setMarketShare(tape.getMarketShare() != null ? tape
+					.getMarketShare() : 0);
+			this.setAudienceRating(tape.getAudienceRating() != null ? tape
+					.getAudienceRating() : 0);
 			Topic t = new Topic();
 			t.setId(tape.getTopic().getId());
 			t.setTopicName(tape.getTopic().getTopicName());
@@ -330,8 +331,8 @@ public class VedioSearchMgmt extends BaseAction {
 						unlook++;
 					}
 				}
-				this.audiScore = look + "看 / " + unlook+"不看";
-				
+				this.audiScore = look + "看 / " + unlook + "不看";
+
 			}
 
 		}

@@ -7,7 +7,7 @@ import com.vms.db.bean.Topic;
 
 public interface ITopicService {
 
-	List<Topic> findAllTopics(int startIndex, int endIndex, String propertyName, boolean ascending) throws Exception;
+	List<Topic> findAllTopics(int startIndex, int endIndex, String propertyName, boolean ascending,boolean enabled) throws Exception;
 
 	void deleteTopic(int id) throws Exception;
 
