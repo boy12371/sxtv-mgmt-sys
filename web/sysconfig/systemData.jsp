@@ -30,11 +30,32 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/tabview/tabview-min.js"></script> 
+
 </head>
 <body class="yui-skin-sam">
 <s:actionmessage />
 <s:actionerror />
 
+<div id="demo" class="yui-navset"> 
+    <ul class="yui-nav"> 
+        <li class="selected"><a href="#tab1"><em>状态</em></a></li> 
+        <li><a href="#tab2"><em>题材</em></a></li>
+        <li><a href="#tab3"><em>栏目</em></a></li>
+        <li><a href="#tab4"><em>评分权重</em></a></li>
+        <li><a href="#tab5"><em>评分级别</em></a></li>
+    </ul>            
+    <div class="yui-content"> 
+        <div><div id="vedioStatus" align="center"></div></div> 
+        <div><div id="vedioTopic" align="center"></div><div id="topicBtnDiv" align="center"></div></div> 
+        <div><div id="vedioSubject" align="center"></div><div id="subjectBtnDiv" align="center"></div></div>
+        <div><div id="scoreWeight" align="center"></div></div> 
+        <div><div id="scorelevel" align="center"></div><div id="levelBtnDiv" align="center"></div></div> 
+         
+    </div> 
+</div>
+
+<!-- 
 <h1>影带状态</h1>
 <img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
 <p>影带状态不可更改</p>
@@ -64,8 +85,8 @@
 <p>可添加或修改权重</p>
 <br />
 <div id="scoreWeight" align="center"></div>
-
-<!-- div id="weightBtnDiv" align="center"></div-->
+ -->
+<!-- div id="weightBtnDiv" align="center"></div
 
 
 
@@ -75,11 +96,15 @@
 <br />
 <div id="scorelevel" align="center"></div>
 <div id="levelBtnDiv" align="center"></div>
-
+-->
 
 
 
 <script type="text/javascript">
+
+(function() {
+    var tabView = new YAHOO.widget.TabView('demo');
+})();
 	YAHOO.example.DynamicData = initStatusTable();
 	YAHOO.example.DynamicData = initTopicTable();
 	YAHOO.example.DynamicData = initSubjectTable();
