@@ -16,12 +16,21 @@ public class VedioTapeVO {
 	private String topic;
 	private String companyID;
 	private Date dateComing;
+	private Date dateStore;
 	private String status;
 	private float marketShare;
 	private float audienceRating;
 	private Float avgScore= new Float(0);
 	private String audiScore="";
 	private int orientation;
+	public Date getDateStore() {
+		return dateStore;
+	}
+
+	public void setDateStore(Date dateStore) {
+		this.dateStore = dateStore;
+	}
+
 	private String award="";
 	private String purchase="";
 
@@ -47,6 +56,7 @@ public class VedioTapeVO {
 		this.topic = tape.getTopic().getTopicName();
 		this.setCompanyID(tape.getCompanyID().getCompanyName());
 		this.dateComing = tape.getDateInput();//.getDateComing();
+		this.dateStore = tape.getDateStore();
 		this.status = tape.getStatus().getStatus();
 		this.comments = tape.getComments();
 		this.marketShare = null == tape.getMarketShare() ? 0 : tape
