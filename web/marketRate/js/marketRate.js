@@ -19,18 +19,15 @@ function initDataTable() {
 	}, {
 		key : "topic",
 		label : "题材",
-		sortable : true,
-		formatter : formatTopic
+		sortable : true
 	}, {
 		key : "subject",
 		label : "栏目",
-		sortable : true,
-		formatter : formatSubject
+		sortable : true
 	}, {
 		key : "companyID",
 		label : "影视公司",
-		sortable : true,
-		formatter : formatCompany
+		sortable : true
 	}, {
 		key : "dateComing",
 		label : "收带日期",
@@ -39,8 +36,7 @@ function initDataTable() {
 	}, {
 		key : "status",
 		label : "状态",
-		sortable : true,
-		formatter : formatStatus
+		sortable : true
 	},/*** {
 		key : "vedioscores",
 		label : "综合平均分",
