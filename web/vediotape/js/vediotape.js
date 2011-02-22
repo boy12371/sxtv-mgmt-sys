@@ -448,10 +448,12 @@ function initToArrangeTable(ds) {
 				label : "收带日期",
 				sortable : true,
 				formatter : formatDate
-//			}, {
-//				key : "status",
-//				label : "状态",
-//				formatter : formatStatus
+			}, {
+				key : "status",
+				label : "状态",
+				formatter : function(elCell, oRecord, oColumn, sData){
+					elCell.innerHTML = "通过-未入库";
+				}
 			}, {
 				key : "avgScore",
 				label : "综合平均分",
@@ -712,10 +714,26 @@ function initToPassTable(ds) {
 				label : "收带日期",
 				sortable : true,
 				formatter : formatDate
-//			}, {
-//				key : "status",
-//				label : "状态",
-//				formatter : formatStatus
+			}, {
+				key : "status",
+				label : "状态"
+			}, {
+				key : "dateStore",
+				label : "入库日期",
+				sortable : true,
+				formatter : function(elCell, oRecord, oColumn, sData) {
+						if(sData!=null){
+							var idx = sData.indexOf("T");
+							if (idx != -1) {
+								elCell.innerHTML = sData.substring(0, idx);
+							} else {
+								elCell.innerHTML = sData;
+							}	
+						}else{
+							elCell.innerHTML = "-";
+						}
+						
+					}
 			}, {
 				key : "avgScore",
 				label : "综合平均分",
@@ -747,7 +765,7 @@ function initToPassTable(ds) {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateComing", "status", "avgScore", "audiScore", "award",
+				"dateComing", "status","dateStore", "avgScore", "audiScore", "award",
 				"comments","purchase" ],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
@@ -866,7 +884,7 @@ function initToPassTable(ds) {
 function initButtons() {
 	var submitToPreArrange = new YAHOO.widget.Button( {
 		type : "button",
-		label : "批为编排",
+		label : "批为入库",
 		id : "toArrageBtn",
 		container : "submitToPreArrange"
 	});
