@@ -31,11 +31,29 @@
 <s:actionerror/>
 
 <p>未编排影带列表，点击第一列图标将影带移入编排列表</p>
-<br />
+
+<div id="subject" align="center">
+<table>
+	<tr>
+		<td>选择栏目：</td>
+		<s:iterator value="subjects" status='st'>
+			<td>
+			<s:if test="id == 1">
+				<input type="radio" onclick="selectSubject(this)" name="subject" value='<s:property value="id"/>' checked="checked"/> 
+			</s:if><s:else>
+				<input type="radio" onclick="selectSubject(this)" name="subject" value='<s:property value="id"/>' /> 
+			</s:else>	
+			<s:property value="subjectName"/>
+			</td>
+		</s:iterator>
+	</tr>
+</table>
+</div>
 <div id="unArrangeTableDiv" align="center"></div>
 
 <p>已编排影带列表，点击第一列图标可将影带移除编排列表，拖动记录可以调节播放时间。</p>
 <br />
+
 <div id="selectMonthDiv" style="width:800px;height:30px;margin-left:68px;margin-bottom:10px;">
 	<table style="width:100%"><tr>
 		<td>
