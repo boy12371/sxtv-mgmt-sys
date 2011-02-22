@@ -227,6 +227,7 @@
 	</bean>
 	<bean id="arrangeService" class="com.vms.service.ArrangeService">
 		<property name="playorderDAO" ref="playorderDAO" />
+		<property name="subjectDAO" ref="subjectDAO" />
 	</bean>
 	<bean id="resourceService" class="com.vms.service.ResourceService">
 		<property name="resourceDAO" ref="resourceDAO" />
