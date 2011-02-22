@@ -1,6 +1,25 @@
-var unArrangeTable;
+var unArrangeTable=null;
 var arrangeTable;
 var selMonth = "";
+var selSubject = 1;
+
+function selectSubject(self){
+	selSubject = self.value;
+	if(null==unArrangeTable) return;
+	var oState = unArrangeTable.getState();
+	oState.pagination.recordOffset = 0;
+	var callback = {
+			success:unArrangeTable.onDataReturnInitializeTable,
+			failure:unArrangeTable.onDataReturnInitializeTable,
+			argument:oState,
+			scope:unArrangeTable
+			};
+	unArrangeTable.getDataSource().sendRequest(
+			unArrangeTable.get("generateRequest")(oState, unArrangeTable),
+			callback
+			);
+	selectMonthFunc();
+}
 
 function selectMonthFunc(self){
 	var oState = arrangeTable.getState();
@@ -13,7 +32,7 @@ function selectMonthFunc(self){
 			scope:arrangeTable
 			};
 	arrangeTable.getDataSource().sendRequest(
-			"sort=playDate&dir=asc&month="+selMonth,
+			"sort=playDate&dir=asc&month="+selMonth+"&subject="+selSubject,
 			callback
 			);
 }
@@ -79,6 +98,19 @@ function initUnArrangeTable() {
 		var result = comp(a.getData("marked"), b.getData("marked"), true); 
 		return (result !== 0) ? result : comp(a.getData(field), b.getData(field), desc); 
 	}; 
+	
+	var requestBuilder = function (oState, oSelf) {
+		var sort, dir, startIndex, results; 
+		var startIndex, results;
+		oState = oState || {pagination: null, sortedBy: null};
+		sort = (oState.sortedBy) ? oState.sortedBy.key : oSelf.getColumnSet().keys[0].getKey();
+		dir = (oState.sortedBy && oState.sortedBy.dir === unArrangeTable.CLASS_DESC) ? "desc" : "asc"; 
+		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
+		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
+		return "&results=" + results + "&startIndex=" + startIndex + "&sort="
+		+ sort + "&dir=" + dir + "&subject="+selSubject;
+	};
+	
 	// Column definitions
 	var myColumnDefs = [ // sortable:true enables sorting
 	{
@@ -138,7 +170,8 @@ function initUnArrangeTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0", // Initial
+		initialRequest :"sort=dateComing&dir=asc&startIndex=0&subject="+selSubject, // Initial
+		generateRequest: requestBuilder,
 		sortedBy : {
 			key :"dateComing",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
@@ -259,7 +292,7 @@ function initArrangeTable() {
 	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=playDate&dir=asc&month="+selMonth, // Initial
+		initialRequest :"sort=playDate&dir=asc&month="+selMonth+"&subject="+selSubject,// Initial
 		dynamicData :true, // Enables dynamic server-driven data
 		formatRow: myRowStatusChange,
 		sortedBy : {
