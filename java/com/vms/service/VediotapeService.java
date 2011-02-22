@@ -97,6 +97,18 @@ public class VediotapeService implements IVediotapeService {
 				endIndex, propertyName, asceding);
 
 	}
+	
+	public List<Vediotape> findVideotapeByStatusAndSubject(int status, int subject,
+			String propertyName, int startIndex, int endIndex, boolean asceding)
+			throws Exception {
+		Map<String, Object> properties = new HashMap<String, Object>();
+		properties.put(Vediotape.PROP_STATUS, new Status(status));
+		properties.put(Vediotape.PROP_SUBJECT, new Subject(subject));
+		return (List<Vediotape>) vediotapeDAO.findObjectByFields(clz,
+				properties, startIndex,
+				endIndex, propertyName, asceding);
+
+	}
 
 	@Override
 	public int getTotalCountForAllVideotapesForAudit() throws Exception {

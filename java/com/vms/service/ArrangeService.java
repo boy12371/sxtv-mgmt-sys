@@ -9,13 +9,17 @@ import java.util.List;
 import com.vms.beans.VedioTapeVO;
 import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
+import com.vms.db.bean.Subject;
 import com.vms.db.bean.Vediotape;
 import com.vms.db.dao.iface.IPlayorderDAO;
+import com.vms.db.dao.iface.ISubjectDAO;
 import com.vms.service.iface.IArrangeService;
 
 public class ArrangeService implements IArrangeService{
 	
 	private IPlayorderDAO playorderDAO;
+	
+	private ISubjectDAO subjectDAO;
 	
 	public Date getFirstArrangedDate() throws Exception {
 		return playorderDAO.getFirstArrangedDate();
@@ -31,12 +35,13 @@ public class ArrangeService implements IArrangeService{
 		return orders;
 	}
 	
-	public List<VedioTapeVO> findArrangedTapes(Date month) throws Exception{
+	public List<VedioTapeVO> findArrangedTapes(Date month, int subject) throws Exception{
 		List<VedioTapeVO> tapes = new  ArrayList<VedioTapeVO>();
 		
 		List<Playorder> orders = findPlayorders(month);
 		
 		for(Playorder p:orders){
+			if(p.getVedioID().getSubject().getId()!=subject) continue;
 			VedioTapeVO tape = new VedioTapeVO(p.getVedioID());
 			tape.setPlayDate(p.getPlayDate());
 			if(null!=p.getStatus()&&p.getStatus()<1){
@@ -46,6 +51,10 @@ public class ArrangeService implements IArrangeService{
 			tapes.add(tape);
 		}
 		return tapes;
+	}
+	
+	public List<Subject> getSubjects() throws Exception{
+		return subjectDAO.findObjectByField(Subject.class, "status", 1, -1, -1, "status", true);
 	}
 	
 	public void deletePlayOrder(List<Playorder> pos, int userID) throws Exception{
@@ -69,6 +78,14 @@ public class ArrangeService implements IArrangeService{
 		if(null==list || 0==list.size()) return null;
 		if(list.get(0).getOperation().equals("移除")) return list.get(0);
 		return null;
+	}
+
+	public void setSubjectDAO(ISubjectDAO subjectDAO) {
+		this.subjectDAO = subjectDAO;
+	}
+
+	public ISubjectDAO getSubjectDAO() {
+		return subjectDAO;
 	}
 
 }
