@@ -45,6 +45,23 @@ function initDataTable() {
 				sortable : true,
 				formatter : formatStatus
 			}, {
+				key : "dateStore",
+				label : "入库日期",
+				sortable : true,
+				formatter : function(elCell, oRecord, oColumn, sData) {
+						if(sData!=null){
+							var idx = sData.indexOf("T");
+							if (idx != -1) {
+								elCell.innerHTML = sData.substring(0, idx);
+							} else {
+								elCell.innerHTML = sData;
+							}	
+						}else{
+							elCell.innerHTML = "-";
+						}
+						
+					}
+			}, {
 				key : "marketShare",
 				label : "市场份额",
 				sortable : true
@@ -77,7 +94,7 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "marketShare", "audienceRating",
+				"dateInput", "status", "dateStore", "marketShare", "audienceRating",
 				"avgScore", "purchase", "award", "audiScore",
 				"comments"],
 		metaFields : {
