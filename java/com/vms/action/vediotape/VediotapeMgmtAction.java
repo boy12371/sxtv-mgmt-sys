@@ -231,7 +231,7 @@ public class VediotapeMgmtAction extends BaseAction {
 		try {
 			SessionUserInfo user = this.getUserInfo();
 			this.vedioService.auditingVideo(vv.getId(), user, Integer
-					.parseInt(vv.getStatus()));
+					.parseInt(vv.getStatus()),null);
 			this.addActionMessage("影带已进入重审状态,等待审核");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -248,14 +248,14 @@ public class VediotapeMgmtAction extends BaseAction {
 			SessionUserInfo user = this.getUserInfo();
 			if (toApproved != null && !toApproved.isEmpty()) {
 				for (String vidString : toApproved) {
-					this.vedioService.auditingVideo(vidString, user, 5);
+					this.vedioService.auditingVideo(vidString, user, 5, new Date());
 				}
 
 			}
 
 			if (toPassed != null && !toPassed.isEmpty()) {
 				for (String vidString : toPassed) {
-					this.vedioService.auditingVideo(vidString, user, 3);
+					this.vedioService.auditingVideo(vidString, user, 3, null);
 				}
 
 			}

@@ -36,6 +36,8 @@ public abstract class BaseVediotape implements Serializable {
 	public static String PROP_ID = "id";
 	public static String PROP_DATE_INPUT = "dateInput";
 	public static String PROP_AUDIENCESCORE ="audiencescore";
+	
+	public static String PROP_DATE_STORE ="dateStore";
 
 	// constructors
 	public BaseVediotape() {
@@ -55,7 +57,7 @@ public abstract class BaseVediotape implements Serializable {
 	 */
 	public BaseVediotape(java.lang.String id, com.vms.db.bean.Topic topic, com.vms.db.bean.User inputer,
 			com.vms.db.bean.Status status, com.vms.db.bean.Subject subject, com.vms.db.bean.Company companyID,
-			java.lang.String vedioName, java.util.Date dateComing, java.util.Date dateInput) {
+			java.lang.String vedioName, java.util.Date dateComing, java.util.Date dateInput,java.util.Date dateStore) {
 
 		this.setId(id);
 		this.setTopic(topic);
@@ -66,6 +68,7 @@ public abstract class BaseVediotape implements Serializable {
 		this.setVedioName(vedioName);
 		this.setDateComing(dateComing);
 		this.setDateInput(dateInput);
+		this.setDateStore(dateStore);
 		initialize();
 	}
 
@@ -81,6 +84,7 @@ public abstract class BaseVediotape implements Serializable {
 	private java.lang.String vedioName;
 	private java.util.Date dateComing;
 	private java.util.Date dateInput;
+	private java.util.Date dateStore;
 	private java.lang.String comments;
 	private java.lang.Float marketShare;
 	private java.lang.Float audienceRating;
@@ -411,6 +415,16 @@ public abstract class BaseVediotape implements Serializable {
 	public void setAudiencescore(
 			java.util.Set<com.vms.db.bean.Audiencescore> audiencescore) {
 		this.audiencescore = audiencescore;
+	}
+
+	
+	public java.util.Date getDateStore() {
+		return dateStore;
+	}
+
+	
+	public void setDateStore(java.util.Date dateStore) {
+		this.dateStore = dateStore;
 	}
 
 }

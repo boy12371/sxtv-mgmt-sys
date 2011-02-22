@@ -149,24 +149,40 @@ public class VediotapeService implements IVediotapeService {
 
 	@Override
 	public boolean auditingVideo(String vedioId, SessionUserInfo user,
-			int operation) throws Exception {
+			int operation, Date date) throws Exception {
 		// TODO Auto-generated method stub
-		String hql = "update Vediotape tape set tape.status.id=? where tape.id=?";
-		boolean success = vediotapeDAO.updateVideotape(hql, new Object[] {
-				operation, vedioId });
-		Serializable id = null;
-		if (success) {
+		//String hql = "update Vediotape tape set tape.status.id=? tape.dateStore=? where tape.id=?";
+		Vediotape v = (Vediotape) vediotapeDAO.loadObject(clz, vedioId);
+		if(null != v){
+			v.setStatus(new Status(operation));
+			v.setDateStore(date);
+			vediotapeDAO.updateObject(v);
 			Auditing audit = new Auditing();
 			audit.setVedioID(new Vediotape(vedioId));
 			audit.setAuditor(new User(user.getUserId()));
 			audit.setResult(new Status(operation));
 			audit.setAuditDate(new Date());
-			id = auditingDAO.saveObject(audit);
-		} else {
+			auditingDAO.saveObject(audit);
+			return true;
+		}else{
 			return false;
 		}
-
-		return id != null;
+		
+//		boolean success = vediotapeDAO.updateVideotape(hql, new Object[] {
+//				operation, new Date(), vedioId });
+//		Serializable id = null;
+//		if (success) {
+//			Auditing audit = new Auditing();
+//			audit.setVedioID(new Vediotape(vedioId));
+//			audit.setAuditor(new User(user.getUserId()));
+//			audit.setResult(new Status(operation));
+//			audit.setAuditDate(new Date());
+//			id = auditingDAO.saveObject(audit);
+//		} else {
+//			return false;
+//		}
+//
+//		return id != null;
 	}
 
 	@Override

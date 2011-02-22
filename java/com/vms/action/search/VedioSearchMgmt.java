@@ -251,6 +251,7 @@ public class VedioSearchMgmt extends BaseAction {
 		private java.lang.String vedioName;
 		private java.util.Date dateComing;
 		private java.util.Date dateInput;
+		private java.util.Date dateStore;
 		private java.lang.String comments;
 		private float marketShare = 0;
 		private float audienceRating = 0;
@@ -270,6 +271,7 @@ public class VedioSearchMgmt extends BaseAction {
 			this.setVedioName(tape.getVedioName());
 			this.setDateComing(tape.getDateComing());
 			this.setDateInput(tape.getDateInput());
+			this.setDateStore(tape.getDateStore());
 			this.setComments(tape.getComments());
 			this.setMarketShare(tape.getMarketShare() != null ? tape
 					.getMarketShare() : 0);
@@ -455,6 +457,16 @@ public class VedioSearchMgmt extends BaseAction {
 
 		public void setAudienceRating(float audienceRating) {
 			this.audienceRating = audienceRating;
+		}
+
+		
+		public java.util.Date getDateStore() {
+			return dateStore;
+		}
+
+		
+		public void setDateStore(java.util.Date dateStore) {
+			this.dateStore = dateStore;
 		}
 	}
 

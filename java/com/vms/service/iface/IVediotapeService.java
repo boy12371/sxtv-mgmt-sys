@@ -1,5 +1,6 @@
 package com.vms.service.iface;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,8 @@ public interface IVediotapeService {
 	VedioTapeVO getVideotapeById(String videoID,
 			List<AudienceExamineVO> audienceVote) throws Exception;
 
-	boolean auditingVideo(String vedioId, SessionUserInfo user, int operation)
+	boolean auditingVideo(String vedioId, SessionUserInfo user,
+			int operation, Date date)
 			throws Exception;
 
 	List<String> findVideoNamesForAutoComplete(String videoName)

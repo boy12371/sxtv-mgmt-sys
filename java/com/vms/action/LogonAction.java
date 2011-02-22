@@ -2,10 +2,8 @@ package com.vms.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
-
 import com.vms.common.BaseAction;
 import com.vms.common.SessionUserInfo;
 
