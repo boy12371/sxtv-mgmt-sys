@@ -20,6 +20,7 @@ import com.vms.common.BaseAction;
 import com.vms.common.JSONDataTableUtils;
 import com.vms.db.bean.Playchangelog;
 import com.vms.db.bean.Playorder;
+import com.vms.db.bean.Subject;
 import com.vms.db.bean.User;
 import com.vms.db.bean.Vediotape;
 import com.vms.service.iface.IArrangeService;
@@ -49,7 +50,12 @@ public class ArrangeAction extends BaseAction {
 	
 	private String nowDate;
 	
+	private Integer subject;
+	
+	private List<Subject> subjects;
+	
 	public String toArrange() throws Exception {
+		subjects = arrangeService.getSubjects();
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(new Date());
 		int nowMonth = calendar.getTime().getMonth();
@@ -70,11 +76,10 @@ public class ArrangeAction extends BaseAction {
 		unArrangedTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 		int status = 5;
 		try {
-			List<Vediotape> tapes = tapeService.findVideotapeByStatus(
-					status, 
+			List<Vediotape> tapes = tapeService.findVideotapeByStatusAndSubject(
+					status, subject,
 					unArrangedTable.getSort(),
-					-1, 
-					-1, 
+					-1, -1, 
 					unArrangedTable.getDir().equals(JSONDataTableUtils.SORT_DIRECTION));
 			
 			List<VedioTapeVO> tapeVOs = new ArrayList<VedioTapeVO>();
@@ -195,7 +200,7 @@ public class ArrangeAction extends BaseAction {
 		
 		arrangeTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 		try {
-			List<VedioTapeVO> tapes = arrangeService.findArrangedTapes(selDate);
+			List<VedioTapeVO> tapes = arrangeService.findArrangedTapes(selDate, subject);
 			Date now = new Date();
 			//make records the date of which has no tape to play.
 			for(int i=1;i<=numDayOfMonth;i++){
@@ -294,6 +299,22 @@ public class ArrangeAction extends BaseAction {
 
 	public String getNowDate() {
 		return nowDate;
+	}
+
+	public void setSubject(Integer subject) {
+		this.subject = subject;
+	}
+
+	public Integer getSubject() {
+		return subject;
+	}
+
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
+	public List<Subject> getSubjects() {
+		return subjects;
 	}
 
 }
