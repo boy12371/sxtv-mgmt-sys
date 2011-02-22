@@ -32,7 +32,7 @@ function initDataTable() {
 		sortable : true,
 		formatter : formatCompany
 	}, {
-		key : "dateInput",
+		key : "dateComing",
 		label : "收带日期",
 		sortable : true,
 		formatter : formatDate
@@ -67,7 +67,7 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-					"dateInput", "status", "vedioscores", "vedioscores",
+					"dateComing", "status", "vedioscores", "vedioscores",
 					"audiencescore", "comments" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
@@ -77,10 +77,10 @@ function initDataTable() {
 	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateInput&dir=asc&startIndex=0&results=25",
+		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=25",
 		dynamicData :true,
 		sortedBy : {
-			key :"dateInput",
+			key :"dateComing",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		},
 		paginator :new YAHOO.widget.Paginator({
