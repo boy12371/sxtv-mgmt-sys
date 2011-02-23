@@ -25,20 +25,20 @@ public class ArrangeService implements IArrangeService{
 		return playorderDAO.getFirstArrangedDate();
 	}
 	
-	public List<Playorder> findPlayorders(Date month) throws Exception{
+	public List<Playorder> findPlayorders(Date month, int subject) throws Exception{
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(month);
 		
 		Date startDate = new Date(month.getYear(),month.getMonth(),1);
 		Date endDate = new Date(month.getYear(),month.getMonth(),calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		List<Playorder> orders = playorderDAO.findMonthPlayOrder(startDate,endDate,-1,-1,true);
+		List<Playorder> orders = playorderDAO.findMonthPlayOrder(startDate,endDate,subject,-1,-1,true);
 		return orders;
 	}
 	
 	public List<VedioTapeVO> findArrangedTapes(Date month, int subject) throws Exception{
 		List<VedioTapeVO> tapes = new  ArrayList<VedioTapeVO>();
 		
-		List<Playorder> orders = findPlayorders(month);
+		List<Playorder> orders = findPlayorders(month, subject);
 		
 		for(Playorder p:orders){
 			if(p.getVedioID().getSubject().getId()!=subject) continue;
