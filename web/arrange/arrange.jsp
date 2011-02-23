@@ -31,7 +31,7 @@
 <s:actionerror/>
 
 <p>未编排影带列表，点击第一列图标将影带移入编排列表</p>
-
+<s:form action="doArrange" namespace="/arrange" >
 <div id="subject" align="center">
 <table>
 	<tr>
@@ -77,11 +77,12 @@
 <div align="center">
 	<div style="margin-top:30px;" id="submitBtnDiv"></div>
 </div>
-<s:form action="doArrange" namespace="/arrange" >
+
 	<s:hidden name="newResult" id="newResult"/>
 	<s:hidden name="month" id="month"/>
 </s:form>
 <script type="text/javascript">
+	getSubjectValue();
 	initUnArrangeTable();
 
 	var printBtn = new YAHOO.widget.Button({  
