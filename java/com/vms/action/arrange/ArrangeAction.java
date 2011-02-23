@@ -151,7 +151,7 @@ public class ArrangeAction extends BaseAction {
 		String[] xx = month.split("-");
 		selDate.setYear(Integer.parseInt(xx[0]));
 		selDate.setMonth(Integer.parseInt(xx[1])-1);
-		List<Playorder> oldOrders = arrangeService.findPlayorders(selDate);
+		List<Playorder> oldOrders = arrangeService.findPlayorders(selDate,subject);
 		List<Playorder> delOrders = new ArrayList<Playorder>();
 		for(Playorder oldOrder: oldOrders){
 			boolean delFlag = true;
