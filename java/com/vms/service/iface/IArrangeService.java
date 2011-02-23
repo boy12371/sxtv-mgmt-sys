@@ -15,7 +15,7 @@ public interface IArrangeService {
 	
 	public void savePlayorder(List<Playorder> pos, int userID) throws Exception;
 	
-	public List<Playorder> findPlayorders(Date month) throws Exception;
+	public List<Playorder> findPlayorders(Date month,int subject) throws Exception;
 	
 	public void deletePlayOrder(List<Playorder> pos, int userID) throws Exception;
 	
