@@ -3,6 +3,17 @@ var arrangeTable;
 var selMonth = "";
 var selSubject = 1;
 
+function getSubjectValue(){
+	var radioDiv = document.getElementById("subject");
+	var rs = radioDiv.getElementsByTagName("input");
+	for(var i=0;i<rs.length;i++){
+		if(rs[i].type=="radio" && rs[i].checked==true){
+			selSubject=rs[i].value;
+			break;
+		}
+	}
+}
+
 function selectSubject(self){
 	selSubject = self.value;
 	if(null==unArrangeTable) return;
