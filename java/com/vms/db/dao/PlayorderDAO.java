@@ -65,7 +65,7 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 		}
 	}
 
-	public List<Playorder> findMonthPlayOrder(Date startTime, Date endTime,
+	public List<Playorder> findMonthPlayOrder(Date startTime, Date endTime, int subject,
 			int startIndex, int endIndex, boolean ascending) throws Exception {
 		Criteria crt = this.getCriteria(Playorder.class);
 
@@ -75,6 +75,10 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 
 		if (endTime != null) {
 			crt.add(Restrictions.le(Playorder.PROP_PLAY_DATE, endTime));
+		}
+		
+		if (-1!=subject){
+			crt.createCriteria(Playorder.PROP_VEDIO).createCriteria(Vediotape.PROP_SUBJECT).add(Restrictions.eq("id", subject));
 		}
 
 		Order order = DaoUtils.getOrder(Playorder.PROP_PLAY_DATE, ascending);
@@ -156,12 +160,14 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 			temp = findObjectByFields(Playorder.class, conditions, -1, -1, Playorder.PROP_ID, true);
 			if (null != temp && 0 != temp.size()) {
 				Playorder old = temp.get(0);
-				
-//				if(old.getVedioID().getSubject().getId()==p.getVedioID().getSubject().getId()){
-//					insert = true;
-//				}
+				Vediotape oldVedio = (Vediotape)getObject(Vediotape.class, old.getVedioID().getId());
+				Vediotape pVedio = (Vediotape)getObject(Vediotape.class, p.getVedioID().getId());
+				if(oldVedio.getSubject().getId()!=pVedio.getSubject().getId()){
+					insert = true;
+				}
 			}
 			if(insert){
+				p.setId(null);
 				this.saveObject(p);
 			}else{
 				this.getHibernateTemplate().merge(p);
