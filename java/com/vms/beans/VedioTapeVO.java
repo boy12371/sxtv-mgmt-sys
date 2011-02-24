@@ -271,4 +271,12 @@ public class VedioTapeVO {
 		this.purchase = purchase;
 	}
 
+	public void setDateStore(Date dateStore) {
+		this.dateStore = dateStore;
+	}
+
+	public Date getDateStore() {
+		return dateStore;
+	}
+
 }
