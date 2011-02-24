@@ -23,13 +23,6 @@ public class VedioTapeVO {
 	private Float avgScore= new Float(0);
 	private String audiScore="";
 	private int orientation;
-	public Date getDateStore() {
-		return dateStore;
-	}
-
-	public void setDateStore(Date dateStore) {
-		this.dateStore = dateStore;
-	}
 
 	private String award="";
 	private String purchase="";
