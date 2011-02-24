@@ -50,9 +50,11 @@ public class ArrangeAction extends BaseAction {
 	
 	private String nowDate;
 	
-	private Integer subject;
+	private Integer subject=1;
 	
 	private List<Subject> subjects;
+	
+	private String subjectName;
 	
 	public String toArrange() throws Exception {
 		subjects = arrangeService.getSubjects();
@@ -118,7 +120,6 @@ public class ArrangeAction extends BaseAction {
 			selDate.setYear(Integer.parseInt(xx[0]));
 			selDate.setMonth(Integer.parseInt(xx[1])-1);
 		}
-		
 		getArrangedTapesByDate(selDate);
 		return SUCCESS;
 	}
@@ -169,6 +170,7 @@ public class ArrangeAction extends BaseAction {
 	}
 	
 	public String toArrangedHistory() throws Exception{
+		subjects = arrangeService.getSubjects();
 		Date fDate = arrangeService.getFirstArrangedDate();
 		if(null==fDate) {
 			this.addActionError("暂无历史数据。");
@@ -181,6 +183,13 @@ public class ArrangeAction extends BaseAction {
 	}
 	
 	public String toArrangePrint() throws Exception{
+		subjects = arrangeService.getSubjects();
+		for(Subject s:subjects){
+			if(s.getId().equals(subject)){
+				subjectName = s.getSubjectName();
+				break;
+			}
+		}
 		return SUCCESS;
 	}
 	
@@ -315,6 +324,14 @@ public class ArrangeAction extends BaseAction {
 
 	public List<Subject> getSubjects() {
 		return subjects;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public String getSubjectName() {
+		return subjectName;
 	}
 
 }
