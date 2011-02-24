@@ -31,19 +31,19 @@
 <s:actionerror/>
 
 <p>未编排影带列表，点击第一列图标将影带移入编排列表</p>
-<s:form action="doArrange" namespace="/arrange" >
-<div id="subject" align="center">
+
+<div id="subjectDiv" align="center">
 <table>
 	<tr>
 		<td>选择栏目：</td>
-		<s:iterator value="subjects" status='st'>
+		<s:iterator value="subjects" status='st' id='s'>
 			<td>
-			<s:if test="id == 1">
-				<input type="radio" onclick="selectSubject(this)" name="subject" value='<s:property value="id"/>' checked="checked"/> 
+			<s:if test="#s.id == subject">
+				<input type="radio" onclick="selectSubject(this)" checked="checked" name="sub" value='<s:property value="id"/>' /> 
 			</s:if><s:else>
-				<input type="radio" onclick="selectSubject(this)" name="subject" value='<s:property value="id"/>' /> 
-			</s:else>	
-			<s:property value="subjectName"/>
+				<input type="radio" onclick="selectSubject(this)" name="sub" value='<s:property value="id"/>' /> 
+			</s:else>
+				<s:property value="subjectName"/>
 			</td>
 		</s:iterator>
 	</tr>
@@ -77,7 +77,8 @@
 <div align="center">
 	<div style="margin-top:30px;" id="submitBtnDiv"></div>
 </div>
-
+<s:form action="doArrange" namespace="/arrange" >	
+	<s:hidden name="subject" id="subject"/>
 	<s:hidden name="newResult" id="newResult"/>
 	<s:hidden name="month" id="month"/>
 </s:form>

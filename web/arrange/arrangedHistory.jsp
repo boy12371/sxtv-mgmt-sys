@@ -31,7 +31,23 @@
 <s:actionerror/>
 
 <p>编排影带历史</p>
-<br />
+<div id="subjectDiv" style="margin-left:73px;">
+<table>
+	<tr>
+		<td>选择栏目：</td>
+		<s:iterator value="subjects" status='st' id='s'>
+			<td>
+			<s:if test="#s.id == subject">
+				<input type="radio" onclick="selectSubject(this)" checked="checked" name="sub" value='<s:property value="id"/>' /> 
+			</s:if><s:else>
+				<input type="radio" onclick="selectSubject(this)" name="sub" value='<s:property value="id"/>' /> 
+			</s:else>
+				<span id="subjectName<s:property value="id"/>"><s:property value="subjectName"/></span>
+			</td>
+		</s:iterator>
+	</tr>
+</table>
+</div>
 
 <div id="selectDateDiv" style="width: 800px; height: 30px; margin-left:68px;margin-bottom:10px;">
 	<table style="width:100%"><tr>
@@ -54,7 +70,7 @@
 <script type="text/javascript">
 	var firstArrangedDate = "<s:property value='firstArrangedDate'/>";
 	var nowDate = "<s:property value='nowDate'/>";
-	
+	getSubjectValue();
 	var printBtn = new YAHOO.widget.Button({  
 		label: "打&nbsp;&nbsp;印",  
 		id: "printBtn",  
@@ -65,7 +81,8 @@
 		var year = YAHOO.util.Dom.get("selectYear").value;
 		var month = YAHOO.util.Dom.get("selectMonth").value;
 		selMonth = year + "-" + month; 	
-		var url="/tv/arrange/toArrangePrint.action?selMonth=" + selMonth;
+		var sname = document.getElementById("subjectName"+selSubject).innerHTML;
+		var url="/tv/arrange/toArrangePrint.action?selMonth=" + selMonth+"&subject="+selSubject;
 		window.open(url, "打印预览");
 	}
 	

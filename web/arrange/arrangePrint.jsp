@@ -68,11 +68,16 @@
 <div id="closeDiv" style="display:inline"></div>
 </div>
 </div>
-<div id="date" align="center" style="margin-bottom:20px;"><h1 id="title"></h1></div>
+
+<div id="date" align="center" style="margin-bottom:20px;">
+<h1 id="title"></h1>
+<div>栏目：${subjectName}</div>
+</div>
 <div id="historyDiv" align="center"></div>
 <s:form action="" namespace="/arrange" >
 </s:form>
 <script type="text/javascript">
+var selSubject="${param.subject}";
 var printBtn = new YAHOO.widget.Button({  
 	label: "打印预览",  
 	id: "printBtn",  
