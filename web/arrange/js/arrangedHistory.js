@@ -1,5 +1,22 @@
 var historyTable = null;
 var selMonth="";
+var selSubject;
+
+function getSubjectValue(){
+	var radioDiv = document.getElementById("subjectDiv");
+	var rs = radioDiv.getElementsByTagName("input");
+	for(var i=0;i<rs.length;i++){
+		if(rs[i].type=="radio" && rs[i].checked==true){
+			selSubject=rs[i].value;
+			break;
+		}
+	}
+}
+
+function selectSubject(self){
+	selSubject = self.value;
+	refreshTable();
+}
 
 function initSelectElements(){
 	var selYear = document.getElementById("selectYear");
@@ -65,7 +82,7 @@ function refreshTable(){
 			scope:historyTable
 			};
 	historyTable.getDataSource().sendRequest(
-			"sort=playDate&dir=asc&month="+selMonth,
+			"sort=playDate&dir=asc&month="+selMonth+"&subject="+selSubject,
 			callback
 			);
 }

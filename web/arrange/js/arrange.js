@@ -1,10 +1,10 @@
 var unArrangeTable=null;
 var arrangeTable;
 var selMonth = "";
-var selSubject = 1;
+var selSubject;
 
 function getSubjectValue(){
-	var radioDiv = document.getElementById("subject");
+	var radioDiv = document.getElementById("subjectDiv");
 	var rs = radioDiv.getElementsByTagName("input");
 	for(var i=0;i<rs.length;i++){
 		if(rs[i].type=="radio" && rs[i].checked==true){
@@ -16,19 +16,22 @@ function getSubjectValue(){
 
 function selectSubject(self){
 	selSubject = self.value;
-	if(null==unArrangeTable) return;
-	var oState = unArrangeTable.getState();
-	oState.pagination.recordOffset = 0;
-	var callback = {
+	var sObj = document.getElementById("subject");
+	sObj.value = selSubject;
+	if(null!=unArrangeTable){
+		var oState = unArrangeTable.getState();
+		oState.pagination.recordOffset = 0;
+		var callback = {
 			success:unArrangeTable.onDataReturnInitializeTable,
 			failure:unArrangeTable.onDataReturnInitializeTable,
 			argument:oState,
 			scope:unArrangeTable
 			};
-	unArrangeTable.getDataSource().sendRequest(
+		unArrangeTable.getDataSource().sendRequest(
 			unArrangeTable.get("generateRequest")(oState, unArrangeTable),
 			callback
 			);
+	}
 	selectMonthFunc();
 }
 
@@ -138,9 +141,12 @@ function initUnArrangeTable() {
 		key :"vedioName",
 		label :"名称"
 	}, {
-		key :"subject",
-		label :"栏目",
+		key :"dateStore",
+		label:"入库日期",
+//		key :"subject",
+//		label :"栏目",
 		sortable :true,
+		formatter :formatDateArrange,
 		sortOptions:{sortFunction:sortCustom}
 	}, {
 		key :"topic",
@@ -174,17 +180,17 @@ function initUnArrangeTable() {
 
 	myDataSource.responseSchema = {
 		resultsList :"records",
-		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "avgScore", "audiScore", "companyID", "marked", "comments", "orientation"],
+		fields : [ "id", "vedioName", "subject", "topic", "dateComing", "dateStore", "avgScore", "audiScore", "companyID", "marked", "comments", "orientation"],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 		}
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0&subject="+selSubject, // Initial
+		initialRequest :"sort=dateStore&dir=asc&startIndex=0&subject="+selSubject, // Initial
 		generateRequest: requestBuilder,
 		sortedBy : {
-			key :"dateComing",
+			key :"dateStore",
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator({

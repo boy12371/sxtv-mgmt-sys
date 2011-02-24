@@ -60,7 +60,7 @@ function initPrintTable() {
 	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=playDate&dir=asc&month="+selMonth, // Initial
+		initialRequest :"sort=playDate&dir=asc&month="+selMonth+"&subject="+selSubject, // Initial
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
 			key :"playDate",
