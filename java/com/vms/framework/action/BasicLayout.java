@@ -1,22 +1,35 @@
 package com.vms.framework.action;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import com.vms.action.LogonAction;
 import com.vms.common.BaseAction;
-import com.vms.common.BaseException;
 import com.vms.common.SessionUserInfo;
+import com.vms.db.bean.Company;
+import com.vms.db.bean.Status;
+import com.vms.db.bean.Subject;
+import com.vms.db.bean.Topic;
 import com.vms.framework.tabview.TabElementBean;
 import com.vms.framework.tabview.TabViewManager;
-
+import com.vms.service.iface.ICompanyService;
+import com.vms.service.iface.IStatusService;
+import com.vms.service.iface.ISubjectService;
+import com.vms.service.iface.ITopicService;
 import com.vms.service.iface.IUserService;
 
 public class BasicLayout extends BaseAction{
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 1L;
+
 	private static Logger logger = Logger.getLogger(LogonAction.class);
 	
 	private IUserService userService;
+	private ICompanyService companyService;
+	private ISubjectService subjectService;
+	private ITopicService topicService;
+	private IStatusService statusService;
 	
 	private SessionUserInfo userInfo;
 	
@@ -48,7 +61,23 @@ public class BasicLayout extends BaseAction{
 			}			
 		}
 	}
+	public List<Company> getComList() throws Exception {
+		return companyService.findAllCompany(-1, -1, Company.PROP_ID, true,
+				true);
+	}
 
+	public List<Topic> getTopList() throws Exception {
+		return topicService.findAllTopics(-1, -1, Topic.PROP_ID, true, true);
+	}
+
+	public List<Subject> getSubList() throws Exception {
+		return subjectService.findAllSubjects(-1, -1, Subject.PROP_ID, true,
+				true);
+	}
+
+	public List<Status> getStatusList() throws Exception {
+		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
+	}
 	public void setTabs(List<TabElementBean> tabs) {
 		this.tabs = tabs;
 	}
@@ -63,5 +92,37 @@ public class BasicLayout extends BaseAction{
 
 	public IUserService getUserService() {
 		return userService;
+	}
+
+	public ICompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(ICompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public ISubjectService getSubjectService() {
+		return subjectService;
+	}
+
+	public void setSubjectService(ISubjectService subjectService) {
+		this.subjectService = subjectService;
+	}
+
+	public ITopicService getTopicService() {
+		return topicService;
+	}
+
+	public void setTopicService(ITopicService topicService) {
+		this.topicService = topicService;
+	}
+
+	public IStatusService getStatusService() {
+		return statusService;
+	}
+
+	public void setStatusService(IStatusService statusService) {
+		this.statusService = statusService;
 	}
 }
