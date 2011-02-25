@@ -88,68 +88,79 @@
 	<s:actionerror />
 	<s:actionmessage />
 	<div align="center">
-	<div style="display:none">
-	<s:select cssClass="selectField" list="comList" listKey="id"
-				listValue="companyName" id="vcompany" />
-	</div>
-	<table class="inputTable">
+		<div style="display:none">
+		<s:select cssClass="selectField" list="comList" listKey="id"
+					listValue="companyName" id="vcompany" />
+		</div>
+		
+		<table>
 		<tr>
-			<td><label>影带编号</label></td>
-			<td><input class="inputField" type="text" name="textfield"
-				id="vid" /></td>
+			<td valign="top">
+					<table class="inputTable">
+						<tr>
+							<td><label>影带编号</label></td>
+							<td><input class="inputField" type="text" name="textfield"
+								id="vid" /></td>
+						</tr>
+						<tr>
+							<td><label>剧目名称</label></td>
+							<td><input class="inputField" type="text" name="textfield"
+								id="vname" /></td>
+						</tr>
+						<tr>
+							<td><label>影视公司</label></td>
+							<td> <input id="comName"
+								class="inputField autoComplete" type="text">
+							<div id="container"></div></td>
+						</tr>
+						<tr>
+							<td><label>题材</label></td>
+							<td><s:select cssClass="selectField" list="topList" listKey="id"
+								listValue="topicName" id="vtopic" /></td>
+						</tr>
+						<tr>
+							<td><label>栏目</label></td>
+							<td><s:select cssClass="selectField" list="subList" listKey="id"
+								listValue="subjectName" id="vsubject" /></td>
+						</tr>
+						<!-- tr>
+							<td><label>收带日期</label></td>
+							<td><sx:datetimepicker cssClass="inputField"
+								displayFormat="yyyy-MM-dd" id="vdateComing" toggleType="explode"
+								value="today" /></td>
+				
+						</tr-->
+						<tr>
+							<td><label>备注</label></td>
+							<td><textarea class="inputField" name="textfield" id="vcomments"></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><span id="go"
+								class="yui-button yui-push-button"> <span class="first-child">
+							<button type="button">确 定</button>
+							</span> </span></td>
+						</tr>
+					</table>
+			</td>
+			<td valign="top">
+					<div id="cellediting" align="center"></div>
+					<br />
+					<div align="left"><span align="center" id="submit"
+						class="yui-button yui-push-button"> <span class="first-child">
+					<button type="button">添加到数据库</button>
+					</span> </span></div>
+			</td>
 		</tr>
-		<tr>
-			<td><label>剧目名称</label></td>
-			<td><input class="inputField" type="text" name="textfield"
-				id="vname" /></td>
-		</tr>
-		<tr>
-			<td><label>影视公司</label></td>
-			<td> <input id="comName"
-				class="inputField autoComplete" type="text">
-			<div id="container"></div></td>
-		</tr>
-		<tr>
-			<td><label>题材</label></td>
-			<td><s:select cssClass="selectField" list="topList" listKey="id"
-				listValue="topicName" id="vtopic" /></td>
-		</tr>
-		<tr>
-			<td><label>栏目</label></td>
-			<td><s:select cssClass="selectField" list="subList" listKey="id"
-				listValue="subjectName" id="vsubject" /></td>
-		</tr>
-		<!-- tr>
-			<td><label>收带日期</label></td>
-			<td><sx:datetimepicker cssClass="inputField"
-				displayFormat="yyyy-MM-dd" id="vdateComing" toggleType="explode"
-				value="today" /></td>
-
-		</tr-->
-		<tr>
-			<td><label>备注</label></td>
-			<td><textarea class="inputField" name="textfield" id="vcomments"></textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center"><span id="go"
-				class="yui-button yui-push-button"> <span class="first-child">
-			<button type="button">确 定</button>
-			</span> </span></td>
-		</tr>
-	</table>
+		</table>
+		
+		
+	
+	
+	
 	</div>
 	<s:hidden name="jasonDataString" id="jasonDataString" />
-	<h1>影带信息</h1>
-	<img class="pageImage"
-		src="${pageContext.request.contextPath}/common/images/tape.png"
-		border="0" />
-	<p>单击表格可进行编辑，单击右键可删除</p>
-	<div id="cellediting" align="center"></div>
-	<br />
-	<div align="center"><span align="center" id="submit"
-		class="yui-button yui-push-button"> <span class="first-child">
-	<button type="button">添加</button>
-	</span> </span></div>
+	
+	
 </s:form>
 
 <script type="text/javascript">

@@ -3,7 +3,6 @@ body {
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	background-color: #EBF4FB;
 }
 
 .errorMessage {
@@ -25,14 +24,14 @@ h1 {
 }
 
 p {
-	border-bottom: 1px solid #B7DDF2;
+	border-bottom: 1px solid #c2c2c2;
 	color: #666666;
 	font-size: 14px;
 	padding-bottom: 10px;
 }
 
 label {
-	color: #666666;
+	color: black;
 	display: block;
 	float: right;
 	font-weight: bold;
@@ -43,11 +42,8 @@ label {
 }
 
 .inputField {
-	border: 1px solid #AACFE4;
 	float: left;
 	font-size: 14px;
-	margin: 5px;
-	padding: 4px 2px;
 	width: 200px;
 }
 
@@ -70,10 +66,7 @@ label {
 
 .inputTable td {
 	height: 30px;
-	vertical-align: bottom;
-	border-bottom: 1px solid #B7DDF2;
-	padding-left: 1em;
-	padding-right: 2em;
+	border-bottom: 1px solid #C2C2C2;
 }
 
 .yui-dt-hidden {

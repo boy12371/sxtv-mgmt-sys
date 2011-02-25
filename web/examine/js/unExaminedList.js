@@ -145,7 +145,7 @@ function initDataTable() {
 	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=25", // Initial
+		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=20", // Initial
 		generateRequest: requestBuilder,
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
@@ -153,14 +153,12 @@ function initDataTable() {
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :25,
+			rowsPerPage :20,
 			firstPageLinkLabel :"首页",
 			lastPageLinkLabel :" 尾页",
 			previousPageLinkLabel :" 上一页",
 			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
+			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}"
 		})
 		// Enables pagination
 	};

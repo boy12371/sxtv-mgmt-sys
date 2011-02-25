@@ -150,9 +150,7 @@ function initDataTable() {
 	myDataTable.subscribe("cellMouseoutEvent",
 			myDataTable.onEventUnhighlightCell);
 	myDataTable.subscribe("cellClickEvent", myDataTable.onEventShowCellEditor);
-	myDataTable.subscribe("rowAddEvent", function(record) {
-		parent.resizeIframe();
-	});
+	
 	getData = function() {
 		var _vid = YAHOO.util.Dom.get("vid").value;
 		var _vname = YAHOO.util.Dom.get("vname").value;
@@ -522,7 +520,7 @@ function initToArrangeTable(ds) {
 		$.unblockUI();
 		addColumnsName();
 		resizeScrollTable("makeToArrange");
-		parent.resizeIframe();
+		
 	});
 	myDataSource.subscribe("requestEvent", function() {
 		$.blockUI( {
