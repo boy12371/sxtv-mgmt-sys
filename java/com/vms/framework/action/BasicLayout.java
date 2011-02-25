@@ -41,9 +41,14 @@ public class BasicLayout extends BaseAction{
 		this.userInfo = userInfo;		
 	}
 
-	private List<TabElementBean> tabs;
+	//private List<TabElementBean> tabs;
 	
 	public String doLogon() throws Exception{
+		if(super.getUserInfo() != null){
+//			TabViewManager tabManager = TabViewManager.getInstance(this.session);
+//			tabs = tabManager.getTabs();
+			return SUCCESS;	
+		}
 		if(userInfo==null || userInfo.getUsername().length()==0 || userInfo.getPassword().length()==0){
 			this.addActionError("用户名或密码错误");
 			return INPUT;
@@ -56,7 +61,8 @@ public class BasicLayout extends BaseAction{
 			}else{
 				super.setUserInfo(userInfo);
 				TabViewManager tabManager = TabViewManager.getInstance(this.session);
-				tabs = tabManager.getTabs();
+				List<TabElementBean> tabs = tabManager.getTabs();
+				this.getSession().setAttribute("NAV_TABS", tabs);
 				return SUCCESS;	
 			}			
 		}
@@ -78,13 +84,7 @@ public class BasicLayout extends BaseAction{
 	public List<Status> getStatusList() throws Exception {
 		return statusService.findAllStatus(-1, -1, Status.PROP_ID, true);
 	}
-	public void setTabs(List<TabElementBean> tabs) {
-		this.tabs = tabs;
-	}
-
-	public List<TabElementBean> getTabs() {
-		return tabs;
-	}
+	
 
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
