@@ -36,10 +36,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.actionsmenu-1.1/jquery.actionsmenu-1.1.js"></script>
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/common/jquery/jquery.actionsmenu-1.1/jquery.actionsmenu-1.1.css" />
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
@@ -99,44 +95,43 @@ body {
 </head>
 
 <body class="yui-skin-sam">
-<div class="logoStyle"></div>
+<div class="logoStyle">
+<%@include file="./sxtv.jsp" %>
+</div>
 <div id="top1">
     <div id="productsandservices" class="yuimenubar yuimenubarnav"> 
         <div class="bd"> 
             <ul class="first-of-type">
-            <s:iterator value="tabs" var="ftab">
-            ﻿  ﻿  <li class="yuimenubaritem first-of-type">
-            ﻿  ﻿  <a class="yuimenubaritemlabel" href="#"><s:property value="#ftab.name" /></a>
-                </li>
-            ﻿</s:iterator>
-            </ul>
+			<s:iterator value="#session.NAV_TABS" status="st" var="ftab">
+				<li class="yuimenubaritem">
+					<s:if test="#ftab.subTabs.size() == 0">
+						<a class="yuimenubaritemlabel" href="#" onclick="refreshIframe('<s:property value='url'/>');return false;" id="<s:property value='id'/>"><s:property value="name" /></a>
+					</s:if> 
+					<s:else>
+						<a class="yuimenubaritemlabel" href="#tab<s:property value='#ftab.id'/>" id="<s:property value='id'/>"><s:property value="name" /></a>
+							<div id="tab<s:property value='#ftab.id'/>" class="yuimenu"> 
+						      <div class="bd"> 
+						          <ul class="first-of-type">
+							          <s:iterator value="#ftab.subTabs" status="xt" var="stab">
+						          		<li class="yuimenuitem">
+						                  <a class=yuimenuitemlabel onclick="refreshIframe('<s:property value='#stab.url'/>');return false;" href="<s:property value='#stab.url'/>" id="<s:property value='#stab.id'/>"><s:property value="#stab.name" /></a>
+						                </li>
+								      </s:iterator>
+						          </ul> 
+						      </div> 
+						    </div>
+					</s:else>
+				</li>
+			</s:iterator>
+			</ul>         
+                       
         </div> 
     </div>
 </div>
 
-
-<!-- 
-<ul class="first-of-type">
-﻿   <s:iterator value="tabs" status="st">
-﻿  ﻿  <li class="yuimenubaritem first-of-type">
-﻿  ﻿  ﻿  <a class="yuimenubaritemlabel" href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>"><s:property value="name" /></a>
-      <div id="communication" class="yuimenu"> 
-        <div class="bd"> 
-            <ul>
-                <s:iterator value="subTabs" status="xt">
-            ﻿  ﻿  ﻿ <li class="yuimenuitem">
-                    <a class="yuimenuitemlabel" href="<s:property value='url'/>" id="<s:property value='id'/>"> <s:property value="name" /></a>
-                 </li> 
-            ﻿  ﻿  </s:iterator>
-            </ul> 
-        </div> 
-      </div>
-    </li>
-﻿  </s:iterator>
-</ul>
- -->
 <div id="bottom1">
-<p>温馨提示：使用Firefox或Google Chrome浏览器，将会得到更快的浏览速度及更好的显示效果.</p>
+<p>温馨提示：使用Firefox或Google Chrome浏览器，将会得到更快的浏览速度及更好的显示效果.</p><br/>
+
 </div>
 <div id="right1">
 <s:form action="searchVideos" namespace="/search" target="mainContentFrame">
@@ -202,72 +197,15 @@ body {
 </div>
 </div>
 
-<script>
-	(function() {
-		var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event;
-		var initTopMenu = function() {
-			var oMenuBar = new YAHOO.widget.MenuBar("productsandservices", {
-				autosubmenudisplay : true,
-				hidedelay : 750,
-				lazyload : true,
-				effect : {
-					effect : YAHOO.widget.ContainerEffect.FADE,
-					duration : 0.25
-				}
-			});
-			
-			oMenuBar.render();
-		};
-
-		
-
-		Event.onDOMReady(function() {
-			var layout = new YAHOO.widget.Layout({
-				units : [ {
-					position : 'top',
-					height : 28,
-					body : 'top1',
-					scroll : null,
-					zIndex : 2
-				}, {
-					position : 'right',
-					header : '查询',
-					width : 310,
-					resize : true,
-					collapse : true,
-					footer: 'Footer',
-					scroll : true,
-					body : 'right1',
-					animate : true,
-					gutter : '5'
-				}, {
-					position : 'bottom',
-					height : 30,
-					body : 'bottom1'
-				}, {
-					position : 'center',
-					body : 'center1',
-					gutter : '5 0',
-					height:0,
-					width:0
-				} ]
-			});
-			
-			layout.on('render', function() {
-				YAHOO.util.Event.onContentReady("productsandservices",
-						initTopMenu);
-				
-			});
-			
-			layout.render();
-//			for(var i=0; i<menuIDs.length; i++){
-//				 $('#'+menuIDs[i]).actionsmenu();
-//			}
-			initDataTable(layout);
-						
+<script type="text/javascript">
+var userInfo = {
+		userId:${userInfo.userId},
+		username:"${userInfo.username}",
+		password:"${userInfo.password}",
+		strRoles:"${userInfo.strRoles}"
+	};
+YAHOO.util.Event.addListener(window, "load", initPageElements);
 	
-		});
-	})();
 </script>
 </body>
 </html>
