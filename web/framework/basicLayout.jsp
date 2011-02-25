@@ -1,190 +1,273 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" style="overflow:hidden;">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <sx:head extraLocales="UTF-8"/>
-
-<link rel="shortcuticon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
-<link rel="icon" href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico" ></link>
+<link rel="shortcuticon"
+	href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico"></link>
+<link rel="icon"
+	href="${pageContext.request.contextPath}/common/logo/sxtvLogo.ico"></link>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/reset-fonts-grids/reset-fonts-grids.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/resize/assets/skins/sam/resize.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/layout/assets/skins/sam/layout.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/calendar/calendar-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
+
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/utilities/utilities.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/resize/resize-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/layout/layout-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/framework/js/basicLayout.js"></script>
 
 <style type="text/css">
 body {
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
-	background: url(../images/body_bg.gif) 0 0 repeat-x #E8E8D0;
+	background: url('./images/bg.jpg') repeat scroll center center #000000;
+}
+
+#productsandservices2 {
+	position: static;
+}
+
+#productsandservices2 .yuimenuitemlabel {
+	_zoom: 1;
+}
+
+#productsandservices2 .yuimenu .yuimenuitemlabel {
+	_zoom: normal;
+}
+
+
+.yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
+	border: none;
+}
+#yui-gen8{
+	opacity:0.8
+}
+#yui-gen3{
+	opacity:0.8
+}
+#yui-gen1{
+	opacity:0.9
+}
+.yui-skin-sam .yuimenu .bd {
+	background-color: #F2F2F2;
+}
+
+#productsandservices2 .bd {
+	border: none;
+}
+
+#productsandservices2 .bd .first-of-type .bd {
+	border: 1px solid #808080;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit div.yui-layout-bd {
+    border:0;
 }
 </style>
-
-
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/tabview/assets/skins/sam/tabview.css" />
-<link rel="stylesheet" type="text/css" href="css/layout.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/tabview/tabview-min.js"></script>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.blockUI.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/framework/js/layout.js"></script>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" /> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script> 
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 </head>
 
 <body class="yui-skin-sam">
-<div id="topBranding" class="topBranding">
-<form id="form1" name="form1" method="post" action="/tv/search/searchVideoByName.action" target="contentFrameId">
-<table style="margin-top:-10px;width:100%;">
-<tr>
-<td style="width:80px;"><img border="0" style="margin-left:20px;" src="./images/TVlogo.png"/></td>
-<td><img border="0" width="500" src="./images/titleText.png"/></td>
-<td>
-	<div class="divSearch">
-		<table><tr style="height: 40px;">
-			<td>
-				<img border="0" width="33" height="33" style="margin-top:5px;" src="./images/telescope.png"/>
-			</td>
-			<td>
-				<input type="text" class="inputSearch" style="position:relative;" id="searchinput" name="query"/><div id="searchcontainer"></div>
-			</td>
-			<td><div id="goBtnDiv" class="goBtn"></div></td>
-		</tr></table>
-
-		<table><tr style="height: 40px;">
-			<td>&nbsp;</td>
-			<td>
-				<a id="changePassword" href="#" class="globalLink">修改密码</a> 
-				<span style="color:#FFFFFF">&nbsp;|&nbsp;</span>
-				<a id="logout" href="#" class="globalLink" onclick="logout();return false;">退出</a>
-			</td>
-		</tr></table>
-	</div>
-</td>
-</tr>
-</table>
-</form>
-</div>
+<div class="logoStyle"></div>
+<div id="top1">
+<div id="productsandservices" class="yuimenubar yuimenubarnav">
+<div class="bd">
+<div style="float: right; margin-right:7em;margin-top:1px"><input type="text" name="sdfs" /><input type="button" value="搜索" /></div>
+<ul class="first-of-type">
+	<li class="yuimenubaritem first-of-type"><a
+		class="yuimenubaritemlabel" href="#communication">Communication</a>
+        <div id="communication" class="yuimenu"> 
+            <div class="bd"> 
+                <ul> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://360.yahoo.com">360&#176;</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://alerts.yahoo.com">Alerts</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://avatars.yahoo.com">Avatars</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://groups.yahoo.com">Groups</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://promo.yahoo.com/broadband/">Internet Access</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="#">PIM</a> 
+                    
+                        <div id="pim" class="yuimenu"> 
+                            <div class="bd"> 
+                                <ul class="first-of-type"> 
+                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://mail.yahoo.com">Yahoo! Mail</a></li> 
+                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://addressbook.yahoo.com">Yahoo! Address Book</a></li> 
+                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://calendar.yahoo.com">Yahoo! Calendar</a></li> 
+                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://notepad.yahoo.com">Yahoo! Notepad</a></li> 
+                                </ul>            
+                            </div> 
+                        </div>                    
+                    
+                    </li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://members.yahoo.com">Member Directory</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://messenger.yahoo.com">Messenger</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://mobile.yahoo.com">Mobile</a></li> 
+                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://www.flickr.com">Flickr Photo Sharing</a></li> 
+                </ul> 
+            </div> 
+        </div>      
+    </li>
 	
- <div id="passwordForm" style="display:none">
-	<h1 class="passwordTitle">修改密码</h1>
-    <p><label>原&nbsp;密&nbsp;码:</label><input type="password" name="oldPwd" id="oldPwd"/></p>
-    <p><label>新&nbsp;密&nbsp;码:</label><input type="password" name="newPwd" id="newPwd"/></p>
-	<p><label>确认密码:&nbsp;</label><input type="password" name="confirmPwd" id="confirmPwd"/></p>
-	<p><input type="button" name="demo1" id="yes" value="确认" />
-	<input type="button" name="cancel" id="cancel" value="取消" /></p>
- </div>
-
-<script type="text/javascript"> 
-
-YAHOO.example.Centered = autoCompleteVideoName(); 
-
-</script>
-<div id="tabView" class="yui-navset tabviewArea">
-<ul class="yui-nav">
-	<s:iterator value="tabs" status="st">
-		<li><s:if test="subTabs.size() == 0">
-			<a href="<s:property value='url'/>" id="<s:property value='id'/>" onclick="refreshIframe(this);return false;">
-		</s:if> <s:else>
-			<a href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>" onclick="showDefaultSubtab(this);return false";>
-		</s:else> <em><s:property value="name" /></em></a></li>
-	</s:iterator>
-
+	
 </ul>
 
-<div class="yui-content subTabview" id="subTabview">
-<s:iterator value="tabs" status="st">
-	<div id="tab<s:property value='#st.index'/>">
-	<ul class="subTabUL">
-		<s:iterator value="subTabs" status="xt">
-			<s:if test="#xt.index == 0">
-			<li style="background-image:none;">
-			</s:if><s:else>
-			<li>
-			</s:else>
-				<a href="<s:property value='url'/>" target="contentFrame" id="<s:property value='id'/>" onclick="highLightSubtab(this);refreshIframe(this);return false;"> 
-					<s:property value="name" /> 
-				</a>
-			</li>
-		</s:iterator>
-	</ul>
+</div>
+</div>
+</div>
+<div id="bottom1">
+<p>温馨提示：使用Firefox或Google Chrome浏览器，将会得到更快的浏览速度及更好的显示效果.</p>
+</div>
+<div id="right1">
+<s:form action="searchVideos" namespace="/search" target="mainContentFrame">
+<div align="center" style="margin-top:20px">
+<table>
+	<tr>
+		<td><label>影带编号&nbsp;&nbsp;</label></td>
+		<td><input class="inputField" type="text" name="video.id" id="vid" /></td>
+	</tr>
+	<tr>
+		<td><label>剧目名称&nbsp;&nbsp;</label></td>
+		<td><input class="inputField" type="text" name="video.vedioName" id="vname" /></td>
+	</tr>
+	<tr>
+		<td><label>影视公司&nbsp;&nbsp;</label></td>
+		<td><s:select cssClass="selectField" list="comList" listKey="id" listValue="companyName" id="vcompany" name="video.companyID.id" headerKey="0" headerValue="" /></td>
+	</tr>
+	<tr>
+		<td><label>题材&nbsp;&nbsp;</label></td>
+		<td><s:select cssClass="selectField" list="topList" listKey="id" listValue="topicName" id="vtopic" name="video.topic.id" headerKey="0" headerValue=""/></td>
+	</tr>
+	<tr>
+		<td><label>栏目&nbsp;&nbsp;</label></td>
+		<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" name="video.subject.id" headerKey="0" headerValue=""/></td>
+	</tr>
+	<tr>
+		<td><label>状态&nbsp;&nbsp;</label></td>
+		<td><s:select cssClass="selectField" list="statusList" listKey="id" listValue="status" id="vstatus" name="video.status.id" headerKey="0" headerValue=""/></td>
+
+	</tr>
+	<tr>
+		<td><label>从&nbsp;&nbsp;</label></td>
+		<td><sx:datetimepicker name="startDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="startDate" value="%{'today'}" language="UTF-8" weekStartsOn="0"/></td>
+	</tr>
+	<tr>
+		<td><label>至&nbsp;&nbsp;</label></td>
+		<td><sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="endDate" value="%{'today'}" language="UTF-8"  weekStartsOn="0"/></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="center">
+		<div id="queryBtnDiv"></div>
+		</td>
+	</tr>
+</table>
+</div>
+</s:form>
+</div>
+
+<div id="center1" style="height:100%;overflow-x:auto;overflow-y:hidden;">
+
+<div align="center" id="queryDiv" style="display:none; overflow: auto; margin-top: 20px; height:100%;" >
+	<div style="float:left;">
+	<div id="tableOption"></div>
+	<div id="printBtn" align="right"></div>
+    <div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 	</div>
-</s:iterator>
+	<div id="dynamicdata"></div>
+</div>
+<div style="height:100%;overflow-x:auto;overflow-y:hidden;">
+<iframe id="mainContentFrame" style="height:100%;width:100%;border:0" src="/tv/framework/sxtv.jsp">
+
+</iframe>
 </div>
 </div>
 
-<div style="overflow-y: auto; overflow-x: hidden" id="contentDiv">
-<div class="bodyTop"></div>
-<div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='no' style="height: 650px"
-	src="" onload="resizeIframe();return false;"> </iframe></div>
-<div style="margin-top: 30px;" /></div>
-<!-- 
-<div class="footer" align="center">
-	<ul>
-	<li><a href="#">首页</a>|</li>
-	<li><a href="#">About Us</a>|</li>
-	<li><a href="#">Services</a>|</li>
-	<li><a href="#">Solutions</a>|</li>
-	<li><a href="#">Testimonials</a>|</li>
-	<li><a href="#">Projects</a>|</li>
-	<li><a href="#">Online Jobs</a>|</li>
-	<li><a href="#">Login</a>|</li>
-	<li><a href="#">Submission</a>|</li>
-	<li><a href="#">Contact Us</a></li>
-	</ul>
-</div>
- -->
-<script language="JavaScript">
-	( function() {
-		var tabView = new YAHOO.widget.TabView('tabView');
+<script>
+	(function() {
+		var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event;
+		var initTopMenu = function() {
+			var oMenuBar = new YAHOO.widget.MenuBar("productsandservices", {
+				autosubmenudisplay : true,
+				hidedelay : 750,
+				lazyload : true,
+				effect : {
+					effect : YAHOO.widget.ContainerEffect.FADE,
+					duration : 0.25
+				}
+			});
+			
+			oMenuBar.render();
+		};
+
+		
+
+		Event.onDOMReady(function() {
+			var layout = new YAHOO.widget.Layout({
+				units : [ {
+					position : 'top',
+					height : 28,
+					body : 'top1',
+					scroll : null,
+					zIndex : 2
+				}, {
+					position : 'right',
+					header : '查询',
+					width : 310,
+					resize : true,
+					collapse : true,
+					footer: 'Footer',
+					scroll : true,
+					body : 'right1',
+					animate : true,
+					gutter : '5'
+				}, {
+					position : 'bottom',
+					height : 30,
+					body : 'bottom1'
+				}, {
+					position : 'center',
+					body : 'center1',
+					gutter : '5 0',
+					height:0,
+					width:0
+				} ]
+			});
+			
+			layout.on('render', function() {
+				YAHOO.util.Event.onContentReady("productsandservices",
+						initTopMenu);
+				
+			});
+		
+			layout.render();
+			initDataTable(layout);
+		});
 	})();
-
-	var goBtn = new YAHOO.widget.Button({  
-		type: "submit",  
-		label: "GO",  
-		id: "goBtn",  
-		container: "goBtnDiv" }
-		); 
-	
-	resizeContentDiv();
-	resizeTabview();
-	window.onresize = function() {
-		resizeContentDiv();
-	}
-
-	var userInfo = {
-		userId:${userInfo.userId},
-		username:"${userInfo.username}",
-		password:"${userInfo.password}",
-		strRoles:"${userInfo.strRoles}"
-	};
-
-	var defTab = document.getElementById("search");
-	defTab.onclick();
 </script>
 </body>
 </html>
