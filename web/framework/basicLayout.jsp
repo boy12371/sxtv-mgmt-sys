@@ -36,7 +36,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.actionsmenu-1.1/jquery.actionsmenu-1.1.js"></script>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/common/jquery/jquery.actionsmenu-1.1/jquery.actionsmenu-1.1.css" />
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
@@ -92,54 +95,46 @@ body {
     border:0;
 }
 </style>
+
 </head>
 
 <body class="yui-skin-sam">
 <div class="logoStyle"></div>
 <div id="top1">
-<div id="productsandservices" class="yuimenubar yuimenubarnav">
-<div class="bd">
-<div style="float: right; margin-right:7em;margin-top:1px"><input type="text" name="sdfs" /><input type="button" value="搜索" /></div>
-<ul class="first-of-type">
-	<li class="yuimenubaritem first-of-type"><a
-		class="yuimenubaritemlabel" href="#communication">Communication</a>
-        <div id="communication" class="yuimenu"> 
-            <div class="bd"> 
-                <ul> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://360.yahoo.com">360&#176;</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://alerts.yahoo.com">Alerts</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://avatars.yahoo.com">Avatars</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://groups.yahoo.com">Groups</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://promo.yahoo.com/broadband/">Internet Access</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="#">PIM</a> 
-                    
-                        <div id="pim" class="yuimenu"> 
-                            <div class="bd"> 
-                                <ul class="first-of-type"> 
-                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://mail.yahoo.com">Yahoo! Mail</a></li> 
-                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://addressbook.yahoo.com">Yahoo! Address Book</a></li> 
-                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://calendar.yahoo.com">Yahoo! Calendar</a></li> 
-                                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://notepad.yahoo.com">Yahoo! Notepad</a></li> 
-                                </ul>            
-                            </div> 
-                        </div>                    
-                    
-                    </li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://members.yahoo.com">Member Directory</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://messenger.yahoo.com">Messenger</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://mobile.yahoo.com">Mobile</a></li> 
-                    <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://www.flickr.com">Flickr Photo Sharing</a></li> 
-                </ul> 
-            </div> 
-        </div>      
-    </li>
-	
-	
-</ul>
+    <div id="productsandservices" class="yuimenubar yuimenubarnav"> 
+        <div class="bd"> 
+            <ul class="first-of-type">
+            <s:iterator value="tabs" var="ftab">
+            ﻿  ﻿  <li class="yuimenubaritem first-of-type">
+            ﻿  ﻿  <a class="yuimenubaritemlabel" href="#"><s:property value="#ftab.name" /></a>
+                </li>
+            ﻿</s:iterator>
+            </ul>
+        </div> 
+    </div>
+</div>
 
-</div>
-</div>
-</div>
+
+<!-- 
+<ul class="first-of-type">
+﻿   <s:iterator value="tabs" status="st">
+﻿  ﻿  <li class="yuimenubaritem first-of-type">
+﻿  ﻿  ﻿  <a class="yuimenubaritemlabel" href="#tab<s:property value='#st.index'/>" id="<s:property value='id'/>"><s:property value="name" /></a>
+      <div id="communication" class="yuimenu"> 
+        <div class="bd"> 
+            <ul>
+                <s:iterator value="subTabs" status="xt">
+            ﻿  ﻿  ﻿ <li class="yuimenuitem">
+                    <a class="yuimenuitemlabel" href="<s:property value='url'/>" id="<s:property value='id'/>"> <s:property value="name" /></a>
+                 </li> 
+            ﻿  ﻿  </s:iterator>
+            </ul> 
+        </div> 
+      </div>
+    </li>
+﻿  </s:iterator>
+</ul>
+ -->
 <div id="bottom1">
 <p>温馨提示：使用Firefox或Google Chrome浏览器，将会得到更快的浏览速度及更好的显示效果.</p>
 </div>
@@ -263,9 +258,14 @@ body {
 						initTopMenu);
 				
 			});
-		
+			
 			layout.render();
+//			for(var i=0; i<menuIDs.length; i++){
+//				 $('#'+menuIDs[i]).actionsmenu();
+//			}
 			initDataTable(layout);
+						
+	
 		});
 	})();
 </script>

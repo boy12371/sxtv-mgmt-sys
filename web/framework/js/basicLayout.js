@@ -1,103 +1,101 @@
-
 function initDataTable(layoutObj) {
 	var formatLink = function(elCell, oRecord, oColumn, sData) {
 		elCell.innerHTML = "<a href='#'>" + sData + "</a>";
 	}
 
 	// Column definitions
-	var myColumnDefs = [ {
-		key : "id",
-		label : "编号",
-		sortable : true,
-		formatter : formatLink
-	}, {
-		key : "vedioName",
-		label : "剧目名称"
-	}, {
-		key : "topic",
-		label : "题材",
-		sortable : true,
-		formatter : formatTopic
-	}, {
-		key : "subject",
-		label : "栏目",
-		sortable : true,
-		formatter : formatSubject
-	}, {
-		key : "companyID",
-		label : "影视公司",
-		sortable : true,
-		formatter : formatCompany
-	}, {
-		key : "dateInput",
-		label : "收带日期",
-		sortable : true,
-		formatter : formatDate
-	}, {
-		key : "status",
-		label : "状态",
-		sortable : true,
-		formatter : formatStatus
-	}, {
-		key : "dateStore",
-		label : "入库日期",
-		sortable : true,
-		formatter : function(elCell, oRecord, oColumn, sData) {
-			if (sData != null) {
-				var idx = sData.indexOf("T");
-				if (idx != -1) {
-					elCell.innerHTML = sData.substring(0, idx);
-				} else {
-					elCell.innerHTML = sData;
-				}
-			} else {
-				elCell.innerHTML = "-";
-			}
+	var myColumnDefs = [{
+				key : "id",
+				label : "编号",
+				sortable : true,
+				formatter : formatLink
+			}, {
+				key : "vedioName",
+				label : "剧目名称"
+			}, {
+				key : "topic",
+				label : "题材",
+				sortable : true,
+				formatter : formatTopic
+			}, {
+				key : "subject",
+				label : "栏目",
+				sortable : true,
+				formatter : formatSubject
+			}, {
+				key : "companyID",
+				label : "影视公司",
+				sortable : true,
+				formatter : formatCompany
+			}, {
+				key : "dateInput",
+				label : "收带日期",
+				sortable : true,
+				formatter : formatDate
+			}, {
+				key : "status",
+				label : "状态",
+				sortable : true,
+				formatter : formatStatus
+			}, {
+				key : "dateStore",
+				label : "入库日期",
+				sortable : true,
+				formatter : function(elCell, oRecord, oColumn, sData) {
+					if (sData != null) {
+						var idx = sData.indexOf("T");
+						if (idx != -1) {
+							elCell.innerHTML = sData.substring(0, idx);
+						} else {
+							elCell.innerHTML = sData;
+						}
+					} else {
+						elCell.innerHTML = "-";
+					}
 
-		}
-	}, {
-		key : "marketShare",
-		label : "市场份额",
-		sortable : true
-	}, {
-		key : "audienceRating",
-		label : "收视率",
-		sortable : true
-	}, {
-		key : "avgScore",
-		label : "综合平均分"// ,formatter : formatScroes
-	}, {
-		key : "purchase",
-		label : "购买意见"
-	// ,formatter : formatPurchase
-	}, {
-		key : "award",
-		label : "获奖备选"// , formatter : formatAward
-	}, {
-		key : "audiScore",
-		label : "观众投票"// , formatter : formatAudienceScore
-	}, {
-		key : "comments",
-		label : "备注",
-		formatter : formatorComments
-	} ];
-	
+				}
+			}, {
+				key : "marketShare",
+				label : "市场份额",
+				sortable : true
+			}, {
+				key : "audienceRating",
+				label : "收视率",
+				sortable : true
+			}, {
+				key : "avgScore",
+				label : "综合平均分"// ,formatter : formatScroes
+			}, {
+				key : "purchase",
+				label : "购买意见"
+				// ,formatter : formatPurchase
+		}	, {
+				key : "award",
+				label : "获奖备选"// , formatter : formatAward
+			}, {
+				key : "audiScore",
+				label : "观众投票"// , formatter : formatAudienceScore
+			}, {
+				key : "comments",
+				label : "备注",
+				formatter : formatorComments
+			}];
+
 	// DataSource instance
-	var myDataSource = new YAHOO.util.XHRDataSource(
-			"/tv/search/searchVideos.action?");
+	var myDataSource = new YAHOO.util.XHRDataSource("/tv/search/searchVideos.action?");
 	myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 	myDataSource.responseSchema = {
 		resultsList : "records",
-		fields : [ "id", "vedioName", "topic", "subject", "companyID",
+		fields : ["id", "vedioName", "topic", "subject", "companyID",
 				"dateInput", "status", "dateStore", "marketShare",
 				"audienceRating", "avgScore", "purchase", "award", "audiScore",
-				"comments" ],
+				"comments"],
 		metaFields : {
 			totalRecords : "totalRecords" // Access to value in the server
-		// response
+			// response
 		}
 	};
-	
+
 	requestBuilder = function(oState, oSelf) {
 		var startIndex, results, sort, dir;
 		oState = oState || {
@@ -116,9 +114,11 @@ function initDataTable(layoutObj) {
 
 		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
 		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
-		sort = (oState.sortedBy) ? oState.sortedBy.key
+		sort = (oState.sortedBy)
+				? oState.sortedBy.key
 				: oSelf.getColumnSet().keys[0].getKey();
-		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC) ? "desc"
+		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC)
+				? "desc"
 				: "asc";
 		var queryString = "&results=" + results + "&startIndex=" + startIndex
 				+ "&sort=" + sort + "&dir=" + dir;
@@ -139,31 +139,37 @@ function initDataTable(layoutObj) {
 		sortedBy : {
 			key : "dateInput",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
-		}, // Sets UI initial sort arrow
-		paginator : new YAHOO.widget.Paginator(
-				{
-					rowsPerPage : 25,
-					firstPageLinkLabel : "首页",
-					lastPageLinkLabel : " 尾页",
-					previousPageLinkLabel : " 上一页",
-					nextPageLinkLabel : " 下一页",
-					template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
-					pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}"					
-				}), // Enables pagination
+		}, // Sets UI initial sort
+		// arrow
+		paginator : new YAHOO.widget.Paginator({
+			rowsPerPage : 25,
+			firstPageLinkLabel : "首页",
+			lastPageLinkLabel : " 尾页",
+			previousPageLinkLabel : " 上一页",
+			nextPageLinkLabel : " 下一页",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
+			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}"
+		}), // Enables
+		// pagination
 		generateRequest : requestBuilder
 	};
-	
+
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
-	
+
 	myDataTable.subscribe("initEvent", function() {
-		addColumnsName();
-	});
-	var linkClickEvent = function(oArgs){
+				addColumnsName();
+			});
+	var linkClickEvent = function(oArgs) {
 		var a = oArgs.target;
 		var oRecord = this.getRecord(a);
-		var link = "/tv/search/toVideoDetail.action?vid="+oRecord.getData("id");
-		window.open(link,"影带信息",'height=500,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+		var link = "/tv/search/toVideoDetail.action?vid="
+				+ oRecord.getData("id");
+		window
+				.open(
+						link,
+						"影带信息",
+						'height=500,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
 	}
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
@@ -185,20 +191,22 @@ function initDataTable(layoutObj) {
 			myDataTable.showColumn(column);
 		}
 	}
-	
+
 	var colLink = new YAHOO.widget.Button({
-		type : "button",
-		id : "colLink",
-		label : "选项",
-		container : "tableOption"
-	});
+				type : "button",
+				id : "colLink",
+				label : "选项",
+				container : "tableOption"
+			});
 	var colDiv = YAHOO.util.Dom.get("colDiv");
-	colLink.on("click",function(){
-		colDiv.style.display = colDiv.style.display == "block" ? "none": "block";
-	});
+	colLink.on("click", function() {
+				colDiv.style.display = colDiv.style.display == "block"
+						? "none"
+						: "block";
+			});
 	addColumnsName = function() {
 		if (colDiv.innerHTML.length == 0) {
-			for ( var i = 0; i < myColumnDefs.length; i++) {
+			for (var i = 0; i < myColumnDefs.length; i++) {
 				var column = myColumnDefs[i];
 				var checkbox = document.createElement("INPUT");
 				checkbox.type = "checkbox";
@@ -220,11 +228,11 @@ function initDataTable(layoutObj) {
 		}
 	};
 	var fireEvent = function(resetRecordOffset) {
-		var iframe=YAHOO.util.Dom.get("mainContentFrame");
-		iframe.style.display="none";
-		var queryDiv=YAHOO.util.Dom.get("queryDiv");
-		queryDiv.style.display="block";
-		
+		var iframe = YAHOO.util.Dom.get("mainContentFrame");
+		iframe.style.display = "none";
+		var queryDiv = YAHOO.util.Dom.get("queryDiv");
+		queryDiv.style.display = "block";
+
 		var oState = myDataTable.getState(), request, oCallback;
 		if (resetRecordOffset) {
 			oState.pagination.recordOffset = 0;
@@ -252,7 +260,7 @@ function initDataTable(layoutObj) {
 		}
 		request = myDataTable.get("generateRequest")(oState, myDataTable);
 		myDataSource.sendRequest(request, oCallback);
-		
+
 		layoutObj.getUnitByPosition('right').toggle();
 	}
 	checkSelectItems = function() {
@@ -294,23 +302,23 @@ function initDataTable(layoutObj) {
 
 		window.open(queryString, "打印预览");
 	}
-	
+
 	var printBtn = new YAHOO.widget.Button({
-		type : "button",
-		id : "topicBtn",
-		label : "打印",
-		container : "printBtn"
-	});
+				type : "button",
+				id : "topicBtn",
+				label : "打印",
+				container : "printBtn"
+			});
 	printBtn.on("click", generatePrintTable);
-	
+
 	var queryBtn = new YAHOO.widget.Button({
-		type : "button",
-		label : "查询",
-		id : "queryBtn",
-		container : "queryBtnDiv"
-	});
+				type : "button",
+				label : "查询",
+				id : "queryBtn",
+				container : "queryBtnDiv"
+			});
 	queryBtn.on("click", fireEvent);
-	
+
 	// fixTableWidthWithScrollBar("dynamicdata");
 
 	return {
@@ -319,3 +327,4 @@ function initDataTable(layoutObj) {
 	};
 
 }
+
