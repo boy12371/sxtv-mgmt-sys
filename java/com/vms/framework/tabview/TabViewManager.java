@@ -68,8 +68,9 @@ public class TabViewManager {
 				NodeList moduleItems = tempModule.getChildNodes();
 				if(moduleItems != null){
 					int modulesItemLength = moduleItems.getLength();
+					List<TabElementBean> subTabs=null;
 					if(modulesItemLength != 0){
-						List<TabElementBean> subTabs = new ArrayList<TabElementBean>();
+						subTabs = new ArrayList<TabElementBean>();
 						for(int j = 0; j < modulesItemLength; j++){
 							Node tempModuleItem = moduleItems.item(j);
 							TabElementBean subTab = new TabElementBean();
