@@ -247,6 +247,10 @@
 	<bean id="frameMgmt" class="com.vms.framework.action.BasicLayout"
 		scope="prototype">
 		<property name="userService" ref="userService" />
+		<property name="companyService" ref="companyService" />
+		<property name="subjectService" ref="subjectService" />
+		<property name="topicService" ref="topicService" />
+		<property name="statusService" ref="statusService" />
 	</bean>
 	
 	
