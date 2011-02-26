@@ -58,6 +58,15 @@ public class AudienceScoreService implements IAudienceScoreService{
 		}
 	}
 	
+	public void deleteAudienceScore(AudienceExamineVO ae) throws Exception{
+		Audiencescore as = ae.toAudiencescore();
+		if(null==as.getId()) return;
+		Audiencescore old = (Audiencescore)audienceScoreDAO.getObject(Audiencescore.class, as.getId());
+		if(null!=old){
+			audienceScoreDAO.deleteObject(old);
+		}
+	}
+	
 	private Map<String, Audience> getAllAudience() throws Exception{
 		Map<String, Audience> ausMap = new HashMap<String, Audience>();
 		List<Audience> ausList = audienceScoreDAO.findAll(Audience.class);
