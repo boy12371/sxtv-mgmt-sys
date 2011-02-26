@@ -39,6 +39,8 @@ public class AudienceExamineAction extends BaseAction {
 	private VedioTapeVO tape;
 	
 	private String newResult;
+	
+	private String delResult;
 
 	public String toAudienceExamine() throws Exception {
 		try{
@@ -70,6 +72,30 @@ public class AudienceExamineAction extends BaseAction {
 	}
 	
 	public String doAudienceExamine() throws Exception {
+		if(null!=delResult && !"".equals(delResult)){
+			JSONArray delArray = JSONArray.fromObject(delResult);
+			List<AudienceExamineVO> delAes = new ArrayList<AudienceExamineVO>();
+			if(delArray.isArray() && !delArray.isEmpty()){
+				int size = delArray.size();
+				for (int i = 0; i < size; i++) {
+					JSONObject obj =delArray.getJSONObject(i);
+					AudienceExamineVO aev = new AudienceExamineVO();
+					aev.setAudience(obj.getString("audience"));
+					String tapeID = obj.getString("tapeID");
+					aev.setTapeID(tapeID);
+					if(null == tape){
+						tape = new VedioTapeVO();
+						tape.setId(tapeID);
+					}
+					aev.setResult(obj.getString("result"));
+					aev.setId(new Integer(obj.getInt("id")));
+					delAes.add(aev);
+					audienceExamineService.deleteAudienceScore(aev);
+				}
+			}
+		}
+		
+		
 		JSONArray jsonArray = JSONArray.fromObject(newResult);
 		List<AudienceExamineVO> aes = new ArrayList<AudienceExamineVO>();
 		if(jsonArray.isArray() && !jsonArray.isEmpty()){
@@ -146,5 +172,13 @@ public class AudienceExamineAction extends BaseAction {
 
 	public String getNewResult() {
 		return newResult;
+	}
+
+	public void setDelResult(String delResult) {
+		this.delResult = delResult;
+	}
+
+	public String getDelResult() {
+		return delResult;
 	}
 }
