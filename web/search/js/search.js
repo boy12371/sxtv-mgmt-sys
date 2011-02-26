@@ -61,6 +61,23 @@ function initDataTable() {
 						}
 						
 					}
+			},{
+				key : "playDate",
+				label : "播放日期",
+				sortable : true,
+				formatter : function(elCell, oRecord, oColumn, sData) {
+						if(sData!=null){
+							var idx = sData.indexOf("T");
+							if (idx != -1) {
+								elCell.innerHTML = sData.substring(0, idx);
+							} else {
+								elCell.innerHTML = sData;
+							}	
+						}else{
+							elCell.innerHTML = "-";
+						}
+						
+					}
 			}, {
 				key : "marketShare",
 				label : "市场份额",
@@ -94,7 +111,7 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : ["id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "dateStore", "marketShare", "audienceRating",
+				"dateInput", "status", "dateStore","playDate", "marketShare", "audienceRating",
 				"avgScore", "purchase", "award", "audiScore",
 				"comments"],
 		metaFields : {
@@ -166,8 +183,7 @@ function initDataTable() {
 				parent.resizeIframe();
 				$.unblockUI();				
 			});
-	myDataTable.subscribe("initEvent", function() {
-				addColumnsName();			
+	myDataTable.subscribe("beforeRenderEvent", function() {
 			});
 	// Update totalRecords on the fly with value from server
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse,
@@ -200,6 +216,7 @@ function initDataTable() {
 				colDiv.style.display = colDiv.style.display == "block"
 						? "none"
 						: "block";
+				return false;
 			});
 	addColumnsName = function() {
 		if (colDiv.innerHTML.length == 0) {
@@ -209,7 +226,11 @@ function initDataTable() {
 				checkbox.type = "checkbox";
 				checkbox.name = "colCkbox";
 				checkbox.value = column.key;
-				checkbox.checked = false;
+				if(column.key=="avgScore"||column.key=="purchase"||column.key=="award"||column.key=="audiScore"||column.key=="comments"){
+					checkbox.checked = true;
+				}else{
+					checkbox.checked = false;
+				}
 				colDiv.appendChild(checkbox);
 				var p = document.createElement("SPAN");
 				p.innerHTML = column.label;
@@ -224,6 +245,13 @@ function initDataTable() {
 			}
 		}
 	};
+	
+	var initHideCols = function(){
+		var colNames=["avgScore","purchase","award","audiScore","comments"];
+		for ( var i = 0; i < colNames.length; i++) {
+			myDataTable.hideColumn(columnSet.getColumn(colNames[i]));
+		}
+	}
 	var fireEvent = function(resetRecordOffset) {
 		var oState = myDataTable.getState(), request, oCallback;
 		if (resetRecordOffset) {
@@ -321,7 +349,8 @@ function initDataTable() {
 	vstatus.selectedIndex = 0;
 	
 // fixTableWidthWithScrollBar("dynamicdata");
-	
+	addColumnsName();
+	initHideCols();
 	return {
 		ds : myDataSource,
 		dt : myDataTable
@@ -657,6 +686,23 @@ function initExcelTable(ds) {
 		sortable: true// ,sortOptions:{sortFunction:statusSortor},formatter
 						// :formatStatus
 	}, {
+		key : "playDate",
+		label : "播放日期",
+		sortable : true,
+		formatter : function(elCell, oRecord, oColumn, sData) {
+				if(sData!=null){
+					var idx = sData.indexOf("T");
+					if (idx != -1) {
+						elCell.innerHTML = sData.substring(0, idx);
+					} else {
+						elCell.innerHTML = sData;
+					}	
+				}else{
+					elCell.innerHTML = "-";
+				}
+				
+			}
+	},{
 		key :"marketShare",
 		label :"市场份额",
 		sortable: true// ,formatter: mkShareFormatter,
@@ -701,7 +747,7 @@ function initExcelTable(ds) {
 	myDataSource.responseSchema = {
 		resultsList :"records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateComing", "status", "marketShare", "audienceRating", "purchase", "award", "audiScore",	"comments","avgScore" ],
+				"dateComing", "status","playDate", "marketShare", "audienceRating", "purchase", "award", "audiScore",	"comments","avgScore" ],
 		metaFields : {
 			totalRecords :"totalRecords" // Access to value in the server
 	// response

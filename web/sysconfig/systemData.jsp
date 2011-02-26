@@ -31,7 +31,28 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/tabview/tabview-min.js"></script> 
-
+<style type="text/css">
+.yui-skin-sam .yui-navset .yui-nav .selected a, .yui-skin-sam .yui-navset .yui-nav .selected a:focus, .yui-skin-sam .yui-navset .yui-nav .selected a:hover {
+    background: url("../common/yui/build/assets/skins/sam/sprite.png") repeat-x scroll left -1400px #2647A0;
+    color: #FFFFFF;
+}
+.yui-skin-sam .yui-navset .yui-nav a, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
+    background: url("../common/yui/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 #D8D8D8;
+    border-color: #A3A3A3;
+    border-style: solid;
+    border-width: 0 1px;
+    color: #000000;
+    position: relative;
+    text-decoration: none;
+}
+.yui-skin-sam .yui-navset .yui-content, .yui-skin-sam .yui-navset .yui-navset-top .yui-content {
+    border-bottom: 0px solid #808080;
+    border-left: 0px solid #808080;
+    border-right: 0px solid #808080;
+    border-top: 0px solid #243356;
+    padding: 0.25em 0.5em;
+}
+</style>
 </head>
 <body class="yui-skin-sam">
 <s:actionmessage />

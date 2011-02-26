@@ -195,7 +195,7 @@ function initTopicTable() {
 							message : $('#hiddenDiv'),
 							css : {
 								width : '400px',
-								top : '45%',
+								top : '120px',
 								left : '25%',
 								cursor : 'auto',
 								border : '5px solid #999999'
@@ -243,7 +243,7 @@ function initTopicTable() {
 						message : $('#hiddenDiv'),
 						css : {
 							width : '400px',
-							top : '45%',
+							top : '120px',
 							left : '25%',
 							cursor : 'auto',
 							border : '5px solid #999999'
@@ -422,7 +422,7 @@ function initSubjectTable() {
 							message : $('#hiddenDiv'),
 							css : {
 								width : '400px',
-								top : '45%',
+								top : '120px',
 								left : '25%',
 								cursor : 'auto',
 								border : '5px solid #999999'
@@ -470,7 +470,7 @@ function initSubjectTable() {
 						message : $('#hiddenDiv'),
 						css : {
 							width : '400px',
-							top : '45%',
+							top : '120px',
 							left : '25%',
 							cursor : 'auto',
 							border : '5px solid #999999'
@@ -628,7 +628,7 @@ function initScoreWeightTable() {
 						message : $('#hiddenWeightDiv'),
 						css : {
 							width : '400px',
-							top : '45%',
+							top : '120px',
 							left : '25%',
 							cursor : 'auto',
 							border : '5px solid #999999'
@@ -764,7 +764,7 @@ function initScoreLevelTable() {
 							message : $('#hiddenLevelDiv'),
 							css : {
 								width : '400px',
-								top : '45%',
+								top : '120px',
 								left : '25%',
 								cursor : 'auto',
 								border : '5px solid #999999'
@@ -804,7 +804,7 @@ function initScoreLevelTable() {
 						message : $('#hiddenLevelDiv'),
 						css : {
 							width : '400px',
-							top : '45%',
+							top : '120px',
 							left : '25%',
 							cursor : 'auto',
 							border : '5px solid #999999'

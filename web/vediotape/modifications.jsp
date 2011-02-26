@@ -49,7 +49,7 @@ white-space:nowrap;
 
 
 
-<h1>查看或修改影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/audit.png" border="0">
+<h1>搜索影带信息</h1><img class="pageImage" src="${pageContext.request.contextPath}/common/images/audit.png" border="0">
 <p>输入剧目编号或名称搜索剧目</p>
 <s:actionerror />
 <s:actionmessage />
@@ -84,7 +84,7 @@ white-space:nowrap;
 	<div align="center">
 	<div id="submitToPreArrange"></div>
 	</div>
-	<h1>待排影带列表</h1>
+	<h1>已入库待排影带列表</h1>
 	<p>选择并点击按钮，使影带进入通过状态</p>
 	<a href="#" id="tableOptionPass" style="font-size:12px">选项</a>
 	<div id="colDivPass" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
