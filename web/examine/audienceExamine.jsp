@@ -84,6 +84,7 @@
 </div>
 <s:form action="doAudienceExamine" namespace="/examine" >
 	<s:hidden name="newResult" id="newResult"/>
+	<s:hidden name="delResult" id="delResult"/>
 	<s:hidden name="tape.id"/>
 </s:form>
 <script type="text/javascript">
