@@ -76,6 +76,35 @@ function initDataTable() {
 		clearErrorMsg();
 	});
 	
+	var onContextMenuClick = function(p_sType, p_aArgs, p_myDataTable) {
+		var task = p_aArgs[1];
+		if (task) {
+			// Extract which TR element triggered the context menu
+			var elRow = this.contextEventTarget;
+			elRow = myDataTable.getTrEl(elRow);
+
+			if (elRow) {
+				switch (task.index) {
+				case 0: // Delete row upon confirmation
+					var oRecord = myDataTable.getRecord(elRow);
+					jConfirm("您却定要删除?", "提示",
+							function(r) {
+								if (r) {
+									myDataTable.deleteRow(elRow);
+								}
+							})
+				}
+			}
+		}
+	};
+	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu", {
+		trigger : myDataTable.getTbodyEl()
+	});
+	myContextMenu.addItem("删除");
+	// Render the ContextMenu instance to the parent container of the DataTable
+	myContextMenu.render("dynamicdata");
+	myContextMenu.clickEvent.subscribe(onContextMenuClick, myDataTable);
+	
 	return {
 		ds :myDataSource,
 		dt :myDataTable

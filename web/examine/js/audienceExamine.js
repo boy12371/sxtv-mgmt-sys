@@ -1,5 +1,6 @@
 var myDataTable;
 var cXData;
+var delArray = new Array();
 function initDataTable() {
 	var formatDate = function(elCell, oRecord, oColumn, sData) {
 		var idx = sData.indexOf("T");
@@ -86,6 +87,47 @@ function initDataTable() {
 	myDataTable.subscribe("renderEvent", function() { 
 		parent.resizeIframe();
 	});
+	
+	var onContextMenuClick = function(p_sType, p_aArgs, p_myDataTable) {
+		var task = p_aArgs[1];
+		if (task) {
+			// Extract which TR element triggered the context menu
+			var elRow = this.contextEventTarget;
+			elRow = myDataTable.getTrEl(elRow);
+
+			if (elRow) {
+				switch (task.index) {
+				case 0: // Delete row upon confirmation
+					var oRecord = myDataTable.getRecord(elRow);
+					var dData = oRecord.getData();
+					var marked = oRecord.getData("marked");
+					var msg = "";
+					if(2==marked){
+						msg = "该记录不是本次操作输入，确认要删除?"
+					}else{
+						msg = "您却定要删除?";
+					}
+					jConfirm(msg, "提示",
+							function(r) {
+								if (r) {
+									if(2==marked){
+										delArray[delArray.length] = dData;
+									}
+									myDataTable.deleteRow(elRow);
+								}
+							})
+				}
+			}
+		}
+	};
+	var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu", {
+		trigger : myDataTable.getTbodyEl()
+	});
+	myContextMenu.addItem("删除");
+	// Render the ContextMenu instance to the parent container of the DataTable
+	myContextMenu.render("cellediting");
+	myContextMenu.clickEvent.subscribe(onContextMenuClick, myDataTable);
+	
 	return {
 		ds :myDataSource,
 		dt :myDataTable
@@ -164,7 +206,9 @@ function submitAction(){
 		}
 	}
 	var newResult = document.getElementById("newResult");
+	var delResult = document.getElementById("delResult");
 	newResult.value = YAHOO.lang.JSON.stringify(submitArray);
+	delResult.value = YAHOO.lang.JSON.stringify(delArray);
 	document.forms[0].submit();
 }
 
