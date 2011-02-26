@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -14,6 +15,7 @@ import com.vms.common.JSONDataTableUtils;
 import com.vms.common.SearchCondition;
 import com.vms.db.bean.Audiencescore;
 import com.vms.db.bean.Company;
+import com.vms.db.bean.Playorder;
 import com.vms.db.bean.Status;
 import com.vms.db.bean.Subject;
 import com.vms.db.bean.Topic;
@@ -252,6 +254,7 @@ public class VedioSearchMgmt extends BaseAction {
 		private java.util.Date dateComing;
 		private java.util.Date dateInput;
 		private java.util.Date dateStore;
+		private java.util.Date playDate;
 		private java.lang.String comments;
 		private float marketShare = 0;
 		private float audienceRating = 0;
@@ -272,6 +275,14 @@ public class VedioSearchMgmt extends BaseAction {
 			this.setDateComing(tape.getDateComing());
 			this.setDateInput(tape.getDateInput());
 			this.setDateStore(tape.getDateStore());
+			Set<Playorder> orders = tape.getPlayorders();
+			if(null!=orders && !orders.isEmpty()){
+				Playorder[] or = orders.toArray(new Playorder[]{});
+				this.setPlayDate(or[0].getPlayDate());
+			}else{
+				this.setPlayDate(null);
+			}
+			
 			this.setComments(tape.getComments());
 			this.setMarketShare(tape.getMarketShare() != null ? tape
 					.getMarketShare() : 0);
@@ -467,6 +478,14 @@ public class VedioSearchMgmt extends BaseAction {
 		
 		public void setDateStore(java.util.Date dateStore) {
 			this.dateStore = dateStore;
+		}
+
+		public java.util.Date getPlayDate() {
+			return playDate;
+		}
+
+		public void setPlayDate(java.util.Date playDate) {
+			this.playDate = playDate;
 		}
 	}
 
