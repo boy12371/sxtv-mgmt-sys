@@ -194,14 +194,13 @@ function initUnArrangeTable() {
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :25,
+			rowsPerPage :20,
 			firstPageLinkLabel :"首页",
 			lastPageLinkLabel :" 尾页",
 			previousPageLinkLabel :" 上一页",
 			nextPageLinkLabel :" 下一页",
-			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template :"{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate :"Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50,100 ]
 		}),
 		formatRow: myRowFormatter
 	};
