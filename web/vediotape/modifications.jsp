@@ -58,10 +58,10 @@ white-space:nowrap;
     text-decoration: none;
 }
 .yui-skin-sam .yui-navset .yui-content, .yui-skin-sam .yui-navset .yui-navset-top .yui-content {
-    border-bottom: 1px solid #808080;
-    border-left: 1px solid #808080;
-    border-right: 1px solid #808080;
-    border-top: 1px solid #243356;
+    border-bottom: 0px solid #808080;
+    border-left: 0px solid #808080;
+    border-right: 0px solid #808080;
+    border-top: 0px solid #243356;
     padding: 0.25em 0.5em;
 }
 .yui-skin-sam .yui-navset .yui-content {
@@ -98,7 +98,7 @@ white-space:nowrap;
 	</script>
 </s:form>
 
-<s:form id="tableForm" namespace="/vedio" action="doModificationBatch" method="post" cssStyle="width:85%">
+<s:form id="tableForm" namespace="/vedio" action="doModificationBatch" method="post">
 
 <div id="tabs" class="yui-navset"> 
     <ul class="yui-nav"> 
@@ -120,9 +120,6 @@ white-space:nowrap;
         </div> 
     </div> 
 </div>
-	<script type="text/javascript">
-	
-	</script>
 </s:form>
 <script type="text/javascript">
 (function() {

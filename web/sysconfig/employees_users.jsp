@@ -51,10 +51,10 @@ white-space:nowrap;
     text-decoration: none;
 }
 .yui-skin-sam .yui-navset .yui-content, .yui-skin-sam .yui-navset .yui-navset-top .yui-content {
-    border-bottom: 1px solid #808080;
-    border-left: 1px solid #808080;
-    border-right: 1px solid #808080;
-    border-top: 1px solid #243356;
+    border-bottom: 0px solid #808080;
+    border-left: 0px solid #808080;
+    border-right: 0px solid #808080;
+    border-top: 0px solid #243356;
     padding: 0.25em 0.5em;
 }
 .yui-skin-sam .yui-navset .yui-content {

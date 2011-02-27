@@ -26,7 +26,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/calendar/calendar-min.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
 
@@ -115,7 +115,7 @@
 			</td>
 			<td valign="top">
 				<div id="dynamicdata" align="center"></div>
-				<div id="submitBtnDiv" align="center" style="margin-top:20px;"></div>
+				<div id="submitBtnDiv" style="margin-top:20px;"></div>
 			</td>
 		</tr>
 	

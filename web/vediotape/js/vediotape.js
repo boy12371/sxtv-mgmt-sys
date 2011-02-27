@@ -266,7 +266,6 @@ function initDataTable() {
 		var len = records.length;
 		if (len != 0) {
 			var data = YAHOO.util.Dom.get("jasonDataString");
-
 			var form = document.forms[0];
 			var jasonString = "[";
 			for ( var i = 0; i < len; i++) {
@@ -286,6 +285,7 @@ function initDataTable() {
 			}
 			jasonString += "]";
 			data.value = jasonString;
+			form.action="/tv/vedio/doAddingVedio.action";
 			form.submit();
 		} else {
 			jAlert('尚未添加任何影带信息', "提示");

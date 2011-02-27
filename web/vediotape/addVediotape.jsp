@@ -46,7 +46,7 @@
 
 <s:form id="form1" name="form1" method="post" action="doAddingVedio"
 	namespace="/vedio">
-	
+	<s:hidden name="jasonDataString" id="jasonDataString" />
 	<h1>输入影带信息</h1>
 	<img class="pageImage"
 		src="${pageContext.request.contextPath}/common/images/2.png"
@@ -119,14 +119,7 @@
 			</td>
 		</tr>
 		</table>
-		
-		
-	
-	
-	
 	</div>
-	<s:hidden name="jasonDataString" id="jasonDataString" />
-	
 	
 </s:form>
 <div id="simpleDialog"></div>
