@@ -112,7 +112,6 @@
 	border="0">
 <p>点击下拉菜单查看待审剧目，单击剧目查看详细信息</p>
 
-<div style="width:300px;left:40px">
 <select class="selectField" id="filter">
 	<option value="0">All</option>
 	<option value="2" selected="selected">待审剧目</option>
@@ -123,8 +122,8 @@
 </select><br/>
 <a href="#" id="tableOption" style="font-size:12px">选项</a>
 	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
-</div>
-<div id="dynamicdata" align="center"></div>
+
+<div id="dynamicdata" align="center" style="overflow-x:scroll; border:0px solid;"></div>
 
 <div id="printDate" style="display: none">
 <h1 class="popupWindowTitle">请选择日期</h1>

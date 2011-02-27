@@ -15,7 +15,7 @@ function initDataTable() {
 		sel.id = "scoreSel_" + data;
 		sel.options.add(new Option("选择评价类型","0")); 
 		sel.options.add(new Option("专业人员打分","1")); 
-		if(sessUser.strRoles.indexOf("8")!=-1){
+		if(parent.userInfo.strRoles.indexOf("8")!=-1){
 			sel.options.add(new Option("普通观众评价","2"));
 			sel.options.add(new Option("打分完成","3"));
 		}

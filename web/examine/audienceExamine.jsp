@@ -47,48 +47,41 @@
 <s:actionerror/>
 <p>输入影带新评价</p>
 <div align="center">
-
-<table>
-	<tr>
-	<td valign="top">
-		<table class="inputTable">
-			<tr>
-				<td><label>影带编号：</label></td>
-				<td id="vedioID"><s:property value="tape.id"/></td>
-			</tr>
-			<tr>
-				<td><label>影带名称：</label></td>
-				<td id="vedioName"><s:property value="tape.vedioName"/></td>
-			</tr>
-			<tr>
-				<td><label>输入观众名：</label></td>
-				<td>
-		    		<input id="audienceName" class="inputField autoComplete" type="text"> 
-		    		<div id="container"></div>  
-				</td>
-			</tr>
-			<tr>
-				<td><label>选择评价：</label></td>
-				<td>
-					<table><tr>
-						<td><input type="radio" class="radioSel" id="look" name="result" value="1"/>看</td>
-						<td><input type="radio" class="radioSel" id="unlook" name="result" value="0"/>不看</td>
-					</tr></table>
-				</td>
-			</tr>		
-		</table>
-		<div style="margin-top:10px;" id="addBtnDiv"></div></td>
-	<td valign="top">
-		<div id="cellediting" align="center" class="cellediting"></div>
-		<div align="center">
-			<div style="margin-top:30px;" id="submitBtnDiv"></div>
-		</div></td>
-	</tr>
-
-</table>
-	
+	<table class="inputTable">
+		<tr>
+			<td><label>影带编号：</label></td>
+			<td id="vedioID"><s:property value="tape.id"/></td>
+		</tr>
+		<tr>
+			<td><label>影带名称：</label></td>
+			<td id="vedioName"><s:property value="tape.vedioName"/></td>
+		</tr>
+		<tr>
+			<td><label>输入观众名：</label></td>
+			<td>
+	    		<input id="audienceName" class="inputField autoComplete" type="text"> 
+	    		<div id="container"></div>  
+			</td>
+		</tr>
+		<tr>
+			<td><label>选择评价：</label></td>
+			<td>
+				<table><tr>
+					<td><input type="radio" class="radioSel" id="look" name="result" value="1"/>看</td>
+					<td><input type="radio" class="radioSel" id="unlook" name="result" value="0"/>不看</td>
+				</tr></table>
+			</td>
+		</tr>		
+	</table>
+	<div style="margin-top:30px;" id="addBtnDiv"></div>
 </div>		
 
+<p>影带已有评价</p>
+<br/>
+<div id="cellediting" align="center" class="cellediting"></div>
+<div align="center">
+	<div style="margin-top:30px;" id="submitBtnDiv"></div>
+</div>
 <s:form action="doAudienceExamine" namespace="/examine" >
 	<s:hidden name="newResult" id="newResult"/>
 	<s:hidden name="delResult" id="delResult"/>

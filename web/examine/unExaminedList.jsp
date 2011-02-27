@@ -40,7 +40,7 @@
 
 <s:actionmessage/>
 <s:actionerror/>
-
+<br />
 <div align="center">
 <table class="searchTable">
 	<tr>
@@ -49,7 +49,7 @@
 		<td><label>剧目名称</label></td>
 		<td>
 			<input class="inputField autoComplete" type="text" id="searchinput" name="vname" style="width: 200px" />
-			<div id="searchcontainer" style="filter:Alpha(opacity=100)!important"></div>
+			<div id="searchcontainer"></div>
 		</td>
 		<td><div id="searchBtnDiv"></div></td>
 	</tr>
@@ -58,12 +58,6 @@
 <div id="dynamicdata" align="center"></div>
 
 <script language="JavaScript">
-	var sessUser = {
-		userId:${userInfo.userId},
-		username:"${userInfo.username}",
-		password:"${userInfo.password}",
-		strRoles:"${userInfo.strRoles}"
-	};
 	YAHOO.example.Centered = autoCompleteVideoName();
 	YAHOO.example.DynamicData = initDataTable();
 

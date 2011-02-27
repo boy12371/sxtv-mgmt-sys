@@ -77,7 +77,7 @@
 <a href="#" id="tableOption" style="font-size:12px">选项</a>
 	<div id="colDiv" style="display:none;z-index:1002;position:absolute;background-color:white;overflow:auto;border:5px solid #999999"></div>
 <div id="printBtn" align="right"></div>
-<div id="dynamicdata" align="center"></div>
+<div id="dynamicdata" align="center"  style="overflow-x:scroll; border:0px solid;"></div>
 
 <script type="text/javascript">
 	YAHOO.util.Event.addListener(window, "load", initOrderDataTable());

@@ -34,8 +34,9 @@
 
 <s:actionmessage />
 <s:actionerror />
-<div id="addaud" style="margin-left:17%"></div>
+<br/>
 <div id="dynamicdata" align="center"></div>
+<div id="addaud" align="center"></div>
 <script type="text/javascript">
 	var addEmpBtn = new YAHOO.widget.Button( {
 		type :"link",

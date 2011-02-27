@@ -30,56 +30,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/tabview/tabview-min.js"></script> 
-<style type="text/css">
-.yui-skin-sam .yui-navset .yui-nav .selected a, .yui-skin-sam .yui-navset .yui-nav .selected a:focus, .yui-skin-sam .yui-navset .yui-nav .selected a:hover {
-    background: url("../common/yui/build/assets/skins/sam/sprite.png") repeat-x scroll left -1400px #2647A0;
-    color: #FFFFFF;
-}
-.yui-skin-sam .yui-navset .yui-nav a, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
-    background: url("../common/yui/build/assets/skins/sam/sprite.png") repeat-x scroll 0 0 #D8D8D8;
-    border-color: #A3A3A3;
-    border-style: solid;
-    border-width: 0 1px;
-    color: #000000;
-    position: relative;
-    text-decoration: none;
-}
-.yui-skin-sam .yui-navset .yui-content, .yui-skin-sam .yui-navset .yui-navset-top .yui-content {
-    border-bottom: 0px solid #808080;
-    border-left: 0px solid #808080;
-    border-right: 0px solid #808080;
-    border-top: 0px solid #243356;
-    padding: 0.25em 0.5em;
-}
-.yui-skin-sam .yui-navset .yui-content {
-    background: none;
-}
-</style>
 </head>
 <body class="yui-skin-sam">
 <s:actionmessage />
 <s:actionerror />
 
-<div id="demo" class="yui-navset"> 
-    <ul class="yui-nav"> 
-        <li class="selected"><a href="#tab1"><em>状态</em></a></li> 
-        <li><a href="#tab2"><em>题材</em></a></li>
-        <li><a href="#tab3"><em>栏目</em></a></li>
-        <li><a href="#tab4"><em>评分权重</em></a></li>
-        <li><a href="#tab5"><em>评分级别</em></a></li>
-    </ul>            
-    <div class="yui-content"> 
-        <div><div id="vedioStatus" align="center"></div></div> 
-        <div><div id="topicBtnDiv" style="margin-left:17%"></div><div id="vedioTopic" align="center"></div></div> 
-        <div><div id="subjectBtnDiv" style="margin-left:17%"></div><div id="vedioSubject" align="center"></div></div>
-        <div><div id="scoreWeight" align="center"></div></div> 
-        <div><div id="levelBtnDiv" style="margin-left:17%"></div><div id="scorelevel" align="center"></div></div> 
-         
-    </div> 
-</div>
-
-<!-- 
 <h1>影带状态</h1>
 <img class="pageImage" src="${pageContext.request.contextPath}/common/images/21.png" border="0">
 <p>影带状态不可更改</p>
@@ -109,8 +64,8 @@
 <p>可添加或修改权重</p>
 <br />
 <div id="scoreWeight" align="center"></div>
- -->
-<!-- div id="weightBtnDiv" align="center"></div
+
+<!-- div id="weightBtnDiv" align="center"></div-->
 
 
 
@@ -120,15 +75,11 @@
 <br />
 <div id="scorelevel" align="center"></div>
 <div id="levelBtnDiv" align="center"></div>
--->
+
 
 
 
 <script type="text/javascript">
-
-(function() {
-    var tabView = new YAHOO.widget.TabView('demo');
-})();
 	YAHOO.example.DynamicData = initStatusTable();
 	YAHOO.example.DynamicData = initTopicTable();
 	YAHOO.example.DynamicData = initSubjectTable();
