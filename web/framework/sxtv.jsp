@@ -7,14 +7,15 @@
 <title>Insert title here</title>
 <style type="text/css">
 .logoStyle {
-	background-image: url("http://i713.photobucket.com/albums/ww135/subtroniq/th_ubuntu_logo.jpg");
-	/*background-image: url("./images/sxtv_logo.png");*/
+	/*background-image: url("http://i713.photobucket.com/albums/ww135/subtroniq/th_ubuntu_logo.jpg");*/
+	background-image: url("./images/sxtv_logo.png");
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	position: relative;
 	height: 100px;
 	opacity: 0.80;
-	filter: alpha(opacity =                     20);
+	filter: alpha(opacity = 90);
+	background-color:#F2F2F2;
 }
 </style>
 </head>

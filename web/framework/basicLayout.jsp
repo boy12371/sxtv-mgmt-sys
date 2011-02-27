@@ -19,6 +19,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
+ 
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+
+
+ 
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
@@ -26,8 +34,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
-
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/utilities/utilities.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
@@ -36,10 +42,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/framework/js/basicLayout.js"></script>
@@ -68,13 +74,16 @@ body {
 	border: none;
 }
 #yui-gen8{
-	opacity:0.8
+	opacity:0.8;
+	filter:Alpha(opacity=80);
 }
 #yui-gen3{
-	opacity:0.8
+	opacity:0.8;
+	filter:Alpha(opacity=80);
 }
 #yui-gen1{
-	opacity:0.9
+	opacity:0.9;
+	/*filter:Alpha(opacity=90);*/
 }
 .yui-skin-sam .yuimenu .bd {
 	background-color: #F2F2F2;
@@ -90,6 +99,10 @@ body {
 .yui-skin-sam .yui-layout .yui-layout-unit div.yui-layout-bd {
     border:0;
 }
+.yui-skin-sam .yui-ac-input {
+    position: relative;
+    width: 120px;
+}
 </style>
 
 </head>
@@ -101,6 +114,17 @@ body {
 <div id="top1">
     <div id="productsandservices" class="yuimenubar yuimenubarnav"> 
         <div class="bd"> 
+        <div style="float:right;margin-right:20px;width:400px">
+        <div style="float:left">
+        <form style="width:200px" id="searchForm" onsubmit="beforeSearchSubmit(this);" method="post" action="/tv/search/searchVideoByName.action" target="mainContentFrame" >
+		<input type="text" style="float:left" id="searchinput" name="query"/><div id="searchcontainer"></div><input type="submit" id="goBtnDiv" value="Go" />
+		</form>
+		</div>
+		<span style="float:right">
+		用户:&nbsp;<s:property value="#session.SessionUserInfo.username"/>&nbsp;&nbsp;
+		<a href="#">修改密码</a>&nbsp;&nbsp;<a href="#" onclick="logout();return false">退出</a>
+		</span>
+		</div>
             <ul class="first-of-type">
 			<s:iterator value="#session.NAV_TABS" status="st" var="ftab">
 				<li class="yuimenubaritem">

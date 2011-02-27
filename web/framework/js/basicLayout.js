@@ -1,9 +1,20 @@
 var layout = null;
 
-function initPageElements(){
+function initPageElements() {
 	initLayout();
 	initMenuBar();
 	initDataTable();
+	autoCompleteVideoName();
+}
+
+function beforeSearchSubmit(form){
+	//var sform = YAHOO.util.Dom.get("searchForm");
+	var iframe = YAHOO.util.Dom.get("mainContentFrame");
+	iframe.style.display = "";
+	var queryDiv = YAHOO.util.Dom.get("queryDiv");
+	queryDiv.style.display = "none";
+	form.target="mainContentFrame";
+	form.submit();
 }
 function initLayout() {
 	layout = new YAHOO.widget.Layout({
@@ -37,12 +48,13 @@ function initLayout() {
 		} ]
 	});
 	layout.render();
+
 }
 
 function initMenuBar() {
 
 	var oMenuBar = new YAHOO.widget.MenuBar("productsandservices", {
-		autosubmenudisplay : true,
+		autosubmenudisplay : false,
 		hidedelay : 750,
 		lazyload : true,
 		effect : {
@@ -110,6 +122,23 @@ function initDataTable() {
 
 		}
 	}, {
+		key : "playDate",
+		label : "播出日期",
+		sortable : true,
+		formatter : function(elCell, oRecord, oColumn, sData) {
+			if (sData != null) {
+				var idx = sData.indexOf("T");
+				if (idx != -1) {
+					elCell.innerHTML = sData.substring(0, idx);
+				} else {
+					elCell.innerHTML = sData;
+				}
+			} else {
+				elCell.innerHTML = "-";
+			}
+
+		}
+	}, {
 		key : "marketShare",
 		label : "市场份额",
 		sortable : true
@@ -143,7 +172,7 @@ function initDataTable() {
 	myDataSource.responseSchema = {
 		resultsList : "records",
 		fields : [ "id", "vedioName", "topic", "subject", "companyID",
-				"dateInput", "status", "dateStore", "marketShare",
+				"dateInput", "status", "dateStore", "playDate", "marketShare",
 				"audienceRating", "avgScore", "purchase", "award", "audiScore",
 				"comments" ],
 		metaFields : {
@@ -212,9 +241,6 @@ function initDataTable() {
 	myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
 			myDataSource, myConfigs);
 
-	myDataTable.subscribe("initEvent", function() {
-		addColumnsName();
-	});
 	var linkClickEvent = function(oArgs) {
 		var a = oArgs.target;
 		var oRecord = this.getRecord(a);
@@ -258,7 +284,7 @@ function initDataTable() {
 		colDiv.style.display = colDiv.style.display == "block" ? "none"
 				: "block";
 	});
-	addColumnsName = function() {
+	var addColumnsName = function() {
 		if (colDiv.innerHTML.length == 0) {
 			for ( var i = 0; i < myColumnDefs.length; i++) {
 				var column = myColumnDefs[i];
@@ -266,7 +292,13 @@ function initDataTable() {
 				checkbox.type = "checkbox";
 				checkbox.name = "colCkbox";
 				checkbox.value = column.key;
-				checkbox.checked = false;
+				if (column.key == "avgScore" || column.key == "purchase"
+						|| column.key == "award" || column.key == "audiScore"
+						|| column.key == "comments") {
+					checkbox.checked = true;
+				} else {
+					checkbox.checked = false;
+				}
 				colDiv.appendChild(checkbox);
 				var p = document.createElement("SPAN");
 				p.innerHTML = column.label;
@@ -281,6 +313,13 @@ function initDataTable() {
 			}
 		}
 	};
+	var initHideCols = function() {
+		var colNames = [ "avgScore", "purchase", "award", "audiScore",
+				"comments" ];
+		for ( var i = 0; i < colNames.length; i++) {
+			myDataTable.hideColumn(columnSet.getColumn(colNames[i]));
+		}
+	}
 	var fireEvent = function(resetRecordOffset) {
 		var iframe = YAHOO.util.Dom.get("mainContentFrame");
 		iframe.style.display = "none";
@@ -373,14 +412,17 @@ function initDataTable() {
 	queryBtn.on("click", fireEvent);
 
 	// fixTableWidthWithScrollBar("dynamicdata");
-
+	addColumnsName();
+	initHideCols();
 	return {
 		ds : myDataSource,
 		dt : myDataTable
 	};
 
 }
-
+function logout() {
+	window.location = "/tv/logon/doLogout.action";
+}
 function refreshIframe(link) {
 	var iframe = YAHOO.util.Dom.get("mainContentFrame");
 	iframe.style.display = "";
