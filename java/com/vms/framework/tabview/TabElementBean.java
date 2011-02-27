@@ -1,8 +1,14 @@
 package com.vms.framework.tabview;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TabElementBean {
+public class TabElementBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1512341929113180151L;
 
 	private String name;
 
