@@ -41,119 +41,124 @@
 <s:form action="videoOperation" method="post" namespace="/audit">
 	<div align="center">
 
-	<table class="inputTable">
-		<tr>
-			<td><label>编号</label></td>
-			<td><s:property value="vv.id" /><s:hidden name="vv.id" id="videoID" /></td>
-		</tr>
-		<tr>
-			<td><label>剧目名称</label></td>
-			<td><s:property value="vv.vedioName" /></td>
+<table>
+	<tr>
+		<td valign="top">
+				<table class="inputTable">
+				<tr>
+					<td><label>编号</label></td>
+					<td><s:property value="vv.id" /><s:hidden name="vv.id" id="videoID" /></td>
+				</tr>
+				<tr>
+					<td><label>剧目名称</label></td>
+					<td><s:property value="vv.vedioName" /></td>
+		
+				</tr>
+				<tr>
+					<td><label>栏目</label></td>
+					<td><s:property value="vv.subject" /></td>
+				</tr>
+				<tr>
+					<td><label>题材</label></td>
+					<td><s:property value="vv.topic" /></td>
+		
+				</tr>
+				<tr>
+					<td><label>影视公司</label></td>
+					<td><s:property value="vv.companyID" /></td>
+				</tr>
+				<tr>
+					<td><label>收录日期</label></td>
+					<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
+		
+				</tr>
+				<tr>
+					<td><label>状态</label></td>
+					<td><s:property value="vv.status" /></td>
+				</tr>
+				<tr>
+					<td><label>观众评价</label></td>
+					<td><s:iterator value="vv.watching" var="w">
+						<s:property value="#w.key" /> : <s:property value="#w.value" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</s:iterator></td>
+		
+				</tr>
+		
+			</table>
+			<input type="hidden" name="operation">
+			<div style="margin-top: 20px;">
+			<s:if test="vedio.status.id == 3">
+				<div id="rejectDiv"></div>
+				<script type="text/javascript">
+			var rejectBtn = new YAHOO.widget.Button( {
+				type :"button",
+				label :"淘汰",
+				id :"submitBtn",
+				container :"rejectDiv"
+			});
+			rejectBtn.on("click", function() {
+				var form = document.forms[0];
+				form.operation.value = "7";
+				form.submit();
+		
+			});
+		</script>
+			</s:if> <s:elseif test="vedio.status.id == 2">
+				<span id="passDiv"></span>
+				<span id="rejectDiv"></span>
+				<script type="text/javascript">
+			var passBtn = new YAHOO.widget.Button( {
+				type :"button",
+				label :"通 过",
+				id :"passBtn",
+				container :"passDiv"
+			});
+			passBtn.on("click", function() {
+				var form = document.forms[0];
+				form.operation.value = "3";
+				form.submit();
+		
+			});
+		
+			var rejectBtn = new YAHOO.widget.Button( {
+				type :"button",
+				label :"淘 汰",
+				id :"rejectBtn",
+				container :"rejectDiv"
+			});
+			rejectBtn.on("click", function() {
+				var form = document.forms[0];
+				form.operation.value = "7";
+				form.submit();
+		
+			});
+		</script>
+			</s:elseif> <s:else>
+				<div id="passDiv"></div>
+				<script type="text/javascript">
+			var passBtn = new YAHOO.widget.Button( {
+				type :"button",
+				label :"通过",
+				id :"passBtn",
+				container :"passDiv"
+			});
+			passBtn.on("click", function() {
+				var form = document.forms[0];
+				form.operation.value = "3";
+				form.submit();
+		
+			});
+		</script>
+			</s:else></div>
+		</td>
+		<td valign="top"><div id="dynamicdata" align="center"></div></td>
+	</tr>
+	
+</table>
 
-		</tr>
-		<tr>
-			<td><label>栏目</label></td>
-			<td><s:property value="vv.subject" /></td>
-		</tr>
-		<tr>
-			<td><label>题材</label></td>
-			<td><s:property value="vv.topic" /></td>
-
-		</tr>
-		<tr>
-			<td><label>影视公司</label></td>
-			<td><s:property value="vv.companyID" /></td>
-		</tr>
-		<tr>
-			<td><label>收录日期</label></td>
-			<td><s:date name="vv.dateComing" format="yyyy-MM-dd" /></td>
-
-		</tr>
-		<tr>
-			<td><label>状态</label></td>
-			<td><s:property value="vv.status" /></td>
-		</tr>
-		<tr>
-			<td><label>观众评价</label></td>
-			<td><s:iterator value="vv.watching" var="w">
-				<s:property value="#w.key" /> : <s:property value="#w.value" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</s:iterator></td>
-
-		</tr>
-
-	</table>
-	<input type="hidden" name="operation">
-	<div style="margin-top: 20px;"><s:if test="vedio.status.id == 3">
-		<div id="rejectDiv"></div>
-		<script type="text/javascript">
-	var rejectBtn = new YAHOO.widget.Button( {
-		type :"button",
-		label :"淘汰",
-		id :"submitBtn",
-		container :"rejectDiv"
-	});
-	rejectBtn.on("click", function() {
-		var form = document.forms[0];
-		form.operation.value = "7";
-		form.submit();
-
-	});
-</script>
-	</s:if> <s:elseif test="vedio.status.id == 2">
-		<span id="passDiv"></span>
-		<span id="rejectDiv"></span>
-		<script type="text/javascript">
-	var passBtn = new YAHOO.widget.Button( {
-		type :"button",
-		label :"通 过",
-		id :"passBtn",
-		container :"passDiv"
-	});
-	passBtn.on("click", function() {
-		var form = document.forms[0];
-		form.operation.value = "3";
-		form.submit();
-
-	});
-
-	var rejectBtn = new YAHOO.widget.Button( {
-		type :"button",
-		label :"淘 汰",
-		id :"rejectBtn",
-		container :"rejectDiv"
-	});
-	rejectBtn.on("click", function() {
-		var form = document.forms[0];
-		form.operation.value = "7";
-		form.submit();
-
-	});
-</script>
-	</s:elseif> <s:else>
-		<div id="passDiv"></div>
-		<script type="text/javascript">
-	var passBtn = new YAHOO.widget.Button( {
-		type :"button",
-		label :"通过",
-		id :"passBtn",
-		container :"passDiv"
-	});
-	passBtn.on("click", function() {
-		var form = document.forms[0];
-		form.operation.value = "3";
-		form.submit();
-
-	});
-</script>
-	</s:else></div>
+	
 	</div>
 </s:form>
-<div></div>
-<h1>评分信息</h1>
-<img class="pageImage" src="${pageContext.request.contextPath}/common/images/score.png" border="0">
-<p>评分人员对此剧目的评分情况</p>
-
-<div id="dynamicdata" align="center" style="overflow-x:scroll; border:0px solid;"></div>
 
 <script type="text/javascript">
 	YAHOO.util.Event.addListener(window, "load", initScoreDataTable());

@@ -26,21 +26,20 @@ function initStatusTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=20",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 10,
+			rowsPerPage : 20,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -131,21 +130,20 @@ function initTopicTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=20",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 10,
+			rowsPerPage : 20,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -366,21 +364,20 @@ function initSubjectTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=20",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 10,
+			rowsPerPage : 20,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -574,21 +571,20 @@ function initScoreWeightTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=10",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=20",
 		dynamicData : true, // Enables dynamic server-driven data
 //		sortedBy : {
 //			key : "id",
 //			dir : YAHOO.widget.DataTable.CLASS_ASC
 //		},
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 10,
+			rowsPerPage : 20,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -711,21 +707,20 @@ function initScoreLevelTable() {
 	};
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=20",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "level",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
+			rowsPerPage : 20,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50, 100]
 		})
 		// Enables pagination
 	};

@@ -85,25 +85,20 @@ function initEmployeeDataTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=10", // Initial
-		// request
-		// for first
-		// page of
-		// data
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=20", // Initial
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 10,
+			rowsPerPage : 20,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -112,15 +107,6 @@ function initEmployeeDataTable() {
 
 	var myDataTable = new YAHOO.widget.DataTable("employeeTable", myColumnDefs,
 			myDataSource, myConfigs);
-	myDataTable.subscribe("renderEvent", function() {
-				$.unblockUI();
-				parent.resizeIframe();
-			});
-	myDataSource.subscribe("requestEvent", function() {
-				$.blockUI({
-							message : "<h1>数据加载中......</h1>"
-						});
-			});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
@@ -209,25 +195,20 @@ function initUserDataTable() {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=id&dir=asc&startIndex=0&results=10", // Initial
-		// request
-		// for first
-		// page of
-		// data
+		initialRequest : "sort=id&dir=asc&startIndex=0&results=20", // Initial
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "id",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 10,
+			rowsPerPage : 20,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [10, 20, 30]
 		})
 		// Enables pagination
 	};
@@ -242,15 +223,6 @@ function initUserDataTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
-	myDataTable.subscribe("renderEvent", function() {
-				$.unblockUI();
-				parent.resizeIframe();
-			});
-	myDataSource.subscribe("requestEvent", function() {
-				$.blockUI({
-							message : "<h1>数据加载中......</h1>"
-						});
-			});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);

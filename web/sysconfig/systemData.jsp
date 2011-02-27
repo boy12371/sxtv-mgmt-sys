@@ -52,6 +52,9 @@
     border-top: 0px solid #243356;
     padding: 0.25em 0.5em;
 }
+.yui-skin-sam .yui-navset .yui-content {
+    background: none;
+}
 </style>
 </head>
 <body class="yui-skin-sam">
@@ -68,10 +71,10 @@
     </ul>            
     <div class="yui-content"> 
         <div><div id="vedioStatus" align="center"></div></div> 
-        <div><div id="vedioTopic" align="center"></div><div id="topicBtnDiv" align="center"></div></div> 
-        <div><div id="vedioSubject" align="center"></div><div id="subjectBtnDiv" align="center"></div></div>
+        <div><div id="topicBtnDiv" style="margin-left:17%"></div><div id="vedioTopic" align="center"></div></div> 
+        <div><div id="subjectBtnDiv" style="margin-left:17%"></div><div id="vedioSubject" align="center"></div></div>
         <div><div id="scoreWeight" align="center"></div></div> 
-        <div><div id="scorelevel" align="center"></div><div id="levelBtnDiv" align="center"></div></div> 
+        <div><div id="levelBtnDiv" style="margin-left:17%"></div><div id="scorelevel" align="center"></div></div> 
          
     </div> 
 </div>

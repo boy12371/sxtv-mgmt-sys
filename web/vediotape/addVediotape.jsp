@@ -8,71 +8,38 @@
 <sx:head extraLocales="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/calendar/assets/skins/sam/calendar.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/datatable/assets/skins/sam/datatable.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/paginator/assets/skins/sam/paginator.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/menu/assets/skins/sam/menu.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/container/assets/skins/sam/container.css" /> 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/common.css" />
 
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/css/common.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/calendar/calendar-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/element/element-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/calendar/calendar-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/datasource/datasource-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/datatable/datatable-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/paginator/paginator-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/button/button-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/container/container_core-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/menu/menu-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/connection/connection-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/json/json-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/js/common.js"></script>
-
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/vediotape/js/vediotape.js"></script>
 
 
-
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/animation/animation-min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/yui/build/autocomplete/autocomplete-min.js"></script>
-
-
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.ui.draggable.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery/jqueryAlerts/jquery.alerts.css" />
 </head>
 
 <body class="yui-skin-sam">
@@ -162,7 +129,7 @@
 	
 	
 </s:form>
-
+<div id="simpleDialog"></div>
 <script type="text/javascript">
 
 	var coms = new Array();

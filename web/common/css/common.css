@@ -7,7 +7,7 @@ body {
 
 .errorMessage {
 	color: #FF0000;
-	font-weight: bold;
+	text-align: center;
 }
 
 .actionMessage {
@@ -26,8 +26,8 @@ h1 {
 p {
 	border-bottom: 1px solid #c2c2c2;
 	color: #666666;
-	font-size: 14px;
-	padding-bottom: 10px;
+	font-size: 10px;
+	
 }
 
 label {
@@ -48,7 +48,6 @@ label {
 }
 
 .selectField {
-	border: 1px solid #AACFE4;
 	font-size: 14px;
 	margin: 5px;
 	width: 207px;
@@ -111,7 +110,7 @@ label {
 }
 */
 .yui-skin-sam .yui-dt-liner {
-	font-size:11pt;
+	font-size:10pt;
 	white-space: nowrap;
 }
 .yui-skin-sam .yui-dt-liner {
@@ -136,12 +135,10 @@ label {
 }
 
 .searchTable {
-	width: 70%;
 	height: auto;
 }
 
 .searchTable td {
-	height: 40px;
 	vertical-align: middle;
 }
 

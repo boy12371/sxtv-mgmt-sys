@@ -15,7 +15,7 @@ function initDataTable() {
 		sel.id = "scoreSel_" + data;
 		sel.options.add(new Option("选择评价类型","0")); 
 		sel.options.add(new Option("专业人员打分","1")); 
-		if(parent.userInfo.strRoles.indexOf("8")!=-1){
+		if(sessUser.strRoles.indexOf("8")!=-1){
 			sel.options.add(new Option("普通观众评价","2"));
 			sel.options.add(new Option("打分完成","3"));
 		}
@@ -145,7 +145,7 @@ function initDataTable() {
 	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=20", // Initial
+		initialRequest :"sort=dateComing&dir=asc&startIndex=0&results=10", // Initial
 		generateRequest: requestBuilder,
 		dynamicData :true, // Enables dynamic server-driven data
 		sortedBy : {
@@ -153,7 +153,7 @@ function initDataTable() {
 			dir :YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator :new YAHOO.widget.Paginator({
-			rowsPerPage :20,
+			rowsPerPage :10,
 			firstPageLinkLabel :"首页",
 			lastPageLinkLabel :" 尾页",
 			previousPageLinkLabel :" 上一页",

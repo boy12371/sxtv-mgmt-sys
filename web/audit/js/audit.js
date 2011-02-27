@@ -144,14 +144,12 @@ function initDataTable(ds) {
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
+			rowsPerPage : 10,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
-			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
-			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50, 100]
+			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}"
 		}),
 		// generateRequest : requestBuilder
 	};
@@ -251,7 +249,7 @@ function initDataTable(ds) {
 	//	
 	// printBtn.on("click",function(e){
 	// $.blockUI({ message: $('#printDate'), css: { width:
-	// '400px',top:'25%',left:'30%',cursor:'auto' } });
+	// '400px',top:'10%',left:'30%',cursor:'auto' } });
 	// var filter = YAHOO.util.Dom.get('filter');
 	// var url =
 	// myDataSource.liveData+"sort=dateInput&dir=asc&startIndex=-1&results=0&filter="+filter.value;
@@ -315,10 +313,7 @@ function initScoreDataTable(videoID) {
 		elCell.innerHTML = sData.status;
 	}
 	// Column definitions
-	var myColumnDefs = [{
-				key : "vedioName",
-				label : "剧目名称"
-			}, {
+	var myColumnDefs = [ {
 				key : "score",
 				label : "综合得分",
 				sortable : true
@@ -373,21 +368,21 @@ function initScoreDataTable(videoID) {
 
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest : "sort=score&dir=asc&startIndex=0&results=25",
+		initialRequest : "sort=score&dir=asc&startIndex=0&results=10",
 		dynamicData : true, // Enables dynamic server-driven data
 		sortedBy : {
 			key : "score",
 			dir : YAHOO.widget.DataTable.CLASS_ASC
 		}, // Sets UI initial sort arrow
 		paginator : new YAHOO.widget.Paginator({
-			rowsPerPage : 25,
+			rowsPerPage : 10,
 			firstPageLinkLabel : "首页",
 			lastPageLinkLabel : " 尾页",
 			previousPageLinkLabel : " 上一页",
 			nextPageLinkLabel : " 下一页",
 			template : "{FirstPageLink}{PreviousPageLink}{PageLinks}{NextPageLink}{LastPageLink}{RowsPerPageDropdown}",
 			pageReportTemplate : "Showing items {startIndex} - {endIndex} of {totalRecords}",
-			rowsPerPageOptions : [25, 50, 100]
+			rowsPerPageOptions : [10, 50, 100]
 		}),
 		width:"auto"
 

@@ -480,10 +480,9 @@ function initOrderDataTable() {
 			dir : YAHOO.widget.DataTable.CLASS_DESC
 		},
 		paginator : new YAHOO.widget.Paginator({
-					rowsPerPage : 25
+					rowsPerPage : 20
 				}),
 		generateRequest : requestBuilder,
-		width:"auto"
 	};
 
 	var myDataTable = new YAHOO.widget.DataTable("dynamicdata", myColumnDefs,
@@ -491,8 +490,6 @@ function initOrderDataTable() {
 	myDataTable.subscribe("renderEvent", function() {
 				rowIndex = 0;
 				addColumnsName();
-				$.unblockUI();
-				parent.resizeIframe();
 			});
 
 	// Update totalRecords on the fly with value from server
@@ -502,12 +499,8 @@ function initOrderDataTable() {
 		return oPayload;
 	}
 	myDataSource.subscribe("requestEvent", function() {
-
-				var path = '${pageContext.request.contextPath}';
-				$.blockUI({
-							message : "<h1>数据加载中......</h1>"
-						});
-			});
+		var path = '${pageContext.request.contextPath}';
+	});
 	myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow);
 	myDataTable
 			.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow);
