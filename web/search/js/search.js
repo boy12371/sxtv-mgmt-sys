@@ -374,8 +374,7 @@ function initOrderDataTable() {
 				formatter : formatOrder
 			}, {
 				key : "id",
-				label : "编号",
-				formatter : formatLink
+				label : "编号"
 			}, {
 				key : "vedioName",
 				label : "剧目名称"

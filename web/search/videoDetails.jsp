@@ -28,8 +28,10 @@
 <p>影带详细信息</p>
 
 <s:actionerror />
+
 <div align="center">
 <table class="inputTable">
+	<s:if test="video!=null">
 	<tr>
 		<td><label>影带编号</label></td>
 		<td><s:property value="video.id" />
@@ -70,6 +72,11 @@
 		<td><s:property value="video.status.status" /></td>
 	</tr>
 	<tr>
+		<td><label>播出日期</label></td>
+		<td><s:property value="video.playDate" /></td>
+
+	</tr>
+	<tr>
 		<td><label>备注</label></td>
 		<td><s:property value="video.comments" /></td>
 
@@ -91,7 +98,7 @@
 
 	</tr>
 	 -->
-
+</s:if>
 	<tr>
 		<td colspan="4" align="center">
 			<div id="btnDiv"></div>

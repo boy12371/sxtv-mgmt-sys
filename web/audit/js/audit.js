@@ -37,7 +37,7 @@ function initDataSourceForTable(url, callBack) {
 
 
 var fireEvent = function(arg0) {
-	var status = arg0.target.value;
+	var status = YAHOO.util.Dom.get("filter").value;
 	request = "/tv/audit/filterVideos.action?sort=dateInput&dir=asc&startIndex=-1&filter="+status;
 	initDataSourceForTable(request,datatableCallBack);
 }
