@@ -121,6 +121,7 @@ label {
 .autoComplete {
         width: 200px !important;
         position: relative !important;
+        z-index: 300;
 }
 
 .yui-ac-container {
