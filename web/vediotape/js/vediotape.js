@@ -536,6 +536,11 @@ function initToArrangeTable(ds) {
                 oPayload.totalRecords = oResponse.meta.totalRecords;
                 return oPayload;
         }
+        
+        myDataTable.subscribe("renderEvent", function() { 
+    		parent.resizeIframe();
+    	});
+        
         var headerCheckbox = YAHOO.util.Dom.get("Aheader_checkbox");
         YAHOO.util.Event.addListener(headerCheckbox, "click",
                         OnHeaderCheckboxClicked);
