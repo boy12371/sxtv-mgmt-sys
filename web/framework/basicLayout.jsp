@@ -139,7 +139,7 @@ YAHOO.example.Centered = autoCompleteVideoName();
 
 <div style="overflow-y: auto; overflow-x: hidden" id="contentDiv">
 <div class="bodyTop"></div>
-<div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='yes' style="height: 650px"
+<div align="center"><iframe id="contentFrameId" name="contentFrame" class="contentIframe" frameborder='0' scrolling='no' style="height: 650px"
 	src="" onload="resizeIframe();return false;"> </iframe></div>
 <div style="margin-top: 30px;" /></div>
 <!-- 
