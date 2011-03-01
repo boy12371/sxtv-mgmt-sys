@@ -139,10 +139,10 @@ function initDataTable() {
 		var startIndex, results;
 		oState = oState || {pagination: null, sortedBy: null};
 		sort = (oState.sortedBy) ? oState.sortedBy.key : oSelf.getColumnSet().keys[0].getKey();
-		dir = (oState.sortedBy && oState.sortedBy.dir === myDataTable.CLASS_DESC) ? "desc" : "asc"; 
+		dir = (oState.sortedBy != null && oState.sortedBy.dir == YAHOO.widget.DataTable.CLASS_DESC) ? "desc" : "asc";
 		startIndex = (oState.pagination) ? oState.pagination.recordOffset : 0;
 		results = (oState.pagination) ? oState.pagination.rowsPerPage : null;
-		
+		//alert(dir);
 		var vid = YAHOO.util.Dom.get("vid").value; 
 		var vname= YAHOO.util.Dom.get("searchinput").value;
 		vname = encodeURIComponent(vname);
