@@ -30,8 +30,15 @@ function initDataTable() {
 			window.location="/tv/examine/toExamineTape.action?tapeScore.vedioID=" + vedioID;
 		}else if("2" == val){
 			window.location="/tv/examine/toAudienceExamine.action?tape.id=" + vedioID;
+		}else if("3"==val){
+			jConfirm("影带将被修改为待审状态，您却定吗?", "提示",
+                    function(r) {
+                            if (r) {
+                            	window.location="/tv/examine/completeExamine.action?tapeScore.vedioID=" + vedioID;
+                            }
+                    });
 		}else{
-			window.location="/tv/examine/completeExamine.action?tapeScore.vedioID=" + vedioID;
+			//window.location="/tv/examine/completeExamine.action?tapeScore.vedioID=" + vedioID;
 		}
 	}
 	
