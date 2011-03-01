@@ -213,6 +213,9 @@ function initUnArrangeTable() {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
 	}
+	unArrangeTable.subscribe("renderEvent", function() { 
+		parent.resizeIframe();
+	});
 	unArrangeTable.subscribe("rowMouseoverEvent", unArrangeTable.onEventHighlightRow);
 	unArrangeTable.subscribe("rowMouseoutEvent", unArrangeTable.onEventUnhighlightRow);
 	return {
