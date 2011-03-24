@@ -97,7 +97,7 @@
 		var date = selDate.split("-");
 		var year = parseInt(date[0],10)+1900;
 		var selMonth = year + "-" + date[1]; 	
-		var url="/tv/arrange/toArrangePrint.action?selMonth=" + selMonth;
+		var url="/tv/arrange/toArrangePrint.action?selMonth=" + selMonth+"&subject="+selSubject;
 		window.open(url, "打印预览");
 	}
 
