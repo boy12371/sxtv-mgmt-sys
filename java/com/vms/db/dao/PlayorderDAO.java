@@ -154,7 +154,7 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 				plog.setFromDate(temp.get(0).getPlayDate());
 				plog.setOperation("更新");
 			}
-			boolean insert = false;
+			boolean hasOne = false;
 			conditions = new HashMap<String, Object>();
 			conditions.put(Playorder.PROP_PLAY_DATE, p.getPlayDate());
 			temp = findObjectByFields(Playorder.class, conditions, -1, -1, Playorder.PROP_ID, true);
@@ -163,12 +163,19 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 				Vediotape oldVedio = (Vediotape)getObject(Vediotape.class, old.getVedioID().getId());
 				Vediotape pVedio = (Vediotape)getObject(Vediotape.class, p.getVedioID().getId());
 				if(oldVedio.getSubject().getId()!=pVedio.getSubject().getId()){
-					insert = true;
+					hasOne = true;
 				}
 			}
-			if(insert){
-				p.setId(null);
-				this.saveObject(p);
+			if(hasOne){
+//				Playorder n = new Playorder();
+//				n.setArrangeDate(p.getArrangeDate());
+//				n.setAuditor(p.getAuditor());
+//				n.setPlayDate(p.getPlayDate());
+//				n.setStatus(p.getStatus());
+//				n.setVedioID(p.getVedioID());
+//				this.deleteObject(p);
+//				this.saveObject(n);
+				this.getHibernateTemplate().merge(p);
 			}else{
 				this.getHibernateTemplate().merge(p);
 			}
