@@ -166,19 +166,8 @@ public class PlayorderDAO extends com.vms.db.dao.BaseRootDAO implements
 					hasOne = true;
 				}
 			}
-			if(hasOne){
-//				Playorder n = new Playorder();
-//				n.setArrangeDate(p.getArrangeDate());
-//				n.setAuditor(p.getAuditor());
-//				n.setPlayDate(p.getPlayDate());
-//				n.setStatus(p.getStatus());
-//				n.setVedioID(p.getVedioID());
-//				this.deleteObject(p);
-//				this.saveObject(n);
-				this.getHibernateTemplate().merge(p);
-			}else{
-				this.getHibernateTemplate().merge(p);
-			}
+
+			this.getHibernateTemplate().merge(p);
 			
 			this.saveObject(plog);
 
