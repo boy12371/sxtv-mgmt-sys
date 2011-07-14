@@ -91,7 +91,11 @@
 			</tr>
 			<tr>
 				<td><label>栏目</label></td>
+				<s:if test="vedio.status.id > 5">
+				<td><s:property value="vedio.subject.subjectName" /><input type="hidden" name="vedio.subject.id" value="<s:property value='vedio.subject.id'/>" /></td>
+				</s:if><s:else>
 				<td><s:select cssClass="selectField" list="subList" listKey="id" listValue="subjectName" id="vsubject" name="vedio.subject.id" /></td>
+				</s:else>
 			</tr>
 			<tr>
 				<td><label>题材</label></td>
