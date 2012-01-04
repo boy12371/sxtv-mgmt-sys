@@ -62,11 +62,15 @@ public class ArrangeAction extends BaseAction {
 		calendar.setTime(new Date());
 		int nowMonth = calendar.getTime().getMonth();
 		int nowYear = calendar.getTime().getYear();
+		boolean isYearAdd = false;
 		for(int i=0;i<6;i++){
 			int month = nowMonth + i + 1;
 			if(month > 12){
 				month = month - 12;
-				nowYear++;
+				if(!isYearAdd){
+					nowYear++;
+					isYearAdd = true;
+				}
 			}
 			String key = nowYear + "-" + month;
 			monthList.add(new Pair(key, month + "月"));
