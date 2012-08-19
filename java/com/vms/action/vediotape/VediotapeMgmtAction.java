@@ -67,6 +67,25 @@ public class VediotapeMgmtAction extends BaseAction {
 		return this.SUCCESS;
 	}
 
+	public String doAjaxAddingVideo() throws Exception{
+		this.getResponse().setCharacterEncoding("UTF-8");
+		PrintWriter out = this.getResponse().getWriter();
+		this.jasonDataString = java.net.URLDecoder.decode(this.jasonDataString, "UTF-8");
+		List<Vediotape> vedios = this.convertJASSONStringToVedio();
+		
+		Vediotape _v = vedioService.getVediotapeByID(vedios.get(0).getId());
+		if(null == _v){
+			_v = vedioService.getVediotapeByName(vedios.get(0).getVedioName());
+		}
+		if(null == _v){
+			vedioService.createVediotapes(vedios);
+			out.println("添加成功");
+		}else{
+			out.println("添加失败, 影带已存在. 请检查编号或名称.");
+		}
+		out.close();
+		return NONE;
+	}
 	private List<Vediotape> convertJASSONStringToVedio() throws ParseException {
 		JSONArray jasonArray = JSONArray.fromObject(this.jasonDataString);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
