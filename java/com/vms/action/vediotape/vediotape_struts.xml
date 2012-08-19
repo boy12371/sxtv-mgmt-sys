@@ -8,6 +8,7 @@
 			<result>/vediotape/addVediotape.jsp</result>
 		</action>
 		<action name="isVediotapeExsits" class="vedioMgmt" method="isVediotapeExsits" />
+		<action name="doAjaxAddingVideo" class="vedioMgmt" method="doAjaxAddingVideo" />
 			
 		<action name="doAddingVedio" class="vedioMgmt" method="doAddingVedio">
 			<result>/vediotape/addVediotape.jsp</result>
