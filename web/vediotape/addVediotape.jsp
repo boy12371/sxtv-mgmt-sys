@@ -87,6 +87,11 @@
 	<p>调描条形码并填写或选择其他相关信息</p>
 	<s:actionerror />
 	<s:actionmessage />
+	<div id="action" style="display: none">
+	<ul class="actionMessage" >
+		<li><span id="actionMessage"></span></li>
+	</ul>
+	</div>
 	<div align="center">
 	<div style="display:none">
 	<s:select cssClass="selectField" list="comList" listKey="id"
@@ -145,11 +150,13 @@
 		border="0" />
 	<p>单击表格可进行编辑，单击右键可删除</p>
 	<div id="cellediting" align="center"></div>
+	<!-- 
 	<br />
 	<div align="center"><span align="center" id="submit"
 		class="yui-button yui-push-button"> <span class="first-child">
 	<button type="button">添加</button>
 	</span> </span></div>
+	 -->
 </s:form>
 
 <script type="text/javascript">
