@@ -230,9 +230,9 @@ public class ArrangeAction extends BaseAction {
 					voidTape.setPlayDate(playDate);
 					tapes.add(i-1,voidTape);
 				}
-				if(now.getMonth()==selDate.getMonth() && now.getDate()>i ){
-					tapes.get(i-1).setMarked(-1);
-				}
+				//if(now.getMonth()==selDate.getMonth() && now.getDate()>i ){
+				//	tapes.get(i-1).setMarked(-1);
+				//}
 			}
 			
 			JSONDataTableUtils.setupJSONDataTable(tapes, arrangeTable, numDayOfMonth);
