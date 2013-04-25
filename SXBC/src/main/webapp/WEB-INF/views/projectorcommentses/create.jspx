@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$('input[type=checkbox]').click(function() {
+				var checkboxs = $('input[type=checkbox]');
+				checkboxs.each(function() {
+					$(this).attr('checked', false);
+				});
+				$(this).attr('checked', true);
+				if ($(this).attr('id') == "isRecommend_no") {
+					dijit.byId("_projectorRecommend_id").set("disabled", true);
+					dijit.byId("_recommendChannel_id").set("disabled", true);
+				} else {
+					dijit.byId("_projectorRecommend_id").set("disabled", false);
+					dijit.byId("_recommendChannel_id").set("disabled", false);
+				}
+			});
+			$("#proceed").button().click(function() {
+				if ($("#isRecommend_no").attr("checked")) {
+					$("#dialog-confirm-reject").dialog("open");
+				} else {
+					$("#projectorComments").submit();
+					//window.location.href='/SXBC/tvshows/${projectorComments.tvshow.id}';
+				}
+
+			});
+			$("#dialog-confirm-reject").dialog({
+				resizable : false,
+				autoOpen : false,
+				height : 160,
+				modal : true,
+				buttons : {
+					"淘汰" : function() {
+						$(this).dialog("close");
+						$("#projectorComments").submit();
+					},
+					"取消" : function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+			$("#projectorComments").validate({
+				rules : {
+					comments : "required",
+				}
+			});
+		});
+	</script>
+    <style>
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+</style>
+    <c:if test="${!ableToCreate}">
+        <util:panel id="sdfff" title="错误">
+            <div>
+				只有项目负责人才能填写推荐表。<A href="/SXBC/tvshows/generalInfo/${projectorComments.tvshow.id}">返回</A>
+            </div>
+        </util:panel>
+    </c:if>
+    <c:if test="${ableToCreate}">
+        <form:create id="fc_com_sx_tv_entites_ProjectorComments" isNormalBtn="true" modelAttribute="projectorComments" path="/projectorcommentses" render="${empty dependencies}" z="user-managed">
+            <input name="tvshow" type="hidden" value="${projectorComments.tvshow}"/>
+            <div class="rowcontainer">
+                <label> 剧 目: </label>
+                <label>
+                    <A href="/SXBC/tvshows/generalInfo/${projectorComments.tvshow.id}"> ${projectorComments.tvshow.name} </A>
+                </label>
+            </div>
+            <br/>
+            <br/>
+            <div class="rowcontainer">
+                <label> 是否推荐: </label>
+                <INPUT checked="checked" id="isRecommend_yes" name="isRecommend" type="checkbox" value="true"/>推荐 <input id="isRecommend_no" name="isRecommend" type="checkbox" value="false"/> 不推荐(淘汰)
+			</div>
+            <br/>
+            <field:select field="projectorRecommend" id="c_com_sx_tv_entites_ProjectorComments_projectorRecommend" itemLabel="name" itemValue="id" items="${recommendclasses}" label="推荐星级" path="/recommendclasses" z="user-managed"/>
+            <field:select field="recommendChannel" id="c_com_sx_tv_entites_ProjectorComments_recommendChannel" itemValue="id" items="${channels}" label="推荐平台" path="/channels" z="user-managed"/>
+            <field:textarea field="comments" id="c_com_sx_tv_entites_ProjectorComments_comments"/>
+            <field:checkbox field="isRecommend" id="c_com_sx_tv_entites_ProjectorComments_isRecommend" z="iTyjPgOZsqpFvlNjMZn8547oWa0="/>
+            <field:select field="tvshow" id="c_com_sx_tv_entites_ProjectorComments_tvshow" itemValue="id" items="${tvshows}" path="/tvshows1" z="8KIYy8oAujNt4Z+JYa60I/RG8Ak="/>
+        </form:create>
+        <div id="dialog-confirm-reject" title="淘汰此剧目?">
+            <p>您确定要淘汰此剧目吗？</p>
+        </div>
+    </c:if>
+    <form:dependency dependencies="${dependencies}" id="d_com_sx_tv_entites_ProjectorComments" render="${not empty dependencies}" z="clpd4mPGj1U+RBmZygyQ62mw7G4="/>
+</div>

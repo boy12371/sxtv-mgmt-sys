@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition extends="default" name="scores/list">
+		<put-attribute name="body" value="/WEB-INF/views/scores/list.jspx" />
+	</definition>
+	<definition extends="default" name="scores/show">
+		<put-attribute name="body" value="/WEB-INF/views/scores/show.jspx" />
+	</definition>
+	<definition extends="default" name="scores/create">
+		<put-attribute name="body" value="/WEB-INF/views/scores/create.jspx" />
+	</definition>
+	<definition extends="default" name="scores/createScore">
+		<put-attribute name="body" value="/WEB-INF/views/scores/createScore.jspx" />
+	</definition>
+	<definition extends="default" name="scores/update">
+		<put-attribute name="body" value="/WEB-INF/views/scores/update.jspx" />
+	</definition>
+</tiles-definitions>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url value="/resources/js/tvshows/tvdata.js" var="tvdata" />
+	<script src="${tvdata}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+	<style>
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+
+table {
+	width: 70%;
+	text-align: center;
+	border-spacing: 0px;
+}
+td {
+	border: 1px solid;
+}
+tr:nth-child(odd) {
+	background-color: white;
+}
+
+tr:nth-child(even) {
+	background-color: white;
+}
+</style>
+	<form:create label="收视数据" id="fc_com_sx_tv_view_TVShowData" modelAttribute="TVShowData_" path="/tvshowdatas/${tvid}" render="${empty dependencies}"
+		z="6KEW1+FB94KEJc5FiVOLz7gW0/I=">
+		<div class="rowcontainer">
+			<label> 剧 目: </label> <label> <A href="/SXBC/tvshows/generalInfo/${tvid}"> ${tvshow.name } </A>
+			</label>
+		</div>
+		<br />
+		<br />
+		<field:input label="收视率" metaRequired="true" field="rating" id="c_com_sx_tv_view_TVShowData_rating" validationMessageCode="field_invalid_number"
+			z="KfOEy04mWMfExwx1RoT2wBcuBsw=" />
+		<field:input label="市场份额" metaRequired="true" field="marketShare" id="c_com_sx_tv_view_TVShowData_marketShare" validationMessageCode="field_invalid_number"
+			z="b+fTy5yI+o7evlpqt/QtQPEqD88=" />
+		<field:input label="城市排名" metaRequired="true" field="ranking" id="c_com_sx_tv_view_TVShowData_ranking" validationMessageCode="field_invalid_integer"
+			z="OR3gU6Ela1e3hQ8Bn9Pi/Aj1RgU=" />
+
+		<input type="hidden" name="tdata" id="tdata" />
+
+		<div class="rowcontainer">
+			<label> 播出环境数据: </label> <input id="excelFile" type="file" name="excelFile" /><input style="margin-left: 5px;" type="button" value="确定" onclick="readExcel();" />
+
+		</div>
+		<br />
+		<br />
+		<div class="rowcontainer" style="display: none">
+			<table id="excelTable" style="width: 70%">
+				<tr style="background-color: #EFEFEF;">
+					<td>频道</td>
+					<td>剧名</td>
+					<td>播出时间</td>
+					<td>收视率</td>
+					<td>收视份额</td>
+				</tr>
+			</table>
+			<br />
+		</div>
+
+	</form:create>
+</div>

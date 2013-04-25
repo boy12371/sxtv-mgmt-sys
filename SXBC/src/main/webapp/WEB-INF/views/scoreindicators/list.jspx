@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list labelPlural="评分指标" id="pl_com_sx_tv_entites_ScoreIndicator" items="${scoreindicators}" z="VxyYzf1dLfQFkvE28niKgr64UX8=">
+        <table:table data="${scoreindicators}" id="l_com_sx_tv_entites_ScoreIndicator" path="/scoreindicators" z="RepdBCXzSciE+BvuKAQds0jvI8g=">
+            <table:column id="c_com_sx_tv_entites_ScoreIndicator_name" property="name" z="Uutk1iwfsE3l2+982UjMFgOvGu4="/>
+            <table:column id="c_com_sx_tv_entites_ScoreIndicator_proportion" property="proportion" z="8/pnBxwkos4QhGlt/1pBj4s0hzk="/>
+        </table:table>
+    </page:list>
+</div>

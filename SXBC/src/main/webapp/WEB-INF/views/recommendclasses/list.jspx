@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sx_tv_entites_RecommendClass" items="${recommendclasses}" z="w6t+3HgyAzgb9xTty69gurDx6X4=">
+        <table:table data="${recommendclasses}" id="l_com_sx_tv_entites_RecommendClass" path="/recommendclasses" z="b0ZrvLqPzEbjtEwvyn25MupUsH8=">
+            <table:column id="c_com_sx_tv_entites_RecommendClass_name" property="name" z="F/ozafBXJnYvFUEiGvYdzovNuxE="/>
+            <table:column id="c_com_sx_tv_entites_RecommendClass_start" property="start" z="Q5g4I3VDO4h2MffBlcntNfPi5wY="/>
+            <table:column id="c_com_sx_tv_entites_RecommendClass_end" property="end" z="pmp7/6J8LbxfUVDC/lpNms0DSb4="/>
+        </table:table>
+    </page:list>
+</div>

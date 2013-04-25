@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="channelcommentses/list">
+        <put-attribute name="body" value="/WEB-INF/views/channelcommentses/list.jspx"/>
+    </definition>
+<definition extends="default" name="channelcommentses/show">
+        <put-attribute name="body" value="/WEB-INF/views/channelcommentses/show.jspx"/>
+    </definition>
+<definition extends="default" name="channelcommentses/create">
+        <put-attribute name="body" value="/WEB-INF/views/channelcommentses/create.jspx"/>
+    </definition>
+<definition extends="default" name="channelcommentses/update">
+        <put-attribute name="body" value="/WEB-INF/views/channelcommentses/update.jspx"/>
+    </definition>
+    
+    <definition extends="default" name="channelcommentses/createCC">
+        <put-attribute name="body" value="/WEB-INF/views/channelcommentses/createCC.jspx"/>
+    </definition>
+    
+     <definition extends="printTable" name="channelcommentses/recommendForm">
+        <put-attribute name="body" value="/WEB-INF/views/channelcommentses/recommendForm.jspx"/>
+    </definition>
+</tiles-definitions>

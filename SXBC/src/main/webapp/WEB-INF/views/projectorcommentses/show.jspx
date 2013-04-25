@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" id="ps_com_sx_tv_entites_ProjectorComments" object="${projectorcomments}" path="/projectorcommentses" z="user-managed">
+        <div>
+            <LABEL> 推荐星级 </LABEL>
+            <c:if test="${empty projectorcomments.projectorRecommend}">
+        		-
+        	</c:if>
+            <c:if test="${!empty projectorcomments.projectorRecommend}">
+        		${projectorcomments.projectorRecommend.name}
+        	</c:if>
+        </div>
+        <br/>
+        <div>
+            <LABEL> 推荐平台 </LABEL>
+            <c:if test="${empty projectorcomments.recommendChannel}">
+        		-
+        	</c:if>
+            <c:if test="${!empty projectorcomments.recommendChannel}">
+        		${projectorcomments.recommendChannel.name}
+        	</c:if>
+        </div>
+        <br/>
+        <field:display field="comments" id="s_com_sx_tv_entites_ProjectorComments_comments" object="${projectorcomments}" z="M5e1aD0arpCLvllf53xdcjJb/HU="/>
+        <div>
+            <LABEL> 推荐意见 </LABEL>
+            <c:if test="${projectorcomments.isRecommend}">
+        		推荐
+        	</c:if>
+            <c:if test="${!projectorcomments.isRecommend}">
+        		不推荐
+        	</c:if>
+        </div>
+        <br/>
+        <field:display field="name" id="s_com_sx_tv_entites_ProjectorComments_tvshow" object="${projectorcomments.tvshow}" z="user-managed"/>
+        <field:display field="projectorRecommend" id="s_com_sx_tv_entites_ProjectorComments_projectorRecommend" object="${projectorcomments}" z="nHYtQ5nyWVKy/dzGiI8CIsqag+s="/>
+        <field:display field="recommendChannel" id="s_com_sx_tv_entites_ProjectorComments_recommendChannel" object="${projectorcomments}" z="f0nEyR4xB8f4Hm/3LDPgWR/MWMA="/>
+        <field:display field="isRecommend" id="s_com_sx_tv_entites_ProjectorComments_isRecommend" object="${projectorcomments}" z="a0uahvkvDv8A/CVzQITLSvV5qJ4="/>
+    </page:show>
+</div>

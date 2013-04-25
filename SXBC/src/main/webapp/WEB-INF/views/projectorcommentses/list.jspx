@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sx_tv_entites_ProjectorComments" items="${projectorcommentses}" label="负责人推荐意见" labelPlural="负责人推荐意见" z="user-managed">
+        <table:table create="false" data="${projectorcommentses}" id="l_com_sx_tv_entites_ProjectorComments" path="/projectorcommentses" z="user-managed">
+            <table:column id="c_com_sx_tv_entites_ProjectorComments_projectorRecommend" property="projectorRecommend" z="PgA5otuJtHDi2yF/s8NrjQe4kzY="/>
+            <table:column id="c_com_sx_tv_entites_ProjectorComments_recommendChannel" property="recommendChannel" z="7mu+1tg/ecxmxvXBao7lKd/JrbM="/>
+            <table:column id="c_com_sx_tv_entites_ProjectorComments_comments" property="comments" z="lrqbakMt7XEeng2wQNN1klRr0Vg="/>
+            <table:column id="c_com_sx_tv_entites_ProjectorComments_isRecommend" property="isRecommend" z="W1D44qbDPYAxDKDXogOzokNKuEA="/>
+            <table:column id="c_com_sx_tv_entites_ProjectorComments_tvshow" property="tvshow" z="ojDRIGnI6iIVfYFhge5OPSt1F3g="/>
+        </table:table>
+    </page:list>
+</div>

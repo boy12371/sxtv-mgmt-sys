@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="deptcommentses/list">
+        <put-attribute name="body" value="/WEB-INF/views/deptcommentses/list.jspx"/>
+    </definition>
+<definition extends="default" name="deptcommentses/show">
+        <put-attribute name="body" value="/WEB-INF/views/deptcommentses/show.jspx"/>
+    </definition>
+<definition extends="default" name="deptcommentses/create">
+        <put-attribute name="body" value="/WEB-INF/views/deptcommentses/create.jspx"/>
+    </definition>
+<definition extends="default" name="deptcommentses/update">
+        <put-attribute name="body" value="/WEB-INF/views/deptcommentses/update.jspx"/>
+    </definition>
+    
+    <definition extends="default" name="deptcommentses/createDeptCmts">
+        <put-attribute name="body" value="/WEB-INF/views/deptcommentses/createDeptCmts.jspx"/>
+    </definition>
+</tiles-definitions>

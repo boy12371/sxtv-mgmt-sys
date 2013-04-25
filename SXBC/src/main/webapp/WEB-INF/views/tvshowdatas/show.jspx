@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_sx_tv_view_TVShowData" object="${tvshowdata_}" path="/tvshowdatas" z="9hWk+b1jBj/PMNxd6QPK63q64/U=">
+        <field:display field="rating" id="s_com_sx_tv_view_TVShowData_rating" object="${tvshowdata_}" z="3E/1QbuFYjRQgHteOjKBFtIcTUQ="/>
+        <field:display field="marketShare" id="s_com_sx_tv_view_TVShowData_marketShare" object="${tvshowdata_}" z="TlrrBuvqBM26zTOr+P3UxoaaBD0="/>
+        <field:display field="ranking" id="s_com_sx_tv_view_TVShowData_ranking" object="${tvshowdata_}" z="HkZ3dIvXGkPST6/ZfDJVirQHkTc="/>
+    </page:show>
+</div>

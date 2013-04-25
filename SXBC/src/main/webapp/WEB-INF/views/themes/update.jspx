@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_sx_tv_entites_Theme" modelAttribute="theme" path="/themes" versionField="Version" z="SPumlcx+p63q8OgsjHdjH+Cvn8g=">
+        <field:input field="name" id="c_com_sx_tv_entites_Theme_name" required="true" z="G+SwTTksJpLU64EJaZQMs54uecQ="/>
+    </form:update>
+</div>

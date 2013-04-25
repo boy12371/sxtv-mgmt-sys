@@ -1,0 +1,16 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:message var="app_name" code="application_name" htmlEscape="false" />
+	<spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
+	<util:panel id="title" title="${title}">
+		<h3>欢迎登录 【陕西广播电视台 * 电视剧信息管理系统】</h3>
+		<p>
+			为了得到更好的显示效果及浏览速度，建议使用<a target="_blank" href="http://firefox.com.cn/">Firefox</a>浏览器或<a target="_blank" href="http://www.google.com.hk">Google-Chrome</a>浏览器。
+
+		</p>
+					点击这里下载: <a target="_blank" href="http://firefox.com.cn/">Firefox</a> 或 <a target="_blank"
+			href="http://www.google.com.hk">Google-Chrome</a>
+	</util:panel>
+</div>

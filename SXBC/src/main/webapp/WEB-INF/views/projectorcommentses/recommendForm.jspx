@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<style>
+table {
+	border: 1px solid #666;
+	border-spacing: 0px;
+	width: 90%;
+	margin-left: 60px;
+}
+
+table CAPTION {
+	font-size: 1.3em;
+	color: black;
+	text-align: center
+}
+
+tr:nth-child(even) {
+	background-color: #FFFFFF;
+}
+
+td {
+	font-size: 1.5em;
+	padding: 10px;
+	border: 1px solid;
+}
+</style>
+	<br /> <br /> <br /> <br /> <br /> <br />
+	<DIV>
+		<TABLE>
+			<CAPTION>初选意见表</CAPTION>
+			<TR>
+				<TD width="15%">剧 名</TD>
+				<TD>
+					<!-- <A href="/SXBC/tvshows/generalInfo/${projectorcomments.tvshow.id}"> ${projectorcomments.tvshow.name} </A>--> ${projectorcomments.tvshow.name}
+				</TD>
+				<TD width="10%">集数</TD>
+				<TD>${projectorcomments.tvshow.count}集</TD>
+			</TR>
+
+			<TR>
+				<TD>主演</TD>
+				<TD><c:forEach items="${projectorcomments.tvshow.actors}" var="a">
+						${a.name} 
+					</c:forEach></TD>
+				<TD>导演</TD>
+				<TD><c:forEach items="${projectorcomments.tvshow.directors}" var="d">
+						${d.name} 
+					</c:forEach></TD>
+			</TR>
+
+			<TR>
+				<td>公司</td>
+				<td colspan="3">${projectorcomments.tvshow.company.name}(发行人: ${projectorcomments.tvshow.company.publisher}   电话: ${projectorcomments.tvshow.company.telephone})</td>
+			</TR>
+			<TR>
+				<td>发行计划</td>
+				<td colspan="3">${projectorcomments.tvshow.publishSchedule}</td>
+			</TR>
+
+			<TR>
+				<td>推荐理由</td>
+				<td colspan="3">${projectorcomments.comments}</td>
+			</TR>
+			<TR>
+				<td>推荐星级</td>
+				<td colspan="3"><DIV id="" class="rateit" data-rateit-value="${projectorcomments.projectorRecommend.id}" data-rateit-readonly="true"
+						style="margin-bottom: 10px">
+						<SPAN></SPAN>
+					</DIV></td>
+			</TR>
+			<TR>
+				<td>推荐播出平台</td>
+				<td colspan="3">${projectorcomments.recommendChannel.name}</td>
+			</TR>
+			<TR>
+				<td>初审负责人</td>
+				<td colspan="3">${projectorcomments.tvshow.projector.staff}</td>
+			</TR>
+		</TABLE>
+	</DIV>
+</div>

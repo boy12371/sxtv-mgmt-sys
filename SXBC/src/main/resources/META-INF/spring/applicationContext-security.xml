@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http security="none" pattern="/resources/styles/**" use-expressions="true" />
+	<http security="none" pattern="/resources/images*/**" use-expressions="true" />
+	<http security="none" pattern="/resources/spring/**" use-expressions="true" />
+	<http security="none" pattern="/resources/dijit/**" use-expressions="true" />
+	<http security="none" pattern="/resources/dojo/**" use-expressions="true" />
+	<http security="none" pattern="/resources/js/**" use-expressions="true" />
+	<http security="none" pattern="/resources/jv/**" use-expressions="true" />
+	<http security="none" pattern="/resources/loopj*/**" use-expressions="true" />
+	<http auto-config="true" use-expressions="true">
+		<access-denied-handler error-page="/accessDenied"/>
+		<form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t"
+			default-target-url="/" />
+		<logout logout-url="/resources/j_spring_security_logout" logout-success-url="/login" />
+		<!-- Configure these elements to secure URIs in your application -->
+		<custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+	</http>
+	<!-- 
+	<beans:bean id="myAccessDeniedHandler" class="com.sx.tv.security.MyAccessDeniedHandler">
+		<beans:property name="errorPage" value="/accessDenied"></beans:property>
+	</beans:bean>
+	 -->
+	<beans:bean id="myFilter" class="com.sx.tv.security.MyFilterSecurityInterceptor">
+		<beans:property name="authenticationManager" ref="myAuthenticationManager" />
+		<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+		<beans:property name="accessDecisionManager" ref="myAccessDecisionManager" />
+		<beans:property name="securityMetadataSource" ref="mySecurityMetadataSource" /> 
+	</beans:bean>
+	<!-- Configure Authentication mechanism -->
+	<authentication-manager alias="myAuthenticationManager">
+		<!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
+		<authentication-provider user-service-ref="userDetailService">
+			<password-encoder hash="md5">
+				<salt-source user-property="username" />
+			</password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+	<beans:bean id="userDetailService" class="com.sx.tv.service.MyUserDetailService"></beans:bean>
+	<beans:bean id="myAccessDecisionManager" class="com.sx.tv.security.MyAccessDecisionManager"></beans:bean>
+	<beans:bean id="mySecurityMetadataSource" class="com.sx.tv.security.MySecurityMetadataSource"></beans:bean>
+	<!-- HTTP security configurations <http auto-config="true" use-expressions="true"> <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" 
+		authentication-failure-url="/login?login_error=t" /> <logout logout-url="/resources/j_spring_security_logout" /> <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" 
+		/> <intercept-url pattern="/member/**" access="isAuthenticated()" /> <intercept-url pattern="/resources/**" access="permitAll" /> <intercept-url pattern="/**" access="permitAll" 
+		/> </http> -->
+	<!-- Configure Authentication mechanism <authentication-manager alias="authenticationManager"> <authentication-provider> <password-encoder hash="sha-256" /> <user-service> 
+		<user name="admin" password="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" authorities="ROLE_ADMIN" /> <user name="user" password="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" 
+		authorities="ROLE_USER" /> </user-service> </authentication-provider> </authentication-manager> -->
+
+
+
+
+
+</beans:beans>

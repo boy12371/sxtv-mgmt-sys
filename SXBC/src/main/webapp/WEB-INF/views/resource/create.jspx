@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_sx_tv_entites_Resource" modelAttribute="resource" path="/resource" render="${empty dependencies}" z="88oAEmj41Eyqelugzojwe247kl8=">
+        <field:input field="resouceName" id="c_com_sx_tv_entites_Resource_resouceName" z="hQtYLOLQh8aT/W23KWud972mk+o="/>
+        <field:input field="resouceURL" id="c_com_sx_tv_entites_Resource_resouceURL" z="r7AUbmeWfeaYrWJBSRQdIODKKL0="/>
+        <field:input field="comments" id="c_com_sx_tv_entites_Resource_comments" z="zkKhs2gdya7w0+gKEEESs+Cmkzw="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_sx_tv_entites_Resource" render="${not empty dependencies}" z="hMXIlKfkeiNjFJznrSatKLVJ8IA="/>
+</div>

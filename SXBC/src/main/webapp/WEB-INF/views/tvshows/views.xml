@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition extends="default" name="tvshows/list">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/list.jspx" />
+	</definition>
+	<definition extends="default" name="tvshows/show">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/show.jspx" />
+	</definition>
+	<definition extends="default" name="tvshows/create">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/create.jspx" />
+	</definition>
+	
+	<definition extends="default" name="tvshows/filterFind">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/filterFind.jspx" />
+	</definition>
+	<definition extends="default" name="tvshows/update">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/update.jspx" />
+	</definition>
+	
+	<definition extends="default" name="tvshows/information">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/information.jspx" />
+	</definition>
+	
+	<definition extends="default" name="tvshows/reject">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/reject.jspx" />
+	</definition>
+	<definition extends="default" name="tvshows/scoring">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/scoring.jspx" />
+	</definition>
+</tiles-definitions>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#proceed").button();
+			$("#score").validate({
+				rules : {
+					'details[0].score' : {
+						required : true,
+						range : [ 0, 100 ]
+					},
+					'details[1].score' : {
+						required : true,
+						range : [ 0, 100 ]
+					},
+					'details[2].score' : {
+						required : true,
+						range : [ 0, 100 ]
+					},
+					'details[3].score' : {
+						required : true,
+						range : [ 0, 100 ]
+					},
+					'details[4].score' : {
+						required : true,
+						range : [ 0, 100 ]
+					},
+					'details[5].score' : {
+						required : true,
+						range : [ 0, 100 ]
+					},
+				}
+			});
+		});
+	</script>
+
+	<style>
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+</style>
+	<c:if test="${isCreate}">
+		<form:create label="评分" id="fc_com_sx_tv_entites_Score" modelAttribute="score" path="/front/scores/create" render="${empty dependencies}" z="Ljcn/l+n0vOFLd0v5amaWGTJnnc=">
+			<input name="tvshow" type="hidden" value="${score.tvshow.id}" />
+			<div class="rowcontainer">
+				<label> 剧 目: </label> <label> <A href="/SXBC/tvshows/generalInfo/${score.tvshow.id}"> ${score.tvshow.name} </A>
+				</label>
+			</div>
+			<br />
+			<br />
+			<c:forEach items="${score.details}" var="item" varStatus="vs">
+				<div class="rowcontainer">
+					<label><input type="hidden" name="details[${vs.index}].indicator" value="${item.indicator.id}" />${item.indicator.name} ${item.indicator.proportion}: </label> <INPUT
+						id="details[${vs.index}].score" type="text" name="details[${vs.index}].score" class="text ui-widget-content ui-corner-all" />
+				</div>
+				<br />
+			</c:forEach>
+			<field:select itemLabel="name" label="推荐平台" field="recommendChannel" id="c_com_sx_tv_entites_Score_recommendChannel" itemValue="id" items="${channels}" path="/channels"
+				z="dfXDxBAxicIshgMoBiGwUFNc1p8=" />
+		</form:create>
+	</c:if>
+
+	<c:if test="${!isCreate}">
+		<util:panel id="sdfff" title="评分">
+			<div class="rowcontainer">
+				<label> 剧 目: </label> <label> <A href="/SXBC/tvshows/generalInfo/${score.tvshow.id}"> ${score.tvshow.name} </A>
+				</label>
+			</div>
+			<br />
+			<br />
+			<c:forEach items="${score.details}" var="item" varStatus="vs">
+				<div class="rowcontainer">
+					<label>${item.indicator.name} : </label> ${item.score}
+				</div>
+				<br />
+			</c:forEach>
+			<div class="rowcontainer">
+				<label>推荐平台 : </label> ${score.recommendChannel.name }
+			</div>
+			<br />
+			<div class="rowcontainer">
+				<label>平均得分 : </label> ${score.avgScore }
+			</div>
+		</util:panel>
+
+
+	</c:if>
+
+	<form:dependency dependencies="${dependencies}" id="d_com_sx_tv_entites_Score" render="${not empty dependencies}" z="JU/wEKdeu55lH+IuUdl2FP/Bfdg=" />
+</div>

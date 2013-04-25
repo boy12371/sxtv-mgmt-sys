@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			//dijit.byId('_recommendLevel_id').set('readOnly', true);
+			$('input[type=button]').button();
+			$('input[type=checkbox]').click(function() {
+				var checkboxs = $('input[type=checkbox]');
+				checkboxs.each(function() {
+					$(this).attr('checked', false);
+				});
+				$(this).attr('checked', true);
+
+				if ($(this).attr('id') == "isRecommend_no") {
+					//$("#rateit_recommendLevel_id").rateit('value',0);
+					//dijit.byId("_recommendLevel_id").set("disabled", true);
+					dijit.byId("_recommendChannel_id").set("disabled", true);
+				} else {
+					//dijit.byId("_recommendLevel_id").set("disabled", false);
+					dijit.byId("_recommendChannel_id").set("disabled", false);
+				}
+			});
+
+			$("#deptComments").validate({
+				rules : {
+					comments : "required",
+				}
+			});
+
+			$("#proceed").button().click(function() {
+				if ($("#isRecommend_no").attr("checked")) {
+					$("#dialog-confirm-reject").dialog("open");
+				} else {
+					$("#deptComments").submit();
+				}
+
+			});
+			$("#dialog-confirm-reject").dialog({
+				resizable : false,
+				autoOpen : false,
+				height : 160,
+				modal : true,
+				buttons : {
+					"淘汰" : function() {
+						$(this).dialog("close");
+						$("#deptComments").submit();
+					},
+					"取消" : function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+
+		});
+	</script>
+	<style>
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+</style>
+	<form:create label="中心推荐" isNormalBtn="true" id="fc_com_sx_tv_entites_DeptComments" modelAttribute="deptComments" path="/front/deptcommentses/create" render="${empty dependencies}"
+		z="9vmvIT2dU/pFZfPi5BT2TVHV+rA=">
+
+		<input name="tvshow" type="hidden" value="${deptComments.tvshow.id}" />
+		<div class="rowcontainer">
+				<label> 剧 目: </label> <label> <A href="/SXBC/tvshows/generalInfo/${deptComments.tvshow.id}"> ${deptComments.tvshow.name} </A>
+				</label>
+			</div>
+			<br />
+			<br />
+		<div class="rowcontainer">
+			<label>中心意见 : </label> <INPUT checked="checked" id="isRecommend_yes" name="isRecommend" type="checkbox" value="true" />推荐
+		</div>
+		<br />
+		<field:select label="中心负责人" field="owner" id="c_com_sx_tv_entites_DeptComments_owner" itemLabel="staff" itemValue="id" items="${users}" path="/users" z="user-managed" />
+		<field:select rateit="true" readonly="true" label="推荐级别" field="recommendLevel" id="c_com_sx_tv_entites_DeptComments_recommendLevel" itemLabel="name" itemValue="id"
+			items="${recommendclasses}" path="/recommendclasses" z="user-managed" />
+		<field:select label="推荐平台" field="recommendChannel" id="c_com_sx_tv_entites_DeptComments_recommendChannel" itemLabel="name" itemValue="id" items="${channels}"
+			path="/channels" z="user-managed" />
+		<field:input label="备注" field="comments" id="c_com_sx_tv_entites_DeptComments_comments" z="ruEWpGDAGzVNOAIs+LiifDWba5E=" />
+	</form:create>
+	<div id="dialog-confirm-reject" title="淘汰此剧目?">
+		<p>您确定要淘汰此剧目吗？</p>
+	</div>
+</div>

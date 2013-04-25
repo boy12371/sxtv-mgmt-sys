@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_sx_tv_entites_Resource" modelAttribute="resource" path="/resources" versionField="Version" z="rFpkxeAdGr3gSNCCJKs8u0RaUhQ=">
+        <field:input field="comments" id="c_com_sx_tv_entites_Resource_comments" z="zkKhs2gdya7w0+gKEEESs+Cmkzw="/>
+        <field:input field="resouceName" id="c_com_sx_tv_entites_Resource_resouceName" z="hQtYLOLQh8aT/W23KWud972mk+o="/>
+        <field:input field="resouceURL" id="c_com_sx_tv_entites_Resource_resouceURL" z="r7AUbmeWfeaYrWJBSRQdIODKKL0="/>
+    </form:update>
+</div>

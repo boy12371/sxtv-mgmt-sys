@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" id="ps_com_sx_tv_entites_Score" label="评分信息" object="${score}" path="/scores" update="false" z="user-managed">
+        <field:display field="staff" id="s_com_sx_tv_entites_Score_ratedBy" label="评分人" object="${score.ratedBy}" z="user-managed"/>
+        <field:display field="avgScore" id="s_com_sx_tv_entites_Score_avgScore" label="平均分" object="${score}" z="user-managed"/>
+        <c:forEach items="${score.details}" var="item" varStatus="vs">
+            <div class="rowcontainer">
+                <label>
+                    ${item.indicator.name}:
+				</label>
+               		${item.score}
+            </div>
+            <br/>
+        </c:forEach>
+        <div>
+            <LABEL> 推荐平台 </LABEL>
+            <c:if test="${empty score.recommendChannel}">
+        		-
+        	</c:if>
+            <c:if test="${!empty score.recommendChannel}">
+        		${score.recommendChannel.name}
+        	</c:if>
+        </div>
+        <br/>
+        <div>
+            <LABEL> 推荐平台 </LABEL>
+            <c:if test="${empty score.recommendLevel}">
+        		-
+        	</c:if>
+            <c:if test="${!empty score.recommendLevel}">
+        		${score.recommendLevel.name}
+        	</c:if>
+        </div>
+        <br/>
+        <field:display field="name" id="s_com_sx_tv_entites_Score_tvshow" label="剧目" object="${score.tvshow}" z="user-managed"/>
+        <field:display field="recommendChannel" id="s_com_sx_tv_entites_Score_recommendChannel" object="${score}" z="al+NHzRzjJPjzwCGYqRSk+6JcXU="/>
+        <field:display field="recommendLevel" id="s_com_sx_tv_entites_Score_recommendLevel" object="${score}" z="CMYLj5AUOe1dsLVU/UcrqzN13sk="/>
+    </page:show>
+</div>

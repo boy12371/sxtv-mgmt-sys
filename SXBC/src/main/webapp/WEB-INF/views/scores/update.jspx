@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <c:if test="${empty formURL}">
+        <c:set value="/scores" var="formURL"/>
+    </c:if>
+    <form:update id="fu_com_sx_tv_entites_Score" modelAttribute="score" path="${formURL}" versionField="Version" z="user-managed">
+        <div class="rowcontainer">
+            <label> 剧 目: </label>
+            <label>
+                <A href="/SXBC/tvshows/generalInfo/${score.tvshow.id}"> ${score.tvshow.name} </A>
+            </label>
+            <input name="tvshow" type="hidden" value="${score.tvshow.id}"/>
+        </div>
+        <input name="tvshow" type="hidden" value="${score.tvshow.id}"/>
+        <br/>
+        <br/>
+        <field:select field="ratedBy" id="c_com_sx_tv_entites_Score_ratedBy" itemLabel="staff" itemValue="id" items="${users}" label="评分人" path="/users" z="user-managed"/>
+        <field:input disabled="true" field="avgScore" id="c_com_sx_tv_entites_Score_avgScore" label="平均分" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <c:forEach items="${score.details}" var="item" varStatus="vs">
+            <div class="rowcontainer">
+                <label>
+                    <input name="details[${vs.index}].indicator" type="hidden" value="${item.indicator.id}"/>${item.indicator.name} ${item.indicator.proportion}:
+				</label>
+                <INPUT class="text ui-widget-content ui-corner-all" id="details[${vs.index}].score" name="details[${vs.index}].score" type="text" value="${item.score}"/>
+            </div>
+            <br/>
+        </c:forEach>
+        <field:select field="recommendChannel" id="c_com_sx_tv_entites_Score_recommendChannel" itemLabel="name" itemValue="id" items="${channels}" label="推荐平台" path="/channels" z="user-managed"/>
+        <field:select field="recommendLevel" id="c_com_sx_tv_entites_Score_recommendLevel" itemLabel="name" itemValue="id" items="${recommendclasses}" label="推荐星级" path="/recommendclasses" readonly="true" z="user-managed"/>
+    </form:update>
+</div>

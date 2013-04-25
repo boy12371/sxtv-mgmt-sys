@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" id="ps_com_sx_tv_entites_ChannelComments" object="${channelcomments}" path="/channelcommentses" z="user-managed">
+        <field:display field="name" id="s_com_sx_tv_entites_ChannelComments_channel" object="${channelcomments.channel}" z="user-managed"/>
+        <div>
+            <LABEL> 购片意见 </LABEL>
+            <c:if test="${channelcomments.decision}">
+        		购买
+        	</c:if>
+            <c:if test="${!channelcomments.decision}">
+        		不购买
+        	</c:if>
+        </div>
+        <br/>
+        <field:display field="recommendLevel" id="s_com_sx_tv_entites_ChannelComments_recommendLevel" object="${channelcomments}" z="OfXcGuYDcSWiSadnZUBcyZdYUvU="/>
+        <field:display date="true" dateTimePattern="${channelComments_recorddate_date_format}" field="recordDate" id="s_com_sx_tv_entites_ChannelComments_recordDate" object="${channelcomments}" z="SRj9TRg3hXtVaKzPODNEIfI5FqM="/>
+        <field:display date="true" dateTimePattern="${channelComments_recommenddate_date_format}" field="recommendDate" id="s_com_sx_tv_entites_ChannelComments_recommendDate" object="${channelcomments}" z="ScPEMJDA8NHzx9mKgStJgjZttQA="/>
+        <field:display date="true" dateTimePattern="${channelComments_replydate_date_format}" field="replyDate" id="s_com_sx_tv_entites_ChannelComments_replyDate" object="${channelcomments}" z="aW9q19jKZrctp995dP3brY0BvzU="/>
+        <field:display field="promotionPlan" id="s_com_sx_tv_entites_ChannelComments_promotionPlan" object="${channelcomments}" z="/Awu/3ATqIooRZV8FSQ3njmDB00="/>
+        <field:display field="name" id="s_com_sx_tv_entites_ChannelComments_tvshow" object="${channelcomments.tvshow}" z="user-managed"/>
+        <field:display field="comments" id="s_com_sx_tv_entites_ChannelComments_comments" object="${channelcomments}" z="AvsBQn4jmlR3Oyr2voCPhXnpP4E="/>
+        <field:display field="ownedby" id="s_com_sx_tv_entites_ChannelComments_ownedby" label="签字负责人" object="${channelcomments}" z="user-managed"/>
+        <field:display field="decision" id="s_com_sx_tv_entites_ChannelComments_decision" object="${channelcomments}" z="2w1QxdFNKEHGbVRFt3rxETNeGT4="/>
+    </page:show>
+</div>

@@ -1,0 +1,306 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-29 10:28:33
+project --topLevelPackage com.sx.tv --projectName SXBC --java 6 --packaging JAR
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-29 10:28:55
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-29 10:29:01
+hint
+help 
+hint
+jpa setup --database MYSQL --provider HIBERNATE --databaseName test --hostName localhost --userName root --password
+web mvc setup
+security setup
+perform clean
+web mvc scaffold --backingType ~.entites.TVShow --class ~.web.TVShowController
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-29 18:00:37
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-11-29 21:24:37
+finder list --class ~.entites.TVShow --filter 
+finder list --class ~.test.Book --filter 
+finder add --finderName findBooksByBookNameEquals --class ~.test.Book
+finder list --class ~.test.Book --filter --depth 3
+finder add --finderName  findBooksByStudentsOrBookNameLikeOrPagesBetween --class ~.test.Book
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-11-29 23:24:28
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-02 13:50:22
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-02 14:49:28
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-02 20:11:45
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-02 20:27:03
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-02 22:50:48
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-03 00:07:54
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-03 16:44:40
+perform clean
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-03 16:51:33
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-03 17:26:37
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-03 18:16:59
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-04 14:54:26
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-04 17:53:23
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-04 20:46:07
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-05 17:29:42
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-05 19:06:44
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-05 22:16:20
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-05 22:49:50
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-06 21:54:39
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-07 17:44:30
+hint
+hint
+perform clean 
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-07 17:55:36
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-07 17:57:53
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-07 17:59:49
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-07 18:01:30
+hint
+perform clean
+hint
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-07 18:02:01
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-07 21:09:59
+hint
+perform tests
+perform clean
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-07 21:50:06
+hint
+perform clean
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-07 22:13:45
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-08 10:22:01
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-08 10:43:29
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-08 11:02:45
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-10 13:32:33
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-10 16:22:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-10 17:08:35
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-10 18:57:20
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-13 19:33:33
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-13 19:46:34
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-13 19:52:04
+hint
+web mvc scaffold --backingType ~.entites.ChannelComments --class ~.web.ChannelCommentsController
+web mvc scaffold --backingType ~.entites.DeptComments --class ~.web.DeptCommentsController 
+web mvc scaffold --backingType ~.entites.ProjectorComments --class ~.web.DeptCommentsController
+web mvc scaffold --backingType ~.entites.DeptComments --class ~.web.DeptCommentsController 
+web mvc scaffold --backingType ~.entites.DeptComments --class ~.web.DeptCommentsController 
+web mvc scaffold --backingType ~.entites.ProjectorComments --class ~.web.ProjectorCommentsController
+web mvc scaffold --backingType ~.entites.TVShowScore --class ~.web.TVShowScoreController 
+web mvc scaffold --backingType ~.entites.Score --class ~.web.ScoreController
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-13 21:29:40
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-17 19:39:02
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-17 20:15:22
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-18 18:54:08
+hint
+hint
+perform clean
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-18 19:26:30
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-18 19:26:57
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-18 19:28:35
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-18 19:29:05
+perform clean
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-18 19:29:46
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-18 19:34:25
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-18 21:01:40
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-19 18:47:01
+perform clean
+hint
+finder list --class ~.entites.Score 
+finder list --class ~.entites.Score --depth 2
+finder list --class ~.entites.Score --depth 2 --filter 
+finder add --finderName findScoresByRatedByAndTvshowidEquals --class ~.entites.Score
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-19 20:33:03
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-20 16:11:48
+hint
+help
+hint
+hint topics
+hint security
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-20 16:14:54
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-20 16:15:13
+hint
+hint web mvc
+help
+perform clean
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-20 16:16:37
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-20 18:02:25
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-20 18:10:53
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-22 14:34:19
+hint
+perform clean
+help
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-22 14:52:01
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-22 14:52:18
+web mvc scaffold --backingType ~.entites.Resource --class ~.web.ResourceController --path resource
+hint
+help
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-22 16:10:36
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-22 17:35:33
+hint
+finder list --class ~.entites.Score --filter --depth 1
+finder add --finderName findScoresByTvshowidEquals --class ~.entites.Score
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-22 23:02:25
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-23 14:26:18
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-23 15:00:59
+finder list --class ~.entites.Score --depth 1 
+finder list --class ~.entites.User --depth 1
+finder add --finderName findUsersByRoles --class ~.entites.User 
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-23 15:29:40
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-23 15:30:50
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-23 15:30:58
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-23 15:38:34
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-23 15:39:13
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-23 15:43:10
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-23 15:43:17
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-23 15:44:24
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-23 16:55:42
+perform clean
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-23 17:38:25
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-12-26 16:24:40
+hint
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-26 16:27:56
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-27 11:26:33
+hint
+perform clean
+perform eclipse
+web mvc json all --package com.sx.tv.test
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-27 11:32:59
+// [failed] hint
+hint
+perform clean
+hint
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-27 23:57:44
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-28 09:42:02
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-28 14:20:21
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-28 14:20:37
+hint
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-28 14:21:23
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-28 14:25:07
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-29 17:11:05
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-29 17:14:00
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-29 17:34:39
+hint
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-30 01:14:43
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-30 10:53:36
+hint
+finder list --class ~.entites.ProjectorComments --filter 
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-12-30 10:58:56
+finder list --class ~.entites.ProjectorComments --filter 
+finder add --finderName findProjectorCommentsesByTvshow --class ~.entites.ProjectorComments
+finder list --class ~.entites.Score --depth 2
+finder add --finderName findScoresByRatedByAndTvshow --class ~.entites.Score
+finder list --class ~.entites.Score --filter 
+finder add --finderName findScoresByRatedBy --class ~.entites.Score
+finder add --finderName findScoresByTvshow --class ~.entites.Score
+hint
+finder list --class ~.entites.DeptComments
+finder add --finderName findDeptCommentsesByTvshow --class ~.entites.DeptComments
+finder list --class ~.entites.Channel --filter 
+finder add --finderName findChannelsByType --class ~.entites.Channel
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-30 20:10:26
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-12-30 20:10:36
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-03 13:34:30
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-03 13:56:06
+hint
+finder list --class ~.entites.ChannelComments --depth 2
+finder list --class ~.entites.ChannelComments --filter 
+finder list --class ~.entites.ChannelComments --depth 2
+finder add --finderName findChannelCommentsesByChannelAndTvshow --class ~.entites.ChannelComments
+finder list --class ~.entites.ChannelComments --filter 
+finder add --finderName findChannelCommentsesByTvshow --class ~.entites.ChannelComments 
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-03 18:06:17
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-03 20:21:26
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-04 14:38:40
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-04 18:34:30
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-05 16:41:09
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-05 17:41:27
+web mvc scaffold --backingType ~.entites.ChannelComments --class ~.web.ChannelCommentsController
+hint
+web mvc scaffold --backingType ~.entites.ChannelComments --class ~.web.ChannelCommentsController
+web mvc scaffold --backingType ~.entites.ChannelComments --class ~.web.ChannelCommentsController
+hint
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-05 18:04:39
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-05 18:04:47
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-05 18:54:37
+hint
+web mvc scaffold --backingType ~.entites.ChannelComments --class ~.web.ChannelCommentsController
+hint
+web mvc scaffold --backingType ~.entites.TVContract --class ~.web.TVContractController
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-06 22:22:33
+hint
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-06 22:37:23
+finder list --class ~.entites.TVContract --filter 
+finder add --finderName findTVContractsByTvshow
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-07 00:24:17
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-07 14:26:52
+web mvc scaffold --backingType ~.entites.ContractPayment --class ~.web.ContractPaymentController
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-07 14:37:18
+hint
+hint
+finder list --class ~.entites.ContractPayment
+finder list --class ~.entites.ContractPayment --filter 
+finder add --finderName findContractPaymentsByContract
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-07 20:25:46
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-08 19:47:49
+hint
+web mvc scaffold --class ~.web.TVShowDataController --backingType ~.view.TVShowData
+hint
+web mvc scaffold --class ~.web.TVShowDataController --backingType ~.view.TVShowData
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-08 19:53:13
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-08 19:53:19
+hint
+hint
+entity jpa --class ~.view.TVShowData
+field number --fieldName rating --type java.lang.Float --value 0
+field number --fieldName marketShare --type java.lang.Float --value 0
+field number --fieldName ranking --type java.lang.Integer --value 0
+web mvc scaffold --class ~.web.TVShowDataController --backingType ~.view.TVShowData
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-21 20:42:58
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-21 20:50:20
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-21 21:01:01
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-21 21:57:57
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-22 09:02:38
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-27 09:50:37
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-27 21:41:52
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-28 16:16:38
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-28 18:14:16
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-29 13:39:33
+hint
+hint
+hint topics
+hint loggin
+hint logging
+logging setup --level DEBUG 
+hint
+help
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-29 16:52:28
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-01-31 10:32:01
+hint
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-01-31 18:13:17
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-02-01 13:03:55
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-02-01 17:35:00
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-03-03 11:34:05
+hint
+finder list --class ~.entites.PlayData 
+finder add --finderName findPlayDatasByTvshow --class ~.entites.PlayData

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url value="/resources/js/tvshows/information.js" var="information" />
+	<spring:url value="/resources/js/validateUtil.js" var="validate" />
+	<script src="${information}" type="text/javascript">
+		
+	</script>
+	<script src="${validate}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+	<style>
+td {
+	font-size: 12px;
+	width: 200px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+h1 {
+	background: #648c1d;
+	color: white"
+}
+
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+</style>
+	<div id="basicInfoDiv" style="padding: 0px;">
+		<ul>
+			<li><a href="#div_basicInfo">基本信息</a></li>
+			<c:if test="${tvshow_.status.id == 1 }">
+				<li><a href="#div_projectorCommentsCreate">项目负责人推荐</a></li>
+			</c:if>
+			<c:if test="${tvshow_.status.id == 2}">
+				<li><a href="#div_projectorComments">项目负责人意见</a></li>
+				<c:if test="${ableToScoring}">
+					<li><a href="#div_scores">评分</a></li>
+				</c:if>
+				<c:if test="${hasAdminView}">
+					<li><a href="#div_scoresAuditing">中心审核</a></li>
+				</c:if>
+			</c:if>
+			<c:if test="${tvshow_.status.id == 3}">
+				<c:forEach items="${tvshow_.channelComments}" var="item" varStatus="vs">
+					<li><a href="#div_channelComments_${vs.index}">${item.channel.name}</a></li>
+				</c:forEach>
+			</c:if>
+
+			<c:if test="${tvshow_.status.id == 8 }">
+				<li><a href="#div_projectorComments">项目负责人意见</a></li>
+			</c:if>
+		</ul>
+		<INPUT type="hidden" value="${itemId}" id="itemId" />
+
+		<DIV id="div_basicInfo" style="padding-left: 0px; padding-right: 0px;">
+			<table style="width: 100%;">
+				<tr>
+					<td>剧名</td>
+					<th><spring:eval expression="tvshow_['name']" /></th>
+				</tr>
+				<tr>
+					<td>集数</td>
+					<th><spring:eval expression="tvshow_['count']" /></th>
+				</tr>
+				<tr>
+					<td>影视公司</td>
+					<th><spring:eval expression="tvshow_['company']" /></th>
+				</tr>
+				<tr>
+					<td>题材</td>
+					<th><spring:eval expression="tvshow_['theme']" /></th>
+				</tr>
+				<tr>
+					<td>状态</td>
+					<th><spring:eval expression="tvshow_['status']" /></th>
+				</tr>
+				<tr>
+					<td>价格区间</td>
+					<th><spring:eval expression="tvshow_['priceRange']" /></th>
+				</tr>
+				<tr>
+					<td>发行计划</td>
+					<th><spring:eval expression="tvshow_['publishSchedule']" /></th>
+				</tr>
+
+				<tr>
+					<td>演员</td>
+					<th><spring:eval expression="tvshow_['actors']" /></th>
+				</tr>
+				<tr>
+					<td>导演</td>
+					<th><spring:eval expression="tvshow_['directors']" /></th>
+				</tr>
+				<tr>
+					<td>编剧</td>
+					<th><spring:eval expression="tvshow_['screenwriters']" /></th>
+				</tr>
+				<tr>
+					<td>发行人员</td>
+					<th><spring:eval expression="tvshow_['publisher']" /></th>
+				</tr>
+				<tr>
+					<td>故事梗概</td>
+					<th><spring:eval expression="tvshow_['outline']" /></th>
+				</tr>
+
+				<tr>
+					<td>项目负责人</td>
+					<th>${tvshow_.projector.staff}</th>
+				</tr>
+				<tr>
+					<td>录入时间</td>
+					<th><fmt:formatDate value="${tvshow_.inputDate}" pattern="${fn:escapeXml('yyyy-MM-dd')}" /></th>
+				</tr>
+
+			</table>
+		</DIV>
+
+		<c:if test="${tvshow_.status.id == 1 }">
+			<div id="div_projectorCommentsCreate" style="padding-left: 0px; padding-right: 0px;">
+				<c:if test="${ableToCreate}">
+					<form:form id="pCommentsForm" action="./createProjectComments/${itemId}" method="POST" modelAttribute="pcomments">
+
+						<div class="rowcontainer">
+							<label>意见 : </label> <INPUT type="checkbox" name="isRecommend" value="true" id="isRecommend_yes" />推荐 <input id="isRecommend_no" type="checkbox" name="isRecommend"
+								value="false" /> 不推荐(淘汰)
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>推荐星级 : </label> <select id="_projectorRecommend_id" name="projectorRecommend">
+								<c:forEach items="${recommendclasses}" var="item">
+									<option value="${item.id}">${item.name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>推荐平台 : </label> <select id="_recommendChannel_id" name="recommendChannel">
+								<c:forEach items="${channels}" var="item">
+									<option value="${item.id}">${item.name}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>负责人意见 : </label> <INPUT type="text" name="comments" id="_comments_id" class="text ui-widget-content ui-corner-all" />
+						</div>
+						<br />
+						<input type="submit" value="保 存" id="submitBtn" />
+
+						<div id="dialog-confirm-reject" title="淘汰此剧目?">
+							<p>
+								<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span> 您确定要淘汰此剧目吗？
+							</p>
+						</div>
+					</form:form>
+				</c:if>
+				<c:if test="${!ableToCreate}">
+					只有项目负责人才能填写推荐意见。
+				</c:if>
+			</div>
+		</c:if>
+
+		<c:if test="${tvshow_.status.id == 2 || tvshow_.status.id == 3}">
+			<div id="div_projectorComments">
+				<div class="rowcontainer">
+					<label>意见 : </label>
+					<c:if test="${tvshow_.projectorComments.isRecommend }">
+					推荐
+					</c:if>
+				</div>
+				<br />
+				<div class="rowcontainer">
+					<label>推荐星级 : </label> ${tvshow_.projectorComments.projectorRecommend.name }
+				</div>
+				<br />
+				<div class="rowcontainer">
+					<label>推荐平台 : </label> ${tvshow_.projectorComments.recommendChannel.name }
+				</div>
+				<br />
+				<div class="rowcontainer">
+					<label>负责人意见 : </label> ${tvshow_.projectorComments.comments }
+				</div>
+				<br />
+			</div>
+
+			<c:if test="${ableToScoring}">
+				<div id="div_scores">
+					<c:if test="${isCreate}">
+						<form:form id="saveScoreForm" action="./saveScore/${itemId}" method="POST" modelAttribute="score">
+							<c:forEach items="${score.details}" var="item" varStatus="vs">
+								<div class="rowcontainer">
+									<label><input type="hidden" name="details[${vs.index}].indicator" value="${item.indicator.id}" />${item.indicator.name} ${item.indicator.proportion}: </label> <INPUT
+										id="details[${vs.index}].score" type="text" name="details[${vs.index}].score" class="text ui-widget-content ui-corner-all" />
+								</div>
+								<br />
+							</c:forEach>
+
+							<div class="rowcontainer">
+								<label>推荐平台 : </label> <select id="_recommendChannel_id" name="recommendChannel">
+									<c:forEach items="${channels}" var="item">
+										<option value="${item.id}">${item.name}</option>
+									</c:forEach>
+								</select>
+							</div>
+
+							<!-- 
+						<div class="rowcontainer">
+							<label>平均得分 : </label> <INPUT readonly="true" type="text" name="avgScore" class="text ui-widget-content ui-corner-all" />
+						</div>
+						 -->
+							<br />
+							<input type="submit" value="保 存" />
+						</form:form>
+
+					</c:if>
+					<c:if test="${!isCreate}">
+						<c:forEach items="${score.details}" var="item" varStatus="vs">
+							<div class="rowcontainer">
+								<label>${item.indicator.name} : </label> ${item.score}
+							</div>
+							<br />
+						</c:forEach>
+
+						<div class="rowcontainer">
+							<label>平均得分 : </label> ${score.avgScore }
+						</div>
+					</c:if>
+				</div>
+			</c:if>
+			<c:if test="${hasAdminView}">
+				<div id="div_scoresAuditing">
+					<c:set scope="page" var="si" value="${scoresList[0].details}" />
+					<table>
+						<TR>
+							<th>评分人</th>
+							<th>平均分</th>
+							<c:forEach items="${si}" var="it">
+								<th>${it.indicator.name }</th>
+							</c:forEach>
+						</TR>
+						<c:forEach items="${scoresList}" var="sc">
+							<tr>
+								<td>${sc.ratedBy.staff}</td>
+								<td>${sc.avgScore }</td>
+								<c:forEach items="${sc.details}" var="item">
+									<td>${item.score}</td>
+								</c:forEach>
+							</tr>
+						</c:forEach>
+						<c:if test="${hasUsersNotScoring}">
+							<c:forEach items="${usersNotScoring}" var="item">
+								<tr>
+									<td>${item.staff}</td>
+									<td colspan="7">尚未评分</td>
+								</tr>
+							</c:forEach>
+							<div id="dialog-confirm-recommend-score" title="推荐剧目?">
+								<p>
+									<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+								<p>还有${usersNotScoring.size()}人没有对此剧目评分，您却定要推荐此剧目？</p>
+								</p>
+							</div>
+
+						</c:if>
+
+					</table>
+					<br /> <br />
+					<div class="rowcontainer">
+						<label>综合平均得分 : </label> ${avgScore }
+					</div>
+					<br />
+
+					<form:form id="deptCommentForm" action="./doCreateOrUpdateDeptComment/${itemId}" method="POST" modelAttribute="deptComments"
+						enctype="application/x-www-form-urlencoded">
+						<div class="rowcontainer">
+							<label>中心意见 : </label> <INPUT type="checkbox" name="isRecommend" checked="checked" value="true" id="isRecommend_yes" />推荐 <input id="isRecommend_no" type="checkbox"
+								name="isRecommend" value="false" /> 不推荐(淘汰)
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>推荐星级 : </label>
+							<form:select id="_recommendLevel_id" path="recommendLevel" items="${recommendclasses}" itemLabel="name" itemValue="id"></form:select>
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>推荐平台 : </label>
+							<form:select id="_recommendChannel_id" path="recommendChannel" items="${channels}" itemLabel="name" itemValue="id"></form:select>
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>中心负责人 : </label>
+							<form:select path="owner" items="${users}" itemLabel="staff" itemValue="id"></form:select>
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>备注 : </label>
+							<form:input path="comments" />
+						</div>
+						<br />
+
+						<DIV>
+							<INPUT type="button" id="submitBtn" value="保 存" />
+
+							<DIV style="float: right">
+								<A href="#"> 卫视推荐表 </A> | <a href="#">地面推荐表</a>
+							</DIV>
+						</DIV>
+						<!-- 
+						<c:if test="${!isCreateDeptComment}">
+							<div id="dialog-confirm-update" title="推荐剧目?">
+								<p>
+									<span class="ui-icon ui-icon-alert"
+										style="float: left; margin: 0 7px 20px 0;"></span>
+								<p>此剧目已推荐到 ${recommendChannel.name}, 您却定要更改？</p>
+								</p>
+							</div>
+						</c:if>
+						 -->
+						<div id="dialog-confirm-recommend" title="推荐剧目?">
+							<p>
+								<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+							<p>您却定要推荐此剧目？</p>
+							</p>
+						</div>
+						<div id="dialog-confirm-reject" title="淘汰剧目?">
+							<p>
+								<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+							<p>您确定要淘汰此剧目吗？</p>
+							</p>
+						</div>
+
+					</form:form>
+
+				</div>
+			</c:if>
+		</c:if>
+
+		<c:if test="${tvshow_.status.id == 3}">
+			<c:forEach items="${tvshow_.channelComments}" var="item" varStatus="vs">
+				<div id="div_projectorComments_${vs.index}">
+
+					<div class="rowcontainer">
+						<label>推荐平台 : </label> ${item.channel.name }
+					</div>
+
+					<div class="rowcontainer">
+						<label>购片意见 : </label> ${item.channel.name }
+					</div>
+					<div class="rowcontainer">
+						<label>购片意见 : </label> ${item.channel.name }
+					</div>
+					<div class="rowcontainer">
+						<label>购片意见 : </label> ${item.channel.name }
+					</div>
+					<div class="rowcontainer">
+						<label>购片意见 : </label> ${item.channel.name }
+					</div>
+					<div class="rowcontainer">
+						<label>购片意见 : </label> ${item.channel.name }
+					</div>
+					<div class="rowcontainer">
+						<label>购片意见 : </label> ${item.channel.name }
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
+		<c:if test="${tvshow_.status.id == 8 }">
+			<div id="div_projectorComments">
+				<div class="rowcontainer">
+					<label>意见 : </label>
+					<c:if test="${!tvshow_.projectorComments.isRecommend }">
+					不推荐(淘汰)
+					</c:if>
+				</div>
+				<!-- 
+				<br />
+				<div class="rowcontainer">
+					<label>推荐星级 : </label>
+					${tvshow_.projectorComments.projectorRecommend.name }
+				</div>
+				<br />
+				<div class="rowcontainer">
+					<label>推荐平台 : </label>
+					${tvshow_.projectorComments.recommendChannel.name }
+				</div>
+				<br />
+				 -->
+				<div class="rowcontainer">
+					<label>负责人意见 : </label> ${tvshow_.projectorComments.comments }
+				</div>
+				<br />
+			</div>
+		</c:if>
+	</div>
+</div>

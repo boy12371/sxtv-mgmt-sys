@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_sx_tv_entites_TVShowScore" modelAttribute="TVShowScore_" path="/tvshowscores" versionField="Version" z="kRbeyfVbRni1VSjuxtlVnM85/9U=">
+        <field:input field="avgScore" id="c_com_sx_tv_entites_TVShowScore_avgScore" validationMessageCode="field_invalid_number" z="uix6amjx8oA30nESGbTBMLxK3pM="/>
+        <field:simple field="scores" id="c_com_sx_tv_entites_TVShowScore_scores" messageCode="entity_reference_not_managed" messageCodeAttribute="Score" z="S9dvwdKr4KzEIF5ZmzYEDQM/PFA="/>
+    </form:update>
+</div>

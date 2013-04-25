@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" id="ps_com_sx_tv_entites_DeptComments" object="${deptcomments}" path="/deptcommentses" z="user-managed">
+        <field:display field="staff" id="s_com_sx_tv_entites_DeptComments_owner" object="${deptcomments.owner}" z="user-managed"/>
+        <field:display field="name" id="s_com_sx_tv_entites_DeptComments_recommendLevel" object="${deptcomments.recommendLevel}" z="user-managed"/>
+        <div>
+            <LABEL> 推荐平台 </LABEL>
+            <c:if test="${empty deptcomments.recommendChannel}">
+        		-
+        	</c:if>
+            <c:if test="${!empty deptcomments.recommendChannel}">
+        		${deptcomments.recommendChannel.name}
+        	</c:if>
+        </div>
+        <br/>
+        <field:display field="comments" id="s_com_sx_tv_entites_DeptComments_comments" object="${deptcomments}" z="96W8/P5kF5oLnHNq3xAoHi8KcHg="/>
+        <div>
+            <LABEL> 推荐意见 </LABEL>
+            <c:if test="${deptcomments.isRecommend}">
+        		推荐
+        	</c:if>
+            <c:if test="${!deptcomments.isRecommend}">
+        		不推荐
+        	</c:if>
+        </div>
+        <br/>
+    </page:show>
+</div>

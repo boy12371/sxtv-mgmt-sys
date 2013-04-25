@@ -1,0 +1,154 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+	<jsp:directive.attribute name="jValidity" type="java.lang.Boolean" required="false" rtexprvalue="true" description="load jquery validity js andcss" />
+	<jsp:directive.attribute name="jtokenInput" type="java.lang.Boolean" required="false" rtexprvalue="true" description="load jquery tokeninput js and css" />
+	<jsp:directive.attribute name="jGrid" type="java.lang.Boolean" required="false" rtexprvalue="true" description="load jquery grid js and css" />
+	<jsp:directive.attribute name="jqueryUI" type="java.lang.Boolean" required="false" rtexprvalue="true" description="load jqueryUI js and css" />
+	<!-- 
+  <spring:theme code="styleSheet" var="roo_css" />
+   -->
+	<spring:url value="/resources/styles/standard.css" var="roo_css_url" />
+	<spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
+	<spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
+	<spring:url value="/resources/spring/Spring.js" var="spring_url" />
+	<spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
+	<c:if test="${empty jValidity}">
+		<c:set value="true" var="jValidity" />
+	</c:if>
+	<c:if test="${empty jtokenInput}">
+		<c:set value="true" var="jtokenInput" />
+	</c:if>
+	<c:if test="${empty jGrid}">
+		<c:set value="true" var="jGrid" />
+	</c:if>
+	<c:if test="${empty jqueryUI}">
+		<c:set value="true" var="jqueryUI" />
+	</c:if>
+
+	<c:if test="${jValidity}">
+		<spring:url value="/resources/jqueryValidity/jquery.validity.css" var="jqueryValidityCSS" />
+		<spring:url value="/resources/jqueryValidity/jQuery.validity.js" var="jqueryValidityJS" />
+		<spring:url value="/resources/jv/jquery.validate.js" var="jqueryValidate" />
+		<spring:url value="/resources/jv/messages_zh.js" var="jqueryVMessage" />
+	</c:if>
+
+	<c:if test="${jtokenInput}">
+		<spring:url value="/resources/loopj-jquery-tokeninput/styles/token-input.css" var="jqueryTokeninputStandardCSS" />
+		<spring:url value="/resources/loopj-jquery-tokeninput/styles/token-input-facebook.css" var="jqueryTokeninputFackbookCSS" />
+		<spring:url value="/resources/loopj-jquery-tokeninput/src/jquery.tokeninput.js" var="jqueryTokeninput" />
+	</c:if>
+	<c:if test="${jGrid}">
+		<spring:url value="/resources/jqGrid/css/ui.jqgrid.css" var="jqueryJQgridCSS" />
+		<spring:url value="/resources/jquery-ui/css/custom-theme/jquery-ui-1.9.2.custom.min.css" var="jqueryUICSS" />
+		<spring:url value="/resources/jqGrid/js/i18n/grid.locale-cn.js" var="jqGridLocal" />
+		<spring:url value="/resources/jqGrid/js/jquery.jqGrid.min.js" var="jqGrid" />
+	</c:if>
+	<c:if test="${jqueryUI}">
+		<spring:url value="/resources/jquery-ui/css/custom-theme/jquery-ui-1.9.2.custom.min.css" var="jqueryUICSS" />
+		<spring:url value="/resources/jquery-ui/js/jquery-ui-1.9.2.custom.min.js" var="jqueryUIJS" />
+	</c:if>
+
+	<spring:url value="/resources/rateit/jquery.rateit.min.js" var="rateitJS" />
+	<spring:url value="/resources/rateit/rateit.css" var="rateitCSS" />
+
+	<spring:url value="/resources/jquery-ui/js/jquery-1.8.3.js" var="jquery" />
+
+	<spring:url value="/resources/images/favicon.ico" var="favicon" />
+	<link rel="stylesheet" type="text/css" href="${tundra_url}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
+	
+	<link rel="stylesheet" type="text/css" href="${rateitCSS}" />
+
+	<c:if test="${jtokenInput}">
+		<link rel="stylesheet" type="text/css" href="${jqueryTokeninputStandardCSS}" />
+		<link rel="stylesheet" type="text/css" href="${jqueryTokeninputFackbookCSS}" />
+
+	</c:if>
+
+	<c:if test="${jGrid}">
+		<link rel="stylesheet" type="text/css" href="${jqueryUICSS}" />
+		<link rel="stylesheet" type="text/css" href="${jqueryJQgridCSS}" />
+	</c:if>
+	<c:if test="${jqueryUI}">
+		<link rel="stylesheet" type="text/css" href="${jqueryUICSS}" />
+	</c:if>
+
+
+	<link rel="SHORTCUT ICON" href="${favicon}" />
+
+	<!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
+	<c:set var="userLocale">
+		<c:set var="plocale">${pageContext.response.locale}</c:set>
+		<c:out value="${fn:replace(plocale, '_', '-')}" default="zh_CN" />
+	</c:set>
+
+	<script type="text/javascript">
+		var djConfig = {
+			parseOnLoad : false,
+			isDebug : false,
+			locale : '${fn:toLowerCase(userLocale)}'
+		};
+	</script>
+
+	<script src="${jquery}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+
+	<script src="${rateitJS}" type="text/javascript">
+	<!-- /required for FF3 and Opera -->
+		
+	</script>
+
+
+
+	<c:if test="${jValidity}">
+		<script src="${jqueryValidate}" type="text/javascript">
+		<!-- /required for FF3 and Opera -->
+			
+		</script>
+		<script src="${jqueryVMessage}" type="text/javascript">
+		<!-- /required for FF3 and Opera -->
+			
+		</script>
+	</c:if>
+	<c:if test="${jtokenInput}">
+		<script src="${jqueryTokeninput}" type="text/javascript">
+		<!-- /required for FF3 and Opera -->
+			
+		</script>
+	</c:if>
+	<c:if test="${jGrid}">
+		<script src="${jqGridLocal}" type="text/javascript">
+		<!-- /required for FF3 and Opera -->
+			
+		</script>
+		<script src="${jqGrid}" type="text/javascript">
+		<!-- /required for FF3 and Opera -->
+			
+		</script>
+	</c:if>
+
+	<c:if test="${jqueryUI }">
+		<script src="${jqueryUIJS}" type="text/javascript">
+		<!-- /required for FF3 and Opera -->
+			
+		</script>
+	</c:if>
+	<script src="${dojo_url}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+	<script src="${spring_url}" type="text/javascript">
+	<!-- /required for FF3 and Opera -->
+		
+	</script>
+	<script src="${spring_dojo_url}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+	<script language="JavaScript" type="text/javascript">
+		dojo.require("dojo.parser");
+	</script>
+</jsp:root>

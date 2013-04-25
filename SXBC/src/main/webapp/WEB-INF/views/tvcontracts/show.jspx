@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <style>
+label {
+	color: #666;
+	width:270px;
+}
+</style>
+    <page:show create="false" id="ps_com_sx_tv_entites_TVContract" object="${tvcontract_}" path="/tvcontracts" z="user-managed">
+        <field:display date="true" dateTimePattern="${TVContract__showdate_date_format}" field="showDate" id="s_com_sx_tv_entites_TVContract_showDate" object="${tvcontract_}" z="DcogHwUJ2HFsEk8S9Y8CIaw73/A="/>
+        <field:display field="name" id="s_com_sx_tv_entites_TVContract_tvshow" object="${tvcontract_.tvshow}" z="user-managed"/>
+        <field:display field="publishForm" id="s_com_sx_tv_entites_TVContract_publishForm" object="${tvcontract_}" z="yWK7RmnuXAc+7QcqOJZsgkMqSY0="/>
+        <field:display field="totalPrice" id="s_com_sx_tv_entites_TVContract_totalPrice" object="${tvcontract_}" z="m11RsAO7E7UnS/y9sPPdFcbnGbM="/>
+        <field:display field="extraFee" id="s_com_sx_tv_entites_TVContract_extraFee" object="${tvcontract_}" z="Z1v3iOBwGpbT/Rtm+j8bFuGI4lo="/>
+        <field:display date="true" dateTimePattern="${TVContract__recievedate_date_format}" field="recieveDate" id="s_com_sx_tv_entites_TVContract_recieveDate" object="${tvcontract_}" z="VWnMJxsTquQSFrl4QAh7KqR7qIc="/>
+        <field:display field="recieveOwner" id="s_com_sx_tv_entites_TVContract_recieveOwner" object="${tvcontract_}" z="Or7KASHJiH9iijPZqB5BoQA4y2g="/>
+        <field:display date="true" dateTimePattern="${TVContract__inputdate_date_format}" field="inputDate" id="s_com_sx_tv_entites_TVContract_inputDate" object="${tvcontract_}" z="wOvw36wymWRr0H9fQ4RcwLJtlM0="/>
+        <field:display field="inputter" id="s_com_sx_tv_entites_TVContract_inputter" object="${tvcontract_}" z="dQXmQhdPoxAEwLNC5gX3PiyYm4o="/>
+        <field:display date="true" dateTimePattern="${TVContract__filedate_date_format}" field="fileDate" id="s_com_sx_tv_entites_TVContract_fileDate" object="${tvcontract_}" z="V/BBswaeMQesEy7dqGHslSH701w="/>
+        <field:display field="fileBy" id="s_com_sx_tv_entites_TVContract_fileBy" object="${tvcontract_}" z="d67Z3qNlvbeFnPQoCcRBt9FD7uw="/>
+        <field:display date="true" dateTimePattern="${TVContract__recieveagreementdate_date_format}" field="recieveAgreementDate" id="s_com_sx_tv_entites_TVContract_recieveAgreementDate" object="${tvcontract_}" z="6os130UKOTn3SGHsJTUtSNGXodY="/>
+        <field:display field="recieveAgreementOwner" id="s_com_sx_tv_entites_TVContract_recieveAgreementOwner" object="${tvcontract_}" z="E2r0+u9luw9A3oTsYSrWLSr67mI="/>
+        <field:display date="true" dateTimePattern="${TVContract__inputagreementdate_date_format}" field="inputAgreementDate" id="s_com_sx_tv_entites_TVContract_inputAgreementDate" object="${tvcontract_}" z="OGPYhdx/FtPlyGvJCTBsPfw2BZE="/>
+        <field:display field="inputterAgreement" id="s_com_sx_tv_entites_TVContract_inputterAgreement" object="${tvcontract_}" z="wQ+8yqJ/3l7a0qdgVaxNbs5L4SU="/>
+        <field:display date="true" dateTimePattern="${TVContract__fileagreementdate_date_format}" field="fileAgreementDate" id="s_com_sx_tv_entites_TVContract_fileAgreementDate" object="${tvcontract_}" z="M2FR0mo0dO2/RPCnxNP1aOWMaJ8="/>
+        <field:display field="fileByAgreement" id="s_com_sx_tv_entites_TVContract_fileByAgreement" object="${tvcontract_}" z="3y1Fwp8JEKOO4Dp7DP4z16E7Wl8="/>
+        <field:display field="contractNo" id="s_com_sx_tv_entites_TVContract_contractNo" object="${tvcontract_}" z="v914M7mpxo6t4lVxNcM6yK1l2Wo="/>
+        <field:display date="true" dateTimePattern="${TVContract__copyrightstart_date_format}" field="copyrightStart" id="s_com_sx_tv_entites_TVContract_copyrightStart" object="${tvcontract_}" z="ZLPxMqPR7mARRRSQ1Co3OMNB3tU="/>
+        <field:display date="true" dateTimePattern="${TVContract__copyrightend_date_format}" field="copyrightEnd" id="s_com_sx_tv_entites_TVContract_copyrightEnd" object="${tvcontract_}" z="h8HbOAUaWbumOe+ShauZpOVfGN4="/>
+        <field:display field="channel" id="s_com_sx_tv_entites_TVContract_channel" object="${tvcontract_}" z="lg5tqvSfZNqoLZ9sHr84KF1Rqs4="/>
+        <field:display field="ownedby" id="s_com_sx_tv_entites_TVContract_ownedby" object="${tvcontract_}" z="qdBgC1pWWfyjSDPXB9wMbpipmtA="/>
+    </page:show>
+</div>

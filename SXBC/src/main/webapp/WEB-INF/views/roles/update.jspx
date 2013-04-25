@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_sx_tv_entites_Role" modelAttribute="role" path="/roles" versionField="Version" z="7KX+6P0n7YEgio2xcKmdcChlnXw=">
+        <field:input field="name" id="c_com_sx_tv_entites_Role_name" z="9WDeIjhfq4pWZ16NhB7SesDWUdw="/>
+        <field:input field="comments" id="c_com_sx_tv_entites_Role_comments" z="C/CreAajzJs50v6DMPfJAeV/afI="/>
+        <div id="_c_com_sx_tv_entites_Role_resources_id">
+            <label for="_resources_id">资源 : </label>
+            <p style="margin-left:105px;">
+                <c:forEach items="${resources }" var="r">
+                    <c:set value="false" var="status"/>
+                    <c:forEach items="${role.resources}" var="rr">
+                        <c:if test="${rr.id == r.id }">
+                            <c:set value="true" var="status"/>
+                        </c:if>
+                    </c:forEach>
+                    <c:if test="${status}">
+                        <input checked="checked" name="resources" type="checkbox" value="${r.id}"/>${r.resouceName} | ${r.resouceURL}<br/>
+                    </c:if>
+                    <c:if test="${!status}">
+                        <input name="resources" type="checkbox" value="${r.id}"/>${r.resouceName} | ${r.resouceURL}<br/>
+                    </c:if>
+                </c:forEach>
+            </p>
+        </div>
+    </form:update>
+</div>

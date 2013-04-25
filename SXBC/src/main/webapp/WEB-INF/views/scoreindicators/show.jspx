@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_sx_tv_entites_ScoreIndicator" label="评分指标" object="${scoreindicator}" path="/scoreindicators" z="user-managed">
+        <field:display field="name" id="s_com_sx_tv_entites_ScoreIndicator_name" label="名称" object="${scoreindicator}" z="user-managed"/>
+        <field:display field="proportion" id="s_com_sx_tv_entites_ScoreIndicator_proportion" label="比重" object="${scoreindicator}" z="user-managed"/>
+    </page:show>
+</div>

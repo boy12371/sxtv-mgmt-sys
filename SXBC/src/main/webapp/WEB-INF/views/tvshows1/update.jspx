@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_sx_tv_entites_TVShow" modelAttribute="TVShow_" path="/tvshows1" versionField="Version" z="XAkWRQFmbzWufzA+rITxgRZNTWA=">
+        <field:input field="name" id="c_com_sx_tv_entites_TVShow_name" z="14P15RR6NrqEXo9SrXAn7IRmroA="/>
+        <field:input field="count" id="c_com_sx_tv_entites_TVShow_count" z="RwGJIAfYZyrgI+Pnrt0DYTjWqeU="/>
+        <field:input field="publishSchedule" id="c_com_sx_tv_entites_TVShow_publishSchedule" z="/Y4sy8OOLOgpFHT8xAKJ/E4kSp4="/>
+        <field:input field="priceRange" id="c_com_sx_tv_entites_TVShow_priceRange" z="QISRmmZOW3M4jwPtibfzNxgLe7k="/>
+        <field:input field="ratings" id="c_com_sx_tv_entites_TVShow_ratings" validationMessageCode="field_invalid_number" z="Nz6GjP4nljjD/7P7DkTMloDWzvA="/>
+        <field:input field="marketShare" id="c_com_sx_tv_entites_TVShow_marketShare" validationMessageCode="field_invalid_number" z="DfEv/OXFnamOFGhEGuuE7q6J75M="/>
+        <field:input field="ranking" id="c_com_sx_tv_entites_TVShow_ranking" z="jo1WP6+u77LQEandQoTxTNh/68o="/>
+        <field:input field="outline" id="c_com_sx_tv_entites_TVShow_outline" z="pMV0426q9Rqw4hV15ZW3gyoxYlw="/>
+        <field:input field="marketAssessment" id="c_com_sx_tv_entites_TVShow_marketAssessment" z="Ifjo7nRVy3FBJk5I9N9XafjN/34="/>
+        <field:input field="publicPrice" id="c_com_sx_tv_entites_TVShow_publicPrice" validationMessageCode="field_invalid_number" z="IfYFU099dnD+eYido/o72XlZIRc="/>
+        <field:checkbox field="isPurchase" id="c_com_sx_tv_entites_TVShow_isPurchase" z="YBh84KS+nnbdMjddFJYaY8uBq/A="/>
+        <field:datetime dateTimePattern="${TVShow__inputdate_date_format}" field="inputDate" id="c_com_sx_tv_entites_TVShow_inputDate" z="XqG/WGqsad842dd/Zbsl0KV8WRk="/>
+        <field:datetime dateTimePattern="${TVShow__rejectdate_date_format}" field="rejectDate" id="c_com_sx_tv_entites_TVShow_rejectDate" z="TeT8O+J4nPpg98kBmJJl8xdXS7k="/>
+        <field:select field="progress" id="c_com_sx_tv_entites_TVShow_progress" itemValue="id" items="${progresses}" path="/progresses" z="HuiCBCdycBddzVyQHfiOVV+e628="/>
+        <field:select field="theme" id="c_com_sx_tv_entites_TVShow_theme" itemValue="id" items="${themes}" path="/themes" z="r1r3RuQsT0mvLt5shJsa6Z7KZN4="/>
+        <field:select field="company" id="c_com_sx_tv_entites_TVShow_company" itemValue="id" items="${companys}" path="/companys" z="h41+YEZvGFyivCMkl0HZEfFcpwY="/>
+        <field:select field="status" id="c_com_sx_tv_entites_TVShow_status" itemValue="id" items="${statuses}" path="/statuses" z="UrSMjU5/1Ews08TqF/AcNBolIvM="/>
+        <field:select field="actors" id="c_com_sx_tv_entites_TVShow_actors" itemValue="id" items="${peoples}" multiple="true" path="/peoples" z="1wk6TB2HzV7jsiZLcucKjK61FXc="/>
+        <field:select field="directors" id="c_com_sx_tv_entites_TVShow_directors" itemValue="id" items="${peoples}" multiple="true" path="/peoples" z="YXNlA70MvO9KEp4c/E+lUq51F+U="/>
+        <field:select field="screenwriters" id="c_com_sx_tv_entites_TVShow_screenwriters" itemValue="id" items="${peoples}" multiple="true" path="/peoples" z="++7nBizYp9bOqXZjAJbOIwv6zrQ="/>
+        <field:select field="publisher" id="c_com_sx_tv_entites_TVShow_publisher" itemValue="id" items="${peoples}" multiple="true" path="/peoples" z="7ED0oWpJmszabMdgXq3f0XQuEqk="/>
+        <field:select field="inputter" id="c_com_sx_tv_entites_TVShow_inputter" itemValue="id" items="${users}" path="/users" z="gMAJcHDhDby/woTRr2ltJHx7IeA="/>
+        <field:select field="projector" id="c_com_sx_tv_entites_TVShow_projector" itemValue="id" items="${users}" path="/users" z="y4+nDHTfCAyCCs8tbPEMVwGHfJQ="/>
+        <field:input field="comments" id="c_com_sx_tv_entites_TVShow_comments" z="rRHPsMKjUPALgT/qqNS6zDlylVg="/>
+    </form:update>
+</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition extends="default" name="projectorcommentses/list">
+		<put-attribute name="body" value="/WEB-INF/views/projectorcommentses/list.jspx" />
+	</definition>
+	<definition extends="default" name="projectorcommentses/show">
+		<put-attribute name="body" value="/WEB-INF/views/projectorcommentses/show.jspx" />
+	</definition>
+	<definition extends="default" name="projectorcommentses/create">
+		<put-attribute name="body" value="/WEB-INF/views/projectorcommentses/create.jspx" />
+	</definition>
+	<definition extends="default" name="projectorcommentses/createPrjComments">
+		<put-attribute name="body" value="/WEB-INF/views/projectorcommentses/createPrjComments.jspx" />
+	</definition>
+	<definition extends="default" name="projectorcommentses/update">
+		<put-attribute name="body" value="/WEB-INF/views/projectorcommentses/update.jspx" />
+	</definition>
+	
+	<definition extends="printTable" name="projectorcommentses/recommendFrom">
+		<put-attribute name="body" value="/WEB-INF/views/projectorcommentses/recommendForm.jspx" />
+	</definition>
+	
+	
+</tiles-definitions>

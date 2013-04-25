@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sx_tv_entites_Company" items="${companys}" z="l6OcUDGCq9aHRs6OGyt8Baovqhw=">
+        <table:table data="${companys}" id="l_com_sx_tv_entites_Company" path="/companys" z="ZDVCOiyo8x4LBhTl9pEfNZ4eGB4=">
+            <table:column id="c_com_sx_tv_entites_Company_name" property="name" z="Lvo+5Q2qssxLN9gRtVaW2lLmYhA="/>
+            <table:column id="c_com_sx_tv_entites_Company_publisher" property="publisher" z="MPG1uDNHm895ylmBLf7GwKJW/gE="/>
+            <table:column id="c_com_sx_tv_entites_Company_telephone" property="telephone" z="NdvzxmMvMyJ+aydlY3M2hc9vWKY="/>
+            <table:column label="代表作" id="c_com_sx_tv_entites_Company_achievements" property="achievements" z="Sz24ZOAuDbiF4kEujjvumWW/wNs="/>
+        </table:table>
+    </page:list>
+</div>

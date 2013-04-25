@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<page:list labelPlural="用户" id="pl_com_sx_tv_entites_User" items="${users}" z="b9Dhw/p+8Csg3a9pNJDnDFJBXik=">
+		<table:table data="${users}" id="l_com_sx_tv_entites_User" path="/users" z="n5flD+/gLgJvumjMR2T3vVK0sJ4=">
+			<table:column id="c_com_sx_tv_entites_User_name" label="用户名" property="name" z="user-managed" />
+			<table:column id="c_com_sx_tv_entites_User_staff" label="职员" property="staff" z="user-managed" />
+			
+			<!-- <table:column id="c_com_sx_tv_entites_User_password" label="密码" property="password" z="user-managed"/>  
+            <table:column id="c_com_sx_tv_entites_User_roles" label="角色" property="roles" z="user-managed"/>
+            -->
+		</table:table>
+	</page:list>
+</div>

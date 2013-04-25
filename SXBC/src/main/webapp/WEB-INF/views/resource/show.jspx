@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_sx_tv_entites_Resource" object="${resource}" path="/resource" z="yy+F4LASZyEtlVkW6QoTF+tH9jg=">
+        <field:display field="resouceName" id="s_com_sx_tv_entites_Resource_resouceName" object="${resource}" z="uC/xJe6deMUa/AWBwjYOCsjrjyY="/>
+        <field:display field="resouceURL" id="s_com_sx_tv_entites_Resource_resouceURL" object="${resource}" z="AaWhTwxZ85A/JGar3jFG20Yy+7U="/>
+        <field:display field="comments" id="s_com_sx_tv_entites_Resource_comments" object="${resource}" z="9D+uUeH4A6YdlhJ0EYw0DzaNptM="/>
+    </page:show>
+</div>

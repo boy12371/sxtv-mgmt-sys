@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<style>
+td {
+	font-size: 20px;
+	width: 200px;
+	text-align: center
+}
+</style>
+	<util:panel id="projectorRecommendTable" title="初选意见表">
+		<table style="width: 100%; font-size: 20px">
+			<tr>
+				<td>剧名</td>
+				<th><spring:eval expression="tvshow_['name']" /></th>
+			</tr>
+			<tr>
+				<td>集数</td>
+				<th><spring:eval expression="tvshow_['count']" /></th>
+			</tr>
+			<tr>
+				<td>影视公司</td>
+				<th><spring:eval expression="tvshow_['company']" /></th>
+			</tr>
+			<tr>
+				<td>题材</td>
+				<th><spring:eval expression="tvshow_['theme']" /></th>
+			</tr>
+			<tr>
+				<td>价格区间</td>
+				<th><spring:eval expression="tvshow_['priceRange']" /></th>
+			</tr>
+			<tr>
+				<td>发行计划</td>
+				<th><spring:eval expression="tvshow_['publishSchedule']" /></th>
+			</tr>
+			<tr>
+				<td>项目进度</td>
+				<th><spring:eval expression="tvshow_['progress']" /></th>
+			</tr>
+			<tr>
+				<td>推荐平台</td>
+				<th><spring:eval expression="tvshow_['recommendChannel']" /></th>
+			</tr>
+			<tr>
+				<td>推荐星级</td>
+				<th><spring:eval expression="tvshow_['projectorRecommend']" /></th>
+			</tr>
+			<tr>
+				<td>演员</td>
+				<th><spring:eval expression="tvshow_['actors']" /></th>
+			</tr>
+			<tr>
+				<td>导演</td>
+				<th><spring:eval expression="tvshow_['directors']" /></th>
+			</tr>
+			<tr>
+				<td>编剧</td>
+				<th><spring:eval expression="tvshow_['screenwriters']" /></th>
+			</tr>
+			<tr>
+				<td>录入时间</td>
+				<th><fmt:formatDate value="${tvshow_[inputDate]}" pattern="${fn:escapeXml('yyyy-MM-dd')}" /></th>
+			</tr>
+			<tr>
+				<td>发行人员</td>
+				<th><spring:eval expression="tvshow_['publisher']" /></th>
+			</tr>
+			<tr>
+				<td>故事梗概</td>
+				<th><spring:eval expression="tvshow_['outline']" /></th>
+			</tr>
+			<tr>
+				<td>负责人意见</td>
+				<th><spring:eval expression="tvshow_['projectorComments']" /></th>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div style="text-align: center; font-size: 25px">初审负责人(签名):</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div class="submit" style="text-align: right;">
+						<A href="./${tvshow_['id']}?type=score">录入评分</A> | <A href="#">打印初选意见表</A> |<A href="#">打印评分表</A>
+					</div>
+				</td>
+			</tr>
+
+
+		</table>
+	</util:panel>
+	
+	<c:if test="${type=='print'}">
+
+	</c:if>
+</div>

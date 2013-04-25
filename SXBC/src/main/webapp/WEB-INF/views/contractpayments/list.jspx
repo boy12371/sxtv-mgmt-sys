@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sx_tv_entites_ContractPayment" items="${contractpayments}" z="rC++BIIlHLTiobmnaqwNwM7lj2A=">
+        <table:table create="false" data="${contractpayments}" id="l_com_sx_tv_entites_ContractPayment" path="/contractpayments" z="user-managed">
+            <table:column id="c_com_sx_tv_entites_ContractPayment_amount" property="amount" z="zqtW8F7PeMD9E1aBzLsgMwFvNlQ="/>
+            <table:column id="c_com_sx_tv_entites_ContractPayment_invoiceCount" property="invoiceCount" z="6eZNEH1/nWSgAVvCoxaca++wQHQ="/>
+            <table:column date="true" dateTimePattern="${contractPayment_paydate_date_format}" id="c_com_sx_tv_entites_ContractPayment_payDate" property="payDate" z="b/lajPMHz5kuYRPq0oUzaqEgrIE="/>
+            <table:column id="c_com_sx_tv_entites_ContractPayment_payBy" property="payBy" z="gjRQOlh1BA+Uwd3zI/XRV2BfFos="/>
+            <table:column date="true" dateTimePattern="${contractPayment_recivedate_date_format}" id="c_com_sx_tv_entites_ContractPayment_reciveDate" property="reciveDate" z="vZPfHepqW/Qmgv+3GYTg6OXcSLY="/>
+            <table:column id="c_com_sx_tv_entites_ContractPayment_reciveBy" property="reciveBy" z="Y/2PVeCjvoRHLE7wi89IJZMxtQg="/>
+        </table:table>
+    </page:list>
+</div>

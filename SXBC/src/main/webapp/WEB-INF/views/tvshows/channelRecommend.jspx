@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url value="/resources/js/tvshows/updateScores.js" var="updateScores" />
+	<script src="${updateScores}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+	<script type="text/javascript">
+		var indcts = [];
+	</script>
+	<style>
+td {
+	font-size: 16px;
+	width: 200px;
+	text-align: center
+}
+
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+</style>
+	<div id="updateScoreDiv">
+		<H1>基本信息</H1>
+		<DIV style="height:315px">
+			<table style="width: 100%;">
+				<tr>
+					<td>剧名</td>
+					<th><spring:eval expression="tvshow_['name']" /></th>
+				</tr>
+				<tr>
+					<td>集数</td>
+					<th><spring:eval expression="tvshow_['count']" /></th>
+				</tr>
+				<tr>
+					<td>影视公司</td>
+					<th><spring:eval expression="tvshow_['company']" /></th>
+				</tr>
+				<tr>
+					<td>题材</td>
+					<th><spring:eval expression="tvshow_['theme']" /></th>
+				</tr>
+				<tr>
+					<td>价格区间</td>
+					<th><spring:eval expression="tvshow_['priceRange']" /></th>
+				</tr>
+				<tr>
+					<td>发行计划</td>
+					<th><spring:eval expression="tvshow_['publishSchedule']" /></th>
+				</tr>
+
+				<tr>
+					<td>演员</td>
+					<th><spring:eval expression="tvshow_['actors']" /></th>
+				</tr>
+				<tr>
+					<td>导演</td>
+					<th><spring:eval expression="tvshow_['directors']" /></th>
+				</tr>
+				<tr>
+					<td>编剧</td>
+					<th><spring:eval expression="tvshow_['screenwriters']" /></th>
+				</tr>
+				<tr>
+					<td>发行人员</td>
+					<th><spring:eval expression="tvshow_['publisher']" /></th>
+				</tr>
+				<tr>
+					<td>故事梗概</td>
+					<th><spring:eval expression="tvshow_['outline']" /></th>
+				</tr>
+
+				<tr>
+					<td>项目负责人</td>
+					<th>${tvshow_.projector.staff}</th>
+				</tr>
+				<tr>
+					<td>录入时间</td>
+					<th><fmt:formatDate value="${tvshow_.inputDate}" pattern="${fn:escapeXml('yyyy-MM-dd')}" /></th>
+				</tr>
+				<tr>
+				<td colspan="2">
+					<div class="submit" style="text-align: right;">
+						<A href="#">录入lkjfweoi评分</A> | <A href="#"> rgergerg</A> |<A href="#">ergerge</A>
+					</div>
+				</td>
+			</tr>
+				
+			</table>
+		</DIV>
+		<H1>评分</H1>
+		<DIV>
+			<form:form id="scoreForm" action="./updateScores" method="POST" modelAttribute="tvScore">
+				<table style="width: 100%;">
+					<c:forEach items="${indicators}" var="item" varStatus="vs">
+						<tr style="height: 50px">
+							<td><spring:eval expression="item['name']" />[<spring:eval expression="item['proportion']" />]</td>
+							<th><INPUT type="hidden" name="scores[${vs.index}].scoreIndicator" value="${item.id}" />
+							 <INPUT type="text" class="text ui-widget-content ui-corner-all error" id="scores_${vs.index}" name="scores[${vs.index}].score" class="scroeInput" style="width: 120px;" /></th>
+						</tr>
+					</c:forEach>
+					<tr style="height: 100px">
+						<th colspan="2" style="text-align: center;"><INPUT name="tvid" id="tvid" type="hidden" value="${tvshow_.id}" /> 得分：<INPUT type="text" class="text ui-widget-content ui-corner-all error"
+							id="finalScore" name="finalScore" style="width: 120px;" /> 
+							</th>
+					</tr>
+					<tr style="height: 100px">
+						<th colspan="2" style="text-align: center;">
+							推荐播出平台：<select id="_recommendChannel_id" name="channel">
+								<c:forEach items="${channels}" var="item">
+									<option value="${item.id}">${item.name}</option>
+								</c:forEach>
+						</select></th>
+					</tr>
+					<tr style="height: 50px">
+						<TD colspan="2">
+							<div class="submit" style="float: right; margin-right: 50px">
+								<input type="button" value="淘 汰" id="rejectBtn" style="width: 100px; margin-right: 17px; background-color: rgb(245, 179, 166);" /> <input type="submit"
+									value="保 存" id="submitBtn" style="width: 100px" />
+							</div>
+						</TD>
+					</tr>
+				</table>
+
+				<div id="dialog-form" title="淘汰此剧目">
+					<p class="validateTips">淘汰原因(必填)：</p>
+					<fieldset style="width: 300px">
+						<input type="text" name="reason" id="reason" style="width: 295px" class="text ui-widget-content ui-corner-all" />
+					</fieldset>
+
+				</div>
+			</form:form>
+		</DIV>
+	</div>
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" id="ps_com_sx_tv_entites_ContractPayment" object="${contractpayment}" path="/contractpayments" z="user-managed">
+        <field:display field="amount" id="s_com_sx_tv_entites_ContractPayment_amount" object="${contractpayment}" z="yzLabCr1ijuoWF/iWXfxNCdyh6M="/>
+        <field:display field="invoiceCount" id="s_com_sx_tv_entites_ContractPayment_invoiceCount" object="${contractpayment}" z="hcLWVUGSfHv8qNb4SnHh9csZOR8="/>
+        <field:display date="true" dateTimePattern="${contractPayment_paydate_date_format}" field="payDate" id="s_com_sx_tv_entites_ContractPayment_payDate" object="${contractpayment}" z="Rj29ARM6jAwhNgZpydMHR99aFUc="/>
+        <field:display field="payBy" id="s_com_sx_tv_entites_ContractPayment_payBy" object="${contractpayment}" z="mNPnoptOGTAzybIHIq/sKxpLfSE="/>
+        <field:display date="true" dateTimePattern="${contractPayment_recivedate_date_format}" field="reciveDate" id="s_com_sx_tv_entites_ContractPayment_reciveDate" object="${contractpayment}" z="anEIGsUy1fjIj5cNjpsnyoR0jtI="/>
+        <field:display field="reciveBy" id="s_com_sx_tv_entites_ContractPayment_reciveBy" object="${contractpayment}" z="ZxI6vRVQwQVBrCMgR+SE0qmqI4s="/>
+        <field:display field="contract" id="s_com_sx_tv_entites_ContractPayment_contract" object="${contractpayment}" z="Mt+UP1LMdgA8Alkd+cZoXvnTRUk="/>
+    </page:show>
+</div>

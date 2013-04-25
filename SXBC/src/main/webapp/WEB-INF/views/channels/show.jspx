@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_sx_tv_entites_Channel" object="${channel}" path="/channels" z="W17ch6NimPSqVwqllFT4XtTvTdE=">
+        <field:display field="name" id="s_com_sx_tv_entites_Channel_name" object="${channel}" z="NIl5bIczovEr0sFSXAg8NK/VHHI="/>
+        <field:display field="comments" id="s_com_sx_tv_entites_Channel_comments" object="${channel}" z="UciiICZzPAs90EFsCzAlg3Er9hs="/>
+        <div class="rowcontainer">
+            <label> 类别: </label>
+            <c:if test="${channel.type == 1}">
+           		卫视
+           </c:if>
+            <c:if test="${channel.type == 0}">
+           		地面
+           </c:if>
+        </div>
+        <br/>
+        <br/>
+    </page:show>
+</div>

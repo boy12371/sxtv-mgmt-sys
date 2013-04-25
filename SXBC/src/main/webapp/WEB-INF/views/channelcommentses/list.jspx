@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sx_tv_entites_ChannelComments" items="${channelcommentses}" z="1QqYSqgXdGPAMjEMR8W/he3mYQQ=">
+        <table:table create="false" data="${channelcommentses}" id="l_com_sx_tv_entites_ChannelComments" path="/channelcommentses" z="user-managed">
+            <table:column id="c_com_sx_tv_entites_ChannelComments_channel" property="channel" z="jXLGSBhSPHIHuwI2n526x5DOVao="/>
+            <table:column id="c_com_sx_tv_entites_ChannelComments_decision" property="decision" z="I0A7uj7hgvqTNRlDJJFmJaPf1CQ="/>
+            <table:column id="c_com_sx_tv_entites_ChannelComments_recommendLevel" property="recommendLevel" z="gb2WPb5HKGVk95QzIcX1xMTAXJ0="/>
+            <table:column date="true" dateTimePattern="${channelComments_recorddate_date_format}" id="c_com_sx_tv_entites_ChannelComments_recordDate" property="recordDate" z="OGIJMGj4lhzZ3Z5cg/ro4YafvYI="/>
+            <table:column date="true" dateTimePattern="${channelComments_recommenddate_date_format}" id="c_com_sx_tv_entites_ChannelComments_recommendDate" property="recommendDate" z="7hows+Xyns2tKUvdnEU6QyXgsQM="/>
+            <table:column id="c_com_sx_tv_entites_ChannelComments_ownedby" property="ownedby" z="FvHUmHu8QIuz2fgPeLLjfE6Skk0="/>
+        </table:table>
+    </page:list>
+</div>

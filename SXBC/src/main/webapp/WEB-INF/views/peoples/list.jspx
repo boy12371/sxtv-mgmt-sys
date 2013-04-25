@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sx_tv_entites_People" items="${peoples}" z="tKaviYe+Nu/QwziLmm0JMkTSIeI=">
+        <table:table data="${peoples}" id="l_com_sx_tv_entites_People" path="/peoples" z="QkrwEMXaYserqvMlI4s9HwsCmyw=">
+            <table:column id="c_com_sx_tv_entites_People_name" property="name" z="Mepn35CJea6LWhOv48UMXJ5mYfA="/>
+            <table:column label="代表作" id="c_com_sx_tv_entites_People_achievements" property="achievements" z="kkUCEtiw8MjPZh/B7jY/8cSoh4A="/>
+        </table:table>
+    </page:list>
+</div>

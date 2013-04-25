@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#rejectDiv").accordion({
+				collapsible : true,
+				heightStyle : "content"
+			});
+
+			$("#rejectTVform").validate({
+				rules : {
+					owner : "required",
+					reason : "required"
+				}
+			});
+		});
+	</script>
+	<style>
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+</style>
+	<div id="rejectDiv">
+
+		<c:if test="${TVShow_.status.id == 1}">
+			<H1>淘汰剧目？</H1>
+			<DIV style="height: auto">
+				<form:form id="rejectTVform"
+					action="/SXBC/tvshows/reject/${TVShow_.id}" modelAttribute="reject"
+					method="POST" enctype="application/x-www-form-urlencoded">
+					<p class="validateTips">评分负责人：</p>
+					<input type="hidden" name="status" value="2" />
+					<input type="text" class="text ui-widget-content ui-corner-all"
+						name="owner" id="owner" />
+					<p class="validateTips">淘汰原因(必填)：</p>
+					<input type="text" class="text ui-widget-content ui-corner-all"
+						name="reason" id="reason" style="width: 295px" />
+					<br />
+					<div class="submit" style="margin-top:15px">
+						<input type="submit" value="确 定" />
+					</div>
+				</form:form>
+			</DIV>
+		</c:if>
+
+		<c:if test="${TVShow_.status.id == 5}">
+			<H1>淘汰剧目？</H1>
+			<DIV style="height: auto">
+				<form:form id="rejectTVform"
+					action="/SXBC/tvshows/reject/${TVShow_.id}" modelAttribute="reject"
+					method="POST" enctype="application/x-www-form-urlencoded">
+					<p class="validateTips">购片负责人：</p>
+					<input type="hidden" name="status" value="6" />
+					<input type="text" class="text ui-widget-content ui-corner-all"
+						name="owner" id="owner" />
+					<p class="validateTips">淘汰/未购 原因(必填)：</p>
+					<input type="text" class="text ui-widget-content ui-corner-all"
+						name="reason" id="reason" style="width: 295px" />
+					<br />
+					<div class="submit" style="margin-left: 30px">
+						<input type="submit" value="确定" />
+					</div>
+				</form:form>
+			</DIV>
+		</c:if>
+
+	</div>
+</div>

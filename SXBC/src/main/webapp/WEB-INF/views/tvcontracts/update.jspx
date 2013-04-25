@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <c:if test="${empty formURL}">
+        <c:set value="/tvcontracts" var="formURL"/>
+    </c:if>
+    <style>
+label {
+    float: left;
+    margin-left: 5px;
+    margin-top: 0;
+    width: 180px;
+    color: #666;
+}
+</style>
+    <form:update id="fu_com_sx_tv_entites_TVContract" label="更新合同" modelAttribute="TVContract_" path="${formURL }" versionField="Version" z="user-managed">
+        <div class="rowcontainer">
+            <label> 剧 目: </label>
+            <label>
+                <A href="/SXBC/tvshows/generalInfo/${TVContract_.tvshow.id}"> ${TVContract_.tvshow.name} </A>
+            </label>
+            <input name="tvshow" type="hidden" value="${TVContract_.tvshow.id}"/>
+        </div>
+        <br/>
+        <br/>
+        <field:input field="ownedby" id="c_com_sx_tv_entites_TVContract_owner" label="合同负责人" z="pEUZjCCvnX36CFh1ymi5xyhHfrk="/>
+        <field:datetime dateTimePattern="${TVContract__showdate_date_format}" field="showDate" id="c_com_sx_tv_entites_TVContract_showDate" label="上星时间" z="user-managed"/>
+        <field:input field="publishForm" id="c_com_sx_tv_entites_TVContract_publishForm" label="发行方式" z="user-managed"/>
+        <field:input field="totalPrice" id="c_com_sx_tv_entites_TVContract_totalPrice" label="总价" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <field:input field="extraFee" id="c_com_sx_tv_entites_TVContract_extraFee" label="单价及三费" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__recievedate_date_format}" field="recieveDate" id="c_com_sx_tv_entites_TVContract_recieveDate" label="合同接收时间" z="user-managed"/>
+        <field:input field="recieveOwner" id="c_com_sx_tv_entites_TVContract_recieveOwner" label="合同接收经手人" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__inputdate_date_format}" field="inputDate" id="c_com_sx_tv_entites_TVContract_inputDate" label="合同录入时间" z="user-managed"/>
+        <field:input field="inputter" id="c_com_sx_tv_entites_TVContract_inputter" label="合同录入经手人" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__filedate_date_format}" field="fileDate" id="c_com_sx_tv_entites_TVContract_fileDate" label="合同归档时间" z="user-managed"/>
+        <field:input field="fileBy" id="c_com_sx_tv_entites_TVContract_fileBy" label="合同归档经手人" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__recieveagreementdate_date_format}" field="recieveAgreementDate" id="c_com_sx_tv_entites_TVContract_recieveAgreementDate" label="归档经手人" z="user-managed"/>
+        <field:input field="recieveAgreementOwner" id="c_com_sx_tv_entites_TVContract_recieveAgreementOwner" label="补充协议接收经手人" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__inputagreementdate_date_format}" field="inputAgreementDate" id="c_com_sx_tv_entites_TVContract_inputAgreementDate" label="补充协议录入时间" z="user-managed"/>
+        <field:input field="inputterAgreement" id="c_com_sx_tv_entites_TVContract_inputterAgreement" label="补充协议录入经手人" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__fileagreementdate_date_format}" field="fileAgreementDate" id="c_com_sx_tv_entites_TVContract_fileAgreementDate" label="补充协议归档时间" z="user-managed"/>
+        <field:input field="fileByAgreement" id="c_com_sx_tv_entites_TVContract_fileByAgreement" label="补充协议归档经手人" z="user-managed"/>
+        <field:input field="contractNo" id="c_com_sx_tv_entites_TVContract_contractNo" label="合同号" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__copyrightstart_date_format}" field="copyrightStart" id="c_com_sx_tv_entites_TVContract_copyrightStart" label="版权期限开始时间" z="user-managed"/>
+        <field:datetime dateTimePattern="${TVContract__copyrightend_date_format}" field="copyrightEnd" id="c_com_sx_tv_entites_TVContract_copyrightEnd" label="版权期限终止时间" z="user-managed"/>
+        <field:select field="channel" id="c_com_sx_tv_entites_TVContract_channel" itemLabel="name" itemValue="id" items="${channels}" label="播出平台" path="/channels" z="user-managed"/>
+    </form:update>
+</div>

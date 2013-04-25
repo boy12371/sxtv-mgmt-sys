@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_sx_tv_entites_Role" modelAttribute="role" path="/roles" render="${empty dependencies}" z="xJQuzgAf0SdZFRKGKNPWuc7aEoc=">
+        <field:input field="name" id="c_com_sx_tv_entites_Role_name" z="9WDeIjhfq4pWZ16NhB7SesDWUdw="/>
+        <field:input field="comments" id="c_com_sx_tv_entites_Role_comments" z="C/CreAajzJs50v6DMPfJAeV/afI="/>
+        <div id="_c_com_sx_tv_entites_Role_resources_id">
+            <label for="_resources_id">资源 : </label>
+            <p style="margin-left:105px;">
+                <c:forEach items="${resources }" var="r">
+                    <input name="resources" type="checkbox" value="${r.id}"/>${r.resouceName} | ${r.resouceURL}<br/>
+                </c:forEach>
+            </p>
+        </div>
+        <br/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_sx_tv_entites_Role" render="${not empty dependencies}" z="G4B+jzvfstSnmP1WiuKNf7Xjghs="/>
+</div>

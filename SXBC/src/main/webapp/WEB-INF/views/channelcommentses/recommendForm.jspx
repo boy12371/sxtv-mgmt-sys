@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<style>
+table {
+	border: 1px solid #666;
+	border-spacing: 0px;
+	width: 100%
+}
+
+table CAPTION {
+	font-size: 1.8em;
+	color: black;
+	text-align: center
+}
+
+tr:nth-child(even) {
+	background-color: #FFFFFF;
+}
+
+td {
+	font-size: 1.2em;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid;
+}
+</style>
+	<br /><br />
+	<TABLE>
+		<CAPTION>节目推荐意见表</CAPTION>
+		<TR>
+			<TD>剧 目:</TD>
+			<TD>${channelComments.tvshow.name}</TD>
+			<TD>集数</TD>
+			<TD>${channelComments.tvshow.count}</TD>
+			<TD>类型</TD>
+			<TD>${channelComments.tvshow.theme.name}</TD>
+			<TD>状态</TD>
+			<TD>${channelComments.tvshow.status.name}</TD>
+			<TD>发行计划</TD>
+			<TD>${channelComments.tvshow.publishSchedule}</TD>
+		</TR>
+		<tr>
+			<td>制作公司</td>
+			<td>${channelComments.tvshow.company.name}</td>
+			<td>代表作品</td>
+			<td colspan="2">${channelComments.tvshow.company.achievements}</td>
+			<td>收视</td>
+			<td colspan="2"></td>
+			<td>对该剧宣传计划</td>
+			<td colspan="2"></td>
+		</tr>
+		<TR>
+			<td colspan="1">主创人员</td>
+			<TD colspan="9" style="padding: 0px; border: none">
+				<table style="border: none; font-size: .7em">
+					<TR>
+						<td></td>
+						<td>姓名</td>
+						<td>代表作</td>
+						<td>收视状况(平均)</td>
+						<td>市场评价</td>
+					</TR>
+					<TR>
+						<td>导演</td>
+						<td><c:forEach items="${channelComments.tvshow.directors}" var="d">
+						${d.name} 
+					</c:forEach></td>
+						<td><c:forEach items="${channelComments.tvshow.directors}" var="d">
+						${d.achievements} 
+					</c:forEach></td>
+						<td></td>
+						<td></td>
+					</TR>
+					<TR>
+						<td>编剧</td>
+						<td><c:forEach items="${channelComments.tvshow.screenwriters}" var="d">
+						${d.name} 
+					</c:forEach></td>
+						<td><c:forEach items="${channelComments.tvshow.screenwriters}" var="d">
+						${d.achievements} 
+					</c:forEach></td>
+						<td></td>
+						<td></td>
+					</TR>
+					<TR>
+						<td>演员</td>
+						<td><c:forEach items="${channelComments.tvshow.actors}" var="d">
+						${d.name} 
+					</c:forEach></td>
+						<td><c:forEach items="${channelComments.tvshow.actors}" var="d">
+						${d.achievements} 
+					</c:forEach></td>
+						<td></td>
+						<td></td>
+					</TR>
+				</table>
+
+			</TD>
+
+		</TR>
+		<tr>
+			<td>发行价格</td>
+			<td></td>
+			<td>推荐时间</td>
+			<td colspan="2"></td>
+			<td>答复时间</td>
+			<td colspan="2"></td>
+			<td>节目中心推荐意${channelComments.recommendLevel.id}见</td>
+			<td colspan="2">
+				<DIV class="rateit" data-rateit-value="${deptCmt.recommendLevel.id}" data-rateit-readonly="true" style="margin-bottom: 10px">
+					<SPAN></SPAN>
+				</DIV>
+			</td>
+		</tr>
+		<tr>
+			<td>故事梗概</td>
+			<td colspan="11">${channelComments.tvshow.outline}</td>
+		</tr>
+		<tr>
+			<td>评估结果</td>
+			<td colspan="2"></td>
+			<td>购片意见</td>
+			<td colspan="2"></td>
+			<td>频道意见</td>
+			<td colspan="3"></td>
+		</tr>
+		<tr>
+			<td colspan="12">填表人：${channelComments.tvshow.projector.staff}</td>
+		</tr>
+	</TABLE>
+
+</div>

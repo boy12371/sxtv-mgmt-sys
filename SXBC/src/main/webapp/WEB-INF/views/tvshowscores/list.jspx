@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sx_tv_entites_TVShowScore" items="${tvshowscores}" z="PaLeg06QpOVKC8AEvwIcvddWp8s=">
+        <table:table data="${tvshowscores}" id="l_com_sx_tv_entites_TVShowScore" path="/tvshowscores" z="+3ibIxKT/EzZYoFPFOsAyyh2qTc=">
+            <table:column id="c_com_sx_tv_entites_TVShowScore_avgScore" property="avgScore" z="Q2gzFK9nAxJ1HgDwWkVKlL0UpB4="/>
+        </table:table>
+    </page:list>
+</div>

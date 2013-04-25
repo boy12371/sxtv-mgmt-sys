@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_sx_tv_entites_TVShow" object="${tvshow_}" path="/tvshows1" z="g1zFTEArfj6yzq9a70JHlCNnrII=">
+        <field:display field="name" id="s_com_sx_tv_entites_TVShow_name" object="${tvshow_}" z="8R8iA3Jw4zrQ7JNbE/Hcl70mNrg="/>
+        <field:display field="count" id="s_com_sx_tv_entites_TVShow_count" object="${tvshow_}" z="DwG0+zwdZxJbNePhz0zgEIkJGCk="/>
+        <field:display field="publishSchedule" id="s_com_sx_tv_entites_TVShow_publishSchedule" object="${tvshow_}" z="V7upgrQSHa3ilB6LjlUb6dZWl60="/>
+        <field:display field="priceRange" id="s_com_sx_tv_entites_TVShow_priceRange" object="${tvshow_}" z="8kCk6REL6s4pcqU00FnmSaIWjhk="/>
+        <field:display field="ratings" id="s_com_sx_tv_entites_TVShow_ratings" object="${tvshow_}" z="Fo3naPeTHyJKnMCE3rGanJsLbxA="/>
+        <field:display field="marketShare" id="s_com_sx_tv_entites_TVShow_marketShare" object="${tvshow_}" z="3RMQxULNC5Mg4p6FYt/GvB/oHAc="/>
+        <field:display field="ranking" id="s_com_sx_tv_entites_TVShow_ranking" object="${tvshow_}" z="WabruQ0MMWfn1/HK/t+wXOP08os="/>
+        <field:display field="outline" id="s_com_sx_tv_entites_TVShow_outline" object="${tvshow_}" z="ltiW29xNLiB3b7wcFsjdI+YyAMM="/>
+        <field:display field="marketAssessment" id="s_com_sx_tv_entites_TVShow_marketAssessment" object="${tvshow_}" z="0ettfZV6bG3vS59iB/p04hzj71Y="/>
+        <field:display field="publicPrice" id="s_com_sx_tv_entites_TVShow_publicPrice" object="${tvshow_}" z="nTetaQoLrV0bg5xB5Of4FsfgPN0="/>
+        <field:display field="isPurchase" id="s_com_sx_tv_entites_TVShow_isPurchase" object="${tvshow_}" z="a2tcJtdFSIxudcUTp2geCaxUo1g="/>
+        <field:display date="true" dateTimePattern="${TVShow__inputdate_date_format}" field="inputDate" id="s_com_sx_tv_entites_TVShow_inputDate" object="${tvshow_}" z="955ILo+6xSOpI29Jsb/YgbhiYkg="/>
+        <field:display date="true" dateTimePattern="${TVShow__rejectdate_date_format}" field="rejectDate" id="s_com_sx_tv_entites_TVShow_rejectDate" object="${tvshow_}" z="KLPKSoNGVZe89md5KcIXUx3frws="/>
+        <field:display field="progress" id="s_com_sx_tv_entites_TVShow_progress" object="${tvshow_}" z="N8IFISHugWAeFct8EX91Dgw+3AM="/>
+        <field:display field="theme" id="s_com_sx_tv_entites_TVShow_theme" object="${tvshow_}" z="/vwwab7Gar90jumP2zje7CMRZzE="/>
+        <field:display field="company" id="s_com_sx_tv_entites_TVShow_company" object="${tvshow_}" z="t/bphEjx7MQ3RlSGgl/IA5y4FD4="/>
+        <field:display field="status" id="s_com_sx_tv_entites_TVShow_status" object="${tvshow_}" z="aLYoWtrZQMCH4VnNYU1oUn6G0/8="/>
+        <field:display field="actors" id="s_com_sx_tv_entites_TVShow_actors" object="${tvshow_}" z="0ZcJiIiOisGNKp5A26skMMpJylU="/>
+        <field:display field="directors" id="s_com_sx_tv_entites_TVShow_directors" object="${tvshow_}" z="qv0Rd1yeF6q5foOpsvmb3bEcnXA="/>
+        <field:display field="screenwriters" id="s_com_sx_tv_entites_TVShow_screenwriters" object="${tvshow_}" z="FvjW624iLZTDHrSr1a3/ydY/GBY="/>
+        <field:display field="publisher" id="s_com_sx_tv_entites_TVShow_publisher" object="${tvshow_}" z="+gPglagOhgc02N3h/GvtRjfO/LQ="/>
+        <field:display field="inputter" id="s_com_sx_tv_entites_TVShow_inputter" object="${tvshow_}" z="RnnFcNwjQPNgb8IFuwOR4cLP+rs="/>
+        <field:display field="projector" id="s_com_sx_tv_entites_TVShow_projector" object="${tvshow_}" z="xA3itVBAH38mQvHOmcDVHBtRL74="/>
+        <field:display field="comments" id="s_com_sx_tv_entites_TVShow_comments" object="${tvshow_}" z="PPRJW3RpGE/AFIAcFV+JyvzftT8="/>
+    </page:show>
+</div>
