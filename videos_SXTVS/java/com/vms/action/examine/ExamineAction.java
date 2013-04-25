@@ -56,6 +56,8 @@ public class ExamineAction extends BaseAction {
 	
 	private String newResult;
 
+	private int type;
+	
 	public String toUnExaminedTapes() {
 		return SUCCESS;
 	}
@@ -153,6 +155,7 @@ public class ExamineAction extends BaseAction {
 		if(null == tapeScore.getVedioID() || "".equals(tapeScore.getVedioID())) return INPUT;
 		//for chinese characters, need to convert to utf-8
 		//String vname = new String(tape.getVedioName().getBytes("iso-8859-1"),"utf-8");
+		type = vediotapeService.getVediotapeByID(tapeScore.getVedioID()).getSubject().getId();
 		if("modify".equals(perform)){
 			tapeScore = vedioscoreService.getTapeScoreByIdAndUser(tapeScore.getVedioID(), Integer.parseInt(uid));
 		}else{
@@ -373,5 +376,13 @@ public class ExamineAction extends BaseAction {
 
 	public void setNewResult(String newResult) {
 		this.newResult = newResult;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 }

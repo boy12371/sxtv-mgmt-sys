@@ -20,9 +20,9 @@ public class Scoreweight extends BaseScoreweight {
 	/**
 	 * Constructor for required fields
 	 */
-	public Scoreweight(java.lang.String id, java.lang.Float wieght,String weightName) {
+	public Scoreweight(java.lang.String id, java.lang.Float wieght,String weightName,java.lang.Integer type) {
 
-		super(id, wieght,weightName);
+		super(id, wieght,weightName, type);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */

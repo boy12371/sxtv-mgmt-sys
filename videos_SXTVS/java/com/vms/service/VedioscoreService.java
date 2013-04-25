@@ -2,6 +2,7 @@ package com.vms.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -82,11 +83,11 @@ public class VedioscoreService implements IVedioscoreService {
 
 	public void saveVedioScore(VedioScoreVO scoreVO) throws Exception {
 		Vedioscore score = scoreVO.toVedioscore();
-
-		Map<String, Float> weights = getWeights();
-		Float sum = score.getPerformScore() * weights.get("performScore") + score.getInnovateScore()
-				* weights.get("innovateScore") + score.getStoryScore() * weights.get("storyScore")
-				+ score.getTechScore() * weights.get("techScore");
+		Vediotape vt = (Vediotape) vediotapeDAO.loadObject(Vediotape.class, scoreVO.getVedioID());
+		Map<String, Float> weights = getWeights(vt.getSubject().getId()==1?1:0);
+		Float sum = score.getPerformScore() * (weights.get("performScore")!=null?weights.get("performScore"):weights.get("_performScore")) + score.getInnovateScore()
+				* (weights.get("innovateScore")!=null?weights.get("innovateScore"):weights.get("_innovateScore")) + score.getStoryScore() * (weights.get("storyScore")!=null?weights.get("storyScore"):weights.get("_storyScore"))
+				+ score.getTechScore() * (weights.get("techScore")!=null?weights.get("techScore"):weights.get("_techScore"));
 		score.setScore(sum);
 
 		vedioscoreDAO.saveOrUpdateObject(score);
@@ -102,9 +103,9 @@ public class VedioscoreService implements IVedioscoreService {
 //		}
 	}
 
-	private Map<String, Float> getWeights() throws Exception {
+	private Map<String, Float> getWeights(int subject) throws Exception {
 		Map<String, Float> map = new HashMap<String, Float>();
-		List<Scoreweight> weights = vedioscoreDAO.findAll(Scoreweight.class);
+		List<Scoreweight> weights = vedioscoreDAO.findObjectByField(Scoreweight.class, Scoreweight.PROP_TYPE, subject, -1, -1, null, false);//.findAll(Scoreweight.class);
 		for (Scoreweight w : weights) {
 			map.put(w.getId(), w.getWeight());
 		}

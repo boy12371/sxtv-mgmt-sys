@@ -15,6 +15,7 @@ public abstract class BaseScoreweight implements Serializable {
 	public static String REF = "Scoreweight";
 	public static String PROP_WIEGHT = "weight";
 	public static String PROP_WIEGHTNAME = "weightName";
+	public static String PROP_TYPE = "type";
 	public static String PROP_ID = "id";
 
 	// constructors
@@ -33,11 +34,12 @@ public abstract class BaseScoreweight implements Serializable {
 	/**
 	 * Constructor for required fields
 	 */
-	public BaseScoreweight(java.lang.String id, java.lang.Float weight, java.lang.String weightName) {
+	public BaseScoreweight(java.lang.String id, java.lang.Float weight, java.lang.String weightName, java.lang.Integer type) {
 
 		this.setId(id);
 		this.setWeight(weight);
 		this.setWeightName(weightName);
+		this.setType(type);
 		initialize();
 	}
 
@@ -53,7 +55,9 @@ public abstract class BaseScoreweight implements Serializable {
 	private java.lang.Float weight;
 	
 	private java.lang.String weightName;
-
+	
+	private java.lang.Integer type;
+	
 	/**
 	 * Return the unique identifier of this class
 	 * 
@@ -120,6 +124,14 @@ public abstract class BaseScoreweight implements Serializable {
 
 	public void setWeight(java.lang.Float weight) {
 		this.weight = weight;
+	}
+
+	public java.lang.Integer getType() {
+		return type;
+	}
+
+	public void setType(java.lang.Integer type) {
+		this.type = type;
 	}
 
 }
