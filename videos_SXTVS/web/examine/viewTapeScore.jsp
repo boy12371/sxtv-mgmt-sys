@@ -45,7 +45,8 @@
 				<td><s:property value="tapeScore.performScore"/></td>
 			</tr>
 			<tr>
-				<td><label>创新</label></td>
+				<td><s:if test="type==1"><label>节奏</label></s:if>
+				<s:else><label>创新</label></s:else></td>
 				<td><s:property value="tapeScore.innovateScore"/></td>
 			</tr>
 			<tr>

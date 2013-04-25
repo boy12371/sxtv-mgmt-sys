@@ -90,7 +90,10 @@
 				</s:else>
 			</tr>
 			<tr>
-				<td><label>创新</label></td>
+				<td>${type}
+				<s:if test="type==1"><label>节奏</label></s:if>
+				<s:else><label>创新</label></s:else>
+				</td>
 				<s:if test="'modify'==perform">
 					<td><s:textfield cssClass="inputField" name="tapeScore.innovateScore" id="innovateScore" /></td>
 				</s:if><s:else>
