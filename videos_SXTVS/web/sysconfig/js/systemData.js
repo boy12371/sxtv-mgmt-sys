@@ -537,13 +537,20 @@ function initSubjectTable() {
 }
 
 function initScoreWeightTable() {
-
+		var _formatType = function(elCell, oRecord, oColumn, sData) {
+		        var st = sData == 1 ? "都市" : "百家";
+		        elCell.innerHTML = st;
+			};
         var myColumnDefs = [ {
                                 key : "weightName",
                                 label : "名称"
                         }, {
                                 key : "weight",
                                 label : "权重系数"
+                        }, {
+	                        	key : "type",
+	                            label : "类别",
+	                            formatter : _formatType,
                         }, {
                                 key : "select",
                                 label : "操作",
@@ -563,7 +570,7 @@ function initScoreWeightTable() {
 
         myDataSource.responseSchema = {
                 resultsList : "records",
-                fields : ["id", "weight", "weightName", {
+                fields : ["id", "weight", "weightName", "type", {
                                         key : "select",
                                         parser : "string"
                                 }],
