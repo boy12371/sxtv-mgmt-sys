@@ -5,7 +5,7 @@
     <page:list id="pl_com_sx_tv_entites_People" items="${peoples}" z="tKaviYe+Nu/QwziLmm0JMkTSIeI=">
         <table:table data="${peoples}" id="l_com_sx_tv_entites_People" path="/peoples" z="QkrwEMXaYserqvMlI4s9HwsCmyw=">
             <table:column id="c_com_sx_tv_entites_People_name" property="name" z="Mepn35CJea6LWhOv48UMXJ5mYfA="/>
-            <table:column label="代表作" id="c_com_sx_tv_entites_People_achievements" property="achievements" z="kkUCEtiw8MjPZh/B7jY/8cSoh4A="/>
+            <table:column id="c_com_sx_tv_entites_People_achievements" label="代表作" property="achievements" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

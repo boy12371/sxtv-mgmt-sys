@@ -72,7 +72,7 @@ li.token-input-input-token-facebook {
 
 div.token-input-dropdown-facebook {
     position: absolute;
-    width: 400px;
+    width: 350px;
     background-color: #fff;
     overflow: hidden;
     border-left: 1px solid #ccc;
@@ -82,6 +82,10 @@ div.token-input-dropdown-facebook {
     font-size: 11px;
     font-family: Verdana;
     z-index: 1;
+    max-height: 200px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
 }
 
 div.token-input-dropdown-facebook p {

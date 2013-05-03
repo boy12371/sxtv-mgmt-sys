@@ -4,9 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show create="false" id="ps_com_sx_tv_entites_DeptComments" object="${deptcomments}" path="/deptcommentses" z="user-managed">
         <field:display field="staff" id="s_com_sx_tv_entites_DeptComments_owner" object="${deptcomments.owner}" z="user-managed"/>
-        <field:display field="name" id="s_com_sx_tv_entites_DeptComments_recommendLevel" object="${deptcomments.recommendLevel}" z="user-managed"/>
+        <field:display label="推荐星级" field="name" id="s_com_sx_tv_entites_DeptComments_recommendLevel" object="${deptcomments.recommendLevel}" z="user-managed"/>
         <div>
-            <LABEL> 推荐平台 </LABEL>
+            <LABEL> 推荐平台</LABEL>
             <c:if test="${empty deptcomments.recommendChannel}">
         		-
         	</c:if>

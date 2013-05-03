@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_sx_tv_entites_DeptComments" items="${deptcommentses}" z="KFh+0pKprq7mgqW5iBflFdSXva4=">
-        <table:table create="false" data="${deptcommentses}" id="l_com_sx_tv_entites_DeptComments" path="/deptcommentses" z="user-managed">
+        <table:table create="true" data="${deptcommentses}" id="l_com_sx_tv_entites_DeptComments" path="/deptcommentses" z="user-managed">
             <table:column id="c_com_sx_tv_entites_DeptComments_owner" property="owner" z="OTGvrVCLpd17sZE4zTFHHBE2mAU="/>
             <table:column id="c_com_sx_tv_entites_DeptComments_recommendLevel" property="recommendLevel" z="aOWEQ7FYisDaXz+m9dC5LSfkIJo="/>
             <table:column id="c_com_sx_tv_entites_DeptComments_recommendChannel" property="recommendChannel" z="IZjJboAe2diwglgyZG0J/DUm+1U="/>

@@ -422,7 +422,8 @@ h1 {
 						<br />
 						<c:if test="${dept.isRecommend}">
 							<div class="rowcontainer">
-								<label>推荐星级 : </label> ${dept.recommendLevel.name }
+								<label>推荐星级 : </label>
+								<div class="rateit" data-rateit-value="${dept.recommendLevel.id}" data-rateit-ispreset="true" data-rateit-readonly="true">.</div>
 							</div>
 							<br />
 							<div class="rowcontainer">

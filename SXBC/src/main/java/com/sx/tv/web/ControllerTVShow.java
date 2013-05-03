@@ -1,5 +1,6 @@
 package com.sx.tv.web;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.text.DateFormat;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -20,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sx.tv.entites.Channel;
@@ -71,6 +75,9 @@ public class ControllerTVShow {
 	@RequestMapping(value = "/create", params = "toCreate", produces = "text/html")
 	public String toCreate(Model uiModel) {
 		uiModel.addAttribute("TVShow_", new TVShow());
+		uiModel.addAttribute("people", new People());
+		uiModel.addAttribute("company", new Company());
+		uiModel.addAttribute("theme", new Theme());
 		addDateTimeFormatPatterns(uiModel);
 		populateEditForm(uiModel);
 		return "tvshows/create";
@@ -191,31 +198,31 @@ public class ControllerTVShow {
 	public String doCreate(TVShow TVShow_, Principal principal, Model uiModel, HttpServletRequest httpServletRequest) {
 		uiModel.asMap().clear();
 
-		List<People> as = new ArrayList<People>(TVShow_.getActors().size());
-		for (People a : TVShow_.getActors()) {
-			a = People.findPeople(a.getId());
-			as.add(a);
-		}
-		TVShow_.setActors(as);
-		List<People> ds = new ArrayList<People>(TVShow_.getDirectors().size());
-		for (People d : TVShow_.getDirectors()) {
-			d = People.findPeople(d.getId());
-			ds.add(d);
-		}
-		TVShow_.setDirectors(ds);
-
-		List<People> ss = new ArrayList<People>(TVShow_.getScreenwriters().size());
-		for (People s : TVShow_.getScreenwriters()) {
-			s = People.findPeople(s.getId());
-			ss.add(s);
-		}
-		TVShow_.setScreenwriters(ss);
-		List<People> ps = new ArrayList<People>(TVShow_.getPublisher().size());
-		for (People p : TVShow_.getPublisher()) {
-			p = People.findPeople(p.getId());
-			ps.add(p);
-		}
-		TVShow_.setPublisher(ps);
+//		List<People> as = new ArrayList<People>(TVShow_.getActors().size());
+//		for (People a : TVShow_.getActors()) {
+//			a = People.findPeople(a.getId());
+//			as.add(a);
+//		}
+//		TVShow_.setActors(as);
+//		List<People> ds = new ArrayList<People>(TVShow_.getDirectors().size());
+//		for (People d : TVShow_.getDirectors()) {
+//			d = People.findPeople(d.getId());
+//			ds.add(d);
+//		}
+//		TVShow_.setDirectors(ds);
+//
+//		List<People> ss = new ArrayList<People>(TVShow_.getScreenwriters().size());
+//		for (People s : TVShow_.getScreenwriters()) {
+//			s = People.findPeople(s.getId());
+//			ss.add(s);
+//		}
+//		TVShow_.setScreenwriters(ss);
+//		List<People> ps = new ArrayList<People>(TVShow_.getPublisher().size());
+//		for (People p : TVShow_.getPublisher()) {
+//			p = People.findPeople(p.getId());
+//			ps.add(p);
+//		}
+//		TVShow_.setPublisher(ps);
 
 		User inputer = User.findUsersByNameEquals(principal.getName()).getSingleResult();
 		TVShow_.setInputter(inputer);
@@ -230,6 +237,9 @@ public class ControllerTVShow {
 	public String toUpdate(@PathVariable("id") Long id, Model uiModel) {
 		uiModel.addAttribute("TVShow_", TVShow.findTVShow(id));
 		addDateTimeFormatPatterns(uiModel);
+		uiModel.addAttribute("people", new People());
+		uiModel.addAttribute("company", new Company());
+		uiModel.addAttribute("theme", new Theme());
 		populateEditForm(uiModel);
 		return "tvshows/update";
 	}
@@ -388,8 +398,81 @@ public class ControllerTVShow {
 
 	@RequestMapping(value = "/loadPeopleJsonString", method = RequestMethod.GET)
 	public @ResponseBody
-	List<People> writeJson() {
-		return People.findAllPeoples();
+	List<People> writeJson(@RequestParam String pname) {
+		try {
+			pname = new String(pname.getBytes("ISO-8859-1"), "UTF-8");
+			if (pname.charAt(0) != '%') {
+				pname = "%" + pname;
+			}
+			if (pname.charAt(pname.length() - 1) != '%') {
+				pname = pname + "%";
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		EntityManager em = People.entityManager();
+		StringBuffer sb = new StringBuffer("SELECT o FROM People AS o WHERE o.name LIKE :name");
+		Query query = em.createQuery(sb.toString(), People.class);
+		query.setParameter("name", pname);
+		List<People> peoples = query.getResultList();
+		return peoples;
+	}
+	
+	@RequestMapping(value = "/loadTVshowJsonString", method = RequestMethod.GET)
+	public @ResponseBody List<Jtvshow> queryJsonTVshow(@RequestParam String tvname){
+		List<Jtvshow> list = new ArrayList<Jtvshow>();
+		try {
+			tvname = new String(tvname.getBytes("ISO-8859-1"), "UTF-8");
+			if (tvname.charAt(0) != '%') {
+				tvname = "%" + tvname;
+			}
+			if (tvname.charAt(tvname.length() - 1) != '%') {
+				tvname = tvname + "%";
+			}
+			EntityManager em = TVShow.entityManager();
+			StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o WHERE o.name LIKE :name");
+			Query query = em.createQuery(sb.toString(), TVShow.class);
+			query.setParameter("name", tvname);
+			List<TVShow> _data = query.getResultList();
+			if(null != _data && !_data.isEmpty()){
+				for (TVShow tvShow : _data) {
+					list.add(new Jtvshow(tvShow.getId(),tvShow.getName()));
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
+	public class Jtvshow implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private long id;
+		private String name;
+		public long getId() {
+			return id;
+		}
+		public void setId(long id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public Jtvshow() {
+		}
+		public Jtvshow(long id, String name) {
+			super();
+			this.id = id;
+			this.name = name;
+		}
+		
+	}
 }

@@ -2,6 +2,10 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    <spring:url value="/resources/js/validateUtil.js" var="validateUtil"/>
+    <script src="${validateUtil}" type="text/javascript">
+        <!-- required for FF3 and Opera -->
+    </script>
     <script type="text/javascript">
     $(document).ready(function() {
     	
@@ -15,18 +19,116 @@
 			$(this).attr('checked', true);
 
 			if ($(this).attr('id') == "isRecommend_no") {
-				$("#_recommendLevel_id").parent().hide();
-				$("#_recommendChannel_id").parent().hide();
+				dijit.byId("_recommendLevel_id").set("disabled", true);
+				dijit.byId("_recommendChannel_id").set("disabled", true);
 			} else {
-				$("#_recommendLevel_id").parent().show();
-				$("#_recommendChannel_id").parent().show();
+				dijit.byId("_recommendLevel_id").set("disabled", false);
+				dijit.byId("_recommendChannel_id").set("disabled", false);
 			}
 		});
+    	
+    	$("#tvshow_autocomplete").tokenInput("/SXBC/tvshows/loadTVshowJsonString", {
+    		tokenLimit : 1,
+    		propertyToSearch : "name",
+    		queryParam : "tvname",
+    		hintText : "键入并搜索",
+    		tokenFormatter : function(item) {
+    			return "<li><p>" + item.name + "</p></li>";
+    		},
+    		onAdd : function(item) {
+    			//var _tvshow = $("input[name=tvshow]").length
+    			//if (_tvshow != 0) {
+    				$("#_tvshow_id").val(item.id);
+    				ValidateUtil.hideError($("#token-input-tvshow_autocomplete"));
+    			//}
+
+    		},
+    		onDelete : function(item) {
+    			$("#_tvshow_id").val("");
+    		}
+    	});
+    	
+    	$("#deptComments").submit(function(){
+    		var v = $("#_tvshow_id").val();
+    		if(v == ""){
+    			ValidateUtil.showError($("#token-input-tvshow_autocomplete"), "必填字段");
+    			return false;
+    		}
+    		
+    		if($("input[name=recommendLevel]").val()==0){
+    			if($("#isRecommend_yes")[0].checked){
+    				alert("要推荐此剧，请选择推荐星级");
+    				//ValidateUtil.showError($("#_recommendLevel_id"), "必选字段");
+        			return false;	
+    			}
+    		}
+    	});
     });
 	</script>
+	
+	<style>
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+
+select {
+	width: 200px;
+}
+
+.dijitTextArea {
+	max-height: 22em !important;
+	max-width: 500px;
+	min-height: 5.5em !important;
+	overflow-y: auto !important;
+}
+
+.ui-autocomplete {
+	max-height: 300px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+* html .ui-autocomplete {
+	height: 100px;
+}
+
+ul.token-input-list {
+	background-color: #FFFFFF;
+	border: 1px solid #B3B3B3;
+	clear: right;
+	cursor: text;
+	font-family: Verdana;
+	font-size: 12px;
+	height: 23px !important;
+	list-style-type: none;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	width: 300px;
+	z-index: 999;
+}
+
+li.token-input-token {
+	background-color: #EFF2F7;
+	color: #000000;
+	cursor: default;
+	display: block;
+	font-weight: bold;
+	height: auto !important;
+	margin: 0px;
+	overflow: hidden;
+	padding: 3px 5px;
+}
+</style>
     <form:create id="fc_com_sx_tv_entites_DeptComments" modelAttribute="deptComments" path="/deptcommentses" render="${empty dependencies}" z="9vmvIT2dU/pFZfPi5BT2TVHV+rA=">
         <div class="rowcontainer">
-            <label>中心意见 : </label>
+            <label>中心意见: </label>
             <INPUT checked="checked" id="isRecommend_yes" name="isRecommend" type="checkbox" value="true"/>推荐 <input id="isRecommend_no" name="isRecommend" type="checkbox" value="false"/> 不推荐(淘汰)
 						</div>
         <br/>
@@ -34,8 +136,11 @@
         <field:select field="recommendLevel" id="c_com_sx_tv_entites_DeptComments_recommendLevel" itemLabel="name" itemValue="id" items="${recommendclasses}" path="/recommendclasses" z="user-managed"/>
         <field:select field="recommendChannel" id="c_com_sx_tv_entites_DeptComments_recommendChannel" itemLabel="name" itemValue="id" items="${channels}" path="/channels" z="user-managed"/>
         <field:input field="comments" id="c_com_sx_tv_entites_DeptComments_comments" z="ruEWpGDAGzVNOAIs+LiifDWba5E="/>
-        <field:checkbox field="isRecommend" id="c_com_sx_tv_entites_DeptComments_isRecommend" z="KKyzO3C4dTriws+lwqcFEEbKpt0="/>
-        <field:select field="tvshow" id="c_com_sx_tv_entites_DeptComments_tvshow" itemValue="id" items="${tvshows}" path="/tvshows1" z="dxuO4aZ58T4RedGlH5oPIt/r29I="/>
+        <div class="rowcontainer">
+            <label>剧目 : </label>
+            <input id="tvshow_autocomplete" name="tvshowAC" type="text"/>
+            <INPUT id="_tvshow_id" name="tvshow" type="hidden"/>
+        </div>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_sx_tv_entites_DeptComments" render="${not empty dependencies}" z="csYHkiiSnIh+hYz1YmssU9ejD+U="/>
 </div>
