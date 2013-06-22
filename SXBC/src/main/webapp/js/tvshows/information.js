@@ -198,7 +198,7 @@ $(document).ready(function() {
 			$("#dialog-scores").dialog({
 				resizable : false,
 				autoOpen : false,
-				height : 160,
+				height : 170,
 				width : 400,
 				modal : true,
 				buttons : {

@@ -43,7 +43,7 @@ public class ControllerScore {
 		int _avg = (int) avgScore;
 		List<RecommendClass> rList = RecommendClass.findAllRecommendClasses();
 		for (RecommendClass rc : rList) {
-			if (_avg > rc.getStart() && _avg < rc.getEnd()) {
+			if (_avg >= rc.getStart() && _avg <= rc.getEnd()) {
 				score.setRecommendLevel(rc);
 				break;
 			}

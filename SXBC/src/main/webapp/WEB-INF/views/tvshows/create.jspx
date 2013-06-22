@@ -15,12 +15,19 @@
 		
 	</script>
 	<script type="text/javascript">
+		var peopleID="";
 		var aCount = 0;
 		var dCount = 0;
 		var sCount = 0;
 		var pCount = 0;
 		var companyItems = [];
 		var themeItems = [];
+		<c:forEach items="${themes}" var="item">
+			themeItems[themeItems.length] = {id: ${item.id}, name: '${item.name}'};
+		</c:forEach>
+		<c:forEach items="${companys}" var="item">
+			companyItems[companyItems.length] = {id: ${item.id}, name: '${item.name}'};
+		</c:forEach>
 	</script>
 	<style>
 .error {
@@ -150,9 +157,6 @@ li.token-input-token {
 						<option value="0" selected="selected">0</option>
 						<c:forEach items="${themes}" var="item">
 							<option value="${item.id}">${item.name}</option>
-							<script type="text/javascript">
-								themeItems[themeItems.length] = {id: ${item.id}, name: '${item.name}'};
-							</script>
 						</c:forEach>
 					</select>
 					<INPUT type="text" id="theme_autoComplete" />
@@ -164,41 +168,34 @@ li.token-input-token {
 						<option value="0" selected="selected">0</option>
 						<c:forEach items="${companys}" var="item">
 							<option value="${item.id}">${item.name}</option>
-							<script type="text/javascript">
-								companyItems[companyItems.length] = {id: ${item.id}, name: '${item.name}'};
-							</script>
 						</c:forEach>
 					</select> <INPUT type="text" id="company_autoComplete" />
 				</div>
 				<div class="rowcontainer">
-					<label><a class="peopleAdd" href="#"><img title="新增演员" src="/SXBC/resources/images/add.png" alt="新增演员"></img></a>演员 : </label> <input type="text"
+					<label><a class="peopleAdd" name="_actors_id" href="#"><img title="新增演员" src="/SXBC/resources/images/add.png" alt="新增演员"></img></a>演员 : </label> <input type="text"
 						id="_actors_id" />
 
 				</div>
 				<div class="rowcontainer">
-					<label><a class="peopleAdd" href="#"><img title="新增导演" src="/SXBC/resources/images/add.png" alt="新增导演"></img></a>导演 : </label> <input type="text"
+					<label><a class="peopleAdd" name="_directors_id" href="#"><img title="新增导演" src="/SXBC/resources/images/add.png" alt="新增导演"></img></a>导演 : </label> <input type="text"
 						name="directors" id="_directors_id" />
 
 				</div>
 				<div class="rowcontainer">
-					<label><a class="peopleAdd" href="#"><img title="新增编剧" src="/SXBC/resources/images/add.png" alt="新增编剧"></img></a>编剧 : </label> <input type="text"
+					<label><a class="peopleAdd" name="_screenwriters_id" href="#"><img title="新增编剧" src="/SXBC/resources/images/add.png" alt="新增编剧"></img></a>编剧 : </label> <input type="text"
 						name="screenwriters" id="_screenwriters_id" />
-
 				</div>
 
 				<div class="rowcontainer">
-					<label><a class="peopleAdd" href="#"><img title="新增发行人员" src="/SXBC/resources/images/add.png" alt="新发行人员"></img></a>发行人员 : </label> <input type="text"
+					<label><a class="peopleAdd" name="_publisher_id" href="#"><img title="新增发行人员" src="/SXBC/resources/images/add.png" alt="新发行人员"></img></a>发行人员 : </label> <input type="text"
 						name="publisher" id="_publisher_id" />
-
 				</div>
 				<br />
 				<div class="rowcontainer">
 					<label>故事梗概 : </label>
 					<TEXTAREA style="width: 300px" rows="2" cols="20" id="_outline_id" name="outline" class="text ui-widget-content ui-corner-all">*</TEXTAREA>
-
 				</div>
 				<br />
-
 				<div class="rowcontainer">
 					<label>负责人 : </label> <select id="_projector_id" name="projector">
 						<c:forEach items="${users}" var="item">

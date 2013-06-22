@@ -9,6 +9,7 @@ $(document).ready(function() {
 
 	// $("#_company_id").combobox();
 	$("#company_autoComplete").tokenInput(companyItems, {
+		noCache: true,
 		tokenLimit : 1,
 		hintText : "键入并搜索",
 		onAdd : function(item) {
@@ -31,6 +32,7 @@ $(document).ready(function() {
 	 * hasDownArrow : true } }));
 	 */
 	$("#theme_autoComplete").tokenInput(themeItems, {
+		noCache: true,
 		tokenLimit : 1,
 		hintText : "键入并搜索",
 		onAdd : function(item) {
@@ -64,6 +66,7 @@ $(document).ready(function() {
 	}));
 
 	$("#_actors_id").tokenInput("/SXBC/tvshows/loadPeopleJsonString", {
+		noCache: true,
 		theme : "facebook",
 		propertyToSearch : "name",
 		queryParam : "pname",
@@ -89,6 +92,7 @@ $(document).ready(function() {
 		}
 	});
 	$("#_directors_id").tokenInput("/SXBC/tvshows/loadPeopleJsonString", {
+		noCache: true,
 		theme : "facebook",
 		propertyToSearch : "name",
 		queryParam : "pname",
@@ -114,6 +118,7 @@ $(document).ready(function() {
 		}
 	});
 	$("#_screenwriters_id").tokenInput("/SXBC/tvshows/loadPeopleJsonString", {
+		noCache: true,
 		theme : "facebook",
 		propertyToSearch : "name",
 		queryParam : "pname",
@@ -139,6 +144,7 @@ $(document).ready(function() {
 		}
 	});
 	$("#_publisher_id").tokenInput("/SXBC/tvshows/loadPeopleJsonString", {
+		noCache: true,
 		theme : "facebook",
 		propertyToSearch : "name",
 		queryParam : "pname",
@@ -227,6 +233,7 @@ $(document).ready(function() {
 				$("#peopleAddForm").submit();
 			},
 			"取消" : function() {
+				peopleID = "";
 				$("#people_name").removeClass("ui-state-error");
 				$("#people_name").val("");
 				$("#achievements").val("");
@@ -246,9 +253,10 @@ $(document).ready(function() {
 					id : _id,
 					name : $("#people_name").val()
 				};
-				// $("#_actors_id").tokenInput("add", _data);
+				$("#"+peopleID).tokenInput("add", _data);
 				$("#people_name").val("");
 				$("#achievements").val("");
+				peopleID = "";
 				$("#dialog-people-form").dialog("close");
 			}
 			// $("#forms").replaceWith(html);
@@ -256,6 +264,7 @@ $(document).ready(function() {
 		return false;
 	});
 	$("a[class=peopleAdd]").click(function() {
+		peopleID =  $(this).attr("name");
 		$("#dialog-people-form").dialog("open");
 		return false;
 	});

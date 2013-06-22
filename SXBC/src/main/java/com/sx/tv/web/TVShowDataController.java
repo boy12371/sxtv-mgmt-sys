@@ -39,13 +39,15 @@ public class TVShowDataController {
 		tv.merge();
 		
 		String tdata = TVShowData_.getTdata();
-		String[] _array = tdata.split(";");
-		List<PlayData> pds = new ArrayList<PlayData>(_array.length);
-		for (String string : _array) {
-			String [] _a = string.split(",");
-			PlayData pd = new PlayData(_a[0],_a[1],_a[2],_a[3],_a[4],tv);
-			pd.persist();
-			pds.add(pd);
+		if(!tdata.equals("")){
+			String[] _array = tdata.split(";");
+			List<PlayData> pds = new ArrayList<PlayData>(_array.length);
+			for (String string : _array) {
+				String [] _a = string.split(",");
+				PlayData pd = new PlayData(_a[0],_a[1],_a[2],_a[3],_a[4],tv);
+				pd.persist();
+				pds.add(pd);
+			}
 		}
 		return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tvid.toString(), httpServletRequest);
 	}

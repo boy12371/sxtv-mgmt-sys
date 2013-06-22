@@ -50,7 +50,9 @@ var DEFAULT_SETTINGS = {
     onResult: null,
     onAdd: null,
     onDelete: null,
-    onReady: null
+    onReady: null,
+    //no cache
+    noCache: false
 };
 
 // Default classes to use when theming
@@ -756,7 +758,9 @@ $.TokenList = function (input, url_or_data, settings) {
     // Do the actual search
     function run_search(query) {
         var cache_key = query + computeURL();
-        var cached_results = cache.get(cache_key);
+        if(!settings.noCache){
+        	var cached_results = cache.get(cache_key);
+        }
         if(cached_results) {
             populate_dropdown(query, cached_results);
         } else {
@@ -778,7 +782,9 @@ $.TokenList = function (input, url_or_data, settings) {
                 } else {
                     ajax_params.url = url;
                 }
-
+                if(settings.noCache){
+                	ajax_params.data['timestamp'] = new Date().getTime();
+                }
                 // Prepare the request
                 ajax_params.data[settings.queryParam] = query;
                 ajax_params.type = settings.method;
