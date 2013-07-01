@@ -9,27 +9,27 @@
 			$("#proceed").button();
 			$("#score").validate({
 				rules : {
-					'details[0].score' : {
+					'details[0].scoreAmount' : {
 						required : true,
 						range : [ 0, 100 ]
 					},
-					'details[1].score' : {
+					'details[1].scoreAmount' : {
 						required : true,
 						range : [ 0, 100 ]
 					},
-					'details[2].score' : {
+					'details[2].scoreAmount' : {
 						required : true,
 						range : [ 0, 100 ]
 					},
-					'details[3].score' : {
+					'details[3].scoreAmount' : {
 						required : true,
 						range : [ 0, 100 ]
 					},
-					'details[4].score' : {
+					'details[4].scoreAmount' : {
 						required : true,
 						range : [ 0, 100 ]
 					},
-					'details[5].score' : {
+					'details[5].scoreAmount' : {
 						required : true,
 						range : [ 0, 100 ]
 					},
@@ -58,7 +58,7 @@
 			<c:forEach items="${score.details}" var="item" varStatus="vs">
 				<div class="rowcontainer">
 					<label><input type="hidden" name="details[${vs.index}].indicator" value="${item.indicator.id}" />${item.indicator.name} ${item.indicator.proportion}: </label> <INPUT
-						id="details[${vs.index}].score" type="text" name="details[${vs.index}].score" class="text ui-widget-content ui-corner-all" />
+						id="details[${vs.index}].scoreAmount" type="text" name="details[${vs.index}].scoreAmount" class="text ui-widget-content ui-corner-all" />
 				</div>
 				<br />
 			</c:forEach>

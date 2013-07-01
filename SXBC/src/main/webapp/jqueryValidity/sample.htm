@@ -1,39 +1,36 @@
 <html>
-    <head>
-        <title>Simple</title>
-        <link type="text/css" rel="Stylesheet" href="jquery.validity.css" />
-        <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="jquery.validity.min.js"></script>
-        
-        <script type="text/javascript">
-		$.validity.setup({ outputMode:"label" });
-		
-		function test(){
-				var t= $("#vehicles")
-                        .require()
-                        .match("number")
-                        .range(4, 12);
-						alert(t);
-						return false;
-		}
-            
-            
-        </script>
+<head>
+<title>Simple</title>
+<link type="text/css" rel="Stylesheet" href="jquery.validity.css" />
+<script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="jQuery.validity.min.js"></script>
 
-        </head>
-    <body>
+<script type="text/javascript">
+	$.validity.setup({
+		outputMode : "label"
+	});
+
+	function test() {
+		var t = $("#vehicles").require().match("number").range(4, 12);
+
+		alert(t);
+		return false;
+
+	}
+</script>
+
+</head>
+<body>
 	<div class="validity-summary-container">
-    Here's a summary of the validation failures:
-    <ul></ul>
-</div>
-        <form method="get" action="">
-            Number of Vehicles:
-            <input type="text" id="vehicles" name="vehicles" title="Vehicle Count" />
-            <br /><br />
-            Date of birth:
-            <input type="text" id="dob" name="dob" title="Birthday" />
-            <br /><br />
-            <input type="submit" onclick="return test();"/>
-        </form>
-    </body>
+		Here's a summary of the validation failures:
+		<ul></ul>
+	</div>
+	<form method="get" action="">
+		Number of Vehicles: <input type="text" id="vehicles" name="vehicles"
+			title="Vehicle Count" /> <br />
+		<br /> Date of birth: <input type="text" id="dob" name="dob"
+			title="Birthday" /> <br />
+		<br /> <input type="submit" onclick="return test();" />
+	</form>
+</body>
 </html>

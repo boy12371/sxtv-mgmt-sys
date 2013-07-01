@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" version="2.0">
 
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -38,8 +39,10 @@ td {
 				<form:input path="name" id="_name_id" />
 			</div>
 			<br />
-			<field:select label="影视公司" itemLabel="name" field="company" id="c_com_sx_tv_entites_TVShow_company" itemValue="id" items="${companys}" path="/companys" z="h41+YEZvGFyivCMkl0HZEfFcpwY=" />
-			<field:select label="题材" itemLabel="name" field="theme" id="c_com_sx_tv_entites_TVShow_theme" itemValue="id" items="${themes}" path="/themes" z="r1r3RuQsT0mvLt5shJsa6Z7KZN4=" />
+			<field:select label="影视公司" itemLabel="name" field="company" id="c_com_sx_tv_entites_TVShow_company" itemValue="id" items="${companys}" path="/companys"
+				z="h41+YEZvGFyivCMkl0HZEfFcpwY=" />
+			<field:select label="题材" itemLabel="name" field="theme" id="c_com_sx_tv_entites_TVShow_theme" itemValue="id" items="${themes}" path="/themes"
+				z="r1r3RuQsT0mvLt5shJsa6Z7KZN4=" />
 			<!-- 
 				<field:textareac field="company" items="${companys}" label="影视公司"></field:textareac>
 				<field:textareac field="theme" items="${companys}" label="题材"></field:textareac>
@@ -49,21 +52,34 @@ td {
 				<form:input path="priceRange" id="_priceRange_id" />
 			</div>
 			<br />
-			<field:select label="项目进度" itemLabel="name" field="progress" id="c_com_sx_tv_entites_TVShow_progress" itemValue="id" items="${progresses}" path="/progress" z="8tuUFGTVoYkMpUJ7y8jn63c0hoE=" />
+			<field:select label="项目进度" itemLabel="name" field="progress" id="c_com_sx_tv_entites_TVShow_progress" itemValue="id" items="${progresses}" path="/progress"
+				z="8tuUFGTVoYkMpUJ7y8jn63c0hoE=" />
 
 			<!-- 
 				<field:textareac field="progress" items="${progresses}" label="项目进度"></field:textareac>
  				-->
-			<field:datetime label="录入日期" dateTimePattern="${TVShow__inputdate_date_format}" field="inputDate" id="c_com_sx_tv_entites_TVShow_inputDate" z="XqG/WGqsad842dd/Zbsl0KV8WRk=" />
+			<field:datetime label="录入日期" dateTimePattern="${TVShow__inputdate_date_format}" field="inputDate" id="c_com_sx_tv_entites_TVShow_inputDate"
+				z="XqG/WGqsad842dd/Zbsl0KV8WRk=" />
 
-			<field:select label="项目负责人" field="projector" itemLabel="staff" id="c_com_sx_tv_entites_TVShow_projector" itemValue="id" items="${users}" path="/users" z="gMAJcHDhDby/woTRr2ltJHx7IeA=" />
+			<field:select label="项目负责人" field="projector" itemLabel="staff" id="c_com_sx_tv_entites_TVShow_projector" itemValue="id" items="${users}" path="/users"
+				z="gMAJcHDhDby/woTRr2ltJHx7IeA=" />
 			<!--
 				<field:textareac field="inputter" items="${users}" label="录入人"></field:textareac>
 				-->
-			<field:select label="状态" itemLabel="name" field="status" id="c_com_sx_tv_entites_TVShow_status" itemValue="id" items="${statuses}" path="/statuses" z="UrSMjU5/1Ews08TqF/AcNBolIvM=" />
-			<field:select label="推荐平台" itemLabel="name" field="recommendChannel" id="c_com_sx_tv_entites_TVShow_recommendChannel" itemValue="id" items="${channels}" path="/channels" z="a7lhn1RLuh5eMgDqydqfBsYaoQ0=" />
-			<field:select label="推荐星级" itemLabel="name" field="recommendLevel" id="c_com_sx_tv_entites_TVShow_projectorRecommend" itemValue="id" items="${recommendclasses}" path="/recommendclasses" z="fNlseSNd9zHph3Jgo/QN8/OhAeo=" />
-
+			<field:select label="状态" itemLabel="name" field="status" id="c_com_sx_tv_entites_TVShow_status" itemValue="id" items="${statuses}" path="/statuses"
+				z="UrSMjU5/1Ews08TqF/AcNBolIvM=" />
+			<field:select label="推荐平台" itemLabel="name" field="recommendChannel" id="c_com_sx_tv_entites_TVShow_recommendChannel" itemValue="id" items="${channels}" path="/channels"
+				z="a7lhn1RLuh5eMgDqydqfBsYaoQ0=" />
+			<!-- 
+			<field:select label="推荐平台(负责人)" itemLabel="name" field="prjRecommendChannel" id="c_com_sx_tv_entites_TVShow_prjRecommendChannel" itemValue="id" items="${channels}" path="/channels"
+				z="a7lhn1RLuh5eMgDqydqfBsYaoQ0=" />
+				 -->
+			<field:select label="推荐星级" itemLabel="name" field="recommendLevel" id="c_com_sx_tv_entites_TVShow_recommendLevel" itemValue="id" items="${recommendclasses}"
+				path="/recommendclasses" z="fNlseSNd9zHph3Jgo/QN8/OhAeo=" />
+			<!-- 
+			<field:select label="推荐星级(负责人)" itemLabel="name" field="projectorRecommend" id="c_com_sx_tv_entites_TVShow_projectorRecommend" itemValue="id" items="${recommendclasses}"
+				path="/recommendclasses" z="fNlseSNd9zHph3Jgo/QN8/OhAeo=" />
+ 			-->
 			<!-- 
 				<div class="rowcontainer">
 					<form:errors path="actors" cssClass="errors_ac" />
@@ -91,8 +107,7 @@ td {
 				</div>
  -->
 			<div class="submit">
-				<input type="button" value="检索" id="submitBtn" />
-				<input type="button" value="清除检索条件" id="resetBtn" />
+				<input type="button" value="检索" id="submitBtn" /> <input type="button" value="清除检索条件" id="resetBtn" />
 			</div>
 		</form:form>
 	</div>

@@ -127,8 +127,8 @@ h1 {
 				</tr>
 				<tr>
 					<td style="color: #666">影视公司</td>
-					<td><A href="#" title="${tvshow_['company']['publisher']} ${tvshow_['company']['telephone']}" id="info_company" style="color: #7DB223"
-						onclick="return false;"> <spring:eval expression="tvshow_['company']['name']" />
+					<td><A href="#" title="${tvshow_['company']['publisher']} ${tvshow_['company']['telephone']}" id="info_company" style="color: #7DB223" onclick="return false;">
+							<spring:eval expression="tvshow_['company']['name']" />
 					</A></td>
 					<td style="color: #666">题材</td>
 					<td><spring:eval expression="tvshow_['theme']" /></td>
@@ -139,39 +139,26 @@ h1 {
 							test="${(tvshow_.status.id == 8) or (tvshow_.status.id == 9) or (tvshow_.status.id == 10) or (tvshow_.status.id == 11)}">
 					(<spring:eval expression="tvshow_['comments']" />)
 					</c:if></td>
-					<td style="color: #666">价格区间</td>
-					<td><spring:eval expression="tvshow_['priceRange']" /></td>
+					<td style="color: #666">录入时间</td>
+					<td colspan="3"><fmt:formatDate value="${tvshow_.inputDate}" pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
 				</tr>
 				<tr>
-					<td style="color: #666">发行计划</td>
-					<td><spring:eval expression="tvshow_['publishSchedule']" /></td>
+					<td style="color: #666">项目负责人</td>
+					<td>${tvshow_.projector.staff}</td>
 					<td style="color: #666">演员</td>
-					<td><c:forEach items="${tvshow_.actors}" var="d">
-						${d.name} 
-					</c:forEach></td>
+					<td>${tvshow_.actors}</td>
 				</tr>
 				<tr>
 					<td style="color: #666">导演</td>
-					<td><c:forEach items="${tvshow_.directors}" var="p">
-						${p.name}
-					</c:forEach></td>
+					<td>${tvshow_.directors}</td>
 					<td style="color: #666">编剧</td>
-					<td><c:forEach items="${tvshow_.screenwriters}" var="d">
-						${d.name} 
-					</c:forEach></td>
+					<td>${tvshow_.screenwriters}</td>
 				</tr>
 				<tr>
 					<td style="color: #666">发行人员</td>
-					<td><c:forEach items="${tvshow_.publisher}" var="d">
-						${d.name} 
-					</c:forEach></td>
-					
-					<td style="color: #666">项目负责人</td>
-					<td>${tvshow_.projector.staff}</td>
-				</tr>
-				<tr>
-					<td style="color: #666">录入时间</td>
-					<td colspan="3"><fmt:formatDate value="${tvshow_.inputDate}" pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+					<td>${tvshow_.publisher}</td>
+					<td style="color: #666">项目进度</td>
+					<td>${tvshow_.progress.name}</td>
 				</tr>
 				<tr>
 					<td style="color: #666">故事梗概</td>
@@ -204,19 +191,28 @@ h1 {
 
 				</util:panel>
 			</c:if>
-			<c:if test="${tvshow_.status.id == 1 }">
-				<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
-					<a id="createPrjCommentsLink" href="/SXBC/front/projectorcommentses/create/${itemId}?toCreate"> 填写负责人意见</a>
-				</div>
+			<c:if test="${empty prjComments}">
+				<c:if test="${pageContext['request'].userPrincipal.name == tvshow_.projector.name}">
+					<c:if test="${tvshow_.status.id == 1 ||tvshow_.status.id == 2 || tvshow_.status.id == 3}">
+						<c:if test="${fn:length(prjComments) != fn:length(channels)}">
+							<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+								<a id="createPrjCommentsLink" href="/SXBC/front/projectorcommentses/create/${itemId}?toCreate"> 填写负责人意见</a>
+							</div>
+						</c:if>
+					</c:if>
+				</c:if>
 			</c:if>
 
 			<c:if test="${tvshow_.status.id == 2}">
 				<c:if test="${isScoring==true}">
-					<c:if test="${empty _score}">
-						<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+					<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+						<c:if test="${empty _score}">
 							<a id="createScoreLink" href="/SXBC/front/scores/create/${itemId}?toCreate">评 分</a>
-						</div>
-					</c:if>
+						</c:if>
+						<c:if test="${pageContext['request'].userPrincipal.name == tvshow_.projector.name}">
+							<a id="createPrjCommentsLink" href="/SXBC/front/projectorcommentses/create/${itemId}?toCreate">填写负责人意见</a>
+						</c:if>
+					</div>
 				</c:if>
 			</c:if>
 
@@ -268,40 +264,54 @@ h1 {
 		</DIV>
 		<c:if test="${not empty prjComments}">
 			<DIV id="div_projectorComments">
-				<div class="rowcontainer">
-					<label>意见 : </label><a style="color: #7DB223" href="/SXBC/front/projectorcommentses/update/${prjComments.id}?toUpdate"> <c:if
-							test="${prjComments.isRecommend }">
+				<c:forEach items="${prjComments}" var="prjcmt" varStatus="vs">
+					<util:panel title="${prjcmt.recommendChannel.name }推荐意见" id="prjComments_${vs.index}">
+						<div class="rowcontainer">
+							<label>意见 : </label><a style="color: #7DB223" href="/SXBC/front/projectorcommentses/update/${prjcmt.id}?toUpdate"> <c:if test="${prjcmt.isRecommend }">
 						推荐
-					</c:if> <c:if test="${!prjComments.isRecommend }">
+					</c:if> <c:if test="${!prjcmt.isRecommend }">
 						淘汰
 					</c:if>
-					</a>
-				</div>
-				<br />
-				<div class="rowcontainer">
-					<label>推荐星级 : </label>
-					<DIV class="rateit" data-rateit-value="${prjComments.projectorRecommend.id}" data-rateit-readonly="true" style="margin-bottom: 10px">
-						<SPAN></SPAN>
-					</DIV>
-				</div>
-				<div class="rowcontainer">
-					<label>推荐平台 : </label> ${prjComments.recommendChannel.name }
-				</div>
-				<br />
-				<div class="rowcontainer">
-					<label>负责人意见 : </label> ${prjComments.comments }
-				</div>
-				<br />
-				<c:if test="${tvshow_.status.id == 2 }">
-					<c:if test="${empty _score}">
-						<c:if test="${pageContext['request'].userPrincipal.name == tvshow_.projector.name}">
-							<div>
-								<a id="prjRecommendForm" target="_blank" href="/SXBC/front/projectorcommentses/recommendFrom/${prjComments.id}">推荐表 </a>
-							</div>
+							</a>
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>推荐星级 : </label>
+							<DIV class="rateit" data-rateit-value="${prjcmt.projectorRecommend.id}" data-rateit-readonly="true" style="margin-bottom: 10px">
+								<SPAN></SPAN>
+							</DIV>
+						</div>
+						<div class="rowcontainer">
+							<label>推荐平台 : </label> ${prjcmt.recommendChannel.name }
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>发行计划 : </label> ${prjcmt.publicSchdule }
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>发行价格 : </label> ${prjcmt.publicPrice }
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>价格区间 : </label> ${prjcmt.priceRange }
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>负责人意见 : </label> ${prjcmt.comments }
+						</div>
+						<br />
+						<c:if test="${tvshow_.status.id == 2 }">
+							<c:if test="${pageContext['request'].userPrincipal.name == tvshow_.projector.name}">
+								<div>
+									<a name="prjRecommendForm" target="_blank" href="/SXBC/front/projectorcommentses/recommendFrom/${prjcmt.id}">推荐表 </a>
+								</div>
+							</c:if>
 						</c:if>
-					</c:if>
-				</c:if>
-				<br />
+
+						<br />
+					</util:panel>
+				</c:forEach>
 			</DIV>
 		</c:if>
 
@@ -313,7 +323,7 @@ h1 {
 				<br />
 				<c:forEach items="${_score.details}" var="item" varStatus="vs">
 					<div class="rowcontainer">
-						<label>${item.indicator.name} : </label> ${item.score}
+						<label>${item.indicator.name} : </label> ${item.scoreAmount}
 					</div>
 					<br />
 				</c:forEach>
@@ -363,7 +373,7 @@ h1 {
 								<td>${sc.recommendChannel.name}</td>
 								<td><div class="rateit" data-rateit-value="${sc.recommendLevel.id}" data-rateit-ispreset="true" data-rateit-readonly="true"></div></td>
 								<c:forEach items="${sc.details}" var="item">
-									<td>${item.score}</td>
+									<td>${item.scoreAmount}</td>
 								</c:forEach>
 							</tr>
 						</c:forEach>
@@ -587,14 +597,12 @@ h1 {
 						<tr>
 							<td><field:display object="${contract}" date="true" dateTimePattern="${TVContract__recieveagreementdate_date_format}" field="recieveAgreementDate"
 									id="c_com_sx_tv_entites_TVContract_recieveAgreementDate" label="补充协议接收时间" z="user-managed" /></td>
-							<td><field:display object="${contract}" field="recieveAgreementOwner" id="c_com_sx_tv_entites_TVContract_recieveAgreementOwner" label="协议接收经手人"
-									z="user-managed" /></td>
+							<td><field:display object="${contract}" field="recieveAgreementOwner" id="c_com_sx_tv_entites_TVContract_recieveAgreementOwner" label="协议接收经手人" z="user-managed" /></td>
 						</tr>
 						<tr>
 							<td><field:display object="${contract}" date="true" dateTimePattern="${TVContract__inputagreementdate_date_format}" field="inputAgreementDate"
 									id="c_com_sx_tv_entites_TVContract_inputAgreementDate" label="补充协议录入时间" z="user-managed" /></td>
-							<td><field:display object="${contract}" field="inputterAgreement" id="c_com_sx_tv_entites_TVContract_inputterAgreement" label="协议录入经手人"
-									z="user-managed" /></td>
+							<td><field:display object="${contract}" field="inputterAgreement" id="c_com_sx_tv_entites_TVContract_inputterAgreement" label="协议录入经手人" z="user-managed" /></td>
 						</tr>
 						<tr>
 							<td><field:display object="${contract}" date="true" dateTimePattern="${TVContract__fileagreementdate_date_format}" field="fileAgreementDate"

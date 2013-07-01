@@ -1,14 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?><div version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_sx_tv_entites_TVShow" items="${tvshows}" z="4H/aBLLWxRTXdxoQYG/g/I2wz44=">
-        <table:table data="${tvshows}" id="l_com_sx_tv_entites_TVShow" path="/tvshows" z="SJS6nPVacUU7m/JykST8jPeGdi0=">
-            <table:column id="c_com_sx_tv_entites_TVShow_name" property="name" z="r0B3vyUOWdbtj6HWo+MGa31USs8="/>
-            <table:column id="c_com_sx_tv_entites_TVShow_count" property="count" z="EvYXgjCzMk5SnjoNbYgHLcUw+0o="/>
-            <table:column id="c_com_sx_tv_entites_TVShow_publishSchedule" property="publishSchedule" z="rp6mx09C0P9kx39ec0fuFas7+mo="/>
-            <table:column id="c_com_sx_tv_entites_TVShow_priceRange" property="priceRange" z="mw83UdYk3Dc/PMAh0yFe1XAng3E="/>
-            <table:column id="c_com_sx_tv_entites_TVShow_ratings" property="ratings" z="G39L7suIByFMjVW4pHBukgISAHM="/>
-            <table:column id="c_com_sx_tv_entites_TVShow_channelComments" property="channelComments" z="yCUJD5BXcEAK91L9LWVvhWxPpSo="/>
-        </table:table>
-    </page:list>
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<style>
+ui-button-text {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+</style>
+	<page:list id="pl_com_sx_tv_entites_TVShow" items="${tvshows}" z="4H/aBLLWxRTXdxoQYG/g/I2wz44=">
+		<DIV id="searchSection">
+			<SELECT id="stype">
+				<option value="0">编号</option>
+				<option value="1">剧名</option>
+			</SELECT> <INPUT id="svalue" type="text" /> <a id="search" href="/SXBC/tvshows/list?">搜索</a>
+		</DIV>
+		<table:table data="${tvshows}" create="false" updateParam="toUpdate" deleteParam="delete" id="l_com_sx_tv_entites_TVShow" path="/tvshows" z="SJS6nPVacUU7m/JykST8jPeGdi0=">
+			<table:column label="编号" id="c_com_sx_tv_entites_TVShow_id" property="id" />
+			<table:column label="剧名" id="c_com_sx_tv_entites_TVShow_name" property="name" z="r0B3vyUOWdbtj6HWo+MGa31USs8=" />
+			<table:column label="集数" id="c_com_sx_tv_entites_TVShow_count" property="count" z="EvYXgjCzMk5SnjoNbYgHLcUw+0o=" />
+			<table:column label="状态" id="c_com_sx_tv_entites_TVShow_status" property="status" z="rp6mx09C0P9kx39ec0fuFas7+mo=" />
+			<table:column label="录入日期" id="c_com_sx_tv_entites_TVShow_inputDate" date="true" property="inputDate"></table:column>
+			<table:column label="题材" id="c_com_sx_tv_entites_TVShow_theme" property="theme" z="G39L7suIByFMjVW4pHBukgISAHM=" />
+			<table:column label="影视公司" id="c_com_sx_tv_entites_TVShow_company" property="company" z="yCUJD5BXcEAK91L9LWVvhWxPpSo=" />
+		</table:table>
+	</page:list>
+
+	<script type="text/javascript">
+    $(document).ready(function() {
+    $("#search").button().click(function(){
+    	var t = $('#stype').val();
+    	if(t == 0){
+    		if(isNaN($('#svalue').val())){
+    			$("#svalue").addClass("ui-state-error").val("请输入数字编号").focus(function(){
+    				$(this).removeClass("ui-state-error").val("");
+    			});
+    			return false;
+    		}
+    	}
+   		if($("#svalue").val().length == 0 ){
+   			$("#svalue").addClass("ui-state-error").val("请输入剧目名称").focus(function(){
+   				$(this).removeClass("ui-state-error").val("");
+   			});
+   			return false;
+   		}
+    	var href = $(this).attr("href");
+    	href += "stype="+$('#stype').val()+"&amp;svalue="+$("#svalue").val();
+    	$(this).attr("href",href);
+    });
+    $('a span').css("padding-top","1px").css("padding-bottom","1px").css("color","white");
+    });
+    Spring.addDecoration(new Spring.ElementDecoration({elementId : 'searchSection', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '查询', open: false}})); 
+    
+    </script>
 </div>

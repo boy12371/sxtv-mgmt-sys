@@ -24,7 +24,7 @@
 		<c:out value=" | " />
 		<span>用户： ${pageContext['request'].userPrincipal.name} </span> |
 		<span>
-		<a href="./users/passwdUpdate">更改密码</a>
+		<a href="/SXBC/users/passwdUpdate">更改密码</a>
 		</span>
 	</c:if>
 	<c:if test="${pageContext['request'].userPrincipal == null}">

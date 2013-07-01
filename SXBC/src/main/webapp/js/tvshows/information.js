@@ -39,7 +39,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#prjRecommendForm").button();
+	$('a[name="prjRecommendForm"]').button();
 	if ($("#confirmationPurchase").length != 0) {
 		$("#dialog-confirmationPurchase").dialog({
 			resizable : false,

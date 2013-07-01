@@ -40,7 +40,7 @@ td {
 			<TD>状态</TD>
 			<TD>${channelComments.tvshow.status.name}</TD>
 			<TD>发行计划</TD>
-			<TD>${channelComments.tvshow.publishSchedule}</TD>
+			<TD>${prjCmt.publicSchdule }</TD>
 		</TR>
 		<tr>
 			<td>制作公司</td>
@@ -65,34 +65,22 @@ td {
 					</TR>
 					<TR>
 						<td>导演</td>
-						<td><c:forEach items="${channelComments.tvshow.directors}" var="d">
-						${d.name} 
-					</c:forEach></td>
-						<td><c:forEach items="${channelComments.tvshow.directors}" var="d">
-						${d.achievements} 
-					</c:forEach></td>
+						<td>${channelComments.tvshow.directors}</td>
+						<td></td>
 						<td></td>
 						<td></td>
 					</TR>
 					<TR>
 						<td>编剧</td>
-						<td><c:forEach items="${channelComments.tvshow.screenwriters}" var="d">
-						${d.name} 
-					</c:forEach></td>
-						<td><c:forEach items="${channelComments.tvshow.screenwriters}" var="d">
-						${d.achievements} 
-					</c:forEach></td>
+						<td>${channelComments.tvshow.screenwriters}</td>
+						<td></td>
 						<td></td>
 						<td></td>
 					</TR>
 					<TR>
 						<td>演员</td>
-						<td><c:forEach items="${channelComments.tvshow.actors}" var="d">
-						${d.name} 
-					</c:forEach></td>
-						<td><c:forEach items="${channelComments.tvshow.actors}" var="d">
-						${d.achievements} 
-					</c:forEach></td>
+						<td>${channelComments.tvshow.actors}</td>
+						<td></td>
 						<td></td>
 						<td></td>
 					</TR>
@@ -103,7 +91,7 @@ td {
 		</TR>
 		<tr>
 			<td>发行价格</td>
-			<td></td>
+			<td>${prjCmt.publicPrice }</td>
 			<td>推荐时间</td>
 			<td colspan="2"></td>
 			<td>答复时间</td>
