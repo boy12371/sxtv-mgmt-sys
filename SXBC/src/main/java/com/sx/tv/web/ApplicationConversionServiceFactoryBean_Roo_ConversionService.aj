@@ -20,7 +20,6 @@ import com.sx.tv.entites.Status;
 import com.sx.tv.entites.TVContract;
 import com.sx.tv.entites.TVShow;
 import com.sx.tv.entites.Theme;
-import com.sx.tv.entites.Type;
 import com.sx.tv.entites.User;
 import com.sx.tv.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -394,7 +393,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<TVShow, String> ApplicationConversionServiceFactoryBean.getTVShowToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.sx.tv.entites.TVShow, java.lang.String>() {
             public String convert(TVShow tVShow) {
-                return new StringBuilder().append(tVShow.getComments()).append(' ').append(tVShow.getName()).append(' ').append(tVShow.getCount()).append(' ').append(tVShow.getPublishSchedule()).toString();
+                return new StringBuilder().append(tVShow.getComments()).append(' ').append(tVShow.getName()).append(' ').append(tVShow.getCount()).append(' ').toString();
             }
         };
     }
@@ -435,30 +434,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.sx.tv.entites.Theme>() {
             public com.sx.tv.entites.Theme convert(String id) {
                 return getObject().convert(getObject().convert(id, Integer.class), Theme.class);
-            }
-        };
-    }
-    
-    public Converter<Type, String> ApplicationConversionServiceFactoryBean.getTypeToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<com.sx.tv.entites.Type, java.lang.String>() {
-            public String convert(Type type) {
-                return new StringBuilder().append(type.getName()).append(' ').append(type.getComments()).toString();
-            }
-        };
-    }
-    
-    public Converter<Integer, Type> ApplicationConversionServiceFactoryBean.getIdToTypeConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Integer, com.sx.tv.entites.Type>() {
-            public com.sx.tv.entites.Type convert(java.lang.Integer id) {
-                return Type.findType(id);
-            }
-        };
-    }
-    
-    public Converter<String, Type> ApplicationConversionServiceFactoryBean.getStringToTypeConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.sx.tv.entites.Type>() {
-            public com.sx.tv.entites.Type convert(String id) {
-                return getObject().convert(getObject().convert(id, Integer.class), Type.class);
             }
         };
     }
@@ -539,9 +514,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getThemeToStringConverter());
         registry.addConverter(getIdToThemeConverter());
         registry.addConverter(getStringToThemeConverter());
-        registry.addConverter(getTypeToStringConverter());
-        registry.addConverter(getIdToTypeConverter());
-        registry.addConverter(getStringToTypeConverter());
         registry.addConverter(getUserToStringConverter());
         registry.addConverter(getIdToUserConverter());
         registry.addConverter(getStringToUserConverter());

@@ -1,8 +1,6 @@
 package com.sx.tv.entites;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,13 +40,6 @@ public class TVShow {
 	@Value("0")
 	private int count;
 
-	@Column(name = "publishSchedule")
-	private String publishSchedule;
-
-	@Column(name = "priceRange")
-	@Value("0-0")
-	private String priceRange;
-
 	@Column(name = "ratings")
 	@Value("0")
 	private Float ratings;
@@ -57,7 +47,7 @@ public class TVShow {
 	@Column(name = "marketShare")
 	@Value("0")
 	private Float marketShare;
-
+	
 	@Column(name = "ranking")
 	@Value("0")
 	private int ranking;
@@ -68,10 +58,6 @@ public class TVShow {
 	@Column(name = "marketAssessment")
 	@Value("-")
 	private String marketAssessment;
-
-	@Column(name = "publicPrice")
-	@Value("0")
-	private Float publicPrice;
 
 	@Column(name = "isPurchase")
 	@Value("false")
@@ -97,17 +83,21 @@ public class TVShow {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private Status status;
 
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	private List<People> actors = new ArrayList<People>();
+	@Column(name="actors")
+	@Value("")
+	private String actors;
 
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	private List<People> directors = new ArrayList<People>();
+	@Column(name="directors")
+	@Value("")
+	private String directors;
+	
+	@Column(name="screenwriters")
+	@Value("")
+	private String screenwriters;
 
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	private List<People> screenwriters = new ArrayList<People>();
-
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	private List<People> publisher = new ArrayList<People>();
+	@Column(name="publisher")
+	@Value("")
+	private String publisher;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private User inputter;
@@ -117,6 +107,14 @@ public class TVShow {
 
 	@Value(value="")
 	private String comments;
+	
+	/**
+	 * default 0=OK 1=removed.
+	 * only used for remove the record.
+	 * 
+	 */
+	@Column(name="removed")
+	private Integer removed = 0;
 	
 	public String getComments() {
 		return comments;
@@ -149,23 +147,6 @@ public class TVShow {
 	public void setCount(int count) {
 		this.count = count;
 	}
-
-	public String getPublishSchedule() {
-		return publishSchedule;
-	}
-
-	public void setPublishSchedule(String publishSchedule) {
-		this.publishSchedule = publishSchedule;
-	}
-
-	public String getPriceRange() {
-		return priceRange;
-	}
-
-	public void setPriceRange(String priceRange) {
-		this.priceRange = priceRange;
-	}
-
 	public Float getRatings() {
 		return ratings;
 	}
@@ -204,14 +185,6 @@ public class TVShow {
 
 	public void setMarketAssessment(String marketAssessment) {
 		this.marketAssessment = marketAssessment;
-	}
-
-	public Float getPublicPrice() {
-		return publicPrice;
-	}
-
-	public void setPublicPrice(Float publicPrice) {
-		this.publicPrice = publicPrice;
 	}
 
 	public Boolean getIsPurchase() {
@@ -269,39 +242,7 @@ public class TVShow {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
-	public List<People> getActors() {
-		return actors;
-	}
-
-	public void setActors(List<People> actors) {
-		this.actors = actors;
-	}
-
-	public List<People> getDirectors() {
-		return directors;
-	}
-
-	public void setDirectors(List<People> directors) {
-		this.directors = directors;
-	}
-
-	public List<People> getScreenwriters() {
-		return screenwriters;
-	}
-
-	public void setScreenwriters(List<People> screenwriters) {
-		this.screenwriters = screenwriters;
-	}
-
-	public List<People> getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(List<People> publisher) {
-		this.publisher = publisher;
-	}
-
+	
 	public User getInputter() {
 		return inputter;
 	}
@@ -316,6 +257,46 @@ public class TVShow {
 
 	public void setProjector(User projector) {
 		this.projector = projector;
+	}
+
+	public String getActors() {
+		return actors;
+	}
+
+	public void setActors(String actors) {
+		this.actors = actors;
+	}
+
+	public String getDirectors() {
+		return directors;
+	}
+
+	public void setDirectors(String directors) {
+		this.directors = directors;
+	}
+
+	public String getScreenwriters() {
+		return screenwriters;
+	}
+
+	public void setScreenwriters(String screenwriters) {
+		this.screenwriters = screenwriters;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public Integer getRemoved() {
+		return removed;
+	}
+
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
 
 }

@@ -3,25 +3,7 @@
 
 package com.sx.tv.entites;
 
-import com.sx.tv.entites.ScoreDetail;
-import com.sx.tv.entites.ScoreIndicator;
 
 privileged aspect ScoreDetail_Roo_JavaBean {
-    
-    public ScoreIndicator ScoreDetail.getIndicator() {
-        return this.indicator;
-    }
-    
-    public void ScoreDetail.setIndicator(ScoreIndicator indicator) {
-        this.indicator = indicator;
-    }
-    
-    public Float ScoreDetail.getScore() {
-        return this.score;
-    }
-    
-    public void ScoreDetail.setScore(Float score) {
-        this.score = score;
-    }
     
 }

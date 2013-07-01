@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sx.tv.entites.Channel;
 import com.sx.tv.entites.ChannelComments;
 import com.sx.tv.entites.DeptComments;
+import com.sx.tv.entites.ProjectorComments;
 import com.sx.tv.entites.RecommendClass;
 import com.sx.tv.utils.URLStringUtil;
 
@@ -49,10 +50,17 @@ public class ControllerChnlCmts {
 
 	    @RequestMapping(value = "/recommendFrom/{id}", produces = "text/html")
 	    public String recommendForm(@PathVariable("id") Integer id, Model uiModel) {
+	    	
 	        DeptComments deptCmt = DeptComments.findDeptComments(id);
 	        ChannelComments cc = new ChannelComments();
 	        cc.setChannel(deptCmt.getRecommendChannel());
 	        cc.setTvshow(deptCmt.getTvshow());
+	        List<ProjectorComments> prjCmts = ProjectorComments.findProjectorCommentsesByTvshow(deptCmt.getTvshow()).getResultList();
+	        for (ProjectorComments p : prjCmts) {
+				if(p.getRecommendChannel().getId() == deptCmt.getRecommendChannel().getId()){
+					uiModel.addAttribute("prjCmt", p);
+				}
+			}
 	        uiModel.addAttribute("deptCmt", deptCmt);
 	        populateEditForm(uiModel, cc);
 	        return "channelcommentses/recommendForm";

@@ -43,7 +43,9 @@ public class SearchTV {
 	private Status status;
 
 	private Channel recommendChannel;
-
+	
+	private Channel prjRecommendChannel;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date recommendTime;
@@ -65,7 +67,7 @@ public class SearchTV {
 	private RecommendClass recommendLevel;
 
 	private RecommendClass projectorRecommend;
-	
+
 	// private Set<People> actors = new HashSet<People>();
 	//
 	// private Set<People> directors = new HashSet<People>();

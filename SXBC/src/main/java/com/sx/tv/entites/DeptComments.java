@@ -36,7 +36,7 @@ public class DeptComments {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Channel recommendChannel;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private TVShow tvshow;
 
     @Column

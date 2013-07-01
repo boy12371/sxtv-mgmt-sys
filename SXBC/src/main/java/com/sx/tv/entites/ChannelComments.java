@@ -62,7 +62,7 @@ public class ChannelComments {
 	@Column(name = "promotionPlan")
 	private String promotionPlan;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private TVShow tvshow;
 
 	public ChannelComments() {

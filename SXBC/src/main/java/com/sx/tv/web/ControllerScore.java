@@ -37,7 +37,8 @@ public class ControllerScore {
 		User inputer = User.findUsersByNameEquals(principal.getName()).getSingleResult();
 		float avgScore = 0;
 		for (ScoreDetail sd : score.getDetails()) {
-			avgScore += sd.getScore() * sd.getIndicator().getProportion();
+			sd.persist();
+			avgScore += sd.getScoreAmount() * sd.getIndicator().getProportion();
 		}
 		
 		int _avg = (int) avgScore;
@@ -62,7 +63,7 @@ public class ControllerScore {
 		try {
 			score = Score.findScoresByRatedByAndTvshow(u, tv).getSingleResult();
 		} catch (Exception e) {
-
+			
 		}
 		boolean isCreate = false;
 		if (null == score) {
@@ -91,7 +92,7 @@ public class ControllerScore {
 		uiModel.asMap().clear();
 		float avgScore = 0;
 		for (ScoreDetail sd : score.getDetails()) {
-			avgScore += sd.getScore() * sd.getIndicator().getProportion();
+			avgScore += sd.getScoreAmount() * sd.getIndicator().getProportion();
 		}
 		int _avg = (int) avgScore;
 		List<RecommendClass> rList = RecommendClass.findAllRecommendClasses();

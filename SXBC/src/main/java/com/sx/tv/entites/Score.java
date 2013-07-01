@@ -19,29 +19,30 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooSerializable
-@RooJpaActiveRecord(table = "score", finders = { "findScoresByRatedByAndTvshowidEquals", "findScoresByTvshowidEquals", "findScoresByRatedByAndTvshow", "findScoresByRatedBy", "findScoresByTvshow" })
+@RooJpaActiveRecord(table = "score", finders = { "findScoresByRatedByAndTvshowidEquals", "findScoresByTvshowidEquals",
+		"findScoresByRatedByAndTvshow", "findScoresByRatedBy", "findScoresByTvshow" })
 public class Score {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", insertable = false, updatable = false)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", insertable = false, updatable = false)
+	private Integer id;
 
-    @Column(name = "avgScore")
-    private Integer avgScore;
+	@Column(name = "avgScore")
+	private Integer avgScore;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    private TVShow tvshow;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private TVShow tvshow;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    private Channel recommendChannel;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	private Channel recommendChannel;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    private User ratedBy;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	private User ratedBy;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ScoreDetail> details;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private List<ScoreDetail> details;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    private RecommendClass recommendLevel;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	private RecommendClass recommendLevel;
 }

@@ -49,6 +49,6 @@ public class ContractPayment {
     @Column
     private String reciveBy;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private TVContract contract;
 }

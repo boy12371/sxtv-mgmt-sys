@@ -38,7 +38,7 @@ public class PlayData {
     @Column(name = "playShare")
     private String playShare;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private TVShow tvshow;
 
     public PlayData() {

@@ -84,6 +84,15 @@ private static final Logger logger = Logger.getLogger(ControllerPrjcomments.clas
 		pc.setTvshow(tv);
 		uiModel.addAttribute("ableToCreate", ableToCreate);
 		populateEditForm(uiModel, pc);
+		
+		List<ProjectorComments> cmts = ProjectorComments.findProjectorCommentsesByTvshow(tv).getResultList();
+		uiModel.addAttribute("prjCmts", cmts);
+		List<Channel> channels = (List<Channel>) uiModel.asMap().get("channels");
+		for (ProjectorComments p : cmts) {
+			if(channels.contains(p.getRecommendChannel())){
+				channels.remove(p.getRecommendChannel());
+			}
+		}
 		return "projectorcommentses/createPrjComments";
 	}
 

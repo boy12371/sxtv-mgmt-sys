@@ -39,7 +39,7 @@ public class TVContract {
     @DateTimeFormat(style = "M-")
     private Date showDate;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private TVShow tvshow;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)

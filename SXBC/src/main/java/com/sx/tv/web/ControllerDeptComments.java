@@ -80,7 +80,7 @@ public class ControllerDeptComments {
 			avgScore = (float) (Math.round((avgScore / sList.size()) * 10)) / 10;
 		}
 		for (RecommendClass rc : rList) {
-			if (avgScore > rc.getStart() && avgScore < rc.getEnd()) {
+			if (avgScore >= rc.getStart() && avgScore <= rc.getEnd()) {
 				dept.setRecommendLevel(rc);
 				break;
 			}
