@@ -379,7 +379,7 @@ public class ControllerTVShow {
 			 */
 			for (TVShow t : results) {
 				Object[] o = new Object[] { t.getId(), t.getName(), t.getCount(), t.getCompany().getName(), t.getTheme().getName(),
-						t.getDirectors(), t.getProjector(), t.getStatus(), sdf.format(t.getInputDate()) };
+						t.getDirectors(), t.getProjector().getStaff(), t.getStatus().getName(), sdf.format(t.getInputDate()) };
 				JsonData jd = new JsonData(t.getId(), o);
 				rows.add(jd);
 			}

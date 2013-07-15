@@ -63,12 +63,10 @@ $(document).ready(function() {
 		}, {
 			name : 'projector',
 			index : 'projector',
-			formatter : formatProjector,
 			width : 100
 		}, {
 			name : 'status',
 			index : 'status',
-			formatter : formatStatus,
 			width : 100
 		}, {
 			name : 'inputDate',
