@@ -4,8 +4,12 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<style>
+div {
+	text-align: center;
+}
+
 table {
-	border: 1px solid #666;
+	border: 1px solid #c2c2c2;
 	border-spacing: 0px;
 	width: 100%
 }
@@ -21,17 +25,24 @@ tr:nth-child(even) {
 }
 
 td {
-	font-size: 1.2em;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	font-size: 12pt;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	border: 1px solid;
+	border-color: #c2c2c2;
+	text-aglin: center;
 }
 </style>
-	<br /><br />
+	<br />
 	<TABLE>
-		<CAPTION>节目推荐意见表</CAPTION>
+		<c:if test="${channelComments.channel.type == 1}">
+		<CAPTION>卫视节目推荐意见表</CAPTION>
+		</c:if>
+		<c:if test="${channelComments.channel.type == 0}">
+		<CAPTION>地面节目推荐意见表</CAPTION>
+		</c:if>
 		<TR>
-			<TD>剧 目:</TD>
+			<TD style="width: 80px">剧 目</TD>
 			<TD>${channelComments.tvshow.name}</TD>
 			<TD>集数</TD>
 			<TD>${channelComments.tvshow.count}</TD>
@@ -52,6 +63,16 @@ td {
 			<td>对该剧宣传计划</td>
 			<td colspan="2"></td>
 		</tr>
+		<c:if test="${channelComments.channel.type == 1}">
+			<tr>
+				<td>地面发行</td>
+				<td colspan="3">${prjCmt.localSchdule }</td>
+				<td>网络发行</td>
+				<td colspan="2">${prjCmt.webSchdule }</td>
+				<td>剧本来源</td>
+				<td colspan="2">${prjCmt.tvshow.scriptSrc }</td>
+			</tr>
+		</c:if>
 		<TR>
 			<td colspan="1">主创人员</td>
 			<TD colspan="9" style="padding: 0px; border: none">
@@ -65,22 +86,39 @@ td {
 					</TR>
 					<TR>
 						<td>导演</td>
-						<td>${channelComments.tvshow.directors}</td>
-						<td></td>
+						<td><c:forEach items="${channelComments.tvshow.directors}" var="p">
+								${p.name}<br />
+							</c:forEach></td>
+						<td><c:forEach items="${channelComments.tvshow.directors}" var="p">
+								<c:if test="${not empty p.achievements}">${p.achievements} <br /></c:if>
+								<c:if test="${empty p.achievements}"> —— <br /></c:if>
+							</c:forEach></td>
 						<td></td>
 						<td></td>
 					</TR>
 					<TR>
 						<td>编剧</td>
-						<td>${channelComments.tvshow.screenwriters}</td>
-						<td></td>
+						<td><c:forEach items="${channelComments.tvshow.screenwriters}" var="p">
+								${p.name}<br />
+							</c:forEach></td>
+						<td><c:forEach items="${channelComments.tvshow.screenwriters}" var="p">
+								<c:if test="${not empty p.achievements}">${p.achievements} <br /></c:if>
+								<c:if test="${empty p.achievements}"> —— <br /></c:if>
+							</c:forEach></td>
+
 						<td></td>
 						<td></td>
 					</TR>
 					<TR>
 						<td>演员</td>
-						<td>${channelComments.tvshow.actors}</td>
-						<td></td>
+						<td><c:forEach items="${channelComments.tvshow.actors}" var="p">
+								${p.name}<br />
+							</c:forEach></td>
+						<td><c:forEach items="${channelComments.tvshow.actors}" var="p">
+								<c:if test="${not empty p.achievements}">${p.achievements} <br /></c:if>
+								<c:if test="${empty p.achievements}"> —— <br /></c:if>
+							</c:forEach></td>
+
 						<td></td>
 						<td></td>
 					</TR>
@@ -89,6 +127,11 @@ td {
 			</TD>
 
 		</TR>
+
+		<tr>
+			<td>故事梗概</td>
+			<td colspan="11">${channelComments.tvshow.outline}</td>
+		</tr>
 		<tr>
 			<td>发行价格</td>
 			<td>${prjCmt.publicPrice }</td>
@@ -102,10 +145,6 @@ td {
 					<SPAN></SPAN>
 				</DIV>
 			</td>
-		</tr>
-		<tr>
-			<td>故事梗概</td>
-			<td colspan="11">${channelComments.tvshow.outline}</td>
 		</tr>
 		<tr>
 			<td>评估结果</td>

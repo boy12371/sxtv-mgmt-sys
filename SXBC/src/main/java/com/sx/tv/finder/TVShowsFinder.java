@@ -11,20 +11,110 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.sx.tv.entites.DeptComments;
+import com.sx.tv.entites.PlayInfo;
+import com.sx.tv.entites.TVContract;
 import com.sx.tv.entites.TVShow;
+import com.sx.tv.utils.StatusUtil;
 import com.sx.tv.view.SearchTV;
 
 public class TVShowsFinder {
 
-	public static List<TVShow> findTVShows(SearchTV tv, int firstResult, int size, String orderby, String dir)
-			throws UnsupportedEncodingException {
+	public static List<TVShow> findTVShows(SearchTV tv, int firstResult, int size, String orderby, String dir) throws UnsupportedEncodingException {
 		if (null != tv.getId() && !"".equals(tv.getId())) {
 			return findTVShowByID(tv.getId());
 		}
 		if (tv.getRecommendChannel() != null || tv.getRecommendLevel() != null) {
-			return findTVShowsOnOtherField(tv, firstResult, size, orderby, dir);
+			return findDependsOnRecommendChannel(tv, firstResult, size, orderby, dir);
 		}
+
+//		if (tv.getPlayChannel() != null || tv.getCopyrightFrom() != null || tv.getCopyrightTo() != null || (tv.getContractNo() != null && !tv.getContractNo().equals(""))
+//				|| tv.getPlayDateStart() != null || tv.getPlayDateEnd() != null) {
+//			int status = tv.getStatus() == null ? -1 : tv.getStatus().getId();
+//			if (status == StatusUtil.YI_BO || status == StatusUtil.DAI_BO) {
+//				// search tvshow from TVContract in table playinfo
+//				return findDependsOnContractFields(tv, firstResult, size, orderby, dir);
+//			} else if (status == StatusUtil.ER_LUN_DAI_BO || status == StatusUtil.ER_LUN_YI_BO || status == StatusUtil.SAN_LUN_YI_BO || status == StatusUtil.SAN_LUN_DAI_BO
+//					|| status == StatusUtil.SAN_LUN_HOU_DAI_BO || status == StatusUtil.SAN_LUN_HOU_YI_BO) {
+//				// search tvshow from Playinfo in table playinfo
+//
+//			} else {
+//				// search tvshow from TVShow
+//			}
+//		}
+
 		return findTVShowsByFields(tv, firstResult, size, orderby, dir);
+	}
+
+	public static List<TVContract> findDependsOnContractFields(SearchTV tv, int firstResult, int size, String orderby, String dir) throws UnsupportedEncodingException {
+		if (null == tv) {
+			return new ArrayList<TVContract>();
+		}
+		EntityManager em = TVContract.entityManager();
+		StringBuffer sb = new StringBuffer("SELECT o FROM TVContract AS o WHERE o.tvshow.removed = 0 ");
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		if (null != tv.getId() && !"".equals(tv.getId())) {
+			sb.append("AND o.tvshow.id = :id ");
+			params.put("id", tv.getId());
+		}		
+		if (null != tv.getName() && !"".equals(tv.getName())) {
+			String tname = new String(tv.getName().getBytes("ISO-8859-1"), "UTF-8");
+			String _name = convertLikeString(tname.replace('*', '%'));
+			sb.append("AND o.tvshow.name LIKE :name ");
+			params.put("name", _name);
+		}
+		if (null != tv.getCompany()) {
+			sb.append("AND o.tvshow.company = :company ");
+			params.put("company", tv.getCompany());
+		}
+		if (null != tv.getProgress()) {
+			sb.append("AND o.tvshow.progress = :progress ");
+			params.put("progress", tv.getProgress());
+		}
+		if (null != tv.getTheme()) {
+			sb.append("AND o.tvshow.theme = :theme ");
+			params.put("theme", tv.getTheme());
+		}
+		if (null != tv.getStatus()) {
+			sb.append("AND o.tvshow.status = :status ");
+			params.put("status", tv.getStatus());
+		}
+		if (null != tv.getProjector()) {
+			sb.append("AND o.tvshow.inputter = :inputter ");
+			params.put("inputter", tv.getProjector());
+		}
+		if (null != tv.getPlayChannel()) {
+			sb.append("AND o.channel = :channel ");
+			params.put("channel", tv.getPlayChannel());
+		}
+		if (null != tv.getCopyrightFrom()) {
+			sb.append("AND o.copyrightStart >= :copyrightStart ");
+			params.put("copyrightStart", tv.getCopyrightFrom());
+		}
+		if (null != tv.getCopyrightTo()) {
+			sb.append("AND o.copyrightEnd <= :copyrightEnd ");
+			params.put("copyrightEnd", tv.getCopyrightTo());
+		}
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.tvshow.playDate >= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
+		if (null != tv.getPlayDateEnd()) {
+			sb.append("AND o.tvshow.playDate <= :playDate ");
+			params.put("playDate", tv.getPlayDateEnd());
+		}
+		if (null != tv.getContractNo() && !"".equals(tv.getContractNo())) {
+			sb.append("AND o.contractNo = :contractNo ");
+			params.put("contractNo", tv.getContractNo());
+		}
+		sb.append("ORDER BY o.tvshow." + orderby + " " + dir);
+		Query query = em.createQuery(sb.toString(), TVContract.class);
+		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
+			String key = it.next();
+			query.setParameter(key, params.get(key));
+		}
+		List<TVContract> cts = query.setFirstResult(firstResult).setMaxResults(size).getResultList();
+		return cts;
 	}
 
 	public static long countTVShows(SearchTV tv) throws UnsupportedEncodingException {
@@ -32,18 +122,92 @@ public class TVShowsFinder {
 			return countTVShowByID(tv.getId());
 		}
 		if (tv.getRecommendChannel() != null || tv.getRecommendLevel() != null) {
-			return countTVShowsOnOtherField(tv);
+			return countDependsOnRecommendChannel(tv);
+		}
+
+		if (tv.getPlayChannel() != null || tv.getCopyrightTo() != null || tv.getCopyrightTo() != null || (tv.getContractNo() != null && !tv.getContractNo().equals(""))) {
+			return countDependsOnContractFields(tv);
 		}
 		return countTVShowsByFields(tv);
 	}
 
-	public static List<TVShow> findTVShowsByFields(SearchTV tv, int firstResult, int size, String orderby, String dir)
-			throws UnsupportedEncodingException {
+	public static long countDependsOnContractFields(SearchTV tv) throws UnsupportedEncodingException {
+		if (null == tv) {
+			return 0;
+		}
+		EntityManager em = TVContract.entityManager();
+		StringBuffer sb = new StringBuffer("SELECT COUNT(o) FROM TVContract AS o WHERE o.tvshow.removed = 0 ");
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		if (null != tv.getId() && !"".equals(tv.getId())) {
+			sb.append("AND o.tvshow.id = :id ");
+			params.put("id", tv.getId());
+		}
+		if (null != tv.getName() && !"".equals(tv.getName())) {
+			String tname = new String(tv.getName().getBytes("ISO-8859-1"), "UTF-8");
+			String _name = convertLikeString(tname.replace('*', '%'));
+			sb.append("AND o.tvshow.name LIKE :name ");
+			params.put("name", _name);
+		}
+		if (null != tv.getCompany()) {
+			sb.append("AND o.tvshow.company = :company ");
+			params.put("company", tv.getCompany());
+		}
+		if (null != tv.getProgress()) {
+			sb.append("AND o.tvshow.progress = :progress ");
+			params.put("progress", tv.getProgress());
+		}
+		if (null != tv.getTheme()) {
+			sb.append("AND o.tvshow.theme = :theme ");
+			params.put("theme", tv.getTheme());
+		}
+		if (null != tv.getStatus()) {
+			sb.append("AND o.tvshow.status = :status ");
+			params.put("status", tv.getStatus());
+		}
+		if (null != tv.getProjector()) {
+			sb.append("AND o.tvshow.inputter = :inputter ");
+			params.put("inputter", tv.getProjector());
+		}
+		if (null != tv.getPlayChannel()) {
+			sb.append("AND o.channel = :channel ");
+			params.put("channel", tv.getPlayChannel());
+		}
+		if (null != tv.getCopyrightFrom()) {
+			sb.append("AND o.copyrightStart >= :copyrightStart ");
+			params.put("copyrightStart", tv.getCopyrightFrom());
+		}
+		if (null != tv.getCopyrightTo()) {
+			sb.append("AND o.copyrightEnd <= :copyrightEnd ");
+			params.put("copyrightEnd", tv.getCopyrightTo());
+		}
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.tvshow.playDate >= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
+		if (null != tv.getPlayDateEnd()) {
+			sb.append("AND o.tvshow.playDate <= :playDate ");
+			params.put("playDate", tv.getPlayDateEnd());
+		}
+		if (null != tv.getContractNo() && !"".equals(tv.getContractNo())) {
+			sb.append("AND o.contractNo = :contractNo ");
+			params.put("contractNo", tv.getContractNo());
+		}
+		Query query = em.createQuery(sb.toString(), Long.class);
+		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
+			String key = it.next();
+			query.setParameter(key, params.get(key));
+		}
+		Long count = (Long) query.getSingleResult();
+		return count;
+	}
+
+	public static List<TVShow> findTVShowsByFields(SearchTV tv, int firstResult, int size, String orderby, String dir) throws UnsupportedEncodingException {
 		if (null == tv) {
 			return new ArrayList<TVShow>();
 		}
 		EntityManager em = TVShow.entityManager();
-		StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o where o.removed = 0 ");
+		StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o WHERE o.removed = 0 ");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		if (null != tv.getName() && !"".equals(tv.getName())) {
@@ -89,6 +253,16 @@ public class TVShowsFinder {
 			params.put("inputDate", tv.getInputDate());
 		}
 
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.playDate >= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
+
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.playDate <= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
+		
 		if (null != tv.getIsPurchase()) {
 			sb.append("AND o.isPurchase = :isPurchase ");
 			params.put("isPurchase", tv.getIsPurchase());
@@ -162,7 +336,17 @@ public class TVShowsFinder {
 			sb.append("AND o.inputDate LIKE :inputDate ");
 			params.put("inputDate", tv.getInputDate());
 		}
+		
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.playDate >= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
 
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.playDate <= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
+		
 		if (null != tv.getIsPurchase()) {
 			sb.append("AND o.isPurchase = :isPurchase ");
 			params.put("isPurchase", tv.getIsPurchase());
@@ -175,14 +359,13 @@ public class TVShowsFinder {
 		return (Long) query.getSingleResult();
 	}
 
-	public static List<TVShow> findTVShowsOnOtherField(SearchTV tv, int firstResult, int size, String orderby, String dir)
-			throws UnsupportedEncodingException {
+	public static List<TVShow> findDependsOnRecommendChannel(SearchTV tv, int firstResult, int size, String orderby, String dir) throws UnsupportedEncodingException {
 		if (null == tv) {
 			return new ArrayList<TVShow>();
 		}
-		EntityManager em = TVShow.entityManager();
+		EntityManager em = DeptComments.entityManager();
 		// StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o ");
-		StringBuffer sb = new StringBuffer("SELECT o FROM DeptComments AS o WHERE o.removed = 0 ");
+		StringBuffer sb = new StringBuffer("SELECT o FROM DeptComments AS o WHERE o.tvshow.removed = 0 ");
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (null != tv.getRecommendChannel()) {
 			sb.append("AND o.recommendChannel LIKE :recommendChannel ");
@@ -261,12 +444,12 @@ public class TVShowsFinder {
 
 	}
 
-	public static long countTVShowsOnOtherField(SearchTV tv) throws UnsupportedEncodingException {
+	public static long countDependsOnRecommendChannel(SearchTV tv) throws UnsupportedEncodingException {
 		if (null == tv) {
 			return 0;
 		}
 		EntityManager em = TVShow.entityManager();
-		StringBuffer sb = new StringBuffer("SELECT COUNT(o) FROM DeptComments AS o WHERE o.removed = 0 ");
+		StringBuffer sb = new StringBuffer("SELECT COUNT(o) FROM DeptComments AS o WHERE o.tvshow.removed = 0 ");
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (null != tv.getRecommendChannel()) {
 			sb.append("AND o.recommendChannel LIKE :recommendChannel ");
@@ -351,6 +534,7 @@ public class TVShowsFinder {
 		return (Long) query.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	public static List<TVShow> findTVShowsByName(String name) throws UnsupportedEncodingException {
 		EntityManager em = TVShow.entityManager();
 		// StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o ");
@@ -362,6 +546,7 @@ public class TVShowsFinder {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public static List<TVShow> findAllTVShows() {
 		EntityManager em = TVShow.entityManager();
 		// StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o ");
@@ -370,12 +555,191 @@ public class TVShowsFinder {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public static List<TVShow> findTVShowsByStatus(int firstResult, int size, String orderby, String dir, int[] status) {
+		EntityManager em = TVShow.entityManager();
+		// StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o ");
+		StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o WHERE o.removed = 0 AND o.status in (");
+		for (int i = 0; i < status.length; i++) {
+			if (i != 0 && i < status.length) {
+				sb.append(",");
+			}
+			sb.append(" " + status[i]);
+		}
+		sb.append(") ORDER BY o." + orderby + " " + dir);
+		Query query = em.createQuery(sb.toString(), TVShow.class).setFirstResult(firstResult).setMaxResults(size);
+		return query.getResultList();
+	}
+
+	public static long countAllTVShowsByStatus(int... status) {
+		EntityManager em = TVShow.entityManager();
+		// StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o ");
+		StringBuffer sb = new StringBuffer("SELECT COUNT(o) FROM TVShow AS o WHERE o.removed = 0 AND o.status in (");
+		for (int i = 0; i < status.length; i++) {
+			if (i != 0 && i < status.length) {
+				sb.append(",");
+			}
+			sb.append(" " + status[i]);
+		}
+		sb.append(")");
+		Query query = em.createQuery(sb.toString(), Long.class);
+
+		return (Long) query.getSingleResult();
+	}
+
 	public static List<TVShow> findTVShowEntries(int firstResult, int maxResults) {
-		return TVShow.entityManager().createQuery("SELECT o FROM TVShow o WHERE o.removed = 0", TVShow.class).setFirstResult(firstResult)
-				.setMaxResults(maxResults).getResultList();
+		return TVShow.entityManager().createQuery("SELECT o FROM TVShow o WHERE o.removed = 0", TVShow.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 	}
 
 	public static long countTVShows() {
 		return TVShow.entityManager().createQuery("SELECT COUNT(o) FROM TVShow o WHERE o.removed = 0", Long.class).getSingleResult();
+	}
+	
+	
+	public static List<PlayInfo> findDependsOnPlayInfo(SearchTV tv, int firstResult, int size, String orderby, String dir) throws UnsupportedEncodingException {
+		if (null == tv) {
+			return new ArrayList<PlayInfo>();
+		}
+		EntityManager em = PlayInfo.entityManager();
+		StringBuffer sb = new StringBuffer("SELECT o FROM PlayInfo AS o WHERE o.tvshow.removed = 0 ");
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		if (null != tv.getId() && !"".equals(tv.getId())) {
+			sb.append("AND o.tvshow.id = :id ");
+			params.put("id", tv.getId());
+		}
+		
+		if (null != tv.getName() && !"".equals(tv.getName())) {
+			String tname = new String(tv.getName().getBytes("ISO-8859-1"), "UTF-8");
+			String _name = convertLikeString(tname.replace('*', '%'));
+			sb.append("AND o.tvshow.name LIKE :name ");
+			params.put("name", _name);
+		}
+		if (null != tv.getCompany()) {
+			sb.append("AND o.tvshow.company = :company ");
+			params.put("company", tv.getCompany());
+		}
+
+		if (null != tv.getProgress()) {
+			sb.append("AND o.tvshow.progress = :progress ");
+			params.put("progress", tv.getProgress());
+		}
+
+		if (null != tv.getTheme()) {
+			sb.append("AND o.tvshow.theme = :theme ");
+			params.put("theme", tv.getTheme());
+		}
+
+		if (null != tv.getStatus()) {
+			sb.append("AND o.tvshow.status = :status ");
+			params.put("status", tv.getStatus());
+			int sid = tv.getStatus().getId();
+			int round = 0;
+			if (sid == StatusUtil.ER_LUN_DAI_BO || sid == StatusUtil.ER_LUN_YI_BO) {
+				round = 2;
+			}
+			if (sid == StatusUtil.SAN_LUN_YI_BO || sid == StatusUtil.SAN_LUN_DAI_BO) {
+				round = 3;
+			}
+			if (sid == StatusUtil.SAN_LUN_HOU_DAI_BO || sid == StatusUtil.SAN_LUN_HOU_YI_BO) {
+				round = 4;
+			}
+		}
+
+		if (null != tv.getProjector()) {
+			sb.append("AND o.tvshow.inputter = :inputter ");
+			params.put("inputter", tv.getProjector());
+		}
+
+		if (null != tv.getPlayChannel()) {
+			sb.append("AND o.playChannel = :playChannel ");
+			params.put("playChannel", tv.getPlayChannel());
+		}
+
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.playDate >= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
+
+		if (null != tv.getPlayDateEnd()) {
+			sb.append("AND o.playDate <= :playDate ");
+			params.put("playDate", tv.getPlayDateEnd());
+		}
+		
+		Query query = em.createQuery(sb.toString(), PlayInfo.class);
+		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
+			String key = it.next();
+			query.setParameter(key, params.get(key));
+		}
+		List<PlayInfo> infos = query.setFirstResult(firstResult).setMaxResults(size).getResultList();
+		return infos;
+	}
+
+	public static long countDependsOnPlayInfo(SearchTV tv) throws UnsupportedEncodingException {
+		
+		EntityManager em = PlayInfo.entityManager();
+		StringBuffer sb = new StringBuffer("SELECT COUNT(o) FROM PlayInfo AS o WHERE o.tvshow.removed = 0 ");
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		if (null != tv.getId() && !"".equals(tv.getId())) {
+			sb.append("AND o.tvshow.id = :id ");
+			params.put("id", tv.getId());
+		}
+		
+		if (null != tv.getName() && !"".equals(tv.getName())) {
+			String tname = new String(tv.getName().getBytes("ISO-8859-1"), "UTF-8");
+			String _name = convertLikeString(tname.replace('*', '%'));
+			sb.append("AND o.tvshow.name LIKE :name ");
+			params.put("name", _name);
+		}
+		if (null != tv.getCompany()) {
+			sb.append("AND o.tvshow.company = :company ");
+			params.put("company", tv.getCompany());
+		}
+
+		if (null != tv.getProgress()) {
+			sb.append("AND o.tvshow.progress = :progress ");
+			params.put("progress", tv.getProgress());
+		}
+
+		if (null != tv.getTheme()) {
+			sb.append("AND o.tvshow.theme = :theme ");
+			params.put("theme", tv.getTheme());
+		}
+
+		if (null != tv.getStatus()) {
+			sb.append("AND o.tvshow.status = :status ");
+			params.put("status", tv.getStatus());
+		}
+
+		if (null != tv.getProjector()) {
+			sb.append("AND o.tvshow.inputter = :inputter ");
+			params.put("inputter", tv.getProjector());
+		}
+
+		if (null != tv.getPlayChannel()) {
+			sb.append("AND o.playChannel = :playChannel ");
+			params.put("playChannel", tv.getPlayChannel());
+		}
+
+		if (null != tv.getPlayDateStart()) {
+			sb.append("AND o.playDate >= :playDate ");
+			params.put("playDate", tv.getPlayDateStart());
+		}
+
+		if (null != tv.getPlayDateEnd()) {
+			sb.append("AND o.playDate <= :playDate ");
+			params.put("playDate", tv.getPlayDateEnd());
+		}
+
+		Query query = em.createQuery(sb.toString(), Long.class);
+		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
+			String key = it.next();
+			query.setParameter(key, params.get(key));
+		}
+
+		Long count = (Long) query.getSingleResult();
+
+		return count;
 	}
 }

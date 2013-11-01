@@ -54,6 +54,9 @@ public class TVContract {
     @Column(name = "extraFee")
     private Float extraFee;
 
+    @Column(name="price")
+    private Float price;
+    
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date recieveDate;

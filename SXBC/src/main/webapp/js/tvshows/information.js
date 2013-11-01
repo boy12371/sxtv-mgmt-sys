@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$("#createPrjCommentsLink").button();
 	$("#createScoreLink").button();
 	$("info_company").tooltip();
-
+	$("#contractTable br").remove();
 	$("#createDeptCommentsLink").button().click(function() {
 		if ($("#dialog-scores").length != 0) {
 			$("#dialog-scores").dialog("open");

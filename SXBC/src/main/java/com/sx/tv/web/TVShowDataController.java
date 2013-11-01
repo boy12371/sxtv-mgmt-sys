@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sx.tv.entites.PlayData;
 import com.sx.tv.entites.TVShow;
@@ -25,7 +26,7 @@ import com.sx.tv.view.TVShowData;
 public class TVShowDataController {
 
 	@RequestMapping(value = "/{tvid}", method = RequestMethod.POST, produces = "text/html")
-	public String create(@PathVariable("tvid") Long tvid, @Valid TVShowData TVShowData_, BindingResult bindingResult, Model uiModel,
+	public String create(@PathVariable("tvid") Long tvid, @Valid TVShowData TVShowData_,@RequestParam(required = false)String level, BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, TVShowData_);
@@ -49,13 +50,21 @@ public class TVShowDataController {
 				pds.add(pd);
 			}
 		}
-		return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tvid.toString(), httpServletRequest);
+		if(null != level){
+			return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest) + "?level=level2market";
+		}else{
+			return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest);	
+		}
 	}
 
 	@RequestMapping(value = "/{tvid}", params = "form", produces = "text/html")
-	public String createForm(@PathVariable("tvid") Long tvid, Model uiModel) {
+	public String createForm(@PathVariable("tvid") Long tvid,@RequestParam(required = false)String level, Model uiModel) {
 		uiModel.addAttribute("tvid", tvid);
 		uiModel.addAttribute("tvshow", TVShow.findTVShow(tvid));
+		if(null != level && !"".equals(level)){
+			uiModel.addAttribute("level", level);
+		}
+		uiModel.addAttribute("tvid", tvid);
 		populateEditForm(uiModel, new TVShowData());
 		return "tvshowdatas/create";
 	}

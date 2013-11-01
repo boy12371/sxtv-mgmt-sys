@@ -1,6 +1,7 @@
 package com.sx.tv.entites;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,6 +73,13 @@ public class TVShow {
 	@DateTimeFormat(style = "M-")
 	private Date rejectDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "M-")
+	private Date playDate;
+	
+	@Column(name = "scriptSrc", length = 512)
+	private String scriptSrc;
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private Progress progress;
 
@@ -83,21 +92,17 @@ public class TVShow {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private Status status;
 
-	@Column(name="actors")
-	@Value("")
-	private String actors;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<People> actors;
 
-	@Column(name="directors")
-	@Value("")
-	private String directors;
-	
-	@Column(name="screenwriters")
-	@Value("")
-	private String screenwriters;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<People> directors;
 
-	@Column(name="publisher")
-	@Value("")
-	private String publisher;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<People> screenwriters;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<People> publisher;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private User inputter;
@@ -109,7 +114,7 @@ public class TVShow {
 	private String comments;
 	
 	/**
-	 * default 0=OK 1=removed.
+	 * default 0=Normal, 1=removed.
 	 * only used for remove the record.
 	 * 
 	 */
@@ -259,37 +264,6 @@ public class TVShow {
 		this.projector = projector;
 	}
 
-	public String getActors() {
-		return actors;
-	}
-
-	public void setActors(String actors) {
-		this.actors = actors;
-	}
-
-	public String getDirectors() {
-		return directors;
-	}
-
-	public void setDirectors(String directors) {
-		this.directors = directors;
-	}
-
-	public String getScreenwriters() {
-		return screenwriters;
-	}
-
-	public void setScreenwriters(String screenwriters) {
-		this.screenwriters = screenwriters;
-	}
-
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
 
 	public Integer getRemoved() {
 		return removed;
@@ -297,6 +271,54 @@ public class TVShow {
 
 	public void setRemoved(Integer removed) {
 		this.removed = removed;
+	}
+
+	public Date getPlayDate() {
+		return playDate;
+	}
+
+	public void setPlayDate(Date playDate) {
+		this.playDate = playDate;
+	}
+
+	public String getScriptSrc() {
+		return scriptSrc;
+	}
+
+	public void setScriptSrc(String scriptSrc) {
+		this.scriptSrc = scriptSrc;
+	}
+
+	public Set<People> getActors() {
+		return actors;
+	}
+
+	public void setActors(Set<People> actors) {
+		this.actors = actors;
+	}
+
+	public Set<People> getDirectors() {
+		return directors;
+	}
+
+	public void setDirectors(Set<People> directors) {
+		this.directors = directors;
+	}
+
+	public Set<People> getScreenwriters() {
+		return screenwriters;
+	}
+
+	public void setScreenwriters(Set<People> screenwriters) {
+		this.screenwriters = screenwriters;
+	}
+
+	public Set<People> getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Set<People> publisher) {
+		this.publisher = publisher;
 	}
 
 }

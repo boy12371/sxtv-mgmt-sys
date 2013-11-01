@@ -31,5 +31,6 @@ label {
         <field:display date="true" dateTimePattern="${TVContract__copyrightend_date_format}" field="copyrightEnd" id="s_com_sx_tv_entites_TVContract_copyrightEnd" object="${tvcontract_}" z="h8HbOAUaWbumOe+ShauZpOVfGN4="/>
         <field:display field="channel" id="s_com_sx_tv_entites_TVContract_channel" object="${tvcontract_}" z="lg5tqvSfZNqoLZ9sHr84KF1Rqs4="/>
         <field:display field="ownedby" id="s_com_sx_tv_entites_TVContract_ownedby" object="${tvcontract_}" z="qdBgC1pWWfyjSDPXB9wMbpipmtA="/>
+        <field:display field="price" id="s_com_sx_tv_entites_TVContract_price" object="${tvcontract_}" z="9Bg0IjlgUccX72JiGw7ErD2zk6Q="/>
     </page:show>
 </div>

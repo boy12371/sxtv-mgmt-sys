@@ -19,7 +19,12 @@
 .ui-jqgrid-sortable {
 	color: black;
 }
-
+.ui-jqgrid .ui-jqgrid-titlebar-close {
+	position: relative;
+	top: auto;
+	margin: 0;
+	float: left;
+}
 td {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -47,11 +52,11 @@ td {
 				<field:textareac field="company" items="${companys}" label="影视公司"></field:textareac>
 				<field:textareac field="theme" items="${companys}" label="题材"></field:textareac>
  				-->
-			<div class="rowcontainer">
+			<div class="rowcontainer" style="display:none">
 				<label>价格区间: </label>
 				<form:input path="priceRange" id="_priceRange_id" />
 			</div>
-			<br />
+			
 			<field:select label="项目进度" itemLabel="name" field="progress" id="c_com_sx_tv_entites_TVShow_progress" itemValue="id" items="${progresses}" path="/progress"
 				z="8tuUFGTVoYkMpUJ7y8jn63c0hoE=" />
 

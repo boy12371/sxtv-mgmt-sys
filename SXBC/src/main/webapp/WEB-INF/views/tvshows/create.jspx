@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:form="http://www.springframework.org/tags/form"
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -19,19 +15,7 @@
 		
 	</script>
 	<script type="text/javascript">
-		//var peopleID="";
-		//var aCount = 0;
-		//var dCount = 0;
-		//var sCount = 0;
-		//var pCount = 0;
-		var companyItems = [];
-		var themeItems = [];
-		<c:forEach items="${themes}" var="item">
-			themeItems[themeItems.length] = {id: ${item.id}, name: '${item.name}'};
-		</c:forEach>
-		<c:forEach items="${companys}" var="item">
-			companyItems[companyItems.length] = {id: ${item.id}, name: '${item.name}'};
-		</c:forEach>
+		var peopleID="";
 	</script>
 	<spring:url var="successPng" value="/resources/images/success.png" />
 	<spring:url var="errorPng" value="/resources/images/error.png" />
@@ -42,6 +26,7 @@
 	padding-left: .5em;
 	vertical-align: top;
 }
+
 div.info,div.success,div.warning,div.error {
 	border: 1px solid;
 	margin: 10px 0px;
@@ -49,6 +34,7 @@ div.info,div.success,div.warning,div.error {
 	background-repeat: no-repeat;
 	background-position: 10px center;
 }
+
 div.success {
 	color: #4F8A10;
 	background-color: #DFF2BF;
@@ -60,6 +46,7 @@ div.error {
 	background-color: #FFBABA;
 	background-image: url('${errorPng}');
 }
+
 .ui-autocomplete {
 	max-height: 300px;
 	overflow-y: auto;
@@ -80,7 +67,6 @@ ul.token-input-list {
 	cursor: text;
 	font-family: Verdana;
 	font-size: 12px;
-	height: 23px !important;
 	list-style-type: none;
 	margin: 0;
 	overflow: hidden;
@@ -90,7 +76,7 @@ ul.token-input-list {
 }
 
 li.token-input-token {
-	background-color: #EFF2F7;
+	background-color: #dff2bf;
 	color: #000000;
 	cursor: default;
 	display: block;
@@ -100,81 +86,67 @@ li.token-input-token {
 	overflow: hidden;
 	padding: 3px 5px;
 }
+li.token-input-input-token input{
+	width :100px;
+}
 </style>
 
 	<div id="dialog-company-form" title="添加 影视公司">
-		<form:form id="companyAddForm"
-			action="/SXBC/front/companys/doAjaxCreate" modelAttribute="company"
-			method="post">
-			<label for="name" style="width: 70px">姓名<font color="red">*</font></label>
-			<form:input path="name" id="company_name"
-				cssClass="text ui-widget-content ui-corner-all" />
+		<form:form id="companyAddForm" action="/SXBC/front/companys/doAjaxCreate" modelAttribute="company" method="post">
+			<label for="name" style="width: 70px">公司名称<font color="red">*</font></label>
+			<form:input path="name" id="company_name" cssClass="text ui-widget-content ui-corner-all" />
 			<br />
 			<br />
 			<label for="publisher" style="width: 70px">发行人</label>
-			<form:input path="publisher" id="company_publisher"
-				cssClass="text ui-widget-content ui-corner-all" />
+			<form:input path="publisher" id="company_publisher" cssClass="text ui-widget-content ui-corner-all" />
 			<br />
 			<br />
 			<label for="telephone" style="width: 70px">联系电话</label>
-			<form:input path="telephone" id="company_telephone"
-				cssClass="text ui-widget-content ui-corner-all" />
+			<form:input path="telephone" id="company_telephone" cssClass="text ui-widget-content ui-corner-all" />
 			<br />
 			<br />
 			<label for="achievements" style="width: 70px">代表作</label>
-			<form:input path="achievements" id="company_achievements"
-				cssClass="text ui-widget-content ui-corner-all" />
+			<form:input path="achievements" id="company_achievements" cssClass="text ui-widget-content ui-corner-all" />
 		</form:form>
 	</div>
 
 	<div id="dialog-theme-form" title="添加 题材">
-		<form:form id="themeAddForm" action="/SXBC/front/themes/doAjaxCreate"
-			modelAttribute="theme" method="post">
+		<form:form id="themeAddForm" action="/SXBC/front/themes/doAjaxCreate" modelAttribute="theme" method="post">
 			<label for="name" style="width: 70px">名称<font color="red">*</font></label>
-			<form:input path="name" id="theme_name"
-				cssClass="text ui-widget-content ui-corner-all" />
+			<form:input path="name" id="theme_name" cssClass="text ui-widget-content ui-corner-all" />
+		</form:form>
+	</div>
+	<div id="dialog-people-form" title="添加 演员|导演|编剧">
+		<form:form id="peopleAddForm" action="/SXBC/front/peoples/doAjaxCreate" modelAttribute="people" method="post">
+			<label for="name" style="width: 70px">姓名<font color="red">*</font></label>
+			<form:input path="name" id="people_name" cssClass="text ui-widget-content ui-corner-all" />
+			<br />
+			<br />
+			<label for="achievements" style="width: 70px">代表作</label>
+			<form:input path="achievements" id="achievements" cssClass="text ui-widget-content ui-corner-all" />
 		</form:form>
 	</div>
 	<div id="tvshowCreate">
-		<!-- 
-		<div id="dialog-people-form" title="添加 演员|导演|编剧">
-			<form:form id="peopleAddForm" action="/SXBC/front/peoples/doAjaxCreate" modelAttribute="people" method="post">
-				<label for="name" style="width: 70px">姓名<font color="red">*</font></label>
-				<form:input path="name" id="people_name" cssClass="text ui-widget-content ui-corner-all" />
-				<br />
-				<br />
-				<label for="achievements" style="width: 70px">代表作</label>
-				<form:input path="achievements" id="achievements" cssClass="text ui-widget-content ui-corner-all" />
-			</form:form>
-		</div>
-		-->
 		<ul>
 			<li><a href="#tabs-1">添加剧目</a></li>
 		</ul>
 
 		<div id="tabs-1">
-			<form:form id="tvshowForm" action="/SXBC/tvshows/doAjaxCreate"
-				method="POST" modelAttribute="TVShow_"
-				enctype="application/x-www-form-urlencoded">
+			<form:form id="tvshowForm" action="/SXBC/tvshows/doAjaxCreate" method="POST" modelAttribute="TVShow_" enctype="application/x-www-form-urlencoded">
 				<div id="message">${message}</div>
 				<div class="rowcontainer">
-					<label>剧名 : </label> <INPUT type="text" name="name" id="_name_id"
-						class="required text ui-widget-content ui-corner-all" />
+					<label>剧名 : </label> <INPUT type="text" name="name" id="_name_id" class="required text ui-widget-content ui-corner-all" />
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label>集数 : </label> <INPUT type="text" name="count" id="_count_id"
-						class="required text ui-widget-content ui-corner-all" />
+					<label>集数 : </label> <INPUT type="text" name="count" id="_count_id" class="required text ui-widget-content ui-corner-all" />
 				</div>
 				<br />
+
+				<div class="rowcontainer">
+					<label>剧本来源: </label> <INPUT type="text" name="scriptSrc" id="_scriptSrc_id" class="text ui-widget-content ui-corner-all" />
+				</div>
 				<!-- 
-				<div class="rowcontainer">
-					<label>价格区间: </label> <INPUT type="text" name="priceRange"
-						id="_priceRange_id" class="text ui-widget-content ui-corner-all" />(例:
-					1000-2000)
-				</div>
-				<br />
-				
 				<div class="rowcontainer">
 					<label>发行计划: </label> <input type="text" name="publishSchedule"
 						id="_publishSchedule_id"
@@ -194,59 +166,49 @@ li.token-input-token {
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label><a id="addThemeLink" href="#"><img title="新增题材"
-							src="/SXBC/resources/images/add.png" alt="新增题材"></img></a>题材 : </label> <select
-						id="_theme_id" style="display: none" name="theme">
-						<option value="0" selected="selected">0</option>
-						<c:forEach items="${themes}" var="item">
-							<option value="${item.id}">${item.name}</option>
-						</c:forEach>
-					</select> <INPUT type="text" id="theme_autoComplete" class="required" />
+					<label><a id="addThemeLink" href="#"><img title="新增题材" src="/SXBC/resources/images/add.png" alt="新增题材"></img></a>题材 : </label> 
+					<input type="hidden" id="_theme_id" name="theme" />
+					<INPUT type="text" id="theme_autoComplete" class="required" />
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label><a id="addCompanyLink" href="#"><img
-							title="新增公司" src="/SXBC/resources/images/add.png" alt="新增公司"></img></a>影视公司
-						: </label> <select id="_company_id" name="company" style="display: none">
-						<option value="0" selected="selected">0</option>
-						<c:forEach items="${companys}" var="item">
-							<option value="${item.id}">${item.name}</option>
-						</c:forEach>
-					</select> <INPUT type="text" id="company_autoComplete" class="required" />
+					<label><a id="addCompanyLink" href="#"><img title="新增公司" src="/SXBC/resources/images/add.png" alt="新增公司"></img></a>影视公司 : </label> 
+					<input type="hidden" name="company" id="_company_id" />
+					<INPUT type="text" id="company_autoComplete" class="required" />
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label>演员: </label> <input type="text" id="_actors_id"
-						style="width: 300px" class="required" name="actors" />
+					<label><a class="peopleAdd" name="_actors_id" href="#"><img title="新增演员" src="/SXBC/resources/images/add.png" alt="新增演员"></img></a>演员 : </label> <input type="text"
+						id="_actors_id" />
+
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label>导演 : </label> <input type="text" name="directors"
-						style="width: 300px" class="required" id="_directors_id" />
+					<label><a class="peopleAdd" name="_directors_id" href="#"><img title="新增导演" src="/SXBC/resources/images/add.png" alt="新增导演"></img></a>导演 : </label> <input type="text"
+						id="_directors_id" />
+
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label>编剧 : </label> <input type="text" name="screenwriters"
-						style="width: 300px" class="required" id="_screenwriters_id" />
+					<label><a class="peopleAdd" name="_screenwriters_id" href="#"><img title="新增编剧" src="/SXBC/resources/images/add.png" alt="新增编剧"></img></a>编剧 : </label> <input
+						type="text" id="_screenwriters_id" />
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label>发行人员 : </label> <input type="text" name="publisher"
-						style="width: 300px" class="required" id="_publisher_id" />
+					<label><a class="peopleAdd" name="_publisher_id" href="#"><img title="新增发行人员" src="/SXBC/resources/images/add.png" alt="新发行人员"></img></a>发行人员 : </label> <input
+						type="text" id="_publisher_id" />
 				</div>
 				<br />
 				<div class="rowcontainer">
 					<label>故事梗概 : </label>
-					<TEXTAREA rows="8" cols="60" id="_outline_id" name="outline"
-						class="required text ui-widget-content ui-corner-all">-</TEXTAREA>
+					<TEXTAREA rows="8" cols="60" id="_outline_id" name="outline" class="required text ui-widget-content ui-corner-all">-</TEXTAREA>
 				</div>
 				<br />
 				<div class="rowcontainer">
 					<label>负责人 : </label> <select id="_projector_id" name="projector">
 						<c:forEach items="${users}" var="item">
 							<c:choose>
-								<c:when
-									test="${item.name == pageContext['request'].userPrincipal.name}">
+								<c:when test="${item.name == pageContext['request'].userPrincipal.name}">
 									<option value="${item.id}" selected="selected">${item.staff}</option>
 								</c:when>
 								<c:otherwise>
@@ -259,9 +221,7 @@ li.token-input-token {
 				<br />
 
 				<div>
-					<input style="height: 26px" type="submit" value="保 存"
-						id="submitBtn" /> <input id="reset" type="reset" value="重 置"
-						style="height: 26px" />
+					<input style="height: 26px" type="submit" value="保 存" id="submitBtn" /> <input id="reset" type="reset" value="重 置" style="height: 26px" />
 				</div>
 			</form:form>
 		</div>

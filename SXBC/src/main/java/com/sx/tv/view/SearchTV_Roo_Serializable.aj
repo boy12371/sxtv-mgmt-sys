@@ -10,6 +10,4 @@ privileged aspect SearchTV_Roo_Serializable {
     
     declare parents: SearchTV implements Serializable;
     
-    private static final long SearchTV.serialVersionUID = 1L;
-    
 }

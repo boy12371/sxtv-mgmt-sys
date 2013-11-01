@@ -10,6 +10,4 @@ privileged aspect ScoreDetail_Roo_Serializable {
     
     declare parents: ScoreDetail implements Serializable;
     
-    private static final long ScoreDetail.serialVersionUID = 1L;
-    
 }

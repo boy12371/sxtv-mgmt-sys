@@ -77,7 +77,7 @@
 						<c:otherwise>
 							<!-- 运行到这里=================================== -->
 							<c:if test="${metaRequired}">
-								<form:input cssClass="required" id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />
+								<form:input cssClass="required|number" id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />
 							</c:if>
 							<c:if test="${!metaRequired}">
 								<form:input id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />

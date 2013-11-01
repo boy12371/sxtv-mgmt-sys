@@ -33,7 +33,7 @@ $(document).ready(function() {
 		url : './queryTVShows4Json',
 		datatype : "json",
 		height : 500,
-		colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '导演', '项目负责人', '状态', '录入时间' ],
+		colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人', '状态', '录入时间' ],
 		colModel : [ {
 			name : 'id',
 			index : 'id',
@@ -56,8 +56,8 @@ $(document).ready(function() {
 			index : 'theme',
 			width : 100
 		}, {
-			name : 'directors',
-			index : 'directors',
+			name : 'scriptSrc',
+			index : 'scriptSrc',
 			//formatter : formatDirectors,
 			width : 130
 		}, {

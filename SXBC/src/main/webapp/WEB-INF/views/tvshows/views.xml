@@ -28,4 +28,17 @@
 	<definition extends="default" name="tvshows/scoring">
 		<put-attribute name="body" value="/WEB-INF/views/tvshows/scoring.jspx" />
 	</definition>
+	
+	<definition extends="default" name="tvshows/level2market">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/level2market.jspx" />
+	</definition>
+	<definition extends="default" name="tvshows/level2information">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/level2information.jspx" />
+	</definition>
+	<definition extends="default" name="tvshows/playInfo">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/playInfo.jspx" />
+	</definition>
+	 <definition extends="printTable" name="tvshows/level2marketPrint">
+        <put-attribute name="body" value="/WEB-INF/views/tvshows/level2marketPrint.jspx"/>
+    </definition>
 </tiles-definitions>

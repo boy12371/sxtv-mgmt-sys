@@ -5,6 +5,26 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<script type="text/javascript">
+		var channels = [];
+		<c:forEach items="${channels}" var="item">
+			channels[channels.length] = {id: ${item.id}, name: '${item.name}', type : ${item.type} };
+		</c:forEach>
+		dojo.addOnLoad(function(){
+		       // dojo.byId returns a DOMNode, not a dijit instance, replace dojo with dijit
+		       dojo.connect(dijit.byId("_recommendChannel_id"), 'onChange', function(event){
+		    	   $.each(channels, function(index, el) {
+		    		   if(el.id == $("input[type='hidden'][name='recommendChannel']").val()){
+						if(el.type == 1){
+							$("#_c_com_sx_tv_entites_prj_localSchdule_id").show();
+							$("#_c_com_sx_tv_entites_prj_localSchdule_id").next().show();
+						}else{
+							$("#_c_com_sx_tv_entites_prj_localSchdule_id").hide();
+							$("#_c_com_sx_tv_entites_prj_localSchdule_id").next().hide();
+						}
+					}
+				});
+	       });
+	   });
 		$(document).ready(function() {
 			$('input[type=checkbox]').click(function() {
 				var checkboxs = $('input[type=checkbox]');
@@ -69,6 +89,11 @@
 					comments : "required",
 				}
 			});
+			$("#_c_com_sx_tv_entites_prj_localSchdule_id").next().hide();
+			$("#_c_com_sx_tv_entites_prj_localSchdule_id").hide();
+			$("input[type='text']").css("width", 400);
+			$("textarea").css("max-width", 400);
+			$("textarea").css("width", 400);
 		});
 	</script>
 	<style>
@@ -106,6 +131,8 @@
 			<field:select itemLabel="name" field="recommendChannel" id="c_com_sx_tv_entites_ProjectorComments_recommendChannel" itemValue="id" items="${channels}" label="推荐平台"
 				path="/channels" z="user-managed" />
 			<field:input label="发行计划" field="publicSchdule" id="c_com_sx_tv_entites_prj_ps" z="g4gKe5Bm9BdNZTPOZjwOrNZjOQ4=" />
+			<field:input label="地面计划" field="localSchdule" id="c_com_sx_tv_entites_prj_localSchdule" z="" />
+			<field:input label="网络发行" field="webSchdule" id="c_com_sx_tv_entites_prj_webSchdule" z="" />
 			<field:input label="发行价格" field="publicPrice" id="c_com_sx_tv_entites_prj_pp" z="g4gKe5Bm9BdNZTPOZjwOrNZjOQ4=" />
 			<field:input label="价格区间" field="priceRange" id="c_com_sx_tv_entites_prj_pr" z="g4gKe5Bm9BdNZTPOZjwOrNZjOQ4=" />
 			<field:textarea label="意见" field="comments" id="c_com_sx_tv_entites_ProjectorComments_comments" />

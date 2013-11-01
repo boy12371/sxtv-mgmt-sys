@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_sx_tv_entites_Score" modelAttribute="score" path="/scores" render="${empty dependencies}" z="Ljcn/l+n0vOFLd0v5amaWGTJnnc=">
         <field:select field="ratedBy" id="c_com_sx_tv_entites_Score_ratedBy" itemValue="id" items="${users}" path="/users" z="a+V2hZUJz+qnrxO8PmBQrCgc7Us="/>
-        <field:input field="avgScore" id="c_com_sx_tv_entites_Score_avgScore" validationMessageCode="field_invalid_number" z="3YocMeRgnzR5JwaDfnj0mYo2ufc="/>
+        <field:input field="avgScore" id="c_com_sx_tv_entites_Score_avgScore" validationMessageCode="field_invalid_integer" z="vgrWEZ3iiI49hpinIBQU2Yz9yqE="/>
         <field:simple field="details" id="c_com_sx_tv_entites_Score_details" messageCode="entity_reference_not_managed" messageCodeAttribute="Score Detail" z="IFONHxBNRLpmzU7oS+kKfBLItvc="/>
         <field:select field="recommendChannel" id="c_com_sx_tv_entites_Score_recommendChannel" itemValue="id" items="${channels}" path="/channels" z="dfXDxBAxicIshgMoBiGwUFNc1p8="/>
         <field:select field="recommendLevel" id="c_com_sx_tv_entites_Score_recommendLevel" itemValue="id" items="${recommendclasses}" path="/recommendclasses" z="xZBs5Wzfh0Hl3F17juEgl/5rUbo="/>

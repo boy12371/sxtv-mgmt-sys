@@ -9,7 +9,126 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#TVContract_").validate();
+			//$("#TVContract_").validate();
+			$("td br").remove();
+			$("td").css("padding-top","10px")
+			$("font").remove();
+			$("#TVContract_").submit(function() {
+				var res = true;
+				/* if ($("#_publishForm_id").val().length == 0) {
+					$("#_publishForm_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false;
+				} */
+
+				/* var _pdate = $("#_showDate_id").val();
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(_pdate)) {
+					$("#_showDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				} */
+
+				if (!$.isNumeric($("#_totalPrice_id").val())) {
+					$("#_totalPrice_id").addClass("ui-state-error").val("请输入数字").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false;
+				}
+				
+				if($("#_channel_id").val().length == 0){
+					res = false;
+					$("#_channel_id").addClass("ui-state-error").val("请选择").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+				}
+				
+				/* if (!$.isNumeric($("#_extraFee_id").val())) {
+					$("#_extraFee_id").addClass("ui-state-error").val("请输入数字").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_recieveDate_id").val())) {
+					$("#_recieveDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_fileDate_id").val())) {
+					$("#_fileDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_inputDate_id").val())) {
+					$("#_inputDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_copyrightStart_id").val())) {
+					$("#_copyrightStart_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				
+				if ($("#_recieveOwner_id").val().length == 0) {
+					$("#_recieveOwner_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_inputter_id").val().length == 0) {
+					$("#_inputter_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_fileBy_id").val().length == 0) {
+					$("#_fileBy_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_contractNo_id").val().length == 0) {
+					$("#_contractNo_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_ownedby_id").val().length == 0) {
+					$("#_ownedby_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				} */
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_copyrightStart_id").val())) {
+					$("#_copyrightStart_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false;
+				}
+				
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_copyrightEnd_id").val())) {
+					$("#_copyrightEnd_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false;
+				}
+				if (!$.isNumeric($("#_price_id").val())) {
+					$("#_price_id").addClass("ui-state-error").val("请输入数字").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false;
+				}
+				
+				return res;
+				
+			});
 		});
 	</script>
 	<style>
@@ -34,37 +153,41 @@ label {
     vertical-align: middle;
     width: 170px;
 }
+td {
+	border-bottom: 1px solid #E9E3E3;
+}
 </style>
 	<form:create id="fc_com_sx_tv_entites_TVContract" label="合同信息" modelAttribute="TVContract_" path="/front/tvcontracts/create" render="${empty dependencies}" z="user-managed">
 		<input name="tvshow" type="hidden" value="${TVContract_.tvshow.id}" />
-		<table>
+		<table style="width:100%">
 			<tr>
 				<td style="width: 400px">
 					<div>
 						<label>剧目：</label> <A href="/SXBC/tvshows/generalInfo/${TVContract_.tvshow.id}"> ${TVContract_.tvshow.name} </A> <br />
 					</div> <br />
 				</td>
-				<td><field:select field="channel" id="c_com_sx_tv_entites_TVContract_channel" itemValue="id" items="${channels}" label="播出平台" path="/channels" z="user-managed" /></td>
+				<td><field:select field="channel" id="c_com_sx_tv_entites_TVContract_channel" itemLabel="name" itemValue="id" items="${channels}" label="播出平台" path="/channels" z="user-managed" /></td>
 			</tr>
 			<tr>
-				<td><field:input field="publishForm" id="c_com_sx_tv_entites_TVContract_publishForm" label="发行方式" metaRequired="true" z="user-managed" /></td>
+				<td><field:input field="publishForm" id="c_com_sx_tv_entites_TVContract_publishForm" label="发行方式" z="user-managed" /></td>
 				<td><field:datetime dateTimePattern="${TVContract__showdate_date_format}" field="showDate" id="c_com_sx_tv_entites_TVContract_showDate" label="上星时间" required="true" z="user-managed" /></td>
 			</tr>
 			<tr>
-				<td><field:input field="totalPrice" id="c_com_sx_tv_entites_TVContract_totalPrice" label="总价" metaRequired="true" validationMessageCode="field_invalid_number" z="user-managed" /></td>
-				<td><field:input field="extraFee" id="c_com_sx_tv_entites_TVContract_extraFee" label="单价及三费" metaRequired="true" validationMessageCode="field_invalid_number" z="user-managed" /></td>
+				<td><field:input field="totalPrice" id="c_com_sx_tv_entites_TVContract_totalPrice" label="总价" validationMessageCode="field_invalid_number" z="user-managed" /></td>
+				<td><field:input field="extraFee" id="c_com_sx_tv_entites_TVContract_extraFee" label="单价及三费" validationMessageCode="field_invalid_number" z="user-managed" />
+				</td>
 			</tr>
 			<tr>
 				<td><field:datetime dateTimePattern="${TVContract__recievedate_date_format}" field="recieveDate" id="c_com_sx_tv_entites_TVContract_recieveDate" label="合同接收时间" required="true" z="user-managed" /></td>
-				<td><field:input field="recieveOwner" id="c_com_sx_tv_entites_TVContract_recieveOwner" label="合同接收经手人" metaRequired="true" z="user-managed" /></td>
+				<td><field:input field="recieveOwner" id="c_com_sx_tv_entites_TVContract_recieveOwner" label="合同接收经手人" z="user-managed" /></td>
 			</tr>
 			<tr>
 				<td><field:datetime dateTimePattern="${TVContract__inputdate_date_format}" field="inputDate" id="c_com_sx_tv_entites_TVContract_inputDate" label="合同录入时间" required="true" z="user-managed" /></td>
-				<td><field:input field="inputter" id="c_com_sx_tv_entites_TVContract_inputter" label="合同录入经手人" metaRequired="true" z="user-managed" /></td>
+				<td><field:input field="inputter" id="c_com_sx_tv_entites_TVContract_inputter" label="合同录入经手人" z="user-managed" /></td>
 			</tr>
 			<tr>
 				<td><field:datetime dateTimePattern="${TVContract__filedate_date_format}" field="fileDate" id="c_com_sx_tv_entites_TVContract_fileDate" label="合同归档时间" required="true" z="user-managed" /></td>
-				<td><field:input field="fileBy" id="c_com_sx_tv_entites_TVContract_fileBy" label="合同归档经手人" metaRequired="true" z="user-managed" /></td>
+				<td><field:input field="fileBy" id="c_com_sx_tv_entites_TVContract_fileBy" label="合同归档经手人" z="user-managed" /></td>
 			</tr>
 			<tr>
 				<td><field:datetime dateTimePattern="${TVContract__recieveagreementdate_date_format}" field="recieveAgreementDate" id="c_com_sx_tv_entites_TVContract_recieveAgreementDate" label="补充协议接收时间" z="user-managed" /></td>
@@ -83,9 +206,14 @@ label {
 				<td><field:datetime dateTimePattern="${TVContract__copyrightend_date_format}" field="copyrightEnd" id="c_com_sx_tv_entites_TVContract_copyrightEnd" label="版权期限终止时间" required="true" z="user-managed" /></td>
 			</tr>
 			<tr>
-				<td><field:input field="contractNo" id="c_com_sx_tv_entites_TVContract_contractNo" label="合同号" metaRequired="true" z="user-managed" /></td>
-				<td><field:input field="ownedby" id="c_com_sx_tv_entites_TVContract_owner" label="合同负责人" metaRequired="true" z="user-managed" /></td>
+				<td><field:input field="contractNo" id="c_com_sx_tv_entites_TVContract_contractNo" label="合同号" z="user-managed" /></td>
+				<td><field:input field="ownedby" id="c_com_sx_tv_entites_TVContract_owner" label="合同负责人" z="user-managed" /></td>
 			</tr>
+			<tr>
+				<td><field:input field="price" id="c_com_sx_tv_entites_TVContract_price" label="单价" validationMessageCode="field_invalid_number" z="user-managed" /></td>
+				<td></td>
+			</tr>
+			
 		</table>
 	</form:create>
 </div>

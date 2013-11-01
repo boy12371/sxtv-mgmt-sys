@@ -127,6 +127,7 @@ label {
         </table>
         <field:select field="tvshow" id="c_com_sx_tv_entites_TVContract_tvshow" itemValue="id" items="${tvshows}" path="/tvshows1" z="KVDaLXGLnbUZficOr4dhwkziF+Q="/>
         <field:input field="ownedby" id="c_com_sx_tv_entites_TVContract_ownedby" z="Wb6POu1FCnn4r5rXv7IivX5RvMk="/>
+        <field:input field="price" id="c_com_sx_tv_entites_TVContract_price" validationMessageCode="field_invalid_number" z="kKO2d8Y/Vkr5dX+amtn+/e4QURU="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_sx_tv_entites_TVContract" render="${not empty dependencies}" z="XUE/AlHke+pqxDmnOjwmT5OVqZ0="/>
 </div>

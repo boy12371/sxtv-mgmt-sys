@@ -32,10 +32,20 @@ tr:nth-child(even) {
 	background-color: white;
 }
 </style>
-	<form:create label="收视数据" id="fc_com_sx_tv_view_TVShowData" modelAttribute="TVShowData_" path="/tvshowdatas/${tvid}" render="${empty dependencies}"
+	<c:set value="/tvshowdatas/${tvid}" var="formURL"/>
+	<c:if test="${not empty level}">
+        <c:set value="/tvshowdatas/${tvid}?level=level2market" var="formURL"/>
+    </c:if>
+	<form:create label="收视数据" id="fc_com_sx_tv_view_TVShowData" modelAttribute="TVShowData_" path="${formURL}" render="${empty dependencies}"
 		z="6KEW1+FB94KEJc5FiVOLz7gW0/I=">
 		<div class="rowcontainer">
-			<label> 剧 目: </label> <label> <A href="/SXBC/tvshows/generalInfo/${tvid}"> ${tvshow.name } </A>
+			<label> 剧 目: </label> <label> 
+			<c:if test="${not empty level}">
+				<A href="/SXBC/tvshows/generalInfo/${tvid}?level=level2market"> ${tvshow.name } </A>
+			</c:if>
+			<c:if test="${empty level}">
+				<A href="/SXBC/tvshows/generalInfo/${tvid}"> ${tvshow.name } </A>
+			</c:if>
 			</label>
 		</div>
 		<br />

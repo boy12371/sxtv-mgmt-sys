@@ -4,14 +4,12 @@
 package com.sx.tv.entites;
 
 import com.sx.tv.entites.Company;
-import com.sx.tv.entites.People;
 import com.sx.tv.entites.Progress;
 import com.sx.tv.entites.Status;
 import com.sx.tv.entites.TVShow;
 import com.sx.tv.entites.Theme;
 import com.sx.tv.entites.User;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -89,21 +87,6 @@ privileged aspect TVShow_Roo_Finder {
         return q;
     }
     
-    public static TypedQuery<TVShow> TVShow.findTVShowsByPriceRangeLike(String priceRange) {
-        if (priceRange == null || priceRange.length() == 0) throw new IllegalArgumentException("The priceRange argument is required");
-        priceRange = priceRange.replace('*', '%');
-        if (priceRange.charAt(0) != '%') {
-            priceRange = "%" + priceRange;
-        }
-        if (priceRange.charAt(priceRange.length() - 1) != '%') {
-            priceRange = priceRange + "%";
-        }
-        EntityManager em = TVShow.entityManager();
-        TypedQuery<TVShow> q = em.createQuery("SELECT o FROM TVShow AS o WHERE LOWER(o.priceRange) LIKE LOWER(:priceRange)", TVShow.class);
-        q.setParameter("priceRange", priceRange);
-        return q;
-    }
-    
     public static TypedQuery<TVShow> TVShow.findTVShowsByProgress(Progress progress) {
         if (progress == null) throw new IllegalArgumentException("The progress argument is required");
         EntityManager em = TVShow.entityManager();
@@ -112,19 +95,11 @@ privileged aspect TVShow_Roo_Finder {
         return q;
     }
     
-    public static TypedQuery<TVShow> TVShow.findTVShowsByScreenwriters(List<People> screenwriters) {
-        if (screenwriters == null) throw new IllegalArgumentException("The screenwriters argument is required");
+    public static TypedQuery<TVShow> TVShow.findTVShowsByScreenwriters(String screenwriters) {
+        if (screenwriters == null || screenwriters.length() == 0) throw new IllegalArgumentException("The screenwriters argument is required");
         EntityManager em = TVShow.entityManager();
-        StringBuilder queryBuilder = new StringBuilder("SELECT o FROM TVShow AS o WHERE");
-        for (int i = 0; i < screenwriters.size(); i++) {
-            if (i > 0) queryBuilder.append(" AND");
-            queryBuilder.append(" :screenwriters_item").append(i).append(" MEMBER OF o.screenwriters");
-        }
-        TypedQuery<TVShow> q = em.createQuery(queryBuilder.toString(), TVShow.class);
-        int screenwritersIndex = 0;
-        for (People _people: screenwriters) {
-            q.setParameter("screenwriters_item" + screenwritersIndex++, _people);
-        }
+        TypedQuery<TVShow> q = em.createQuery("SELECT o FROM TVShow AS o WHERE o.screenwriters = :screenwriters", TVShow.class);
+        q.setParameter("screenwriters", screenwriters);
         return q;
     }
     

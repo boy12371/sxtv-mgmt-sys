@@ -4,7 +4,6 @@
 package com.sx.tv.web;
 
 import com.sx.tv.entites.Company;
-import com.sx.tv.entites.People;
 import com.sx.tv.entites.Progress;
 import com.sx.tv.entites.Status;
 import com.sx.tv.entites.TVShow;
@@ -97,13 +96,13 @@ privileged aspect TVShowController_Roo_Controller {
     void TVShowController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("TVShow__inputdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("TVShow__rejectdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("TVShow__playdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void TVShowController.populateEditForm(Model uiModel, TVShow TVShow_) {
         uiModel.addAttribute("TVShow_", TVShow_);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("companys", Company.findAllCompanys());
-        uiModel.addAttribute("peoples", People.findAllPeoples());
         uiModel.addAttribute("progresses", Progress.findAllProgresses());
         uiModel.addAttribute("statuses", Status.findAllStatuses());
         uiModel.addAttribute("themes", Theme.findAllThemes());

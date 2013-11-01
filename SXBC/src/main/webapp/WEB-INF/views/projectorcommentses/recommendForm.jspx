@@ -25,15 +25,17 @@ tr:nth-child(even) {
 }
 
 td {
-	font-size: 1.5em;
-	padding: 10px;
-	border: 1px solid;
+	font-size: 14pt;
+	padding: 8px;
+	border: 1px solid #c2c2c2;
+	text-algin:center;
 }
 </style>
-	<br /> <br /> <br /> <br /> <br /> <br />
+	<br /> <br /> <br /> 
 	<DIV>
 		<TABLE>
 			<CAPTION>初选意见表</CAPTION>
+			 <br /> 
 			<TR>
 				<TD width="15%">剧 名</TD>
 				<TD>
@@ -46,16 +48,24 @@ td {
 
 			<TR>
 				<TD>主演</TD>
-				<TD>${projectorcomments.tvshow.actors}</TD>
+				<TD>
+				<c:forEach items="${projectorcomments.tvshow.actors}" var="p">
+					${p.name }<c:if test="${not empty p.achievements}">【 ${p.achievements} 】</c:if> <br />
+				</c:forEach>
+				</TD>
 				<TD>导演</TD>
-				<TD>${projectorcomments.tvshow.directors}</TD>
+				<TD>
+				<c:forEach items="${projectorcomments.tvshow.directors}" var="p">
+					${p.name }<c:if test="${not empty p.achievements}"> 代表作：【 ${p.achievements} 】</c:if> <br />
+				</c:forEach>
+				</TD>
 			</TR>
 
 			<TR>
 				<td>公司</td>
-				<td colspan="3">${projectorcomments.tvshow.company.name}(发行人:
+				<td colspan="3">${projectorcomments.tvshow.company.name}【发行人:
 					${projectorcomments.tvshow.company.publisher} 电话:
-					${projectorcomments.tvshow.company.telephone})</td>
+					${projectorcomments.tvshow.company.telephone}】</td>
 			</TR>
 			<TR>
 				<td>价格区间</td>

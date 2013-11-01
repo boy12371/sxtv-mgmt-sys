@@ -6,8 +6,11 @@ import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -18,6 +21,7 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,12 +38,12 @@ import com.sx.tv.entites.ContractPayment;
 import com.sx.tv.entites.DeptComments;
 import com.sx.tv.entites.People;
 import com.sx.tv.entites.PlayData;
+import com.sx.tv.entites.PlayInfo;
 import com.sx.tv.entites.Progress;
 import com.sx.tv.entites.ProjectorComments;
 import com.sx.tv.entites.RecommendClass;
 import com.sx.tv.entites.Role;
 import com.sx.tv.entites.Score;
-import com.sx.tv.entites.ScoreDetail;
 import com.sx.tv.entites.Status;
 import com.sx.tv.entites.TVContract;
 import com.sx.tv.entites.TVShow;
@@ -52,6 +56,7 @@ import com.sx.tv.view.JsonData;
 import com.sx.tv.view.JsonDataTable;
 import com.sx.tv.view.Page;
 import com.sx.tv.view.SearchTV;
+import com.sx.tv.view.TVShowView;
 
 @Controller
 @RequestMapping(value = "/tvshows")
@@ -77,7 +82,7 @@ public class ControllerTVShow {
 
 	@RequestMapping(value = "/create", params = "toCreate", produces = "text/html")
 	public String toCreate(Model uiModel) {
-		uiModel.addAttribute("TVShow_", new TVShow());
+		uiModel.addAttribute("TVShow_", new TVShowView());
 		uiModel.addAttribute("people", new People());
 		uiModel.addAttribute("company", new Company());
 		uiModel.addAttribute("theme", new Theme());
@@ -87,7 +92,7 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/generalInfo/{id}", produces = "text/html")
-	public String information(@PathVariable("id") Long id, Model uiModel, Principal principal) {
+	public String information(@PathVariable("id") Long id, @RequestParam(value = "level", required = false) String level, Model uiModel, Principal principal) {
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("channels", Channel.findAllChannels());
 		TVShow tv = TVShow.findTVShow(id);
@@ -195,7 +200,13 @@ public class ControllerTVShow {
 			}
 		}
 
-		return "tvshows/information";
+		if (null != level && !"".equals(level)) {
+			List<PlayInfo> playInfos = PlayInfo.findPlayInfoesByTvshow(tv).getResultList();
+			uiModel.addAttribute("playInfos", playInfos);
+			return "tvshows/level2information";
+		} else {
+			return "tvshows/information";
+		}
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "text/html")
@@ -212,22 +223,53 @@ public class ControllerTVShow {
 
 	@RequestMapping(value = "/doAjaxCreate", method = RequestMethod.POST, produces = "text/html")
 	public @ResponseBody
-	String doCreateAjaxSubmit(TVShow TVShow_, Model uiModel, HttpServletRequest httpServletRequest, Principal principal) {
+	String doCreateAjaxSubmit(TVShowView TVShow_, Model uiModel, HttpServletRequest httpServletRequest, Principal principal) {
 		String message = "SUCCESS";
 		try {
-			TypedQuery<TVShow> query = TVShow.findTVShowsByNameEquals(TVShow_.getName());
+			TypedQuery<TVShow> query = TVShow.findTVShowsByNameEquals(TVShow_.getName().trim());
 			boolean isNotExsits = query.getResultList().isEmpty();
 			if (isNotExsits) {
 				User inputer = User.findUsersByNameEquals(principal.getName()).getSingleResult();
-				TVShow_.setInputter(inputer);
-				TVShow_.setInputDate(new Date());
-				TVShow_.setStatus(Status.findStatus(StatusUtil.DAI_TUI_JIAN));
-				TVShow_.persist();
+				TVShow tv = new TVShow();
+				tv.setName(TVShow_.getName().trim());
+				tv.setCount(TVShow_.getCount());
+				tv.setCompany(TVShow_.getCompany());
+				tv.setTheme(TVShow_.getTheme());
+				tv.setInputDate(new Date());
+				tv.setInputter(inputer);
+				tv.setIsPurchase(false);
+				tv.setOutline(TVShow_.getOutline());
+				tv.setProgress(TVShow_.getProgress());
+				tv.setProjector(TVShow_.getProjector());
+				tv.setRemoved(0);
+				tv.setScriptSrc(TVShow_.getScriptSrc());
+				tv.setStatus(Status.findStatus(StatusUtil.DAI_TUI_JIAN));
+				Set<People> actors = new HashSet<People>();
+				actors.addAll(TVShow_.getActors());
+				tv.setActors(actors);
+				
+				Set<People> directors = new HashSet<People>();
+				directors.addAll(TVShow_.getDirectors());
+				tv.setDirectors(directors);
+				
+				Set<People> screenwriters = new HashSet<People>();
+				screenwriters.addAll(TVShow_.getScreenwriters());
+				tv.setScreenwriters(screenwriters);
+				
+				if(null != TVShow_.getPublisher()){
+					Set<People> publisher = new HashSet<People>();
+					publisher.addAll(TVShow_.getPublisher());
+					tv.setPublisher(publisher);
+				}
+				
+				tv.persist();
+				message += "_"+tv.getId();
+				
 			} else {
 				message = "DUPLICATE";
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			e.printStackTrace();
 			message = "FAILED";
 		}
 		// uiModel.addAttribute("message", message);
@@ -236,7 +278,42 @@ public class ControllerTVShow {
 
 	@RequestMapping(value = "/update/{id}", params = "toUpdate", produces = "text/html")
 	public String toUpdate(@PathVariable("id") Long id, Model uiModel) {
-		uiModel.addAttribute("TVShow_", TVShow.findTVShow(id));
+		TVShow tv = TVShow.findTVShow(id);
+		TVShowView tvview = new TVShowView();
+		tvview.setId(tv.getId());
+		List<People> actors = new ArrayList<People>();
+		actors.addAll(tv.getActors());
+		tvview.setActors(actors);
+		
+		List<People> dirs = new ArrayList<People>();
+		dirs.addAll(tv.getDirectors());
+		tvview.setDirectors(dirs);
+		
+		List<People> writers = new ArrayList<People>();
+		writers.addAll(tv.getScreenwriters());
+		tvview.setScreenwriters(writers);
+		
+		List<People> pubs = new ArrayList<People>();
+		pubs.addAll(tv.getPublisher());
+		tvview.setPublisher(pubs);
+		tvview.setCompany(tv.getCompany());
+		tvview.setCount(tv.getCount());
+		tvview.setInputDate(tv.getInputDate());
+		tvview.setInputter(tv.getInputter());
+		tvview.setIsPurchase(tv.getIsPurchase());
+		tvview.setMarketAssessment(tv.getMarketAssessment());
+		tvview.setMarketShare(tv.getMarketShare());
+		tvview.setName(tv.getName());
+		tvview.setOutline(tv.getOutline());
+		tvview.setProgress(tv.getProgress());
+		tvview.setProjector(tv.getProjector());
+		tvview.setRanking(tv.getRanking());
+		tvview.setRatings(tv.getRatings());
+		tvview.setScriptSrc(tv.getScriptSrc());
+		tvview.setStatus(tv.getStatus());
+		tvview.setTheme(tv.getTheme());
+		
+		uiModel.addAttribute("TVShow_", tvview);
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("people", new People());
 		uiModel.addAttribute("company", new Company());
@@ -246,39 +323,84 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/update/doUpdate/{sid}", method = RequestMethod.PUT, produces = "text/html")
-	public String doUpdate(@PathVariable("sid") Integer sid, @Valid TVShow TVShow_, BindingResult bindingResult, Principal principal,
+	public String doUpdate(@PathVariable("sid") Integer sid, TVShowView TVShow_, BindingResult bindingResult, Principal principal,
 			Model uiModel, HttpServletRequest httpServletRequest) {
-		if (bindingResult.hasErrors()) {
-			uiModel.addAttribute("TVShow_", TVShow_);
-			populateEditForm(uiModel);
-			return "tvshows/update";
-		}
+
 		uiModel.asMap().clear();
 		User logonUser = User.findUsersByNameEquals(principal.getName()).getSingleResult();
 		Status _newST = TVShow_.getStatus();
 		if (_newST.getId() != sid) {
 			Status _oldST = Status.findStatus(sid);
 			logger.warn("Warning:Status Changed==========================\r\n");
-			logger.warn("\r\nTVShow: (id=" + TVShow_.getId() + ", name=" + TVShow_.getName() + ") status changed from \r\n"
-					+ _oldST.getName() + "(" + _oldST.getId() + ") to " + _newST.getName() + "(" + _newST.getId() + ") by user:("
-					+ logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\n");
+			logger.warn("\r\nTVShow: (id=" + TVShow_.getId() + ", name=" + TVShow_.getName() + ") status changed from \r\n" + _oldST.getName() + "(" + _oldST.getId() + ") to "
+					+ _newST.getName() + "(" + _newST.getId() + ") by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\n");
 			logger.warn("Warning:Status Changed==========================\r\n");
 		}
-		TVShow_.merge();
+		TVShow tv = TVShow.findTVShow(TVShow_.getId());
+		tv.setCompany(TVShow_.getCompany());
+		tv.setCount(TVShow_.getCount());
+		tv.setInputDate(TVShow_.getInputDate());
+		tv.setInputter(TVShow_.getInputter());
+		tv.setIsPurchase(TVShow_.getIsPurchase());
+		tv.setMarketAssessment(TVShow_.getMarketAssessment());
+		tv.setMarketShare(TVShow_.getMarketShare());
+		//tv.setName(TVShow_.getName());
+		tv.setOutline(TVShow_.getOutline());
+		tv.setProgress(TVShow_.getProgress());
+		tv.setProjector(TVShow_.getProjector());
+		tv.setRanking(TVShow_.getRanking());
+		tv.setRatings(TVShow_.getRatings());
+		tv.setScriptSrc(TVShow_.getScriptSrc());
+		tv.setStatus(TVShow_.getStatus());
+		tv.setTheme(TVShow_.getTheme());
+		
+		if(null != TVShow_.getActors() && !TVShow_.getActors().isEmpty()){
+			Set<People> actors = new HashSet<People>();
+			actors.addAll(TVShow_.getActors());
+			tv.setActors(actors);
+		}else{
+			tv.setActors(null);
+		}
+		
+		if(null != TVShow_.getDirectors() && !TVShow_.getDirectors().isEmpty()){
+			Set<People> directors = new HashSet<People>();
+			directors.addAll(TVShow_.getDirectors());
+			tv.setDirectors(directors);
+		}else{
+			tv.setDirectors(null);
+		}
+		
+		if(null != TVShow_.getScreenwriters() && !TVShow_.getScreenwriters().isEmpty()){
+			Set<People> screenwriters = new HashSet<People>();
+			screenwriters.addAll(TVShow_.getScreenwriters());
+			tv.setScreenwriters(screenwriters);
+		}else{
+			tv.setScreenwriters(null);
+		}
+		
+		if(null != TVShow_.getPublisher() && !TVShow_.getPublisher().isEmpty()){
+			Set<People> publisher = new HashSet<People>();
+			publisher.addAll(TVShow_.getPublisher());
+			tv.setPublisher(publisher);
+		}else{
+			tv.setPublisher(null);
+		}
+		
+		tv.merge();
 		return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(TVShow_.getId().toString(), httpServletRequest);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "text/html")
-	public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size, Principal principal, Model uiModel) {
+	public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size,
+			Principal principal, Model uiModel) {
 
 		TVShow TVShow_ = TVShow.findTVShow(id);
 		TVShow_.setRemoved(1);
 		TVShow_.merge();
 		User logonUser = User.findUsersByNameEquals(principal.getName()).getSingleResult();
 		logger.warn("Warning:TVShow Removed=========================\r\n");
-		logger.warn("TVShow: (id=" + TVShow_.getId() + ", name=" + TVShow_.getName() + ") removed by by user:(" + logonUser.getStaff()
-				+ "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\n");
+		logger.warn("TVShow: (id=" + TVShow_.getId() + ", name=" + TVShow_.getName() + ") removed by by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "="
+				+ logonUser.getId() + "])\r\n");
 		logger.warn("Warning:Status Changed==========================\r\n");
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
@@ -287,8 +409,8 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/confirmPurchase/{tvid}/{sid}", produces = "text/html")
-	public String confirmPurchase(@PathVariable("tvid") Long tvid, @PathVariable("sid") Integer sid, String reason, Principal principal,
-			Model uiModel, HttpServletRequest httpServletRequest) throws UnsupportedEncodingException {
+	public String confirmPurchase(@PathVariable("tvid") Long tvid, @PathVariable("sid") Integer sid, @RequestParam(required = false)String level,String reason, Principal principal, Model uiModel,
+			HttpServletRequest httpServletRequest) throws UnsupportedEncodingException {
 		Status status = Status.findStatus(sid);
 		TVShow tv = TVShow.findTVShow(tvid);
 
@@ -296,14 +418,12 @@ public class ControllerTVShow {
 		logger.warn("Warning:Status Changed==========================\r\n");
 		if (sid == 8 || sid == 9 || sid == 10 || sid == 11) {
 			tv.setComments(new String(reason.getBytes("ISO-8859-1"), "UTF-8"));
-			logger.warn("\r\nTVShow: (id=" + tv.getId() + ", name=" + tv.getName() + ") status changed from \r\n"
-					+ tv.getStatus().getName() + "(" + tv.getStatus().getId() + ") to " + status.getName() + "(" + status.getId()
-					+ ") by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\nReason:\r\n"
-					+ new String(reason.getBytes("ISO-8859-1"), "UTF-8"));
+			logger.warn("\r\nTVShow: (id=" + tv.getId() + ", name=" + tv.getName() + ") status changed from \r\n" + tv.getStatus().getName() + "(" + tv.getStatus().getId()
+					+ ") to " + status.getName() + "(" + status.getId() + ") by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId()
+					+ "])\r\nReason:\r\n" + new String(reason.getBytes("ISO-8859-1"), "UTF-8"));
 		} else {
-			logger.warn("\r\nTVShow: (id=" + tv.getId() + ", name=" + tv.getName() + ") status changed from \r\n"
-					+ tv.getStatus().getName() + "(" + tv.getStatus().getId() + ") to " + status.getName() + "(" + status.getId()
-					+ ") by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\n");
+			logger.warn("\r\nTVShow: (id=" + tv.getId() + ", name=" + tv.getName() + ") status changed from \r\n" + tv.getStatus().getName() + "(" + tv.getStatus().getId()
+					+ ") to " + status.getName() + "(" + status.getId() + ") by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\n");
 
 		}
 		logger.warn("Warning:Status Changed==========================\r\n");
@@ -311,13 +431,17 @@ public class ControllerTVShow {
 		tv.merge();
 		uiModel.addAttribute("tvshow_", tv);
 		uiModel.addAttribute("itemId", tvid);
-		return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest);
+		if(null != level){
+			return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest) + "?level=level2market";
+		}else{
+			return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest);	
+		}
+		
 	}
 
 	@RequestMapping(value = "list", produces = "text/html")
-	public String list(@RequestParam(value = "stype", required = false) Integer stype,
-			@RequestParam(value = "svalue", required = false) String svalue, @RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+	public String list(@RequestParam(value = "stype", required = false) Integer stype, @RequestParam(value = "svalue", required = false) String svalue,
+			@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
 			final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
@@ -354,6 +478,14 @@ public class ControllerTVShow {
 		return "tvshows/filterFind";
 	}
 
+	@RequestMapping(value = "/findLevel2Market", produces = "text/html")
+	public String findLevel2Market(Model uiModel) {
+		addDateTimeFormatPatterns(uiModel);
+		uiModel.addAttribute("SearchTV", new SearchTV());
+		populateDependencies(uiModel, true);
+		return "tvshows/level2market";
+	}
+
 	@RequestMapping(value = "/queryTVShows4Json")
 	public @ResponseBody
 	JsonDataTable queryTVShows4Json(Page page, SearchTV stv) throws UnsupportedEncodingException {
@@ -373,13 +505,13 @@ public class ControllerTVShow {
 
 			/**
 			 * 
-			 * colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '导演', '项目负责人', '状态',
+			 * colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人', '状态',
 			 * '录入时间' ],
 			 * 
 			 */
 			for (TVShow t : results) {
 				Object[] o = new Object[] { t.getId(), t.getName(), t.getCount(), t.getCompany().getName(), t.getTheme().getName(),
-						t.getDirectors(), t.getProjector().getStaff(), t.getStatus().getName(), sdf.format(t.getInputDate()) };
+						t.getScriptSrc(), t.getProjector().getStaff(), t.getStatus().getName(), sdf.format(t.getInputDate()) };
 				JsonData jd = new JsonData(t.getId(), o);
 				rows.add(jd);
 			}
@@ -390,6 +522,191 @@ public class ControllerTVShow {
 			jdt.setRecords(count);
 		}
 		return jdt;
+	}
+
+	@RequestMapping(value = "/queryTVShows4JsonLevel2Market")
+	public @ResponseBody
+	JsonDataTable queryTVShows4JsonLevel2Market(@RequestParam(required=false)boolean unexpired, Page page, SearchTV stv) throws UnsupportedEncodingException {
+		boolean flag = false;
+		if (null == stv) {
+			stv = new SearchTV();
+			flag = true;
+		}
+		JsonDataTable jdt = new JsonDataTable();
+		if (page != null) {
+			int sizeNo = page.getRows() == 0 ? 10 : page.getRows();
+			final int firstResult = page == null ? 0 : (page.getPage() - 1) * sizeNo;
+			jdt.setPage(page.getPage());
+			List<JsonData> rows = new ArrayList<JsonData>();
+			DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			// colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '项目负责人',
+			// '状态', '首播频道', '价格', '版权起始', '版权终止']
+			boolean exsit = false;
+//			long total = TVShowsFinder.countDependsOnPlayInfo(stv);
+//			String round = "-";
+//			if (total != 0) {
+//				List<PlayInfo> infos = TVShowsFinder.findDependsOnPlayInfo(stv, firstResult, page.getRows(), page.getSidx(), page.getSord());
+//				for (PlayInfo tt : infos) {
+//					TVShow t = tt.getTvshow();
+//					if (t.getStatus().getId() == StatusUtil.ER_LUN_DAI_BO || t.getStatus().getId() == StatusUtil.ER_LUN_YI_BO) {
+//						round = "二轮";
+//					}
+//					if (t.getStatus().getId() == StatusUtil.SAN_LUN_YI_BO || t.getStatus().getId() == StatusUtil.SAN_LUN_DAI_BO) {
+//						round = "三轮";
+//					}
+//					if (t.getStatus().getId() == StatusUtil.SAN_LUN_HOU_DAI_BO || t.getStatus().getId() == StatusUtil.SAN_LUN_HOU_YI_BO) {
+//						round = "三轮后";
+//					}
+//					Object[] o = new Object[] { t.getId(), t.getName(), t.getCount(), t.getCompany().getName(), t.getTheme().getName(), t.getProjector().getStaff(), t.getStatus(),
+//							tt.getPlayChannel().getName(), tt.getPrice(), round, sdf.format(tt.getReservedFrom()), sdf.format(tt.getReservedTo())
+//
+//					};
+//					JsonData jd = new JsonData(t.getId(), o);
+//					rows.add(jd);
+//				}
+//				jdt.setRows(rows);
+//				jdt.setSize(page.getRows());
+//				jdt.setTotal(total / page.getRows() + 1);
+//				jdt.setRecords(total);
+//				exsit = true;
+//			}
+//
+//			if (total == 0) {
+//				total = TVShowsFinder.countDependsOnContractFields(stv);
+//			}
+			long total = TVShowsFinder.countDependsOnContractFields(stv);
+			if (total != 0 && !exsit) {
+				Date today = new Date();
+				List<TVContract> cts = TVShowsFinder.findDependsOnContractFields(stv, firstResult, page.getRows(), page.getSidx(), page.getSord());
+				//round = "首轮";
+				for (TVContract tt : cts) {
+					if(unexpired){
+						if(tt.getCopyrightEnd().before(today)){
+							continue;
+						}
+						
+					}
+					TVShow t = tt.getTvshow();
+					Object[] o = new Object[] { t.getId(), t.getName(), t.getCount(), t.getCompany().getName(), t.getTheme().getName(), t.getProjector().getStaff(), t.getStatus(),
+							tt.getChannel().getName(), tt.getPrice(), sdf.format(tt.getCopyrightStart()), sdf.format(tt.getCopyrightEnd())
+
+					};
+					JsonData jd = new JsonData(t.getId(), o);
+					rows.add(jd);
+				}
+				jdt.setRows(rows);
+				jdt.setSize(page.getRows());
+				jdt.setTotal(total / page.getRows() + 1);
+				jdt.setRecords(total);
+				exsit = true;
+			}
+
+			if (total == 0) {
+				total = TVShowsFinder.countTVShows(stv);
+			}
+
+			if (total != 0 && !exsit) {
+				List<TVShow> tvs = TVShowsFinder.findTVShows(stv, firstResult, page.getRows(), page.getSidx(), page.getSord());
+				for (TVShow t : tvs) {
+					// TVShow t = tt.getTvshow();
+					Object[] o = new Object[] { t.getId(), t.getName(), t.getCount(), t.getCompany().getName(), t.getTheme().getName(), t.getProjector().getStaff(), t.getStatus(),
+							"-", "-", "-", "-"
+
+					};
+					JsonData jd = new JsonData(t.getId(), o);
+					rows.add(jd);
+				}
+				jdt.setRows(rows);
+				jdt.setSize(page.getRows());
+				jdt.setTotal(total / page.getRows() + 1);
+				jdt.setRecords(total);
+			}
+		}
+		return jdt;
+	}
+	@RequestMapping(value = "/queryTVShows4JsonLevel2MarketPrint")
+	public String queryTVShows4JsonLevel2MarketPrint(@RequestParam(required=false)boolean unexpired, SearchTV stv,Model uiModel) throws UnsupportedEncodingException {
+		List<TVContract> cts = TVShowsFinder.findDependsOnContractFields(stv, 0, 99999, "id", "asc");
+		uiModel.addAttribute("data", cts);
+		return "tvshows/level2marketPrint";
+	}
+	@RequestMapping("/{tvid}/updateStatusByPlayDate")
+	public String updateStatusByPlayDate(@PathVariable("tvid") Long tvid, int status, @org.springframework.format.annotation.DateTimeFormat(iso = ISO.DATE) Date pdate,
+			Principal principal, HttpServletRequest httpServletRequest) {
+		TVShow tv = TVShow.findTVShow(tvid);
+		Status st = Status.findStatus(status);
+		User logonUser = User.findUsersByNameEquals(principal.getName()).getSingleResult();
+		logger.warn("Warning:Status Changed==========================\r\n");
+		logger.warn("\r\nTVShow: (id=" + tv.getId() + ", name=" + tv.getName() + ") status changed from \r\n" + tv.getStatus().getName() + "(" + tv.getStatus().getId() + ") to "
+				+ st.getName() + "(" + st.getId() + ") by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\n");
+		logger.warn("Warning:Status Changed==========================\r\n");
+		if (status == StatusUtil.YI_BO ) {
+			tv.setPlayDate(pdate);
+		}else{
+			List<PlayInfo> infos = PlayInfo.findPlayInfoesByTvshow(tv).getResultList();
+			for (PlayInfo pi : infos) {
+				if(null == pi.getPlayDate()){
+					pi.setPlayDate(pdate);
+					pi.merge();
+					break;
+				}
+				
+			}
+		}
+		tv.setStatus(st);
+		tv.merge();
+		return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest) + "?level=level2market";
+	}
+
+	@RequestMapping(value = "/{tvid}/toAddPlayInfo4Level2", produces = "text/html")
+	public String addPlayInfo4Level2(@PathVariable("tvid") Long tvid, int round, Model uiModel) {
+		addDateTimeFormatPatterns(uiModel);
+		TVShow tv = TVShow.findTVShow(tvid);
+		uiModel.addAttribute("tvshow", tv);
+		TVContract contract = null;
+		try {
+			contract = TVContract.findTVContractsByTvshow(tv).getSingleResult();
+			uiModel.addAttribute("contract", contract);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		uiModel.addAttribute("playInfo", new PlayInfo());
+		uiModel.addAttribute("round", round);
+		List<Channel> _channelList = new ArrayList<Channel>();
+		Channel channel = new Channel(new Integer(0), "请选择", 0);
+		_channelList.add(channel);
+		_channelList.addAll(Channel.findAllChannels());
+
+		uiModel.addAttribute("channels", _channelList);
+		// populateDependencies(uiModel, true);
+		return "tvshows/playInfo";
+	}
+
+	@RequestMapping(value = "/{tvid}/doAddPlayInfo4Level2", produces = "text/html", method = RequestMethod.POST)
+	public String doAddPlayInfo4Level2(@PathVariable("tvid") Long tvid, PlayInfo playInfo, Model uiModel, Principal principal, HttpServletRequest httpServletRequest) {
+		TVShow tv = TVShow.findTVShow(tvid);
+		Status st = null;
+		if (playInfo.getRound() == 2) {
+			st = Status.findStatus(StatusUtil.ER_LUN_DAI_BO);
+		}
+		if (playInfo.getRound() == 3) {
+			st = Status.findStatus(StatusUtil.SAN_LUN_DAI_BO);
+		}
+		if (playInfo.getRound() >= 4) {
+			st = Status.findStatus(StatusUtil.SAN_LUN_HOU_DAI_BO);
+		}
+		// PlayInfo.findPlayInfoesByTvshow(tv).getResultList();
+		User logonUser = User.findUsersByNameEquals(principal.getName()).getSingleResult();
+		logger.warn("Warning:Status Changed==========================\r\n");
+		logger.warn("\r\nTVShow: (id=" + tv.getId() + ", name=" + tv.getName() + ") status changed from \r\n" + tv.getStatus().getName() + "(" + tv.getStatus().getId() + ") to "
+				+ st.getName() + "(" + st.getId() + ") by user:(" + logonUser.getStaff() + "[" + logonUser.getName() + "=" + logonUser.getId() + "])\r\n");
+		logger.warn("Warning:Status Changed==========================\r\n");
+		// tv.setPlayDate(pdate);
+		tv.setStatus(st);
+		tv.merge();
+		playInfo.persist();
+
+		return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest) + "?level=level2market";
 	}
 
 	public void populateDependencies(Model uiModel, boolean emptyOpt) {
@@ -476,18 +793,7 @@ public class ControllerTVShow {
 	List<Jtvshow> queryJsonTVshow(@RequestParam String tvname) {
 		List<Jtvshow> list = new ArrayList<Jtvshow>();
 		try {
-			tvname = new String(tvname.getBytes("ISO-8859-1"), "UTF-8");
-			if (tvname.charAt(0) != '%') {
-				tvname = "%" + tvname;
-			}
-			if (tvname.charAt(tvname.length() - 1) != '%') {
-				tvname = tvname + "%";
-			}
-			EntityManager em = TVShow.entityManager();
-			StringBuffer sb = new StringBuffer("SELECT o FROM TVShow AS o WHERE o.name LIKE :name and removed=0");
-			Query query = em.createQuery(sb.toString(), TVShow.class);
-			query.setParameter("name", tvname);
-			List<TVShow> _data = query.getResultList();
+			List<TVShow> _data = TVShowsFinder.findTVShowsByName(tvname);
 			if (null != _data && !_data.isEmpty()) {
 				for (TVShow tvShow : _data) {
 					list.add(new Jtvshow(tvShow.getId(), tvShow.getName()));
@@ -499,11 +805,67 @@ public class ControllerTVShow {
 		}
 		return list;
 	}
+	
+	
+	@RequestMapping(value = "/loadCompanyJsonString", method = RequestMethod.GET)
+	public @ResponseBody
+	List<Jtvshow> queryJsonCompany(@RequestParam String qname) {
+		List<Jtvshow> list = new ArrayList<Jtvshow>();
+		try {
+			qname = new String(qname.getBytes("ISO-8859-1"), "UTF-8");
+			if (qname.charAt(0) != '%') {
+				qname = "%" + qname;
+			}
+			if (qname.charAt(qname.length() - 1) != '%') {
+				qname = qname + "%";
+			}
+			EntityManager em = Company.entityManager();
+			StringBuffer sb = new StringBuffer("SELECT o FROM Company AS o WHERE o.name LIKE :name");
+			Query query = em.createQuery(sb.toString(), Company.class);
+			query.setParameter("name", qname);
+			List<Company> _data = query.getResultList();
+			if (null != _data && !_data.isEmpty()) {
+				for (Company c : _data) {
+					list.add(new Jtvshow(c.getId(), c.getName()));
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@RequestMapping(value = "/loadThemeJsonString", method = RequestMethod.GET)
+	public @ResponseBody
+	List<Jtvshow> queryJsonTheme(@RequestParam String qname) {
+		List<Jtvshow> list = new ArrayList<Jtvshow>();
+		try {
+			qname = new String(qname.getBytes("ISO-8859-1"), "UTF-8");
+			if (qname.charAt(0) != '%') {
+				qname = "%" + qname;
+			}
+			if (qname.charAt(qname.length() - 1) != '%') {
+				qname = qname + "%";
+			}
+			EntityManager em = Theme.entityManager();
+			StringBuffer sb = new StringBuffer("SELECT o FROM Theme AS o WHERE o.name LIKE :name");
+			Query query = em.createQuery(sb.toString(), Theme.class);
+			query.setParameter("name", qname);
+			List<Theme> _data = query.getResultList();
+			if (null != _data && !_data.isEmpty()) {
+				for (Theme t : _data) {
+					list.add(new Jtvshow(t.getId(), t.getName()));
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public class Jtvshow implements Serializable {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		private long id;
 		private String name;

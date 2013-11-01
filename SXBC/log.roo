@@ -304,3 +304,19 @@ quit
 hint
 finder list --class ~.entites.PlayData 
 finder add --finderName findPlayDatasByTvshow --class ~.entites.PlayData
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-06-17 12:46:59
+hint
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-06-17 12:56:28
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-07-22 14:13:45
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-07-22 14:20:16
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-07-24 11:22:18
+hint
+hint
+hint finders
+finder list --class ~.entites.PlayInfo --filter 
+finder add --finderName findPlayInfoesByTvshow
+finder add --finderName findPlayInfoesByPlayChannel
+finder add --finderName findPlayInfoesByPlayDateBetween
+finder add --finderName findPlayInfoesByPlayDateGreaterThan
+finder add --finderName findPlayInfoesByReservedToGreaterThanEquals
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-07-24 17:38:57

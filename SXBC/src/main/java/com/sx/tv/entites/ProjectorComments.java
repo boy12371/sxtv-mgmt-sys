@@ -33,6 +33,12 @@ public class ProjectorComments {
 	@Column(name = "publicSchdule")
 	private String publicSchdule;
 	
+	@Column(name = "webSchdule")
+	private String webSchdule;
+	
+	@Column(name = "localSchdule")
+	private String localSchdule;
+	
 	@Column(name = "priceRange")
 	private String priceRange;
 
@@ -121,5 +127,21 @@ public class ProjectorComments {
 
 	public void setPriceRange(String priceRange) {
 		this.priceRange = priceRange;
+	}
+
+	public String getWebSchdule() {
+		return webSchdule;
+	}
+
+	public void setWebSchdule(String webSchdule) {
+		this.webSchdule = webSchdule;
+	}
+
+	public String getLocalSchdule() {
+		return localSchdule;
+	}
+
+	public void setLocalSchdule(String localSchdule) {
+		this.localSchdule = localSchdule;
 	}
 }

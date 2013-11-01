@@ -58,6 +58,10 @@ h1 {
 #contractTable label {
 	color: #666;
 }
+
+td {
+	border-bottom: 1px solid #E9E3E3;
+}
 </style>
 
 	<INPUT type="hidden" value="${itemId}" id="itemId" />
@@ -91,7 +95,7 @@ h1 {
 			</c:if>
 
 			<c:if test="${not empty contract}">
-				<li><a href="#div_tvcontract">合同</a></li>
+				<li><a href="#div_tvcontract">合同信息</a></li>
 			</c:if>
 		</ul>
 
@@ -146,19 +150,41 @@ h1 {
 					<td style="color: #666">项目负责人</td>
 					<td>${tvshow_.projector.staff}</td>
 					<td style="color: #666">演员</td>
-					<td>${tvshow_.actors}</td>
+					<td><c:if test="${not empty tvshow_.actors}">
+							<c:forEach items="${tvshow_.actors}" var="p">
+								${p.name}  
+							</c:forEach>
+						</c:if></td>
 				</tr>
 				<tr>
 					<td style="color: #666">导演</td>
-					<td>${tvshow_.directors}</td>
+					<td><c:if test="${not empty tvshow_.directors}">
+							<c:forEach items="${tvshow_.directors}" var="p">
+						${p.name} 
+							</c:forEach>
+						</c:if></td>
 					<td style="color: #666">编剧</td>
-					<td>${tvshow_.screenwriters}</td>
+					<td><c:if test="${not empty tvshow_.screenwriters}">
+							<c:forEach items="${tvshow_.screenwriters}" var="p">
+						${p.name} 
+						</c:forEach>
+
+						</c:if></td>
+
 				</tr>
 				<tr>
 					<td style="color: #666">发行人员</td>
-					<td>${tvshow_.publisher}</td>
+					<td><c:if test="${not empty tvshow_.publisher}">
+							<c:forEach items="${tvshow_.publisher}" var="p">
+						${p.name} 
+							</c:forEach>
+						</c:if></td>
 					<td style="color: #666">项目进度</td>
 					<td>${tvshow_.progress.name}</td>
+				</tr>
+				<tr>
+					<td style="color: #666">剧本来源</td>
+					<td colspan="3"><spring:eval expression="tvshow_['scriptSrc']" /></td>
 				</tr>
 				<tr>
 					<td style="color: #666">故事梗概</td>
@@ -191,45 +217,34 @@ h1 {
 
 				</util:panel>
 			</c:if>
-			<c:if test="${empty prjComments}">
+			<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
 				<c:if test="${pageContext['request'].userPrincipal.name == tvshow_.projector.name}">
 					<c:if test="${tvshow_.status.id == 1 ||tvshow_.status.id == 2 || tvshow_.status.id == 3}">
 						<c:if test="${fn:length(prjComments) != fn:length(channels)}">
-							<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
-								<a id="createPrjCommentsLink" href="/SXBC/front/projectorcommentses/create/${itemId}?toCreate"> 填写负责人意见</a>
-							</div>
+							<a id="createPrjCommentsLink" href="/SXBC/front/projectorcommentses/create/${itemId}?toCreate"> 填写负责人意见</a>
 						</c:if>
 					</c:if>
 				</c:if>
-			</c:if>
-
-			<c:if test="${tvshow_.status.id == 2}">
-				<c:if test="${isScoring==true}">
-					<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+				<c:if test="${tvshow_.status.id == 2}">
+					<c:if test="${isScoring==true}">
 						<c:if test="${empty _score}">
 							<a id="createScoreLink" href="/SXBC/front/scores/create/${itemId}?toCreate">评 分</a>
 						</c:if>
-						<c:if test="${pageContext['request'].userPrincipal.name == tvshow_.projector.name}">
-							<a id="createPrjCommentsLink" href="/SXBC/front/projectorcommentses/create/${itemId}?toCreate">填写负责人意见</a>
-						</c:if>
-					</div>
+					</c:if>
 				</c:if>
-			</c:if>
-
-			<c:if test="${not empty channelCmts}">
-				<c:if test="${tvshow_.status.id == 3 }">
-					<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+				<c:if test="${not empty channelCmts}">
+					<c:if test="${tvshow_.status.id == 3 }">
 						<a id="confirmationPurchase" href="#">定 片</a> <a id="rejectPurchase" href="#">淘 汰</a>
-					</div>
-					<div id="dialog-confirmationPurchase" title="定片?">
-						<p>您确定要购买此片吗？</p>
-					</div>
-					<div id="dialog-rejectPurchase" title="淘汰?">
-						<p class="validateTips">淘汰原因</p>
-						<input id="rejectText" type="text" style="width: 20em;" class="text ui-widget-content ui-corner-all" />
-					</div>
+						<div id="dialog-confirmationPurchase" title="定片?">
+							<p>您确定要购买此片吗？</p>
+						</div>
+						<div id="dialog-rejectPurchase" title="淘汰?">
+							<p class="validateTips">淘汰原因</p>
+							<input id="rejectText" type="text" style="width: 20em;" class="text ui-widget-content ui-corner-all" />
+						</div>
+					</c:if>
 				</c:if>
-			</c:if>
+			</div>
 			<c:if test="${tvshow_.status.id == 4 }">
 				<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
 					<a id="createContract" href="/SXBC/front/tvcontracts/create/${itemId}?toCreate"> 添加合同信息 </a> <a id="contractReject" href="#">淘汰此片</a>
@@ -289,6 +304,17 @@ h1 {
 							<label>发行计划 : </label> ${prjcmt.publicSchdule }
 						</div>
 						<br />
+						<div class="rowcontainer">
+							<label>网络发行 : </label> ${prjcmt.webSchdule }
+						</div>
+						<br />
+						<c:if test="${prjcmt.recommendChannel.type == 1 }">
+							<div class="rowcontainer">
+								<label>地面发行 : </label> ${prjcmt.localSchdule }
+							</div>
+							<br />
+						</c:if>
+
 						<div class="rowcontainer">
 							<label>发行价格 : </label> ${prjcmt.publicPrice }
 						</div>
@@ -555,7 +581,6 @@ h1 {
 
 		<c:if test="${not empty contract}">
 			<div id="div_tvcontract">
-				<util:panel openPane="true" title="合同信息" id="contractPanel">
 					<table style="width: 100%" id="contractTable">
 						<tr>
 							<td style="width: 330px">
@@ -620,7 +645,6 @@ h1 {
 							<td><field:display object="${contract}" field="channel" id="c_com_sx_tv_entites_TVContract_channel" z="MV5LzzGaDcWPZH1EADLi8ygSIEQ=" /></td>
 						</tr>
 					</table>
-				</util:panel>
 				<util:panel openPane="true" title="付款详情" id="paymentPanel">
 					<A href="/SXBC/front/contractpayments/create/${contract.id}?toCreate">添加付款详情</A>
 					<br />

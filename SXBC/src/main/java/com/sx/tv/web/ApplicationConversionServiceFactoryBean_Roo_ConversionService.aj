@@ -201,7 +201,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<ProjectorComments, String> ApplicationConversionServiceFactoryBean.getProjectorCommentsToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.sx.tv.entites.ProjectorComments, java.lang.String>() {
             public String convert(ProjectorComments projectorComments) {
-                return new StringBuilder().append(projectorComments.getComments()).toString();
+                return new StringBuilder().append(projectorComments.getComments()).append(' ').append(projectorComments.getPublicPrice()).append(' ').append(projectorComments.getPublicSchdule()).append(' ').append(projectorComments.getPriceRange()).toString();
             }
         };
     }
@@ -393,7 +393,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<TVShow, String> ApplicationConversionServiceFactoryBean.getTVShowToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.sx.tv.entites.TVShow, java.lang.String>() {
             public String convert(TVShow tVShow) {
-                return new StringBuilder().append(tVShow.getComments()).append(' ').append(tVShow.getName()).append(' ').append(tVShow.getCount()).append(' ').toString();
+                return new StringBuilder().append(tVShow.getComments()).append(' ').append(tVShow.getName()).append(' ').append(tVShow.getCount()).append(' ').append(tVShow.getRatings()).toString();
             }
         };
     }

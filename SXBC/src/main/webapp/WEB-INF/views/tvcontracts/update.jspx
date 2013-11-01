@@ -5,6 +5,121 @@
     <c:if test="${empty formURL}">
         <c:set value="/tvcontracts" var="formURL"/>
     </c:if>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$("#TVContract_").submit(function() {
+				var res = true;
+				if ($("#_publishForm_id").val().length == 0) {
+					$("#_publishForm_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false;
+				}
+
+				var _pdate = $("#_showDate_id").val();
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(_pdate)) {
+					$("#_showDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+
+				if (!$.isNumeric($("#_totalPrice_id").val())) {
+					$("#_totalPrice_id").addClass("ui-state-error").val("请输入数字").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!$.isNumeric($("#_extraFee_id").val())) {
+					$("#_extraFee_id").addClass("ui-state-error").val("请输入数字").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_recieveDate_id").val())) {
+					$("#_recieveDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_fileDate_id").val())) {
+					$("#_fileDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_inputDate_id").val())) {
+					$("#_inputDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_copyrightStart_id").val())) {
+					$("#_copyrightStart_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				
+				
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_copyrightStart_id").val())) {
+					$("#_copyrightStart_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_copyrightEnd_id").val())) {
+					$("#_copyrightEnd_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				
+				if ($("#_recieveOwner_id").val().length == 0) {
+					$("#_recieveOwner_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_inputter_id").val().length == 0) {
+					$("#_inputter_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_fileBy_id").val().length == 0) {
+					$("#_fileBy_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_contractNo_id").val().length == 0) {
+					$("#_contractNo_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if ($("#_ownedby_id").val().length == 0) {
+					$("#_ownedby_id").addClass("ui-state-error").val("必填").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				if (!$.isNumeric($("#_price_id").val())) {
+					$("#_price_id").addClass("ui-state-error").val("请输入数字").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					res = false
+				}
+				
+				return res;
+				
+			});
+		});
+	</script>
+    
     <style>
 label {
     float: left;
@@ -12,6 +127,9 @@ label {
     margin-top: 0;
     width: 180px;
     color: #666;
+}
+input[type=text]{
+	width: 210px;
 }
 </style>
     <form:update id="fu_com_sx_tv_entites_TVContract" label="更新合同" modelAttribute="TVContract_" path="${formURL }" versionField="Version" z="user-managed">
@@ -27,6 +145,7 @@ label {
         <field:input field="ownedby" id="c_com_sx_tv_entites_TVContract_owner" label="合同负责人" z="pEUZjCCvnX36CFh1ymi5xyhHfrk="/>
         <field:datetime dateTimePattern="${TVContract__showdate_date_format}" field="showDate" id="c_com_sx_tv_entites_TVContract_showDate" label="上星时间" z="user-managed"/>
         <field:input field="publishForm" id="c_com_sx_tv_entites_TVContract_publishForm" label="发行方式" z="user-managed"/>
+        <field:input field="price" id="c_com_sx_tv_entites_TVContract_price" label="单价" validationMessageCode="field_invalid_number" z="user-managed"/>
         <field:input field="totalPrice" id="c_com_sx_tv_entites_TVContract_totalPrice" label="总价" validationMessageCode="field_invalid_number" z="user-managed"/>
         <field:input field="extraFee" id="c_com_sx_tv_entites_TVContract_extraFee" label="单价及三费" validationMessageCode="field_invalid_number" z="user-managed"/>
         <field:datetime dateTimePattern="${TVContract__recievedate_date_format}" field="recieveDate" id="c_com_sx_tv_entites_TVContract_recieveDate" label="合同接收时间" z="user-managed"/>

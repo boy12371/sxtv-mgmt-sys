@@ -38,7 +38,7 @@ public class ControllerDeptComments {
 			return "deptcommentses/createDeptCmts";
 		}
 		uiModel.asMap().clear();
-		Status st = Status.findStatus(deptComments.getIsRecommend() ? StatusUtil.TUI_JIAN_ZHONG : StatusUtil.PING_FEN_TAO_TAI);
+		Status st = Status.findStatus(deptComments.getIsRecommend() ? StatusUtil.TUI_JIAN_ZHONG : StatusUtil.ZHONG_XIN_TAO_TAI);
 		TVShow tv = deptComments.getTvshow();
 		User logonUser = User.findUsersByNameEquals(principal.getName()).getSingleResult();
 		List<DeptComments> deptCmts = DeptComments.findDeptCommentsesByTvshow(tv).getResultList();

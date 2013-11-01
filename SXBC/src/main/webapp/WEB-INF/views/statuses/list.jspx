@@ -2,10 +2,10 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list labelPlural="状态" id="pl_com_sx_tv_entites_Status" items="${statuses}" z="Qk83ANgCVIoBlhu5sOBf9Fm8JLY=">
+    <page:list id="pl_com_sx_tv_entites_Status" items="${statuses}" labelPlural="状态" z="user-managed">
         <table:table create="false" data="${statuses}" delete="false" id="l_com_sx_tv_entites_Status" path="/statuses" z="user-managed">
-            <table:column label="状态" id="c_com_sx_tv_entites_Status_name" property="name" z="3kqR1F1v7HrktPVp9NgBbmyModY="/>
-            <table:column label="备注" id="c_com_sx_tv_entites_Status_remark" property="remark" z="IFr3pgfbxvyknX4ePxbCT36vHOw="/>
+            <table:column id="c_com_sx_tv_entites_Status_name" label="状态" property="name" z="user-managed"/>
+            <table:column id="c_com_sx_tv_entites_Status_remark" label="备注" property="remark" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

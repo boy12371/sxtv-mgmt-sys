@@ -2,8 +2,8 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list labelPlural="评分" id="pl_com_sx_tv_entites_Score" items="${scores}" z="hTILoVWXPDRFTUMdooV3NDRz6jU=">
-        <table:table update="false" create="false" data="${scores}" id="l_com_sx_tv_entites_Score" path="/scores" z="user-managed">
+    <page:list id="pl_com_sx_tv_entites_Score" items="${scores}" labelPlural="评分" z="user-managed">
+        <table:table create="false" data="${scores}" id="l_com_sx_tv_entites_Score" path="/scores" update="false" z="user-managed">
             <table:column id="c_com_sx_tv_entites_Score_ratedBy" label="评分人" property="ratedBy" z="user-managed"/>
             <table:column id="c_com_sx_tv_entites_Score_avgScore" label="平均分" property="avgScore" z="user-managed"/>
             <table:column id="c_com_sx_tv_entites_Score_recommendChannel" label="推荐平台" property="recommendChannel" z="user-managed"/>
