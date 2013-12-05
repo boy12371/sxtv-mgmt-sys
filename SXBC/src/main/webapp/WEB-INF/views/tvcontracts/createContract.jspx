@@ -44,13 +44,13 @@
 					});
 				}
 				
-				/* if (!$.isNumeric($("#_extraFee_id").val())) {
+				if (!$.isNumeric($("#_extraFee_id").val())) {
 					$("#_extraFee_id").addClass("ui-state-error").val("请输入数字").focus(function() {
 						$(this).removeClass("ui-state-error").val("");
 					});
 					res = false
 				}
-				
+				/* 
 				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_recieveDate_id").val())) {
 					$("#_recieveDate_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
 						$(this).removeClass("ui-state-error").val("");
@@ -105,7 +105,7 @@
 						$(this).removeClass("ui-state-error").val("");
 					});
 					res = false
-				} */
+				}
 				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test($("#_copyrightStart_id").val())) {
 					$("#_copyrightStart_id").addClass("ui-state-error").val("日期格式错误").focus(function() {
 						$(this).removeClass("ui-state-error").val("");
@@ -118,7 +118,7 @@
 						$(this).removeClass("ui-state-error").val("");
 					});
 					res = false;
-				}
+				} */
 				if (!$.isNumeric($("#_price_id").val())) {
 					$("#_price_id").addClass("ui-state-error").val("请输入数字").focus(function() {
 						$(this).removeClass("ui-state-error").val("");

@@ -262,7 +262,9 @@ td {
 
 			<c:if test="${tvshow_.status.id == 5}">
 				<div style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
-					<a id="contractTerminated">终止合同</a> <a id="updateStatus" href="#">更改状态为 已播 </a>
+					<a id="contractTerminated">终止合同</a>
+					
+					<!-- <a id="updateStatus" href="#">更改状态为 已播 </a>-->
 				</div>
 				<div id="dialog-updateStatus" title="已播?">您确认要更改此剧目的状态为已播吗？</div>
 				<div id="dialog-contractTerminated" title="终止合同?">

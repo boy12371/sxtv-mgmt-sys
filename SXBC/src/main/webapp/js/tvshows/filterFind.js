@@ -136,7 +136,7 @@ $(document).ready(function() {
 				params += "&";
 			}
 			if (queryValues[i].value != "") {
-				params += queryValues[i].attr("name") + "=" + queryValues[i].val();
+				params += queryValues[i].attr("name") + "=" + $.trim(queryValues[i].val());
 			}
 		}
 		
