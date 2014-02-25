@@ -142,7 +142,6 @@ li.token-input-input-token input{
 					<label>集数 : </label> <INPUT type="text" name="count" id="_count_id" class="required text ui-widget-content ui-corner-all" />
 				</div>
 				<br />
-
 				<div class="rowcontainer">
 					<label>剧本来源: </label> <INPUT type="text" name="scriptSrc" id="_scriptSrc_id" class="text ui-widget-content ui-corner-all" />
 				</div>

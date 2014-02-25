@@ -34,10 +34,6 @@
 		var _prePubs = [];
 		var _prePro = [];
 		
-		$("#tvshowForm").submit(function() {
-			
-		});
-		
 		var _c = {
 				id : ${TVShow_.company.id},
 				name : '${TVShow_.company.name}'
