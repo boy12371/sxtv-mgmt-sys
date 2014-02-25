@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_sx_tv_entites_TVContract" items="${tvcontracts}" labelPlural="剧目合同" z="user-managed">
-        <table:table create="false" data="${tvcontracts}" id="l_com_sx_tv_entites_TVContract" path="/tvcontracts" z="user-managed">
+        <table:table delete="false" create="false" data="${tvcontracts}" id="l_com_sx_tv_entites_TVContract" path="/tvcontracts" z="user-managed">
             <table:column id="c_com_sx_tv_entites_TVContract_owner" label="合同负责人" property="ownedby" z="ql5PiEDtwjZQ0U4pxHt8w+jgMfk="/>
             <table:column date="true" dateTimePattern="${TVContract__showdate_date_format}" id="c_com_sx_tv_entites_TVContract_showDate" label="上星时间" property="showDate" z="user-managed"/>
             <table:column id="c_com_sx_tv_entites_TVContract_tvshow" label="剧目" property="tvshow" z="user-managed"/>

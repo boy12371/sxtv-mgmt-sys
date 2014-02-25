@@ -8,6 +8,9 @@
                 <menu:item id="i_tvshow_new" label="添加新剧目" url="/tvshows/create?toCreate" z="user-managed"/>
                 <menu:item id="i_tvshow_list_find" label="剧目检索" url="/tvshows/findTVShows?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
+            <menu:category id="c_tvshow" label="剧目入库管理" z="user-managed">
+            	<menu:item id="i_tvshow_list_findleve2market" label="入库信息" url="/tvshows/findReciveStore?status=5&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            </menu:category>
             <menu:category id="c_tvshow" label="二级市场" z="user-managed">
             	<menu:item id="i_tvshow_list_findleve2market" label="剧目信息" url="/tvshows/findLevel2Market?status=5&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
@@ -19,14 +22,13 @@
                 <menu:item id="i_progress_list" label="项目进度" url="/progresses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <!-- 
                 <menu:item id="i_people_list" label="演员|导演|编剧" url="/peoples?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
-                 -->
                 <menu:item id="i_score_list" label="剧目评分" url="/scores?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_channelcomments_list" label="频道意见" url="/channelcommentses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_deptcomments_list" label="中心意见" url="/deptcommentses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_projectorcomments_list" label="负责人意见" url="/projectorcommentses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_tvcontract_list" label="剧目合同" url="/tvcontracts?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_contractpayment_list" label="付款信息" url="/contractpayments?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
-               
+                -->
             </menu:category>
             <menu:category id="c_company" label="系统数据管理" z="user-managed">
                 <menu:item id="i_recommendclass_list" label="评星及分数级别" url="/recommendclasses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>

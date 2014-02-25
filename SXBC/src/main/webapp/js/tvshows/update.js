@@ -1,6 +1,9 @@
 $(document).ready(
 		function() {
 			$("#proceed").button();
+			$("#forcePurchase_checkbox").click(function() {
+				$("#forcePurchase").val($(this).attr("checked") == "checked" ? 1 : 0);
+			});
 			$("#dialog-people-form").dialog({
 				resizable : false,
 				autoOpen : false,
@@ -162,7 +165,7 @@ $(document).ready(
 				onAdd : function(item) {
 					$("#_company_id").val(item.id);
 				},
-				onDelete : function(){
+				onDelete : function() {
 					$("#_company_id").val("");
 				}
 			});
@@ -176,11 +179,32 @@ $(document).ready(
 				onAdd : function(item) {
 					$("#_theme_id").val(item.id);
 				},
-				onDelete: function(){
+				onDelete : function() {
 					$("#_theme_id").val("");
 				}
 			});
 
+			$("#_producer_id").tokenInput(
+					"/SXBC/tvshows/loadPeopleJsonString",
+					{
+						noCache : true,
+						prePopulate : _prePro,
+						propertyToSearch : "name",
+						queryParam : "pname",
+						preventDuplicates : true,
+						hintText : "键入并搜索",
+						tokenFormatter : function(item) {
+							var _arch = (item.achievements == null || item.achievements == "") ? "<font color='red'>暂无代表作</font>" : item.achievements;
+							return "<li><input type='hidden' name='producer[" + $("input[name*='producer']").length + "]' value='" + item.id + "'/><p>" + item.name
+									+ "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
+						},
+						onDelete : function(item) {
+							$.each($("input[name*='producer']"), function(index, el) {
+								el.name = "producer[" + index + "]";
+							});
+						}
+					});
+			
 			$("#_actors_id").tokenInput(
 					"/SXBC/tvshows/loadPeopleJsonString",
 					{
@@ -212,8 +236,8 @@ $(document).ready(
 						hintText : "键入并搜索",
 						tokenFormatter : function(item) {
 							var _arch = (item.achievements == null || item.achievements == "") ? "<font color='red'>暂无代表作</font>" : item.achievements;
-							return "<li><input type='hidden' name='directors[" + $("input[name*='directors']").length + "]' value='" + item.id + "'/><p>" + item.name
-									+ "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
+							return "<li><input type='hidden' name='directors[" + $("input[name*='directors']").length + "]' value='" + item.id + "'/><p>"
+									+ item.name + "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
 						},
 						onDelete : function(item) {
 							$.each($("input[name*='directors']"), function(index, el) {
@@ -233,8 +257,8 @@ $(document).ready(
 						hintText : "键入并搜索",
 						tokenFormatter : function(item) {
 							var _arch = (item.achievements == null || item.achievements == "") ? "<font color='red'>暂无代表作</font>" : item.achievements;
-							return "<li><input type='hidden' name='screenwriters[" + $("input[name*='screenwriters']").length + "]' value='" + item.id + "'/><p>" + item.name
-									+ "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
+							return "<li><input type='hidden' name='screenwriters[" + $("input[name*='screenwriters']").length + "]' value='" + item.id
+									+ "'/><p>" + item.name + "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
 						},
 						onDelete : function(item) {
 							$.each($("input[name*='screenwriters']"), function(index, el) {
@@ -253,8 +277,8 @@ $(document).ready(
 						hintText : "键入并搜索",
 						tokenFormatter : function(item) {
 							var _arch = (item.achievements == null || item.achievements == "") ? "<font color='red'>暂无代表作</font>" : item.achievements;
-							return "<li><input type='hidden' name='publisher[" + $("input[name*='publisher'][type='hidden']").length + "]' value='" + item.id + "'/><p>"
-									+ item.name + "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
+							return "<li><input type='hidden' name='publisher[" + $("input[name*='publisher'][type='hidden']").length + "]' value='" + item.id
+									+ "'/><p>" + item.name + "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
 						},
 						onDelete : function(item) {
 							$.each($("input[name*='publisher'][type='hidden']"), function(index, el) {
@@ -400,7 +424,7 @@ $(document).ready(
 					});
 					res = false;
 				}
-				
+
 				return res;
 				// if ($("input[name*='publisher'][type='hidden']").length == 0)
 				// {

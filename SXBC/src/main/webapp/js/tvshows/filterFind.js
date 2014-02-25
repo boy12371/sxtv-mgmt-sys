@@ -1,36 +1,132 @@
 var timeoutHnd;
 $(document).ready(function() {
 	$("#searchFormDiv").accordion({
-		collapsible : true
+		collapsible : true,
+		active : 0
 	});
+	// $("#searchFormDiv").accordion("option", "active", true);
+
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_inputDateStart_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '起始日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_inputDateEnd_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '结束日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_copyrightFrom_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '起始日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_copyrightTo_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '结束日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_playDateStart_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '起始日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_playDateEnd_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '结束日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
+
 	$("#_id_id").keyup(function() {
-		if ($.trim($(this).val()).length >= 1 ) {
+		if ($.trim($(this).val()).length >= 1) {
 			$("#_name_id")[0].disabled = true;
-			$("#_priceRange_id")[0].disabled = true;
 			dijit.byId("_progress_id").set("disabled", true);
 			dijit.byId("_company_id").set("disabled", true);
 			dijit.byId("_theme_id").set("disabled", true);
-			dijit.byId("_inputDate_id").set("disabled", true);
 			dijit.byId("_projector_id").set("disabled", true);
 			dijit.byId("_status_id").set("disabled", true);
 			dijit.byId("_recommendChannel_id").set("disabled", true);
 			dijit.byId("_recommendLevel_id").set("disabled", true);
+			dijit.byId("_inputDateStart_id").set("disabled", true);
+			dijit.byId("_inputDateEnd_id").set("disabled", true);
+			dijit.byId("_copyrightFrom_id").set("disabled", true);
+			dijit.byId("_copyrightTo_id").set("disabled", true);
+			dijit.byId("_playDateStart_id").set("disabled", true);
+			dijit.byId("_playDateEnd_id").set("disabled", true);
 		} else {
 			$("#_name_id")[0].disabled = false;
-			$("#_priceRange_id")[0].disabled = false;
 			dijit.byId("_progress_id").set("disabled", false);
 			dijit.byId("_company_id").set("disabled", false);
 			dijit.byId("_theme_id").set("disabled", false);
-			dijit.byId("_inputDate_id").set("disabled", false);
 			dijit.byId("_projector_id").set("disabled", false);
 			dijit.byId("_status_id").set("disabled", false);
 			dijit.byId("_recommendChannel_id").set("disabled", false);
 			dijit.byId("_recommendLevel_id").set("disabled", false);
+			dijit.byId("_inputDateStart_id").set("disabled", false);
+			dijit.byId("_inputDateEnd_id").set("disabled", false);
+			dijit.byId("_copyrightFrom_id").set("disabled", false);
+			dijit.byId("_copyrightTo_id").set("disabled", false);
+			dijit.byId("_playDateStart_id").set("disabled", false);
+			dijit.byId("_playDateEnd_id").set("disabled", false);
 		}
-		//dijit.byId("_progress_id").set("value", 2);
+		// dijit.byId("_progress_id").set("value", 2);
 	});
 	jQuery("#dataList").jqGrid({
-		url : './queryTVShows4Json',
+		url : '#',
 		datatype : "json",
 		height : 500,
 		colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人', '状态', '录入时间' ],
@@ -42,7 +138,8 @@ $(document).ready(function() {
 			name : 'name',
 			index : 'name',
 			width : 120,
-			formatter : formatName
+			formatter : formatName,
+			sortable : false
 		}, {
 			name : 'count',
 			index : 'count',
@@ -58,8 +155,9 @@ $(document).ready(function() {
 		}, {
 			name : 'scriptSrc',
 			index : 'scriptSrc',
-			//formatter : formatDirectors,
-			width : 130
+			// formatter : formatDirectors,
+			width : 130,
+			sortable : false
 		}, {
 			name : 'projector',
 			index : 'projector',
@@ -69,8 +167,8 @@ $(document).ready(function() {
 			index : 'status',
 			width : 100
 		}, {
-			name : 'inputDate',
-			index : 'inputDate',
+			name : 'input_date',
+			index : 'input_date',
 			width : 80
 		} ],
 		altRows : true,
@@ -78,12 +176,18 @@ $(document).ready(function() {
 		rowNum : 30,
 		rowList : [ 30, 60 ],
 		pager : '#pager',
-		sortname : 'inputDate',
+		sortname : 'input_date',
 		viewrecords : true,
 		sortorder : "desc",
 		caption : "检索结果",
 		gridComplete : function() {
 			$("#searchFormDiv").accordion("option", "active", false);
+			// $(".ui-jqgrid-titlebar-close",
+			// jQuery("#dataList")[0].grid.cDiv).click();
+			var state = jQuery("#dataList").jqGrid('getGridParam', 'gridstate');
+			if (state == 'hidden') {
+				$(".ui-jqgrid-titlebar-close", jQuery("#dataList")[0].grid.cDiv).click();
+			}
 			// $(this).jqGrid("hideCol","directors");
 			// jQuery("#dataList").jqGrid(
 		}
@@ -92,16 +196,13 @@ $(document).ready(function() {
 	 * loadComplete: function(){ }
 	 */
 	});
-	$("#resetBtn").button().click(function(){
+	$("#resetBtn").button().click(function() {
 		$("#_id_id").val("");
 		$("#_name_id")[0].disabled = false;
 		$("#_name_id").val("");
-		$("#_priceRange_id")[0].disabled = false;
-		$("#_priceRange_id").val("");
 		dijit.byId("_progress_id").set("disabled", false);
 		dijit.byId("_company_id").set("disabled", false);
 		dijit.byId("_theme_id").set("disabled", false);
-		dijit.byId("_inputDate_id").set("disabled", false);
 		dijit.byId("_projector_id").set("disabled", false);
 		dijit.byId("_status_id").set("disabled", false);
 		dijit.byId("_recommendChannel_id").set("disabled", false);
@@ -109,26 +210,37 @@ $(document).ready(function() {
 		dijit.byId("_progress_id").set("value", 0);
 		dijit.byId("_company_id").set("value", 0);
 		dijit.byId("_theme_id").set("value", 0);
-		dijit.byId("_inputDate_id").set("value",0);
 		dijit.byId("_projector_id").set("value", 0);
 		dijit.byId("_status_id").set("value", 0);
 		dijit.byId("_recommendChannel_id").set("value", 0);
 		dijit.byId("_recommendLevel_id").set("value", 0);
-		
+		dijit.byId("_inputDateStart_id").set("value", "");
+		dijit.byId("_inputDateEnd_id").set("value", "");
+		dijit.byId("_copyrightFrom_id").set("value", "");
+		dijit.byId("_copyrightTo_id").set("value", "");
+		dijit.byId("_playDateStart_id").set("value", "");
+		dijit.byId("_playDateEnd_id").set("value", "");
+
 	});
 	$("#submitBtn").button().click(function() {
 		var queryValues = [];
 		queryValues[0] = $("input[name*=id]");
 		queryValues[1] = $("input[name*=name]");
-		queryValues[2] = $("input[name*=priceRange]");
-		queryValues[3] = $("input[name*=progress]");
-		queryValues[4] = $("input[name*=company]");
-		queryValues[5] = $("input[name*=theme]");
-		queryValues[6] = $("input[name*=inputDate]");
-		queryValues[7] = $("input[name*=projector]");
-		queryValues[8] = $("input[name*=status]");
-		queryValues[9] = $("input[name*=recommendChannel]");
-		queryValues[10] = $("input[name*=recommendLevel]");
+		queryValues[2] = $("input[name*=progress]");
+		queryValues[3] = $("input[name*=company]");
+		queryValues[4] = $("input[name*=theme]");
+		queryValues[5] = $("input[name*=projector]");
+		queryValues[6] = $("input[name*=status]");
+		queryValues[7] = $("input[name*=recommendChannel]");
+		queryValues[8] = $("input[name*=recommendLevel]");
+		queryValues[9] = $("input[name*=inputDateStart]");
+		queryValues[10] = $("input[name*=inputDateEnd]");
+		queryValues[11] = $("input[name*=copyrightFrom]");
+		queryValues[12] = $("input[name*=copyrightTo]");
+		queryValues[13] = $("input[name*=playDateStart]");
+		queryValues[14] = $("input[name*=playDateEnd]");
+		
+		
 
 		var params = "";
 		for ( var i = 0; i < queryValues.length; i++) {
@@ -139,34 +251,23 @@ $(document).ready(function() {
 				params += queryValues[i].attr("name") + "=" + $.trim(queryValues[i].val());
 			}
 		}
-		
-	/*	var inputs = $("input[type=text][name!=]");
-		var hiddens = $("[type=hidden]");
-		for ( var i = 0; i < inputs.length; i++) {
-			if (inputs[i].value.length != 0) {
-				if (i != 0 && i != inputs.length) {
-					params += "&";
-				}
-				if (inputs[i].value != "") {
-					params += inputs[i].name + "=" + inputs[i].value;
-				}
 
-			}
-		}
-		params += "&";
-		for ( var i = 0; i < hiddens.length; i++) {
-			if (hiddens[i].value.length != 0) {
-				if (i != 0 && i < hiddens.length) {
-					params += "&";
-				}
-				params += hiddens[i].name + "=" + hiddens[i].value;
-			}
-		}*/
+		/*
+		 * var inputs = $("input[type=text][name!=]"); var hiddens =
+		 * $("[type=hidden]"); for ( var i = 0; i < inputs.length; i++) { if
+		 * (inputs[i].value.length != 0) { if (i != 0 && i != inputs.length) {
+		 * params += "&"; } if (inputs[i].value != "") { params +=
+		 * inputs[i].name + "=" + inputs[i].value; } } } params += "&"; for (
+		 * var i = 0; i < hiddens.length; i++) { if (hiddens[i].value.length !=
+		 * 0) { if (i != 0 && i < hiddens.length) { params += "&"; } params +=
+		 * hiddens[i].name + "=" + hiddens[i].value; } }
+		 */
 		jQuery("#dataList").jqGrid('setGridParam', {
-			url : "./queryTVShows4Json?" + params,
+			url : "./queryTVShows4Json?" + encodeURI(params),
 			page : 1
 		}).trigger("reloadGrid");
 	});
+	$(".ui-jqgrid-titlebar-close", jQuery("#dataList")[0].grid.cDiv).click();
 
 });
 

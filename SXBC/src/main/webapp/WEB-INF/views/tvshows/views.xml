@@ -41,4 +41,12 @@
 	 <definition extends="printTable" name="tvshows/level2marketPrint">
         <put-attribute name="body" value="/WEB-INF/views/tvshows/level2marketPrint.jspx"/>
     </definition>
+    
+    <definition extends="default" name="tvshows/reciveStore">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/reciveStore.jspx" />
+	</definition>
+	
+	<definition extends="default" name="tvshows/reciveStoreInformation">
+		<put-attribute name="body" value="/WEB-INF/views/tvshows/reciveStoreInformation.jspx" />
+	</definition>
 </tiles-definitions>

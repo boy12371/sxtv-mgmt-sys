@@ -64,7 +64,7 @@
 		<br />
 		<field:input label="频道签字人" field="ownedby" id="c_com_sx_tv_entites_ChannelComments_owner" z="g4gKe5Bm9BdNZTPOZjwOrNZjOQ4=" />
 
-		<field:select label="推荐星级" rateit="true" itemLabel="name" field="recommendLevel" id="c_com_sx_tv_entites_ChannelComments_recommendLevel" itemValue="id" items="${recommendclasses}"
+		<field:select label="星 级" rateit="true" itemLabel="name" field="recommendLevel" id="c_com_sx_tv_entites_ChannelComments_recommendLevel" itemValue="id" items="${recommendclasses}"
 			path="/recommendclasses" z="c911BWYK2Pe8fxE52cjIx4UP2bI=" />
 		<field:datetime label="推荐日期" dateTimePattern="${channelComments_recommenddate_date_format}" field="recommendDate" id="c_com_sx_tv_entites_ChannelComments_recommendDate"
 			z="HEdIUtfgmrwT0QkEpvFTd33I6qA=" />

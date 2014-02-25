@@ -18,6 +18,13 @@
 			label="推荐星级" path="/recommendclasses" z="user-managed" />
 		<field:select field="recommendChannel" id="c_com_sx_tv_entites_ProjectorComments_recommendChannel" itemLabel="name" itemValue="id" items="${channels}" label="推荐平台"
 			path="/channels" z="user-managed" />
+		<c:if test="${projectorComments.recommendChannel.type == 1}">
+			<field:input label="地面计划" field="localSchdule" id="c_com_sx_tv_entites_prj_localSchdule" z="" />
+		</c:if>
+		<c:if test="${projectorComments.recommendChannel.type == 0}">
+			<input name="localSchdule" type="hidden" value="${projectorComments.localSchdule}"/>
+		</c:if>
+		<field:input label="网络发行" field="webSchdule" id="c_com_sx_tv_entites_prj_webSchdule" z="" />
 		<field:input label="发行计划" field="publicSchdule" id="c_com_sx_tv_entites_prj_ps" z="g4gKe5Bm9BdNZTPOZjwOrNZjOQ4=" />
 		<field:input label="发行价格" field="publicPrice" id="c_com_sx_tv_entites_prj_pp" z="g4gKe5Bm9BdNZTPOZjwOrNZjOQ4=" />
 		<field:input label="价格区间" field="priceRange" id="c_com_sx_tv_entites_prj_pr" z="g4gKe5Bm9BdNZTPOZjwOrNZjOQ4=" />

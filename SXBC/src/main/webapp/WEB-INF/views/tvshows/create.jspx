@@ -158,7 +158,7 @@ li.token-input-input-token input{
 					<label> <!-- 
 					<a href="/SXBC/front/progresses?toCreate"><img title="新增进度" src="/SXBC/resources/images/add.png" alt="新增进度"></img></a>
 					--> 项目进度 :
-					</label> <select id="_progress_id" name="progress">
+					</label> <select id="_progress_id" name="progress" style="width: 175px;height: 25px;font-size: 16px;">
 						<c:forEach items="${progresses}" var="item">
 							<option value="${item.id}">${item.name}</option>
 						</c:forEach>
@@ -176,6 +176,13 @@ li.token-input-input-token input{
 					<input type="hidden" name="company" id="_company_id" />
 					<INPUT type="text" id="company_autoComplete" class="required" />
 				</div>
+				<br />
+				<div class="rowcontainer">
+					<label><a class="peopleAdd" name="_producer_id" href="#"><img title="新增制片人" src="/SXBC/resources/images/add.png" alt="新增制片人"></img></a>制片人 : </label> <input type="text"
+						id="_producer_id" />
+
+				</div>
+				
 				<br />
 				<div class="rowcontainer">
 					<label><a class="peopleAdd" name="_actors_id" href="#"><img title="新增演员" src="/SXBC/resources/images/add.png" alt="新增演员"></img></a>演员 : </label> <input type="text"
@@ -205,7 +212,7 @@ li.token-input-input-token input{
 				</div>
 				<br />
 				<div class="rowcontainer">
-					<label>负责人 : </label> <select id="_projector_id" name="projector">
+					<label>负责人 : </label> <select id="_projector_id" name="projector" style="width: 175px;height: 25px;font-size: 16px;">
 						<c:forEach items="${users}" var="item">
 							<c:choose>
 								<c:when test="${item.name == pageContext['request'].userPrincipal.name}">

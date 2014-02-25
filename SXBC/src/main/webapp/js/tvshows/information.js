@@ -3,21 +3,14 @@ $(document).ready(function() {
 	$("#basicInfoDiv").tabs();
 	$("#createPrjCommentsLink").button();
 	$("#createScoreLink").button();
+	$("#createScoreLink2").button();
 	$("info_company").tooltip();
 	$("#contractTable br").remove();
-	$("#createDeptCommentsLink").button().click(function() {
-		if ($("#dialog-scores").length != 0) {
-			$("#dialog-scores").dialog("open");
-		} else {
-			window.location.href = "/SXBC/front/deptcommentses/create/" + $("#itemId").val() + "/3?toCreate";
-		}
-
-	});
-	$("#rejectTVShowLink").button().click(function() {
+	$("a[name*=createDeptCommentsLink]").button();
+	$("a[name*=rejectTVShowLink]").button().click(function() {
 		$("#dialog-rejectTVShowLink").dialog("open");
-		return false;
 	});
-	
+
 	$("#dialog-rejectTVShowLink").dialog({
 		resizable : false,
 		autoOpen : false,
@@ -38,7 +31,7 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
+
 	$('a[name="prjRecommendForm"]').button();
 	if ($("#confirmationPurchase").length != 0) {
 		$("#dialog-confirmationPurchase").dialog({
@@ -177,20 +170,54 @@ $(document).ready(function() {
 		}
 	});
 
-	if ($("#createDeptCommentsLinkA").length != 0) {
-		$("#createDeptCommentsLinkA").button();
-	}
-	if ($("#updateDeptCommentsLinkA").length != 0) {
-		$("#updateDeptCommentsLinkA").button();
-		$("#channelRecommendFromA").button();
+	$("#dialog-recommend2other").dialog({
+		resizable : false,
+		autoOpen : false,
+		height : "auto",
+		width : 280,
+		modal : true,
+		buttons : {
+			"确定" : function() {
+				if ($("#recommendChannel").val().length == 0) {
+					alert("请选择频道.");
+					return;
+				}
+				var _url = "/SXBC/front/deptcommentses/create/" + $("#itemId").val() + "/" + $("#recommendChannel").val() + "?toCreate";
+				window.location.href = _url;
+			},
+			"取消" : function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+	
+	$("a[name*=updateDeptCommentsLink]").button();
+	$("a[name*=channelRecommendFrom]").button();
+	
+	if ($("a[name*=createMoreDeptComments]").length != 0) {
+		$("a[name*=createMoreDeptComments]").button().click(function() {
+			$("#recommendChannel option").remove();
+			var _url = $(this).attr("href");
+			$.getJSON(_url, function(data) {
+				if (data.length != 0) {
+					for ( var i = 0; i < data.length; i++) {
+						$("#recommendChannel").append("<option value='" + data[i].id + "'>" + data[i].name + "</option>");
+					}
+					$("#dialog-recommend2other").dialog("open");
+				} else {
+					alert("其他平台还没有评分，需要先评分才能推荐！");
+				}
+			});
+			return false;
+		});
+
 	}
 
-	if ($("#createDeptCommentsLinkB").length != 0) {
-		$("#createDeptCommentsLinkB").button();
-	}
-	if ($("#updateDeptCommentsLinkB").length != 0) {
-		$("#updateDeptCommentsLinkB").button();
-		$("#channelRecommendFromB").button();
+	if ($("#createMoreDeptComments").length != 0) {
+		$("#createMoreDeptComments").button().click(function() {
+			alert("其他平台还没有评分，需要先评分才能推荐！");
+			return false;
+		});
 	}
 
 	if ($("#div_scores").length != 0) {

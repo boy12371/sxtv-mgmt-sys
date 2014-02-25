@@ -9,24 +9,25 @@ $(document).ready(
 				$("input[name*='directors[']").parent().remove();
 				$("input[name*='screenwriters[']").parent().remove();
 				$("input[name*='publisher[']").parent().remove();
+				$("input[name*='producer[']").parent().remove();
 			});
 			$("#_outline_id").val("");
 			// $("#tvshowForm").validate();
-			Spring.addDecoration(new Spring.ElementDecoration({
+			/*Spring.addDecoration(new Spring.ElementDecoration({
 				elementId : '_progress_id',
 				widgetType : 'dijit.form.FilteringSelect',
 				widgetAttrs : {
 					hasDownArrow : true
 				}
-			}));
+			}));*/
 
-			Spring.addDecoration(new Spring.ElementDecoration({
+			/*Spring.addDecoration(new Spring.ElementDecoration({
 				elementId : '_projector_id',
 				widgetType : 'dijit.form.FilteringSelect',
 				widgetAttrs : {
 					hasDownArrow : true
 				}
-			}));
+			}));*/
 			/*
 			 * Spring.addDecoration(new Spring.ElementDecoration({ elementId :
 			 * '_company_id', widgetType : 'dijit.form.FilteringSelect',
@@ -60,6 +61,27 @@ $(document).ready(
 				}
 			});
 
+			$("#_producer_id").tokenInput(
+					"/SXBC/tvshows/loadPeopleJsonString",
+					{
+						noCache : true,
+						// theme : "facebook",
+						propertyToSearch : "name",
+						queryParam : "pname",
+						preventDuplicates : true,
+						hintText : "键入并搜索",
+						tokenFormatter : function(item) {
+							var _arch = (item.achievements == null || item.achievements == "") ? "暂无代表作" : item.achievements;
+							return "<li><input type='hidden' name='producer[" + $("input[name*='producer']").length + "]' value='" + item.id + "'/><p>" + item.name
+									+ "&nbsp;&nbsp;&nbsp;&nbsp;[" + _arch + "]</p></li>";
+						},
+						onDelete : function(item) {
+							$.each($("input[name*='producer']"), function(index, el) {
+								el.name = "producer[" + index + "]";
+							});
+						}
+					});
+			
 			$("#_actors_id").tokenInput(
 					"/SXBC/tvshows/loadPeopleJsonString",
 					{

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
-	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:sform="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:sform="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url value="/resources/jv/jquery.metadata.js" var="validate" />
@@ -26,6 +32,11 @@
 		var _preDirs = [];
 		var _preWriters = [];
 		var _prePubs = [];
+		var _prePro = [];
+		
+		$("#tvshowForm").submit(function() {
+			
+		});
 		
 		var _c = {
 				id : ${TVShow_.company.id},
@@ -49,6 +60,9 @@
 			_prePubs[_prePubs.length] = {id: ${item.id}, name: '${item.name}', achievements : '${item.achievements}'};
 		</c:forEach>
 		
+		<c:forEach items="${TVShow_.producer}" var="item">
+			_prePro[_prePro.length] = {id: ${item.id}, name: '${item.name}', achievements : '${item.achievements}'};
+		</c:forEach>
 	</script>
 	<style>
 .error {
@@ -61,6 +75,7 @@
 select {
 	width: 200px;
 }
+
 .dijitTextArea {
 	max-height: 22em !important;
 	max-width: 500px;
@@ -107,75 +122,138 @@ li.token-input-token {
 	overflow: hidden;
 	padding: 3px 5px;
 }
-li.token-input-input-token input{
-	width :100px;
-}
 
+li.token-input-input-token input {
+	width: 100px;
+}
 </style>
 	<util:panel id="${tvshowUpdatePanel}" title="编辑|更新" openPane="true">
-		<sform:form id="tvshowForm" action="/SXBC/tvshows/update/doUpdate/${TVShow_.status.id}" method="PUT" modelAttribute="TVShow_" enctype="application/x-www-form-urlencoded">
+		<sform:form id="tvshowForm"
+			action="/SXBC/tvshows/update/doUpdate/${TVShow_.status.id}"
+			method="PUT" modelAttribute="TVShow_"
+			enctype="application/x-www-form-urlencoded">
 
 			<!-- <form:update id="fu_com_sx_tv_entites_TVShow" modelAttribute="TVShow_" path="/tvshows/update/doUpdate/${TVShow_.status.id}" versionField="Version"
 		z="XAkWRQFmbzWufzA+rITxgRZNTWA=">
 		 -->
-		 	<fmt:formatDate var="_var_inputDate" value="${TVShow_.inputDate}" pattern="yyyy-MM-dd"/>
-			<fmt:formatDate var="_var_rejectDate" value="${TVShow_.rejectDate}" pattern="${TVShow__rejectdate_date_format}" />
+			<fmt:formatDate var="_var_inputDate" value="${TVShow_.inputDate}"
+				pattern="yyyy-MM-dd" />
+			<fmt:formatDate var="_var_rejectDate" value="${TVShow_.rejectDate}"
+				pattern="${TVShow__rejectdate_date_format}" />
 			<input type="hidden" name="id" value="${TVShow_.id}" />
-			<input type="hidden" name="name" value="${TVShow_.name}" />
 			<input type="hidden" name="rejectDate" value="${_var_rejectDate}" />
-			<field:display label="剧名" id="c_com_sx_tv_entites_TVShow_name" object="${TVShow_}" field="name"></field:display>
-			<field:input label="集数" field="count" id="c_com_sx_tv_entites_TVShow_count" z="RwGJIAfYZyrgI+Pnrt0DYTjWqeU=" />
-			<field:input label="剧本来源" field="scriptSrc" id="c_com_sx_tv_entites_TVShow_scriptSrc" z="RwGJIAfYZyrgI+Pnrt0DYTjWqeU=" />
-			<field:input label="收视率" field="ratings" id="c_com_sx_tv_entites_TVShow_ratings" validationMessageCode="field_invalid_number" z="Nz6GjP4nljjD/7P7DkTMloDWzvA=" />
-			<field:input label="市场份额" field="marketShare" id="c_com_sx_tv_entites_TVShow_marketShare" validationMessageCode="field_invalid_number" z="DfEv/OXFnamOFGhEGuuE7q6J75M=" />
-			<field:input label="排名" field="ranking" id="c_com_sx_tv_entites_TVShow_ranking" z="jo1WP6+u77LQEandQoTxTNh/68o=" />
-			<field:input label="市场评估" field="marketAssessment" id="c_com_sx_tv_entites_TVShow_marketAssessment" z="Ifjo7nRVy3FBJk5I9N9XafjN/34=" />
-			<field:checkbox label="已购买" field="isPurchase" id="c_com_sx_tv_entites_TVShow_isPurchase" z="YBh84KS+nnbdMjddFJYaY8uBq/A=" />
-			<field:select required="true" label="项目进度" field="progress" id="c_com_sx_tv_entites_TVShow_progress" itemValue="id" items="${progresses}" path="/progresses"
+			<input type="hidden" id="forcePurchase" name="forcePurchase"
+				value="${TVShow_.forcePurchase}" />
+			<field:input label="剧名" field="name"
+				id="c_com_sx_tv_entites_TVShow_name"
+				z="RwGJIAfYZyrgI+Pnrt0DYTjWqeU=" />
+			<field:input label="集数" field="count"
+				id="c_com_sx_tv_entites_TVShow_count"
+				z="RwGJIAfYZyrgI+Pnrt0DYTjWqeU=" />
+			<field:input label="剧本来源" field="scriptSrc"
+				id="c_com_sx_tv_entites_TVShow_scriptSrc"
+				z="RwGJIAfYZyrgI+Pnrt0DYTjWqeU=" />
+			<field:input label="收视率" field="ratings"
+				id="c_com_sx_tv_entites_TVShow_ratings"
+				validationMessageCode="field_invalid_number"
+				z="Nz6GjP4nljjD/7P7DkTMloDWzvA=" />
+			<field:input label="市场份额" field="marketShare"
+				id="c_com_sx_tv_entites_TVShow_marketShare"
+				validationMessageCode="field_invalid_number"
+				z="DfEv/OXFnamOFGhEGuuE7q6J75M=" />
+			<field:input label="排名" field="ranking"
+				id="c_com_sx_tv_entites_TVShow_ranking"
+				z="jo1WP6+u77LQEandQoTxTNh/68o=" />
+			<field:input label="市场评估" field="marketAssessment"
+				id="c_com_sx_tv_entites_TVShow_marketAssessment"
+				z="Ifjo7nRVy3FBJk5I9N9XafjN/34=" />
+			<field:checkbox label="已购买" field="isPurchase"
+				id="c_com_sx_tv_entites_TVShow_isPurchase"
+				z="YBh84KS+nnbdMjddFJYaY8uBq/A=" />
+			<field:select required="true" label="项目进度" field="progress"
+				id="c_com_sx_tv_entites_TVShow_progress" itemValue="id"
+				items="${progresses}" path="/progresses"
 				z="HuiCBCdycBddzVyQHfiOVV+e628=" />
-			<field:select required="true" label="状态" field="status" id="c_com_sx_tv_entites_TVShow_status" itemLabel="name" itemValue="id" items="${statuses}" path="/statuses"
+			<field:select required="true" label="状态" field="status"
+				id="c_com_sx_tv_entites_TVShow_status" itemLabel="name"
+				itemValue="id" items="${statuses}" path="/statuses"
 				z="UrSMjU5/1Ews08TqF/AcNBolIvM=" />
 			<div class="rowcontainer">
-				<label><a id="addThemeLink" href="#"><img title="新增题材" src="/SXBC/resources/images/add.png" alt="新增题材"></img></a>题材 : </label>
-				<INPUT type="hidden" name="theme" id="_theme_id" value="${TVShow_.theme.id}"/>
-				<INPUT type="text" id="theme_autoComplete" />
+				<label><a id="addThemeLink" href="#"><img title="新增题材"
+						src="/SXBC/resources/images/add.png" alt="新增题材"></img></a>题材 : </label> <INPUT
+					type="hidden" name="theme" id="_theme_id"
+					value="${TVShow_.theme.id}" /> <INPUT type="text"
+					id="theme_autoComplete" />
 			</div>
 			<br />
 			<div class="rowcontainer">
-				<label><a id="addCompanyLink" href="#"><img title="新增公司" src="/SXBC/resources/images/add.png" alt="新增公司"></img></a>影视公司 : </label>
-				<INPUT type="hidden" id="_company_id" name="company" value="${TVShow_.company.id}" />
-				<INPUT type="text" id="company_autoComplete" />
+				<label><a id="addCompanyLink" href="#"><img title="新增公司"
+						src="/SXBC/resources/images/add.png" alt="新增公司"></img></a>影视公司 : </label> <INPUT
+					type="hidden" id="_company_id" name="company"
+					value="${TVShow_.company.id}" /> <INPUT type="text"
+					id="company_autoComplete" />
 			</div>
 			<br />
 			<div class="rowcontainer">
-				<label><a class="peopleAdd" name="_actors_id" href="#"><img title="新增演员" src="/SXBC/resources/images/add.png" alt="新增演员"></img></a>演员 : </label> <input type="text"
-					id="_actors_id" />
-			</div>
-			<br />
-			<div class="rowcontainer">
-				<label><a class="peopleAdd" name="_directors_id" href="#"><img title="新增导演" src="/SXBC/resources/images/add.png" alt="新增导演"></img></a>导演 : </label> <input type="text"
-					id="_directors_id" />
+				<label><a class="peopleAdd" name="_producer_id" href="#"><img
+						title="新增制片人" src="/SXBC/resources/images/add.png" alt="新增制片人"></img></a>制片人
+					: </label> <input type="text" id="_producer_id" />
 
 			</div>
 			<br />
 			<div class="rowcontainer">
-				<label><a class="peopleAdd" name="_screenwriters_id" href="#"><img title="新增编剧" src="/SXBC/resources/images/add.png" alt="新增编剧"></img></a>编剧 : </label> <input
-					type="text" id="_screenwriters_id" />
+				<label><a class="peopleAdd" name="_actors_id" href="#"><img
+						title="新增演员" src="/SXBC/resources/images/add.png" alt="新增演员"></img></a>演员
+					: </label> <input type="text" id="_actors_id" />
 			</div>
 			<br />
 			<div class="rowcontainer">
-				<label><a class="peopleAdd" name="_publisher_id" href="#"><img title="新增发行人员" src="/SXBC/resources/images/add.png" alt="新发行人员"></img></a>发行人员 : </label> <input
-					type="text" id="_publisher_id" />
+				<label><a class="peopleAdd" name="_directors_id" href="#"><img
+						title="新增导演" src="/SXBC/resources/images/add.png" alt="新增导演"></img></a>导演
+					: </label> <input type="text" id="_directors_id" />
+
 			</div>
 			<br />
 			<div class="rowcontainer">
-				<label>录入时间 : </label> <input type="text" id="_inputDate_id" name="inputDate" value="${_var_inputDate}" />
+				<label><a class="peopleAdd" name="_screenwriters_id"
+					href="#"><img title="新增编剧" src="/SXBC/resources/images/add.png"
+						alt="新增编剧"></img></a>编剧 : </label> <input type="text" id="_screenwriters_id" />
 			</div>
 			<br />
-			<field:select label="录入人" field="inputter" id="inputterSelect" items="${users}" itemValue="id" itemLabel="staff" path=""></field:select>
-			<field:select required="true" itemLabel="staff" label="项目负责人" field="projector" id="c_com_sx_tv_entites_TVShow_projector" itemValue="id" items="${users}" path="/users"
+			<div class="rowcontainer">
+				<label><a class="peopleAdd" name="_publisher_id" href="#"><img
+						title="新增发行人员" src="/SXBC/resources/images/add.png" alt="新发行人员"></img></a>发行人员
+					: </label> <input type="text" id="_publisher_id" />
+			</div>
+			<br />
+			<div class="rowcontainer">
+				<label>录入时间 : </label> <input type="text" id="_inputDate_id"
+					name="inputDate" value="${_var_inputDate}" />
+			</div>
+			<br />
+			<field:select label="录入人" field="inputter" id="inputterSelect"
+				items="${users}" itemValue="id" itemLabel="staff" path=""></field:select>
+			<field:select required="true" itemLabel="staff" label="项目负责人"
+				field="projector" id="c_com_sx_tv_entites_TVShow_projector"
+				itemValue="id" items="${users}" path="/users"
 				z="y4+nDHTfCAyCCs8tbPEMVwGHfJQ=" />
-			<field:textarea label="故事梗概" field="outline" id="c_com_sx_tv_entites_TVShow_outline" z="pMV0426q9Rqw4hV15ZW3gyoxYlw="  />
+			<field:textarea label="故事梗概" field="outline"
+				id="c_com_sx_tv_entites_TVShow_outline"
+				z="pMV0426q9Rqw4hV15ZW3gyoxYlw=" />
+
+			<div class="rowcontainer">
+				<label>要求购买 : </label>
+				<c:if test="${TVShow_.forcePurchase == 1}">
+					<INPUT type="checkbox" id="forcePurchase_checkbox"
+						checked="checked" />
+				</c:if>
+				<c:if test="${TVShow_.forcePurchase == 0}">
+					<INPUT type="checkbox" id="forcePurchase_checkbox" />
+				</c:if>
+			</div>
+			<br />
+			<field:textarea label="备注" field="comments"
+				id="c_com_sx_tv_entites_TVShow_comments" />
 			<!-- 	
 			</form:update>
 	 		-->
@@ -183,39 +261,51 @@ li.token-input-input-token input{
 		</sform:form>
 	</util:panel>
 	<div id="dialog-people-form" title="添加 演员|导演|编剧">
-		<sform:form id="peopleAddForm" action="/SXBC/front/peoples/doAjaxCreate" modelAttribute="people" method="post">
+		<sform:form id="peopleAddForm"
+			action="/SXBC/front/peoples/doAjaxCreate" modelAttribute="people"
+			method="post">
 			<label for="name" style="width: 70px">姓名<font color="red">*</font></label>
-			<sform:input path="name" id="people_name" cssClass="text ui-widget-content ui-corner-all" />
+			<sform:input path="name" id="people_name"
+				cssClass="text ui-widget-content ui-corner-all" />
 			<br />
 			<br />
 			<label for="achievements" style="width: 70px">代表作</label>
-			<sform:input path="achievements" id="achievements" cssClass="text ui-widget-content ui-corner-all" />
+			<sform:input path="achievements" id="achievements"
+				cssClass="text ui-widget-content ui-corner-all" />
 		</sform:form>
 	</div>
 
 	<div id="dialog-company-form" title="添加 影视公司">
-		<sform:form id="companyAddForm" action="/SXBC/front/companys/doAjaxCreate" modelAttribute="company" method="post">
+		<sform:form id="companyAddForm"
+			action="/SXBC/front/companys/doAjaxCreate" modelAttribute="company"
+			method="post">
 			<label for="name" style="width: 70px">姓名<font color="red">*</font></label>
-			<sform:input path="name" id="company_name" cssClass="text ui-widget-content ui-corner-all" />
+			<sform:input path="name" id="company_name"
+				cssClass="text ui-widget-content ui-corner-all" />
 			<br />
 			<br />
 			<label for="publisher" style="width: 70px">发行人</label>
-			<sform:input path="publisher" id="company_publisher" cssClass="text ui-widget-content ui-corner-all" />
+			<sform:input path="publisher" id="company_publisher"
+				cssClass="text ui-widget-content ui-corner-all" />
 			<br />
 			<br />
 			<label for="telephone" style="width: 70px">联系电话</label>
-			<sform:input path="telephone" id="company_telephone" cssClass="text ui-widget-content ui-corner-all" />
+			<sform:input path="telephone" id="company_telephone"
+				cssClass="text ui-widget-content ui-corner-all" />
 			<br />
 			<br />
 			<label for="achievements" style="width: 70px">代表作</label>
-			<sform:input path="achievements" id="company_achievements" cssClass="text ui-widget-content ui-corner-all" />
+			<sform:input path="achievements" id="company_achievements"
+				cssClass="text ui-widget-content ui-corner-all" />
 		</sform:form>
 	</div>
 
 	<div id="dialog-theme-form" title="添加 题材">
-		<sform:form id="themeAddForm" action="/SXBC/front/themes/doAjaxCreate" modelAttribute="theme" method="post">
+		<sform:form id="themeAddForm" action="/SXBC/front/themes/doAjaxCreate"
+			modelAttribute="theme" method="post">
 			<label for="name" style="width: 70px">名称<font color="red">*</font></label>
-			<sform:input path="name" id="theme_name" cssClass="text ui-widget-content ui-corner-all" />
+			<sform:input path="name" id="theme_name"
+				cssClass="text ui-widget-content ui-corner-all" />
 		</sform:form>
 	</div>
 </div>
