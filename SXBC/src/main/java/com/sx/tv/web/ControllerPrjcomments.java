@@ -43,7 +43,7 @@ private static final Logger logger = Logger.getLogger(ControllerPrjcomments.clas
 		User logonUser = User.findUsersByNameEquals(principal.getName()).getSingleResult();
 		logger.warn("Warning:Status Changed==========================\r\n");
 		if (st.getId() == 8 || st.getId() == 9 || st.getId() == 10 || st.getId() == 11) {
-			tv.setComments(projectorComments.getComments());
+			tv.setComments((tv.getComments()!=null?tv.getComments()+"   ":"") + projectorComments.getComments());
 			logger.warn("\r\nTVShow: (id=" + tv.getId() + ", name=" + tv.getName() + ") status changed from \r\n" + tv.getStatus().getName() + "("
 					+ tv.getStatus().getId() + ") to " + st.getName() + "(" + st.getId() + ") by user:(" + logonUser.getStaff() + "["
 					+ logonUser.getName() + "=" + logonUser.getId() + "])\r\nReason:\r\n" + projectorComments.getComments());

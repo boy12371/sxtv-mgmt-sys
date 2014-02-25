@@ -24,9 +24,13 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooSerializable
-@RooJpaActiveRecord(table = "tvshow", finders = { "findTVShowsByTheme", "findTVShowsByCompany", "findTVShowsByCount", "findTVShowsByInputDateBetween",
-		"findTVShowsByInputDateEquals", "findTVShowsByInputter", "findTVShowsByIsPurchaseNot", "findTVShowsByNameEquals", "findTVShowsByPriceRangeLike",
-		"findTVShowsByProgress", "findTVShowsByStatus", "findTVShowsByNameLike", "findTVShowsByScreenwriters" })
+@RooJpaActiveRecord(table = "tvshow", finders = { "findTVShowsByTheme",
+		"findTVShowsByCompany", "findTVShowsByCount",
+		"findTVShowsByInputDateBetween", "findTVShowsByInputDateEquals",
+		"findTVShowsByInputter", "findTVShowsByIsPurchaseNot",
+		"findTVShowsByNameEquals", "findTVShowsByPriceRangeLike",
+		"findTVShowsByProgress", "findTVShowsByStatus",
+		"findTVShowsByNameLike", "findTVShowsByScreenwriters" })
 public class TVShow {
 
 	private static final long serialVersionUID = 1L;
@@ -49,7 +53,7 @@ public class TVShow {
 	@Column(name = "marketShare")
 	@Value("0")
 	private Float marketShare;
-	
+
 	@Column(name = "ranking")
 	@Value("0")
 	private int ranking;
@@ -76,7 +80,7 @@ public class TVShow {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "M-")
 	private Date playDate;
-	
+
 	@Column(name = "scriptSrc", length = 512)
 	private String scriptSrc;
 
@@ -103,6 +107,9 @@ public class TVShow {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<People> publisher;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<People> producer;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private User inputter;
@@ -110,17 +117,25 @@ public class TVShow {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private User projector;
 
-	@Value(value="")
+	@Value(value = "")
 	private String comments;
-	
+
 	/**
-	 * default 0=Normal, 1=removed.
-	 * only used for remove the record.
+	 * default 0=Normal, 1=removed. only used for remove the record.
 	 * 
 	 */
-	@Column(name="removed")
+	@Column(name = "removed")
 	private Integer removed = 0;
+
+	/**
+	 * default 0=Normal, 1=forcePurchase. 应频道要求购买.
+	 * 
+	 */
+	@Column(name = "forcePurchase")
+	private Integer forcePurchase = 0;
 	
+	
+
 	public String getComments() {
 		return comments;
 	}
@@ -152,6 +167,7 @@ public class TVShow {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
 	public Float getRatings() {
 		return ratings;
 	}
@@ -247,7 +263,7 @@ public class TVShow {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
+
 	public User getInputter() {
 		return inputter;
 	}
@@ -263,7 +279,6 @@ public class TVShow {
 	public void setProjector(User projector) {
 		this.projector = projector;
 	}
-
 
 	public Integer getRemoved() {
 		return removed;
@@ -319,6 +334,22 @@ public class TVShow {
 
 	public void setPublisher(Set<People> publisher) {
 		this.publisher = publisher;
+	}
+
+	public Integer getForcePurchase() {
+		return forcePurchase;
+	}
+
+	public void setForcePurchase(Integer forcePurchase) {
+		this.forcePurchase = forcePurchase;
+	}
+
+	public Set<People> getProducer() {
+		return producer;
+	}
+
+	public void setProducer(Set<People> producer) {
+		this.producer = producer;
 	}
 
 }

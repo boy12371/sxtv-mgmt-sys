@@ -6,6 +6,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -45,12 +46,10 @@ public class SearchTV {
 
 	private Channel prjRecommendChannel;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "S-")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date recommendTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "S-")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date replyTime;
 
 	private String publicPrice;
@@ -59,33 +58,32 @@ public class SearchTV {
 
 	private User projector;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "M-")
-	private Date inputDate;
-
 	private RecommendClass recommendLevel;
 
 	private RecommendClass projectorRecommend;
 
+	/*
+	 * 播出平台(合同签约平台)
+	 */
 	private Channel playChannel;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "S-")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date playDateStart;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "S-")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date playDateEnd;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "S-")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date copyrightFrom;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "S-")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date copyrightTo;
 
-	private String contractNo;
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date inputDateStart;
+
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date inputDateEnd;
 
 	public Channel getPlayChannel() {
 		return playChannel;
@@ -207,14 +205,6 @@ public class SearchTV {
 		this.projector = projector;
 	}
 
-	public Date getInputDate() {
-		return inputDate;
-	}
-
-	public void setInputDate(Date inputDate) {
-		this.inputDate = inputDate;
-	}
-
 	public RecommendClass getRecommendLevel() {
 		return recommendLevel;
 	}
@@ -247,14 +237,6 @@ public class SearchTV {
 		this.copyrightTo = copyrightTo;
 	}
 
-	public String getContractNo() {
-		return contractNo;
-	}
-
-	public void setContractNo(String contractNo) {
-		this.contractNo = contractNo;
-	}
-
 	public Date getPlayDateStart() {
 		return playDateStart;
 	}
@@ -269,6 +251,22 @@ public class SearchTV {
 
 	public void setPlayDateEnd(Date playDateEnd) {
 		this.playDateEnd = playDateEnd;
+	}
+
+	public Date getInputDateStart() {
+		return inputDateStart;
+	}
+
+	public void setInputDateStart(Date inputDateStart) {
+		this.inputDateStart = inputDateStart;
+	}
+
+	public Date getInputDateEnd() {
+		return inputDateEnd;
+	}
+
+	public void setInputDateEnd(Date inputDateEnd) {
+		this.inputDateEnd = inputDateEnd;
 	}
 
 }

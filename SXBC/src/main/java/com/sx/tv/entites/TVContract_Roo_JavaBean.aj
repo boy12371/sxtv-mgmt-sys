@@ -58,27 +58,27 @@ privileged aspect TVContract_Roo_JavaBean {
         this.publishForm = publishForm;
     }
     
-    public Float TVContract.getTotalPrice() {
+    public Integer TVContract.getTotalPrice() {
         return this.totalPrice;
     }
     
-    public void TVContract.setTotalPrice(Float totalPrice) {
+    public void TVContract.setTotalPrice(Integer totalPrice) {
         this.totalPrice = totalPrice;
     }
     
-    public Float TVContract.getExtraFee() {
+    public Integer TVContract.getExtraFee() {
         return this.extraFee;
     }
     
-    public void TVContract.setExtraFee(Float extraFee) {
+    public void TVContract.setExtraFee(Integer extraFee) {
         this.extraFee = extraFee;
     }
     
-    public Float TVContract.getPrice() {
+    public Integer TVContract.getPrice() {
         return this.price;
     }
     
-    public void TVContract.setPrice(Float price) {
+    public void TVContract.setPrice(Integer price) {
         this.price = price;
     }
     
