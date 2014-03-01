@@ -36,27 +36,21 @@ public class VedioscoreDAO extends com.vms.db.dao.BaseRootDAO implements IVedios
 		return users;
 	}
 	
-	public List<Vedioscore> findScoresOfUserAndTapes(User user, List<Vediotape> tapes) throws Exception{
-		String hql = "from Vedioscore s where s.vedio in (:tapes) and s.examiner=(:user)";
-		List<Vedioscore> list;
-		if(null == tapes || 0 == tapes.size()){
-			return new ArrayList<Vedioscore>();
-		}
+	@SuppressWarnings("unchecked")
+	public List<Vedioscore> findScoresOfUserAndTapes(User user, String tapes) throws Exception{
+		String hql = "from Vedioscore s where s.examiner="+user.getId()+" and s.vedio.id in ("+tapes+")";
+		List<Vedioscore> list = null;
 		try{
-//			list = this.getHibernateTemplate().find(hql, tapes);
 			Query query = this.getQuery(hql);
+			//query.setString("videoIDs", tapes);
+			list = query.list();
+			//list = this.getHibernateTemplate().find(hql, tapes);
+			/*Query query = this.getQuery(hql);
 			query.setParameterList("tapes", tapes);
 			query.setParameter("user", user);
 			list = query.list();
+			*/
 			
-			for(Vedioscore vs:list){
-				for(Vediotape vt: tapes){
-					if(vs.getVedio().getId().equals(vt.getId())){
-						vs.getVedio().setScore(vt.getScore());
-						break;
-					}
-				}
-			}
 		}catch(Exception e){
 			logger.error(e.getMessage());
 			e.printStackTrace();
