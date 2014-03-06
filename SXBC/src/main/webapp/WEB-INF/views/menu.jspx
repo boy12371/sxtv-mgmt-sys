@@ -20,8 +20,9 @@
                 <menu:item id="i_company_list" label="影视公司" url="/companys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_theme_list" label="剧目题材" url="/themes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_progress_list" label="项目进度" url="/progresses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
-                <!-- 
+                
                 <menu:item id="i_people_list" label="演员|导演|编剧" url="/peoples?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                <!-- 
                 <menu:item id="i_score_list" label="剧目评分" url="/scores?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_channelcomments_list" label="频道意见" url="/channelcommentses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_deptcomments_list" label="中心意见" url="/deptcommentses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>

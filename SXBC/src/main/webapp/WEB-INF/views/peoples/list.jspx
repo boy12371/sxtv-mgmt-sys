@@ -1,11 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<style>
+		ui-button-text {
+			padding-top: 2px;
+			padding-bottom: 2px;
+		}
+	</style>
     <page:list id="pl_com_sx_tv_entites_People" items="${peoples}" z="tKaviYe+Nu/QwziLmm0JMkTSIeI=">
+    	<DIV id="searchSection">
+			名称:<INPUT id="svalue" type="text" /> <a id="search" href="/SXBC/front/peoples/list?">搜索</a>
+		</DIV>
         <table:table data="${peoples}" id="l_com_sx_tv_entites_People" path="/peoples" z="QkrwEMXaYserqvMlI4s9HwsCmyw=">
             <table:column id="c_com_sx_tv_entites_People_name" property="name" z="Mepn35CJea6LWhOv48UMXJ5mYfA="/>
             <table:column id="c_com_sx_tv_entites_People_achievements" label="代表作" property="achievements" z="user-managed"/>
         </table:table>
     </page:list>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $("#search").button().click(function(){
+   		if($("#svalue").val().length == 0 ){
+   			$("#svalue").addClass("ui-state-error").val("请输入姓名").focus(function(){
+   				$(this).removeClass("ui-state-error").val("");
+   			});
+   			return false;
+   		}
+    	var href = $(this).attr("href");
+    	href += "svalue="+$("#svalue").val();
+    	$(this).attr("href",href);
+    });
+    $('a span').css("padding-top","1px").css("padding-bottom","1px").css("color","white");
+    });
+    Spring.addDecoration(new Spring.ElementDecoration({elementId : 'searchSection', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '查询', open: false}})); 
+    </script>
 </div>
