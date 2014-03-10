@@ -57,7 +57,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<ChannelComments, String> ApplicationConversionServiceFactoryBean.getChannelCommentsToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.sx.tv.entites.ChannelComments, java.lang.String>() {
             public String convert(ChannelComments channelComments) {
-                return new StringBuilder().append(channelComments.getOwnedby()).append(' ').append(channelComments.getRecordDate()).append(' ').append(channelComments.getRecommendDate()).append(' ').append(channelComments.getReplyDate()).toString();
+                return new StringBuilder().append(channelComments.getOwnedby()).append(' ').append(channelComments.getRecordDate()).append(' ').append(channelComments.getRecommendDate()).toString();
             }
         };
     }

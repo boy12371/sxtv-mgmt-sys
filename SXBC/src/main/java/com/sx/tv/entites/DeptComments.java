@@ -48,7 +48,11 @@ public class DeptComments {
 	@DateTimeFormat(style = "M-")
 	private Date createDate;
     
-    
+	@Column(name = "replyDate")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style = "S-")
+	private Date replyDate;
+	
     @Column(name="comments")
     private String comments;
 
@@ -60,5 +64,15 @@ public class DeptComments {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+
+	public Date getReplyDate() {
+		return replyDate;
+	}
+
+
+	public void setReplyDate(Date replyDate) {
+		this.replyDate = replyDate;
 	}
 }

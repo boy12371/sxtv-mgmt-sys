@@ -44,20 +44,22 @@ public class ChannelComments {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private RecommendClass recommendLevel;
 
+	/**
+	 * 录入日期
+	 */
 	@Column(name = "recordDate")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date recordDate;
 
+	
+	/**
+	 * 频道反馈信息日期即是频道审核完成返回给中心的日期
+	 */
 	@Column(name = "recommendDate")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "S-")
 	private Date recommendDate;
-
-	@Column(name = "replyDate")
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "S-")
-	private Date replyDate;
 
 	@Column(name = "promotionPlan")
 	private String promotionPlan;
@@ -122,14 +124,6 @@ public class ChannelComments {
 
 	public void setRecommendDate(Date recommendDate) {
 		this.recommendDate = recommendDate;
-	}
-
-	public Date getReplyDate() {
-		return replyDate;
-	}
-
-	public void setReplyDate(Date replyDate) {
-		this.replyDate = replyDate;
 	}
 
 	public String getPromotionPlan() {
