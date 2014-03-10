@@ -38,6 +38,9 @@ td {
 	font-size: 12px;
 	color: black;
 }
+label{
+	width: 120px;
+}
 </style>
 	<div id="searchFormDiv">
 		<H1 style="background: #648c1d; color: white">检索条件</H1>
@@ -116,10 +119,23 @@ td {
 			</div>
 			<br />
 			<div class="rowcontainer">
+				<label>合同日期 : </label>
+				<form:input path="ctcInputDateStart" id="_ctcInputDateStart_id" />
+				-
+				<form:input path="ctcInputDateEnd" id="_ctcInputDateEnd_id" />
+			</div>
+			<br />
+			<div class="rowcontainer">
 				<label>播出日期 : </label>
 				<form:input path="playDateStart" id="_playDateStart_id" />
 				-
 				<form:input path="playDateEnd" id="_playDateEnd_id" />
+			</div>
+			<br />
+			<div class="rowcontainer">
+				<label>应频道要求购买: </label>
+				<input type="checkbox" id="forcePurchaseCKbox" />
+				<form:hidden path="forcePurchase" />
 			</div>
 			<br />
 			<div class="submit">

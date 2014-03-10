@@ -15,10 +15,13 @@
         </div>
         <br/>
         <br/>
+        <field:checkbox field="isRecommend" id="c_com_sx_tv_entites_DeptComments_isRecommend" label="推荐" z="user-managed"/>
         <field:select field="owner" id="c_com_sx_tv_entites_DeptComments_owner" itemLabel="staff" itemValue="id" items="${users}" path="/users" z="user-managed"/>
         <field:select field="recommendLevel" id="c_com_sx_tv_entites_DeptComments_recommendLevel" itemLabel="name" itemValue="id" items="${recommendclasses}" path="/recommendclasses" readonly="true" z="user-managed"/>
         <field:select field="recommendChannel" id="c_com_sx_tv_entites_DeptComments_recommendChannel" itemLabel="name" itemValue="id" items="${channels}" path="/channels" z="user-managed"/>
+        <field:datetime label="答复日期" dateTimePattern="yyyy-MM-dd" field="replyDate" id="c_com_sx_tv_entites_ChannelComments_replyDate"
+			z="AAeOiRusqQjkk6yvYyNvVnwJRiY=" />
         <field:input field="comments" id="c_com_sx_tv_entites_DeptComments_comments" z="ruEWpGDAGzVNOAIs+LiifDWba5E="/>
-        <field:checkbox field="isRecommend" id="c_com_sx_tv_entites_DeptComments_isRecommend" label="推荐" z="user-managed"/>
+        
     </form:update>
 </div>

@@ -90,7 +90,41 @@ $(document).ready(function() {
 			datePattern : 'yyyy-MM-dd'
 		}
 	}));
+	
+	
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_ctcInputDateEnd_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '合同录入日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
+	Spring.addDecoration(new Spring.ElementDecoration({
+		elementId : '_ctcInputDateStart_id',
+		widgetType : 'dijit.form.DateTextBox',
+		widgetAttrs : {
+			promptMessage : '合同录入日期',
+			invalidMessage : '日期格式错误',
+			required : false,
+			constraints : {
+				datePattern : 'yyyy-MM-dd',
+				required : false
+			},
+			datePattern : 'yyyy-MM-dd'
+		}
+	}));
 
+	
+	$("#forcePurchaseCKbox").click(function(){
+		$("#forcePurchase").val($(this).attr("checked")=="checked" ? 1 : 0);
+	});
 	$("#_id_id").keyup(function() {
 		if ($.trim($(this).val()).length >= 1) {
 			$("#_name_id")[0].disabled = true;
@@ -220,7 +254,13 @@ $(document).ready(function() {
 		dijit.byId("_copyrightTo_id").set("value", "");
 		dijit.byId("_playDateStart_id").set("value", "");
 		dijit.byId("_playDateEnd_id").set("value", "");
-
+		dijit.byId("_ctcInputDateStart_id").set("value", "");
+		dijit.byId("_ctcInputDateEnd_id").set("value", "");
+		
+		if($("#forcePurchaseCKbox").attr("checked")=="checked"){
+			$("#forcePurchaseCKbox").attr("checked",false);
+			$("#forcePurchase").val("0");
+		}
 	});
 	$("#submitBtn").button().click(function() {
 		var queryValues = [];
@@ -239,8 +279,9 @@ $(document).ready(function() {
 		queryValues[12] = $("input[name*=copyrightTo]");
 		queryValues[13] = $("input[name*=playDateStart]");
 		queryValues[14] = $("input[name*=playDateEnd]");
-		
-		
+		queryValues[15] = $("input[name*=forcePurchase]");
+		queryValues[16] = $("input[name*=ctcInputDateStart]");
+		queryValues[17] = $("input[name*=ctcInputDateEnd]");
 
 		var params = "";
 		for ( var i = 0; i < queryValues.length; i++) {
