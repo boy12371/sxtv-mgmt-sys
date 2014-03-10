@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_sx_tv_entites_ScoreIndicator" items="${scoreindicators}" labelPlural="评分指标" z="user-managed">
-        <table:table data="${scoreindicators}" id="l_com_sx_tv_entites_ScoreIndicator" path="/scoreindicators" z="RepdBCXzSciE+BvuKAQds0jvI8g=">
+        <table:table delete="false" create="false" data="${scoreindicators}" id="l_com_sx_tv_entites_ScoreIndicator" path="/scoreindicators" z="RepdBCXzSciE+BvuKAQds0jvI8g=">
             <table:column id="c_com_sx_tv_entites_ScoreIndicator_name" property="name" z="Uutk1iwfsE3l2+982UjMFgOvGu4="/>
             <table:column id="c_com_sx_tv_entites_ScoreIndicator_proportion" property="proportion" z="8/pnBxwkos4QhGlt/1pBj4s0hzk="/>
         </table:table>

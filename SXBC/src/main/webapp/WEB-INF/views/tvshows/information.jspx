@@ -573,6 +573,28 @@ td {
 						</div>
 						<br />
 						<div class="rowcontainer">
+							<label>推荐日期 : </label>
+							<c:if test="${not empty dept.createDate }">
+								<fmt:formatDate value="${dept.createDate }"
+									pattern="${fn:escapeXml('yyyy-MM-dd')}" />
+							</c:if>
+							<c:if test="${ empty dept.createDate }">
+							-
+							</c:if>
+						</div>
+						<br />
+						<div class="rowcontainer">
+							<label>答复日期 : </label>
+							<c:if test="${not empty dept.replyDate }">
+								<fmt:formatDate value="${dept.replyDate }"
+									pattern="${fn:escapeXml('yyyy-MM-dd')}" />
+							</c:if>
+							<c:if test="${empty dept.replyDate }">
+								-
+							</c:if>
+						</div>
+						<br />
+						<div class="rowcontainer">
 							<label>备注 : </label> ${dept.comments }
 						</div>
 						<br />
@@ -626,10 +648,6 @@ td {
 			</div>
 		</c:if>
 
-
-
-
-
 		<c:if test="${not empty channelCmts}">
 			<c:forEach items="${channelCmts}" var="cc" varStatus="vs">
 				<c:if test="${cc.channel.type==0}">
@@ -653,7 +671,24 @@ td {
 							</div>
 							<br />
 							<div class="rowcontainer">
-								<label>频道意见: </label> ${cc.comments}
+								<label>反馈日期: </label>
+								<c:if test="${not empty cc.recommendDate }">
+									<fmt:formatDate value="${cc.recommendDate }"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" />
+								</c:if>
+								<c:if test="${empty cc.recommendDate }">
+								-
+							</c:if>
+							</div>
+							<br />
+							<div class="rowcontainer">
+								<label>频道意见: </label>
+								<c:if test="${not empty cc.comments }">
+									${cc.comments}
+								</c:if>
+								<c:if test="${empty cc.comments }">
+								-
+							</c:if>
 							</div>
 							<br />
 							<div class="rowcontainer">
@@ -687,7 +722,24 @@ td {
 							</div>
 							<br />
 							<div class="rowcontainer">
-								<label>频道意见: </label> ${cc.comments}
+								<label>反馈日期: </label>
+								<c:if test="${not empty cc.recommendDate }">
+									<fmt:formatDate value="${cc.recommendDate }"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" />
+								</c:if>
+								<c:if test="${empty cc.recommendDate }">
+								-
+							</c:if>
+							</div>
+							<br />
+							<div class="rowcontainer">
+								<label>频道意见: </label>
+								<c:if test="${not empty cc.comments }">
+									${cc.comments}
+								</c:if>
+								<c:if test="${empty cc.comments }">
+								-
+							</c:if>
 							</div>
 							<br />
 							<div class="rowcontainer">

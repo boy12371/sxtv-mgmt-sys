@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_sx_tv_entites_Role" items="${roles}" z="UvoNbD16gPKcyWGq/tHHEYPmx1c=">
-        <table:table data="${roles}" id="l_com_sx_tv_entites_Role" path="/roles" z="hH/Mp7yTiDMPr1NnNMQr7P4KBeg=">
+        <table:table delete="false" data="${roles}" id="l_com_sx_tv_entites_Role" path="/roles" z="hH/Mp7yTiDMPr1NnNMQr7P4KBeg=">
             <table:column id="c_com_sx_tv_entites_Role_comments" label="名称" property="comments" z="user-managed"/>
             <table:column id="c_com_sx_tv_entites_Role_name" label="备注" property="name" z="user-managed"/>
             <!-- <table:column id="c_com_sx_tv_entites_Role_resources" property="resources" z="Cx7crqpnw4D7TMzikkK8Uv92A6w="/> -->

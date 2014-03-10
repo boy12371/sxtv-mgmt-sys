@@ -36,13 +36,14 @@
                 <menu:item id="i_scoreindicator_list" label="评分指标" url="/scoreindicators?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_role_list" label="角色" url="/roles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <menu:item id="i_user_list" label="用户" url="/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
-                <menu:item id="i_resource_list" label="资源" url="/resource?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                
                 <menu:item id="i_status_list" label="状态" url="/statuses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
             <!-- 
             <menu:category label="资源" id="c_resource" z="QccBeAQCWbFlycIXkFVzmR8srU0=">
                 <menu:item label="新增资源" id="i_resource_new" url="/resource?form" z="user-managed"/>
                 <menu:item label="资源" id="i_resource_list" url="/resource?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                <menu:item id="i_resource_list" label="资源" url="/resource?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
              -->
             <!-- 

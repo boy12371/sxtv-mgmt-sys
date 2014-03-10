@@ -1,10 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
     <page:list id="pl_com_sx_tv_entites_Theme" items="${themes}" labelPlural="剧目题材" z="user-managed">
-        <table:table data="${themes}" id="l_com_sx_tv_entites_Theme" path="/themes" z="YuECvtoN9L5IMZfQ171hVjoMvFo=">
+        <DIV id="searchSection">
+			名称:<INPUT id="svalue" type="text" /> <a id="search" href="/SXBC/front/themes/list?">搜索</a>
+		</DIV>
+        
+        <table:table delete="false" data="${themes}" id="l_com_sx_tv_entites_Theme" path="/themes" z="YuECvtoN9L5IMZfQ171hVjoMvFo=">
             <table:column id="c_com_sx_tv_entites_Theme_name" property="name" z="iNzZnM1l4NwurmJdEdm2BpOMKYE="/>
         </table:table>
     </page:list>
+    
+     <script type="text/javascript">
+    $(document).ready(function() {
+    $("#search").button().click(function(){
+   		if($("#svalue").val().length == 0 ){
+   			$("#svalue").addClass("ui-state-error").val("请输入姓名").focus(function(){
+   				$(this).removeClass("ui-state-error").val("");
+   			});
+   			return false;
+   		}
+    	var href = $(this).attr("href");
+    	href += "svalue="+$("#svalue").val();
+    	$(this).attr("href",href);
+    });
+    $('a span').css("padding-top","1px").css("padding-bottom","1px").css("color","white");
+    });
+    Spring.addDecoration(new Spring.ElementDecoration({elementId : 'searchSection', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '查询', open: false}})); 
+    </script>
 </div>

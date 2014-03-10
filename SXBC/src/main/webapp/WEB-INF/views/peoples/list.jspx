@@ -12,7 +12,7 @@
     	<DIV id="searchSection">
 			名称:<INPUT id="svalue" type="text" /> <a id="search" href="/SXBC/front/peoples/list?">搜索</a>
 		</DIV>
-        <table:table data="${peoples}" id="l_com_sx_tv_entites_People" path="/peoples" z="QkrwEMXaYserqvMlI4s9HwsCmyw=">
+        <table:table delete="false" data="${peoples}" id="l_com_sx_tv_entites_People" path="/peoples" z="QkrwEMXaYserqvMlI4s9HwsCmyw=">
             <table:column id="c_com_sx_tv_entites_People_name" property="name" z="Mepn35CJea6LWhOv48UMXJ5mYfA="/>
             <table:column id="c_com_sx_tv_entites_People_achievements" label="代表作" property="achievements" z="user-managed"/>
         </table:table>

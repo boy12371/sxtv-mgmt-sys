@@ -20,7 +20,6 @@
         <field:select field="recommendLevel" id="c_com_sx_tv_entites_ChannelComments_recommendLevel" itemLabel="name" itemValue="id" items="${recommendclasses}" path="/recommendclasses" z="user-managed"/>
         <field:datetime dateTimePattern="${channelComments_recorddate_date_format}" field="recordDate" id="c_com_sx_tv_entites_ChannelComments_recordDate" label="录入时间" readonly="true" z="user-managed"/>
         <field:datetime dateTimePattern="${channelComments_recommenddate_date_format}" field="recommendDate" id="c_com_sx_tv_entites_ChannelComments_recommendDate" z="HEdIUtfgmrwT0QkEpvFTd33I6qA="/>
-        <field:datetime dateTimePattern="${channelComments_replydate_date_format}" field="replyDate" id="c_com_sx_tv_entites_ChannelComments_replyDate" z="AAeOiRusqQjkk6yvYyNvVnwJRiY="/>
         <field:input field="promotionPlan" id="c_com_sx_tv_entites_ChannelComments_promotionPlan" z="4HbKBFnjm+h9kWArsKMHr7cpe+A="/>
         <field:input field="ownedby" id="c_com_sx_tv_entites_ChannelComments_ownedby" label="签字负责人" z="user-managed"/>
         <field:input field="comments" id="c_com_sx_tv_entites_ChannelComments_comments" z="yTHiaHLlnu+UbJoKJoUFkgM55k4="/>

@@ -34,79 +34,107 @@ td {
 	padding-top: 8px;
 	padding-bottom: 8px;
 	border: 1px solid;
-	border-color:black;
+	border-color: black;
 	text-aglin: center;
 }
 </style>
 	<TABLE>
 		<c:if test="${channelComments.channel.type == 1}">
-			<br/>
+			<br />
 			<CAPTION>卫视节目推荐意见表</CAPTION>
-			<br/>
+			<br />
 			<TR>
-				<TD style="width: 90px;border-right-width: 0px;border-bottom-width: 0px;">剧 目</TD>
-				<TD style="width: 160px;border-right-width: 0px;border-bottom-width: 0px;">${channelComments.tvshow.name}</TD>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">集数</TD>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">${channelComments.tvshow.count}</TD>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">类型</TD>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">${channelComments.tvshow.theme.name}</TD>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">状态</TD>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">${channelComments.tvshow.progress.name}</TD>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">发行计划</TD>
+				<TD
+					style="width: 90px; border-right-width: 0px; border-bottom-width: 0px;">剧
+					目</TD>
+				<TD
+					style="width: 160px; border-right-width: 0px; border-bottom-width: 0px;">${channelComments.tvshow.name}</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">集数</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">${channelComments.tvshow.count}</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">类型</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">${channelComments.tvshow.theme.name}</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">状态</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">${channelComments.tvshow.progress.name}</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">发行计划</TD>
 				<TD style="border-bottom-width: 0px;">${prjCmt.publicSchdule }</TD>
 			</TR>
 			<tr>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">出品公司</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">${channelComments.tvshow.company.name}</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;" colspan="2">代表作品</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">${channelComments.tvshow.company.achievements}</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;" colspan="1">收视</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;" colspan="2"></td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">网络发行</td>
-				<td style="border-bottom-width:0px;" colspan="1">${prjCmt.webSchdule }</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">出品公司</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">${channelComments.tvshow.company.name}</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;"
+					colspan="2">代表作品</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">${channelComments.tvshow.company.achievements}</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;"
+					colspan="1">收视</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;"
+					colspan="2"></td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">网络发行</td>
+				<td style="border-bottom-width: 0px;" colspan="1">${prjCmt.webSchdule
+					}</td>
 			</tr>
 			<c:if test="${channelComments.channel.type == 1}">
 				<tr>
-					<td style="border-right-width: 0px;border-bottom-width: 0px;">地面发行</td>
-					<td style="border-right-width: 0px;border-bottom-width: 0px;" colspan="3">${prjCmt.localSchdule }</td>
-					<td style="border-right-width: 0px;border-bottom-width: 0px;" colspan="2">剧本来源</td>
-					<td style="border-bottom-width: 0px;" colspan="4">${prjCmt.tvshow.scriptSrc }</td>
+					<td style="border-right-width: 0px; border-bottom-width: 0px;">地面发行</td>
+					<td style="border-right-width: 0px; border-bottom-width: 0px;"
+						colspan="3">${prjCmt.localSchdule }</td>
+					<td style="border-right-width: 0px; border-bottom-width: 0px;"
+						colspan="2">剧本来源</td>
+					<td style="border-bottom-width: 0px;" colspan="4">${prjCmt.tvshow.scriptSrc
+						}</td>
 
 				</tr>
 			</c:if>
 			<TR>
-				<td style="padding: 0px;border-right-width: 0px;border-bottom-width: 0px;">主创人员</td>
+				<td
+					style="padding: 0px; border-right-width: 0px; border-bottom-width: 0px;">主创人员</td>
 				<TD colspan="11" style="padding: 0px;">
 					<table style="border: none; font-size: .7em">
 						<TR>
-							<td style="width:180px;width:180px;border-top-width: 0px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-							<td style="width:180px;width:180px;border-top-width: 0px;border-bottom-width: 0px;border-left-width: 0px;">姓名</td>
-							<td style="width:180px;width:180px;border-top-width: 0px;border-bottom-width: 0px;border-left-width: 0px;">代表作</td>
-							<td style="width:180px;width:180px;border-top-width: 0px;border-bottom-width: 0px;border-left-width: 0px;">收视状况(平均)</td>
-							<td style="width:180px;width:180px;border-top-width: 0px;border-bottom-width: 0px;border-left-width: 0px;">剧本来源</td>
-							<td style="width:180px;width:180px;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;border-left-width: 0px;">${prjCmt.tvshow.scriptSrc }</td>
+							<td
+								style="width: 180px; width: 180px; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; width: 180px; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px;">姓名</td>
+							<td
+								style="width: 180px; width: 180px; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px;">代表作</td>
+							<td
+								style="width: 180px; width: 180px; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px;">收视状况(平均)</td>
+							<td
+								style="width: 180px; width: 180px; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px;">剧本来源</td>
+							<td
+								style="width: 180px; width: 180px; border-top-width: 0px; border-bottom-width: 0px; border-right-width: 0px; border-left-width: 0px;">${prjCmt.tvshow.scriptSrc
+								}</td>
 						</TR>
 						<TR>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;">制片人</td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"><c:if test="${not empty prjCmt.tvshow.producer}">
-							<c:forEach items="${prjCmt.tvshow.producer}" var="p">
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;">制片人</td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"><c:if
+									test="${not empty prjCmt.tvshow.producer}">
+									<c:forEach items="${prjCmt.tvshow.producer}" var="p">
 							${p.name}
 							</c:forEach>
-							
-							</c:if>
-							</td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;">地面发行</td>
-							<td style="width:180px;border-bottom-width: 0px;border-right-width: 0px;border-left-width: 0px;">${prjCmt.localSchdule }</td>
+
+								</c:if></td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;">地面发行</td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-right-width: 0px; border-left-width: 0px;">${prjCmt.localSchdule
+								}</td>
 						</TR>
 						<TR>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;">编剧</td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"><c:forEach
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;">编剧</td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"><c:forEach
 									items="${channelComments.tvshow.screenwriters}" var="p">
 								${p.name}<br />
 								</c:forEach></td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"><c:forEach
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"><c:forEach
 									items="${channelComments.tvshow.screenwriters}" var="p">
 									<c:if test="${not empty p.achievements}">${p.achievements} <br />
 									</c:if>
@@ -114,96 +142,114 @@ td {
 									</c:if>
 								</c:forEach></td>
 
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-							<td style="width:180px;width:180px; 0px;border-bottom-width: 0px;border-right-width: 0px;border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; width: 180px; 0 px; border-bottom-width: 0px; border-right-width: 0px; border-left-width: 0px;"></td>
 						</TR>
 						<TR>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;">导演</td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"><c:forEach items="${channelComments.tvshow.directors}"
-									var="p">
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;">导演</td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"><c:forEach
+									items="${channelComments.tvshow.directors}" var="p">
 								${p.name}<br />
 								</c:forEach></td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"><c:forEach items="${channelComments.tvshow.directors}"
-									var="p">
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"><c:forEach
+									items="${channelComments.tvshow.directors}" var="p">
 									<c:if test="${not empty p.achievements}">${p.achievements} <br />
 									</c:if>
 									<c:if test="${empty p.achievements}"> —— <br />
 									</c:if>
 								</c:forEach></td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-							<td style="width:180px;width:180px; 0px;border-bottom-width: 0px;border-right-width: 0px;border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+							<td
+								style="width: 180px; width: 180px; 0 px; border-bottom-width: 0px; border-right-width: 0px; border-left-width: 0px;"></td>
 						</TR>
 						<TR>
-							<td style="width:180px;border-bottom-width: 0px;border-left-width: 0px;">演员</td>
-							<td colspan="5" style="padding-top: 0px;border:none;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;">
-								<c:set var="len" value="${fn:length(channelComments.tvshow.actors)-1}" />
-								<table style="border:none;width:100%">
+							<td
+								style="width: 180px; border-bottom-width: 0px; border-left-width: 0px;">演员</td>
+							<td colspan="5"
+								style="padding-top: 0px; border: none; padding-bottom: 0px; padding-left: 0px; padding-right: 0px;">
+								<c:set var="len"
+									value="${fn:length(channelComments.tvshow.actors)}" />
+								<table style="border: none; width: 100%">
 									<c:forEach items="${channelComments.tvshow.actors}" var="p"
 										varStatus="vs">
-											<c:if test="${vs.index == len}">
-												<TR>
-													<TD style="width:130px;border-bottom-width: 0px;border-left-width: 0px;">${p.name}</TD>
-													<td style="width:134px;border-bottom-width: 0px;border-left-width: 0px;">${p.achievements}</td>
-													<td style="width:135px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-													<td style="width:135px;border-bottom-width: 0px;border-left-width: 0px;border-right-width: 0px;">宣传计划</td>
-													<td style="border-bottom-width: 0px;border-right-width: 0px;"></td>
-												</TR>
+										<TR>
+											<TD
+												style="width: 127px; border-bottom-width: 0px; border-left-width: 0px;">${p.name}</TD>
+											<td
+												style="width: 130px; border-bottom-width: 0px; border-left-width: 0px;">${p.achievements}</td>
+											<td
+												style="width: 130px; border-bottom-width: 0px; border-left-width: 0px;"></td>
+
+											<c:if test="${vs.last}">
+												<td
+													style="width: 135px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px;">宣传计划</td>
+												<td
+													style="border-bottom-width: 0px; border-right-width: 0px;"></td>
 											</c:if>
-											<c:if test="${vs.index != len}">
-											<TR>
-												<TD style="width:130px;border-bottom-width: 0px;border-left-width: 0px;">${p.name}</TD>
-												<td style="width:134px;border-bottom-width: 0px;border-left-width: 0px;">${p.achievements}</td>
-												<td style="width:135px;border-bottom-width: 0px;border-left-width: 0px;"></td>
-												<td colspan="2" style="border-bottom-width: 0px;border-left-width: 0px;border-right-width: 0px;"></td>
-												
-											</TR>
+											<c:if test="${!vs.last}">
+												<td colspan="2"
+													style="width: 135px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px;"></td>
+
 											</c:if>
+
+										</TR>
 									</c:forEach>
 								</table>
 							</td>
-						</TR>						
+						</TR>
 					</table>
 				</TD>
 			</TR>
-			
+
 			<c:set var="len" value="${fn:length(channelComments.tvshow.outline)}" />
 			<c:set var="content" value="${channelComments.tvshow.outline}" />
-			<c:if test ="${len > 300}">
-					<c:set var="content" value="${fn:substring(content,0,300)}" />
+			<c:if test="${len > 300}">
+				<c:set var="content" value="${fn:substring(content,0,300)}" />
 			</c:if>
-	
+
 			<tr>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;">故事梗概</td>
-				<td colspan="11" style="font-size:10pt;text-align: left;border-bottom-width: 0px;border-top-width: 0px;" >						
-					${content}
-				</td>
+				<td style="border-bottom-width: 0px; border-right-width: 0px;">故事梗概</td>
+				<td colspan="11"
+					style="font-size: 10pt; text-align: left; border-bottom-width: 0px; border-top-width: 0px;">
+					${content}</td>
 			</tr>
 
 			<tr>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;">节目中心推荐意见</td>
-				<td colspan="6" align="left" style="border-bottom-width: 0px;border-right-width: 0px;">
+				<td style="border-bottom-width: 0px; border-right-width: 0px;">节目中心推荐意见</td>
+				<td colspan="6" align="left"
+					style="border-bottom-width: 0px; border-right-width: 0px;">
 					<DIV class="rateit"
 						data-rateit-value="${deptCmt.recommendLevel.id}"
 						data-rateit-readonly="true" style="margin-bottom: 10px">
 						<SPAN></SPAN>
 					</DIV>
 				</td>
-				<td colspan="3" style="border-bottom-width: 0px;">
-				
-				</td>
+				<td colspan="3" style="border-bottom-width: 0px;"></td>
 			</tr>
 
 			<tr>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;">发行价格</td>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;">${prjCmt.publicPrice }</td>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;">推荐时间</td>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;"><fmt:formatDate value="${deptCmt.createDate }"
+				<td style="border-bottom-width: 0px; border-right-width: 0px;">发行价格</td>
+				<td style="border-bottom-width: 0px; border-right-width: 0px;">${prjCmt.publicPrice
+					}</td>
+				<td style="border-bottom-width: 0px; border-right-width: 0px;">推荐时间</td>
+				<td style="border-bottom-width: 0px; border-right-width: 0px;"><fmt:formatDate
+						value="${deptCmt.createDate }"
 						pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;">答复时间</td>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;"></td>
-				<td style="border-bottom-width: 0px;border-right-width: 0px;">备注</td>
+				<td style="border-bottom-width: 0px; border-right-width: 0px;">答复时间</td>
+				<td style="border-bottom-width: 0px; border-right-width: 0px;"><fmt:formatDate
+						value="${deptCmt.replyDate }"
+						pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+				<td style="border-bottom-width: 0px; border-right-width: 0px;">备注</td>
 				<td colspan="4" style="border-bottom-width: 0px;">${deptCmt.tvshow.comments}</td>
 			</tr>
 			<tr>
@@ -221,87 +267,107 @@ td {
 			-->
 		</c:if>
 		<c:if test="${channelComments.channel.type == 0}">
-			<br /><br />
+			<br />
+			<br />
 			<CAPTION>地面节目推荐意见表</CAPTION>
-			<br/>
+			<br />
 			<TR>
-				<TD width="100px" style="border-right-width: 0px;border-bottom-width: 0px;">剧 目</TD>
-				<TD style="width:160px;border-right-width: 0px;border-bottom-width: 0px;">${channelComments.tvshow.name}</TD>
-				<TD style="width:80px;border-right-width: 0px;border-bottom-width: 0px;">集数</TD>
-				<TD style="width:80px;border-right-width: 0px;border-bottom-width: 0px;" width="100px">${channelComments.tvshow.count}</TD>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">出品公司</td>
+				<TD width="100px"
+					style="border-right-width: 0px; border-bottom-width: 0px;">剧 目</TD>
+				<TD
+					style="width: 160px; border-right-width: 0px; border-bottom-width: 0px;">${channelComments.tvshow.name}</TD>
+				<TD
+					style="width: 80px; border-right-width: 0px; border-bottom-width: 0px;">集数</TD>
+				<TD
+					style="width: 80px; border-right-width: 0px; border-bottom-width: 0px;"
+					width="100px">${channelComments.tvshow.count}</TD>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">出品公司</td>
 				<td style="border-bottom-width: 0px;">${channelComments.tvshow.company.name}</td>
 			</TR>
 			<tr>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">导演</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;" colspan="1"><c:forEach
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">导演</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;"
+					colspan="1"><c:forEach
 						items="${channelComments.tvshow.directors}" var="p">
 								${p.name}
 					</c:forEach></td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">演员</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">演员</td>
 				<TD style="border-bottom-width: 0px;" colspan="3"><c:forEach
 						items="${channelComments.tvshow.actors}" var="p" varStatus="vs">
 						${p.name}
 					</c:forEach></TD>
 			</tr>
 			<tr>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">状态</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">状态</td>
 				<td style="border-bottom-width: 0px;" colspan="5">${channelComments.tvshow.status.name}</td>
 			</tr>
 
 			<tr>
-				<TD style="border-right-width: 0px;border-bottom-width: 0px;">发行计划</TD>
-				<TD style="border-bottom-width: 0px;" colspan="5">${prjCmt.publicSchdule }</TD>
+				<TD style="border-right-width: 0px; border-bottom-width: 0px;">发行计划</TD>
+				<TD style="border-bottom-width: 0px;" colspan="5">${prjCmt.publicSchdule
+					}</TD>
 			</tr>
 			<tr>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">发行价格</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">${prjCmt.publicPrice }</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">推荐时间</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;"><fmt:formatDate value="${deptCmt.createDate }"
-						pattern="${fn:escapeXml('yyyy/MM/dd')}" /></td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">答复时间</td>
-				<td style="border-bottom-width: 0px;"></td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">发行价格</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">${prjCmt.publicPrice
+					}</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">推荐时间</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;"><fmt:formatDate
+						value="${deptCmt.createDate }"
+						pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">答复时间</td>
+				<td style="border-bottom-width: 0px;"><fmt:formatDate
+						value="${deptCmt.replyDate }"
+						pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
 			</tr>
-			
+
 			<c:set var="len" value="${fn:length(channelComments.tvshow.outline)}" />
 			<c:set var="content" value="${channelComments.tvshow.outline}" />
-			<c:if test ="${len > 600}">
-					<c:set var="content" value="${fn:substring(content,0,600)}" />
+			<c:if test="${len > 600}">
+				<c:set var="content" value="${fn:substring(content,0,600)}" />
 			</c:if>
-			
+
 			<tr height="50px">
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">故事梗概</td>
-				<td style="text-align: left;border-bottom-width: 0px;" colspan="5">${content}</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">故事梗概</td>
+				<td style="text-align: left; border-bottom-width: 0px;" colspan="5">${content}</td>
 			</tr>
 			<tr>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">评估意见</td>
-				<td style="text-align: left;border-bottom-width: 0px;" colspan="5"></td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">评估意见</td>
+				<td style="text-align: left; border-bottom-width: 0px;" colspan="5"></td>
 			</tr>
 			<tr>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">中心意见</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;" colspan="2" width="500px">${channelComments.tvshow.comments}</td>
-				<td style="border-right-width: 0px;border-bottom-width: 0px;">签字</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">中心意见</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;"
+					colspan="2" width="500px">${channelComments.tvshow.comments}</td>
+				<td style="border-right-width: 0px; border-bottom-width: 0px;">签字</td>
 				<td style="border-bottom-width: 0px;" colspan="2"></td>
 			</tr>
 			<tr>
 				<td style="border-right-width: 0px;">频道意见</td>
-				<td style="width:130px;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;" colspan="2">
-					<table style="border: none;height:100px" >
-					<tr>
-						<td style="width:130px;border-top: none;border-left: none;border-right-width: 0px;border-bottom-width: 0px;">是否购买</td>
-						<td style="width:130px;border-top: none;border-right-width: 0px;border-bottom-width: 0px;"></td>
-										
-					</tr>
-					<tr>
-						<td style="width:130px;border-left: none;border-right-width: 0px;border-bottom-width: 0px;">价格区间</td>
-						<td style="width:130px;border-right-width: 0px;border-bottom-width: 0px;">${prjCmt.priceRange }</td>
-					</tr>
+				<td
+					style="width: 130px; padding-top: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px;"
+					colspan="2">
+					<table style="border: none; height: 100px">
+						<tr>
+							<td
+								style="width: 130px; border-top: none; border-left: none; border-right-width: 0px; border-bottom-width: 0px;">是否购买</td>
+							<td
+								style="width: 130px; border-top: none; border-right-width: 0px; border-bottom-width: 0px;"></td>
+
+						</tr>
+						<tr>
+							<td
+								style="width: 130px; border-left: none; border-right-width: 0px; border-bottom-width: 0px;">价格区间</td>
+							<td
+								style="width: 130px; border-right-width: 0px; border-bottom-width: 0px;">${prjCmt.priceRange
+								}</td>
+						</tr>
 					</table>
 				</td>
-				<td style="border-left-width: 0px;border-right-width: 0px;">签字</td>
+				<td style="border-left-width: 0px; border-right-width: 0px;">签字</td>
 				<td colspan="2"></td>
 			</tr>
-			
+
 		</c:if>
 
 	</TABLE>

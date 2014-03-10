@@ -64,6 +64,9 @@
 	padding-left: .5em;
 	vertical-align: top;
 }
+#_comments_id{
+	width: 450px;
+}
 </style>
 	<form:create label="中心推荐" isNormalBtn="true" id="fc_com_sx_tv_entites_DeptComments" modelAttribute="deptComments" path="/front/deptcommentses/create" render="${empty dependencies}"
 		z="9vmvIT2dU/pFZfPi5BT2TVHV+rA=">
@@ -84,6 +87,8 @@
 			items="${recommendclasses}" path="/recommendclasses" z="user-managed" />
 		<field:select label="推荐平台" field="recommendChannel" id="c_com_sx_tv_entites_DeptComments_recommendChannel" itemLabel="name" itemValue="id" items="${channels}"
 			path="/channels" z="user-managed" />
+		<field:datetime label="答复日期" dateTimePattern="yyyy-MM-dd" field="replyDate" id="c_com_sx_tv_entites_ChannelComments_replyDate"
+			z="AAeOiRusqQjkk6yvYyNvVnwJRiY=" />
 		<field:input label="备注" field="comments" id="c_com_sx_tv_entites_DeptComments_comments" z="ruEWpGDAGzVNOAIs+LiifDWba5E=" />
 	</form:create>
 	<div id="dialog-confirm-reject" title="淘汰此剧目?">
