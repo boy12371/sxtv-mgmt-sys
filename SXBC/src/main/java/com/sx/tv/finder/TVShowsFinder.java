@@ -61,7 +61,7 @@ public class TVShowsFinder {
 		}
 		sb.append(")as a ");
 		where = false;
-		if (tv.getCopyrightFrom() != null || tv.getCopyrightTo() != null) { // contract
+		if (tv.getCopyrightFrom() != null || tv.getCopyrightTo() != null || tv.getCtcInputDateEnd()!=null || tv.getCtcInputDateStart() != null) { // contract
 																			// query
 			sb.append("inner join tvcontract b on a.id = b.tvshow ");
 			where = false;
@@ -82,6 +82,33 @@ public class TVShowsFinder {
 				}
 
 			}
+			
+			if (tv.getCtcInputDateStart() != null) {
+				if (where) {
+					sb.append(" and b.input_date >= :ctcInput_date_start");
+					params.put("ctcInput_date_start", tv.getCtcInputDateStart());
+				} else {
+					sb.append(" where b.input_date >= :ctcInput_date_start");
+					params.put("ctcInput_date_start", tv.getCtcInputDateStart());
+					where = true;
+				}
+
+			}
+			
+			if (tv.getCtcInputDateEnd() != null) {
+				if (where) {
+					sb.append(" and b.input_date <= :ctcInput_date_end");
+					params.put("ctcInput_date_end", tv.getCtcInputDateEnd());
+				} else {
+					sb.append(" where b.input_date <= :ctcInput_date_end");
+					params.put("ctcInput_date_end", tv.getCtcInputDateEnd());
+					where = true;
+				}
+
+			}
+			
+			
+			
 		}
 
 		if (where) {
@@ -89,6 +116,11 @@ public class TVShowsFinder {
 		} else {
 			sb.append(" where a.removed = 0 ");
 		}
+		
+		if (tv.getForcePurchase() == 1) {
+			sb.append(" and a.force_purchase = 1");
+		}
+		
 		if (null != tv.getName() && !"".equals(tv.getName())) {
 			String tname = new String(tv.getName().getBytes("ISO-8859-1"),
 					"UTF-8");
@@ -142,8 +174,9 @@ public class TVShowsFinder {
 			params.put("input_dateEnd", tv.getInputDateEnd());
 		}
 
-		sb.append(" order by a." + orderby);
+		sb.append(" order by a." + orderby +" " + dir);
 		EntityManager em = TVShow.entityManager();
+		System.out.println(sb.toString());
 		Query query = em.createNativeQuery(sb.toString(), TVShow.class);
 		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
 			String key = it.next();
@@ -281,7 +314,7 @@ public class TVShowsFinder {
 		}
 		sb.append(")as a ");
 		where = false;
-		if (tv.getCopyrightFrom() != null || tv.getCopyrightTo() != null) { // contract
+		if (tv.getCopyrightFrom() != null || tv.getCopyrightTo() != null || tv.getCtcInputDateEnd()!=null || tv.getCtcInputDateStart() != null) { // contract
 																			// query
 			sb.append("inner join tvcontract b on a.id = b.tvshow ");
 
@@ -301,12 +334,41 @@ public class TVShowsFinder {
 				}
 
 			}
+
+			if (tv.getCtcInputDateStart() != null) {
+				if (where) {
+					sb.append(" and b.input_date >= :ctcInput_date_start");
+					params.put("ctcInput_date_start", tv.getCtcInputDateStart());
+				} else {
+					sb.append(" where b.input_date >= :ctcInput_date_start");
+					params.put("ctcInput_date_start", tv.getCtcInputDateStart());
+					where = true;
+				}
+
+			}
+			
+			if (tv.getCtcInputDateEnd() != null) {
+				if (where) {
+					sb.append(" and b.input_date <= :ctcInput_date_end");
+					params.put("ctcInput_date_end", tv.getCtcInputDateEnd());
+				} else {
+					sb.append(" where b.input_date <= :ctcInput_date_end");
+					params.put("ctcInput_date_end", tv.getCtcInputDateEnd());
+					where = true;
+				}
+
+			}
 		}
 		if (where) {
 			sb.append(" and a.removed = 0 ");
 		} else {
 			sb.append(" where a.removed = 0 ");
 		}
+		
+		if (tv.getForcePurchase() == 1) {
+			sb.append(" and a.force_purchase = 1");
+		}
+		
 		if (null != tv.getName() && !"".equals(tv.getName())) {
 			String tname = new String(tv.getName().getBytes("ISO-8859-1"),
 					"UTF-8");
@@ -360,6 +422,7 @@ public class TVShowsFinder {
 			params.put("input_dateEnd", tv.getInputDateEnd());
 		}
 
+		System.out.println(sb.toString());
 		EntityManager em = TVShow.entityManager();
 		Query query = em.createNativeQuery(sb.toString());
 		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {

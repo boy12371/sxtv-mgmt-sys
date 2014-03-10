@@ -654,9 +654,16 @@ public class ControllerTVShow {
 			int sizeNo = page.getRows() == 0 ? 10 : page.getRows();
 			final int firstResult = page == null ? 0 : (page.getPage() - 1)
 					* sizeNo;
-			List<TVShow> results = TVShowsFinder.findTVShows(stv, firstResult,
-					page.getRows(), page.getSidx(), page.getSord());
+			
 			long count = TVShowsFinder.countTVShows(stv);
+			
+			List<TVShow> results = new ArrayList<TVShow>();
+			if(count != 0){
+				results.addAll(TVShowsFinder.findTVShows(stv, firstResult,
+						page.getRows(), page.getSidx(), page.getSord()));	
+			}
+			
+			
 			jdt.setPage(page.getPage());
 			List<JsonData> rows = new ArrayList<JsonData>();
 

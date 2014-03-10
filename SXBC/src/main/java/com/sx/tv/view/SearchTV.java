@@ -85,6 +85,15 @@ public class SearchTV {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date inputDateEnd;
 
+	
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date ctcInputDateStart;
+
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date ctcInputDateEnd;
+	
+	private int forcePurchase = 0;
+	
 	public Channel getPlayChannel() {
 		return playChannel;
 	}
@@ -267,6 +276,30 @@ public class SearchTV {
 
 	public void setInputDateEnd(Date inputDateEnd) {
 		this.inputDateEnd = inputDateEnd;
+	}
+
+	public Date getCtcInputDateStart() {
+		return ctcInputDateStart;
+	}
+
+	public void setCtcInputDateStart(Date ctcInputDateStart) {
+		this.ctcInputDateStart = ctcInputDateStart;
+	}
+
+	public Date getCtcInputDateEnd() {
+		return ctcInputDateEnd;
+	}
+
+	public void setCtcInputDateEnd(Date ctcInputDateEnd) {
+		this.ctcInputDateEnd = ctcInputDateEnd;
+	}
+
+	public int getForcePurchase() {
+		return forcePurchase;
+	}
+
+	public void setForcePurchase(int forcePurchase) {
+		this.forcePurchase = forcePurchase;
 	}
 
 }
