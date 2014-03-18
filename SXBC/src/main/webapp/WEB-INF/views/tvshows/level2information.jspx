@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url value="/resources/js/tvshows/level2marketInformation.js"
+		var="information" />
+	<spring:url value="/resources/js/validateUtil.js" var="validate" />
+	<script src="${information}" type="text/javascript">
+		
+	</script>
+	<script src="${validate}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+	<style>
+tr:nth-child(even) {
+	background-color: #FFFFFF;
+}
+/*
+th {
+	border-bottom: 1px solid #AAA;
+}
+*/
+td {
+	font-size: 14px;
+	width: 200px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid;
+	border-bottom-color: #E9E3E3;
+}
+
+h1 {
+	background: #648c1d;
+	color: white"
+}
+
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+
+#div_tvcontract label {
+	width: 170px;
+}
+
+.rowcontainer label {
+	color: #666
+}
+
+.dijitPopup .dijitCalendarPopup {
+	z-index: 1002;
+}
+
+#div_basicInfo table td {
+	text-align: left;
+}
+
+#contractTable label {
+	color: #666;
+}
+</style>
+
+	<INPUT type="hidden" value="${itemId}" id="itemId" />
+	<DIV id="basicInfoDiv" style="padding: 0px;">
+		<ul>
+			<li><a href="#div_basicInfo">基本信息</a></li>
+			<c:if test="${not empty contract}">
+				<li><a href="#div_tvcontract">合同</a></li>
+			</c:if>
+		</ul>
+		<DIV id="div_basicInfo">
+			<table>
+				<tr>
+					<td style="width: 15%; color: #666">剧名</td>
+					<td style="width: 25%">${tvshow_.name}</td>
+					<td style="width: 15%; color: #666">集数</td>
+					<td><spring:eval expression="tvshow_['count']" /></td>
+				</tr>
+				<tr>
+					<td style="color: #666">影视公司</td>
+					<td><spring:eval expression="tvshow_['company']['name']" /></td>
+					<td style="color: #666">题材</td>
+					<td><spring:eval expression="tvshow_['theme']" /></td>
+				</tr>
+				<tr>
+					<td style="color: #666">状态</td>
+					<td><spring:eval expression="tvshow_['status']['name']" /> <c:if
+							test="${(tvshow_.status.id == 8) or (tvshow_.status.id == 9) or (tvshow_.status.id == 10) or (tvshow_.status.id == 11)}">
+					(<spring:eval expression="tvshow_['comments']" />)
+					</c:if></td>
+					<td style="color: #666">录入时间</td>
+					<td colspan="3"><fmt:formatDate value="${tvshow_.inputDate}"
+							pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+				</tr>
+				<tr>
+					<td style="color: #666">项目负责人</td>
+					<td>${tvshow_.projector.staff}</td>
+					<td style="color: #666">演员</td>
+					<td><c:if test="${not empty tvshow_.actors}">
+							<c:forEach items="${tvshow_.actors}" var="p">
+								${p.name}  
+							</c:forEach>
+						</c:if></td>
+				</tr>
+				<tr>
+					<td style="color: #666">导演</td>
+					<td><c:if test="${not empty tvshow_.directors}">
+							<c:forEach items="${tvshow_.directors}" var="p">
+						${p.name} 
+							</c:forEach>
+						</c:if></td>
+					<td style="color: #666">编剧</td>
+					<td><c:if test="${not empty tvshow_.screenwriters}">
+							<c:forEach items="${tvshow_.screenwriters}" var="p">
+						${p.name} 
+						</c:forEach>
+
+						</c:if></td>
+				</tr>
+				<tr>
+					<td style="color: #666">发行人员</td>
+					<td><c:if test="${not empty tvshow_.publisher}">
+							<c:forEach items="${tvshow_.publisher}" var="p">
+						${p.name} 
+							</c:forEach>
+						</c:if></td>
+					<td style="color: #666">项目进度</td>
+					<td>${tvshow_.progress.name}</td>
+				</tr>
+				<tr>
+					<td style="color: #666">播出日期</td>
+					<td colspan="3"><fmt:formatDate value="${tvshow_.playDate}"
+							pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+				</tr>
+				<c:if test="${not empty contract}">
+					<tr>
+						<td style="color: #666">版权期限开始</td>
+
+						<td><fmt:formatDate value="${contract.copyrightStart}"
+								pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+						<td style="color: #666">版权期限终止</td>
+						<td><fmt:formatDate value="${contract.copyrightEnd}"
+								pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+					</tr>
+					<tr>
+						<td style="color: #666">备注</td>
+						<td style="color: #666">${contract.comments}</td>
+						<td style="color: #666">版权信息</td>
+						<td> 自
+						<c:if test="${contract.extension == 0}">
+								入库之日
+							</c:if>
+						<c:if test="${contract.extension == 1}">
+								播出之日
+							</c:if>
+						<c:if test="${contract.extension == 2}">
+								上星之日
+							</c:if>
+						起
+						<c:if test="${contract.exYears == 1}">
+								1
+							</c:if>
+						<c:if test="${contract.exYears == 2}">
+								2
+							</c:if>
+						<c:if test="${contract.exYears == 3}">
+								3
+							</c:if>
+						<c:if test="${contract.exYears == 4}">
+								4
+							</c:if>
+						<c:if test="${contract.exYears == 5}">
+								5
+							</c:if>
+						<c:if test="${contract.exYears == 50}">
+								无限期
+							</c:if>
+						年
+						</td>
+					</tr>
+				</c:if>
+				<tr>
+					<td style="color: #666">故事梗概</td>
+					<td colspan="3"><spring:eval expression="tvshow_['outline']" /></td>
+				</tr>
+				<c:if
+					test="${tvshow_.status.id == 5 || tvshow_.status.id == 13 || tvshow_.status.id == 15 || tvshow_.status.id == 17}">
+					<tr>
+						<td style="color: #666">播出日期</td>
+						<td colspan="3"><INPUT id="_playDate_id" type="text" /></td>
+					</tr>
+				</c:if>
+
+			</table>
+
+			<br /> <br />
+
+			<c:set scope="page" var="round" value="2" />
+			<c:if test="${not empty playInfos}">
+				<c:set scope="page" var="round" value="${fn:length(playInfos) + 2 }" />
+				<util:panel openPane="true" title="二轮市场播出及交易信息" id="playInfosPanel">
+					<table id="excelTable">
+						<tr>
+							<td>版权期限(起始)</td>
+							<td>版权期限(终止)</td>
+							<td>播出日期</td>
+							<td>单集价格</td>
+							<td>交易频道</td>
+							<td>轮次</td>
+							<td></td>
+						</tr>
+						<c:forEach items="${playInfos}" var="pd">
+							<tr>
+								<td><fmt:formatDate value="${pd.reservedFrom}"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+								<td><fmt:formatDate value="${pd.reservedTo}"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+								<td><fmt:formatDate value="${pd.playDate}"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+								<td>${pd.price}</td>
+								<td>${pd.playChannel.name}</td>
+								<td>${pd.round}</td>
+								<td>
+								<a style="color:#7DB223" href="/SXBC/tvshows/${tvshow_.id}/${pd.id}/toUpdatePlayInfo4Level2">修改</a>
+								|
+								<a class="delete" style="color:#7DB223" href="/SXBC/tvshows/${tvshow_.id}/${pd.id}/deletePlayInfo4Level2">删除</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</util:panel>
+			</c:if>
+
+			<c:if test="${not empty playData}">
+				<util:panel openPane="false" title="播出环境" id="playDataPanel">
+					<table id="excelTable">
+						<tr>
+							<td>频道</td>
+							<td>剧名</td>
+							<td>播出时间</td>
+							<td>收视率</td>
+							<td>收视份额</td>
+						</tr>
+						<c:forEach items="${playData}" var="pd">
+							<tr>
+								<td>${pd.playChannel }</td>
+								<td>${pd.playName }</td>
+								<td>${pd.playDate }</td>
+								<td>${pd.playRate }</td>
+								<td>${pd.playShare }</td>
+							</tr>
+						</c:forEach>
+
+					</table>
+				</util:panel>
+			</c:if>
+
+			<c:if test="${tvshow_.status.id == 5}">
+				<c:set scope="page" value="6" var="state"></c:set>
+			</c:if>
+			<c:if test="${tvshow_.status.id == 13}">
+				<c:set scope="page" value="14" var="state"></c:set>
+			</c:if>
+			<c:if test="${tvshow_.status.id == 15}">
+				<c:set scope="page" value="16" var="state"></c:set>
+			</c:if>
+			<c:if test="${tvshow_.status.id == 17}">
+				<c:set scope="page" value="18" var="state"></c:set>
+			</c:if>
+			<c:if
+				test="${tvshow_.status.id == 5 || tvshow_.status.id == 13 || tvshow_.status.id == 15 || tvshow_.status.id == 17}">
+				<div
+					style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+					<!-- 
+					<a id="contractTerminated">终止合同</a> 
+					-->
+					<a id="updateStatus" onclick="return false;"
+						href="/SXBC/tvshows/${itemId}/updateStatusByPlayDate?status=${state}">更改状态为
+						已播 </a>
+				</div>
+				<div id="dialog-updateStatus" title="更新剧目状态">您确认要更改此剧目的状态为已播吗？</div>
+				<div id="dialog-contractTerminated" title="终止合同?">
+					<p class="validateTips">原因</p>
+					<input id="contractTerminatedText" type="text" style="width: 20em;"
+						class="text ui-widget-content ui-corner-all" />
+				</div>
+			</c:if>
+			<c:if
+				test="${tvshow_.status.id == 6 || tvshow_.status.id == 14 || tvshow_.status.id == 16 || tvshow_.status.id == 18}">
+				<div
+					style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+					<a id="tvshowData"
+						href="/SXBC/tvshowdatas/${itemId}?form&amp;level=level2market">更新收视数据</a>
+					<a id="updateStatusFinish" href="#">更改状态为 结束 </a>
+					<c:if test="${not empty contract}">
+						<a id="addLevel2PlayInfo"
+							href="/SXBC/tvshows/${itemId}/toAddPlayInfo4Level2?round=${round}">添加
+							${round} 轮交易信息</a>
+					</c:if>
+				</div>
+				<div id="dialog-updateStatusFinish" title="结束?">您确认要更改此剧目的状态为结束吗？</div>
+			</c:if>
+		</DIV>
+
+		<c:if test="${not empty contract}">
+			<div id="div_tvcontract">
+				<table style="width: 100%" id="contractTable">
+					<tr>
+						<td style="width: 330px">
+							<div id="_c_com_sx_tv_entites_TVContract_owner_id">
+								<label for="_owner_id">合同负责人 : </label>
+								<div id="_c_com_sx_tv_entites_TVContract_owner_owner_id"
+									class="box">${contract.ownedby}</div>
+								<br />
+							</div>
+						</td>
+						<td style="width: 330px"><field:display label="频道"
+								object="${contract.channel}" field="name"
+								id="c_com_sx_tv_entites_TVContract_channel"
+								z="MV5LzzGaDcWPZH1EADLi8ygSIEQ=" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" field="publishForm"
+								id="c_com_sx_tv_entites_TVContract_publishForm" label="发行方式"
+								z="user-managed" /></td>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="showDate"
+								id="c_com_sx_tv_entites_TVContract_showDate" label="上星时间"
+								z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" field="totalPrice"
+								id="c_com_sx_tv_entites_TVContract_totalPrice" label="总价"
+								z="user-managed" /></td>
+						<td><field:display object="${contract}" field="extraFee"
+								id="c_com_sx_tv_entites_TVContract_extraFee" label="单价及三费"
+								z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="recieveDate"
+								id="c_com_sx_tv_entites_TVContract_recieveDate" label="合同接收时间"
+								z="user-managed" /></td>
+						<td><field:display object="${contract}" field="recieveOwner"
+								id="c_com_sx_tv_entites_TVContract_recieveOwner" label="接收经手人"
+								z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="inputDate"
+								id="c_com_sx_tv_entites_TVContract_inputDate" label="合同录入时间"
+								z="user-managed" /></td>
+						<td><field:display object="${contract}" field="inputter"
+								id="c_com_sx_tv_entites_TVContract_inputter" label="录入经手人"
+								z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="fileDate"
+								id="c_com_sx_tv_entites_TVContract_fileDate" label="合同归档时间"
+								z="user-managed" /></td>
+						<td><field:display object="${contract}" field="fileBy"
+								id="c_com_sx_tv_entites_TVContract_fileBy" label="归档经手人"
+								z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="recieveAgreementDate"
+								id="c_com_sx_tv_entites_TVContract_recieveAgreementDate"
+								label="补充协议接收时间" z="user-managed" /></td>
+						<td><field:display object="${contract}"
+								field="recieveAgreementOwner"
+								id="c_com_sx_tv_entites_TVContract_recieveAgreementOwner"
+								label="协议接收经手人" z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="inputAgreementDate"
+								id="c_com_sx_tv_entites_TVContract_inputAgreementDate"
+								label="补充协议录入时间" z="user-managed" /></td>
+						<td><field:display object="${contract}"
+								field="inputterAgreement"
+								id="c_com_sx_tv_entites_TVContract_inputterAgreement"
+								label="协议录入经手人" z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="fileAgreementDate"
+								id="c_com_sx_tv_entites_TVContract_fileAgreementDate"
+								label="补充协议归档时间" z="user-managed" /></td>
+						<td><field:display object="${contract}"
+								field="fileByAgreement"
+								id="c_com_sx_tv_entites_TVContract_fileByAgreement"
+								label="协议归档经手人" z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="copyrightStart"
+								id="c_com_sx_tv_entites_TVContract_copyrightStart"
+								label="版权期限开始时间" z="user-managed" /></td>
+						<td><field:display object="${contract}" date="true"
+								dateTimePattern="yyyy-MM-dd" field="copyrightEnd"
+								id="c_com_sx_tv_entites_TVContract_copyrightEnd"
+								label="版权期限终止时间" z="user-managed" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" field="contractNo"
+								id="c_com_sx_tv_entites_TVContract_contractNo" label="合同号"
+								z="user-managed" /></td>
+						<td><field:display object="${contract.channel}" field="name"
+								id="c_com_sx_tv_entites_TVContract_channel"
+								z="MV5LzzGaDcWPZH1EADLi8ygSIEQ=" /></td>
+					</tr>
+					<tr>
+						<td><field:display object="${contract}" field="price"
+								id="c_com_sx_tv_entites_TVContract_extraFee" label="单价"
+								z="user-managed" /></td>
+						<td></td>
+					</tr>
+				</table>
+
+				<br /> <br />
+				<util:panel openPane="true" title="付款详情" id="paymentPanel">
+					<c:if test="${not empty contractPayments}">
+						<table>
+							<tr>
+								<td
+									style="text-align: center; background-color: #EFEFEF; color: #666; font-weight: normal"></td>
+								<td
+									style="text-align: center; background-color: #EFEFEF; color: #666; font-weight: normal">付款金额：</td>
+								<td
+									style="text-align: center; background-color: #EFEFEF; color: #666; font-weight: normal">发票张数</td>
+								<td
+									style="text-align: center; background-color: #EFEFEF; color: #666; font-weight: normal">付款日期</td>
+								<td
+									style="text-align: center; background-color: #EFEFEF; color: #666; font-weight: normal">打款人</td>
+								<td
+									style="text-align: center; background-color: #EFEFEF; color: #666; font-weight: normal">收款日期</td>
+								<td
+									style="text-align: center; background-color: #EFEFEF; color: #666; font-weight: normal">收款人</td>
+							</tr>
+							<c:forEach items="${contractPayments}" var="cp" varStatus="vs">
+								<tr>
+									<td>第${vs.index+1}次打款</td>
+									<td>${cp.amount}</td>
+									<td>${cp.invoiceCount}</td>
+									<td><fmt:formatDate value="${cp.payDate}"
+											pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+									<td>${cp.payBy}</td>
+									<td><fmt:formatDate value="${cp.reciveDate}"
+											pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+									<td>${cp.reciveBy}</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</c:if>
+					<c:if test="${empty contractPayments}">
+					暂无付款信息.
+				</c:if>
+				</util:panel>
+			</div>
+		</c:if>
+	</DIV>
+</div>

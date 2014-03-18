@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="successPng" value="/resources/images/success.png" />
+	<spring:url var="errorPng" value="/resources/images/error.png" />
+	<spring:url value="/resources/js/validateUtil.js" var="validate" />
+	<script src="${validate}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+
+	<script type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		$(document).ready(function() {
+
+			Spring.addDecoration(new Spring.ElementDecoration({
+				elementId : 'reservedFrom',
+				widgetType : 'dijit.form.DateTextBox',
+				widgetAttrs : {
+					promptMessage : '选择日期',
+					invalidMessage : '日期错误',
+					required : true,
+					constraints : {
+						datePattern : 'yyyy-MM-dd',
+						required : true
+					},
+					readOnly : false,
+					datePattern : 'yyyy-MM-dd'
+				}
+			}));
+			<c:if test="${isupdate}">
+			Spring.addDecoration(new Spring.ElementDecoration({
+				elementId : 'playDate',
+				widgetType : 'dijit.form.DateTextBox',
+				widgetAttrs : {
+					promptMessage : '选择日期',
+					invalidMessage : '日期错误',
+					required : true,
+					constraints : {
+						datePattern : 'yyyy-M-d',
+						required : true
+					},
+					readOnly : false,
+					datePattern : 'yyyy-M-d'
+				}
+			}));
+
+			Spring.addDecoration(new Spring.ElementDecoration({
+				elementId : 'reservedTo',
+				widgetType : 'dijit.form.DateTextBox',
+				widgetAttrs : {
+					promptMessage : '选择日期',
+					invalidMessage : '日期错误',
+					required : true,
+					constraints : {
+						datePattern : 'yyyy-MM-dd',
+						required : true
+					},
+					readOnly : false,
+					datePattern : 'yyyy-MM-dd'
+				}
+			}));
+			</c:if>
+
+			$("#submitBtn").button();
+
+			$("#playInfoAddForm").submit(function() {
+
+				var _price = $("#price").val();
+				if (isNaN(_price) || _price == "") {
+					$("#price").addClass("ui-state-error").val("请填写数字").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					return false;
+				}
+
+				var _reservedFrom = $("#reservedFrom").val();
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(_reservedFrom)) {
+					$("#reservedFrom").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					return false;
+				}
+
+				<c:if test="${isupdate}">
+				var _reservedTo = $("#reservedTo").val();
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(_reservedTo)) {
+					$("#reservedTo").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					return false;
+				}
+				var xx = _reservedFrom.split("-");
+				var a = new Date();
+				a.setFullYear(xx[0], xx[1] - 1, xx[2]);
+				xx = [];
+				xx = _reservedTo.split("-");
+				var b = new Date();
+				b.setFullYear(xx[0], xx[1] - 1, xx[2]);
+				if (a >= b) {
+					$("#reservedFrom").addClass("ui-state-error").val("起始日期必须早于终止日期").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					return false;
+				}
+				</c:if>
+				/* var _playDate = $("#playDate").val();
+				if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(_playDate)) {
+					$("#playDate").addClass("ui-state-error").val("日期格式错误").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					return false;
+				} */
+
+				if ($("input[name=playChannel]").val() == 0) {
+					$("#_playChannel_id").addClass("ui-state-error").val("请选择").focus(function() {
+						$(this).removeClass("ui-state-error").val("");
+					});
+					return false;
+				}
+
+			});
+
+		});
+	</script>
+	<style>
+.error {
+	float: none;
+	color: #D8000C;
+	padding-left: .5em;
+	vertical-align: top;
+}
+
+div.info,div.success,div.warning,div.error {
+	border: 1px solid;
+	margin: 10px 0px;
+	padding: 10px 10px 10px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+
+div.success {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image: url('${successPng}');
+}
+
+div.error {
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('${errorPng}');
+}
+
+label {
+	width: 150px;
+}
+</style>
+	<c:set var="actionURL" value="./doAddPlayInfo4Level2"></c:set>
+	<c:set var="stitle" value="添加"></c:set>
+	<c:if test="${isupdate}">
+		<c:set var="actionURL" value="./doUpdatePlayInfo4Level2"></c:set>
+		<c:set var="stitle" value="修改"></c:set>
+	</c:if>
+
+	<util:panel openPane="true" title="${stitle}交易信息" id="playinfoPanel">
+		<div title="${stitle}交易信息">
+			<form:form id="playInfoAddForm" action="${actionURL}"
+				modelAttribute="playInfo" method="post">
+				<c:if test="${isupdate}">
+					<input type="hidden" name="id" value="${playInfo.id }" />
+				</c:if>
+				<input type="hidden" name="tvshow" value="${tvshow.id }" />
+				<input type="hidden" name="round" value="${round }" />
+				<label for="name">剧名</label>
+				${tvshow.name}
+				<br />
+				<br />
+				<label for="publisher">集数</label>
+				${tvshow.count}
+				<br />
+				<br />
+				<label for="publisher">轮次</label>
+				${round} 轮
+				<br />
+				<br />
+				<label for="price">单集价格</label>
+				<c:if test="${isupdate}">
+					<form:input path="price" id="price" />
+				</c:if>
+				<c:if test="${!isupdate}">
+					<c:if test="${not empty contract}">
+						<c:if test="${contract.channel.type == 0}">
+							<c:choose>
+								<c:when test="${round == 3}">
+									<input name="price" id="price" type="TEXT"
+										value="${contract.price * 0.1}"
+										class="text ui-widget-content ui-corner-all" />(${contract.price} * 10%)
+							</c:when>
+								<c:when test="${round >= 4}">
+									<input name="price" id="price" type="TEXT"
+										value="${contract.price * 0.05}"
+										class="text ui-widget-content ui-corner-all" />(${contract.price} * 5%)
+							</c:when>
+								<c:otherwise>
+									<input name="price" id="price" type="TEXT"
+										value="${contract.price * 0.15}"
+										class="text ui-widget-content ui-corner-all" />(${contract.price} * 15%)	
+							</c:otherwise>
+							</c:choose>
+						</c:if>
+						<c:if test="${contract.channel.type == 1}">
+							<c:choose>
+								<c:when test="${round >= 3}">
+									<input name="price" id="price" type="TEXT" value="5000"
+										class="text ui-widget-content ui-corner-all" />
+								</c:when>
+								<c:otherwise>
+									<input name="price" id="price" type="TEXT" value="10000"
+										class="text ui-widget-content ui-corner-all" />
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+					</c:if>
+				</c:if>
+
+				<br />
+				<br />
+				<c:if test="${isupdate}">
+					<label>交易平台</label>
+					<form:select path="playChannel" items="${channels}"
+						itemLabel="name" itemValue="id"></form:select>
+				</c:if>
+				<c:if test="${!isupdate}">
+					<label>首购频道</label>
+					<c:if test="${not empty contract}"> ${contract.channel.name}</c:if>
+				</c:if>
+
+				<br />
+				<br />
+				<label for="reservedFrom">版权期限(起始)</label>
+				<form:input path="reservedFrom" id="reservedFrom" />
+				<br />
+				<br />
+				<c:if test="${isupdate}">
+					<label for="reservedTo">版权期限(终止)</label>
+					<form:input path="reservedTo" id="reservedTo" />
+					<br />
+					<br />
+				</c:if>
+
+				<c:if
+					test="${isupdate and (tvshow.status.id == 6 or tvshow.status.id == 16 or tvshow.status.id == 18)}">
+					<label for="playDate">播出日期</label>
+					<form:input path="playDate" id="playDate" />
+					<br />
+					<br />
+				</c:if>
+				<c:if test="${!isupdate}">
+					<field:select label="交易频道" field="playChannel"
+						id="c_com_sx_tv_entites_DeptComments_recommendChannel"
+						itemLabel="name" itemValue="id" items="${channels}"
+						path="/channels" z="user-managed" />
+				</c:if>
+
+				<input type="submit" id="submitBtn" value="提交" style="heigth: 15px;" />
+
+			</form:form>
+		</div>
+	</util:panel>
+</div>

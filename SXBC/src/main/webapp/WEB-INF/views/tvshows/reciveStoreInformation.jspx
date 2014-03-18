@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url value="/resources/js/tvshows/reciveStoreInformation.js"
+		var="information" />
+	<spring:url value="/resources/js/validateUtil.js" var="validate" />
+	<script src="${information}" type="text/javascript">
+		
+	</script>
+	<script src="${validate}" type="text/javascript">
+	<!-- required for FF3 and Opera -->
+		
+	</script>
+	<script type="text/javascript">
+		var fields = [];
+	</script>
+	<style>
+tr:nth-child(even) {
+	background-color: #FFFFFF;
+}
+/*
+th {
+	border-bottom: 1px solid #AAA;
+}
+*/
+td {
+	font-size: 14px;
+	width: 200px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid;
+	border-bottom-color: #E9E3E3;
+}
+
+h1 {
+	background: #648c1d;
+	color: white"
+}
+
+.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+
+#div_tvcontract label {
+	width: 170px;
+}
+
+.rowcontainer label {
+	color: #666
+}
+
+.dijitPopup .dijitCalendarPopup {
+	z-index: 1002;
+}
+
+#div_basicInfo table td {
+	text-align: left;
+}
+
+#contractTable label {
+	color: #666;
+}
+</style>
+
+	<INPUT type="hidden" value="${itemId}" id="itemId" /> <INPUT
+		type="hidden" value="${contract.extension}" id="tvctExtension" /> <INPUT
+		type="hidden" value="${contract.exYears}" id="tvctexYears" />
+	<DIV id="basicInfoDiv" style="padding: 0px;">
+		<ul>
+			<li><a href="#div_basicInfo">基本信息</a></li>
+		</ul>
+		<DIV id="div_basicInfo">
+			<table>
+				<tr>
+					<td style="width: 15%; color: #666">剧名</td>
+					<td style="width: 25%">${tvshow_.name}</td>
+					<td style="width: 15%; color: #666">集数</td>
+					<td><spring:eval expression="tvshow_['count']" /></td>
+				</tr>
+				<tr>
+					<td style="color: #666">影视公司</td>
+					<td><spring:eval expression="tvshow_['company']['name']" /></td>
+					<td style="color: #666">题材</td>
+					<td><spring:eval expression="tvshow_['theme']" /></td>
+				</tr>
+				<tr>
+					<td style="color: #666">状态</td>
+					<td><spring:eval expression="tvshow_['status']['name']" /> <c:if
+							test="${(tvshow_.status.id == 8) or (tvshow_.status.id == 9) or (tvshow_.status.id == 10) or (tvshow_.status.id == 11)}">
+					(<spring:eval expression="tvshow_['comments']" />)
+					</c:if></td>
+					<td style="color: #666">录入时间</td>
+					<td colspan="3"><fmt:formatDate value="${tvshow_.inputDate}"
+							pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+				</tr>
+				<tr>
+					<td style="color: #666">项目负责人</td>
+					<td>${tvshow_.projector.staff}</td>
+					<td style="color: #666">演员</td>
+					<td><c:if test="${not empty tvshow_.actors}">
+							<c:forEach items="${tvshow_.actors}" var="p">
+								${p.name}  
+							</c:forEach>
+						</c:if></td>
+				</tr>
+				<tr>
+					<td style="color: #666">导演</td>
+					<td><c:if test="${not empty tvshow_.directors}">
+							<c:forEach items="${tvshow_.directors}" var="p">
+						${p.name} 
+							</c:forEach>
+						</c:if></td>
+					<td style="color: #666">编剧</td>
+					<td><c:if test="${not empty tvshow_.screenwriters}">
+							<c:forEach items="${tvshow_.screenwriters}" var="p">
+						${p.name} 
+						</c:forEach>
+
+						</c:if></td>
+				</tr>
+				<tr>
+					<td style="color: #666">发行人员</td>
+					<td><c:if test="${not empty tvshow_.publisher}">
+							<c:forEach items="${tvshow_.publisher}" var="p">
+						${p.name} 
+							</c:forEach>
+						</c:if></td>
+					<td style="color: #666">项目进度</td>
+					<td>${tvshow_.progress.name}</td>
+				</tr>
+				<tr>
+					<td style="color: #666">播出日期</td>
+					<td colspan="3"><fmt:formatDate value="${tvshow_.playDate}"
+							pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+				</tr>
+
+				<c:if test="${not empty contract}">
+										<tr>
+						<td style="color: #666">版权期限开始</td>
+
+						<td><fmt:formatDate value="${contract.copyrightStart}"
+								pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+						<td style="color: #666">版权期限终止</td>
+						<td><fmt:formatDate value="${contract.copyrightEnd}"
+								pattern="${fn:escapeXml('yyyy-MM-dd')}" /></td>
+					</tr>
+					<tr>
+						<td style="color: #666">备注</td>
+						<td style="color: #666">${contract.comments}</td>
+						<td style="color: #666">版权信息</td>
+						<td> 自
+						<c:if test="${contract.extension == 0}">
+								入库之日
+							</c:if>
+						<c:if test="${contract.extension == 1}">
+								播出之日
+							</c:if>
+						<c:if test="${contract.extension == 2}">
+								上星之日
+							</c:if>
+						起
+						<c:if test="${contract.exYears == 1}">
+								1
+							</c:if>
+						<c:if test="${contract.exYears == 2}">
+								2
+							</c:if>
+						<c:if test="${contract.exYears == 3}">
+								3
+							</c:if>
+						<c:if test="${contract.exYears == 4}">
+								4
+							</c:if>
+						<c:if test="${contract.exYears == 5}">
+								5
+							</c:if>
+						<c:if test="${contract.exYears == 50}">
+								无限期
+							</c:if>
+						年
+						</td>
+					</tr>
+				</c:if>
+				<tr>
+					<td style="color: #666">故事梗概</td>
+					<td colspan="3"><spring:eval expression="tvshow_['outline']" /></td>
+				</tr>
+				<c:set var="flag" value="false" scope="page"></c:set>
+				<c:if test="${not empty contract}">
+					<c:if test="${contract.exYears != 50}">
+						<tr>
+							<td style="color: #666">入库日期</td>
+							<td colspan="3"><c:if test="${empty contract.tapeStoreDate}">
+									<c:if test="${contract.extension == 0}">
+										<INPUT id="_tapeStoreDate_id" type="text" name="sdate"
+											value="${contract.tapeStoreDate}" />
+										<font color="red">*</font>
+										<script type="text/javascript">
+											fields[fields.length] = {
+												element : '_tapeStoreDate_id',
+												required : true
+											};
+										</script>
+									</c:if>
+									<c:if test="${contract.extension != 0}">
+										<INPUT id="_tapeStoreDate_id" type="text" name="sdate"
+											value="${contract.tapeStoreDate}" />
+										<script type="text/javascript">
+											fields[fields.length] = {
+												element : '_tapeStoreDate_id',
+												required : false
+											};
+										</script>
+									</c:if>
+									<c:set var="flag" value="true" scope="page"></c:set>
+								</c:if> <c:if test="${not empty contract.tapeStoreDate}">
+									<fmt:formatDate value="${contract.tapeStoreDate}"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" />
+								</c:if></td>
+						</tr>
+						<tr>
+							<td style="color: #666">母带接收日期</td>
+							<td colspan="3"><c:if test="${empty contract.recieveDate}">
+									<c:if test="${contract.extension == 1}">
+										<INPUT id="_tapeReciveDate_id" type="text" name="rdate"
+											value="${contract.recieveDate}" />
+										<font color="red">*</font>
+										<script type="text/javascript">
+											fields[fields.length] = {
+												element : '_tapeReciveDate_id',
+												required : true
+											};
+										</script>
+									</c:if>
+									<c:if test="${contract.extension != 1}">
+										<INPUT id="_tapeReciveDate_id" type="text" name="rdate"
+											value="${contract.recieveDate}" />
+										<script type="text/javascript">
+											fields[fields.length] = {
+												element : '_tapeReciveDate_id',
+												required : false
+											};
+										</script>
+									</c:if>
+									<c:set var="flag" value="true" scope="page"></c:set>
+								</c:if> <c:if test="${not empty contract.recieveDate}">
+									<fmt:formatDate value="${contract.recieveDate}"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" />
+								</c:if></td>
+						</tr>
+						<tr>
+							<td style="color: #666">上星日期</td>
+							<td colspan="3"><c:if test="${empty contract.showDate}">
+									<c:if test="${contract.extension == 2}">
+										<INPUT id="_showDate_id" type="text" name="wdate"
+											value="${contract.showDate}" />
+										<font color="red">*</font>
+										<script type="text/javascript">
+											fields[fields.length] = {
+												element : '_showDate_id',
+												required : true
+											};
+										</script>
+									</c:if>
+									<c:if test="${contract.extension != 2}">
+										<INPUT id="_showDate_id" type="text" name="wdate"
+											value="${contract.showDate}" />
+										<script type="text/javascript">
+											fields[fields.length] = {
+												element : '_showDate_id',
+												required : false
+											};
+										</script>
+									</c:if>
+									<c:set var="flag" value="true" scope="page"></c:set>
+								</c:if> <c:if test="${not empty contract.showDate}">
+									<fmt:formatDate value="${contract.showDate}"
+										pattern="${fn:escapeXml('yyyy-MM-dd')}" />
+								</c:if></td>
+						</tr>
+					</c:if>
+				</c:if>
+			</table>
+			<c:if test="${not empty contract}">
+				<c:if test="${flag == false}">
+					<div
+						style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+						<a id="goback" href="/SXBC/tvshows/findReciveStore?status=5">确定</a>
+					</div>
+					<script type="text/javascript">
+						$("#goback").button();
+					</script>
+				</c:if>
+				<c:if test="${flag == true}">
+					<c:if test="${contract.exYears != 50}">
+						<div
+							style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
+							<a id="updateStatus" onclick="return false;"
+								href="/SXBC/front/tvcontracts/${itemId}/${contract.id}/updateDate?">确定</a>
+						</div>
+					</c:if>
+				</c:if>
+			</c:if>
+		</DIV>
+
+	</DIV>
+</div>
