@@ -94,12 +94,10 @@ function closeAction(){
 	window.close();
 }
 
-var selDate="${selDate}";
-if("" != selDate){
-	var date = selDate.split("-");
-	var hObj = document.getElementById("title");
-	hObj.innerHTML= date[0]+"年"+date[1]+"月员工准确度";
-}
+var start='${startDate}';
+var end='${endDate}';
+var hObj = document.getElementById("title");
+hObj.innerHTML= "员工准确度:  从" + start + "   至" + end ;
 initAccuracyTable();
 </script>
 

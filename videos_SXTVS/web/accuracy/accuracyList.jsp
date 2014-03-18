@@ -43,11 +43,8 @@
 <table class="searchTable">
 	<tr>
 		<td><label>选择查询年月：</label></td>
-		<td><s:select id="selectYear" list="years" value="defYear" cssClass="selectField" cssStyle="width:150px;margin:0px;"/></td>
-		<td><s:select id="selectMonth" 
-			list="#{'01':'1月','02':'2月','03':'3月','04':'4月','05':'5月','06':'6月','07':'7月','08':'8月','09':'9月','10':'10月','11':'11月','12':'12月'}"
-			value="defMonth" 
-			cssClass="selectField" cssStyle="width:150px;margin:0px;"/>
+		<td>从<sx:datetimepicker name="startDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="startDate" value="%{'today'}" language="UTF-8" weekStartsOn="0"/></td>
+		<td>至<sx:datetimepicker name="endDate" displayFormat="yyyy-MM-dd" toggleType="explode" id="endDate" value="%{'today'}" language="UTF-8" weekStartsOn="0"/>
 		</td>
 		<td>
 			<div id="searchBtnDiv"></div>
@@ -62,29 +59,7 @@
 <div id="accuracyTableDiv" align="center"></div>
 
 <script language="JavaScript">
-var searchBtn = new YAHOO.widget.Button({  
-		label: "查&nbsp;&nbsp;询",  
-		id: "searchBtn",  
-		container: "searchBtnDiv" }
-		); 
-
-searchBtn.on("click",filterFunc);
-
-initAccuracyTable();
-
-var printBtn = new YAHOO.widget.Button({  
-	label: "打&nbsp;&nbsp;印",  
-	id: "printBtn",  
-	container: "printDiv" }
-	); 
-printBtn.on("click",printAction);
-function printAction(){
-	var selYear = YAHOO.util.Dom.get("selectYear").value;
-	var selMonth = YAHOO.util.Dom.get("selectMonth").value;
-	var selDate = selYear + "-" + selMonth;
-	var url="/tv/accuracy/toAccuracyPrint.action?selDate=" + selDate;
-	window.open(url, "打印预览");
-}
+YAHOO.util.Event.addListener(window, "load", initAccuracyTable());
 </script>
 
 </body>
