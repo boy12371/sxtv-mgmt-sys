@@ -4,7 +4,8 @@ function initAccuracyTable() {
 		if (sData == -1) {
 			elCell.innerHTML = "无评分影带";
 		} else {
-			elCell.innerHTML = sData + "";
+			var _val = sData.toString();
+			elCell.innerHTML = (_val.length > 5) ? _val.substring(0,5) : _val;
 		}
 	};
 	// Column definitions
@@ -38,7 +39,7 @@ function initAccuracyTable() {
 	
 	// DataTable configuration
 	var myConfigs = {
-		initialRequest :"sort=accuracy&dir=desc&startIndex=0&selDate=" + selDate, // Initial
+		initialRequest :"sort=accuracy&dir=desc&startIndex=0&startDate=" + start+"&endDate="+end, // Initial
 		sortedBy : {
 			key :"accuracy",
 			dir :YAHOO.widget.DataTable.CLASS_DESC
@@ -51,7 +52,7 @@ function initAccuracyTable() {
 	myDataTable.handleDataReturnPayload = function(oRequest, oResponse, oPayload) {
 		oPayload.totalRecords = oResponse.meta.totalRecords;
 		return oPayload;
-	}
+	};
 	return {
 		ds :myDataSource,
 		dt :myDataTable
