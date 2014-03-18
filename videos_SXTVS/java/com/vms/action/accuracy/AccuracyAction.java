@@ -31,14 +31,8 @@ public class AccuracyAction extends BaseAction {
 
 	private JSONDataTable accuracyTable;
 	
-	private String selDate;
-	
-	private List<String> years = new ArrayList<String>();
-	
-	private String defYear;
-	
-	private String defMonth;
-	
+	private String startDate;
+	private String endDate;
 	private String examiner;
 	
 	public String toAccuracyPrint() throws Exception{
@@ -46,38 +40,29 @@ public class AccuracyAction extends BaseAction {
 	}
 	
 	public String toAccuracy() throws Exception{
-		Date fDate = arrangeService.getFirstArrangedDate();
-		if(null==fDate) {
-			this.addActionError("暂无数据。");
-			return SUCCESS;
-		}
-		SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd");
-		String firDate = dateFm.format(fDate);
-		Integer year1st = Integer.parseInt(firDate.split("-")[0]);
-		String nowDate = dateFm.format(new Date());
-		Integer curYear = Integer.parseInt(nowDate.split("-")[0]);
-		Integer curMonth = Integer.parseInt(nowDate.split("-")[1]);
-		for(int i=year1st;i<=curYear;i++){
-			years.add(i+"");
-		}
-		defYear = curYear.toString();
-		defMonth = "01";
 		return SUCCESS;
 	}
 	
 	public String getAccuracy() throws Exception {
 		accuracyTable = JSONDataTableUtils.initJSONDataTable(getRequest());
 		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String tempDate = selDate + "-01";
-		Date startDate = dFormat.parse(tempDate);
-		//get the end of month
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(startDate);
-		int numDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-		tempDate = selDate + "-" + numDayOfMonth;
-		Date endDate = dFormat.parse(tempDate);
+		Date start = dFormat.parse(startDate);
+		Date end = dFormat.parse(endDate);
+		Calendar cal = Calendar.getInstance();
+		
+		cal.setTime(start);
+		cal.set(Calendar.HOUR, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		start = cal.getTime();
+		
+		cal.setTime(end); 
+		cal.set(Calendar.HOUR, 23);
+		cal.set(Calendar.MINUTE, 59);
+		cal.set(Calendar.SECOND, 59);
+		end = cal.getTime();
 		try {
-			List<AccuracyVO> accs = accuracyService.findAllAccuracy(startDate, endDate, -1);
+			List<AccuracyVO> accs = accuracyService.findAllAccuracy(start, end, -1);
 			if (null != examiner && "".equals(examiner)) {
 				AccuracyVO temp = null;
 				for (AccuracyVO a : accs) {
@@ -138,36 +123,19 @@ public class AccuracyAction extends BaseAction {
 	public String getExaminer() {
 		return examiner;
 	}
-
-	public void setSelDate(String selDate) {
-		this.selDate = selDate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public String getSelDate() {
-		return selDate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
-	public void setYears(List<String> years) {
-		this.years = years;
+	public String getEndDate() {
+		return endDate;
 	}
 
-	public List<String> getYears() {
-		return years;
-	}
-
-	public void setDefYear(String defYear) {
-		this.defYear = defYear;
-	}
-
-	public String getDefYear() {
-		return defYear;
-	}
-
-	public void setDefMonth(String defMonth) {
-		this.defMonth = defMonth;
-	}
-
-	public String getDefMonth() {
-		return defMonth;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 }
