@@ -24,6 +24,9 @@ public class AccuracyService implements IAccuracyService{
 		List<User> users = vedioscoreDAO.findAllExaminer();
 		List<Vediotape> tapes = new ArrayList<Vediotape>();
 		StringBuffer idParam = new StringBuffer();
+		if(playorder.isEmpty()){
+			return accs;
+		}
 		for(Playorder p:playorder){
 			idParam.append("'"+p.getVedioID().getId()+"',");
 			tapes.add(p.getVedioID());
@@ -47,11 +50,6 @@ public class AccuracyService implements IAccuracyService{
 			acc.setAccuracy(computeAccuracyOfTapes(uScore));
 			accs.add(acc);
 		}
-		System.out.println(startDate+"====="+endDate);
-		System.out.println("评分员		准确度");
-		for (AccuracyVO av : accs) {
-			System.out.println(av.getEmployeeName()+"		"+av.getAccuracy());
-		}
 		return accs;
 	}
 	
@@ -63,11 +61,9 @@ public class AccuracyService implements IAccuracyService{
 		for(Vedioscore s:scores){
 			float uScore = s.getScore();//评分员打分的综合评分
 			float mScore = s.getVedio().getScore();//依据收视率排名属于那个层次对应的得分（收视率得分）
-			System.out.println(s.getExaminer().getEmployee().getName() + ":	" + uScore +"(综合评分)-----"+ mScore+"(收视率排名得分)	["+s.getVedio().getVedioName()+":"+s.getVedio().getId()+"]");
 			accSum += Math.abs(uScore - mScore);
 			mSum += mScore;
 		}
-		System.out.println(""+accSum+"/"+mSum+"="+accSum / mSum);
 		float acc = (1 - accSum / mSum) * 100 ;
 		return acc;
 	}
