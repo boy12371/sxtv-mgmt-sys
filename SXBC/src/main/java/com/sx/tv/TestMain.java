@@ -55,21 +55,31 @@ public class TestMain {
 		// EntityManager em = TVShow.entityManager();
 		try {
 		
-			StringBuffer sb = new StringBuffer(
-					"select count(a.id) from "
-							+ "(select distinct(t.id),t.actors,t.comments,t.count,t.directors,t.input_date,"
-							+ "t.is_purchase,t.market_assessment,t.ratings, t.market_share,t.name,t.outline,t.publisher,"
-							+ "t.ranking,t.reject_date,t.removed,t.screenwriters,t.version,t.company,t.inputter,"
-							+ "t.progress,t.projector,t.status,t.theme,t.script_src,t.play_date,t.force_purchase "
-							+ "from tvshow t inner join dept_comments d on t.id = d.tvshow) "
-							+ "as a  inner join tvcontract b on a.id = b.tvshow order by a.status asc");
+//			StringBuffer sb = new StringBuffer(
+//					"select count(a.id) from "
+//							+ "(select distinct(t.id),t.actors,t.comments,t.count,t.directors,t.input_date,"
+//							+ "t.is_purchase,t.market_assessment,t.ratings, t.market_share,t.name,t.outline,t.publisher,"
+//							+ "t.ranking,t.reject_date,t.removed,t.screenwriters,t.version,t.company,t.inputter,"
+//							+ "t.progress,t.projector,t.status,t.theme,t.script_src,t.play_date,t.force_purchase "
+//							+ "from tvshow t inner join dept_comments d on t.id = d.tvshow) "
+//							+ "as a  inner join tvcontract b on a.id = b.tvshow order by a.status asc");
 
-			StringBuffer tvsql = new StringBuffer(
-					"select distinct(t.id),t.actors,t.comments,t.count,t.directors,t.input_date,"
-							+ "t.is_purchase,t.market_assessment,t.ratings,t.market_share,t.name,t.outline,t.publisher,"
-							+ "t.ranking,t.reject_date,t.removed,t.screenwriters,t.version,t.company,t.inputter,t.progress,"
-							+ "t.projector,t.status,t.theme,t.script_src,t.play_date,t.force_purchase "
-							+ "from tvshow t inner join tvcontract b on t.id = b.tvshow where t.removed = 0 and b.copyright_end is not null");
+//			StringBuffer tvsql = new StringBuffer(
+//					"select distinct(t.id),t.actors,t.comments,t.count,t.directors,t.input_date,"
+//							+ "t.is_purchase,t.market_assessment,t.ratings,t.market_share,t.name,t.outline,t.publisher,"
+//							+ "t.ranking,t.reject_date,t.removed,t.screenwriters,t.version,t.company,t.inputter,t.progress,"
+//							+ "t.projector,t.status,t.theme,t.script_src,t.play_date,t.force_purchase "
+//							+ "from tvshow t inner join tvcontract b on t.id = b.tvshow where t.removed = 0 and b.copyright_end is not null");
+			StringBuffer sb = new StringBuffer(
+					"select distinct(b.id),b.contract_no,b.copyright_end,b.copyright_start,"
+							+ "b.extra_fee,file_agreement_date,b.file_by,b.file_by_agreement,b.file_date,"
+							+ "b.input_agreement_date,b.input_date,b.inputter,b.inputter_agreement,owner,"
+							+ "b.publish_form,b.recieve_agreement_date,b.recieve_agreement_owner,b.recieve_date,"
+							+ "b.recieve_owner,b.show_date,b.total_price,b.version,b.channel,b.tvshow,"
+							+ "b.price,b.ex_years,b.extension,b.tape_recive_date,b.tape_store_date,b.comments "
+							+ "from tvshow t inner join tvcontract b on t.id = b.tvshow where t.removed = 0 and b.copyright_start is not null and b.copyright_end is not null ");
+			StringBuffer count = new StringBuffer(
+					"select count(*) from tvshow t inner join tvcontract b on t.id = b.tvshow where t.removed = 0 and b.copyright_start is not null and b.copyright_end is not null ");
 
 //			if (tv.getRecommendChannel() != null || tv.getRecommendLevel() != null) { // dept
 //				sb.append("inner join dept_comments d on t.id = d.tvshow");
@@ -84,10 +94,23 @@ public class TestMain {
 //			}
 			//tvsql.append(")as a ");
 
-			EntityManager em = TVShow.entityManager();
-			System.out.println(tvsql.toString());
-			Query query = em.createNativeQuery(tvsql.toString());
-			System.out.println(query.getResultList().size());
+//			EntityManager em = TVShow.entityManager();
+//			System.out.println(count.toString());
+//			Query query = em.createNativeQuery(count.toString());
+//			System.out.println(query.getSingleResult());
+			
+//			EntityManager em = TVContract.entityManager();
+//			Query query = em.createNativeQuery(sb.toString(), TVContract.class);
+//			int num = query.getResultList().size();
+//			System.out.println(num);
+
+			String ss ="select p.id, p.play_date, p.price, p.reserved_from, p.reserved_to, p.round, p.version, p.play_channel,p.tvshow from play_info p inner join tvshow t on p.tvshow=t.id and t.status=14";
+			EntityManager em = PlayInfo.entityManager();
+			Query query = em.createNativeQuery(ss, PlayInfo.class);
+			List<PlayInfo> pi = query.getResultList();
+			for (PlayInfo p : pi) {
+				System.out.println(p.getTvshow().getName()+"==="+p.getTvshow().getCount()+"==="+p.getPrice());
+			}
 			//Long x = (Long) query.getSingleResult();
 			//java.math.BigInteger num = (BigInteger) query.getSingleResult();
 			//System.out.println(num.intValue());

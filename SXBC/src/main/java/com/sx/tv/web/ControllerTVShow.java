@@ -6,6 +6,7 @@ import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -61,6 +62,7 @@ import com.sx.tv.view.JsonDataTable;
 import com.sx.tv.view.Page;
 import com.sx.tv.view.SearchTV;
 import com.sx.tv.view.TVShowView;
+import com.sx.tv.view.TransView;
 
 @Controller
 @RequestMapping(value = "/tvshows")
@@ -326,7 +328,6 @@ public class ControllerTVShow {
 					actors.addAll(TVShow_.getActors());
 					tv.setActors(actors);
 				}
-				
 
 				if (null != TVShow_.getDirectors()) {
 					Set<People> directors = new HashSet<People>();
@@ -654,16 +655,15 @@ public class ControllerTVShow {
 			int sizeNo = page.getRows() == 0 ? 10 : page.getRows();
 			final int firstResult = page == null ? 0 : (page.getPage() - 1)
 					* sizeNo;
-			
+
 			long count = TVShowsFinder.countTVShows(stv);
-			
+
 			List<TVShow> results = new ArrayList<TVShow>();
-			if(count != 0){
+			if (count != 0) {
 				results.addAll(TVShowsFinder.findTVShows(stv, firstResult,
-						page.getRows(), page.getSidx(), page.getSord()));	
+						page.getRows(), page.getSidx(), page.getSord()));
 			}
-			
-			
+
 			jdt.setPage(page.getPage());
 			List<JsonData> rows = new ArrayList<JsonData>();
 
@@ -711,14 +711,11 @@ public class ControllerTVShow {
 			DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			// colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '项目负责人',
 			// '状态', '首播频道', '价格', '版权起始', '版权终止']
-			boolean exsit = false;
-			long total = TVShowsFinder.countDependsOnContractFields(stv);
+			long total = TVShowsFinder.countTVshows4MarketLevel2(stv);
 			if (total != 0) {
-				Date today = new Date();
-				List<TVContract> cts = TVShowsFinder
-						.findDependsOnContractFields(stv, firstResult,
-								page.getRows(), page.getSidx(), page.getSord());
-				// round = "首轮";
+				List<TVContract> cts = TVShowsFinder.findTVshows4MarketLevel2(
+						stv, firstResult, page.getRows(), page.getSidx(),
+						page.getSord());
 				for (TVContract tt : cts) {
 					TVShow t = tt.getTvshow();
 					Object[] o = new Object[] { t.getId(), t.getName(),
@@ -737,7 +734,6 @@ public class ControllerTVShow {
 				jdt.setSize(page.getRows());
 				jdt.setTotal(total / page.getRows() + 1);
 				jdt.setRecords(total);
-				exsit = true;
 			}
 		}
 		return jdt;
@@ -745,11 +741,51 @@ public class ControllerTVShow {
 
 	@RequestMapping(value = "/queryTVShows4JsonLevel2MarketPrint")
 	public String queryTVShows4JsonLevel2MarketPrint(
-			@RequestParam(required = false) boolean unexpired, SearchTV stv,
-			Model uiModel) throws UnsupportedEncodingException {
-		List<TVContract> cts = TVShowsFinder.findDependsOnContractFields(stv,
-				0, 99999, "id", "asc");
-		uiModel.addAttribute("data", cts);
+			@RequestParam(required = false) boolean istransaction,
+			SearchTV stv, Model uiModel) throws UnsupportedEncodingException {
+		uiModel.addAttribute("istransaction", istransaction);
+		int round = 1;
+		if (null != stv.getStatus()) {
+			int sid = stv.getStatus().getId();
+			if (sid == StatusUtil.ER_LUN_DAI_BO
+					|| sid == StatusUtil.ER_LUN_YI_BO) {
+				round = 2;
+			}
+			if (sid == StatusUtil.SAN_LUN_YI_BO
+					|| sid == StatusUtil.SAN_LUN_DAI_BO) {
+				round = 3;
+			}
+			if (sid == StatusUtil.SAN_LUN_HOU_DAI_BO
+					|| sid == StatusUtil.SAN_LUN_HOU_YI_BO) {
+				round = 4;
+			}
+		}
+		List<TVContract> cts = TVShowsFinder.findTVshows4MarketLevel2(stv, 0,
+				99999, "id", "asc");
+		if (istransaction) {
+			List<TransView> trans = new ArrayList<TransView>();
+			for (TVContract cc : cts) {
+				TransView v = new TransView();
+				v.setName(cc.getTvshow().getName());
+				v.setCount(cc.getTvshow().getCount());
+				v.setStatus(cc.getTvshow().getStatus());
+				if (round == 1) {
+					v.setChannel(cc.getChannel());
+					v.setPrice(cc.getPrice().floatValue());
+					v.setConPrice(cc.getPrice());
+				} else {
+					PlayInfo p = TVShowsFinder.getPlayInfo(cc.getTvshow()
+							.getId(), round);
+					v.setChannel(p.getPlayChannel());
+					v.setPrice(p.getPrice());
+					v.setConPrice(cc.getPrice());
+				}
+				trans.add(v);
+			}
+			uiModel.addAttribute("data", trans);
+		} else {
+			uiModel.addAttribute("data", cts);
+		}
 		return "tvshows/level2marketPrint";
 	}
 
@@ -844,6 +880,11 @@ public class ControllerTVShow {
 		// tv.setPlayDate(pdate);
 		tv.setStatus(st);
 		tv.merge();
+		Date from = playInfo.getReservedFrom();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(from);
+		cal.add(Calendar.MONTH, 3);
+		playInfo.setReservedTo(cal.getTime());
 		playInfo.persist();
 
 		return "redirect:/tvshows/generalInfo/"
@@ -851,6 +892,54 @@ public class ControllerTVShow {
 						httpServletRequest) + "?level=level2market";
 	}
 
+	@RequestMapping(value = "/{tvid}/{pid}/toUpdatePlayInfo4Level2", produces = "text/html")
+	public String toUpdatePlayInfo4Level2(@PathVariable("tvid") Long tvid,
+			@PathVariable("pid") int pid, Model uiModel) {
+		addDateTimeFormatPatterns(uiModel);
+		PlayInfo pi = PlayInfo.findPlayInfo(pid);
+		uiModel.addAttribute("isupdate", true);
+		uiModel.addAttribute("tvshow", pi.getTvshow());
+		uiModel.addAttribute("playInfo", pi);
+		uiModel.addAttribute("round", pi.getRound());
+		List<Channel> _channelList = new ArrayList<Channel>();
+		Channel channel = new Channel(new Integer(0), "请选择", 0);
+		_channelList.add(channel);
+		_channelList.addAll(Channel.findAllChannels());
+
+		uiModel.addAttribute("channels", _channelList);
+		// populateDependencies(uiModel, true);
+		return "tvshows/playInfo";
+	}
+
+	@RequestMapping(value = "/{tvid}/{pid}/doUpdatePlayInfo4Level2", produces = "text/html", method = RequestMethod.POST)
+	public String doUpdatePlayInfo4Level2(@PathVariable("tvid") Long tvid,
+			@PathVariable("pid") int pid, PlayInfo playInfo, Model uiModel,
+			Principal principal, HttpServletRequest httpServletRequest) {
+		
+		PlayInfo pi = PlayInfo.findPlayInfo(pid);
+		pi.setPlayChannel(playInfo.getPlayChannel());
+		pi.setPlayDate(playInfo.getPlayDate());
+		pi.setPrice(playInfo.getPrice());
+		pi.setReservedFrom(playInfo.getReservedFrom());
+		pi.setReservedTo(playInfo.getReservedTo());
+		pi.merge();
+		
+		return "redirect:/tvshows/generalInfo/"
+				+ URLStringUtil.encodeUrlPathSegment(tvid.toString(),
+						httpServletRequest) + "?level=level2market";
+	}
+
+	@RequestMapping(value = "/{tvid}/{pid}/deletePlayInfo4Level2", produces = "text/html")
+	public String deletePlayInfo4Level2(@PathVariable("tvid") Long tvid,
+			@PathVariable("pid") int pid, Model uiModel,HttpServletRequest httpServletRequest) {
+		addDateTimeFormatPatterns(uiModel);
+		PlayInfo pi = PlayInfo.findPlayInfo(pid);
+		pi.remove();
+		return "redirect:/tvshows/generalInfo/"
+		+ URLStringUtil.encodeUrlPathSegment(tvid.toString(),
+				httpServletRequest) + "?level=level2market";
+	}
+	
 	public void populateDependencies(Model uiModel, boolean emptyOpt) {
 		List<Company> _companyList = new ArrayList<Company>();
 		List<Channel> _channelList = new ArrayList<Channel>();
@@ -1041,4 +1130,5 @@ public class ControllerTVShow {
 		}
 
 	}
+
 }
