@@ -302,7 +302,21 @@ $(document).ready(
 					datePattern : 'yyyy-MM-dd'
 				}
 			}));
-
+			Spring.addDecoration(new Spring.ElementDecoration({
+				elementId : '_playDate_id',
+				widgetType : 'dijit.form.DateTextBox',
+				widgetAttrs : {
+					promptMessage : '选择日期',
+					invalidMessage : '日期错误',
+					required : true,
+					constraints : {
+						datePattern : 'yyyy-MM-dd',
+						required : true
+					},
+					readOnly : false,
+					datePattern : 'yyyy-MM-dd'
+				}
+			}));
 			$("textarea").css("width", "500");
 
 			/*
@@ -365,6 +379,7 @@ $(document).ready(
 					res = false;
 				}
 
+				/*
 				if ($("input[name*='actors[']").length == 0) {
 					$("#_actors_id").prev().addClass("ui-state-error");
 					$("#token-input-_actors_id").css("color", "red").val("请输入演员").focus(function() {
@@ -389,7 +404,7 @@ $(document).ready(
 					});
 					res = false;
 				}
-
+				*/
 				if ($("#_status_id").val().length == 0) {
 					$("#_status_id").addClass("ui-state-error").val("请选择").focus(function() {
 						$(this).removeClass("ui-state-error").val("");

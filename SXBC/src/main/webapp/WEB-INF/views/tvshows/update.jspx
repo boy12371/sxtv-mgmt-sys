@@ -134,6 +134,8 @@ li.token-input-input-token input {
 		 -->
 			<fmt:formatDate var="_var_inputDate" value="${TVShow_.inputDate}"
 				pattern="yyyy-MM-dd" />
+			<fmt:formatDate var="_var_playDate" value="${TVShow_.playDate}"
+				pattern="yyyy-MM-dd" />
 			<fmt:formatDate var="_var_rejectDate" value="${TVShow_.rejectDate}"
 				pattern="${TVShow__rejectdate_date_format}" />
 			<input type="hidden" name="id" value="${TVShow_.id}" />
@@ -225,6 +227,11 @@ li.token-input-input-token input {
 			<div class="rowcontainer">
 				<label>录入时间 : </label> <input type="text" id="_inputDate_id"
 					name="inputDate" value="${_var_inputDate}" />
+			</div>
+			<br />
+			<div class="rowcontainer">
+				<label>播出时间 : </label> <input type="text" id="_playDate_id"
+					name="playDate" value="${_var_playDate}" />
 			</div>
 			<br />
 			<field:select label="录入人" field="inputter" id="inputterSelect"

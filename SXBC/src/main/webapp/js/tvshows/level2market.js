@@ -186,9 +186,13 @@ $(document).ready(function() {
 						$("#printBtn").button("option", "label", "打印三轮待选剧目表").show();
 						$("#printTansBtn").button("option", "label", "二轮剧目交易表").show();
 						break;
-					default:
+					case 16:
 						$("#printBtn").button("option", "label", "打印三轮后待选剧目表").show();
 						$("#printTansBtn").button("option", "label", "三轮剧目交易表").show();
+						break;
+					default:
+						$("#printBtn").button("option", "label", "打印三轮后待选剧目表").show();
+						$("#printTansBtn").button("option", "label", "三轮后剧目交易表").show();
 						break;
 					}
 				}

@@ -103,7 +103,7 @@ td {
 	<c:if test="${istransaction}">
 	<c:set value="${data[0].status.id}" var="st"/>
 		<TABLE>
-			<CAPTION>电视剧交易表（ 年 月 日 ）</CAPTION>
+			<CAPTION>电视剧交易表（______年____月____日 ）</CAPTION>
 			<TR>
 				<TD colspan="6"><c:choose>
 						<c:when test="${st == 13 || st == 14 }">
