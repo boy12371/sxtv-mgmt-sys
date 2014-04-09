@@ -69,6 +69,9 @@ public class TVShowView {
 	@DateTimeFormat(iso=ISO.DATE)
 	private Date rejectDate;
 	
+	@DateTimeFormat(iso=ISO.DATE)
+	private Date playDate;
+	
 	private int forcePurchase;
 	
 	public String getName() {
@@ -269,6 +272,14 @@ public class TVShowView {
 
 	public void setProducer(List<People> producer) {
 		this.producer = producer;
+	}
+
+	public Date getPlayDate() {
+		return playDate;
+	}
+
+	public void setPlayDate(Date playDate) {
+		this.playDate = playDate;
 	}
 	
 }

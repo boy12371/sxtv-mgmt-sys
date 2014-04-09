@@ -315,7 +315,7 @@ public class TVShowsFinder {
 				}
 				params.put("playDateE", tv.getPlayDateEnd());
 			}
-			sb.append(" AND p.round = " + round);
+			//sb.append(" AND p.round = " + round);
 
 			if (null != tv.getPlayChannel()) {
 				if (hasWhere) {
@@ -546,7 +546,7 @@ public class TVShowsFinder {
 				}
 				params.put("playDateE", tv.getPlayDateEnd());
 			}
-			sb.append(" AND p.round = " + round);
+			//sb.append(" AND p.round = " + round);
 
 			if (null != tv.getPlayChannel()) {
 				if (hasWhere) {
@@ -1007,18 +1007,25 @@ public class TVShowsFinder {
 		return infos;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static PlayInfo getPlayInfo(long tv, int round) {
+		String oper = "=";
+		if(round >= 4){
+			oper = ">=";
+		}
 		EntityManager em = PlayInfo.entityManager();
 		StringBuffer sb = new StringBuffer(
 				"select p.id, p.play_date, p.price, p.reserved_from, p.reserved_to, p.round, p.version, p.play_channel,"
 						+ "p.tvshow from play_info p where p.tvshow ="
 						+ tv
-						+ " and p.round=" + round);
+						+ " and p.round " + oper + round+" order by p.round desc");
 		
 		Query query = em.createNativeQuery(sb.toString(), PlayInfo.class);
-		PlayInfo p = (PlayInfo) query.getSingleResult();
-		return p;
-
+		List<PlayInfo> pi = query.getResultList();
+		if(null != pi && !pi.isEmpty()){
+			return pi.get(0);
+		}
+		return null;
 	}
 
 }

@@ -408,6 +408,7 @@ public class ControllerTVShow {
 		tvview.setTheme(tv.getTheme());
 		tvview.setComments(tv.getComments());
 		tvview.setForcePurchase(tv.getForcePurchase());
+		tvview.setPlayDate(tv.getPlayDate());
 		uiModel.addAttribute("TVShow_", tvview);
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("people", new People());
@@ -457,6 +458,7 @@ public class ControllerTVShow {
 		tv.setTheme(TVShow_.getTheme());
 		tv.setComments(TVShow_.getComments());
 		tv.setForcePurchase(TVShow_.getForcePurchase());
+		tv.setPlayDate(TVShow_.getPlayDate());
 		if (null != TVShow_.getActors() && !TVShow_.getActors().isEmpty()) {
 			Set<People> actors = new HashSet<People>();
 			actors.addAll(TVShow_.getActors());
@@ -769,16 +771,17 @@ public class ControllerTVShow {
 				v.setName(cc.getTvshow().getName());
 				v.setCount(cc.getTvshow().getCount());
 				v.setStatus(cc.getTvshow().getStatus());
-				if (round == 1) {
-					v.setChannel(cc.getChannel());
-					v.setPrice(cc.getPrice().floatValue());
-					v.setConPrice(cc.getPrice());
-				} else {
+				v.setChannel(cc.getChannel());
+				v.setPrice(cc.getPrice().floatValue());
+				v.setConPrice(cc.getPrice());
+				if(round != 1) {
 					PlayInfo p = TVShowsFinder.getPlayInfo(cc.getTvshow()
 							.getId(), round);
-					v.setChannel(p.getPlayChannel());
-					v.setPrice(p.getPrice());
-					v.setConPrice(cc.getPrice());
+					if(null != p){
+						v.setChannel(p.getPlayChannel());
+						v.setPrice(p.getPrice());
+						v.setConPrice(cc.getPrice());	
+					}
 				}
 				trans.add(v);
 			}
