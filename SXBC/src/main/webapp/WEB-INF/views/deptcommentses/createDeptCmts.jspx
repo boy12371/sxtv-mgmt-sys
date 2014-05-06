@@ -25,12 +25,13 @@
 				}
 			});
 
+			/**
 			$("#deptComments").validate({
 				rules : {
 					comments : "required",
 				}
 			});
-
+			**/
 			$("#proceed").button().click(function() {
 				if ($("#isRecommend_no").attr("checked")) {
 					$("#dialog-confirm-reject").dialog("open");

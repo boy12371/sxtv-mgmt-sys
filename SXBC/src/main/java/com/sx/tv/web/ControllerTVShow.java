@@ -652,6 +652,7 @@ public class ControllerTVShow {
 		if (null == stv) {
 			stv = new SearchTV();
 		}
+		
 		JsonDataTable jdt = new JsonDataTable();
 		if (page != null) {
 			int sizeNo = page.getRows() == 0 ? 10 : page.getRows();
@@ -668,9 +669,37 @@ public class ControllerTVShow {
 
 			jdt.setPage(page.getPage());
 			List<JsonData> rows = new ArrayList<JsonData>();
-
+			
+			Role role = Role.findRole(new Long(2));
+			List<Role> rlist = new ArrayList<Role>();
+			rlist.add(role);
+			//所有评分员
+			List<User> uList = User.findUsersByRoles(rlist).getResultList();
+			//所有频道
+			List<Channel> channels = Channel.findAllChannels();
 			DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
+			
+			List<Score> sList = Score.findScoresByTvshow("sdfsdf").getResultList();
+
+			if (null != sList && !sList.isEmpty()) {
+
+				Map<Integer, List<Score>> smap = new HashMap<Integer, List<Score>>();
+
+				for (Channel c : channels) {
+					for (Score s : sList) {
+						if (c.getId() == s.getRecommendChannel().getId()) {
+							if (smap.get(c.getId()) == null) {
+								List<Score> sl = new ArrayList<Score>();
+								sl.add(s);
+								smap.put(c.getId(), sl);
+							} else {
+								smap.get(c.getId()).add(s);
+							}
+						}
+					}
+				}
+			}
 			/**
 			 * 
 			 * colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人',

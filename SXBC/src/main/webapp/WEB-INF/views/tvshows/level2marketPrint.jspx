@@ -3,6 +3,7 @@
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -48,6 +49,7 @@ td {
 				<TD>竞拍低价(单集)</TD>
 				<TD>竞标价格(单集)</TD>
 				<TD>首购频道</TD>
+				<TD>版权到期</TD>
 			</TR>
 
 			<c:forEach items="${data}" var="d" varStatus="st">
@@ -95,6 +97,7 @@ td {
 						</c:choose></TD>
 					<TD></TD>
 					<TD>${d.channel.name}</TD>
+					<TD><fmt:formatDate value="${d.copyrightEnd}" pattern="yyyy-MM-dd" /></TD>
 				</TR>
 
 			</c:forEach>
