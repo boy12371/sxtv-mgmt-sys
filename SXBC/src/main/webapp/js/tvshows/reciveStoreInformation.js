@@ -58,6 +58,7 @@ $(document).ready(function() {
 		if (fields.length != 0) {
 			var _url = $("#updateStatus").attr("href");
 			for ( var i = 0; i < fields.length; i++) {
+				/**
 				if (fields[i].required && $("#" + fields[i].element).val().length == 0) {
 					$("#" + fields[i].element).addClass("ui-state-error").val("日期格式错误").focus(function() {
 						$(this).removeClass("ui-state-error").val("");
@@ -72,7 +73,7 @@ $(document).ready(function() {
 						return false;
 					}
 				}
-				
+				*/
 				if(fields[i].element == '_tapeStoreDate_id'){
 					_url += "&sdate=" + $("#" + fields[i].element).val();
 				}

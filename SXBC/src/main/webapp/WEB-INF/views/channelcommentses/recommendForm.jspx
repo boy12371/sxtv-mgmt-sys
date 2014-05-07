@@ -233,6 +233,7 @@ td {
 						data-rateit-readonly="true" style="margin-bottom: 10px">
 						<SPAN></SPAN>
 					</DIV>
+					${deptCmt.comments}
 				</td>
 				<td colspan="3" style="border-bottom-width: 0px;"></td>
 			</tr>
@@ -338,7 +339,14 @@ td {
 			<tr>
 				<td style="border-right-width: 0px; border-bottom-width: 0px;">中心意见</td>
 				<td style="border-right-width: 0px; border-bottom-width: 0px;"
-					colspan="2" width="500px">${channelComments.tvshow.comments}</td>
+					colspan="2" width="500px">
+					<DIV class="rateit"
+						data-rateit-value="${deptCmt.recommendLevel.id}"
+						data-rateit-readonly="true" style="margin-bottom: 10px">
+						<SPAN></SPAN>
+					</DIV>
+					
+					${deptCmt.comments}</td>
 				<td style="border-right-width: 0px; border-bottom-width: 0px;">签字</td>
 				<td style="border-bottom-width: 0px;" colspan="2"></td>
 			</tr>

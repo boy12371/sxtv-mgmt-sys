@@ -675,45 +675,58 @@ public class ControllerTVShow {
 			rlist.add(role);
 			//所有评分员
 			List<User> uList = User.findUsersByRoles(rlist).getResultList();
+			int numOfuList = uList.size();
 			//所有频道
 			List<Channel> channels = Channel.findAllChannels();
 			DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
 			
-			List<Score> sList = Score.findScoresByTvshow("sdfsdf").getResultList();
-
-			if (null != sList && !sList.isEmpty()) {
-
-				Map<Integer, List<Score>> smap = new HashMap<Integer, List<Score>>();
-
-				for (Channel c : channels) {
-					for (Score s : sList) {
-						if (c.getId() == s.getRecommendChannel().getId()) {
-							if (smap.get(c.getId()) == null) {
-								List<Score> sl = new ArrayList<Score>();
-								sl.add(s);
-								smap.put(c.getId(), sl);
-							} else {
-								smap.get(c.getId()).add(s);
-							}
-						}
-					}
-				}
-			}
 			/**
 			 * 
 			 * colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人',
 			 * '状态', '录入时间' ],
 			 * 
 			 */
+			List<Score> sList = null;
+			Map<Integer, List<Score>> smap = null;
+			
 			for (TVShow t : results) {
+				
+				sList = Score.findScoresByTvshow(t).getResultList();
+				if (null != sList && !sList.isEmpty()) {
+					smap = new HashMap<Integer, List<Score>>();
+					for (Channel c : channels) {
+						for (Score s : sList) {
+							if (c.getId() == s.getRecommendChannel().getId()) {
+								if (smap.get(c.getId()) == null) {
+									List<Score> sl = new ArrayList<Score>();
+									sl.add(s);
+									smap.put(c.getId(), sl);
+								} else {
+									smap.get(c.getId()).add(s);
+								}
+							}
+						}
+					}
+				}
+				boolean fullScored = false;
+				if(null != smap){
+					Iterator<Entry<Integer, List<Score>>> it = smap.entrySet().iterator();
+					while (it.hasNext()) {
+						Map.Entry<Integer, List<Score>> e = it.next();
+						fullScored = e.getValue().size() ==  numOfuList;
+						if(!fullScored){
+							break;
+						}
+					}
+				}
 				Object[] o = new Object[] { t.getId(), t.getName(),
 						t.getCount(), t.getCompany().getName(),
 						t.getTheme().getName(), t.getScriptSrc(),
 						t.getProjector().getStaff(), t.getStatus().getName(),
-						sdf.format(t.getInputDate()) };
+						sdf.format(t.getInputDate()), fullScored };
 				JsonData jd = new JsonData(t.getId(), o);
 				rows.add(jd);
+				sList = null;
 			}
 
 			jdt.setRows(rows);

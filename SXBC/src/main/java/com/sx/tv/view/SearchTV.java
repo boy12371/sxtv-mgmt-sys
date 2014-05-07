@@ -2,14 +2,8 @@ package com.sx.tv.view;
 
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
 
 import com.sx.tv.entites.Channel;
 import com.sx.tv.entites.Company;
@@ -19,9 +13,6 @@ import com.sx.tv.entites.Status;
 import com.sx.tv.entites.Theme;
 import com.sx.tv.entites.User;
 
-@RooJavaBean
-@RooToString
-@RooSerializable
 public class SearchTV {
 	/**
 	 * 
