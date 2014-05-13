@@ -163,7 +163,7 @@ $(document).ready(function() {
 		url : '#',
 		datatype : "json",
 		height : 500,
-		colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人', '状态', '录入时间', '评分状态' ],
+		colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人', '状态', '录入时间', '评分?' ],
 		colModel : [ {
 			name : 'id',
 			index : 'id',
@@ -205,10 +205,11 @@ $(document).ready(function() {
 			index : 'input_date',
 			width : 80
 		}, {
-			name : 'fullScored',
-			index : 'fullScored',
+			name : 'scored',
+			index : 'scored',
 			sortable : false,
 			formatter : formatFullScored,
+			width: 50
 			
 		} ],
 		altRows : true,
@@ -319,13 +320,16 @@ $(document).ready(function() {
 });
 
 function formatName(cellvalue, options, rowObject) {
+//	if(rowObject[9]){
+//		return "<a href='/SXBC/tvshows/generalInfo/" + rowObject[0] + "'>" + cellvalue + "</a>";
+//	}
 	return "<a href='/SXBC/tvshows/generalInfo/" + rowObject[0] + "'>" + cellvalue + "</a>";
 }
 function formatFullScored(cellvalue, options, rowObject) {
 	if(cellvalue == false){
-		return "<FONT color='red'>未完成</FONT>"
+		return "<FONT color='red'>！</FONT>";
 	}
-	return "<FONT>完成</FONT>"
+	return "";
 }
 
 

@@ -647,7 +647,7 @@ public class ControllerTVShow {
 
 	@RequestMapping(value = "/queryTVShows4Json")
 	public @ResponseBody
-	JsonDataTable queryTVShows4Json(Page page, SearchTV stv)
+	JsonDataTable queryTVShows4Json(Page page, SearchTV stv, Principal principal)
 			throws UnsupportedEncodingException {
 		if (null == stv) {
 			stv = new SearchTV();
@@ -688,9 +688,7 @@ public class ControllerTVShow {
 			 */
 			List<Score> sList = null;
 			Map<Integer, List<Score>> smap = null;
-			
 			for (TVShow t : results) {
-				
 				sList = Score.findScoresByTvshow(t).getResultList();
 				if (null != sList && !sList.isEmpty()) {
 					smap = new HashMap<Integer, List<Score>>();
@@ -708,14 +706,20 @@ public class ControllerTVShow {
 						}
 					}
 				}
-				boolean fullScored = false;
+				boolean scored = false;
 				if(null != smap){
 					Iterator<Entry<Integer, List<Score>>> it = smap.entrySet().iterator();
 					while (it.hasNext()) {
 						Map.Entry<Integer, List<Score>> e = it.next();
-						fullScored = e.getValue().size() ==  numOfuList;
-						if(!fullScored){
-							break;
+//						fullScored = e.getValue().size() ==  numOfuList;
+//						if(!fullScored){
+//							break;
+//						}
+						for (Score s : e.getValue()) {
+							if(s.getRatedBy().getName().equals(principal.getName())){
+								scored = true;
+								break;
+							}
 						}
 					}
 				}
@@ -723,7 +727,7 @@ public class ControllerTVShow {
 						t.getCount(), t.getCompany().getName(),
 						t.getTheme().getName(), t.getScriptSrc(),
 						t.getProjector().getStaff(), t.getStatus().getName(),
-						sdf.format(t.getInputDate()), fullScored };
+						sdf.format(t.getInputDate()), scored };
 				JsonData jd = new JsonData(t.getId(), o);
 				rows.add(jd);
 				sList = null;
