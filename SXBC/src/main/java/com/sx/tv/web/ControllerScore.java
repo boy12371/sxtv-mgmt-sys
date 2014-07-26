@@ -134,6 +134,17 @@ public class ControllerScore {
 		return "scores/update";
 	}
 
+	@RequestMapping(value = "/delete/{id}", produces = "text/html")
+	public String deleteScore(@PathVariable("id") Integer id, Model uiModel,HttpServletRequest httpServletRequest){
+		Score s = Score.findScore(id);
+		Long tid = s.getTvshow().getId();
+		for (ScoreDetail sd : s.getDetails()) {
+			sd.remove();
+		}
+		s.remove();
+		return "redirect:/tvshows/generalInfo/"
+				+ URLStringUtil.encodeUrlPathSegment(tid.toString(), httpServletRequest);
+	}
 	void populateEditForm(Model uiModel, Score score) {
 		uiModel.addAttribute("score", score);
 		uiModel.addAttribute("channels", Channel.findAllChannels());
