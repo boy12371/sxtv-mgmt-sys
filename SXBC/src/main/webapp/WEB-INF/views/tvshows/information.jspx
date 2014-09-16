@@ -463,13 +463,15 @@ td {
 								<c:forEach items="${scoresList}" var="sc">
 									<tr>
 										<td>${sc.ratedBy.staff}</td>
-										<td>${sc.avgScore }</td>
+										<td>
+										
+										${sc.avgScore/10 }</td>
 										<td>${sc.recommendChannel.name}</td>
 										<td><div class="rateit"
 												data-rateit-value="${sc.recommendLevel.id}"
 												data-rateit-ispreset="true" data-rateit-readonly="true"></div></td>
 										<c:forEach items="${sc.details}" var="item">
-											<td>${item.scoreAmount}</td>
+											<td>${item.scoreAmount/10}</td>
 										</c:forEach>
 									</tr>
 								</c:forEach>
@@ -488,7 +490,7 @@ td {
 										style="text-align: left; background-color: #EFEFEF; color: #666; font-weight: normal; padding-left: 30px"
 										colspan="10"><span>综合平均分:</span><SPAN
 										style="margin-left: 20px; font-weight: bold; color: black">
-											${avgmap[sm.key]} </SPAN></th>
+											${avgmap[sm.key]/10} </SPAN></th>
 								</tr>
 
 							</table>
@@ -647,7 +649,6 @@ td {
 
 			</div>
 		</c:if>
-
 		<c:if test="${not empty channelCmts}">
 			<c:forEach items="${channelCmts}" var="cc" varStatus="vs">
 				<c:if test="${cc.channel.type==0}">

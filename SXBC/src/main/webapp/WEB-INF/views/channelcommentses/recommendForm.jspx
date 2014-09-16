@@ -228,11 +228,8 @@ td {
 				<td style="border-bottom-width: 0px; border-right-width: 0px;">节目中心推荐意见</td>
 				<td colspan="6" align="left"
 					style="border-bottom-width: 0px; border-right-width: 0px;">
-					<DIV class="rateit"
-						data-rateit-value="${deptCmt.recommendLevel.id}"
-						data-rateit-readonly="true" style="margin-bottom: 10px">
-						<SPAN></SPAN>
-					</DIV>
+					<SPAN style="margin-left:10px;"><b>
+					<fmt:formatNumber value="${avgScore/10}" pattern="0.0"/></b></SPAN>
 					${deptCmt.comments}
 				</td>
 				<td colspan="3" style="border-bottom-width: 0px;"></td>
@@ -340,12 +337,7 @@ td {
 				<td style="border-right-width: 0px; border-bottom-width: 0px;">中心意见</td>
 				<td style="border-right-width: 0px; border-bottom-width: 0px;"
 					colspan="2" width="500px">
-					<DIV class="rateit"
-						data-rateit-value="${deptCmt.recommendLevel.id}"
-						data-rateit-readonly="true" style="margin-bottom: 10px">
-						<SPAN></SPAN>
-					</DIV>
-					
+					<SPAN><b><fmt:formatNumber value="${avgScore/10}" pattern="0.0"/></b></SPAN>
 					${deptCmt.comments}</td>
 				<td style="border-right-width: 0px; border-bottom-width: 0px;">签字</td>
 				<td style="border-bottom-width: 0px;" colspan="2"></td>
