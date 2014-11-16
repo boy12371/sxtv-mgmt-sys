@@ -152,6 +152,10 @@ td {
 			<c:if test="${not empty contract}">
 				<li><a href="#div_tvcontract">合同信息</a></li>
 			</c:if>
+
+			<c:if test="${not empty tvData}">
+				<li><a href="#div_tvData">合同信息</a></li>
+			</c:if>
 		</ul>
 
 		<DIV id="div_basicInfo">
@@ -276,30 +280,6 @@ td {
 
 			</table>
 
-			<c:if test="${not empty playData}">
-				<util:panel openPane="false" title="播出环境" id="playDataPanel">
-					<table id="excelTable">
-						<tr>
-							<td>频道</td>
-							<td>剧名</td>
-							<td>播出时间</td>
-							<td>收视率</td>
-							<td>收视份额</td>
-						</tr>
-						<c:forEach items="${playData}" var="pd">
-							<tr>
-								<td>${pd.playChannel }</td>
-								<td>${pd.playName }</td>
-								<td>${pd.playDate }</td>
-								<td>${pd.playRate }</td>
-								<td>${pd.playShare }</td>
-							</tr>
-						</c:forEach>
-
-					</table>
-
-				</util:panel>
-			</c:if>
 			<div
 				style="margin-top: 15px; margin-bottom: 15px; margin-left: 10px;">
 				<c:if test="${empty prjComments}">
@@ -463,9 +443,7 @@ td {
 								<c:forEach items="${scoresList}" var="sc">
 									<tr>
 										<td>${sc.ratedBy.staff}</td>
-										<td>
-										
-										${sc.avgScore/10 }</td>
+										<td>${sc.avgScore/10 }</td>
 										<td>${sc.recommendChannel.name}</td>
 										<td><div class="rateit"
 												data-rateit-value="${sc.recommendLevel.id}"
@@ -1080,6 +1058,76 @@ td {
 							</c:if>
 						</c:if>
 					</c:if>
+				</c:if>
+			</DIV>
+		</c:if>
+
+		<c:if test="${not empty tvData}">
+			<DIV id="div_tvData">
+				<util:panel openPane="true" title="收视数据" id="tvData">
+					<table>
+						<tr>
+							<td>收视率</td>
+							<td>市场份额</td>
+							<td>城市排名</td>
+							<td>时段</td>
+						</tr>
+						<c:forEach items="${tvData }" var="d">
+						<tr>
+							<td>${d.ratings}</td>
+							<td>${d.marketShare}</td>
+							<td>${d.ranking}</td>
+							<td>
+								<c:if test="${d.state == 1}">
+									第一季度
+								</c:if>
+								<c:if test="${d.state == 1}">
+									第二季度
+								</c:if>
+								<c:if test="${d.state == 1}">
+									第三季度
+								</c:if>
+								<c:if test="${d.state == 1}">
+									第四季度
+								</c:if>
+								<c:if test="${d.state == 1}">
+									上半年
+								</c:if>
+								<c:if test="${d.state == 1}">
+									下半年
+								</c:if>
+								<c:if test="${d.state == 1}">
+									全年
+								</c:if>
+							</td>
+						</tr>
+						</c:forEach>
+					</table>
+				</util:panel>
+				
+				<c:if test="${not empty playData}">
+					<util:panel openPane="false" title="播出环境" id="playDataPanel">
+						<table id="excelTable">
+							<tr>
+								<td>频道</td>
+								<td>剧名</td>
+								<td>播出时间</td>
+								<td>收视率</td>
+								<td>收视份额</td>
+							</tr>
+							<c:forEach items="${playData}" var="pd">
+								<tr>
+									<td>${pd.playChannel }</td>
+									<td>${pd.playName }</td>
+									<td>${pd.playDate }</td>
+									<td>${pd.playRate }</td>
+									<td>${pd.playShare }</td>
+								</tr>
+							</c:forEach>
+
+						</table>
+
+					</util:panel>
 				</c:if>
 			</DIV>
 		</c:if>

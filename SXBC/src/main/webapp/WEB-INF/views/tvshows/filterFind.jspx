@@ -38,8 +38,15 @@ td {
 	font-size: 12px;
 	color: black;
 }
-label{
+
+label {
 	width: 120px;
+}
+
+.statusClazz {
+	width: 100px;
+	margin: 0px;
+	float: left;
 }
 </style>
 	<div id="searchFormDiv">
@@ -86,11 +93,40 @@ label{
 				items="${users}" path="/users" z="gMAJcHDhDby/woTRr2ltJHx7IeA=" />
 			<!--
 				<field:textareac field="inputter" items="${users}" label="录入人"></field:textareac>
-				-->
+				
 			<field:select label="状态" itemLabel="name" field="status"
-				id="c_com_sx_tv_entites_TVShow_status" itemValue="id"
-				items="${statuses}" path="/statuses"
+				multiple="true" id="c_com_sx_tv_entites_TVShow_status"
+				itemValue="id" items="${statuses}" path="/statuses"
 				z="UrSMjU5/1Ews08TqF/AcNBolIvM=" />
+			-->
+			<div class="rowcontainer">
+				<label>状态: </label>
+				<DIV>
+				<UL style="margin-left: 130px;list-style: none;padding-left: 0px; margin-top: -10px;">
+					<c:forEach items="${statuses}" var="st" varStatus="vs">
+						<c:if test="${vs.index == 0}">
+							<li class="statusClazz"> <input type="checkbox"
+								name="status" value="${st.id}" id="${st.id}_status"
+								onclick="checkedAll(this);" />全选
+							</li>
+							<br /><br />
+							<li class="statusClazz" style="width: 200px;"> <input type="checkbox"
+								name="status" value="-1" id="${st.id}_status"
+								onclick="checkedPlayed(this);" />所有已播剧(包括二轮市场)
+							</li>
+							<br /><br />
+						</c:if>
+						<c:if test="${vs.index != 0}">
+							<li class="statusClazz"> <input type="checkbox"
+								name="status" value="${st.id}" id="${st.id}_status" />${st.name }
+							</li>
+						</c:if>
+					</c:forEach>
+				</UL>
+				</DIV>
+			</div>
+			<br />
+			
 			<field:select label="推荐平台" itemLabel="name" field="recommendChannel"
 				id="c_com_sx_tv_entites_TVShow_recommendChannel" itemValue="id"
 				items="${channels}" path="/channels"
@@ -133,8 +169,8 @@ label{
 			</div>
 			<br />
 			<div class="rowcontainer">
-				<label>应频道要求购买: </label>
-				<input type="checkbox" id="forcePurchaseCKbox" />
+				<label>应频道要求购买: </label> <input type="checkbox"
+					id="forcePurchaseCKbox" />
 				<form:hidden path="forcePurchase" />
 			</div>
 			<br />
@@ -150,5 +186,4 @@ label{
 		</table>
 		<div id="pager"></div>
 	</div>
-
 </div>

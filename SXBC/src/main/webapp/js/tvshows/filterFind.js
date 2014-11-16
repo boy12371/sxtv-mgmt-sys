@@ -4,7 +4,8 @@ $(document).ready(function() {
 		collapsible : true,
 		active : 0
 	});
-	// $("#searchFormDiv").accordion("option", "active", true);
+	
+	$("#_c_com_sx_tv_entites_TVShow_recommendChannel_id").css("margin-top", "70px");
 
 	Spring.addDecoration(new Spring.ElementDecoration({
 		elementId : '_inputDateStart_id',
@@ -269,6 +270,17 @@ $(document).ready(function() {
 			$("#forcePurchase").val("0");
 		}
 	});
+	function getStatus(arr){
+		var _status = document.getElementsByName('status');
+		for(var i=0; i < _status.length; i++){
+			if(_status[i].checked){
+				if(_status[i].value != 0 && _status[i].value != -1){
+					arr.push(_status[i].value);	
+				}
+			}
+		}
+		return arr;
+	}
 	$("#submitBtn").button().click(function() {
 		var queryValues = [];
 		queryValues[0] = $("input[name*=id]");
@@ -277,7 +289,7 @@ $(document).ready(function() {
 		queryValues[3] = $("input[name*=company]");
 		queryValues[4] = $("input[name*=theme]");
 		queryValues[5] = $("input[name*=projector]");
-		queryValues[6] = $("input[name*=status]");
+		queryValues[6] = $("input[name='status']");
 		queryValues[7] = $("input[name*=recommendChannel]");
 		queryValues[8] = $("input[name*=recommendLevel]");
 		queryValues[9] = $("input[name*=inputDateStart]");
@@ -295,8 +307,12 @@ $(document).ready(function() {
 			if (i != 0 && i != queryValues.length) {
 				params += "&";
 			}
-			if (queryValues[i].value != "") {
-				params += queryValues[i].attr("name") + "=" + $.trim(queryValues[i].val());
+			if(queryValues[i].attr("name") == 'status'){
+				params += queryValues[i].attr("name") + "=" + getStatus(new Array());
+			}else{
+				if (queryValues[i].value != "") {
+					params += queryValues[i].attr("name") + "=" + $.trim(queryValues[i].val());
+				}
 			}
 		}
 
@@ -332,6 +348,34 @@ function formatFullScored(cellvalue, options, rowObject) {
 	return "";
 }
 
+function checkedAll(obj){
+	var _status = document.getElementsByName('status');
+	for(var i=0; i < _status.length; i++){
+		if(_status[i].value == -1){
+			_status[i].disabled = !!obj.checked;
+			continue;
+		}
+		_status[i].checked = obj.checked;
+	}
+}
+function checkedPlayed(obj){
+	var st = [6,13,14,15,16,17,18];
+	var _status = document.getElementsByName('status');
+	for(var i=0; i < _status.length; i++){
+		if(_status[i] != obj){
+			_status[i].checked = false;	
+		}
+	}
+	
+	for(var i=0; i < _status.length; i++){
+		for(var j=0; j < st.length; j++){
+			if(_status[i].value == st[j]){
+				_status[i].checked = obj.checked;
+				break;
+			}
+		}
+	}
+}
 
 function formatDirectors(cellvalue, options, rowObject) {
 	var html = "";

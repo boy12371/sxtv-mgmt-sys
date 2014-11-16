@@ -56,19 +56,26 @@ tr:nth-child(even) {
 			z="b+fTy5yI+o7evlpqt/QtQPEqD88=" />
 		<field:input label="城市排名" metaRequired="true" field="ranking" id="c_com_sx_tv_view_TVShowData_ranking" validationMessageCode="field_invalid_integer"
 			z="OR3gU6Ela1e3hQ8Bn9Pi/Aj1RgU=" />
-
-		<input type="hidden" name="tdata" id="tdata" />
-
+		
+		
 		<div class="rowcontainer">
-			<label> 播出环境数据: </label> <input id="excelFile" type="file" name="excelFile" /><input style="margin-left: 5px;" type="button" value="确定" onclick="readExcel();" />
-
+				<label>剧名 : </label>
+				<SELECT name="state">
+					<OPTION value="1">第一季度</OPTION>
+					<OPTION value="2">第二季度</OPTION>
+					<OPTION value="3">第三季度</OPTION>
+					<OPTION value="4">第四季度</OPTION>
+					<OPTION value="5">上半年</OPTION>
+					<OPTION value="6">下半年</OPTION>
+					<OPTION value="7">全年</OPTION>
+				</SELECT>
 		</div>
 		<br />
 		<br />
-		<div class="rowcontainer" style="display: none">
+		<div class="rowcontainer">
+			<label> 播出环境数据: </label>
 			<table id="excelTable" style="width: 70%">
 				<tr style="background-color: #EFEFEF;">
-					<td>频道</td>
 					<td>剧名</td>
 					<td>播出时间</td>
 					<td>收视率</td>
@@ -77,6 +84,6 @@ tr:nth-child(even) {
 			</table>
 			<br />
 		</div>
-
+		<input type="hidden" name="tdata" id="tdata" />
 	</form:create>
 </div>
