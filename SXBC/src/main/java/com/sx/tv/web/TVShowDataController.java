@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sx.tv.entites.PlayData;
 import com.sx.tv.entites.TVShow;
+import com.sx.tv.entites.TVShowData;
 import com.sx.tv.utils.URLStringUtil;
-import com.sx.tv.view.TVShowData;
 
 @RequestMapping("/tvshowdatas")
 @Controller
@@ -39,17 +38,17 @@ public class TVShowDataController {
 		tv.setMarketShare(TVShowData_.getMarketShare());
 		tv.merge();
 		
-		String tdata = TVShowData_.getTdata();
-		if(!tdata.equals("")){
-			String[] _array = tdata.split(";");
-			List<PlayData> pds = new ArrayList<PlayData>(_array.length);
-			for (String string : _array) {
-				String [] _a = string.split(",");
-				PlayData pd = new PlayData(_a[0],_a[1],_a[2],_a[3],_a[4],tv);
-				pd.persist();
-				pds.add(pd);
-			}
-		}
+		//String tdata = TVShowData_.getTdata();
+//		if(!tdata.equals("")){
+//			String[] _array = tdata.split(";");
+//			List<PlayData> pds = new ArrayList<PlayData>(_array.length);
+//			for (String string : _array) {
+//				String [] _a = string.split(",");
+//				PlayData pd = new PlayData(_a[0],_a[1],_a[2],_a[3],_a[4],tv);
+//				pd.persist();
+//				pds.add(pd);
+//			}
+//		}
 		if(null != level){
 			return "redirect:/tvshows/generalInfo/" + URLStringUtil.encodeUrlPathSegment(tv.getId().toString(), httpServletRequest) + "?level=level2market";
 		}else{

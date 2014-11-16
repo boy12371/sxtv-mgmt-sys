@@ -1,6 +1,8 @@
 package com.sx.tv.view;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -13,7 +15,7 @@ import com.sx.tv.entites.Status;
 import com.sx.tv.entites.Theme;
 import com.sx.tv.entites.User;
 
-public class SearchTV {
+public class SearchTV implements Serializable {
 	/**
 	 * 
 	 */
@@ -31,7 +33,7 @@ public class SearchTV {
 
 	private Theme theme;
 
-	private Status status;
+	private List<Status> status;
 
 	private Channel recommendChannel;
 
@@ -141,11 +143,11 @@ public class SearchTV {
 		this.theme = theme;
 	}
 
-	public Status getStatus() {
+	public List<Status> getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(List<Status> status) {
 		this.status = status;
 	}
 

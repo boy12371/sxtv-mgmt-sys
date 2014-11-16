@@ -3,32 +3,9 @@
 
 package com.sx.tv.view;
 
-import com.sx.tv.view.TVShowData;
+import com.sx.tv.entites.TVShowData;
 
 privileged aspect TVShowData_Roo_JavaBean {
     
-    public Float TVShowData.getRating() {
-        return this.rating;
-    }
-    
-    public void TVShowData.setRating(Float rating) {
-        this.rating = rating;
-    }
-    
-    public Float TVShowData.getMarketShare() {
-        return this.marketShare;
-    }
-    
-    public void TVShowData.setMarketShare(Float marketShare) {
-        this.marketShare = marketShare;
-    }
-    
-    public Integer TVShowData.getRanking() {
-        return this.ranking;
-    }
-    
-    public void TVShowData.setRanking(Integer ranking) {
-        this.ranking = ranking;
-    }
-    
+   
 }

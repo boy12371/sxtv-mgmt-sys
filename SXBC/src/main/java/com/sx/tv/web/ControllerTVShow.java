@@ -18,6 +18,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +54,7 @@ import com.sx.tv.entites.Score;
 import com.sx.tv.entites.Status;
 import com.sx.tv.entites.TVContract;
 import com.sx.tv.entites.TVShow;
+import com.sx.tv.entites.TVShowData;
 import com.sx.tv.entites.Theme;
 import com.sx.tv.entites.User;
 import com.sx.tv.finder.TVShowsFinder;
@@ -70,6 +73,13 @@ public class ControllerTVShow {
 
 	private static final Logger logger = Logger
 			.getLogger(ControllerTVShow.class);
+
+	private EntityManagerFactory emf;
+
+	@PersistenceUnit
+	public void setEntityManagerFactory(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
 
 	public void populateEditForm(Model uiModel) {
 		uiModel.addAttribute("companys", Company.findAllCompanys());
@@ -266,7 +276,10 @@ public class ControllerTVShow {
 				// TODO: handle exception
 			}
 		}
-
+		List<TVShowData> tdatas = this.findTVData(tv.getId());
+		if(null != tdatas && !tdatas.isEmpty()){
+			uiModel.addAttribute("tdatas", tdatas);
+		}
 		if (null != level && !"".equals(level)) {
 
 			if ("reciveStore".equalsIgnoreCase(level)) {
@@ -298,9 +311,9 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/doAjaxCreate", method = RequestMethod.POST, produces = "text/html")
-	public @ResponseBody
-	String doCreateAjaxSubmit(TVShowView TVShow_, Model uiModel,
-			HttpServletRequest httpServletRequest, Principal principal) {
+	public @ResponseBody String doCreateAjaxSubmit(TVShowView TVShow_,
+			Model uiModel, HttpServletRequest httpServletRequest,
+			Principal principal) {
 		String message = "SUCCESS";
 		try {
 			TypedQuery<TVShow> query = TVShow.findTVShowsByNameEquals(TVShow_
@@ -646,13 +659,13 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/queryTVShows4Json")
-	public @ResponseBody
-	JsonDataTable queryTVShows4Json(Page page, SearchTV stv, Principal principal)
+	public @ResponseBody JsonDataTable queryTVShows4Json(Page page,
+			SearchTV stv, Principal principal)
 			throws UnsupportedEncodingException {
 		if (null == stv) {
 			stv = new SearchTV();
 		}
-		
+
 		JsonDataTable jdt = new JsonDataTable();
 		if (page != null) {
 			int sizeNo = page.getRows() == 0 ? 10 : page.getRows();
@@ -669,17 +682,17 @@ public class ControllerTVShow {
 
 			jdt.setPage(page.getPage());
 			List<JsonData> rows = new ArrayList<JsonData>();
-			
+
 			Role role = Role.findRole(new Long(2));
 			List<Role> rlist = new ArrayList<Role>();
 			rlist.add(role);
-			//所有评分员
+			// 所有评分员
 			List<User> uList = User.findUsersByRoles(rlist).getResultList();
 			int numOfuList = uList.size();
-			//所有频道
+			// 所有频道
 			List<Channel> channels = Channel.findAllChannels();
 			DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-			
+
 			/**
 			 * 
 			 * colNames : [ 'ID', '剧名', '集数', '影视公司', '题材', '剧本来源', '项目负责人',
@@ -707,16 +720,18 @@ public class ControllerTVShow {
 					}
 				}
 				boolean scored = false;
-				if(null != smap){
-					Iterator<Entry<Integer, List<Score>>> it = smap.entrySet().iterator();
+				if (null != smap) {
+					Iterator<Entry<Integer, List<Score>>> it = smap.entrySet()
+							.iterator();
 					while (it.hasNext()) {
 						Map.Entry<Integer, List<Score>> e = it.next();
-//						fullScored = e.getValue().size() ==  numOfuList;
-//						if(!fullScored){
-//							break;
-//						}
+						// fullScored = e.getValue().size() == numOfuList;
+						// if(!fullScored){
+						// break;
+						// }
 						for (Score s : e.getValue()) {
-							if(s.getRatedBy().getName().equals(principal.getName())){
+							if (s.getRatedBy().getName()
+									.equals(principal.getName())) {
 								scored = true;
 								break;
 							}
@@ -742,8 +757,7 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/queryTVShows4JsonLevel2Market")
-	public @ResponseBody
-	JsonDataTable queryTVShows4JsonLevel2Market(
+	public @ResponseBody JsonDataTable queryTVShows4JsonLevel2Market(
 			@RequestParam(required = false) boolean unexpired, Page page,
 			SearchTV stv) throws UnsupportedEncodingException {
 		if (null == stv) {
@@ -794,7 +808,7 @@ public class ControllerTVShow {
 		uiModel.addAttribute("istransaction", istransaction);
 		int round = 1;
 		if (null != stv.getStatus()) {
-			int sid = stv.getStatus().getId();
+			int sid = stv.getStatus().get(0).getId();
 			if (sid == StatusUtil.ER_LUN_DAI_BO
 					|| sid == StatusUtil.ER_LUN_YI_BO) {
 				round = 2;
@@ -820,13 +834,13 @@ public class ControllerTVShow {
 				v.setChannel(cc.getChannel());
 				v.setPrice(cc.getPrice().floatValue());
 				v.setConPrice(cc.getPrice());
-				if(round != 1) {
+				if (round != 1) {
 					PlayInfo p = TVShowsFinder.getPlayInfo(cc.getTvshow()
 							.getId(), round);
-					if(null != p){
+					if (null != p) {
 						v.setChannel(p.getPlayChannel());
 						v.setPrice(p.getPrice());
-						v.setConPrice(cc.getPrice());	
+						v.setConPrice(cc.getPrice());
 					}
 				}
 				trans.add(v);
@@ -964,7 +978,7 @@ public class ControllerTVShow {
 	public String doUpdatePlayInfo4Level2(@PathVariable("tvid") Long tvid,
 			@PathVariable("pid") int pid, PlayInfo playInfo, Model uiModel,
 			Principal principal, HttpServletRequest httpServletRequest) {
-		
+
 		PlayInfo pi = PlayInfo.findPlayInfo(pid);
 		pi.setPlayChannel(playInfo.getPlayChannel());
 		pi.setPlayDate(playInfo.getPlayDate());
@@ -972,7 +986,7 @@ public class ControllerTVShow {
 		pi.setReservedFrom(playInfo.getReservedFrom());
 		pi.setReservedTo(playInfo.getReservedTo());
 		pi.merge();
-		
+
 		return "redirect:/tvshows/generalInfo/"
 				+ URLStringUtil.encodeUrlPathSegment(tvid.toString(),
 						httpServletRequest) + "?level=level2market";
@@ -980,15 +994,16 @@ public class ControllerTVShow {
 
 	@RequestMapping(value = "/{tvid}/{pid}/deletePlayInfo4Level2", produces = "text/html")
 	public String deletePlayInfo4Level2(@PathVariable("tvid") Long tvid,
-			@PathVariable("pid") int pid, Model uiModel,HttpServletRequest httpServletRequest) {
+			@PathVariable("pid") int pid, Model uiModel,
+			HttpServletRequest httpServletRequest) {
 		addDateTimeFormatPatterns(uiModel);
 		PlayInfo pi = PlayInfo.findPlayInfo(pid);
 		pi.remove();
 		return "redirect:/tvshows/generalInfo/"
-		+ URLStringUtil.encodeUrlPathSegment(tvid.toString(),
-				httpServletRequest) + "?level=level2market";
+				+ URLStringUtil.encodeUrlPathSegment(tvid.toString(),
+						httpServletRequest) + "?level=level2market";
 	}
-	
+
 	public void populateDependencies(Model uiModel, boolean emptyOpt) {
 		List<Company> _companyList = new ArrayList<Company>();
 		List<Channel> _channelList = new ArrayList<Channel>();
@@ -1047,8 +1062,7 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/loadPeopleJsonString", method = RequestMethod.GET)
-	public @ResponseBody
-	List<People> writeJson(@RequestParam String pname) {
+	public @ResponseBody List<People> writeJson(@RequestParam String pname) {
 		try {
 			pname = new String(pname.getBytes("ISO-8859-1"), "UTF-8");
 			if (pname.charAt(0) != '%') {
@@ -1071,8 +1085,8 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/loadTVshowJsonString", method = RequestMethod.GET)
-	public @ResponseBody
-	List<Jtvshow> queryJsonTVshow(@RequestParam String tvname) {
+	public @ResponseBody List<Jtvshow> queryJsonTVshow(
+			@RequestParam String tvname) {
 		List<Jtvshow> list = new ArrayList<Jtvshow>();
 		try {
 			List<TVShow> _data = TVShowsFinder.findTVShowsByName(tvname);
@@ -1089,8 +1103,8 @@ public class ControllerTVShow {
 	}
 
 	@RequestMapping(value = "/loadCompanyJsonString", method = RequestMethod.GET)
-	public @ResponseBody
-	List<Jtvshow> queryJsonCompany(@RequestParam String qname) {
+	public @ResponseBody List<Jtvshow> queryJsonCompany(
+			@RequestParam String qname) {
 		List<Jtvshow> list = new ArrayList<Jtvshow>();
 		try {
 			qname = new String(qname.getBytes("ISO-8859-1"), "UTF-8");
@@ -1118,9 +1132,26 @@ public class ControllerTVShow {
 		return list;
 	}
 
+	public List<TVShowData> findTVData(long tv){
+		//this.emf.createEntityManager()
+		
+//		EntityManager em = this.emf.createEntityManager();
+//        try {
+//             Query query = em.createQuery("from TVShowData as p where p.tvshow = :tvshow");
+//             query.setParameter("tvshow", tv);
+//             query.getResultList();
+//        }
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
+		return null;
+	}
+	
+	
 	@RequestMapping(value = "/loadThemeJsonString", method = RequestMethod.GET)
-	public @ResponseBody
-	List<Jtvshow> queryJsonTheme(@RequestParam String qname) {
+	public @ResponseBody List<Jtvshow> queryJsonTheme(@RequestParam String qname) {
 		List<Jtvshow> list = new ArrayList<Jtvshow>();
 		try {
 			qname = new String(qname.getBytes("ISO-8859-1"), "UTF-8");

@@ -3,7 +3,7 @@
 
 package com.sx.tv.view;
 
-import com.sx.tv.view.TVShowData;
+import com.sx.tv.entites.TVShowData;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

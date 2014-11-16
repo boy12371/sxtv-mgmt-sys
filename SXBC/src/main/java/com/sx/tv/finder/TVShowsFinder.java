@@ -9,12 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
+
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.sx.tv.entites.DeptComments;
 import com.sx.tv.entites.PlayInfo;
+import com.sx.tv.entites.Status;
 import com.sx.tv.entites.TVContract;
 import com.sx.tv.entites.TVShow;
+import com.sx.tv.entites.TVShowData;
 import com.sx.tv.utils.StatusUtil;
 import com.sx.tv.view.SearchTV;
 
@@ -144,11 +150,17 @@ public class TVShowsFinder {
 			params.put("theme", tv.getTheme().getId());
 		}
 
-		if (null != tv.getStatus()) {
-			sb.append(" AND a.status = :status");
-			params.put("status", tv.getStatus().getId());
+		if (null != tv.getStatus() && !tv.getStatus().isEmpty()) {
+			sb.append(" AND a.status IN :status");
+			List<Integer> _ids = new ArrayList<Integer>(tv.getStatus().size());
+			for (Status s : tv.getStatus()) {
+				if(null != s){
+					_ids.add(s.getId());	
+				}
+			}
+			params.put("status", _ids);
 		}
-
+		
 		if (null != tv.getProjector()) {
 			sb.append(" AND a.projector = :projector");
 			params.put("projector", tv.getProjector().getId());
@@ -176,7 +188,6 @@ public class TVShowsFinder {
 
 		sb.append(" order by a." + orderby + " " + dir);
 		EntityManager em = TVShow.entityManager();
-		System.out.println(sb.toString());
 		Query query = em.createNativeQuery(sb.toString(), TVShow.class);
 		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
 			String key = it.next();
@@ -220,8 +231,8 @@ public class TVShowsFinder {
 
 		int round = 1;
 		boolean hasWhere = false;
-		if (null != tv.getStatus()) {
-			int sid = tv.getStatus().getId();
+		if (null != tv.getStatus() && !tv.getStatus().isEmpty()) {
+			int sid = tv.getStatus().get(0).getId();
 			if (sid == StatusUtil.ER_LUN_DAI_BO
 					|| sid == StatusUtil.ER_LUN_YI_BO) {
 				round = 2;
@@ -431,7 +442,6 @@ public class TVShowsFinder {
 				sb.append("ORDER BY t." + orderby + " " + dir);
 			}
 		}
-		System.out.println("Query==" + sb.toString());
 
 		EntityManager em = TVContract.entityManager();
 		Query query = em.createNativeQuery(sb.toString(), TVContract.class);
@@ -451,8 +461,8 @@ public class TVShowsFinder {
 				"select count(*) from tvshow t inner join tvcontract c on t.id = c.tvshow ");
 		int round = 1;
 		boolean hasWhere = false;
-		if (null != tv.getStatus()) {
-			int sid = tv.getStatus().getId();
+		if (null != tv.getStatus() && !tv.getStatus().isEmpty()) {
+			int sid = tv.getStatus().get(0).getId();
 			if (sid == StatusUtil.ER_LUN_DAI_BO
 					|| sid == StatusUtil.ER_LUN_YI_BO) {
 				round = 2;
@@ -475,7 +485,7 @@ public class TVShowsFinder {
 				sb.append("WHERE t.status = :status ");
 				hasWhere = true;
 			}
-			params.put("status", tv.getStatus());
+			params.put("status", tv.getStatus().get(0).getId());
 		}
 
 		if (round == 1) {
@@ -645,7 +655,6 @@ public class TVShowsFinder {
 			sb.append(" WHERE t.removed = 0 and c.copyright_start is not null and c.copyright_end is not null ");
 		}
 
-		System.out.println("Count==" + sb.toString());
 		EntityManager em = TVContract.entityManager();
 		Query query = em.createNativeQuery(sb.toString());
 		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
@@ -773,9 +782,16 @@ public class TVShowsFinder {
 			params.put("theme", tv.getTheme().getId());
 		}
 
-		if (null != tv.getStatus()) {
-			sb.append(" AND a.status = :status");
-			params.put("status", tv.getStatus().getId());
+		if (null != tv.getStatus() && !tv.getStatus().isEmpty()) {
+			sb.append(" AND a.status IN :status");
+			List<Integer> _ids = new ArrayList<Integer>(tv.getStatus().size());
+			for (Status s : tv.getStatus()) {
+				if(null != s){
+					_ids.add(s.getId());	
+				}
+				
+			}
+			params.put("status", _ids);
 		}
 
 		if (null != tv.getProjector()) {
@@ -803,7 +819,6 @@ public class TVShowsFinder {
 			params.put("input_dateEnd", tv.getInputDateEnd());
 		}
 
-		System.out.println(sb.toString());
 		EntityManager em = TVShow.entityManager();
 		Query query = em.createNativeQuery(sb.toString());
 		for (Iterator<String> it = params.keySet().iterator(); it.hasNext();) {
@@ -925,10 +940,10 @@ public class TVShowsFinder {
 
 		int round = 1;
 
-		if (null != tv.getStatus()) {
+		if (null != tv.getStatus() && !tv.getStatus().isEmpty()) {
 			sb.append("AND t.status = :status ");
 			params.put("status", tv.getStatus());
-			int sid = tv.getStatus().getId();
+			int sid = tv.getStatus().get(0).getId();
 			if (sid == StatusUtil.ER_LUN_DAI_BO
 					|| sid == StatusUtil.ER_LUN_YI_BO) {
 				round = 2;
